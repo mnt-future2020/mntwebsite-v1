@@ -1,0 +1,37 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
+import { getOrgSettings } from "@/lib/org";
+
+export const runtime = "nodejs";
+
+export async function GET() {
+  const s = await getOrgSettings();
+  return NextResponse.json(s);
+}
+
+export async function PUT(req: Request) {
+  try {
+    const b = await req.json();
+    const num = (v: unknown) => {
+      const n = parseFloat(String(v ?? ""));
+      return Number.isFinite(n) ? n : null;
+    };
+    const radius = parseInt(String(b.geofenceRadiusM ?? 50), 10);
+    const data = {
+      officeLat: num(b.officeLat),
+      officeLng: num(b.officeLng),
+      geofenceRadiusM: Number.isFinite(radius) && radius > 0 ? radius : 50,
+      workStart: String(b.workStart || "09:30"),
+      workEnd: String(b.workEnd || "18:30"),
+      scanEnabled: Boolean(b.scanEnabled),
+    };
+    const saved = await prisma.orgSetting.upsert({
+      where: { id: 1 },
+      update: data,
+      create: { id: 1, ...data },
+    });
+    return NextResponse.json(saved);
+  } catch {
+    return NextResponse.json({ error: "Save failed — is the database connected?" }, { status: 500 });
+  }
+}

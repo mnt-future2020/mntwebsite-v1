@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #2095f1;
+  --navy: #081a33;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink font-sans antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer components {
+  .container-mnt {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-glow hover:bg-brand-600 hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn border border-slate-200 bg-white text-ink hover:border-brand-300 hover:text-brand-700;
+  }
+  .btn-white {
+    @apply btn bg-white text-navy hover:bg-brand-50;
+  }
+  .btn-outline-light {
+    @apply btn border border-white/30 text-white hover:bg-white/10;
+  }
+
+  /* Refined editorial kicker — a short rule + small label (no pill badge) */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-brand-700;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-8 bg-brand-400;
+  }
+  .eyebrow-dark {
+    @apply inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-brand-300;
+  }
+  .eyebrow-dark::before {
+    content: "";
+    @apply inline-block h-px w-8 bg-brand-400/70;
+  }
+
+  .h-display {
+    @apply font-display font-extrabold tracking-tight text-ink;
+  }
+  .lead {
+    @apply text-lg leading-relaxed text-slatey;
+  }
+  .card {
+    @apply rounded-3xl border border-slate-100 bg-white p-7 shadow-card transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 border-brand-100 shadow-cardhover;
+  }
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800;
+  }
+}
+
+/* Subtle section dividers */
+.section-fade-top {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 8%);
+  mask-image: linear-gradient(to bottom, transparent, black 8%);
+}
+
+/* Elegant image hover (GPU-only transform) */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.group:hover .img-zoom img {
+  transform: scale(1.06);
+}
+
+/* Marquee (infinite, GPU transform, pauses on hover) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 2rem)));
+  }
+}
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+  will-change: transform;
+}
+.marquee-wrap:hover .animate-marquee {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Spotlight — cursor-follow radial glow on cards */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(32, 149, 241, 0.14),
+    transparent 70%
+  );
+  pointer-events: none;
+  /* sits above the card background but below content — no need to touch child positioning */
+  z-index: -1;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Respect users who prefer reduced motion — and keep the site fast/calm */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

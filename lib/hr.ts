@@ -1,0 +1,94 @@
+// MnT HR policy constants (from company HR policy).
+export const HR = {
+  annualPaidLeave: 12,
+  monthlyAccrual: 1,
+  maxCarryForward: 5,
+  probationMonths: 3,
+  workStart: "09:30",
+  workEnd: "18:30",
+};
+
+export function fullName(e: { firstName: string; lastName?: string | null }) {
+  return [e.firstName, e.lastName].filter(Boolean).join(" ");
+}
+
+export function initials(e: { firstName: string; lastName?: string | null }) {
+  return [(e.firstName || "")[0], (e.lastName || "")[0]].filter(Boolean).join("").toUpperCase();
+}
+
+export function inr(n?: number | null) {
+  if (n == null || n === 0) return "₹0";
+  return "₹" + Number(n).toLocaleString("en-IN");
+}
+
+export function fmtDate(d?: Date | string | null) {
+  if (!d) return "—";
+  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+export function leaveDays(start: Date | string, end: Date | string) {
+  const a = new Date(start);
+  const b = new Date(end);
+  a.setHours(0, 0, 0, 0);
+  b.setHours(0, 0, 0, 0);
+  const ms = b.getTime() - a.getTime();
+  return Math.max(1, Math.round(ms / 86400000) + 1);
+}
+
+export type PayslipInput = {
+  basic: number;
+  hra: number;
+  allowances: number;
+  otherEarnings: number;
+  pf: number;
+  esi: number;
+  professionalTax: number;
+  tds: number;
+  otherDeductions: number;
+  lopDays: number;
+};
+
+export function computePayslip(p: PayslipInput) {
+  const gross = (p.basic || 0) + (p.hra || 0) + (p.allowances || 0) + (p.otherEarnings || 0);
+  const perDay = gross / 30;
+  const lop = Math.round(perDay * (p.lopDays || 0));
+  const totalDeductions =
+    (p.pf || 0) + (p.esi || 0) + (p.professionalTax || 0) + (p.tds || 0) + (p.otherDeductions || 0) + lop;
+  const net = gross - totalDeductions;
+  return { gross, lop, totalDeductions, net };
+}
+
+export function nextEmployeeCode(count: number) {
+  return "MNT" + String(count + 1).padStart(3, "0");
+}
+
+export function monthName(m: number) {
+  return (
+    ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][(m - 1) % 12] ||
+    ""
+  );
+}
+
+export const EMPLOYEE_STATUS_STYLE: Record<string, string> = {
+  PROBATION: "bg-amber-100 text-amber-700",
+  CONFIRMED: "bg-green-100 text-green-700",
+  NOTICE: "bg-orange-100 text-orange-700",
+  EXITED: "bg-slate-100 text-slatey",
+};
+
+export const LEAVE_STATUS_STYLE: Record<string, string> = {
+  PENDING: "bg-amber-100 text-amber-700",
+  APPROVED: "bg-green-100 text-green-700",
+  REJECTED: "bg-red-100 text-red-700",
+  CANCELLED: "bg-slate-100 text-slatey",
+};
+
+export const ATT_STATUS_STYLE: Record<string, string> = {
+  PRESENT: "bg-green-100 text-green-700",
+  WFH: "bg-blue-100 text-blue-700",
+  HALF_DAY: "bg-amber-100 text-amber-700",
+  ABSENT: "bg-red-100 text-red-700",
+  LEAVE: "bg-purple-100 text-purple-700",
+  HOLIDAY: "bg-slate-100 text-slatey",
+  WEEK_OFF: "bg-slate-100 text-slatey",
+};

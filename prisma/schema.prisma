@@ -1,0 +1,748 @@
+// MnT — admin CMS data model (PostgreSQL via Prisma)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  excerpt     String?
+  contentHtml String     @default("") // rich-text HTML from the editor
+  coverImage  String?
+  status      PostStatus @default(DRAFT)
+  category    String?
+  tags        String[]   @default([])
+  author      String     @default("MnT Team")
+  readingMins Int        @default(5)
+
+  // Per-post SEO
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  canonicalUrl    String?
+  keywords        String?
+  noindex         Boolean @default(false)
+
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  vertical  String?
+  budget    String?
+  message   String
+  source    String?    @default("contact-form")
+  status    LeadStatus @default(NEW)
+  notes     String?
+  createdAt DateTime   @default(now())
+
+  @@index([status, createdAt])
+}
+
+enum SubscriberStatus {
+  PENDING // signed up, not yet confirmed (double opt-in)
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+// Newsletter / email-marketing audience.
+model Subscriber {
+  id             String           @id @default(cuid())
+  email          String           @unique
+  name           String?
+  status         SubscriberStatus @default(PENDING)
+  source         String?          @default("newsletter") // where they signed up
+  token          String           @unique // opaque token for confirm + unsubscribe links
+  createdAt      DateTime         @default(now())
+  confirmedAt    DateTime?
+  unsubscribedAt DateTime?
+
+  @@index([status, createdAt])
+}
+
+enum CampaignStatus {
+  DRAFT
+  SENDING
+  SENT
+}
+
+// An email-marketing campaign (newsletter blast).
+model Campaign {
+  id          String         @id @default(cuid())
+  subject     String
+  preheader   String? // inbox preview text
+  contentHtml String         @default("") // rich-text HTML from the editor
+  status      CampaignStatus @default(DRAFT)
+  recipients  Int            @default(0) // how many it was sent to
+  sentCount   Int            @default(0) // how many actually went out
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  sentAt      DateTime?
+
+  @@index([status, createdAt])
+}
+
+// Per-path SEO overrides for the static marketing pages
+model SeoSetting {
+  id          String   @id @default(cuid())
+  path        String   @unique // e.g. "/about"
+  title       String?
+  description String?
+  ogImage     String?
+  noindex     Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+// Global site-wide SEO + analytics (single row, id = 1)
+model SiteSetting {
+  id                 Int      @id @default(1)
+  siteName           String   @default("MnT — Healthcare & E-Commerce Software Development")
+  titleTemplate      String   @default("%s | MnT")
+  defaultDescription String   @default("We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global.")
+  defaultOgImage     String?
+  gaMeasurementId    String? // GA4, e.g. G-XXXXXXX
+  gscVerification    String? // google-site-verification token
+  bingVerification   String?
+  robotsExtra        String?
+  updatedAt          DateTime @updatedAt
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+//  HR MODULE
+// ──────────────────────────────────────────────────────────────────────────
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  INTERN
+  CONTRACT
+}
+
+enum EmployeeStatus {
+  PROBATION
+  CONFIRMED
+  NOTICE
+  EXITED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  WFH
+  HALF_DAY
+  ABSENT
+  LEAVE
+  HOLIDAY
+  WEEK_OFF
+}
+
+enum LeaveKind {
+  PAID
+  SICK
+  CASUAL
+  COMP_OFF
+  UNPAID
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum PayslipStatus {
+  DRAFT
+  FINALIZED
+  PAID
+}
+
+enum ReviewStatus {
+  DRAFT
+  FINALIZED
+}
+
+model Department {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  head      String?
+  createdAt DateTime   @default(now())
+  employees Employee[]
+}
+
+model Employee {
+  id        String  @id @default(cuid())
+  code      String  @unique // e.g. MNT001
+  firstName String
+  lastName  String?
+  email     String  @unique
+  phone     String?
+  photoUrl  String?
+
+  // Job
+  departmentId   String?
+  department     Department?     @relation(fields: [departmentId], references: [id])
+  designation    String?
+  level          String? // Junior / Mid / Senior / Lead
+  employmentType EmploymentType  @default(FULL_TIME)
+  status         EmployeeStatus  @default(PROBATION)
+  managerId      String?
+  manager        Employee?       @relation("Reports", fields: [managerId], references: [id])
+  reports        Employee[]      @relation("Reports")
+
+  // Login / access — role is a free-form key referencing RoleAccess.role
+  // (built-in keys: ADMIN / HR / MANAGER / EMPLOYEE, plus any custom roles).
+  role         String  @default("EMPLOYEE")
+  passwordHash String?
+
+  // Lifecycle
+  joinDate          DateTime
+  probationEndDate  DateTime?
+  confirmationDate  DateTime?
+  exitDate          DateTime?
+
+  // Personal
+  dob            DateTime?
+  gender         String?
+  address        String?
+  emergencyName  String?
+  emergencyPhone String?
+
+  // Statutory / bank
+  pan         String?
+  bankName    String?
+  bankAccount String?
+  ifsc        String?
+
+  // Compensation (monthly, INR)
+  ctcAnnual  Int? // annual CTC
+  basic      Int @default(0)
+  hra        Int @default(0)
+  allowances Int @default(0)
+
+  // Leave balance (paid leaves, accrues ~1/month, max carry-forward 5)
+  paidLeaveBalance Float @default(0)
+
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendances Attendance[]
+  leaves      LeaveRequest[]
+  payslips    Payslip[]
+  reviews     PerformanceReview[]
+  documents   EmployeeDocument[]
+  punches     AttendancePunch[]
+
+  // Project management
+  ledProjects        Project[]       @relation("ProjectLead")
+  projectMemberships ProjectMember[]
+  assignedTasks      Task[]
+  timeEntries        TimeEntry[]
+
+  // CRM (records this employee owns)
+  ownedContacts  Contact[]  @relation("ContactOwner")
+  ownedDeals     Deal[]     @relation("DealOwner")
+  ownedActivities Activity[] @relation("ActivityOwner")
+
+  @@index([status])
+  @@index([departmentId])
+}
+
+// Roles are dynamic: built-in keys (ADMIN / HR / MANAGER / EMPLOYEE) plus any
+// custom roles admins create here. One row per role, listing the section keys it
+// can open. ADMIN is always all-access (its stored perms are ignored).
+// System-role baselines live in lib/permissions.ts (DEFAULT_PERMS).
+model RoleAccess {
+  role      String   @id // role key, e.g. "MANAGER" or a custom "support-lead"
+  label     String // human-readable name shown in the UI
+  perms     String[]
+  isSystem  Boolean  @default(false) // built-in roles can't be renamed or deleted
+  updatedAt DateTime @updatedAt
+}
+
+enum PunchType {
+  CHECK_IN
+  BREAK_START
+  BREAK_END
+  CHECK_OUT
+}
+
+// A single QR scan / attendance punch (with geofence result).
+model AttendancePunch {
+  id          String    @id @default(cuid())
+  employeeId  String
+  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  type        PunchType
+  at          DateTime  @default(now())
+  lat         Float?
+  lng         Float?
+  distanceM   Int? // metres from office at scan time
+  withinFence Boolean   @default(true)
+
+  @@index([employeeId, at])
+}
+
+// Org-wide attendance settings — single row (id = 1). Admin "locks" the office location.
+model OrgSetting {
+  id              Int      @id @default(1)
+  officeLat       Float?
+  officeLng       Float?
+  geofenceRadiusM Int      @default(50)
+  workStart       String   @default("09:30")
+  workEnd         String   @default("18:30")
+  scanEnabled     Boolean  @default(true)
+  updatedAt       DateTime @updatedAt
+}
+
+model Attendance {
+  id          String           @id @default(cuid())
+  employeeId  String
+  employee    Employee         @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  date        DateTime // stored at 00:00 of the day
+  status      AttendanceStatus @default(PRESENT)
+  checkIn     String? // "09:35"
+  checkOut    String?
+  lateMinutes Int              @default(0)
+  note        String?
+
+  @@unique([employeeId, date])
+  @@index([date])
+}
+
+model LeaveRequest {
+  id          String      @id @default(cuid())
+  employeeId  String
+  employee    Employee    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  kind        LeaveKind   @default(PAID)
+  startDate   DateTime
+  endDate     DateTime
+  days        Float       @default(1)
+  reason      String?
+  status      LeaveStatus @default(PENDING)
+  approverNote String?
+  decidedAt   DateTime?
+  createdAt   DateTime    @default(now())
+
+  @@index([status, createdAt])
+}
+
+model Holiday {
+  id        String   @id @default(cuid())
+  date      DateTime @unique
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Payslip {
+  id         String        @id @default(cuid())
+  employeeId String
+  employee   Employee      @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  month      Int // 1-12
+  year       Int
+
+  // Earnings
+  basic         Int @default(0)
+  hra           Int @default(0)
+  allowances    Int @default(0)
+  otherEarnings Int @default(0)
+
+  // Deductions
+  pf              Int   @default(0)
+  esi             Int   @default(0)
+  professionalTax Int   @default(0)
+  tds             Int   @default(0)
+  otherDeductions Int   @default(0)
+  lopDays         Float @default(0) // loss-of-pay days
+
+  gross           Int           @default(0)
+  totalDeductions Int           @default(0)
+  net             Int           @default(0)
+  status          PayslipStatus @default(DRAFT)
+  notes           String?
+  generatedAt     DateTime      @default(now())
+
+  @@unique([employeeId, month, year])
+  @@index([year, month])
+}
+
+model PerformanceReview {
+  id          String       @id @default(cuid())
+  employeeId  String
+  employee    Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  period      String // e.g. "H1 2026"
+  rating      Int          @default(3) // 1-5
+  strengths   String?
+  improvements String?
+  goals       String?
+  hikePercent Float?
+  reviewer    String?
+  status      ReviewStatus @default(DRAFT)
+  createdAt   DateTime     @default(now())
+
+  @@index([employeeId])
+}
+
+model EmployeeDocument {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  type       String // "Offer Letter", "PAN", "Aadhaar", "Contract", …
+  name       String
+  url        String
+  uploadedAt DateTime @default(now())
+
+  @@index([employeeId])
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+//  PROJECT MANAGEMENT MODULE  (custom software delivery)
+// ──────────────────────────────────────────────────────────────────────────
+
+enum ClientStatus {
+  PROSPECT
+  ACTIVE
+  INACTIVE
+}
+
+enum ProjectStatus {
+  DISCOVERY
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum BillingType {
+  FIXED // fixed-bid
+  HOURLY // time & material
+  RETAINER // monthly retainer
+}
+
+enum SprintStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+}
+
+enum TaskStatus {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskType {
+  FEATURE
+  BUG
+  CHORE
+  RESEARCH
+}
+
+enum MilestoneStatus {
+  PLANNED
+  IN_PROGRESS
+  DONE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+}
+
+// A client we build software for.
+model Client {
+  id        String       @id @default(cuid())
+  name      String // company / account name
+  contact   String? // primary contact person
+  email     String?
+  phone     String?
+  website   String?
+  status    ClientStatus @default(ACTIVE)
+  notes     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  projects   Project[]
+  invoices   Invoice[]
+  contacts   Contact[]
+  deals      Deal[]
+  activities Activity[]
+
+  @@index([status])
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  code        String        @unique // e.g. PRJ-001
+  name        String
+  description String?
+  clientId    String?
+  client      Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  status      ProjectStatus @default(DISCOVERY)
+  billingType BillingType   @default(FIXED)
+  budget      Int           @default(0) // whole currency units
+  currency    String        @default("INR")
+  hourlyRate  Int           @default(0) // for HOURLY billing
+  techStack   String[]      @default([])
+  repoUrl     String?
+  startDate   DateTime?
+  endDate     DateTime? // target delivery
+  leadId      String?
+  lead        Employee?     @relation("ProjectLead", fields: [leadId], references: [id], onDelete: SetNull)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  members     ProjectMember[]
+  sprints     Sprint[]
+  tasks       Task[]
+  milestones  Milestone[]
+  timeEntries TimeEntry[]
+  invoices    Invoice[]
+
+  @@index([status])
+  @@index([clientId])
+}
+
+// An employee allocated to a project.
+model ProjectMember {
+  id           String   @id @default(cuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  employeeId   String
+  employee     Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  role         String   @default("Engineer") // role on this project (Frontend, Backend, QA, PM…)
+  allocationPct Int     @default(100) // % of time allocated
+  createdAt    DateTime @default(now())
+
+  @@unique([projectId, employeeId])
+  @@index([employeeId])
+}
+
+model Sprint {
+  id        String       @id @default(cuid())
+  projectId String
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String // e.g. "Sprint 4"
+  goal      String?
+  startDate DateTime?
+  endDate   DateTime?
+  status    SprintStatus @default(PLANNED)
+  createdAt DateTime     @default(now())
+
+  tasks Task[]
+
+  @@index([projectId, status])
+}
+
+model Task {
+  id            String       @id @default(cuid())
+  projectId     String
+  project       Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sprintId      String?
+  sprint        Sprint?      @relation(fields: [sprintId], references: [id], onDelete: SetNull)
+  title         String
+  description   String?
+  status        TaskStatus   @default(BACKLOG)
+  priority      TaskPriority @default(MEDIUM)
+  type          TaskType     @default(FEATURE)
+  assigneeId    String?
+  assignee      Employee?    @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
+  estimateHours Float        @default(0)
+  order         Int          @default(0) // ordering within a status column
+  dueDate       DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  timeEntries TimeEntry[]
+
+  @@index([projectId, status])
+  @@index([assigneeId])
+  @@index([sprintId])
+}
+
+model Milestone {
+  id          String          @id @default(cuid())
+  projectId   String
+  project     Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  dueDate     DateTime?
+  amount      Int             @default(0) // billable amount tied to this milestone
+  status      MilestoneStatus @default(PLANNED)
+  createdAt   DateTime        @default(now())
+
+  @@index([projectId])
+}
+
+// A logged unit of work (timesheet entry).
+model TimeEntry {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  taskId     String?
+  task       Task?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  date       DateTime // the day the work was done
+  hours      Float    @default(0)
+  note       String?
+  billable   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([projectId, date])
+  @@index([employeeId, date])
+}
+
+model Invoice {
+  id        String        @id @default(cuid())
+  number    String        @unique // e.g. INV-001
+  projectId String?
+  project   Project?      @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  clientId  String?
+  client    Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  status    InvoiceStatus @default(DRAFT)
+  amount    Int           @default(0)
+  currency  String        @default("INR")
+  issueDate DateTime?
+  dueDate   DateTime?
+  notes     String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status])
+  @@index([projectId])
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+//  CRM MODULE  (sales pipeline)
+//  Companies/accounts reuse the Client model above.
+// ──────────────────────────────────────────────────────────────────────────
+
+enum DealStage {
+  NEW
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum ActivityType {
+  NOTE
+  CALL
+  EMAIL
+  MEETING
+  TASK
+}
+
+// A person at a company.
+model Contact {
+  id        String    @id @default(cuid())
+  firstName String
+  lastName  String?
+  email     String?
+  phone     String?
+  title     String? // job title
+  clientId  String?
+  client    Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  ownerId   String?
+  owner     Employee? @relation("ContactOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  notes     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  deals      Deal[]
+  activities Activity[]
+
+  @@index([clientId])
+  @@index([ownerId])
+}
+
+// A sales opportunity moving through the pipeline.
+model Deal {
+  id                String    @id @default(cuid())
+  title             String
+  clientId          String?
+  client            Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  contactId         String?
+  contact           Contact?  @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  ownerId           String?
+  owner             Employee? @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  stage             DealStage @default(NEW)
+  value             Int       @default(0) // deal size, whole currency units
+  currency          String    @default("INR")
+  probability       Int       @default(10) // % chance of winning (0-100)
+  expectedCloseDate DateTime?
+  source            String? // where the deal came from
+  notes             String?
+  lostReason        String?
+  order             Int       @default(0) // ordering within a stage column
+  closedAt          DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  activities Activity[]
+
+  @@index([stage])
+  @@index([clientId])
+  @@index([ownerId])
+}
+
+// A logged interaction or to-do tied to a deal / contact / company.
+model Activity {
+  id        String       @id @default(cuid())
+  type      ActivityType @default(NOTE)
+  subject   String
+  body      String?
+  dueDate   DateTime?
+  done      Boolean      @default(false)
+  dealId    String?
+  deal      Deal?        @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  contactId String?
+  contact   Contact?     @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  clientId  String?
+  client    Client?      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  ownerId   String?
+  owner     Employee?    @relation("ActivityOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdAt DateTime     @default(now())
+
+  @@index([dealId])
+  @@index([contactId])
+}
