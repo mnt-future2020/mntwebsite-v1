@@ -1,17 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
-import { fmtDate, leaveDays, LEAVE_STATUS_STYLE } from "@/lib/hr";
+import { fmtDate, leaveDays, LEAVE_STATUS_STYLE, balanceFieldForKind } from "@/lib/hr";
 
 type Leave = { id: string; employeeId: string; employeeName: string; kind: string; startDate: string; endDate: string; days: number; reason?: string | null; status: string };
-type Emp = { id: string; name: string };
+type Emp = { id: string; name: string; paidLeaveBalance: number; casualBalance: number; sickBalance: number; compOffBalance: number };
 type Holiday = { id: string; date: string; name: string };
 
 const field = "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 const KINDS = ["PAID", "SICK", "CASUAL", "COMP_OFF", "UNPAID"];
 
 export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { leaves: Leave[]; employees: Emp[]; holidays: Holiday[] }) {
+  const router = useRouter();
   const [leaves, setLeaves] = useState(l0);
   const [holidays, setHolidays] = useState(h0);
   const [form, setForm] = useState({ employeeId: employees[0]?.id || "", kind: "PAID", startDate: "", endDate: "", reason: "" });
@@ -20,6 +22,7 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   const decide = async (id: string, status: string) => {
     setLeaves((s) => s.map((l) => (l.id === id ? { ...l, status } : l)));
     await fetch(`/api/admin/hr/leave/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    router.refresh(); // pull fresh balances after the deduction/restore
   };
   const del = async (id: string) => {
     setLeaves((s) => s.filter((l) => l.id !== id));
@@ -53,6 +56,15 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
 
   const estDays = form.startDate && form.endDate ? leaveDays(form.startDate, form.endDate) : 0;
 
+  // Remaining balance for an employee + leave type (null = no balance, e.g. UNPAID).
+  const balanceFor = (employeeId: string, kind: string): number | null => {
+    const fld = balanceFieldForKind(kind);
+    if (!fld) return null;
+    const emp = employees.find((e) => e.id === employeeId);
+    return emp ? emp[fld] : null;
+  };
+  const formBalance = balanceFor(form.employeeId, form.kind);
+
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
@@ -63,11 +75,17 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
           <tbody className="divide-y divide-slate-100">
             {leaves.length === 0 ? (
               <tr><td colSpan={5} className="px-5 py-10 text-center text-slatey">No leave records yet.</td></tr>
-            ) : leaves.map((l) => (
+            ) : leaves.map((l) => {
+              const bal = balanceFor(l.employeeId, l.kind);
+              const low = l.status === "PENDING" && bal != null && l.days > bal;
+              return (
               <tr key={l.id} className="hover:bg-slate-50">
                 <td className="px-5 py-3 font-medium text-ink">{l.employeeName}</td>
                 <td className="px-5 py-3 text-slatey">{fmtDate(l.startDate)} → {fmtDate(l.endDate)} <span className="text-xs text-slate-400">· {l.days}d</span></td>
-                <td className="px-5 py-3 text-slatey">{l.kind.replace("_", " ")}</td>
+                <td className="px-5 py-3 text-slatey">
+                  {l.kind.replace("_", " ")}
+                  {bal != null && <span className={`mt-0.5 block text-xs ${low ? "font-semibold text-amber-600" : "text-slate-400"}`}>bal: {bal}d{low ? " ⚠ low" : ""}</span>}
+                </td>
                 <td className="px-5 py-3"><span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${LEAVE_STATUS_STYLE[l.status]}`}>{l.status.charAt(0) + l.status.slice(1).toLowerCase()}</span></td>
                 <td className="px-5 py-3">
                   <div className="flex items-center justify-end gap-1">
@@ -81,7 +99,8 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
                   </div>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -96,6 +115,13 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
             <select value={form.kind} onChange={(e) => setForm({ ...form, kind: e.target.value })} className={field}>
               {KINDS.map((k) => <option key={k} value={k}>{k.replace("_", " ")}</option>)}
             </select>
+            {formBalance != null ? (
+              <p className={`text-xs ${estDays > formBalance ? "font-semibold text-amber-600" : "text-slate-400"}`}>
+                Balance: {formBalance} day(s){estDays > formBalance ? " — exceeds" : ""}
+              </p>
+            ) : (
+              <p className="text-xs text-slate-400">Unpaid — no balance deducted.</p>
+            )}
             <div className="grid grid-cols-2 gap-2">
               <input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} className={field} />
               <input type="date" value={form.endDate} onChange={(e) => setForm({ ...form, endDate: e.target.value })} className={field} />

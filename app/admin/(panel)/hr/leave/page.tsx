@@ -48,7 +48,14 @@ export default async function LeavePage() {
             reason: l.reason,
             status: l.status,
           }))}
-          employees={data.employees.map((e) => ({ id: e.id, name: fullName(e) }))}
+          employees={data.employees.map((e) => ({
+            id: e.id,
+            name: fullName(e),
+            paidLeaveBalance: e.paidLeaveBalance,
+            casualBalance: e.casualBalance,
+            sickBalance: e.sickBalance,
+            compOffBalance: e.compOffBalance,
+          }))}
           holidays={data.holidays.map((h) => ({ id: h.id, date: h.date.toISOString(), name: h.name }))}
         />
       )}
