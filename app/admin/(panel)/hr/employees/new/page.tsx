@@ -29,6 +29,7 @@ export default async function NewEmployeePage() {
         managers={managers.map((m) => ({ id: m.id, label: fullName(m) }))}
         roles={roles.map((r) => ({ id: r.key, label: r.label }))}
         salarySplit={{ basicPct: org.salaryBasicPct, hraPctOfBasic: org.salaryHraPctOfBasic }}
+        leaveDefaults={{ paid: org.annualPaidLeave, casual: org.annualCasualLeave, sick: org.annualSickLeave, compOff: org.annualCompOff }}
       />
     </>
   );

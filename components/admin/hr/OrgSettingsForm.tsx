@@ -23,6 +23,10 @@ type Props = {
     scanEnabled: boolean;
     salaryBasicPct: number;
     salaryHraPctOfBasic: number;
+    annualPaidLeave: number;
+    annualCasualLeave: number;
+    annualSickLeave: number;
+    annualCompOff: number;
   };
   baseUrl?: string;
 };
@@ -38,6 +42,10 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
     scanEnabled: initial.scanEnabled,
     salaryBasicPct: String(initial.salaryBasicPct ?? 50),
     salaryHraPctOfBasic: String(initial.salaryHraPctOfBasic ?? 50),
+    annualPaidLeave: String(initial.annualPaidLeave ?? 12),
+    annualCasualLeave: String(initial.annualCasualLeave ?? 12),
+    annualSickLeave: String(initial.annualSickLeave ?? 12),
+    annualCompOff: String(initial.annualCompOff ?? 0),
   });
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ kind: "ok" | "err" | "info"; text: string } | null>(null);
@@ -104,6 +112,10 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
         scanEnabled: f.scanEnabled,
         salaryBasicPct: f.salaryBasicPct,
         salaryHraPctOfBasic: f.salaryHraPctOfBasic,
+        annualPaidLeave: f.annualPaidLeave,
+        annualCasualLeave: f.annualCasualLeave,
+        annualSickLeave: f.annualSickLeave,
+        annualCompOff: f.annualCompOff,
       }),
     });
     if (res.ok) {
@@ -255,6 +267,35 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
               <div><p className="text-xs text-slatey">Special</p><p className="font-semibold text-ink">{inr(splitPreview.allowances)}</p></div>
             </div>
           </div>
+        </div>
+
+        <div className={card}>
+          <h2 className="text-sm font-semibold text-ink">Leave allocation (days / year)</h2>
+          <p className="mt-1 text-sm text-slatey">
+            Default annual balance per leave type. New employees are pre-filled with these; approved leave
+            auto-deducts from the matching type. Unpaid leave (LOP) has no balance.
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <label className={label}>Earned / Paid</label>
+              <input type="number" min={0} value={f.annualPaidLeave} onChange={(e) => up("annualPaidLeave", e.target.value)} className={field} />
+            </div>
+            <div>
+              <label className={label}>Casual</label>
+              <input type="number" min={0} value={f.annualCasualLeave} onChange={(e) => up("annualCasualLeave", e.target.value)} className={field} />
+            </div>
+            <div>
+              <label className={label}>Sick</label>
+              <input type="number" min={0} value={f.annualSickLeave} onChange={(e) => up("annualSickLeave", e.target.value)} className={field} />
+            </div>
+            <div>
+              <label className={label}>Comp-off</label>
+              <input type="number" min={0} value={f.annualCompOff} onChange={(e) => up("annualCompOff", e.target.value)} className={field} />
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-slate-400">
+            Total: {(parseFloat(f.annualPaidLeave) || 0) + (parseFloat(f.annualCasualLeave) || 0) + (parseFloat(f.annualSickLeave) || 0) + (parseFloat(f.annualCompOff) || 0)} days/year
+          </p>
         </div>
 
         {msg && <p className={`rounded-lg border px-4 py-2.5 text-sm ${msgStyle}`}>{msg.text}</p>}

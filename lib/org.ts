@@ -9,6 +9,10 @@ export type OrgSettings = {
   scanEnabled: boolean;
   salaryBasicPct: number;
   salaryHraPctOfBasic: number;
+  annualPaidLeave: number;
+  annualCasualLeave: number;
+  annualSickLeave: number;
+  annualCompOff: number;
 };
 
 export const DEFAULT_ORG: OrgSettings = {
@@ -20,6 +24,10 @@ export const DEFAULT_ORG: OrgSettings = {
   scanEnabled: true,
   salaryBasicPct: 50,
   salaryHraPctOfBasic: 50,
+  annualPaidLeave: 12,
+  annualCasualLeave: 12,
+  annualSickLeave: 12,
+  annualCompOff: 0,
 };
 
 // Single-row (id = 1) org settings. Degrades to defaults when DB is absent.
@@ -36,6 +44,10 @@ export async function getOrgSettings(): Promise<OrgSettings> {
       scanEnabled: s.scanEnabled,
       salaryBasicPct: s.salaryBasicPct,
       salaryHraPctOfBasic: s.salaryHraPctOfBasic,
+      annualPaidLeave: s.annualPaidLeave,
+      annualCasualLeave: s.annualCasualLeave,
+      annualSickLeave: s.annualSickLeave,
+      annualCompOff: s.annualCompOff,
     };
   } catch {
     return DEFAULT_ORG;

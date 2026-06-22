@@ -40,6 +40,9 @@ export function parseEmployee(b: Record<string, unknown>) {
     hra: i(b.hra),
     allowances: i(b.allowances),
     paidLeaveBalance: f(b.paidLeaveBalance),
+    casualBalance: f(b.casualBalance),
+    sickBalance: f(b.sickBalance),
+    compOffBalance: f(b.compOffBalance),
     notes: (b.notes as string) || null,
   };
 }

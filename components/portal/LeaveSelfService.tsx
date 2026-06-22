@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
-import { fmtDate, LEAVE_STATUS_STYLE } from "@/lib/hr";
+import { fmtDate, LEAVE_STATUS_STYLE, LEAVE_TYPES } from "@/lib/hr";
 
 type Leave = {
   id: string;
@@ -16,18 +16,29 @@ type Leave = {
   approverNote: string | null;
 };
 
+type Balances = {
+  paidLeaveBalance: number;
+  casualBalance: number;
+  sickBalance: number;
+  compOffBalance: number;
+};
+
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 const label = "mb-1.5 block text-xs font-medium text-slatey";
 const KINDS = ["PAID", "SICK", "CASUAL", "COMP_OFF", "UNPAID"];
 
-export default function LeaveSelfService({ initial }: { initial: Leave[] }) {
+export default function LeaveSelfService({ initial, balances }: { initial: Leave[]; balances: Balances }) {
   const router = useRouter();
   const [leaves, setLeaves] = useState<Leave[]>(initial);
   const [f, setF] = useState({ kind: "PAID", startDate: "", endDate: "", reason: "" });
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const up = (k: string, v: string) => setF((s) => ({ ...s, [k]: v }));
+
+  const balanceList = LEAVE_TYPES.map((t) => ({ kind: t.kind, label: t.label, value: balances[t.field] }));
+  const selectedField = LEAVE_TYPES.find((t) => t.kind === f.kind)?.field;
+  const selectedRemaining = selectedField ? balances[selectedField] : null;
 
   const dayCount = () => {
     if (!f.startDate || !f.endDate) return 0;
@@ -78,7 +89,20 @@ export default function LeaveSelfService({ initial }: { initial: Leave[] }) {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {balanceList.map((b) => (
+          <div key={b.kind} className="rounded-2xl border border-slate-200 bg-white p-4">
+            <p className="text-xs text-slatey">{b.label}</p>
+            <p className="mt-1 text-2xl font-bold text-ink">
+              {b.value}
+              <span className="text-sm font-normal text-slate-400"> days</span>
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
       <form onSubmit={submit} className="h-fit rounded-2xl border border-slate-200 bg-white p-6">
         <h2 className="text-sm font-semibold text-ink">Apply for leave</h2>
         <div className="mt-4 space-y-4">
@@ -91,6 +115,14 @@ export default function LeaveSelfService({ initial }: { initial: Leave[] }) {
                 </option>
               ))}
             </select>
+            {selectedRemaining != null ? (
+              <p className={`mt-1.5 text-xs ${dayCount() > selectedRemaining ? "text-amber-600" : "text-slatey"}`}>
+                Remaining: <span className="font-semibold text-ink">{selectedRemaining} days</span>
+                {dayCount() > selectedRemaining ? " — exceeds your balance" : ""}
+              </p>
+            ) : (
+              <p className="mt-1.5 text-xs text-slatey">Unpaid leave — no balance deducted.</p>
+            )}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -150,6 +182,7 @@ export default function LeaveSelfService({ initial }: { initial: Leave[] }) {
             ))}
           </ul>
         )}
+      </div>
       </div>
     </div>
   );

@@ -50,12 +50,14 @@ export default function EmployeeForm({
   managers,
   roles,
   salarySplit = DEFAULT_SALARY_SPLIT,
+  leaveDefaults = { paid: 12, casual: 12, sick: 12, compOff: 0 },
 }: {
   initial?: Record<string, unknown>;
   departments: Opt[];
   managers: Opt[];
   roles: Opt[];
   salarySplit?: SalarySplit;
+  leaveDefaults?: { paid: number; casual: number; sick: number; compOff: number };
 }) {
   const router = useRouter();
   const editing = Boolean(initial?.id);
@@ -91,7 +93,10 @@ export default function EmployeeForm({
     basic: (initial?.basic ?? "") as string | number,
     hra: (initial?.hra ?? "") as string | number,
     allowances: (initial?.allowances ?? "") as string | number,
-    paidLeaveBalance: (initial?.paidLeaveBalance ?? 0) as string | number,
+    paidLeaveBalance: (initial?.id ? (initial?.paidLeaveBalance ?? 0) : leaveDefaults.paid) as string | number,
+    casualBalance: (initial?.id ? (initial?.casualBalance ?? 0) : leaveDefaults.casual) as string | number,
+    sickBalance: (initial?.id ? (initial?.sickBalance ?? 0) : leaveDefaults.sick) as string | number,
+    compOffBalance: (initial?.id ? (initial?.compOffBalance ?? 0) : leaveDefaults.compOff) as string | number,
     notes: v("notes"),
     password: "",
   });
@@ -234,11 +239,24 @@ export default function EmployeeForm({
             <span className="font-bold text-ink">{inr(Number(f.ctcAnnual) || 0)}</span>
           </div>
         </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Input label="Basic" type="number" value={f.basic} onChange={(val) => up("basic", val)} />
           <Input label="HRA" type="number" value={f.hra} onChange={(val) => up("hra", val)} />
           <Input label="Special allowance" type="number" value={f.allowances} onChange={(val) => up("allowances", val)} />
-          <Input label="Paid leave balance" type="number" value={f.paidLeaveBalance} onChange={(val) => up("paidLeaveBalance", val)} />
+        </div>
+      </div>
+
+      <div className={card}>
+        <h2 className="text-sm font-semibold text-ink">Leave balances (days)</h2>
+        <p className="mt-1 text-xs text-slate-400">
+          Remaining balance per type. New hires are pre-filled from the annual allocation in HR settings;
+          approved leave auto-deducts from the matching type. Unpaid leave (LOP) has no balance.
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Input label="Earned / Paid" type="number" value={f.paidLeaveBalance} onChange={(val) => up("paidLeaveBalance", val)} />
+          <Input label="Casual" type="number" value={f.casualBalance} onChange={(val) => up("casualBalance", val)} />
+          <Input label="Sick" type="number" value={f.sickBalance} onChange={(val) => up("sickBalance", val)} />
+          <Input label="Comp-off" type="number" value={f.compOffBalance} onChange={(val) => up("compOffBalance", val)} />
         </div>
       </div>
 

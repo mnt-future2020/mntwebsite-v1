@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import { balanceFieldForKind } from "@/lib/hr";
 
 export const runtime = "nodejs";
 
@@ -24,8 +25,10 @@ export async function PATCH(req: Request, props: Ctx) {
     if (await managerBlocked(leave.employeeId))
       return NextResponse.json({ error: "You can only act on your team's requests." }, { status: 403 });
 
+    // Deduct from (or restore to) the balance for this leave's type. UNPAID has none.
+    const balanceField = balanceFieldForKind(leave.kind);
     let delta = 0;
-    if (leave.kind === "PAID") {
+    if (balanceField) {
       if (status === "APPROVED" && leave.status !== "APPROVED") delta = -leave.days;
       if (leave.status === "APPROVED" && (status === "REJECTED" || status === "CANCELLED")) delta = leave.days;
     }
@@ -36,11 +39,11 @@ export async function PATCH(req: Request, props: Ctx) {
         data: { status, approverNote: approverNote || null, decidedAt: new Date() },
       }),
     ];
-    if (delta !== 0) {
+    if (delta !== 0 && balanceField) {
       ops.push(
         prisma.employee.update({
           where: { id: leave.employeeId },
-          data: { paidLeaveBalance: { increment: delta } },
+          data: { [balanceField]: { increment: delta } },
         })
       );
     }

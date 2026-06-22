@@ -8,6 +8,22 @@ export const HR = {
   workEnd: "18:30",
 };
 
+// Leave types that carry a balance, mapped to their Employee balance column.
+// UNPAID (loss of pay) is intentionally absent — it has no balance.
+export const LEAVE_TYPES = [
+  { kind: "PAID", label: "Earned / Paid", field: "paidLeaveBalance" },
+  { kind: "CASUAL", label: "Casual", field: "casualBalance" },
+  { kind: "SICK", label: "Sick", field: "sickBalance" },
+  { kind: "COMP_OFF", label: "Comp-off", field: "compOffBalance" },
+] as const;
+
+export type LeaveBalanceField = (typeof LEAVE_TYPES)[number]["field"];
+
+// Which Employee balance column a leave kind draws from (null = no balance, e.g. UNPAID).
+export function balanceFieldForKind(kind: string): LeaveBalanceField | null {
+  return LEAVE_TYPES.find((t) => t.kind === kind)?.field ?? null;
+}
+
 export function fullName(e: { firstName: string; lastName?: string | null }) {
   return [e.firstName, e.lastName].filter(Boolean).join(" ");
 }

@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/db";
 import { getCurrentEmployee } from "@/lib/portal";
-import { HR } from "@/lib/hr";
 import LeaveSelfService from "@/components/portal/LeaveSelfService";
 
 export const dynamic = "force-dynamic";
@@ -50,11 +49,16 @@ export default async function PortalLeavePage() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold text-ink">My leave</h1>
-      <p className="mt-1 mb-6 text-sm text-slatey">
-        Paid balance: <span className="font-semibold text-ink">{emp.paidLeaveBalance ?? HR.annualPaidLeave} days</span>
-      </p>
-      <LeaveSelfService initial={leaves} />
+      <h1 className="mb-6 text-2xl font-bold text-ink">My leave</h1>
+      <LeaveSelfService
+        initial={leaves}
+        balances={{
+          paidLeaveBalance: emp.paidLeaveBalance ?? 0,
+          casualBalance: emp.casualBalance ?? 0,
+          sickBalance: emp.sickBalance ?? 0,
+          compOffBalance: emp.compOffBalance ?? 0,
+        }}
+      />
     </>
   );
 }

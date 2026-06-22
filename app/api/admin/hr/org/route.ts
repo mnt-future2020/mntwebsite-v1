@@ -21,6 +21,10 @@ export async function PUT(req: Request) {
       const n = parseFloat(String(v ?? ""));
       return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) : fallback;
     };
+    const days = (v: unknown, fallback: number) => {
+      const n = parseFloat(String(v ?? ""));
+      return Number.isFinite(n) && n >= 0 ? n : fallback;
+    };
     const data = {
       officeLat: num(b.officeLat),
       officeLng: num(b.officeLng),
@@ -30,6 +34,10 @@ export async function PUT(req: Request) {
       scanEnabled: Boolean(b.scanEnabled),
       salaryBasicPct: pct(b.salaryBasicPct, 50),
       salaryHraPctOfBasic: pct(b.salaryHraPctOfBasic, 50),
+      annualPaidLeave: days(b.annualPaidLeave, 12),
+      annualCasualLeave: days(b.annualCasualLeave, 12),
+      annualSickLeave: days(b.annualSickLeave, 12),
+      annualCompOff: days(b.annualCompOff, 0),
     };
     const saved = await prisma.orgSetting.upsert({
       where: { id: 1 },

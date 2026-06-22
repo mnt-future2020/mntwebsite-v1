@@ -2,7 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { getCurrentEmployee } from "@/lib/portal";
-import { inr, fmtDate, HR } from "@/lib/hr";
+import { inr, fmtDate } from "@/lib/hr";
 import Icon, { IconName } from "@/components/Icon";
 
 export const dynamic = "force-dynamic";
@@ -61,7 +61,7 @@ export default async function PortalHome() {
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <Stat icon="clock" label="Paid leave balance" value={`${emp.paidLeaveBalance ?? HR.annualPaidLeave} days`} />
+        <Stat icon="clock" label="Leave balance" value={`${(emp.paidLeaveBalance || 0) + (emp.casualBalance || 0) + (emp.sickBalance || 0) + (emp.compOffBalance || 0)} days`} />
         <Stat
           icon="calendar"
           label="Today"
