@@ -12,6 +12,36 @@ const card = "rounded-2xl border border-slate-200 bg-white p-6";
 type Opt = { id: string; label: string };
 const dval = (d: unknown) => (d ? new Date(String(d)).toISOString().slice(0, 10) : "");
 
+// Defined at module scope (NOT inside EmployeeForm) so its component identity
+// stays stable across re-renders — otherwise React remounts the <input> on every
+// keystroke and the field loses focus, making it impossible to type.
+function Input({
+  label: l,
+  value,
+  onChange,
+  type = "text",
+  placeholder = "",
+}: {
+  label: string;
+  value: string | number;
+  onChange: (v: string) => void;
+  type?: string;
+  placeholder?: string;
+}) {
+  return (
+    <div>
+      <label className={label}>{l}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={field}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
+
 export default function EmployeeForm({
   initial,
   departments,
@@ -97,23 +127,16 @@ export default function EmployeeForm({
     }
   };
 
-  const Input = ({ k, label: l, type = "text", placeholder = "" }: { k: string; label: string; type?: string; placeholder?: string }) => (
-    <div>
-      <label className={label}>{l}</label>
-      <input type={type} value={(f as never)[k]} onChange={(e) => up(k, e.target.value)} className={field} placeholder={placeholder} />
-    </div>
-  );
-
   return (
     <form onSubmit={save} className="space-y-6">
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Identity</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Input k="firstName" label="First name *" />
-          <Input k="lastName" label="Last name" />
-          <Input k="email" label="Email *" type="email" />
-          <Input k="phone" label="Phone" />
-          <Input k="photoUrl" label="Photo URL" />
+          <Input label="First name *" value={f.firstName} onChange={(val) => up("firstName", val)} />
+          <Input label="Last name" value={f.lastName} onChange={(val) => up("lastName", val)} />
+          <Input label="Email *" type="email" value={f.email} onChange={(val) => up("email", val)} />
+          <Input label="Phone" value={f.phone} onChange={(val) => up("phone", val)} />
+          <Input label="Photo URL" value={f.photoUrl} onChange={(val) => up("photoUrl", val)} />
         </div>
       </div>
 
@@ -127,7 +150,7 @@ export default function EmployeeForm({
               {departments.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
             </select>
           </div>
-          <Input k="designation" label="Designation" placeholder="e.g. Backend Developer" />
+          <Input label="Designation" value={f.designation} onChange={(val) => up("designation", val)} placeholder="e.g. Backend Developer" />
           <div>
             <label className={label}>Level</label>
             <select value={f.level} onChange={(e) => up("level", e.target.value)} className={field}>
@@ -153,42 +176,42 @@ export default function EmployeeForm({
               {managers.filter((m) => m.id !== initial?.id).map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
             </select>
           </div>
-          <Input k="joinDate" label="Join date" type="date" />
-          <Input k="probationEndDate" label="Probation ends" type="date" />
-          <Input k="confirmationDate" label="Confirmation date" type="date" />
-          <Input k="exitDate" label="Exit date" type="date" />
+          <Input label="Join date" type="date" value={f.joinDate} onChange={(val) => up("joinDate", val)} />
+          <Input label="Probation ends" type="date" value={f.probationEndDate} onChange={(val) => up("probationEndDate", val)} />
+          <Input label="Confirmation date" type="date" value={f.confirmationDate} onChange={(val) => up("confirmationDate", val)} />
+          <Input label="Exit date" type="date" value={f.exitDate} onChange={(val) => up("exitDate", val)} />
         </div>
       </div>
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Personal</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Input k="dob" label="Date of birth" type="date" />
-          <Input k="gender" label="Gender" />
-          <Input k="address" label="Address" />
-          <Input k="emergencyName" label="Emergency contact" />
-          <Input k="emergencyPhone" label="Emergency phone" />
+          <Input label="Date of birth" type="date" value={f.dob} onChange={(val) => up("dob", val)} />
+          <Input label="Gender" value={f.gender} onChange={(val) => up("gender", val)} />
+          <Input label="Address" value={f.address} onChange={(val) => up("address", val)} />
+          <Input label="Emergency contact" value={f.emergencyName} onChange={(val) => up("emergencyName", val)} />
+          <Input label="Emergency phone" value={f.emergencyPhone} onChange={(val) => up("emergencyPhone", val)} />
         </div>
       </div>
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Statutory &amp; bank</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Input k="pan" label="PAN" />
-          <Input k="bankName" label="Bank name" />
-          <Input k="bankAccount" label="Account number" />
-          <Input k="ifsc" label="IFSC" />
+          <Input label="PAN" value={f.pan} onChange={(val) => up("pan", val)} />
+          <Input label="Bank name" value={f.bankName} onChange={(val) => up("bankName", val)} />
+          <Input label="Account number" value={f.bankAccount} onChange={(val) => up("bankAccount", val)} />
+          <Input label="IFSC" value={f.ifsc} onChange={(val) => up("ifsc", val)} />
         </div>
       </div>
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Compensation (monthly ₹)</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <Input k="ctcAnnual" label="Annual CTC" type="number" />
-          <Input k="basic" label="Basic" type="number" />
-          <Input k="hra" label="HRA" type="number" />
-          <Input k="allowances" label="Allowances" type="number" />
-          <Input k="paidLeaveBalance" label="Paid leave balance" type="number" />
+          <Input label="Annual CTC" type="number" value={f.ctcAnnual} onChange={(val) => up("ctcAnnual", val)} />
+          <Input label="Basic" type="number" value={f.basic} onChange={(val) => up("basic", val)} />
+          <Input label="HRA" type="number" value={f.hra} onChange={(val) => up("hra", val)} />
+          <Input label="Allowances" type="number" value={f.allowances} onChange={(val) => up("allowances", val)} />
+          <Input label="Paid leave balance" type="number" value={f.paidLeaveBalance} onChange={(val) => up("paidLeaveBalance", val)} />
         </div>
       </div>
 

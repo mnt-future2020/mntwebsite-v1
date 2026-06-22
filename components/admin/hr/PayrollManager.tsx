@@ -12,6 +12,14 @@ const lbl = "mb-1 block text-xs font-medium text-slatey";
 const STATUS = ["DRAFT", "FINALIZED", "PAID"];
 const statusStyle: Record<string, string> = { DRAFT: "bg-slate-100 text-slatey", FINALIZED: "bg-blue-100 text-blue-700", PAID: "bg-green-100 text-green-700" };
 
+// Module scope so React keeps the <input> mounted between renders — a component
+// re-created on each render would lose focus and make the field impossible to type in.
+function N({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
+  return (
+    <div><label className={lbl}>{label}</label><input type="number" value={value} onChange={(e) => onChange(Number(e.target.value))} className={field} /></div>
+  );
+}
+
 export default function PayrollManager({ slips: s0, employees }: { slips: Slip[]; employees: Emp[] }) {
   const [slips, setSlips] = useState(s0);
   const now = new Date();
@@ -59,10 +67,6 @@ export default function PayrollManager({ slips: s0, employees }: { slips: Slip[]
     await fetch(`/api/admin/hr/payroll/${id}`, { method: "DELETE" });
   };
 
-  const N = ({ k, label }: { k: string; label: string }) => (
-    <div><label className={lbl}>{label}</label><input type="number" value={(f as never)[k]} onChange={(e) => up(k, Number(e.target.value))} className={field} /></div>
-  );
-
   return (
     <div className="space-y-6">
       <form onSubmit={generate} className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -85,11 +89,11 @@ export default function PayrollManager({ slips: s0, employees }: { slips: Slip[]
         </div>
         <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-slate-400">Earnings</p>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <N k="basic" label="Basic" /><N k="hra" label="HRA" /><N k="allowances" label="Allowances" /><N k="otherEarnings" label="Other" />
+          <N label="Basic" value={f.basic} onChange={(v) => up("basic", v)} /><N label="HRA" value={f.hra} onChange={(v) => up("hra", v)} /><N label="Allowances" value={f.allowances} onChange={(v) => up("allowances", v)} /><N label="Other" value={f.otherEarnings} onChange={(v) => up("otherEarnings", v)} />
         </div>
         <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-slate-400">Deductions</p>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
-          <N k="pf" label="PF" /><N k="esi" label="ESI" /><N k="professionalTax" label="Prof. tax" /><N k="tds" label="TDS" /><N k="otherDeductions" label="Other" /><N k="lopDays" label="LOP days" />
+          <N label="PF" value={f.pf} onChange={(v) => up("pf", v)} /><N label="ESI" value={f.esi} onChange={(v) => up("esi", v)} /><N label="Prof. tax" value={f.professionalTax} onChange={(v) => up("professionalTax", v)} /><N label="TDS" value={f.tds} onChange={(v) => up("tds", v)} /><N label="Other" value={f.otherDeductions} onChange={(v) => up("otherDeductions", v)} /><N label="LOP days" value={f.lopDays} onChange={(v) => up("lopDays", v)} />
         </div>
         <div className="mt-5 flex items-center gap-4 text-sm">
           <button type="submit" disabled={busy} className="btn-primary disabled:opacity-70"><Icon name="wallet" className="h-4 w-4" /> {busy ? "Saving…" : "Generate / update"}</button>
