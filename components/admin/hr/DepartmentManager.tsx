@@ -14,6 +14,9 @@ export default function DepartmentManager({ initial }: { initial: Dept[] }) {
   const [head, setHead] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editHead, setEditHead] = useState("");
 
   const add = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +50,30 @@ export default function DepartmentManager({ initial }: { initial: Dept[] }) {
     }
   };
 
+  const startEdit = (d: Dept) => {
+    setEditId(d.id);
+    setEditName(d.name);
+    setEditHead(d.head || "");
+  };
+  const saveEdit = async () => {
+    if (!editId || !editName.trim()) return;
+    const res = await fetch(`/api/admin/hr/departments/${editId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: editName, head: editHead }),
+    });
+    if (res.ok) {
+      const d = await res.json();
+      setDepts((s) =>
+        s.map((x) => (x.id === editId ? { ...x, name: d.name, head: d.head } : x)).sort((a, b) => a.name.localeCompare(b.name))
+      );
+      setEditId(null);
+    } else {
+      const d = await res.json().catch(() => ({}));
+      alert(d.error || "Update failed.");
+    }
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
@@ -65,14 +92,31 @@ export default function DepartmentManager({ initial }: { initial: Dept[] }) {
             <tbody className="divide-y divide-slate-100">
               {depts.map((d) => (
                 <tr key={d.id} className="hover:bg-slate-50">
-                  <td className="px-5 py-3 font-medium text-ink">{d.name}</td>
-                  <td className="px-5 py-3 text-slatey">{d.head || "—"}</td>
-                  <td className="px-5 py-3 text-slatey">{d._count?.employees ?? 0}</td>
-                  <td className="px-5 py-3 text-right">
-                    <button onClick={() => del(d.id)} className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600">
-                      <Icon name="trash" className="h-4 w-4" />
-                    </button>
-                  </td>
+                  {editId === d.id ? (
+                    <>
+                      <td className="px-5 py-2"><input value={editName} onChange={(e) => setEditName(e.target.value)} className={field} autoFocus /></td>
+                      <td className="px-5 py-2"><input value={editHead} onChange={(e) => setEditHead(e.target.value)} className={field} placeholder="Head (optional)" /></td>
+                      <td className="px-5 py-3 text-slatey">{d._count?.employees ?? 0}</td>
+                      <td className="px-5 py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          <button onClick={saveEdit} title="Save" className="rounded-lg p-1.5 text-green-600 hover:bg-green-50"><Icon name="check" className="h-4 w-4" /></button>
+                          <button onClick={() => setEditId(null)} title="Cancel" className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
+                        </div>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="px-5 py-3 font-medium text-ink">{d.name}</td>
+                      <td className="px-5 py-3 text-slatey">{d.head || "—"}</td>
+                      <td className="px-5 py-3 text-slatey">{d._count?.employees ?? 0}</td>
+                      <td className="px-5 py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          <button onClick={() => startEdit(d)} title="Edit" className="rounded-lg p-1.5 text-slatey hover:bg-brand-50 hover:text-brand-700"><Icon name="edit" className="h-4 w-4" /></button>
+                          <button onClick={() => del(d.id)} title="Delete" className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button>
+                        </div>
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))}
             </tbody>

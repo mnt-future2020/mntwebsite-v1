@@ -18,6 +18,8 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   const [holidays, setHolidays] = useState(h0);
   const [form, setForm] = useState({ employeeId: employees[0]?.id || "", kind: "PAID", startDate: "", endDate: "", reason: "" });
   const [hol, setHol] = useState({ date: "", name: "" });
+  const [editHolId, setEditHolId] = useState<string | null>(null);
+  const [editHol, setEditHol] = useState({ date: "", name: "" });
 
   const decide = async (id: string, status: string) => {
     setLeaves((s) => s.map((l) => (l.id === id ? { ...l, status } : l)));
@@ -52,6 +54,25 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   const delHoliday = async (id: string) => {
     setHolidays((s) => s.filter((h) => h.id !== id));
     await fetch(`/api/admin/hr/holidays/${id}`, { method: "DELETE" });
+  };
+  const startHolEdit = (h: Holiday) => {
+    setEditHolId(h.id);
+    setEditHol({ date: h.date.slice(0, 10), name: h.name });
+  };
+  const saveHolEdit = async () => {
+    if (!editHolId || !editHol.date || !editHol.name) return;
+    const res = await fetch(`/api/admin/hr/holidays/${editHolId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editHol),
+    });
+    if (res.ok) {
+      const d = await res.json();
+      setHolidays((s) =>
+        s.map((x) => (x.id === editHolId ? { ...x, date: d.date, name: d.name } : x)).sort((a, b) => +new Date(a.date) - +new Date(b.date))
+      );
+      setEditHolId(null);
+    } else alert("Update failed.");
   };
 
   const estDays = form.startDate && form.endDate ? leaveDays(form.startDate, form.endDate) : 0;
@@ -136,9 +157,27 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
           <h2 className="text-sm font-semibold text-ink">Holiday calendar</h2>
           <div className="mt-3 divide-y divide-slate-100">
             {holidays.length === 0 ? <p className="py-2 text-sm text-slatey">No holidays added.</p> : holidays.map((h) => (
-              <div key={h.id} className="flex items-center justify-between py-2 text-sm">
-                <span className="text-ink">{fmtDate(h.date)} <span className="text-xs text-slate-400">· {h.name}</span></span>
-                <button onClick={() => delHoliday(h.id)} className="rounded-lg p-1 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-3.5 w-3.5" /></button>
+              <div key={h.id} className="flex items-center justify-between gap-2 py-2 text-sm">
+                {editHolId === h.id ? (
+                  <>
+                    <div className="flex flex-1 items-center gap-2">
+                      <input type="date" value={editHol.date} onChange={(e) => setEditHol((s) => ({ ...s, date: e.target.value }))} className={`${field} py-1`} />
+                      <input value={editHol.name} onChange={(e) => setEditHol((s) => ({ ...s, name: e.target.value }))} className={`${field} py-1`} placeholder="Name" />
+                    </div>
+                    <div className="flex shrink-0 items-center gap-1">
+                      <button onClick={saveHolEdit} title="Save" className="rounded-lg p-1 text-green-600 hover:bg-green-50"><Icon name="check" className="h-3.5 w-3.5" /></button>
+                      <button onClick={() => setEditHolId(null)} title="Cancel" className="rounded-lg p-1 text-slatey hover:bg-slate-100"><Icon name="x" className="h-3.5 w-3.5" /></button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-ink">{fmtDate(h.date)} <span className="text-xs text-slate-400">· {h.name}</span></span>
+                    <div className="flex shrink-0 items-center gap-1">
+                      <button onClick={() => startHolEdit(h)} title="Edit" className="rounded-lg p-1 text-slatey hover:bg-brand-50 hover:text-brand-700"><Icon name="edit" className="h-3.5 w-3.5" /></button>
+                      <button onClick={() => delHoliday(h.id)} title="Delete" className="rounded-lg p-1 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-3.5 w-3.5" /></button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>

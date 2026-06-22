@@ -89,6 +89,7 @@ export default function EmployeeForm({
     bankName: v("bankName"),
     bankAccount: v("bankAccount"),
     ifsc: v("ifsc"),
+    bankBranch: v("bankBranch"),
     ctcAnnual: (initial?.ctcAnnual ?? "") as string | number,
     basic: (initial?.basic ?? "") as string | number,
     hra: (initial?.hra ?? "") as string | number,
@@ -215,9 +216,10 @@ export default function EmployeeForm({
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Statutory &amp; bank</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Input label="PAN" value={f.pan} onChange={(val) => up("pan", val)} />
           <Input label="Bank name" value={f.bankName} onChange={(val) => up("bankName", val)} />
+          <Input label="Branch" value={f.bankBranch} onChange={(val) => up("bankBranch", val)} placeholder="e.g. Anna Nagar, Chennai" />
           <Input label="Account number" value={f.bankAccount} onChange={(val) => up("bankAccount", val)} />
           <Input label="IFSC" value={f.ifsc} onChange={(val) => up("ifsc", val)} />
         </div>

@@ -239,6 +239,7 @@ model Employee {
   bankName    String?
   bankAccount String?
   ifsc        String?
+  bankBranch  String?
 
   // Compensation (monthly, INR)
   ctcAnnual  Int? // annual CTC

@@ -35,6 +35,7 @@ export function parseEmployee(b: Record<string, unknown>) {
     bankName: (b.bankName as string) || null,
     bankAccount: (b.bankAccount as string) || null,
     ifsc: (b.ifsc as string) || null,
+    bankBranch: (b.bankBranch as string) || null,
     ctcAnnual: b.ctcAnnual ? i(b.ctcAnnual) : null,
     basic: i(b.basic),
     hra: i(b.hra),

@@ -14,6 +14,8 @@ export default function PerformanceManager({ reviews: r0, employees }: { reviews
   const [f, setF] = useState({ employeeId: employees[0]?.id || "", period: "", rating: 3, strengths: "", improvements: "", goals: "", hikePercent: "", reviewer: "", status: "DRAFT" });
   const [busy, setBusy] = useState(false);
   const up = (k: string, v: unknown) => setF((s) => ({ ...s, [k]: v }));
+  const [editId, setEditId] = useState<string | null>(null);
+  const [ef, setEf] = useState({ period: "", rating: 3, hikePercent: "" });
 
   const add = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,23 @@ export default function PerformanceManager({ reviews: r0, employees }: { reviews
     setReviews((s) => s.filter((x) => x.id !== id));
     await fetch(`/api/admin/hr/performance/${id}`, { method: "DELETE" });
   };
+  const startEdit = (r: Review) => {
+    setEditId(r.id);
+    setEf({ period: r.period, rating: r.rating, hikePercent: r.hikePercent != null ? String(r.hikePercent) : "" });
+  };
+  const saveEdit = async () => {
+    if (!editId) return;
+    const res = await fetch(`/api/admin/hr/performance/${editId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ period: ef.period, rating: ef.rating, hikePercent: ef.hikePercent }),
+    });
+    if (res.ok) {
+      const d = await res.json();
+      setReviews((s) => s.map((x) => (x.id === editId ? { ...x, period: d.period, rating: d.rating, hikePercent: d.hikePercent } : x)));
+      setEditId(null);
+    } else alert("Update failed.");
+  };
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
@@ -46,10 +65,35 @@ export default function PerformanceManager({ reviews: r0, employees }: { reviews
             ) : reviews.map((r) => (
               <tr key={r.id} className="hover:bg-slate-50">
                 <td className="px-5 py-3 font-medium text-ink">{r.employeeName}</td>
-                <td className="px-5 py-3 text-slatey">{r.period}</td>
-                <td className="px-5 py-3 text-amber-500">{"★".repeat(r.rating)}<span className="text-slate-200">{"★".repeat(5 - r.rating)}</span></td>
-                <td className="px-5 py-3 text-slatey">{r.hikePercent ? `+${r.hikePercent}%` : "—"}</td>
-                <td className="px-5 py-3 text-right"><button onClick={() => del(r.id)} className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button></td>
+                {editId === r.id ? (
+                  <>
+                    <td className="px-5 py-2"><input value={ef.period} onChange={(e) => setEf((s) => ({ ...s, period: e.target.value }))} className={field} /></td>
+                    <td className="px-5 py-2">
+                      <select value={ef.rating} onChange={(e) => setEf((s) => ({ ...s, rating: Number(e.target.value) }))} className={field}>
+                        {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n} ★</option>)}
+                      </select>
+                    </td>
+                    <td className="px-5 py-2"><input type="number" value={ef.hikePercent} onChange={(e) => setEf((s) => ({ ...s, hikePercent: e.target.value }))} className={field} placeholder="%" /></td>
+                    <td className="px-5 py-3">
+                      <div className="flex items-center justify-end gap-1">
+                        <button onClick={saveEdit} title="Save" className="rounded-lg p-1.5 text-green-600 hover:bg-green-50"><Icon name="check" className="h-4 w-4" /></button>
+                        <button onClick={() => setEditId(null)} title="Cancel" className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
+                      </div>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className="px-5 py-3 text-slatey">{r.period}</td>
+                    <td className="px-5 py-3 text-amber-500">{"★".repeat(r.rating)}<span className="text-slate-200">{"★".repeat(5 - r.rating)}</span></td>
+                    <td className="px-5 py-3 text-slatey">{r.hikePercent ? `+${r.hikePercent}%` : "—"}</td>
+                    <td className="px-5 py-3">
+                      <div className="flex items-center justify-end gap-1">
+                        <button onClick={() => startEdit(r)} title="Edit" className="rounded-lg p-1.5 text-slatey hover:bg-brand-50 hover:text-brand-700"><Icon name="edit" className="h-4 w-4" /></button>
+                        <button onClick={() => del(r.id)} title="Delete" className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button>
+                      </div>
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>

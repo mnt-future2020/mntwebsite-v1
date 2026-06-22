@@ -3,6 +3,20 @@ import { prisma } from "@/lib/db";
 
 export const runtime = "nodejs";
 
+export async function PATCH(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  try {
+    const b = await req.json();
+    const data: Record<string, unknown> = {};
+    if (b.name !== undefined) data.name = String(b.name);
+    if (b.date !== undefined) data.date = new Date(b.date);
+    const h = await prisma.holiday.update({ where: { id: params.id }, data });
+    return NextResponse.json(h);
+  } catch {
+    return NextResponse.json({ error: "Update failed." }, { status: 500 });
+  }
+}
+
 export async function DELETE(_req: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   try {
