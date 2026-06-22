@@ -13,6 +13,7 @@ function parse(b: Record<string, unknown>) {
     clientId: (b.clientId as string) || null,
     ownerId: (b.ownerId as string) || null,
     notes: (b.notes as string) || null,
+    nextFollowUp: b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null,
   };
 }
 

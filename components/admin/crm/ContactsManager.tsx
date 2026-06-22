@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
+import { followUpStatus, FOLLOWUP_STYLE, fmtDate } from "@/lib/crm";
 
 type Opt = { id: string; label: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,7 +12,8 @@ type Contact = any;
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
-const blank = { firstName: "", lastName: "", email: "", phone: "", title: "", clientId: "", ownerId: "", notes: "" };
+const dval = (d: unknown) => (d ? String(d).slice(0, 10) : "");
+const blank = { firstName: "", lastName: "", email: "", phone: "", title: "", clientId: "", ownerId: "", notes: "", nextFollowUp: "" };
 
 export default function ContactsManager({ initial, companies, owners }: { initial: Contact[]; companies: Opt[]; owners: Opt[] }) {
   const router = useRouter();
@@ -25,7 +27,7 @@ export default function ContactsManager({ initial, companies, owners }: { initia
   const reset = () => { setEditId(null); setF(blank); };
   const edit = (c: Contact) => {
     setEditId(c.id);
-    setF({ firstName: c.firstName, lastName: c.lastName || "", email: c.email || "", phone: c.phone || "", title: c.title || "", clientId: c.clientId || "", ownerId: c.ownerId || "", notes: c.notes || "" });
+    setF({ firstName: c.firstName, lastName: c.lastName || "", email: c.email || "", phone: c.phone || "", title: c.title || "", clientId: c.clientId || "", ownerId: c.ownerId || "", notes: c.notes || "", nextFollowUp: dval(c.nextFollowUp) });
   };
 
   const view = useMemo(
@@ -72,7 +74,7 @@ export default function ContactsManager({ initial, companies, owners }: { initia
           ) : (
             <table className="w-full text-sm">
               <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs uppercase tracking-wide text-slatey">
-                <tr><th className="px-5 py-3 font-semibold">Name</th><th className="px-5 py-3 font-semibold">Company</th><th className="px-5 py-3 font-semibold">Owner</th><th className="px-5 py-3 font-semibold">Deals</th><th className="px-5 py-3" /></tr>
+                <tr><th className="px-5 py-3 font-semibold">Name</th><th className="px-5 py-3 font-semibold">Company</th><th className="px-5 py-3 font-semibold">Owner</th><th className="px-5 py-3 font-semibold">Deals</th><th className="px-5 py-3 font-semibold">Follow-up</th><th className="px-5 py-3" /></tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {view.map((c) => (
@@ -81,6 +83,14 @@ export default function ContactsManager({ initial, companies, owners }: { initia
                     <td className="px-5 py-3 text-slatey">{c.client?.name || "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c.owner ? [c.owner.firstName, c.owner.lastName].filter(Boolean).join(" ") : "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c._count?.deals ?? 0}</td>
+                    <td className="px-5 py-3">
+                      {(() => { const fu = followUpStatus(c.nextFollowUp); return (
+                        <div className="text-xs">
+                          {fu ? <span className={`inline-block rounded-full px-1.5 py-0.5 font-semibold ${FOLLOWUP_STYLE[fu]}`}>{fu === "overdue" ? `Overdue · ${fmtDate(c.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(c.nextFollowUp)}</span> : <span className="text-slate-300">—</span>}
+                          {c.lastContactedAt && <div className="mt-0.5 text-[10px] text-slate-400">last: {fmtDate(c.lastContactedAt)}</div>}
+                        </div>
+                      ); })()}
+                    </td>
                     <td className="px-5 py-3 text-right">
                       <button onClick={() => edit(c)} className="rounded-lg p-1.5 text-slatey hover:bg-slate-100 hover:text-ink"><Icon name="edit" className="h-4 w-4" /></button>
                       <button onClick={() => del(c)} className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button>
@@ -112,6 +122,10 @@ export default function ContactsManager({ initial, companies, owners }: { initia
             {owners.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
           </select>
           <textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={2} placeholder="Notes" />
+          <div>
+            <span className="mb-1 block text-[11px] text-slate-400">Next follow-up</span>
+            <input type="date" value={f.nextFollowUp} onChange={(e) => up("nextFollowUp", e.target.value)} className={field} />
+          </div>
         </div>
         <div className="mt-4 flex gap-2">
           <button type="submit" disabled={busy} className="btn-primary flex-1 disabled:opacity-70"><Icon name={editId ? "save" : "plus"} className="h-4 w-4" /> {editId ? "Save" : "Add"}</button>

@@ -60,6 +60,23 @@ export function wrapEmail(
   </body></html>`;
 }
 
+// ─── Internal transactional email ───────────────────────────────────────────
+// For staff-facing notifications (e.g. the daily follow-up digest to a rep).
+export async function sendInternal(
+  to: string,
+  subject: string,
+  innerHtml: string
+): Promise<{ sent: boolean; skipped?: boolean; error?: string }> {
+  if (!resend) return { sent: false, skipped: true };
+  try {
+    const { error } = await resend.emails.send({ from: FROM, to, replyTo: REPLY_TO, subject, html: wrapEmail(innerHtml) });
+    if (error) return { sent: false, error: error.message };
+    return { sent: true };
+  } catch (e) {
+    return { sent: false, error: e instanceof Error ? e.message : "send failed" };
+  }
+}
+
 // ─── Double opt-in confirmation ─────────────────────────────────────────────
 export async function sendConfirmation(
   to: string,

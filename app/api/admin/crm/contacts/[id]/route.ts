@@ -20,6 +20,7 @@ export async function PATCH(req: Request, props: Ctx) {
         clientId: (b.clientId as string) || null,
         ownerId: (b.ownerId as string) || null,
         notes: (b.notes as string) || null,
+        nextFollowUp: b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null,
       },
       include: { client: true, owner: true, _count: { select: { deals: true } } },
     });
