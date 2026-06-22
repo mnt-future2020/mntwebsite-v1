@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/admin/ui";
 import EmployeeForm from "@/components/admin/hr/EmployeeForm";
 import { fullName } from "@/lib/hr";
 import { listRoles } from "@/lib/permissions-db";
+import { getOrgSettings } from "@/lib/org";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ async function getOptions() {
 }
 
 export default async function NewEmployeePage() {
-  const [{ departments, managers }, roles] = await Promise.all([getOptions(), listRoles()]);
+  const [{ departments, managers }, roles, org] = await Promise.all([getOptions(), listRoles(), getOrgSettings()]);
   return (
     <>
       <PageHeader title="Add employee" subtitle="A new code (MNT###) is generated automatically." />
@@ -27,6 +28,7 @@ export default async function NewEmployeePage() {
         departments={departments.map((d) => ({ id: d.id, label: d.name }))}
         managers={managers.map((m) => ({ id: m.id, label: fullName(m) }))}
         roles={roles.map((r) => ({ id: r.key, label: r.label }))}
+        salarySplit={{ basicPct: org.salaryBasicPct, hraPctOfBasic: org.salaryHraPctOfBasic }}
       />
     </>
   );

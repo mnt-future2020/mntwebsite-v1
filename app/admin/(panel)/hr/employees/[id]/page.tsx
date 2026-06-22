@@ -6,6 +6,7 @@ import EmployeeForm from "@/components/admin/hr/EmployeeForm";
 import EmployeeDocs from "@/components/admin/hr/EmployeeDocs";
 import { fullName, fmtDate, inr, monthName, LEAVE_STATUS_STYLE } from "@/lib/hr";
 import { listRoles } from "@/lib/permissions-db";
+import { getOrgSettings } from "@/lib/org";
 
 export const dynamic = "force-dynamic";
 
@@ -22,10 +23,11 @@ export default async function EmployeeDetail(props: { params: Promise<{ id: stri
   }).catch(() => null);
   if (!emp) notFound();
 
-  const [departments, managers, roles] = await Promise.all([
+  const [departments, managers, roles, org] = await Promise.all([
     prisma.department.findMany({ orderBy: { name: "asc" } }),
     prisma.employee.findMany({ where: { status: { not: "EXITED" } }, orderBy: { firstName: "asc" } }),
     listRoles(),
+    getOrgSettings(),
   ]);
 
   const sectionCard = "rounded-2xl border border-slate-200 bg-white p-6";
@@ -39,6 +41,7 @@ export default async function EmployeeDetail(props: { params: Promise<{ id: stri
         departments={departments.map((d) => ({ id: d.id, label: d.name }))}
         managers={managers.map((m) => ({ id: m.id, label: fullName(m) }))}
         roles={roles.map((r) => ({ id: r.key, label: r.label }))}
+        salarySplit={{ basicPct: org.salaryBasicPct, hraPctOfBasic: org.salaryHraPctOfBasic }}
       />
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">

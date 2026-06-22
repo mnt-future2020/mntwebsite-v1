@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import Icon from "@/components/Icon";
+import { breakdownSalary, inr } from "@/lib/hr";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -20,6 +21,8 @@ type Props = {
     workStart: string;
     workEnd: string;
     scanEnabled: boolean;
+    salaryBasicPct: number;
+    salaryHraPctOfBasic: number;
   };
   baseUrl?: string;
 };
@@ -33,6 +36,8 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
     workStart: initial.workStart || "09:30",
     workEnd: initial.workEnd || "18:30",
     scanEnabled: initial.scanEnabled,
+    salaryBasicPct: String(initial.salaryBasicPct ?? 50),
+    salaryHraPctOfBasic: String(initial.salaryHraPctOfBasic ?? 50),
   });
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ kind: "ok" | "err" | "info"; text: string } | null>(null);
@@ -47,6 +52,10 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
   const up = (k: string, v: unknown) => setF((s) => ({ ...s, [k]: v }));
   const located = f.officeLat !== "" && f.officeLng !== "";
   const scanUrl = `${origin}/scan`;
+  const splitPreview = breakdownSalary(50000, {
+    basicPct: parseFloat(f.salaryBasicPct) || 0,
+    hraPctOfBasic: parseFloat(f.salaryHraPctOfBasic) || 0,
+  });
 
   const useMyLocation = () => {
     if (!navigator.geolocation) {
@@ -93,6 +102,8 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
         workStart: f.workStart,
         workEnd: f.workEnd,
         scanEnabled: f.scanEnabled,
+        salaryBasicPct: f.salaryBasicPct,
+        salaryHraPctOfBasic: f.salaryHraPctOfBasic,
       }),
     });
     if (res.ok) {
@@ -218,6 +229,32 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
             Check-ins after work start are flagged late. Turn scanning off to pause QR attendance
             company-wide.
           </p>
+        </div>
+
+        <div className={card}>
+          <h2 className="text-sm font-semibold text-ink">Salary auto-breakdown</h2>
+          <p className="mt-1 text-sm text-slatey">
+            When you add an employee and enter their monthly gross, it auto-splits into Basic, HRA and
+            Special Allowance using these percentages. No PF/ESI, so deductions stay 0 — edit anytime.
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className={label}>Basic (% of monthly gross)</label>
+              <input type="number" min={0} max={100} value={f.salaryBasicPct} onChange={(e) => up("salaryBasicPct", e.target.value)} className={field} />
+            </div>
+            <div>
+              <label className={label}>HRA (% of Basic)</label>
+              <input type="number" min={0} max={100} value={f.salaryHraPctOfBasic} onChange={(e) => up("salaryHraPctOfBasic", e.target.value)} className={field} />
+            </div>
+          </div>
+          <div className="mt-4 rounded-xl bg-soft p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Example — monthly gross ₹50,000</p>
+            <div className="mt-2 grid grid-cols-3 gap-2 text-center">
+              <div><p className="text-xs text-slatey">Basic</p><p className="font-semibold text-ink">{inr(splitPreview.basic)}</p></div>
+              <div><p className="text-xs text-slatey">HRA</p><p className="font-semibold text-ink">{inr(splitPreview.hra)}</p></div>
+              <div><p className="text-xs text-slatey">Special</p><p className="font-semibold text-ink">{inr(splitPreview.allowances)}</p></div>
+            </div>
+          </div>
         </div>
 
         {msg && <p className={`rounded-lg border px-4 py-2.5 text-sm ${msgStyle}`}>{msg.text}</p>}

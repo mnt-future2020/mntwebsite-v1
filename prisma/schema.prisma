@@ -318,6 +318,10 @@ model OrgSetting {
   workStart       String   @default("09:30")
   workEnd         String   @default("18:30")
   scanEnabled     Boolean  @default(true)
+  // Salary auto-breakdown (editable in HR settings). Basic = % of monthly gross;
+  // HRA = % of Basic; the remainder becomes Special Allowance.
+  salaryBasicPct      Float @default(50)
+  salaryHraPctOfBasic Float @default(50)
   updatedAt       DateTime @updatedAt
 }
 

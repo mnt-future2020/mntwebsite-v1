@@ -7,6 +7,8 @@ export type OrgSettings = {
   workStart: string;
   workEnd: string;
   scanEnabled: boolean;
+  salaryBasicPct: number;
+  salaryHraPctOfBasic: number;
 };
 
 export const DEFAULT_ORG: OrgSettings = {
@@ -16,6 +18,8 @@ export const DEFAULT_ORG: OrgSettings = {
   workStart: "09:30",
   workEnd: "18:30",
   scanEnabled: true,
+  salaryBasicPct: 50,
+  salaryHraPctOfBasic: 50,
 };
 
 // Single-row (id = 1) org settings. Degrades to defaults when DB is absent.
@@ -30,6 +34,8 @@ export async function getOrgSettings(): Promise<OrgSettings> {
       workStart: s.workStart,
       workEnd: s.workEnd,
       scanEnabled: s.scanEnabled,
+      salaryBasicPct: s.salaryBasicPct,
+      salaryHraPctOfBasic: s.salaryHraPctOfBasic,
     };
   } catch {
     return DEFAULT_ORG;

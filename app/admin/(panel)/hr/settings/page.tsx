@@ -11,8 +11,8 @@ export default async function HrSettingsPage() {
   return (
     <>
       <PageHeader
-        title="Attendance &amp; geofence"
-        subtitle="Lock the office GPS point and print the QR employees scan to punch in/out."
+        title="HR settings"
+        subtitle="Office geofence &amp; attendance QR, plus the salary auto-breakdown percentages."
       />
       <OrgSettingsForm initial={settings} baseUrl={baseUrl} />
     </>

@@ -17,6 +17,10 @@ export async function PUT(req: Request) {
       return Number.isFinite(n) ? n : null;
     };
     const radius = parseInt(String(b.geofenceRadiusM ?? 50), 10);
+    const pct = (v: unknown, fallback: number) => {
+      const n = parseFloat(String(v ?? ""));
+      return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) : fallback;
+    };
     const data = {
       officeLat: num(b.officeLat),
       officeLng: num(b.officeLng),
@@ -24,6 +28,8 @@ export async function PUT(req: Request) {
       workStart: String(b.workStart || "09:30"),
       workEnd: String(b.workEnd || "18:30"),
       scanEnabled: Boolean(b.scanEnabled),
+      salaryBasicPct: pct(b.salaryBasicPct, 50),
+      salaryHraPctOfBasic: pct(b.salaryHraPctOfBasic, 50),
     };
     const saved = await prisma.orgSetting.upsert({
       where: { id: 1 },

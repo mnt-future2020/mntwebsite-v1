@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
 import DateField from "@/components/admin/DateField";
+import { breakdownSalary, inr, DEFAULT_SALARY_SPLIT, type SalarySplit } from "@/lib/hr";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -48,11 +49,13 @@ export default function EmployeeForm({
   departments,
   managers,
   roles,
+  salarySplit = DEFAULT_SALARY_SPLIT,
 }: {
   initial?: Record<string, unknown>;
   departments: Opt[];
   managers: Opt[];
   roles: Opt[];
+  salarySplit?: SalarySplit;
 }) {
   const router = useRouter();
   const editing = Boolean(initial?.id);
@@ -95,6 +98,16 @@ export default function EmployeeForm({
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const up = (k: string, val: unknown) => setF((s) => ({ ...s, [k]: val }));
+
+  // Monthly-gross driver: type a total and Basic/HRA/Allowances/CTC auto-split.
+  const initialGross =
+    (Number(initial?.basic) || 0) + (Number(initial?.hra) || 0) + (Number(initial?.allowances) || 0);
+  const [monthlyGross, setMonthlyGross] = useState(initialGross ? String(initialGross) : "");
+  const applyGross = (val: string) => {
+    setMonthlyGross(val);
+    const b = breakdownSalary(Number(val) || 0, salarySplit);
+    setF((s) => ({ ...s, basic: b.basic, hra: b.hra, allowances: b.allowances, ctcAnnual: b.ctcAnnual }));
+  };
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -207,11 +220,24 @@ export default function EmployeeForm({
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Compensation (monthly ₹)</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <Input label="Annual CTC" type="number" value={f.ctcAnnual} onChange={(val) => up("ctcAnnual", val)} />
+        <p className="mt-1 text-xs text-slate-400">
+          Type the monthly gross — Basic, HRA &amp; Allowances auto-split (Basic {salarySplit.basicPct}% · HRA{" "}
+          {salarySplit.hraPctOfBasic}% of basic). Adjust the split in HR settings; each field stays editable.
+        </p>
+        <div className="mt-4 grid items-end gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <label className={label}>Monthly gross salary</label>
+            <input type="number" value={monthlyGross} onChange={(e) => applyGross(e.target.value)} className={field} placeholder="e.g. 50000" />
+          </div>
+          <div className="rounded-lg bg-soft px-3 py-2 text-sm">
+            <span className="text-slatey">Annual CTC: </span>
+            <span className="font-bold text-ink">{inr(Number(f.ctcAnnual) || 0)}</span>
+          </div>
+        </div>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Input label="Basic" type="number" value={f.basic} onChange={(val) => up("basic", val)} />
           <Input label="HRA" type="number" value={f.hra} onChange={(val) => up("hra", val)} />
-          <Input label="Allowances" type="number" value={f.allowances} onChange={(val) => up("allowances", val)} />
+          <Input label="Special allowance" type="number" value={f.allowances} onChange={(val) => up("allowances", val)} />
           <Input label="Paid leave balance" type="number" value={f.paidLeaveBalance} onChange={(val) => up("paidLeaveBalance", val)} />
         </div>
       </div>

@@ -58,6 +58,22 @@ export function computePayslip(p: PayslipInput) {
   return { gross, lop, totalDeductions, net };
 }
 
+// ── Salary auto-breakdown ───────────────────────────────────────────────────
+// Split a monthly gross salary into Basic / HRA / Special Allowance using the
+// company's configurable percentages (stored in OrgSetting, editable in HR
+// settings). Allowance is the balancing figure so the parts always sum to the
+// exact gross — no rounding drift.
+export type SalarySplit = { basicPct: number; hraPctOfBasic: number };
+export const DEFAULT_SALARY_SPLIT: SalarySplit = { basicPct: 50, hraPctOfBasic: 50 };
+
+export function breakdownSalary(monthlyGross: number, split: SalarySplit = DEFAULT_SALARY_SPLIT) {
+  const g = Math.max(0, Math.round(Number(monthlyGross) || 0));
+  const basic = Math.round((g * (split.basicPct || 0)) / 100);
+  const hra = Math.round((basic * (split.hraPctOfBasic || 0)) / 100);
+  const allowances = Math.max(0, g - basic - hra);
+  return { basic, hra, allowances, gross: g, ctcAnnual: g * 12 };
+}
+
 export function nextEmployeeCode(count: number) {
   return "MNT" + String(count + 1).padStart(3, "0");
 }
