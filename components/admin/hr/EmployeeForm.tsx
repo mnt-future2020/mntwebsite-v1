@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -176,17 +177,17 @@ export default function EmployeeForm({
               {managers.filter((m) => m.id !== initial?.id).map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
             </select>
           </div>
-          <Input label="Join date" type="date" value={f.joinDate} onChange={(val) => up("joinDate", val)} />
-          <Input label="Probation ends" type="date" value={f.probationEndDate} onChange={(val) => up("probationEndDate", val)} />
-          <Input label="Confirmation date" type="date" value={f.confirmationDate} onChange={(val) => up("confirmationDate", val)} />
-          <Input label="Exit date" type="date" value={f.exitDate} onChange={(val) => up("exitDate", val)} />
+          <DateField label="Join date" value={f.joinDate} onChange={(val) => up("joinDate", val)} />
+          <DateField label="Probation ends" value={f.probationEndDate} onChange={(val) => up("probationEndDate", val)} />
+          <DateField label="Confirmation date" value={f.confirmationDate} onChange={(val) => up("confirmationDate", val)} />
+          <DateField label="Exit date" value={f.exitDate} onChange={(val) => up("exitDate", val)} />
         </div>
       </div>
 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">Personal</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Input label="Date of birth" type="date" value={f.dob} onChange={(val) => up("dob", val)} />
+          <DateField label="Date of birth" value={f.dob} onChange={(val) => up("dob", val)} maxDate={new Date()} />
           <Input label="Gender" value={f.gender} onChange={(val) => up("gender", val)} />
           <Input label="Address" value={f.address} onChange={(val) => up("address", val)} />
           <Input label="Emergency contact" value={f.emergencyName} onChange={(val) => up("emergencyName", val)} />

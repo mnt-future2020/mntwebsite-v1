@@ -145,3 +145,25 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* react-datepicker (DateField): the wrapper is inline-block by default, which
+   collapses the input width inside grid cells — force it to fill the field. */
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  display: block;
+  width: 100%;
+}
+/* Built-in calendar icon: align it inside the input and give the text room. */
+.react-datepicker__input-container input.react-datepicker-ignore-onclickoutside,
+.react-datepicker__view-calendar-icon input {
+  padding-left: 2.25rem;
+}
+.react-datepicker__calendar-icon {
+  top: 50%;
+  transform: translateY(-50%);
+  fill: rgb(148 163 184); /* slate-400 */
+}
+/* Keep the popup above form cards. */
+.react-datepicker-popper {
+  z-index: 50;
+}
