@@ -699,6 +699,8 @@ model Contact {
   ownerId   String?
   owner     Employee? @relation("ContactOwner", fields: [ownerId], references: [id], onDelete: SetNull)
   notes     String?
+  lastContactedAt DateTime? // stamped when an activity is logged against this contact
+  nextFollowUp    DateTime? // when to next reach out to this person
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -730,6 +732,8 @@ model Deal {
   lostReason        String?
   order             Int       @default(0) // ordering within a stage column
   closedAt          DateTime?
+  stageEnteredAt    DateTime? // when the deal entered its current stage (aging)
+  lastActivityAt    DateTime? // last logged activity (stale detection)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 

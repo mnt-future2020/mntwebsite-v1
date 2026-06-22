@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/db";
 import { PageHeader, StatCard, DbNotice } from "@/components/admin/ui";
+import Icon from "@/components/Icon";
 import DealPipeline from "@/components/admin/crm/DealPipeline";
 import { fullName } from "@/lib/hr";
-import { money, weightedValue, contactName, isOpenStage } from "@/lib/crm";
+import { money, weightedValue, contactName, isOpenStage, followUpStatus, isStale } from "@/lib/crm";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,9 @@ export default async function CrmPipelinePage() {
   monthStart.setDate(1);
   monthStart.setHours(0, 0, 0, 0);
   const wonThisMonth = deals.filter((d) => d.stage === "WON" && d.closedAt && new Date(d.closedAt) >= monthStart).reduce((s, d) => s + d.value, 0);
+  const fuOverdue = open.filter((d) => followUpStatus(d.nextFollowUp) === "overdue").length;
+  const fuToday = open.filter((d) => followUpStatus(d.nextFollowUp) === "today").length;
+  const staleCount = open.filter((d) => isStale(d)).length;
 
   return (
     <>
@@ -48,6 +52,15 @@ export default async function CrmPipelinePage() {
         <StatCard label="Weighted forecast" value={money(weighted)} icon="gauge" />
         <StatCard label="Won this month" value={money(wonThisMonth)} icon="check" />
       </div>
+
+      {(fuOverdue > 0 || fuToday > 0 || staleCount > 0) && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm">
+          <span className="inline-flex items-center gap-1.5 font-semibold text-amber-900"><Icon name="bell" className="h-4 w-4" /> Needs attention</span>
+          {fuOverdue > 0 && <span className="text-red-700"><b>{fuOverdue}</b> follow-up{fuOverdue > 1 ? "s" : ""} overdue</span>}
+          {fuToday > 0 && <span className="text-amber-800"><b>{fuToday}</b> due today</span>}
+          {staleCount > 0 && <span className="text-slatey"><b>{staleCount}</b> stale (no activity 14d+)</span>}
+        </div>
+      )}
 
       <div className="mt-8">
         <DealPipeline

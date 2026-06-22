@@ -23,6 +23,9 @@ export async function POST(req: Request) {
       },
       include: { owner: true },
     });
+    // Stamp the deal/contact so we can flag stale deals and show "last contacted".
+    if (a.dealId) await prisma.deal.update({ where: { id: a.dealId }, data: { lastActivityAt: new Date() } }).catch(() => {});
+    if (a.contactId) await prisma.contact.update({ where: { id: a.contactId }, data: { lastContactedAt: new Date() } }).catch(() => {});
     return NextResponse.json(a);
   } catch {
     return NextResponse.json({ error: "Couldn't log the activity." }, { status: 500 });

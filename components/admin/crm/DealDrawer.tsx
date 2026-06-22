@@ -22,11 +22,12 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
     stage: deal.stage, value: String(deal.value || 0), currency: deal.currency || "INR",
     probability: String(deal.probability ?? 10), expectedCloseDate: dval(deal.expectedCloseDate),
     nextFollowUp: dval(deal.nextFollowUp),
-    source: deal.source || "", notes: deal.notes || "",
+    source: deal.source || "", notes: deal.notes || "", lostReason: deal.lostReason || "",
   });
   const [acts, setActs] = useState<Any[]>([]);
   const [actType, setActType] = useState("NOTE");
   const [actSubject, setActSubject] = useState("");
+  const [actDue, setActDue] = useState("");
   const [busy, setBusy] = useState(false);
   const up = (k: string, v: string) => setF((s) => ({ ...s, [k]: v }));
 
@@ -59,9 +60,9 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
     if (!actSubject.trim()) return;
     const res = await fetch("/api/admin/crm/activities", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ dealId: deal.id, clientId: f.clientId || null, contactId: f.contactId || null, type: actType, subject: actSubject }),
+      body: JSON.stringify({ dealId: deal.id, clientId: f.clientId || null, contactId: f.contactId || null, type: actType, subject: actSubject, dueDate: actDue || null }),
     });
-    if (res.ok) { const a = await res.json(); setActs((s) => [a, ...s]); setActSubject(""); toast("Activity logged"); }
+    if (res.ok) { const a = await res.json(); setActs((s) => [a, ...s]); setActSubject(""); setActDue(""); toast("Activity logged"); }
     else toast("Couldn't log activity", "err");
   };
 
@@ -94,6 +95,9 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
             <div><label className={lbl}>Source</label><input value={f.source} onChange={(e) => up("source", e.target.value)} className={field} placeholder="Referral, inbound…" /></div>
           </div>
           <div><label className={lbl}>Notes</label><textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={3} /></div>
+          {f.stage === "LOST" && (
+            <div><label className={lbl}>Lost reason</label><input value={f.lostReason} onChange={(e) => up("lostReason", e.target.value)} className={field} placeholder="Price, competitor, timing…" /></div>
+          )}
 
           {/* Activities */}
           <div className="border-t border-slate-100 pt-4">
@@ -105,6 +109,9 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
               <input value={actSubject} onChange={(e) => setActSubject(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addActivity()} placeholder="Log a note, call, task…" className={field} />
               <button onClick={addActivity} className="btn-primary shrink-0"><Icon name="plus" className="h-4 w-4" /></button>
             </div>
+            {actType === "TASK" && (
+              <input type="date" value={actDue} onChange={(e) => setActDue(e.target.value)} className={`${field} mt-2`} title="Task due date" />
+            )}
             <ul className="mt-3 space-y-2">
               {acts.length === 0 && <li className="text-xs text-slate-400">No activity yet.</li>}
               {acts.map((a) => (
@@ -114,7 +121,7 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
                   </button>
                   <div className="min-w-0 flex-1">
                     <p className={`text-ink ${a.done ? "line-through text-slate-400" : ""}`}>{a.subject}</p>
-                    <p className="text-[11px] text-slate-400">{titleCase(a.type)} · {fmtDate(a.createdAt)}</p>
+                    <p className="text-[11px] text-slate-400">{titleCase(a.type)} · {fmtDate(a.createdAt)}{a.dueDate ? <span className={a.done ? "" : "text-amber-600"}> · due {fmtDate(a.dueDate)}</span> : ""}</p>
                   </div>
                   <button onClick={() => delActivity(a.id)} className="text-slate-300 hover:text-red-500"><Icon name="x" className="h-3.5 w-3.5" /></button>
                 </li>

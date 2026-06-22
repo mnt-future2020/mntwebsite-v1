@@ -30,6 +30,7 @@ export async function POST(req: Request) {
         contactId: (b.contactId as string) || null,
         ownerId: (b.ownerId as string) || null,
         stage: stage as never,
+        stageEnteredAt: new Date(),
         value: parseInt(String(b.value ?? "0"), 10) || 0,
         currency: (b.currency as string) || "INR",
         probability: Math.max(0, Math.min(100, parseInt(String(b.probability ?? "10"), 10) || 0)),

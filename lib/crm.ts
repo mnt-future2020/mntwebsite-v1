@@ -90,3 +90,20 @@ export const FOLLOWUP_STYLE: Record<string, string> = {
   today: "bg-amber-100 text-amber-700",
   soon: "bg-slate-100 text-slatey",
 };
+
+// Whole days the deal has sat in its current stage (null if unknown).
+export function daysInStage(stageEnteredAt?: string | Date | null): number | null {
+  if (!stageEnteredAt) return null;
+  return Math.max(0, Math.floor((Date.now() - new Date(stageEnteredAt).getTime()) / 86400000));
+}
+
+// An OPEN deal with no activity in `days` days is "stale" and needs a nudge.
+export function isStale(
+  d: { stage: string; lastActivityAt?: string | Date | null; createdAt?: string | Date | null },
+  days = 14
+): boolean {
+  if (!isOpenStage(d.stage)) return false;
+  const last = d.lastActivityAt || d.createdAt;
+  if (!last) return true;
+  return Date.now() - new Date(last).getTime() > days * 86400000;
+}

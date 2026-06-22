@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
 import DealDrawer from "@/components/admin/crm/DealDrawer";
-import { DEAL_STAGES, STAGE_LABELS, STAGE_ACCENT, money, fmtDate, contactName, followUpStatus, FOLLOWUP_STYLE, openValue, weightedValue } from "@/lib/crm";
+import { DEAL_STAGES, STAGE_LABELS, STAGE_ACCENT, money, fmtDate, contactName, followUpStatus, FOLLOWUP_STYLE, openValue, weightedValue, daysInStage, isStale } from "@/lib/crm";
 import { fullName } from "@/lib/hr";
 
 type Opt = { id: string; label: string };
@@ -40,8 +40,15 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
   const move = async (id: string, stage: string) => {
     const d = deals.find((x) => x.id === id);
     if (!d || d.stage === stage) return;
+    let lostReason: string | undefined;
+    if (stage === "LOST") {
+      const r = window.prompt("Why was this deal lost? (optional)");
+      if (r === null) return; // cancelled — don't move
+      lostReason = r;
+    }
     setDeals((s) => s.map((x) => (x.id === id ? { ...x, stage } : x)));
-    const res = await fetch(`/api/admin/crm/deals/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ stage }) });
+    const body = lostReason !== undefined ? { stage, lostReason } : { stage };
+    const res = await fetch(`/api/admin/crm/deals/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
     if (res.ok) { const u = await res.json(); setDeals((s) => s.map((x) => (x.id === id ? u : x))); toast(`Moved to ${STAGE_LABELS[stage]}`); }
     else toast("Couldn't move deal", "err");
   };
@@ -102,9 +109,9 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
               {total > 0 && <p className="mb-2 px-1 text-[11px] font-medium text-slate-400">{money(total)}</p>}
 
               <div className="flex flex-1 flex-col gap-2">
-                {col.map((d) => { const fu = followUpStatus(d.nextFollowUp); return (
+                {col.map((d) => { const fu = followUpStatus(d.nextFollowUp); const age = daysInStage(d.stageEnteredAt); const stale = isStale(d); return (
                   <div key={d.id} draggable onDragStart={() => setDragId(d.id)} onDragEnd={() => setDragId(null)} onClick={() => setOpenId(d.id)}
-                    className="group cursor-pointer rounded-xl border border-slate-200 bg-white p-2.5 shadow-sm transition-shadow hover:shadow-md">
+                    className={`group cursor-pointer rounded-xl border bg-white p-2.5 shadow-sm transition-shadow hover:shadow-md ${stale ? "border-amber-300" : "border-slate-200"}`}>
                     <p className="text-sm font-medium text-ink">{d.title}</p>
                     {d.client?.name && <p className="mt-0.5 text-xs text-slate-400">{d.client.name}</p>}
                     <div className="mt-2 flex items-center justify-between">
@@ -112,11 +119,15 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
                       {d.ownerId && <span title={d.owner ? fullName(d.owner) : ""} className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-50 text-[9px] font-bold text-brand-700">{initials(d.owner ? fullName(d.owner) : "")}</span>}
                     </div>
                     {d.contact && <p className="mt-1 text-[11px] text-slate-400">{contactName(d.contact)}</p>}
-                    {fu && (
-                      <span className={`mt-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${FOLLOWUP_STYLE[fu]}`}>
-                        <Icon name="calendar" className="h-3 w-3" /> {fu === "overdue" ? `Overdue · ${fmtDate(d.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(d.nextFollowUp)}
-                      </span>
-                    )}
+                    <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+                      {fu && (
+                        <span className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${FOLLOWUP_STYLE[fu]}`}>
+                          <Icon name="calendar" className="h-3 w-3" /> {fu === "overdue" ? `Overdue · ${fmtDate(d.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(d.nextFollowUp)}
+                        </span>
+                      )}
+                      {stale && <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700"><Icon name="bell" className="h-2.5 w-2.5" /> Stale</span>}
+                      {age != null && <span className="text-[10px] text-slate-400">{age}d in stage</span>}
+                    </div>
                   </div>
                   );
                 })}

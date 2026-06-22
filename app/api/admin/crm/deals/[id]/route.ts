@@ -37,9 +37,19 @@ export async function PATCH(req: Request, props: Ctx) {
     if (has(b, "stage")) {
       const stage = String(b.stage);
       data.stage = stage as never;
-      if (stage === "WON") { data.closedAt = new Date(); if (!has(b, "probability")) data.probability = 100; }
-      else if (stage === "LOST") { data.closedAt = new Date(); if (!has(b, "probability")) data.probability = 0; }
-      else data.closedAt = null; // reopened
+      data.stageEnteredAt = new Date(); // reset aging clock
+      if (stage === "WON") { data.closedAt = new Date(); data.nextFollowUp = null; if (!has(b, "probability")) data.probability = 100; }
+      else if (stage === "LOST") { data.closedAt = new Date(); data.nextFollowUp = null; if (!has(b, "probability")) data.probability = 0; }
+      else {
+        data.closedAt = null; // reopened
+        // Auto-suggest a follow-up 3 days out when moving an open deal, unless one was set explicitly.
+        if (!has(b, "nextFollowUp")) {
+          const f = new Date();
+          f.setHours(0, 0, 0, 0);
+          f.setDate(f.getDate() + 3);
+          data.nextFollowUp = f;
+        }
+      }
     }
     const d = await prisma.deal.update({ where: { id }, data, include: { client: true, contact: true, owner: true } });
     return NextResponse.json(d);
