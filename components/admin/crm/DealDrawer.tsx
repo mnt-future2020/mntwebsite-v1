@@ -21,6 +21,7 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
     title: deal.title, clientId: deal.clientId || "", contactId: deal.contactId || "", ownerId: deal.ownerId || "",
     stage: deal.stage, value: String(deal.value || 0), currency: deal.currency || "INR",
     probability: String(deal.probability ?? 10), expectedCloseDate: dval(deal.expectedCloseDate),
+    nextFollowUp: dval(deal.nextFollowUp),
     source: deal.source || "", notes: deal.notes || "",
   });
   const [acts, setActs] = useState<Any[]>([]);
@@ -41,7 +42,7 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
     setBusy(true);
     const res = await fetch(`/api/admin/crm/deals/${deal.id}`, {
       method: "PATCH", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...f, value: Number(f.value) || 0, probability: Number(f.probability) || 0, clientId: f.clientId || null, contactId: f.contactId || null, ownerId: f.ownerId || null, expectedCloseDate: f.expectedCloseDate || null }),
+      body: JSON.stringify({ ...f, value: Number(f.value) || 0, probability: Number(f.probability) || 0, clientId: f.clientId || null, contactId: f.contactId || null, ownerId: f.ownerId || null, expectedCloseDate: f.expectedCloseDate || null, nextFollowUp: f.nextFollowUp || null }),
     });
     setBusy(false);
     if (res.ok) { onSaved(await res.json()); toast("Deal saved"); onClose(); }
@@ -89,6 +90,7 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
             <div><label className={lbl}>Company</label><select value={f.clientId} onChange={(e) => up("clientId", e.target.value)} className={field}><option value="">—</option>{companies.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
             <div><label className={lbl}>Contact</label><select value={f.contactId} onChange={(e) => up("contactId", e.target.value)} className={field}><option value="">—</option>{contacts.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
             <div><label className={lbl}>Expected close</label><input value={f.expectedCloseDate} onChange={(e) => up("expectedCloseDate", e.target.value)} type="date" className={field} /></div>
+            <div><label className={lbl}>Next follow-up</label><input value={f.nextFollowUp} onChange={(e) => up("nextFollowUp", e.target.value)} type="date" className={field} /></div>
             <div><label className={lbl}>Source</label><input value={f.source} onChange={(e) => up("source", e.target.value)} className={field} placeholder="Referral, inbound…" /></div>
           </div>
           <div><label className={lbl}>Notes</label><textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={3} /></div>

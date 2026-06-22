@@ -30,6 +30,7 @@ export async function PATCH(req: Request, props: Ctx) {
     if (has(b, "currency")) data.currency = String(b.currency);
     if (has(b, "probability")) data.probability = Math.max(0, Math.min(100, parseInt(String(b.probability), 10) || 0));
     if (has(b, "expectedCloseDate")) data.expectedCloseDate = b.expectedCloseDate ? new Date(String(b.expectedCloseDate)) : null;
+    if (has(b, "nextFollowUp")) data.nextFollowUp = b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null;
     if (has(b, "source")) data.source = (b.source as string) || null;
     if (has(b, "notes")) data.notes = (b.notes as string) || null;
     if (has(b, "lostReason")) data.lostReason = (b.lostReason as string) || null;

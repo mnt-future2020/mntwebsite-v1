@@ -34,6 +34,7 @@ export async function POST(req: Request) {
         currency: (b.currency as string) || "INR",
         probability: Math.max(0, Math.min(100, parseInt(String(b.probability ?? "10"), 10) || 0)),
         expectedCloseDate: b.expectedCloseDate ? new Date(String(b.expectedCloseDate)) : null,
+        nextFollowUp: b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null,
         source: (b.source as string) || null,
         notes: (b.notes as string) || null,
       },

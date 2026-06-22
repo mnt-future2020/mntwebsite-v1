@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
 import DealDrawer from "@/components/admin/crm/DealDrawer";
-import { DEAL_STAGES, STAGE_LABELS, STAGE_ACCENT, money, contactName } from "@/lib/crm";
+import { DEAL_STAGES, STAGE_LABELS, STAGE_ACCENT, money, fmtDate, contactName, followUpStatus, FOLLOWUP_STYLE, openValue, weightedValue } from "@/lib/crm";
 import { fullName } from "@/lib/hr";
 
 type Opt = { id: string; label: string };
@@ -21,11 +21,21 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
   const [openId, setOpenId] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [fOwner, setFOwner] = useState("");
+  const [needsFu, setNeedsFu] = useState(false);
 
   const filtered = useMemo(
-    () => deals.filter((d) => (!q || `${d.title} ${d.client?.name || ""}`.toLowerCase().includes(q.toLowerCase())) && (!fOwner || (fOwner === "none" ? !d.ownerId : d.ownerId === fOwner))),
-    [deals, q, fOwner]
+    () =>
+      deals.filter(
+        (d) =>
+          (!q || `${d.title} ${d.client?.name || ""}`.toLowerCase().includes(q.toLowerCase())) &&
+          (!fOwner || (fOwner === "none" ? !d.ownerId : d.ownerId === fOwner)) &&
+          (!needsFu || ["overdue", "today"].includes(followUpStatus(d.nextFollowUp) || ""))
+      ),
+    [deals, q, fOwner, needsFu]
   );
+  const openVal = openValue(deals);
+  const weighted = weightedValue(deals);
+  const overdueCount = deals.filter((d) => followUpStatus(d.nextFollowUp) === "overdue").length;
 
   const move = async (id: string, stage: string) => {
     const d = deals.find((x) => x.id === id);
@@ -60,7 +70,16 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
           <option value="none">Unassigned</option>
           {owners.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
         </select>
-        <span className="ml-auto text-xs text-slate-400">{filtered.length} of {deals.length} deals</span>
+        <button
+          onClick={() => setNeedsFu((v) => !v)}
+          title="Deals due or overdue for follow-up"
+          className={`inline-flex items-center gap-1 rounded-lg border px-2 py-1.5 text-sm font-medium ${needsFu ? "border-brand bg-brand-50 text-brand-700" : "border-slate-200 text-slatey hover:border-brand-300"}`}
+        >
+          <Icon name="bell" className="h-3.5 w-3.5" /> Needs follow-up{overdueCount > 0 ? ` · ${overdueCount} overdue` : ""}
+        </button>
+        <span className="ml-auto text-xs text-slate-400">
+          Open <b className="text-ink">{money(openVal)}</b> · Weighted <b className="text-ink">{money(weighted)}</b> · {filtered.length}/{deals.length}
+        </span>
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
@@ -83,7 +102,7 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
               {total > 0 && <p className="mb-2 px-1 text-[11px] font-medium text-slate-400">{money(total)}</p>}
 
               <div className="flex flex-1 flex-col gap-2">
-                {col.map((d) => (
+                {col.map((d) => { const fu = followUpStatus(d.nextFollowUp); return (
                   <div key={d.id} draggable onDragStart={() => setDragId(d.id)} onDragEnd={() => setDragId(null)} onClick={() => setOpenId(d.id)}
                     className="group cursor-pointer rounded-xl border border-slate-200 bg-white p-2.5 shadow-sm transition-shadow hover:shadow-md">
                     <p className="text-sm font-medium text-ink">{d.title}</p>
@@ -93,8 +112,14 @@ export default function DealPipeline({ initial, companies, contacts, owners }: {
                       {d.ownerId && <span title={d.owner ? fullName(d.owner) : ""} className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-50 text-[9px] font-bold text-brand-700">{initials(d.owner ? fullName(d.owner) : "")}</span>}
                     </div>
                     {d.contact && <p className="mt-1 text-[11px] text-slate-400">{contactName(d.contact)}</p>}
+                    {fu && (
+                      <span className={`mt-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${FOLLOWUP_STYLE[fu]}`}>
+                        <Icon name="calendar" className="h-3 w-3" /> {fu === "overdue" ? `Overdue · ${fmtDate(d.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(d.nextFollowUp)}
+                      </span>
+                    )}
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {adding === stage ? (

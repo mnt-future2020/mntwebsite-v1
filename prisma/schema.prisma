@@ -724,6 +724,7 @@ model Deal {
   currency          String    @default("INR")
   probability       Int       @default(10) // % chance of winning (0-100)
   expectedCloseDate DateTime?
+  nextFollowUp      DateTime? // when to next reach out about this deal
   source            String? // where the deal came from
   notes             String?
   lostReason        String?

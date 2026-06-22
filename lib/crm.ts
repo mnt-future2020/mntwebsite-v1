@@ -66,3 +66,27 @@ export function weightedValue(deals: { stage: string; value: number; probability
     .filter((d) => isOpenStage(d.stage))
     .reduce((s, d) => s + Math.round((d.value * d.probability) / 100), 0);
 }
+
+// Total value of OPEN deals (un-weighted).
+export function openValue(deals: { stage: string; value: number }[]) {
+  return deals.filter((d) => isOpenStage(d.stage)).reduce((s, d) => s + (d.value || 0), 0);
+}
+
+// Where a deal's next follow-up sits relative to today.
+export type FollowUp = "overdue" | "today" | "soon" | null;
+export function followUpStatus(d?: string | Date | null): FollowUp {
+  if (!d) return null;
+  const due = new Date(d);
+  due.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const days = Math.round((due.getTime() - today.getTime()) / 86400000);
+  if (days < 0) return "overdue";
+  if (days === 0) return "today";
+  return "soon";
+}
+export const FOLLOWUP_STYLE: Record<string, string> = {
+  overdue: "bg-red-100 text-red-700",
+  today: "bg-amber-100 text-amber-700",
+  soon: "bg-slate-100 text-slatey",
+};
