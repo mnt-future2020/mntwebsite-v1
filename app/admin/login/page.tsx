@@ -1,5 +1,6 @@
 import Logo from "@/components/Logo";
 import LoginForm from "@/components/admin/LoginForm";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export default function LoginPage() {
   return (
@@ -12,6 +13,7 @@ export default function LoginPage() {
           <h1 className="text-xl font-bold text-ink">Sign in to MnT</h1>
           <p className="mt-1 text-sm text-slatey">Team &amp; admin access for mntfuture.com.</p>
           <LoginForm />
+          <InstallPrompt />
         </div>
         <p className="mt-6 text-center text-xs text-slate-400">MnT — Magizh NexGen Technologies</p>
       </div>

@@ -1,8 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
+import PWARegister from "@/components/PWARegister";
 import { site } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings";
+
+// PWA: status-bar tint + viewport.
+export const viewport: Viewport = {
+  themeColor: "#2095F1",
+  width: "device-width",
+  initialScale: 1,
+};
 
 // Driven by the admin Settings (siteName / titleTemplate / defaultDescription /
 // defaultOgImage), falling back to DEFAULT_SETTINGS when the DB is unset/down.
@@ -37,6 +45,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: { canonical: site.url },
     robots: { index: true, follow: true },
+    applicationName: "MnT Workspace",
+    appleWebApp: { capable: true, statusBarStyle: "default", title: "MnT" },
   };
 }
 
@@ -101,6 +111,7 @@ export default async function RootLayout({
         )}
       </head>
       <body>
+        <PWARegister />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

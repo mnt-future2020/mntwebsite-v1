@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2095F1" />
+    <title>Offline · MnT</title>
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+        background: linear-gradient(180deg, #f4f8fd, #eaf4fe);
+        color: #0e1b2e;
+      }
+      .card {
+        max-width: 360px;
+        width: 100%;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 32px 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      }
+      .badge {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 16px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eaf4fe;
+        color: #0e66c2;
+        font-size: 26px;
+      }
+      h1 { font-size: 18px; margin: 0 0 8px; }
+      p { font-size: 14px; color: #475569; margin: 0 0 20px; line-height: 1.5; }
+      button {
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        background: #2095f1;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 12px 20px;
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="badge">⚡</div>
+      <h1>You're offline</h1>
+      <p>MnT Workspace needs an internet connection. Check your network and try again.</p>
+      <button onclick="location.reload()">Retry</button>
+    </div>
+  </body>
+</html>
