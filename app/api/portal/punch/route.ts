@@ -63,12 +63,18 @@ export async function POST(req: Request) {
 
   const { hhmm, dateStr } = nowParts();
   const day = new Date(dateStr + "T00:00:00.000Z");
+  // Lower bound for "today's punches" must be the START of the IST day as a UTC
+  // instant. Using UTC midnight instead would miss early-morning (IST 00:00–05:30)
+  // punches — whose UTC instant lands on the previous calendar day — letting a
+  // second CHECK_IN slip through. (The Attendance upsert below still keys on `day`
+  // so it stays consistent with admin-entered attendance.)
+  const istDayStart = new Date(dateStr + "T00:00:00+05:30");
 
   // Decide next punch from today's punches.
   let todays;
   try {
     todays = await prisma.attendancePunch.findMany({
-      where: { employeeId: emp.id, at: { gte: day } },
+      where: { employeeId: emp.id, at: { gte: istDayStart } },
       orderBy: { at: "asc" },
     });
   } catch {

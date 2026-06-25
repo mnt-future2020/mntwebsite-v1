@@ -1,8 +1,17 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { getSession } from "@/lib/auth";
 import { leaveDays } from "@/lib/hr";
 
 export const runtime = "nodejs";
+
+// Managers may only file requests for their own team; ADMIN/HR for anyone.
+async function managerBlocked(employeeId: string): Promise<boolean> {
+  const session = await getSession();
+  if (!session || session.role !== "MANAGER") return false;
+  const emp = await prisma.employee.findUnique({ where: { id: employeeId }, select: { managerId: true } });
+  return emp?.managerId !== session.sub;
+}
 
 export async function POST(req: Request) {
   try {
@@ -10,6 +19,8 @@ export async function POST(req: Request) {
     if (!b.employeeId || !b.startDate || !b.endDate) {
       return NextResponse.json({ error: "Employee and dates are required." }, { status: 400 });
     }
+    if (await managerBlocked(String(b.employeeId)))
+      return NextResponse.json({ error: "You can only create requests for your team." }, { status: 403 });
     const days = leaveDays(b.startDate, b.endDate);
     const leave = await prisma.leaveRequest.create({
       data: {

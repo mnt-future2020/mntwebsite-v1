@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { DEFAULT_SETTINGS } from "@/lib/settings";
 
 export const runtime = "nodejs";
 
@@ -16,9 +17,12 @@ export async function PUT(req: Request) {
   try {
     const b = await req.json();
     const data = {
-      siteName: b.siteName || undefined,
-      titleTemplate: b.titleTemplate || undefined,
-      defaultDescription: b.defaultDescription || undefined,
+      // These three columns are non-nullable — a cleared field falls back to the
+      // canonical default rather than silently keeping the previous value (which
+      // `|| undefined` would do, since Prisma skips undefined columns).
+      siteName: b.siteName?.trim() || DEFAULT_SETTINGS.siteName,
+      titleTemplate: b.titleTemplate?.trim() || DEFAULT_SETTINGS.titleTemplate,
+      defaultDescription: b.defaultDescription?.trim() || DEFAULT_SETTINGS.defaultDescription,
       defaultOgImage: b.defaultOgImage || null,
       gaMeasurementId: b.gaMeasurementId || null,
       gscVerification: b.gscVerification || null,

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 import { PROJECT_STATUSES, BILLING_TYPES, BILLING_LABELS, titleCase } from "@/lib/projects";
 
 type Opt = { id: string; label: string };
@@ -130,14 +131,8 @@ export default function ProjectForm({
             <label className={label}>Hourly rate (for T&amp;M)</label>
             <input value={f.hourlyRate} onChange={(e) => up("hourlyRate", e.target.value)} className={field} type="number" placeholder="0" />
           </div>
-          <div>
-            <label className={label}>Start date</label>
-            <input value={f.startDate} onChange={(e) => up("startDate", e.target.value)} className={field} type="date" />
-          </div>
-          <div>
-            <label className={label}>Target delivery</label>
-            <input value={f.endDate} onChange={(e) => up("endDate", e.target.value)} className={field} type="date" />
-          </div>
+          <DateField label="Start date" value={f.startDate} onChange={(v) => up("startDate", v)} />
+          <DateField label="Target delivery" value={f.endDate} onChange={(v) => up("endDate", v)} />
           <div className="sm:col-span-2 lg:col-span-3">
             <label className={label}>Repository URL</label>
             <input value={f.repoUrl} onChange={(e) => up("repoUrl", e.target.value)} className={field} placeholder="https://github.com/org/repo" />

@@ -8,7 +8,18 @@ const field =
 const labelCls = "mb-1.5 block text-sm font-medium text-ink";
 const card = "rounded-2xl border border-slate-200 bg-white p-6";
 
-export default function SettingsForm({ initial }: { initial: Record<string, string | null> }) {
+type SettingsInitial = {
+  siteName?: string | null;
+  titleTemplate?: string | null;
+  defaultDescription?: string | null;
+  defaultOgImage?: string | null;
+  gaMeasurementId?: string | null;
+  gscVerification?: string | null;
+  bingVerification?: string | null;
+  robotsExtra?: string | null;
+};
+
+export default function SettingsForm({ initial }: { initial: SettingsInitial }) {
   const [f, setF] = useState({
     siteName: initial.siteName ?? "",
     titleTemplate: initial.titleTemplate ?? "%s | MnT",

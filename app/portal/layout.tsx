@@ -1,10 +1,14 @@
 import Logo from "@/components/Logo";
-import PortalNav from "@/components/portal/PortalNav";
+import AdminNav from "@/components/admin/AdminNav";
 import { Toaster } from "@/components/admin/Toast";
 import { getSession } from "@/lib/auth";
+import { getRolePerms } from "@/lib/permissions-db";
 
 export default async function PortalLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession().catch(() => null);
+  // Same unified sidebar as the admin shell: base "My workspace" for every
+  // employee, plus whatever admin sections their role grants.
+  const perms = session ? await getRolePerms(session.role) : [];
 
   return (
     <div className="lg:grid lg:min-h-screen lg:grid-cols-[260px_1fr]">
@@ -16,7 +20,7 @@ export default async function PortalLayout({ children }: { children: React.React
           </p>
         </div>
         <div className="flex-1">
-          <PortalNav email={session?.email} />
+          <AdminNav email={session?.email} perms={perms} isEmployee={session?.sub !== "admin"} />
         </div>
       </aside>
 

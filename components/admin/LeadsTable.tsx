@@ -109,7 +109,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                 </td>
                 <td className="px-5 py-3">
                   <div className="flex items-center justify-end gap-1">
-                    <button onClick={() => convert(l)} disabled={converting === l.id} title="Convert to CRM deal" className="rounded-lg p-1.5 text-slatey hover:bg-brand-50 hover:text-brand-700 disabled:opacity-50">
+                    <button onClick={() => convert(l)} disabled={converting === l.id || l.status === "QUALIFIED" || l.status === "WON"} title={l.status === "QUALIFIED" || l.status === "WON" ? "Already converted" : "Convert to CRM deal"} className="rounded-lg p-1.5 text-slatey hover:bg-brand-50 hover:text-brand-700 disabled:opacity-50">
                       <Icon name="network" className="h-4 w-4" />
                     </button>
                     <button onClick={() => setOpen(open === l.id ? null : l.id)} title="View message" className="rounded-lg p-1.5 text-slatey hover:bg-slate-100 hover:text-ink">

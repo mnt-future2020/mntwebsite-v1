@@ -17,7 +17,7 @@ export default async function SettingsPage() {
   return (
     <>
       <PageHeader title="Settings" subtitle="Global site name, defaults, analytics and verification." />
-      <SettingsForm initial={(s as Record<string, string | null>) || {}} />
+      <SettingsForm initial={s ?? {}} />
     </>
   );
 }

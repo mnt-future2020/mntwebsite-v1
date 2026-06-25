@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
 import {
   TASK_STATUSES,
@@ -162,8 +163,7 @@ export default function TaskDrawer({
               </select>
             </div>
             <div className="col-span-2">
-              <label className={lbl}>Due date</label>
-              <input value={f.dueDate} onChange={(e) => up("dueDate", e.target.value)} type="date" className={field} />
+              <DateField label="Due date" value={f.dueDate} onChange={(v) => up("dueDate", v)} />
             </div>
           </div>
         </div>

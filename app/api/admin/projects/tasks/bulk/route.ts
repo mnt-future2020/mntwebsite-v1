@@ -93,24 +93,26 @@ export async function POST(req: Request) {
     if (valid.length === 0) return NextResponse.json({ error: "No rows had a title." }, { status: 400 });
 
     // Create and return full records (with assignee) so the board can render them.
-    const created = [];
-    for (const r of valid) {
-      const t = await prisma.task.create({
-        data: {
-          projectId,
-          title: r.title,
-          description: r.description,
-          status: r.status as never,
-          priority: r.priority as never,
-          type: r.type as never,
-          estimateHours: r.estimateHours,
-          dueDate: r.dueDate,
-          assigneeId: r.assigneeId,
-        },
-        include: { assignee: true },
-      });
-      created.push(t);
-    }
+    // All-or-nothing: a mid-batch failure must not leave a partial import behind
+    // (which would duplicate on retry).
+    const created = await prisma.$transaction(
+      valid.map((r) =>
+        prisma.task.create({
+          data: {
+            projectId,
+            title: r.title,
+            description: r.description,
+            status: r.status as never,
+            priority: r.priority as never,
+            type: r.type as never,
+            estimateHours: r.estimateHours,
+            dueDate: r.dueDate,
+            assigneeId: r.assigneeId,
+          },
+          include: { assignee: true },
+        })
+      )
+    );
 
     return NextResponse.json({ ok: true, created, count: created.length, skipped });
   } catch (e) {

@@ -9,7 +9,13 @@ export async function PATCH(req: Request, props: { params: Promise<{ id: string 
     const b = await req.json();
     const data: Record<string, unknown> = {};
     if (b.name !== undefined) data.name = String(b.name);
-    if (b.date !== undefined) data.date = new Date(b.date);
+    // Normalize to local midnight to match the create route — Holiday.date is
+    // @unique, so an inconsistent instant breaks day-equality and the constraint.
+    if (b.date !== undefined) {
+      const dt = new Date(b.date);
+      dt.setHours(0, 0, 0, 0);
+      data.date = dt;
+    }
     const h = await prisma.holiday.update({ where: { id: params.id }, data });
     return NextResponse.json(h);
   } catch {

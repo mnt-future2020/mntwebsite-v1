@@ -85,7 +85,7 @@ export function hasPerm(perms: string[], key: string): boolean {
 
 // Map a request pathname to the section key it requires. null = no specific
 // section (treat as "needs any admin access").
-const PREFIX_KEYS: [string, string][] = [
+const PREFIX_KEYS = ([
   // API routes (checked alongside page routes; longest prefix wins).
   ["/api/admin/hr/employees", "hr.employees"],
   ["/api/admin/hr/attendance", "hr.attendance"],
@@ -127,7 +127,7 @@ const PREFIX_KEYS: [string, string][] = [
   ["/admin/projects", "projects"],
   ["/admin/crm", "crm"],
   ["/admin", "dashboard"],
-].sort((a, b) => b[0].length - a[0].length);
+] as [string, string][]).sort((a, b) => b[0].length - a[0].length);
 
 export function keyForPath(pathname: string): string | null {
   for (const [prefix, key] of PREFIX_KEYS) {

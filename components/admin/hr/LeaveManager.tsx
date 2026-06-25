@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 import { fmtDate, leaveDays, LEAVE_STATUS_STYLE, balanceFieldForKind } from "@/lib/hr";
 
 type Leave = { id: string; employeeId: string; employeeName: string; kind: string; startDate: string; endDate: string; days: number; reason?: string | null; status: string };
@@ -144,8 +145,8 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
               <p className="text-xs text-slate-400">Unpaid — no balance deducted.</p>
             )}
             <div className="grid grid-cols-2 gap-2">
-              <input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} className={field} />
-              <input type="date" value={form.endDate} onChange={(e) => setForm({ ...form, endDate: e.target.value })} className={field} />
+              <DateField label="Start" value={form.startDate} onChange={(v) => setForm({ ...form, startDate: v })} />
+              <DateField label="End" value={form.endDate} onChange={(v) => setForm({ ...form, endDate: v })} />
             </div>
             <textarea rows={2} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={`${field} resize-none`} placeholder="Reason (optional)" />
             {estDays > 0 && <p className="text-xs text-slate-400">{estDays} day(s)</p>}

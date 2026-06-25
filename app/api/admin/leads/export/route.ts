@@ -3,7 +3,11 @@ import { prisma } from "@/lib/db";
 export const runtime = "nodejs";
 
 function cell(v: unknown) {
-  const s = (v ?? "").toString().replace(/"/g, '""');
+  let s = (v ?? "").toString();
+  // Neutralize spreadsheet formula injection: a leading =, +, -, @, tab or CR
+  // makes Excel/Sheets evaluate the cell as a formula even when quoted.
+  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+  s = s.replace(/"/g, '""');
   return `"${s}"`;
 }
 

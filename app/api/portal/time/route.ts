@@ -13,11 +13,27 @@ export async function POST(req: Request) {
     const projectId = String(b.projectId || "");
     const hours = Number(b.hours) || 0;
     if (!projectId || hours <= 0) return NextResponse.json({ error: "Project and hours are required." }, { status: 400 });
+
+    // The employee may only log time on projects they lead or are a member of —
+    // the route must enforce this, not just the project dropdown in the UI.
+    const onProject = await prisma.project.findFirst({
+      where: { id: projectId, OR: [{ leadId: emp.id }, { members: { some: { employeeId: emp.id } } }] },
+      select: { id: true },
+    });
+    if (!onProject) return NextResponse.json({ error: "You are not assigned to that project." }, { status: 403 });
+
+    // A supplied task must belong to that same project.
+    const taskId = (b.taskId as string) || null;
+    if (taskId) {
+      const task = await prisma.task.findFirst({ where: { id: taskId, projectId }, select: { id: true } });
+      if (!task) return NextResponse.json({ error: "Invalid task for this project." }, { status: 400 });
+    }
+
     const t = await prisma.timeEntry.create({
       data: {
         projectId,
         employeeId: emp.id,
-        taskId: (b.taskId as string) || null,
+        taskId,
         date: b.date ? new Date(String(b.date)) : new Date(),
         hours,
         note: (b.note as string) || null,

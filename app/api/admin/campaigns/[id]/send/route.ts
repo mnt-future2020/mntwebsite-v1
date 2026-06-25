@@ -45,6 +45,17 @@ export async function POST(_req: Request, props: { params: Promise<{ id: string 
       recipients
     );
 
+    // Every batch failed — nothing went out. Reset to DRAFT so the admin can fix
+    // the issue (e.g. unverified domain, rate limit) and retry, rather than
+    // locking the campaign as "SENT" having reached nobody.
+    if (result.sent === 0) {
+      await prisma.campaign.update({ where: { id: campaign.id }, data: { status: "DRAFT" } });
+      return NextResponse.json(
+        { error: result.error || "No emails could be sent. The campaign was reset to draft." },
+        { status: 502 }
+      );
+    }
+
     await prisma.campaign.update({
       where: { id: campaign.id },
       data: {

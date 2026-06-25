@@ -77,6 +77,7 @@ export default function KanbanBoard({
   const move = async (id: string, status: string) => {
     const task = tasks.find((t) => t.id === id);
     if (!task || task.status === status) return;
+    const prev = task.status;
     setTasks((s) => s.map((t) => (t.id === id ? { ...t, status } : t)));
     const res = await fetch(`/api/admin/projects/tasks/${id}`, {
       method: "PATCH",
@@ -84,7 +85,11 @@ export default function KanbanBoard({
       body: JSON.stringify({ status }),
     });
     if (res.ok) toast(`Moved to ${TASK_STATUS_LABELS[status]}`);
-    else toast("Couldn't move task", "err");
+    else {
+      // Roll back the optimistic move so the board doesn't lie about persisted state.
+      setTasks((s) => s.map((t) => (t.id === id ? { ...t, status: prev } : t)));
+      toast("Couldn't move task", "err");
+    }
   };
 
   const add = async (status: string) => {

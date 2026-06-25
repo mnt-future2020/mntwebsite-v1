@@ -9,13 +9,16 @@ import { hasAdminAccess, keyForPath, firstAllowedPath } from "@/lib/permissions"
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession().catch(() => null);
+  // Fail closed: never render the admin shell without a verified session (the
+  // edge middleware is the primary gate; this is defense-in-depth).
+  if (!session) redirect("/admin/login");
 
   // Live permission check (catches changes before the JWT expires).
-  const perms = session ? await getRolePerms(session.role) : [];
-  if (session && !hasAdminAccess(perms)) redirect("/portal");
+  const perms = await getRolePerms(session.role);
+  if (!hasAdminAccess(perms)) redirect("/portal");
   const pathname = (await headers()).get("x-pathname") || "/admin";
   const required = keyForPath(pathname);
-  if (session && required && !perms.includes(required)) {
+  if (required && !perms.includes(required)) {
     redirect(firstAllowedPath(perms) || "/portal");
   }
 
@@ -29,7 +32,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           </p>
         </div>
         <div className="flex-1">
-          <AdminNav email={session?.email} perms={perms} />
+          <AdminNav email={session?.email} perms={perms} isEmployee={session.sub !== "admin"} />
         </div>
       </aside>
 

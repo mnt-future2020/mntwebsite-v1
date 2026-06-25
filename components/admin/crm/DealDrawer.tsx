@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
 import { DEAL_STAGES, STAGE_LABELS, ACTIVITY_TYPES, ACTIVITY_ICON, fmtDate, money, titleCase } from "@/lib/crm";
 
@@ -90,8 +91,8 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
             <div><label className={lbl}>Win probability %</label><input value={f.probability} onChange={(e) => up("probability", e.target.value)} type="number" className={field} /></div>
             <div><label className={lbl}>Company</label><select value={f.clientId} onChange={(e) => up("clientId", e.target.value)} className={field}><option value="">—</option>{companies.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
             <div><label className={lbl}>Contact</label><select value={f.contactId} onChange={(e) => up("contactId", e.target.value)} className={field}><option value="">—</option>{contacts.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
-            <div><label className={lbl}>Expected close</label><input value={f.expectedCloseDate} onChange={(e) => up("expectedCloseDate", e.target.value)} type="date" className={field} /></div>
-            <div><label className={lbl}>Next follow-up</label><input value={f.nextFollowUp} onChange={(e) => up("nextFollowUp", e.target.value)} type="date" className={field} /></div>
+            <DateField label="Expected close" value={f.expectedCloseDate} onChange={(v) => up("expectedCloseDate", v)} />
+            <DateField label="Next follow-up" value={f.nextFollowUp} onChange={(v) => up("nextFollowUp", v)} />
             <div><label className={lbl}>Source</label><input value={f.source} onChange={(e) => up("source", e.target.value)} className={field} placeholder="Referral, inbound…" /></div>
           </div>
           <div><label className={lbl}>Notes</label><textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={3} /></div>

@@ -61,7 +61,20 @@ export async function DELETE(_req: Request, props: Ctx) {
     if (!leave) return NextResponse.json({ error: "Not found" }, { status: 404 });
     if (await managerBlocked(leave.employeeId))
       return NextResponse.json({ error: "You can only act on your team's requests." }, { status: 403 });
-    await prisma.leaveRequest.delete({ where: { id: params.id } });
+
+    // If the leave was APPROVED, its days were deducted from the balance — credit
+    // them back atomically with the delete (mirrors the PATCH restore branch).
+    const balanceField = balanceFieldForKind(leave.kind);
+    const ops: unknown[] = [prisma.leaveRequest.delete({ where: { id: params.id } })];
+    if (leave.status === "APPROVED" && balanceField) {
+      ops.push(
+        prisma.employee.update({
+          where: { id: leave.employeeId },
+          data: { [balanceField]: { increment: leave.days } },
+        })
+      );
+    }
+    await prisma.$transaction(ops as never);
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Delete failed." }, { status: 500 });

@@ -7,6 +7,19 @@ import Icon, { IconName } from "@/components/Icon";
 
 type Item = { href: string; label: string; icon: IconName; key: string; exact?: boolean };
 
+// Base employee self-service ("My workspace") — available to every real employee
+// regardless of role. Rendered without a permission check; role-granted admin
+// sections appear below it.
+const myWorkspace: Item[] = [
+  { href: "/portal", label: "Dashboard", icon: "grid", key: "__self", exact: true },
+  { href: "/portal/projects", label: "My projects", icon: "layers", key: "__self" },
+  { href: "/scan", label: "Scan attendance", icon: "compass", key: "__self" },
+  { href: "/portal/leave", label: "My leave", icon: "clock", key: "__self" },
+  { href: "/portal/attendance", label: "My attendance", icon: "calendar", key: "__self" },
+  { href: "/portal/payslips", label: "Payslips", icon: "wallet", key: "__self" },
+  { href: "/portal/profile", label: "Profile", icon: "users", key: "__self" },
+];
+
 const workspace: Item[] = [
   { href: "/admin", label: "Dashboard", icon: "grid", key: "dashboard", exact: true },
   { href: "/admin/posts", label: "Blog posts", icon: "records", key: "posts" },
@@ -45,7 +58,15 @@ const hr: Item[] = [
 const isActive = (pathname: string | null, href: string, exact?: boolean) =>
   exact ? pathname === href : !!pathname?.startsWith(href);
 
-export default function AdminNav({ email, perms }: { email?: string; perms: string[] }) {
+export default function AdminNav({
+  email,
+  perms,
+  isEmployee = false,
+}: {
+  email?: string;
+  perms: string[];
+  isEmployee?: boolean;
+}) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -79,8 +100,10 @@ export default function AdminNav({ email, perms }: { email?: string; perms: stri
   return (
     <div className="flex h-full flex-col">
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">
-        {wItems.map(renderItem)}
-
+        {isEmployee && (
+          <NavGroup title="My workspace" items={myWorkspace} storageKey="mnt_self_nav_open" pathname={pathname} renderItem={renderItem} />
+        )}
+        <NavGroup title="Workspace" items={wItems} storageKey="mnt_workspace_nav_open" pathname={pathname} renderItem={renderItem} />
         <NavGroup title="Projects" items={projectItems} storageKey="mnt_projects_nav_open" pathname={pathname} renderItem={renderItem} />
         <NavGroup title="CRM" items={crmItems} storageKey="mnt_crm_nav_open" pathname={pathname} renderItem={renderItem} />
         <NavGroup title="Human resources" items={hrItems} storageKey="mnt_hr_nav_open" pathname={pathname} renderItem={renderItem} />

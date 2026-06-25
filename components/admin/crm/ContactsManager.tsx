@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
 import { followUpStatus, FOLLOWUP_STYLE, fmtDate } from "@/lib/crm";
 
@@ -122,10 +123,7 @@ export default function ContactsManager({ initial, companies, owners }: { initia
             {owners.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
           </select>
           <textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={2} placeholder="Notes" />
-          <div>
-            <span className="mb-1 block text-[11px] text-slate-400">Next follow-up</span>
-            <input type="date" value={f.nextFollowUp} onChange={(e) => up("nextFollowUp", e.target.value)} className={field} />
-          </div>
+          <DateField label="Next follow-up" value={f.nextFollowUp} onChange={(v) => up("nextFollowUp", v)} />
         </div>
         <div className="mt-4 flex gap-2">
           <button type="submit" disabled={busy} className="btn-primary flex-1 disabled:opacity-70"><Icon name={editId ? "save" : "plus"} className="h-4 w-4" /> {editId ? "Save" : "Add"}</button>

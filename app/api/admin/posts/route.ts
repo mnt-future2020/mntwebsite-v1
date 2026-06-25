@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { toSlug, readingMinutes } from "@/lib/posts";
+import { toSlug, readingMinutes, sanitizePostHtml } from "@/lib/posts";
 
 export const runtime = "nodejs";
 
@@ -25,18 +25,19 @@ export async function POST(req: Request) {
     while (await prisma.post.findUnique({ where: { slug } })) slug = `${base}-${n++}`;
 
     const status = b.status === "PUBLISHED" ? "PUBLISHED" : "DRAFT";
+    const contentHtml = sanitizePostHtml(b.contentHtml || "");
     const post = await prisma.post.create({
       data: {
         slug,
         title: b.title,
         excerpt: b.excerpt || null,
-        contentHtml: b.contentHtml || "",
+        contentHtml,
         coverImage: b.coverImage || null,
         category: b.category || null,
         tags: Array.isArray(b.tags) ? b.tags : [],
         author: b.author || "MnT Team",
         status,
-        readingMins: readingMinutes(b.contentHtml || ""),
+        readingMins: readingMinutes(contentHtml),
         metaTitle: b.metaTitle || null,
         metaDescription: b.metaDescription || null,
         ogImage: b.ogImage || null,

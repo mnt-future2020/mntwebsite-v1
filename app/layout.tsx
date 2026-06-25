@@ -4,37 +4,41 @@ import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: "MnT — Healthcare & E-Commerce Software Development",
-    template: "%s | MnT",
-  },
-  description: site.description,
-  keywords: [
-    "healthcare software development company",
-    "ecommerce development company",
-    "custom healthcare software development",
-    "telemedicine app development",
-    "shopify development agency",
-    "ABDM FHIR integration",
-    "Magizh NexGen Technologies",
-  ],
-  openGraph: {
-    type: "website",
-    url: site.url,
-    siteName: site.name,
-    title: "MnT — Healthcare & E-Commerce Software Development",
-    description: site.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "MnT — Healthcare & E-Commerce Software Development",
-    description: site.description,
-  },
-  alternates: { canonical: site.url },
-  robots: { index: true, follow: true },
-};
+// Driven by the admin Settings (siteName / titleTemplate / defaultDescription /
+// defaultOgImage), falling back to DEFAULT_SETTINGS when the DB is unset/down.
+export async function generateMetadata(): Promise<Metadata> {
+  const s = await getSiteSettings();
+  return {
+    metadataBase: new URL(site.url),
+    title: { default: s.siteName, template: s.titleTemplate },
+    description: s.defaultDescription,
+    keywords: [
+      "healthcare software development company",
+      "ecommerce development company",
+      "custom healthcare software development",
+      "telemedicine app development",
+      "shopify development agency",
+      "ABDM FHIR integration",
+      "Magizh NexGen Technologies",
+    ],
+    openGraph: {
+      type: "website",
+      url: site.url,
+      siteName: site.name,
+      title: s.siteName,
+      description: s.defaultDescription,
+      ...(s.defaultOgImage ? { images: [{ url: s.defaultOgImage }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: s.siteName,
+      description: s.defaultDescription,
+      ...(s.defaultOgImage ? { images: [s.defaultOgImage] } : {}),
+    },
+    alternates: { canonical: site.url },
+    robots: { index: true, follow: true },
+  };
+}
 
 const orgSchema = {
   "@context": "https://schema.org",
