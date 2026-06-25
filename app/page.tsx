@@ -7,6 +7,7 @@ import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import StackMarquee from "@/components/StackMarquee";
+import ClutchWidget from "@/components/ClutchWidget";
 import SpotlightCard from "@/components/SpotlightCard";
 import Testimonials from "@/components/Testimonials";
 import Integrations from "@/components/Integrations";
@@ -83,6 +84,9 @@ export default function Home() {
             <Stat value="100%" label="Senior-engineer delivery" />
             <Stat value="5+" label="Compliance frameworks engineered in" />
             <Stat value="Global" label="India-based · US, Gulf &amp; Europe delivery" />
+          </div>
+          <div className="mt-10 flex justify-center">
+            <ClutchWidget />
           </div>
         </div>
         <StackMarquee className="mt-12" />

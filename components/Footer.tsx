@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import NewsletterForm from "./NewsletterForm";
+import ClutchWidget from "./ClutchWidget";
 import { site, footerNav } from "@/lib/site";
 
 export default function Footer() {
@@ -34,6 +35,8 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+
+            <ClutchWidget className="mt-6" />
 
             <div className="mt-8 max-w-sm">
               <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
