@@ -48,7 +48,7 @@ export default async function PortalAttendancePage() {
   return (
     <>
       <h1 className="text-2xl font-bold text-ink">My attendance</h1>
-      <p className="mt-1 mb-6 text-sm text-slatey">Your last 30 days and recent QR punches.</p>
+      <p className="mt-1 mb-6 text-sm text-slatey">Your last 30 days and recent location check-ins.</p>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
         <div className="rounded-2xl border border-slate-200 bg-white p-6">

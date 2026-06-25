@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 import { computePayslip, inr, monthName } from "@/lib/hr";
 
 type Emp = { id: string; name: string; basic: number; hra: number; allowances: number };
@@ -55,16 +56,30 @@ export default function PayrollManager({ slips: s0, employees }: { slips: Slip[]
         const without = s.filter((x) => !(x.employeeId === d.employeeId && x.month === d.month && x.year === d.year));
         return [{ id: d.id, employeeId: d.employeeId, employeeName: name, month: d.month, year: d.year, gross: d.gross, net: d.net, status: d.status }, ...without];
       });
+      toast("Payslip generated");
+    } else {
+      toast("Couldn't generate payslip", "err");
     }
     setBusy(false);
   };
   const setStatus = async (id: string, status: string) => {
+    const prev = slips;
     setSlips((s) => s.map((x) => (x.id === id ? { ...x, status } : x)));
-    await fetch(`/api/admin/hr/payroll/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/hr/payroll/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setSlips(prev);
+      toast("Couldn't update payslip", "err");
+    }
   };
   const del = async (id: string) => {
+    if (!confirm("Delete this payslip?")) return;
+    const prev = slips;
     setSlips((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/hr/payroll/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/hr/payroll/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setSlips(prev);
+      toast("Couldn't delete payslip", "err");
+    }
   };
 
   return (

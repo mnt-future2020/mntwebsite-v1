@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 
 type Emp = { id: string; name: string };
 type Review = { id: string; employeeId: string; employeeName: string; period: string; rating: number; hikePercent?: number | null; reviewer?: string | null; status: string };
@@ -27,12 +28,21 @@ export default function PerformanceManager({ reviews: r0, employees }: { reviews
       const name = employees.find((x) => x.id === f.employeeId)?.name || "";
       setReviews((s) => [{ id: d.id, employeeId: d.employeeId, employeeName: name, period: d.period, rating: d.rating, hikePercent: d.hikePercent, reviewer: d.reviewer, status: d.status }, ...s]);
       setF({ ...f, period: "", strengths: "", improvements: "", goals: "", hikePercent: "" });
+      toast("Review saved");
+    } else {
+      toast("Couldn't save review", "err");
     }
     setBusy(false);
   };
   const del = async (id: string) => {
+    if (!confirm("Delete this review?")) return;
+    const prev = reviews;
     setReviews((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/hr/performance/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/hr/performance/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setReviews(prev);
+      toast("Couldn't delete review", "err");
+    }
   };
   const startEdit = (r: Review) => {
     setEditId(r.id);
@@ -49,7 +59,8 @@ export default function PerformanceManager({ reviews: r0, employees }: { reviews
       const d = await res.json();
       setReviews((s) => s.map((x) => (x.id === editId ? { ...x, period: d.period, rating: d.rating, hikePercent: d.hikePercent } : x)));
       setEditId(null);
-    } else alert("Update failed.");
+      toast("Review updated");
+    } else toast("Couldn't update review", "err");
   };
 
   return (

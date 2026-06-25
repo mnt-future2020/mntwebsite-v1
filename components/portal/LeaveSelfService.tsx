@@ -49,6 +49,10 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (f.startDate && f.endDate && f.endDate < f.startDate) {
+      setErr("End date can't be before the start date.");
+      return;
+    }
     setBusy(true);
     setErr(null);
     const res = await fetch("/api/portal/leave", {
@@ -81,10 +85,12 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
 
   const cancel = async (id: string) => {
     if (!confirm("Cancel this leave request?")) return;
-    const res = await fetch(`/api/portal/leave/${id}`, { method: "PATCH" });
-    if (res.ok) {
+    const res = await fetch(`/api/portal/leave/${id}`, { method: "PATCH" }).catch(() => null);
+    if (res && res.ok) {
       setLeaves((l) => l.map((x) => (x.id === id ? { ...x, status: "CANCELLED" } : x)));
       router.refresh();
+    } else {
+      setErr("Couldn't cancel — please try again.");
     }
   };
 

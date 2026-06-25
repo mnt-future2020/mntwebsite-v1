@@ -56,7 +56,14 @@ export default async function ScanPage() {
   const { emp, punches } = session ? await load(session.sub) : { emp: null, punches: [] };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-brand-50/40 px-5 py-10">
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-brand-50/40 px-5 py-10">
+      <Link
+        href="/portal"
+        aria-label="Back to portal"
+        className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-medium text-slatey shadow-sm backdrop-blur transition-colors hover:text-ink"
+      >
+        <span aria-hidden="true">←</span> Portal
+      </Link>
       <ScanPanel
         name={emp ? fullName(emp) : session?.email || ""}
         code={emp?.code || ""}

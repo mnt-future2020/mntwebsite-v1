@@ -56,18 +56,28 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
   };
 
   const setStatus = async (id: string, status: string) => {
+    const prev = leads;
     setLeads((ls) => ls.map((l) => (l.id === id ? { ...l, status } : l)));
-    await fetch(`/api/admin/leads/${id}`, {
+    const res = await fetch(`/api/admin/leads/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
-    });
+    }).catch(() => null);
+    if (!res || !res.ok) {
+      setLeads(prev);
+      toast("Couldn't update status", "err");
+    }
   };
 
   const del = async (id: string) => {
     if (!confirm("Delete this lead? This can't be undone.")) return;
+    const prev = leads;
     setLeads((ls) => ls.filter((l) => l.id !== id));
-    await fetch(`/api/admin/leads/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/leads/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setLeads(prev);
+      toast("Couldn't delete lead", "err");
+    }
   };
 
   return (

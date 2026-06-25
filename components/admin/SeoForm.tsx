@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -21,13 +22,19 @@ function Row({ path, label, initial }: { path: string; label: string; initial: O
 
   const save = async () => {
     setSaving(true);
-    await fetch("/api/admin/seo", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ path, ...f }),
-    });
-    setSaving(false);
-    setSaved(true);
+    try {
+      const res = await fetch("/api/admin/seo", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path, ...f }),
+      });
+      if (res.ok) setSaved(true);
+      else toast("Couldn't save SEO override", "err");
+    } catch {
+      toast("Couldn't save — network error", "err");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

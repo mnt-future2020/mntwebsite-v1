@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 import {
   money,
   fmtDate,
@@ -51,8 +52,14 @@ export function TeamPanel({ projectId, initial, employees }: { projectId: string
     } else setErr((await res.json().catch(() => ({}))).error || "Couldn't add.");
   };
   const remove = async (id: string) => {
+    if (!confirm("Remove this team member from the project?")) return;
+    const prev = members;
     setMembers((s) => s.filter((m) => m.id !== id));
-    await fetch(`/api/admin/projects/members/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/members/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setMembers(prev);
+      toast("Couldn't remove member", "err");
+    }
   };
 
   return (
@@ -114,12 +121,23 @@ export function MilestonesPanel({ projectId, initial, currency }: { projectId: s
     }
   };
   const setStatus = async (id: string, status: string) => {
+    const prev = items;
     setItems((s) => s.map((m) => (m.id === id ? { ...m, status } : m)));
-    await fetch(`/api/admin/projects/milestones/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/projects/milestones/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't update milestone", "err");
+    }
   };
   const remove = async (id: string) => {
+    if (!confirm("Delete this milestone?")) return;
+    const prev = items;
     setItems((s) => s.filter((m) => m.id !== id));
-    await fetch(`/api/admin/projects/milestones/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/milestones/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't delete milestone", "err");
+    }
   };
 
   return (
@@ -178,12 +196,23 @@ export function SprintsPanel({ projectId, initial }: { projectId: string; initia
     }
   };
   const setStatus = async (id: string, status: string) => {
+    const prev = items;
     setItems((s) => s.map((x) => (x.id === id ? { ...x, status } : x)));
-    await fetch(`/api/admin/projects/sprints/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/projects/sprints/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't update sprint", "err");
+    }
   };
   const remove = async (id: string) => {
+    if (!confirm("Delete this sprint?")) return;
+    const prev = items;
     setItems((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/projects/sprints/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/sprints/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't delete sprint", "err");
+    }
   };
 
   return (
@@ -244,12 +273,23 @@ export function InvoicesPanel({ projectId, initial, currency }: { projectId: str
     }
   };
   const setStatus = async (id: string, status: string) => {
+    const prev = items;
     setItems((s) => s.map((x) => (x.id === id ? { ...x, status } : x)));
-    await fetch(`/api/admin/projects/invoices/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/projects/invoices/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't update invoice", "err");
+    }
   };
   const remove = async (id: string) => {
+    if (!confirm("Delete this invoice?")) return;
+    const prev = items;
     setItems((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/projects/invoices/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/invoices/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't delete invoice", "err");
+    }
   };
 
   const billed = items.reduce((s, i) => s + i.amount, 0);
@@ -317,8 +357,14 @@ export function TimePanel({ projectId, initial, members }: { projectId: string; 
     }
   };
   const remove = async (id: string) => {
+    if (!confirm("Delete this time entry?")) return;
+    const prev = items;
     setItems((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/projects/time/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/time/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't delete time entry", "err");
+    }
   };
 
   const total = items.reduce((s, e) => s + e.hours, 0);

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
 import DateField from "@/components/admin/DateField";
+import { toast } from "@/components/admin/Toast";
 import { fmtDate, leaveDays, LEAVE_STATUS_STYLE, balanceFieldForKind } from "@/lib/hr";
 
 type Leave = { id: string; employeeId: string; employeeName: string; kind: string; startDate: string; endDate: string; days: number; reason?: string | null; status: string };
@@ -23,38 +24,64 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   const [editHol, setEditHol] = useState({ date: "", name: "" });
 
   const decide = async (id: string, status: string) => {
+    const prev = leaves;
     setLeaves((s) => s.map((l) => (l.id === id ? { ...l, status } : l)));
-    await fetch(`/api/admin/hr/leave/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/hr/leave/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setLeaves(prev);
+      toast("Couldn't update leave", "err");
+      return;
+    }
     router.refresh(); // pull fresh balances after the deduction/restore
   };
   const del = async (id: string) => {
+    if (!confirm("Delete this leave request? An approved leave will have its balance restored.")) return;
+    const prev = leaves;
     setLeaves((s) => s.filter((l) => l.id !== id));
-    await fetch(`/api/admin/hr/leave/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/hr/leave/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setLeaves(prev);
+      toast("Couldn't delete leave", "err");
+      return;
+    }
+    router.refresh(); // balance may have been restored
   };
   const addLeave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.employeeId || !form.startDate || !form.endDate) return;
-    const res = await fetch("/api/admin/hr/leave", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
-    if (res.ok) {
+    const res = await fetch("/api/admin/hr/leave", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) }).catch(() => null);
+    if (res && res.ok) {
       const d = await res.json();
       const name = employees.find((x) => x.id === form.employeeId)?.name || "";
       setLeaves((s) => [{ ...d, employeeName: name, startDate: d.startDate, endDate: d.endDate }, ...s]);
       setForm({ ...form, startDate: "", endDate: "", reason: "" });
+      toast("Leave added");
+    } else {
+      toast((res && (await res.json().catch(() => ({})))?.error) || "Couldn't add leave", "err");
     }
   };
   const addHoliday = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!hol.date || !hol.name) return;
-    const res = await fetch("/api/admin/hr/holidays", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(hol) });
-    if (res.ok) {
+    const res = await fetch("/api/admin/hr/holidays", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(hol) }).catch(() => null);
+    if (res && res.ok) {
       const created = await res.json();
       setHolidays((s) => [...s, created].sort((a, b) => +new Date(a.date) - +new Date(b.date)));
       setHol({ date: "", name: "" });
+      toast("Holiday added");
+    } else {
+      toast("Couldn't add holiday — that date may already be one", "err");
     }
   };
   const delHoliday = async (id: string) => {
+    if (!confirm("Remove this holiday?")) return;
+    const prev = holidays;
     setHolidays((s) => s.filter((h) => h.id !== id));
-    await fetch(`/api/admin/hr/holidays/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/hr/holidays/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setHolidays(prev);
+      toast("Couldn't remove holiday", "err");
+    }
   };
   const startHolEdit = (h: Holiday) => {
     setEditHolId(h.id);
@@ -166,16 +193,16 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
                       <input value={editHol.name} onChange={(e) => setEditHol((s) => ({ ...s, name: e.target.value }))} className={`${field} py-1`} placeholder="Name" />
                     </div>
                     <div className="flex shrink-0 items-center gap-1">
-                      <button onClick={saveHolEdit} title="Save" className="rounded-lg p-1 text-green-600 hover:bg-green-50"><Icon name="check" className="h-3.5 w-3.5" /></button>
-                      <button onClick={() => setEditHolId(null)} title="Cancel" className="rounded-lg p-1 text-slatey hover:bg-slate-100"><Icon name="x" className="h-3.5 w-3.5" /></button>
+                      <button type="button" onClick={saveHolEdit} title="Save" className="rounded-lg p-1 text-green-600 hover:bg-green-50"><Icon name="check" className="h-3.5 w-3.5" /></button>
+                      <button type="button" onClick={() => setEditHolId(null)} title="Cancel" className="rounded-lg p-1 text-slatey hover:bg-slate-100"><Icon name="x" className="h-3.5 w-3.5" /></button>
                     </div>
                   </>
                 ) : (
                   <>
                     <span className="text-ink">{fmtDate(h.date)} <span className="text-xs text-slate-400">· {h.name}</span></span>
                     <div className="flex shrink-0 items-center gap-1">
-                      <button onClick={() => startHolEdit(h)} title="Edit" className="rounded-lg p-1 text-slatey hover:bg-brand-50 hover:text-brand-700"><Icon name="edit" className="h-3.5 w-3.5" /></button>
-                      <button onClick={() => delHoliday(h.id)} title="Delete" className="rounded-lg p-1 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-3.5 w-3.5" /></button>
+                      <button type="button" onClick={() => startHolEdit(h)} title="Edit" className="rounded-lg p-1 text-slatey hover:bg-brand-50 hover:text-brand-700"><Icon name="edit" className="h-3.5 w-3.5" /></button>
+                      <button type="button" onClick={() => delHoliday(h.id)} title="Delete" className="rounded-lg p-1 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-3.5 w-3.5" /></button>
                     </div>
                   </>
                 )}

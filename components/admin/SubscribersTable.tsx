@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 
 type Subscriber = {
   id: string;
@@ -27,17 +28,27 @@ export default function SubscribersTable({ subscribers: initial }: { subscribers
 
   const del = async (id: string) => {
     if (!confirm("Delete this subscriber? This can't be undone.")) return;
+    const prev = subs;
     setSubs((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/subscribers/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/subscribers/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setSubs(prev);
+      toast("Couldn't delete subscriber", "err");
+    }
   };
 
   const setStatus = async (id: string, status: string) => {
+    const prev = subs;
     setSubs((s) => s.map((x) => (x.id === id ? { ...x, status } : x)));
-    await fetch(`/api/admin/subscribers/${id}`, {
+    const res = await fetch(`/api/admin/subscribers/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
-    });
+    }).catch(() => null);
+    if (!res || !res.ok) {
+      setSubs(prev);
+      toast("Couldn't update subscriber", "err");
+    }
   };
 
   return (

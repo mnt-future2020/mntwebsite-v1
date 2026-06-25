@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { getCurrentEmployee } from "@/lib/portal";
 import LeaveSelfService from "@/components/portal/LeaveSelfService";
+import HolidayList from "@/components/portal/HolidayList";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,21 @@ export default async function PortalLeavePage() {
     /* DB optional */
   }
 
+  // Company holidays for the current calendar year (read-only, for the employee).
+  let holidays: { id: string; name: string; date: string }[] = [];
+  try {
+    const now = new Date();
+    const yStart = new Date(now.getFullYear(), 0, 1);
+    const yEnd = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+    const hrows = await prisma.holiday.findMany({
+      where: { date: { gte: yStart, lte: yEnd } },
+      orderBy: { date: "asc" },
+    });
+    holidays = hrows.map((h) => ({ id: h.id, name: h.name, date: h.date.toISOString() }));
+  } catch {
+    /* DB optional */
+  }
+
   return (
     <>
       <h1 className="mb-6 text-2xl font-bold text-ink">My leave</h1>
@@ -59,6 +75,9 @@ export default async function PortalLeavePage() {
           compOffBalance: emp.compOffBalance ?? 0,
         }}
       />
+      <div className="mt-6">
+        <HolidayList holidays={holidays} />
+      </div>
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 import { money, fmtDate, titleCase, INVOICE_STATUSES, INVOICE_STATUS_STYLE } from "@/lib/projects";
 
 type Opt = { id: string; label: string };
@@ -37,15 +38,30 @@ export default function AllInvoices({ initial, projects }: { initial: Invoice[];
       const inv = await res.json();
       setItems((s) => [inv, ...s]);
       setAmount(""); setIssue(""); setDue("");
+      toast("Invoice created");
+    } else {
+      toast((await res.json().catch(() => ({}))).error || "Couldn't create invoice", "err");
     }
   };
   const setStatus = async (id: string, status: string) => {
+    const prev = items;
     setItems((s) => s.map((x) => (x.id === id ? { ...x, status } : x)));
-    await fetch(`/api/admin/projects/invoices/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    const res = await fetch(`/api/admin/projects/invoices/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't update invoice", "err");
+    }
   };
   const remove = async (id: string) => {
+    const inv = items.find((x) => x.id === id);
+    if (!confirm(`Delete invoice ${inv?.number || ""}?`)) return;
+    const prev = items;
     setItems((s) => s.filter((x) => x.id !== id));
-    await fetch(`/api/admin/projects/invoices/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/projects/invoices/${id}`, { method: "DELETE" }).catch(() => null);
+    if (!res || !res.ok) {
+      setItems(prev);
+      toast("Couldn't delete invoice", "err");
+    }
   };
 
   const billed = items.reduce((s, i) => s + i.amount, 0);

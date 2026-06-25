@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -37,13 +38,19 @@ export default function SettingsForm({ initial }: { initial: SettingsInitial }) 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    await fetch("/api/admin/settings", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(f),
-    });
-    setSaving(false);
-    setSaved(true);
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(f),
+      });
+      if (res.ok) setSaved(true);
+      else toast("Couldn't save settings", "err");
+    } catch {
+      toast("Couldn't save — network error", "err");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

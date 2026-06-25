@@ -34,12 +34,17 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
   const [msg, setMsg] = useState<string | null>(null);
 
   const moveTask = async (id: string, status: string) => {
+    const prev = tasks;
     setTasks((s) => s.map((t) => (t.id === id ? { ...t, status } : t)));
-    await fetch(`/api/portal/tasks/${id}`, {
+    const res = await fetch(`/api/portal/tasks/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
-    });
+    }).catch(() => null);
+    if (!res || !res.ok) {
+      setTasks(prev);
+      setMsg("Couldn't move task — try again.");
+    }
   };
 
   const log = async () => {
