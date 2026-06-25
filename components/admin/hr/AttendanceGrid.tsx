@@ -26,7 +26,9 @@ export default function AttendanceGrid({
       const ex = existing[e.id];
       m[e.id] = {
         employeeId: e.id,
-        status: ex?.status || "PRESENT",
+        // Reflect reality: an employee with no record/punch defaults to ABSENT
+        // until they punch in or HR marks them. ("Mark all present" still bulk-sets.)
+        status: ex?.status || "ABSENT",
         checkIn: ex?.checkIn || "",
         checkOut: ex?.checkOut || "",
         lateMinutes: ex?.lateMinutes || 0,

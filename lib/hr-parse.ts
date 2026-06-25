@@ -22,6 +22,9 @@ export function parseEmployee(b: Record<string, unknown>) {
     status: (b.status as string) || "PROBATION",
     role: (b.role as string) || "EMPLOYEE",
     managerId: (b.managerId as string) || null,
+    // Per-employee work-time override (blank → null = inherit org global).
+    workStart: (b.workStart as string)?.trim() || null,
+    workEnd: (b.workEnd as string)?.trim() || null,
     joinDate: d(b.joinDate) || new Date(),
     probationEndDate: d(b.probationEndDate),
     confirmationDate: d(b.confirmationDate),

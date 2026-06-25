@@ -61,21 +61,21 @@ export default function AllInvoices({ initial, projects }: { initial: Invoice[];
       </div>
 
       <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4">
-        <select value={projectId} onChange={(e) => setProjectId(e.target.value)} className={`${field} w-56`}>
+        <select value={projectId} onChange={(e) => setProjectId(e.target.value)} className={`${field} w-full sm:w-56`}>
           <option value="">— No project —</option>
           {projects.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
         </select>
-        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-36`} type="number" placeholder="Amount" />
-        <div><span className="mb-1 block text-[11px] text-slate-400">Issue</span><input value={issue} onChange={(e) => setIssue(e.target.value)} className={`${field} w-40`} type="date" /></div>
-        <div><span className="mb-1 block text-[11px] text-slate-400">Due</span><input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-40`} type="date" /></div>
-        <button onClick={add} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> New invoice</button>
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-full sm:w-36`} type="number" placeholder="Amount" />
+        <div className="w-full sm:w-auto"><span className="mb-1 block text-[11px] text-slate-400">Issue</span><input value={issue} onChange={(e) => setIssue(e.target.value)} className={`${field} w-full sm:w-40`} type="date" /></div>
+        <div className="w-full sm:w-auto"><span className="mb-1 block text-[11px] text-slate-400">Due</span><input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-full sm:w-40`} type="date" /></div>
+        <button onClick={add} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> New invoice</button>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
         {items.length === 0 ? (
           <p className="px-5 py-10 text-center text-sm text-slatey">No invoices yet.</p>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[680px] text-sm">
             <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs uppercase tracking-wide text-slatey">
               <tr>
                 <th className="px-5 py-3 font-semibold">Invoice</th>

@@ -131,7 +131,7 @@ export default function ScanPanel({
           <Banner kind="err">No employee profile is linked to this account. Contact HR.</Banner>
         )}
         {hasProfile && !scanEnabled && (
-          <Banner kind="err">QR attendance is currently turned off by admin.</Banner>
+          <Banner kind="err">Attendance marking is currently turned off by admin.</Banner>
         )}
         {hasProfile && scanEnabled && !officeSet && (
           <Banner kind="err">Office location isn&apos;t set up yet. Ask HR to lock it in settings.</Banner>
@@ -234,7 +234,7 @@ export default function ScanPanel({
       </div>
 
       <p className="mt-4 text-center text-[11px] text-slate-400">
-        Office hours {workStart}–{workEnd} · scan works within {radius}m of the office
+        Office hours {workStart}–{workEnd} · works within {radius}m of the office (no QR needed)
       </p>
     </div>
   );

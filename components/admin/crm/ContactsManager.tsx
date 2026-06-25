@@ -67,13 +67,13 @@ export default function ContactsManager({ initial, companies, owners }: { initia
       <div>
         <div className="mb-3 relative">
           <Icon name="search" className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search contacts…" className="w-64 rounded-lg border border-slate-200 py-1.5 pl-8 pr-3 text-sm focus:border-brand focus:outline-none" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search contacts…" className="w-full rounded-lg border border-slate-200 py-1.5 pl-8 pr-3 text-sm focus:border-brand focus:outline-none sm:w-64" />
         </div>
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
           {view.length === 0 ? (
             <p className="px-5 py-10 text-center text-sm text-slatey">No contacts yet. Add one on the right.</p>
           ) : (
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[720px] text-sm">
               <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs uppercase tracking-wide text-slatey">
                 <tr><th className="px-5 py-3 font-semibold">Name</th><th className="px-5 py-3 font-semibold">Company</th><th className="px-5 py-3 font-semibold">Owner</th><th className="px-5 py-3 font-semibold">Deals</th><th className="px-5 py-3 font-semibold">Follow-up</th><th className="px-5 py-3" /></tr>
               </thead>

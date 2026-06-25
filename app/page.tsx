@@ -149,7 +149,7 @@ export default function Home() {
                     {v.title}
                   </h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-slatey">{v.desc}</p>
-                  <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
+                  <ul className="mt-6 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                     {v.items.map((it) => (
                       <li key={it} className="flex items-center gap-2.5 text-sm font-medium text-ink">
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700">

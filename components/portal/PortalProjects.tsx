@@ -128,29 +128,29 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
       <section>
         <h2 className="mb-3 text-sm font-semibold text-ink">Log time</h2>
         <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4">
-          <div>
+          <div className="w-full sm:w-auto">
             <span className="mb-1 block text-[11px] text-slate-400">Project</span>
-            <select value={projectId} onChange={(e) => { setProjectId(e.target.value); setTaskId(""); }} className={`${field} w-48`}>
+            <select value={projectId} onChange={(e) => { setProjectId(e.target.value); setTaskId(""); }} className={`${field} w-full sm:w-48`}>
               {projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
             </select>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <span className="mb-1 block text-[11px] text-slate-400">Task (optional)</span>
-            <select value={taskId} onChange={(e) => setTaskId(e.target.value)} className={`${field} w-48`}>
+            <select value={taskId} onChange={(e) => setTaskId(e.target.value)} className={`${field} w-full sm:w-48`}>
               <option value="">— None —</option>
               {tasksForProject.map((t) => <option key={t.id} value={t.id}>{t.title}</option>)}
             </select>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <span className="mb-1 block text-[11px] text-slate-400">Date</span>
-            <input value={date} onChange={(e) => setDate(e.target.value)} className={`${field} w-40`} type="date" />
+            <input value={date} onChange={(e) => setDate(e.target.value)} className={`${field} w-full sm:w-40`} type="date" />
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <span className="mb-1 block text-[11px] text-slate-400">Hours</span>
-            <input value={hours} onChange={(e) => setHours(e.target.value)} className={`${field} w-24`} type="number" step="0.5" placeholder="0" />
+            <input value={hours} onChange={(e) => setHours(e.target.value)} className={`${field} w-full sm:w-24`} type="number" step="0.5" placeholder="0" />
           </div>
-          <input value={note} onChange={(e) => setNote(e.target.value)} className={`${field} flex-1 min-w-[140px]`} placeholder="What did you work on?" />
-          <button onClick={log} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> Log</button>
+          <input value={note} onChange={(e) => setNote(e.target.value)} className={`${field} w-full flex-1 sm:w-auto sm:min-w-[140px]`} placeholder="What did you work on?" />
+          <button onClick={log} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> Log</button>
         </div>
         {msg && <p className="mt-2 text-xs text-slatey">{msg}</p>}
 

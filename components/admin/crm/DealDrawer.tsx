@@ -103,11 +103,11 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
           {/* Activities */}
           <div className="border-t border-slate-100 pt-4">
             <h3 className="text-sm font-semibold text-ink">Activity</h3>
-            <div className="mt-3 flex gap-2">
-              <select value={actType} onChange={(e) => setActType(e.target.value)} className="rounded-lg border border-slate-200 px-2 py-2 text-sm text-slatey focus:border-brand focus:outline-none">
+            <div className="mt-3 flex flex-wrap gap-2">
+              <select value={actType} onChange={(e) => setActType(e.target.value)} className="w-full rounded-lg border border-slate-200 px-2 py-2 text-sm text-slatey focus:border-brand focus:outline-none sm:w-auto">
                 {ACTIVITY_TYPES.map((t) => <option key={t} value={t}>{titleCase(t)}</option>)}
               </select>
-              <input value={actSubject} onChange={(e) => setActSubject(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addActivity()} placeholder="Log a note, call, task…" className={field} />
+              <input value={actSubject} onChange={(e) => setActSubject(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addActivity()} placeholder="Log a note, call, task…" className={`${field} flex-1 min-w-[140px]`} />
               <button onClick={addActivity} className="btn-primary shrink-0"><Icon name="plus" className="h-4 w-4" /></button>
             </div>
             {actType === "TASK" && (

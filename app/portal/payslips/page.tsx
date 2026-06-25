@@ -65,8 +65,8 @@ export default async function PortalPayslipsPage() {
           <p className="mt-1 max-w-sm text-sm text-slatey">Finalized payslips from HR will show up here.</p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr className="border-b border-slate-100 bg-slate-50/60 text-left text-xs text-slate-400">
                 <th className="px-5 py-3 font-medium">Month</th>

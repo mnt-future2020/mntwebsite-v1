@@ -76,11 +76,11 @@ export default function DepartmentManager({ initial }: { initial: Dept[] }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
         {depts.length === 0 ? (
           <p className="px-5 py-10 text-center text-sm text-slatey">No departments yet. Add your first on the right.</p>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[480px] text-sm">
             <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs uppercase tracking-wide text-slatey">
               <tr>
                 <th className="px-5 py-3 font-semibold">Department</th>

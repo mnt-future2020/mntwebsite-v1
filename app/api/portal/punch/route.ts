@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
   const org = await getOrgSettings();
   if (!org.scanEnabled)
-    return NextResponse.json({ error: "QR attendance is currently turned off by admin." }, { status: 403 });
+    return NextResponse.json({ error: "Attendance marking is currently turned off by admin." }, { status: 403 });
   if (org.officeLat == null || org.officeLng == null)
     return NextResponse.json({ error: "Office location isn't set up yet. Ask HR to configure it." }, { status: 400 });
   if (!Number.isFinite(lat) || !Number.isFinite(lng))
@@ -90,7 +90,9 @@ export async function POST(req: Request) {
     });
 
     if (type === "CHECK_IN") {
-      const late = Math.max(0, toMin(hhmm) - toMin(org.workStart));
+      // Late vs the employee's own work-start when set, else the org-wide default.
+      const effectiveStart = emp.workStart || org.workStart;
+      const late = Math.max(0, toMin(hhmm) - toMin(effectiveStart));
       await prisma.attendance.upsert({
         where: { employeeId_date: { employeeId: emp.id, date: day } },
         update: { checkIn: hhmm, status: "PRESENT", lateMinutes: late },

@@ -149,10 +149,10 @@ export function MilestonesPanel({ projectId, initial, currency }: { projectId: s
         )}
       </div>
       <div className={`flex flex-wrap items-end gap-3 p-4 ${card}`}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} className={`${field} flex-1 min-w-[180px]`} placeholder="Milestone title" />
-        <input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-40`} type="date" />
-        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-32`} type="number" placeholder="Amount" />
-        <button onClick={add} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> Add</button>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} className={`${field} flex-1 min-w-[140px]`} placeholder="Milestone title" />
+        <input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-full sm:w-40`} type="date" />
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-full sm:w-32`} type="number" placeholder="Amount" />
+        <button onClick={add} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> Add</button>
       </div>
     </div>
   );
@@ -215,11 +215,11 @@ export function SprintsPanel({ projectId, initial }: { projectId: string; initia
         )}
       </div>
       <div className={`flex flex-wrap items-end gap-3 p-4 ${card}`}>
-        <input value={name} onChange={(e) => setName(e.target.value)} className={`${field} w-40`} placeholder="Sprint name" />
-        <input value={goal} onChange={(e) => setGoal(e.target.value)} className={`${field} flex-1 min-w-[160px]`} placeholder="Goal" />
-        <input value={start} onChange={(e) => setStart(e.target.value)} className={`${field} w-36`} type="date" />
-        <input value={end} onChange={(e) => setEnd(e.target.value)} className={`${field} w-36`} type="date" />
-        <button onClick={add} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> Add</button>
+        <input value={name} onChange={(e) => setName(e.target.value)} className={`${field} w-full sm:w-40`} placeholder="Sprint name" />
+        <input value={goal} onChange={(e) => setGoal(e.target.value)} className={`${field} flex-1 min-w-[140px]`} placeholder="Goal" />
+        <input value={start} onChange={(e) => setStart(e.target.value)} className={`${field} w-full sm:w-36`} type="date" />
+        <input value={end} onChange={(e) => setEnd(e.target.value)} className={`${field} w-full sm:w-36`} type="date" />
+        <button onClick={add} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> Add</button>
       </div>
     </div>
   );
@@ -288,10 +288,10 @@ export function InvoicesPanel({ projectId, initial, currency }: { projectId: str
         )}
       </div>
       <div className={`flex flex-wrap items-end gap-3 p-4 ${card}`}>
-        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-40`} type="number" placeholder="Amount" />
-        <div><span className="mb-1 block text-[11px] text-slate-400">Issue date</span><input value={issue} onChange={(e) => setIssue(e.target.value)} className={`${field} w-40`} type="date" /></div>
-        <div><span className="mb-1 block text-[11px] text-slate-400">Due date</span><input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-40`} type="date" /></div>
-        <button onClick={add} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> New invoice</button>
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} className={`${field} w-full sm:w-40`} type="number" placeholder="Amount" />
+        <div className="w-full sm:w-auto"><span className="mb-1 block text-[11px] text-slate-400">Issue date</span><input value={issue} onChange={(e) => setIssue(e.target.value)} className={`${field} w-full sm:w-40`} type="date" /></div>
+        <div className="w-full sm:w-auto"><span className="mb-1 block text-[11px] text-slate-400">Due date</span><input value={due} onChange={(e) => setDue(e.target.value)} className={`${field} w-full sm:w-40`} type="date" /></div>
+        <button onClick={add} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> New invoice</button>
       </div>
     </div>
   );
@@ -331,14 +331,14 @@ export function TimePanel({ projectId, initial, members }: { projectId: string; 
         <span className="text-slatey">Billable: <b className="text-green-700">{hoursLabel(billable)}</b></span>
       </div>
       <div className={`flex flex-wrap items-end gap-3 p-4 ${card}`}>
-        <select value={empId} onChange={(e) => setEmpId(e.target.value)} className={`${field} w-44`}>
+        <select value={empId} onChange={(e) => setEmpId(e.target.value)} className={`${field} w-full sm:w-44`}>
           <option value="">Who…</option>
           {members.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
         </select>
-        <input value={date} onChange={(e) => setDate(e.target.value)} className={`${field} w-40`} type="date" />
-        <input value={hours} onChange={(e) => setHours(e.target.value)} className={`${field} w-24`} type="number" step="0.5" placeholder="Hours" />
+        <input value={date} onChange={(e) => setDate(e.target.value)} className={`${field} w-full sm:w-40`} type="date" />
+        <input value={hours} onChange={(e) => setHours(e.target.value)} className={`${field} w-full sm:w-24`} type="number" step="0.5" placeholder="Hours" />
         <input value={note} onChange={(e) => setNote(e.target.value)} className={`${field} flex-1 min-w-[140px]`} placeholder="What did you work on?" />
-        <button onClick={add} className="btn-primary"><Icon name="plus" className="h-4 w-4" /> Log</button>
+        <button onClick={add} className="btn-primary w-full justify-center sm:w-auto"><Icon name="plus" className="h-4 w-4" /> Log</button>
       </div>
       <div className={`overflow-hidden ${card}`}>
         {items.length === 0 ? (

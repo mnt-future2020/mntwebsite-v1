@@ -76,6 +76,8 @@ export default function EmployeeForm({
     status: v("status") || "PROBATION",
     role: v("role") || "EMPLOYEE",
     managerId: v("managerId"),
+    workStart: v("workStart"),
+    workEnd: v("workEnd"),
     joinDate: dval(initial?.joinDate),
     probationEndDate: dval(initial?.probationEndDate),
     confirmationDate: dval(initial?.confirmationDate),
@@ -200,7 +202,13 @@ export default function EmployeeForm({
           <DateField label="Probation ends" value={f.probationEndDate} onChange={(val) => up("probationEndDate", val)} />
           <DateField label="Confirmation date" value={f.confirmationDate} onChange={(val) => up("confirmationDate", val)} />
           <DateField label="Exit date" value={f.exitDate} onChange={(val) => up("exitDate", val)} />
+          <Input label="Work start (override)" type="time" value={f.workStart} onChange={(val) => up("workStart", val)} />
+          <Input label="Work end (override)" type="time" value={f.workEnd} onChange={(val) => up("workEnd", val)} />
         </div>
+        <p className="mt-2 text-xs text-slate-400">
+          Leave work times blank to use the org-wide default. Set them to give this employee their own
+          shift — late-minutes on attendance are measured against their work-start.
+        </p>
       </div>
 
       <div className={card}>

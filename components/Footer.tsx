@@ -73,7 +73,7 @@ export default function Footer() {
           <p className="text-xs text-white/50">
             © {new Date().getFullYear()} Magizh NexGen Technologies. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/50">
             <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1.5 hover:text-white">
               <Icon name="mail" className="h-4 w-4" /> {site.email}
             </a>

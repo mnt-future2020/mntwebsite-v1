@@ -216,6 +216,11 @@ model Employee {
   manager        Employee?       @relation("Reports", fields: [managerId], references: [id])
   reports        Employee[]      @relation("Reports")
 
+  // Per-employee work timing override (null = inherit the org-wide OrgSetting
+  // workStart/workEnd). Used for late-minutes on attendance punch.
+  workStart      String? // "HH:mm", e.g. "10:00"
+  workEnd        String? // "HH:mm", e.g. "19:00"
+
   // Login / access — role is a free-form key referencing RoleAccess.role
   // (built-in keys: ADMIN / HR / MANAGER / EMPLOYEE, plus any custom roles).
   role         String  @default("EMPLOYEE")

@@ -56,7 +56,7 @@ export default function EmployeeDocs({ employeeId, initial }: { employeeId: stri
           ))
         )}
       </div>
-      <form onSubmit={add} className="mt-4 grid gap-2 sm:grid-cols-[1fr_1.2fr_1.4fr_auto]">
+      <form onSubmit={add} className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1.2fr_1.4fr_auto]">
         <input value={type} onChange={(e) => setType(e.target.value)} className={field} placeholder="Type" />
         <input value={name} onChange={(e) => setName(e.target.value)} className={field} placeholder="Document name" />
         <input value={url} onChange={(e) => setUrl(e.target.value)} className={field} placeholder="URL" />

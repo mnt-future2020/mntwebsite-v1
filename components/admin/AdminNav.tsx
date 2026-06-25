@@ -13,7 +13,7 @@ type Item = { href: string; label: string; icon: IconName; key: string; exact?: 
 const myWorkspace: Item[] = [
   { href: "/portal", label: "Dashboard", icon: "grid", key: "__self", exact: true },
   { href: "/portal/projects", label: "My projects", icon: "layers", key: "__self" },
-  { href: "/scan", label: "Scan attendance", icon: "compass", key: "__self" },
+  { href: "/scan", label: "Mark attendance", icon: "compass", key: "__self" },
   { href: "/portal/leave", label: "My leave", icon: "clock", key: "__self" },
   { href: "/portal/attendance", label: "My attendance", icon: "calendar", key: "__self" },
   { href: "/portal/payslips", label: "Payslips", icon: "wallet", key: "__self" },

@@ -75,8 +75,8 @@ export default async function PortalHome() {
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-white">
             <Icon name="compass" className="h-5 w-5" />
           </span>
-          <h3 className="mt-3 font-semibold text-ink">Scan attendance</h3>
-          <p className="mt-1 text-sm text-slatey">Check in, take a break, or check out for the day.</p>
+          <h3 className="mt-3 font-semibold text-ink">Mark attendance</h3>
+          <p className="mt-1 text-sm text-slatey">Check in, take a break, or check out — works within range of the office, no QR needed.</p>
         </Link>
 
         <Link href="/portal/leave" className="group rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-brand-200">
