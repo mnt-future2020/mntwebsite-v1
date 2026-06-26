@@ -36,7 +36,7 @@ export default function Footer() {
               ))}
             </div>
 
-            <ClutchWidget className="mt-6" />
+            <ClutchWidget className="mt-6 w-fit rounded-2xl bg-white px-4 py-2.5 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.55)] ring-1 ring-black/5" />
 
             <div className="mt-8 max-w-sm">
               <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
