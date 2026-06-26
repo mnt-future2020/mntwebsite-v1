@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Editor from "./Editor";
 import Icon from "@/components/Icon";
 import { toSlug } from "@/lib/posts";
+import { uploadImage } from "@/components/admin/uploadImage";
+import { toast } from "@/components/admin/Toast";
 
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -54,8 +56,21 @@ export default function PostForm({ initial }: { initial?: PostInput }) {
   const [slugTouched, setSlugTouched] = useState(Boolean(initial?.slug));
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const coverRef = useRef<HTMLInputElement>(null);
+  const [coverBusy, setCoverBusy] = useState(false);
 
   const up = (k: string, v: unknown) => setF((s) => ({ ...s, [k]: v }));
+
+  const onCoverFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setCoverBusy(true);
+    const { url, error } = await uploadImage(file);
+    setCoverBusy(false);
+    if (url) up("coverImage", url);
+    else toast(error || "Couldn't upload image", "err");
+  };
 
   const onTitle = (v: string) => {
     up("title", v);
@@ -182,8 +197,14 @@ export default function PostForm({ initial }: { initial?: PostInput }) {
         </div>
 
         <div className={card}>
-          <label className={labelCls} htmlFor="coverImage">Cover image URL</label>
-          <input id="coverImage" value={f.coverImage} onChange={(e) => up("coverImage", e.target.value)} className={field} placeholder="https://…" />
+          <label className={labelCls} htmlFor="coverImage">Cover image</label>
+          <div className="flex gap-2">
+            <input id="coverImage" value={f.coverImage} onChange={(e) => up("coverImage", e.target.value)} className={field} placeholder="Upload, or paste an image URL" />
+            <input ref={coverRef} type="file" accept="image/*" className="hidden" onChange={onCoverFile} />
+            <button type="button" onClick={() => coverRef.current?.click()} disabled={coverBusy} className="btn-ghost shrink-0 whitespace-nowrap disabled:opacity-70">
+              <Icon name="image" className="h-4 w-4" /> {coverBusy ? "Uploading…" : "Upload"}
+            </button>
+          </div>
           {f.coverImage ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img src={f.coverImage} alt="" className="mt-3 h-28 w-full rounded-lg object-cover" />

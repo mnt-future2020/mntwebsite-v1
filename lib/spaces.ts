@@ -62,6 +62,25 @@ export async function putScreenshot(objectKey: string, body: Buffer, contentType
   await putObject(objectKey, body, contentType);
 }
 
+function publicUrl(c: SpacesCfg, key: string): string {
+  try {
+    const u = new URL(c.endpoint);
+    return `${u.protocol}//${c.bucket}.${u.host}/${key}`;
+  } catch {
+    return `https://${c.bucket}.${c.region}.digitaloceanspaces.com/${key}`;
+  }
+}
+
+// Store a PUBLIC object (e.g. blog images shown to all site visitors) and return
+// its direct public URL.
+export async function putPublicObject(key: string, body: Buffer, contentType: string): Promise<string> {
+  const c = await loadConfig();
+  await makeClient(c).send(
+    new PutObjectCommand({ Bucket: c.bucket, Key: key, Body: body, ContentType: contentType, ACL: "public-read" })
+  );
+  return publicUrl(c, key);
+}
+
 // Short-lived signed URL so the admin can view a private object.
 export async function signedGetUrl(objectKey: string, expiresIn = 300): Promise<string> {
   const c = await loadConfig();

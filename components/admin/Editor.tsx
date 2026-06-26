@@ -5,7 +5,10 @@ import StarterKit from "@tiptap/starter-kit";
 import LinkExt from "@tiptap/extension-link";
 import ImageExt from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
+import { useRef } from "react";
 import Icon, { IconName } from "@/components/Icon";
+import { toast } from "@/components/admin/Toast";
+import { uploadImage } from "@/components/admin/uploadImage";
 
 function Btn({
   active,
@@ -36,16 +39,12 @@ function Btn({
   );
 }
 
-function Toolbar({ editor }: { editor: TiptapEditor }) {
+function Toolbar({ editor, onImage }: { editor: TiptapEditor; onImage: () => void }) {
   const addLink = () => {
     const url = window.prompt("Link URL");
     if (url === null) return;
     if (url === "") editor.chain().focus().unsetLink().run();
     else editor.chain().focus().setLink({ href: url }).run();
-  };
-  const addImage = () => {
-    const url = window.prompt("Image URL");
-    if (url) editor.chain().focus().setImage({ src: url }).run();
   };
   return (
     <div className="flex flex-wrap items-center gap-1 border-b border-slate-200 p-2">
@@ -61,7 +60,7 @@ function Toolbar({ editor }: { editor: TiptapEditor }) {
       <Btn label="Code block" active={editor.isActive("codeBlock")} onClick={() => editor.chain().focus().toggleCodeBlock().run()}>{"</>"}</Btn>
       <span className="mx-1 h-5 w-px bg-slate-200" />
       <Btn label="Link" active={editor.isActive("link")} onClick={addLink} icon="link" />
-      <Btn label="Image" onClick={addImage} icon="image" />
+      <Btn label="Upload image" onClick={onImage} icon="image" />
       <span className="mx-1 h-5 w-px bg-slate-200" />
       <Btn label="Undo" onClick={() => editor.chain().focus().undo().run()}>↶</Btn>
       <Btn label="Redo" onClick={() => editor.chain().focus().redo().run()}>↷</Btn>
@@ -92,12 +91,23 @@ export default function Editor({
     },
     onUpdate: ({ editor: e }) => onChange(e.getHTML()),
   });
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const onImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file || !editor) return;
+    const { url, error } = await uploadImage(file);
+    if (url) editor.chain().focus().setImage({ src: url }).run();
+    else toast(error || "Couldn't upload image", "err");
+  };
 
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={onImageFile} />
       {editor ? (
         <>
-          <Toolbar editor={editor} />
+          <Toolbar editor={editor} onImage={() => fileRef.current?.click()} />
           <EditorContent editor={editor} />
         </>
       ) : (
