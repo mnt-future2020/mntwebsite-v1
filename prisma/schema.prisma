@@ -269,6 +269,7 @@ model Employee {
   reviews     PerformanceReview[]
   documents   EmployeeDocument[]
   punches     AttendancePunch[]
+  screenshots Screenshot[]
 
   // Project management
   ledProjects        Project[]       @relation("ProjectLead")
@@ -317,6 +318,19 @@ model AttendancePunch {
   withinFence Boolean   @default(true)
 
   @@index([employeeId, at])
+}
+
+// Periodic work-session screenshot captured by the desktop monitoring agent.
+// The image itself lives in object storage (DO Spaces); we keep only the key.
+model Screenshot {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  capturedAt DateTime @default(now())
+  storageKey String // object key in the Spaces bucket
+  createdAt  DateTime @default(now())
+
+  @@index([employeeId, capturedAt])
 }
 
 // Org-wide attendance settings — single row (id = 1). Admin "locks" the office location.

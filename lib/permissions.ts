@@ -29,6 +29,7 @@ export const SECTIONS: Section[] = [
   { key: "hr.performance", label: "Performance", path: "/admin/hr/performance", group: "Human resources" },
   { key: "hr.departments", label: "Departments", path: "/admin/hr/departments", group: "Human resources" },
   { key: "hr.settings", label: "Attendance QR", path: "/admin/hr/settings", group: "Human resources" },
+  { key: "hr.monitoring", label: "Screen monitoring", path: "/admin/hr/monitoring", group: "Human resources" },
 ];
 
 export const ALL_KEYS = SECTIONS.map((s) => s.key);
@@ -70,6 +71,7 @@ export const DEFAULT_PERMS: Record<string, string[]> = {
     "hr.performance",
     "hr.departments",
     "hr.settings",
+    "hr.monitoring",
   ],
   MANAGER: ["hr.attendance", "hr.leave"],
   EMPLOYEE: [],
@@ -114,6 +116,7 @@ const PREFIX_KEYS = ([
   ["/admin/hr/performance", "hr.performance"],
   ["/admin/hr/departments", "hr.departments"],
   ["/admin/hr/settings", "hr.settings"],
+  ["/admin/hr/monitoring", "hr.monitoring"],
   ["/admin/hr", "hr.overview"],
   ["/admin/posts", "posts"],
   ["/admin/leads", "leads"],

@@ -34,3 +34,8 @@ check2.js
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# desktop agent (Electron) — deps + built installers
+/desktop-agent/node_modules
+/desktop-agent/release
+/desktop-agent/dist

@@ -1,0 +1,33 @@
+{
+  "name": "mnt-monitor-agent",
+  "version": "1.0.0",
+  "description": "MnT work-session monitoring agent — periodic screenshots with employee consent.",
+  "main": "main.js",
+  "author": "Magizh NexGen Technologies",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.mnt.monitor",
+    "productName": "MnT Monitor",
+    "files": ["main.js", "preload.js", "index.html", "renderer.js", "assets/**"],
+    "directories": { "output": "release" },
+    "win": { "target": "nsis", "icon": "assets/icon.png" },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.business",
+      "icon": "assets/icon.png",
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    }
+  }
+}

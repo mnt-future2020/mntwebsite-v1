@@ -53,6 +53,7 @@ const hr: Item[] = [
   { href: "/admin/hr/performance", label: "Performance", icon: "spark", key: "hr.performance" },
   { href: "/admin/hr/departments", label: "Departments", icon: "layers", key: "hr.departments" },
   { href: "/admin/hr/settings", label: "Attendance QR", icon: "compass", key: "hr.settings" },
+  { href: "/admin/hr/monitoring", label: "Screen monitoring", icon: "eye", key: "hr.monitoring" },
 ];
 
 const isActive = (pathname: string | null, href: string, exact?: boolean) =>
