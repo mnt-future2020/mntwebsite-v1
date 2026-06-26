@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@/components/Icon";
 import {
   TASK_STATUSES,
@@ -16,14 +16,29 @@ import {
 type Project = { id: string; code: string; name: string; status: string; client: string; tasks: number };
 type Task = { id: string; title: string; status: string; priority: string; project: string; projectId: string; dueDate: string | Date | null };
 type Entry = { id: string; hours: number; date: string; project: string; note: string | null };
+type ActiveTimer = { id: string; startedAt: string; projectId: string; taskId: string | null; project: string; task: string | null; note: string | null };
 
 const field =
   "rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 const dval = (d: unknown) => (d ? new Date(String(d)).toISOString().slice(0, 10) : "");
+const hms = (s: number) => {
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  return [h, m, s % 60].map((n) => String(n).padStart(2, "0")).join(":");
+};
+const clock = (iso: string) => new Date(iso).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
-export default function PortalProjects({ projects, tasks: initialTasks, entries: initialEntries }: { projects: Project[]; tasks: Task[]; entries: Entry[] }) {
+export default function PortalProjects({ projects, tasks: initialTasks, entries: initialEntries, active: initialActive = null }: { projects: Project[]; tasks: Task[]; entries: Entry[]; active?: ActiveTimer | null }) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
+
+  // timer
+  const [active, setActive] = useState<ActiveTimer | null>(initialActive);
+  const [elapsed, setElapsed] = useState(0);
+  const [tProjectId, setTProjectId] = useState(initialActive?.projectId || projects[0]?.id || "");
+  const [tTaskId, setTTaskId] = useState(initialActive?.taskId || "");
+  const [timerMsg, setTimerMsg] = useState<string | null>(null);
+  const [timerBusy, setTimerBusy] = useState(false);
 
   // log-time form
   const [projectId, setProjectId] = useState(projects[0]?.id || "");
@@ -32,6 +47,60 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
   const [hours, setHours] = useState("");
   const [note, setNote] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
+
+  // Live elapsed for a running timer — derived from the real start instant so it
+  // stays correct after a reload or re-login (not just client state).
+  useEffect(() => {
+    if (!active) {
+      setElapsed(0);
+      return;
+    }
+    const startMs = new Date(active.startedAt).getTime();
+    const tick = () => setElapsed(Math.max(0, Math.floor((Date.now() - startMs) / 1000)));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [active]);
+
+  const startTimer = async () => {
+    if (!tProjectId || timerBusy) return;
+    setTimerBusy(true);
+    setTimerMsg(null);
+    const res = await fetch("/api/portal/time/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId: tProjectId, taskId: tTaskId || null }),
+    }).catch(() => null);
+    setTimerBusy(false);
+    if (res && res.ok) {
+      const e = await res.json();
+      setActive({ id: e.id, startedAt: String(e.startedAt), projectId: e.projectId, taskId: e.taskId, project: e.project?.name || "", task: e.task?.title || null, note: e.note });
+    } else {
+      const err = res ? (await res.json().catch(() => ({})))?.error : null;
+      setTimerMsg(err || "Couldn't start the timer.");
+    }
+  };
+
+  const stopTimer = async () => {
+    if (timerBusy) return;
+    setTimerBusy(true);
+    setTimerMsg(null);
+    const res = await fetch("/api/portal/time/stop", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    }).catch(() => null);
+    setTimerBusy(false);
+    if (res && res.ok) {
+      const e = await res.json();
+      setActive(null);
+      setEntries((s) => [{ id: e.id, hours: e.hours, date: String(e.date), project: e.project?.name || "", note: e.note }, ...s].slice(0, 15));
+      setTimerMsg(`Logged ${hoursLabel(e.hours)} ✓`);
+    } else {
+      const err = res ? (await res.json().catch(() => ({})))?.error : null;
+      setTimerMsg(err || "Couldn't stop the timer.");
+    }
+  };
 
   const moveTask = async (id: string, status: string) => {
     const prev = tasks;
@@ -67,6 +136,7 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
   };
 
   const tasksForProject = tasks.filter((t) => t.projectId === projectId);
+  const tTasksForProject = tasks.filter((t) => t.projectId === tProjectId);
 
   if (projects.length === 0) {
     return (
@@ -78,6 +148,49 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
 
   return (
     <div className="mt-6 space-y-8">
+      {/* Time tracker — start/stop, auto-calculates the hours */}
+      <section>
+        <h2 className="mb-3 text-sm font-semibold text-ink">Time tracker</h2>
+        {active ? (
+          <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-green-200 bg-green-50/70 p-4">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+            </span>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-ink">
+                {active.project}{active.task ? ` · ${active.task}` : ""}
+              </p>
+              <p className="text-xs text-slate-400">Started {clock(active.startedAt)}</p>
+            </div>
+            <span className="ml-auto font-mono text-2xl font-bold tabular-nums text-ink">{hms(elapsed)}</span>
+            <button onClick={stopTimer} disabled={timerBusy} className="btn-primary w-full justify-center !bg-red-600 hover:!bg-red-700 sm:w-auto">
+              <Icon name="check" className="h-4 w-4" /> Stop &amp; log
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+            <div className="w-full sm:w-auto">
+              <span className="mb-1 block text-[11px] text-slate-400">Project</span>
+              <select value={tProjectId} onChange={(e) => { setTProjectId(e.target.value); setTTaskId(""); }} className={`${field} w-full sm:w-48`}>
+                {projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+              </select>
+            </div>
+            <div className="w-full sm:w-auto">
+              <span className="mb-1 block text-[11px] text-slate-400">Task (optional)</span>
+              <select value={tTaskId} onChange={(e) => setTTaskId(e.target.value)} className={`${field} w-full sm:w-48`}>
+                <option value="">— None —</option>
+                {tTasksForProject.map((t) => <option key={t.id} value={t.id}>{t.title}</option>)}
+              </select>
+            </div>
+            <button onClick={startTimer} disabled={timerBusy || !tProjectId} className="btn-primary w-full justify-center !bg-green-600 hover:!bg-green-700 sm:w-auto">
+              <Icon name="clock" className="h-4 w-4" /> Start timer
+            </button>
+          </div>
+        )}
+        {timerMsg && <p className="mt-2 text-xs text-slatey">{timerMsg}</p>}
+      </section>
+
       {/* Projects */}
       <section>
         <h2 className="mb-3 text-sm font-semibold text-ink">Projects you&apos;re on</h2>
@@ -129,9 +242,10 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
         </div>
       </section>
 
-      {/* Log time */}
+      {/* Log time manually (for past work) */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold text-ink">Log time</h2>
+        <h2 className="mb-3 text-sm font-semibold text-ink">Log time manually</h2>
+        <p className="mb-3 -mt-2 text-xs text-slate-400">For past work — or use the timer above to track live.</p>
         <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4">
           <div className="w-full sm:w-auto">
             <span className="mb-1 block text-[11px] text-slate-400">Project</span>

@@ -672,10 +672,13 @@ model TimeEntry {
   hours      Float    @default(0)
   note       String?
   billable   Boolean  @default(true)
+  startedAt  DateTime? // timer start instant; null for manual entries
+  endedAt    DateTime? // timer stop instant; null while a timer is RUNNING
   createdAt  DateTime @default(now())
 
   @@index([projectId, date])
   @@index([employeeId, date])
+  @@index([employeeId, endedAt]) // find the employee's running timer fast (endedAt = null)
 }
 
 model Invoice {

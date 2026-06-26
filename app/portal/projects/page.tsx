@@ -25,8 +25,11 @@ export default async function PortalProjectsPage() {
   let projects: { id: string; code: string; name: string; status: string; client: string; tasks: number }[] = [];
   let tasks: { id: string; title: string; status: string; priority: string; project: string; projectId: string; dueDate: Date | null }[] = [];
   let entries: { id: string; hours: number; date: Date; project: string; note: string | null }[] = [];
+  let active: {
+    id: string; startedAt: string; projectId: string; taskId: string | null; project: string; task: string | null; note: string | null;
+  } | null = null;
   try {
-    const [projRows, taskRows, timeRows] = await Promise.all([
+    const [projRows, taskRows, timeRows, running] = await Promise.all([
       prisma.project.findMany({
         where: { OR: [{ leadId: emp.id }, { members: { some: { employeeId: emp.id } } }] },
         include: { client: true, _count: { select: { tasks: true } } },
@@ -43,10 +46,26 @@ export default async function PortalProjectsPage() {
         orderBy: { date: "desc" },
         take: 15,
       }),
+      prisma.timeEntry.findFirst({
+        where: { employeeId: emp.id, endedAt: null, startedAt: { not: null } },
+        include: { project: true, task: true },
+        orderBy: { startedAt: "desc" },
+      }),
     ]);
     projects = projRows.map((p) => ({ id: p.id, code: p.code, name: p.name, status: p.status, client: p.client?.name || "Internal", tasks: p._count.tasks }));
     tasks = taskRows.map((t) => ({ id: t.id, title: t.title, status: t.status, priority: t.priority, project: t.project.name, projectId: t.projectId, dueDate: t.dueDate }));
     entries = timeRows.map((e) => ({ id: e.id, hours: e.hours, date: e.date, project: e.project.name, note: e.note }));
+    active = running?.startedAt
+      ? {
+          id: running.id,
+          startedAt: String(running.startedAt),
+          projectId: running.projectId,
+          taskId: running.taskId,
+          project: running.project.name,
+          task: running.task?.title || null,
+          note: running.note,
+        }
+      : null;
   } catch {
     /* DB optional */
   }
@@ -59,6 +78,7 @@ export default async function PortalProjectsPage() {
         projects={projects}
         tasks={tasks}
         entries={entries.map((e) => ({ ...e, date: String(e.date) }))}
+        active={active}
       />
     </>
   );
