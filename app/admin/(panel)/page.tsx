@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import Icon from "@/components/Icon";
 import { PageHeader, StatCard, DbNotice } from "@/components/admin/ui";
+import LiveRefresh from "@/components/admin/LiveRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,9 @@ export default async function Dashboard() {
         <DbNotice />
       ) : (
         <>
+          <div className="-mt-2 mb-4 flex justify-end">
+            <LiveRefresh seconds={30} label="Live" />
+          </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard label="Published posts" value={s.published} icon="records" href="/admin/posts" />
             <StatCard label="Total leads" value={s.leads} icon="users" href="/admin/leads" />
