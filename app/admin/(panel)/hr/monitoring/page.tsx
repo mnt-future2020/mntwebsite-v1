@@ -3,7 +3,6 @@ import { PageHeader, DbNotice, Empty } from "@/components/admin/ui";
 import { fullName } from "@/lib/hr";
 import { isSpacesConfigured, signedGetUrl } from "@/lib/spaces";
 import MonitoringControls from "@/components/admin/hr/MonitoringControls";
-import LiveRefresh from "@/components/admin/LiveRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -85,11 +84,6 @@ export default async function MonitoringPage(props: {
         </div>
       )}
       <MonitoringControls employees={employees} employeeId={employeeId} date={date} />
-      {date === todayStr() && configured && (
-        <div className="mb-3 flex items-center justify-end">
-          <LiveRefresh seconds={20} label="Live · auto-updating" />
-        </div>
-      )}
       {items.length === 0 ? (
         <Empty icon="eye" title="No screenshots" body="No captures for this employee on this date." />
       ) : (

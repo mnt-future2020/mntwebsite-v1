@@ -3,7 +3,6 @@ import { PageHeader, DbNotice, StatCard } from "@/components/admin/ui";
 import { fullName } from "@/lib/hr";
 import { hoursLabel, fmtDate } from "@/lib/projects";
 import RunningTimers from "@/components/admin/RunningTimers";
-import LiveRefresh from "@/components/admin/LiveRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -66,11 +65,7 @@ export default async function TimesheetsPage() {
 
   return (
     <>
-      <PageHeader
-        title="Timesheets"
-        subtitle="Hours logged across all projects (last 30 days)."
-        action={running.length > 0 ? <LiveRefresh seconds={30} label="Live" /> : undefined}
-      />
+      <PageHeader title="Timesheets" subtitle="Hours logged across all projects (last 30 days)." />
       <RunningTimers timers={running} />
 
       <h2 className="mb-3 mt-1 text-sm font-semibold text-ink">
