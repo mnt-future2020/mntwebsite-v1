@@ -20,7 +20,7 @@ type ActiveTimer = { id: string; startedAt: string; projectId: string; taskId: s
 
 const field =
   "rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
-const dval = (d: unknown) => (d ? new Date(String(d)).toISOString().slice(0, 10) : "");
+const istToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date()); // YYYY-MM-DD in IST
 const hms = (s: number) => {
   const h = Math.floor(s / 3600);
   const m = Math.floor((s % 3600) / 60);
@@ -43,10 +43,11 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
   // log-time form
   const [projectId, setProjectId] = useState(projects[0]?.id || "");
   const [taskId, setTaskId] = useState("");
-  const [date, setDate] = useState(dval(new Date().toISOString()));
+  const [date, setDate] = useState(istToday());
   const [hours, setHours] = useState("");
   const [note, setNote] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
+  const [taskMsg, setTaskMsg] = useState<string | null>(null);
 
   // Live elapsed for a running timer — derived from the real start instant so it
   // stays correct after a reload or re-login (not just client state).
@@ -74,6 +75,17 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
     setTimerBusy(false);
     if (res && res.ok) {
       const e = await res.json();
+      // A prior timer may have been auto-stopped — surface it in the recent list.
+      if (Array.isArray(e.autoStopped) && e.autoStopped.length) {
+        setEntries((s) =>
+          [
+            ...e.autoStopped.map((a: { id: string; hours: number; date: string; project: string; note: string | null }) => ({
+              id: a.id, hours: a.hours, date: String(a.date), project: a.project || "", note: a.note,
+            })),
+            ...s,
+          ].slice(0, 15)
+        );
+      }
       setActive({ id: e.id, startedAt: String(e.startedAt), projectId: e.projectId, taskId: e.taskId, project: e.project?.name || "", task: e.task?.title || null, note: e.note });
     } else {
       const err = res ? (await res.json().catch(() => ({})))?.error : null;
@@ -104,6 +116,7 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
 
   const moveTask = async (id: string, status: string) => {
     const prev = tasks;
+    setTaskMsg(null);
     setTasks((s) => s.map((t) => (t.id === id ? { ...t, status } : t)));
     const res = await fetch(`/api/portal/tasks/${id}`, {
       method: "PATCH",
@@ -112,7 +125,7 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
     }).catch(() => null);
     if (!res || !res.ok) {
       setTasks(prev);
-      setMsg("Couldn't move task — try again.");
+      setTaskMsg("Couldn't move task — try again.");
     }
   };
 
@@ -123,15 +136,16 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectId, taskId: taskId || null, date, hours: Number(hours), note }),
-    });
-    if (res.ok) {
+    }).catch(() => null);
+    if (res && res.ok) {
       const e = await res.json();
       setEntries((s) => [{ id: e.id, hours: e.hours, date: String(e.date), project: e.project?.name || "", note: e.note }, ...s].slice(0, 15));
       setHours("");
       setNote("");
       setMsg("Time logged ✓");
     } else {
-      setMsg((await res.json().catch(() => ({}))).error || "Couldn't log time.");
+      const err = res ? (await res.json().catch(() => ({})))?.error : null;
+      setMsg(err || "Couldn't log time.");
     }
   };
 
@@ -240,6 +254,7 @@ export default function PortalProjects({ projects, tasks: initialTasks, entries:
             </ul>
           )}
         </div>
+        {taskMsg && <p className="mt-2 text-xs text-red-600">{taskMsg}</p>}
       </section>
 
       {/* Log time manually (for past work) */}

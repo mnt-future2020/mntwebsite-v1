@@ -32,19 +32,27 @@ export async function POST(req: Request) {
     }
 
     const now = new Date();
-    const created = await prisma.$transaction(async (tx) => {
-      // Auto-stop any timer still running for this employee (one at a time).
-      const running = await tx.timeEntry.findFirst({
+    const result = await prisma.$transaction(async (tx) => {
+      // Auto-stop ALL timers still running for this employee — normally one, but
+      // closing every open entry means a stray/orphaned running row (e.g. from an
+      // overlapping start in another tab) can never linger uncloseable.
+      const running = await tx.timeEntry.findMany({
         where: { employeeId: emp.id, endedAt: null, startedAt: { not: null } },
+        orderBy: { startedAt: "desc" },
         select: { id: true, startedAt: true },
       });
-      if (running?.startedAt) {
-        await tx.timeEntry.update({
-          where: { id: running.id },
-          data: { endedAt: now, hours: elapsedHours(running.startedAt, now), date: istDayDate(running.startedAt) },
-        });
+      const stopped = [];
+      for (const r of running) {
+        if (!r.startedAt) continue;
+        stopped.push(
+          await tx.timeEntry.update({
+            where: { id: r.id },
+            data: { endedAt: now, hours: elapsedHours(r.startedAt, now), date: istDayDate(r.startedAt) },
+            include: { project: true },
+          })
+        );
       }
-      return tx.timeEntry.create({
+      const fresh = await tx.timeEntry.create({
         data: {
           projectId,
           employeeId: emp.id,
@@ -58,8 +66,13 @@ export async function POST(req: Request) {
         },
         include: { task: true, project: true },
       });
+      return { fresh, stopped };
     });
-    return NextResponse.json(created);
+    // Surface any auto-stopped entry so the client can show it in the recent list.
+    return NextResponse.json({
+      ...result.fresh,
+      autoStopped: result.stopped.map((c) => ({ id: c.id, hours: c.hours, date: c.date, project: c.project?.name || "", note: c.note })),
+    });
   } catch {
     return NextResponse.json({ error: "Couldn't start the timer." }, { status: 500 });
   }

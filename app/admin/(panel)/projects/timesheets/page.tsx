@@ -10,7 +10,9 @@ async function getData() {
     const since = new Date();
     since.setDate(since.getDate() - 30);
     const entries = await prisma.timeEntry.findMany({
-      where: { date: { gte: since } },
+      // Exclude in-progress timers (startedAt set, endedAt null, hours still 0) but
+      // keep manual entries (which also have endedAt null but no startedAt).
+      where: { date: { gte: since }, NOT: { startedAt: { not: null }, endedAt: null } },
       orderBy: { date: "desc" },
       include: { employee: true, project: true, task: true },
       take: 200,

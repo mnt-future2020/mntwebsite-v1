@@ -41,7 +41,8 @@ export default async function PortalProjectsPage() {
         orderBy: [{ priority: "desc" }, { createdAt: "asc" }],
       }),
       prisma.timeEntry.findMany({
-        where: { employeeId: emp.id },
+        // Exclude the in-progress timer (shown live above); keep manual entries.
+        where: { employeeId: emp.id, NOT: { startedAt: { not: null }, endedAt: null } },
         include: { project: true },
         orderBy: { date: "desc" },
         take: 15,

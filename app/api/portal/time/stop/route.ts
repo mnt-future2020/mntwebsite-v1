@@ -14,21 +14,34 @@ export async function POST(req: Request) {
   if (!emp) return NextResponse.json({ error: "No employee profile." }, { status: 403 });
   try {
     const b = await req.json().catch(() => ({}));
-    const running = await prisma.timeEntry.findFirst({
+    // Close ALL running timers for this employee (normally one; sweeps up orphans
+    // too). The note override, if any, applies only to the newest entry.
+    const running = await prisma.timeEntry.findMany({
       where: { employeeId: emp.id, endedAt: null, startedAt: { not: null } },
       orderBy: { startedAt: "desc" },
       select: { id: true, startedAt: true, note: true },
     });
-    if (!running?.startedAt) return NextResponse.json({ error: "No running timer." }, { status: 404 });
+    if (running.length === 0) return NextResponse.json({ error: "No running timer." }, { status: 404 });
 
     const now = new Date();
-    const note = b.note !== undefined ? String(b.note) || null : running.note;
-    const t = await prisma.timeEntry.update({
-      where: { id: running.id },
-      data: { endedAt: now, hours: elapsedHours(running.startedAt, now), date: istDayDate(running.startedAt), note },
-      include: { task: true, project: true },
-    });
-    return NextResponse.json(t);
+    const noteOverride = b.note !== undefined ? String(b.note) || null : undefined;
+    const closed = await prisma.$transaction(
+      running
+        .filter((r): r is typeof r & { startedAt: Date } => !!r.startedAt)
+        .map((r, i) =>
+          prisma.timeEntry.update({
+            where: { id: r.id },
+            data: {
+              endedAt: now,
+              hours: elapsedHours(r.startedAt, now),
+              date: istDayDate(r.startedAt),
+              note: i === 0 && noteOverride !== undefined ? noteOverride : r.note,
+            },
+            include: { task: true, project: true },
+          })
+        )
+    );
+    return NextResponse.json(closed[0]); // newest (orderBy desc) — the one the user sees
   } catch {
     return NextResponse.json({ error: "Couldn't stop the timer." }, { status: 500 });
   }
