@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { verifyAgentToken, bearerToken } from "@/lib/agent-auth";
-import { putScreenshot, spacesConfigured } from "@/lib/spaces";
+import { putScreenshot, isSpacesConfigured } from "@/lib/spaces";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const token = bearerToken(req);
   const claims = token ? await verifyAgentToken(token) : null;
   if (!claims) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (!spacesConfigured)
+  if (!(await isSpacesConfigured()))
     return NextResponse.json({ error: "Screenshot storage isn't configured on the server." }, { status: 503 });
 
   try {

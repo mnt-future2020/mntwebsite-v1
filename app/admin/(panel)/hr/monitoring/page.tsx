@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db";
 import { PageHeader, DbNotice, Empty } from "@/components/admin/ui";
 import { fullName } from "@/lib/hr";
-import { spacesConfigured, signedGetUrl } from "@/lib/spaces";
+import { isSpacesConfigured, signedGetUrl } from "@/lib/spaces";
 import MonitoringControls from "@/components/admin/hr/MonitoringControls";
 
 export const dynamic = "force-dynamic";
@@ -67,7 +67,8 @@ export default async function MonitoringPage(props: {
     /* DB optional */
   }
 
-  const items = spacesConfigured
+  const configured = await isSpacesConfigured();
+  const items = configured
     ? await Promise.all(
         shots.map(async (s) => ({ id: s.id, time: istTime(s.capturedAt), url: await signedGetUrl(s.storageKey) }))
       )
@@ -76,9 +77,10 @@ export default async function MonitoringPage(props: {
   return (
     <>
       <PageHeader title="Screen monitoring" subtitle={SUBTITLE} />
-      {!spacesConfigured && (
+      {!configured && (
         <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          Screenshot storage isn&apos;t configured yet — add the <code>SPACES_*</code> environment variables to enable it.
+          Screenshot storage isn&apos;t configured yet — set the DigitalOcean Spaces keys in{" "}
+          <a href="/admin/hr/settings" className="font-semibold underline">HR settings</a>.
         </div>
       )}
       <MonitoringControls employees={employees} employeeId={employeeId} date={date} />

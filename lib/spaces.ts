@@ -1,39 +1,64 @@
 import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { prisma } from "@/lib/db";
 
 // DigitalOcean Spaces (S3-compatible) storage for monitoring screenshots.
-// Env: SPACES_REGION (e.g. blr1), SPACES_BUCKET, SPACES_KEY, SPACES_SECRET,
-// and optionally SPACES_ENDPOINT (defaults to https://<region>.digitaloceanspaces.com).
-const region = process.env.SPACES_REGION || "";
-const bucket = process.env.SPACES_BUCKET || "";
-const accessKeyId = process.env.SPACES_KEY || "";
-const secretAccessKey = process.env.SPACES_SECRET || "";
-const endpoint =
-  process.env.SPACES_ENDPOINT || (region ? `https://${region}.digitaloceanspaces.com` : "");
+// Config is read from the OrgSetting row (set in HR settings) first, then falls
+// back to SPACES_* env vars — so it can be configured dynamically in the admin
+// panel without redeploying.
+type SpacesCfg = { region: string; bucket: string; key: string; secret: string; endpoint: string };
 
-export const spacesConfigured = Boolean(region && bucket && accessKeyId && secretAccessKey);
-
-let client: S3Client | null = null;
-function s3(): S3Client {
-  if (!client) {
-    client = new S3Client({
-      region: region || "us-east-1",
-      endpoint,
-      credentials: { accessKeyId, secretAccessKey },
-      forcePathStyle: false,
+async function loadConfig(): Promise<SpacesCfg> {
+  let row: {
+    spacesRegion: string | null;
+    spacesBucket: string | null;
+    spacesKey: string | null;
+    spacesSecret: string | null;
+    spacesEndpoint: string | null;
+  } | null = null;
+  try {
+    row = await prisma.orgSetting.findUnique({
+      where: { id: 1 },
+      select: { spacesRegion: true, spacesBucket: true, spacesKey: true, spacesSecret: true, spacesEndpoint: true },
     });
+  } catch {
+    /* DB optional — fall back to env */
   }
-  return client;
+  const region = row?.spacesRegion || process.env.SPACES_REGION || "";
+  const bucket = row?.spacesBucket || process.env.SPACES_BUCKET || "";
+  const key = row?.spacesKey || process.env.SPACES_KEY || "";
+  const secret = row?.spacesSecret || process.env.SPACES_SECRET || "";
+  const endpoint =
+    row?.spacesEndpoint ||
+    process.env.SPACES_ENDPOINT ||
+    (region ? `https://${region}.digitaloceanspaces.com` : "");
+  return { region, bucket, key, secret, endpoint };
+}
+
+export async function isSpacesConfigured(): Promise<boolean> {
+  const c = await loadConfig();
+  return Boolean(c.region && c.bucket && c.key && c.secret);
+}
+
+function makeClient(c: SpacesCfg): S3Client {
+  return new S3Client({
+    region: c.region || "us-east-1",
+    endpoint: c.endpoint,
+    credentials: { accessKeyId: c.key, secretAccessKey: c.secret },
+    forcePathStyle: false,
+  });
 }
 
 // Store a screenshot (private — only reachable via a presigned URL).
 export async function putScreenshot(objectKey: string, body: Buffer, contentType = "image/jpeg") {
-  await s3().send(
-    new PutObjectCommand({ Bucket: bucket, Key: objectKey, Body: body, ContentType: contentType, ACL: "private" })
+  const c = await loadConfig();
+  await makeClient(c).send(
+    new PutObjectCommand({ Bucket: c.bucket, Key: objectKey, Body: body, ContentType: contentType, ACL: "private" })
   );
 }
 
 // Short-lived signed URL so the admin can view a private object.
 export async function signedGetUrl(objectKey: string, expiresIn = 300): Promise<string> {
-  return getSignedUrl(s3(), new GetObjectCommand({ Bucket: bucket, Key: objectKey }), { expiresIn });
+  const c = await loadConfig();
+  return getSignedUrl(makeClient(c), new GetObjectCommand({ Bucket: c.bucket, Key: objectKey }), { expiresIn });
 }

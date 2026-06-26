@@ -25,6 +25,10 @@ export async function PUT(req: Request) {
       const n = parseFloat(String(v ?? ""));
       return Number.isFinite(n) && n >= 0 ? n : fallback;
     };
+    const str = (v: unknown) => {
+      const s = String(v ?? "").trim();
+      return s || null;
+    };
     const data = {
       officeLat: num(b.officeLat),
       officeLng: num(b.officeLng),
@@ -38,13 +42,24 @@ export async function PUT(req: Request) {
       annualCasualLeave: days(b.annualCasualLeave, 12),
       annualSickLeave: days(b.annualSickLeave, 12),
       annualCompOff: days(b.annualCompOff, 0),
+      spacesRegion: str(b.spacesRegion),
+      spacesBucket: str(b.spacesBucket),
+      spacesKey: str(b.spacesKey),
+      spacesEndpoint: str(b.spacesEndpoint),
     };
+    // Secret is write-only: only overwrite it when a new value is actually sent
+    // (a blank field keeps the existing secret).
+    const secretUpdate =
+      typeof b.spacesSecret === "string" && b.spacesSecret.trim()
+        ? { spacesSecret: b.spacesSecret.trim() }
+        : {};
     const saved = await prisma.orgSetting.upsert({
       where: { id: 1 },
-      update: data,
-      create: { id: 1, ...data },
+      update: { ...data, ...secretUpdate },
+      create: { id: 1, ...data, ...secretUpdate },
     });
-    return NextResponse.json(saved);
+    // Never return the secret to the client.
+    return NextResponse.json({ ...saved, spacesSecret: undefined });
   } catch {
     return NextResponse.json({ error: "Save failed — is the database connected?" }, { status: 500 });
   }

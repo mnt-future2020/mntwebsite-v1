@@ -351,6 +351,13 @@ model OrgSetting {
   annualCasualLeave Float @default(12)
   annualSickLeave   Float @default(12)
   annualCompOff     Float @default(0)
+  // Screenshot storage (DigitalOcean Spaces) — set in HR settings instead of env
+  // vars. Falls back to SPACES_* env when these are null.
+  spacesRegion   String?
+  spacesBucket   String?
+  spacesKey      String?
+  spacesSecret   String?
+  spacesEndpoint String?
   updatedAt       DateTime @updatedAt
 }
 
