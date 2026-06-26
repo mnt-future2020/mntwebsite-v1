@@ -98,6 +98,7 @@ export default async function AttendancePage(props: { searchParams: Promise<{ da
         <Empty icon="users" title="No employees yet" body="Add employees first to mark attendance." />
       ) : (
         <AttendanceGrid
+          key={date}
           date={date}
           employees={data.employees.map((e) => ({ id: e.id, name: fullName(e), code: e.code }))}
           existing={data.existing}
