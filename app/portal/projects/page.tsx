@@ -74,7 +74,7 @@ export default async function PortalProjectsPage() {
   return (
     <>
       <h1 className="text-2xl font-bold text-ink">My projects</h1>
-      <p className="mt-1 text-sm text-slatey">Your assigned work, and log time against it.</p>
+      <p className="mt-1 text-sm text-slatey">Track time on your tasks with a one-click timer.</p>
       <PortalProjects
         projects={projects}
         tasks={tasks}
