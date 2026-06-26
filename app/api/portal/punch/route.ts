@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { getOrgSettings, distanceM, nextPunchType } from "@/lib/org";
+import { getOrgSettings, distanceM } from "@/lib/org";
+import { allowedPunchTypes, type PunchType } from "@/lib/attendance";
 
 export const runtime = "nodejs";
 
@@ -80,9 +81,19 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "Database not reachable." }, { status: 500 });
   }
-  const type = nextPunchType(todays.map((p) => p.type));
-  if (!type)
+  const allowed = allowedPunchTypes(todays.map((p) => p.type));
+  if (allowed.length === 0)
     return NextResponse.json({ error: "You've already checked out for today." }, { status: 409 });
+  // The client says which action it wants (e.g. break vs check out while working).
+  // Validate it against the current state; fall back to the first allowed action
+  // for older clients that don't send a type.
+  const requested = typeof body.type === "string" ? body.type : "";
+  if (requested && !allowed.includes(requested as PunchType))
+    return NextResponse.json(
+      { error: "That action isn't available right now. Refresh and try again." },
+      { status: 409 }
+    );
+  const type: PunchType = (requested as PunchType) || allowed[0];
 
   try {
     await prisma.attendancePunch.create({

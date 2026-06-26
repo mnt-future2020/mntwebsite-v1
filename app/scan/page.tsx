@@ -67,8 +67,8 @@ export default async function ScanPage() {
       <ScanPanel
         name={emp ? fullName(emp) : session?.email || ""}
         code={emp?.code || ""}
-        workStart={org.workStart}
-        workEnd={org.workEnd}
+        workStart={emp?.workStart || org.workStart}
+        workEnd={emp?.workEnd || org.workEnd}
         scanEnabled={org.scanEnabled}
         officeSet={org.officeLat != null && org.officeLng != null}
         radius={org.geofenceRadiusM}

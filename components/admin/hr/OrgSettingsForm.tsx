@@ -223,17 +223,17 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
           <h2 className="text-sm font-semibold text-ink">Work hours &amp; scanning</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             <div>
-              <label className={label}>Work start</label>
+              <label className={label}>Work start (check-in)</label>
               <input type="time" value={f.workStart} onChange={(e) => up("workStart", e.target.value)} className={field} />
             </div>
             <div>
-              <label className={label}>Work end</label>
+              <label className={label}>Work end (check-out)</label>
               <input type="time" value={f.workEnd} onChange={(e) => up("workEnd", e.target.value)} className={field} />
             </div>
             <div className="flex items-end">
               <label className="flex cursor-pointer items-center gap-2.5 pb-2 text-sm text-ink">
                 <input type="checkbox" checked={f.scanEnabled} onChange={(e) => up("scanEnabled", e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand" />
-                QR scanning enabled
+                Attendance marking enabled
               </label>
             </div>
           </div>

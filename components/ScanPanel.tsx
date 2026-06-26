@@ -3,30 +3,17 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import { allowedPunchTypes, PUNCH_LABEL } from "@/lib/attendance";
 
 type Punch = { type: string; time: string };
 
-const LABEL: Record<string, string> = {
-  CHECK_IN: "Check in",
-  BREAK_START: "Start break",
-  BREAK_END: "Back from break",
-  CHECK_OUT: "Check out",
-};
+const LABEL = PUNCH_LABEL;
 const STEP_DOTS: { type: string; label: string }[] = [
   { type: "CHECK_IN", label: "In" },
   { type: "BREAK_START", label: "Break" },
   { type: "BREAK_END", label: "Resume" },
   { type: "CHECK_OUT", label: "Out" },
 ];
-
-function nextType(types: string[]): string | null {
-  const last = types[types.length - 1];
-  if (!last) return "CHECK_IN";
-  if (last === "CHECK_OUT") return null;
-  if (last === "CHECK_IN" || last === "BREAK_END") return "BREAK_START";
-  if (last === "BREAK_START") return "BREAK_END";
-  return "CHECK_IN";
-}
 
 export default function ScanPanel({
   name,
@@ -55,8 +42,11 @@ export default function ScanPanel({
   const [coords, setCoords] = useState<{ lat: number; lng: number; acc: number } | null>(null);
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
+  const [pending, setPending] = useState<string | null>(null);
 
-  const next = nextType(punches.map((p) => p.type));
+  const allowed = allowedPunchTypes(punches.map((p) => p.type));
+  const allowedSet = allowed as string[];
+  const dayDone = allowed.length === 0;
 
   const readGeo = (cb?: (c: { lat: number; lng: number }) => void) => {
     if (!navigator.geolocation) {
@@ -83,18 +73,19 @@ export default function ScanPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const punch = async (loc: { lat: number; lng: number }) => {
+  const punch = async (loc: { lat: number; lng: number }, type: string) => {
     setBusy(true);
     setResult(null);
     const res = await fetch("/api/portal/punch", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loc),
+      body: JSON.stringify({ ...loc, type }),
     });
     const d = await res.json().catch(() => ({}));
     if (res.ok) {
       setPunches((p) => [...p, { type: d.type, time: d.time }]);
       setResult({ kind: "ok", text: `${LABEL[d.type]} recorded at ${d.time} · ${d.distanceM}m from office` });
+      setPending(null);
       router.refresh();
     } else {
       setResult({ kind: "err", text: d.error || "Couldn't record. Try again." });
@@ -102,12 +93,12 @@ export default function ScanPanel({
     setBusy(false);
   };
 
-  const onPunch = () => {
-    if (coords) {
-      punch({ lat: coords.lat, lng: coords.lng });
-    } else {
-      readGeo((c) => punch(c));
-    }
+  // Two-step: tapping an action sets it pending; the user then confirms before
+  // it's recorded.
+  const confirmPending = () => {
+    if (!pending) return;
+    if (coords) punch({ lat: coords.lat, lng: coords.lng }, pending);
+    else readGeo((c) => punch(c, pending));
   };
 
   const blocked = !hasProfile || !scanEnabled || !officeSet;
@@ -141,7 +132,7 @@ export default function ScanPanel({
         <div className="mb-5 flex items-center justify-between">
           {STEP_DOTS.map((s, i) => {
             const done = punches.some((p) => p.type === s.type);
-            const isNext = next === s.type;
+            const isNext = allowedSet.includes(s.type);
             return (
               <div key={s.type} className="flex flex-1 flex-col items-center">
                 <span
@@ -184,19 +175,53 @@ export default function ScanPanel({
         )}
 
         {/* main action */}
-        {blocked ? null : next === null ? (
+        {blocked ? null : dayDone ? (
           <div className="rounded-2xl bg-green-50 py-6 text-center">
             <p className="text-sm font-semibold text-green-700">You&apos;re done for today ✓</p>
             <p className="mt-1 text-xs text-green-700/80">Checked out. See you tomorrow.</p>
           </div>
+        ) : pending ? (
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center">
+            <p className="text-sm text-slatey">
+              Confirm <span className="font-semibold text-ink">{LABEL[pending]}</span> now?
+            </p>
+            <div className="mt-3 flex gap-3">
+              <button
+                onClick={() => setPending(null)}
+                disabled={busy}
+                className="flex-1 rounded-xl border border-slate-200 bg-white py-3 text-sm font-semibold text-slatey disabled:opacity-70"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmPending}
+                disabled={busy || geo === "reading"}
+                className="btn-primary flex-1 justify-center py-3 disabled:opacity-70"
+              >
+                {busy ? "Recording…" : geo === "reading" ? "Locating…" : "Confirm"}
+              </button>
+            </div>
+          </div>
         ) : (
-          <button
-            onClick={onPunch}
-            disabled={busy || geo === "reading"}
-            className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70"
-          >
-            {busy ? "Recording…" : LABEL[next]}
-          </button>
+          <div className="space-y-2.5">
+            {allowed.map((a) => (
+              <button
+                key={a}
+                onClick={() => {
+                  setResult(null);
+                  setPending(a);
+                }}
+                disabled={busy || geo === "reading"}
+                className={
+                  a === "BREAK_START"
+                    ? "inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white py-4 text-base font-semibold text-ink hover:bg-slate-50 disabled:opacity-70"
+                    : "btn-primary w-full justify-center py-4 text-base disabled:opacity-70"
+                }
+              >
+                {LABEL[a]}
+              </button>
+            ))}
+          </div>
         )}
 
         {(geo === "denied" || geo === "error") && !blocked && (

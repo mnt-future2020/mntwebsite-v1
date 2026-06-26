@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
 import { ATT_STATUS_STYLE } from "@/lib/hr";
-import { PUNCH_LABEL } from "@/lib/org";
+import { PUNCH_LABEL } from "@/lib/attendance";
 import { toast } from "@/components/admin/Toast";
 
 type Emp = { id: string; name: string; code: string };

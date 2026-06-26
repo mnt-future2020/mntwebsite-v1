@@ -20,7 +20,7 @@ export const DEFAULT_ORG: OrgSettings = {
   officeLng: null,
   geofenceRadiusM: 50,
   workStart: "09:30",
-  workEnd: "18:30",
+  workEnd: "19:30",
   scanEnabled: true,
   salaryBasicPct: 50,
   salaryHraPctOfBasic: 50,
@@ -66,19 +66,5 @@ export function distanceM(lat1: number, lng1: number, lat2: number, lng2: number
   return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
-export const PUNCH_LABEL: Record<string, string> = {
-  CHECK_IN: "Check in",
-  BREAK_START: "Break start",
-  BREAK_END: "Back from break",
-  CHECK_OUT: "Check out",
-};
-
-// Given today's punches (oldest→newest), what punch should come next?
-export function nextPunchType(types: string[]): "CHECK_IN" | "BREAK_START" | "BREAK_END" | "CHECK_OUT" | null {
-  const last = types[types.length - 1];
-  if (!last) return "CHECK_IN";
-  if (last === "CHECK_OUT") return null; // day already closed
-  if (last === "CHECK_IN" || last === "BREAK_END") return "BREAK_START"; // working → can break or check out
-  if (last === "BREAK_START") return "BREAK_END"; // on break → must return first
-  return "CHECK_IN";
-}
+// Punch labels + the punch state-machine moved to lib/attendance.ts (prisma-free
+// so it can be shared with client components like ScanPanel).

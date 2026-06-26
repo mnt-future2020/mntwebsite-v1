@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db";
 import { getCurrentEmployee } from "@/lib/portal";
 import { fmtDate, ATT_STATUS_STYLE } from "@/lib/hr";
-import { PUNCH_LABEL } from "@/lib/org";
+import { PUNCH_LABEL } from "@/lib/attendance";
 
 export const dynamic = "force-dynamic";
 
