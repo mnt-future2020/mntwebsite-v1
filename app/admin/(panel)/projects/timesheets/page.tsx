@@ -72,6 +72,10 @@ export default async function TimesheetsPage() {
         action={running.length > 0 ? <LiveRefresh seconds={30} label="Live" /> : undefined}
       />
       <RunningTimers timers={running} />
+
+      <h2 className="mb-3 mt-1 text-sm font-semibold text-ink">
+        Logged time <span className="font-normal text-slate-400">· completed entries, last 30 days</span>
+      </h2>
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard label="Hours logged" value={hoursLabel(total)} icon="clock" />
         <StatCard label="Billable" value={hoursLabel(billable)} icon="wallet" accent />
@@ -94,7 +98,18 @@ export default async function TimesheetsPage() {
 
       <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
         {entries.length === 0 ? (
-          <p className="px-5 py-10 text-center text-sm text-slatey">No time logged in the last 30 days.</p>
+          <div className="px-5 py-10 text-center text-sm text-slatey">
+            {running.length > 0 ? (
+              <>
+                <p className="font-medium text-ink">
+                  Nothing logged yet — but {running.length} timer{running.length > 1 ? "s are" : " is"} running now.
+                </p>
+                <p className="mt-1">Logged hours show up here once an employee hits <b>Stop &amp; log</b>.</p>
+              </>
+            ) : (
+              "No time logged in the last 30 days."
+            )}
+          </div>
         ) : (
           <table className="w-full text-sm">
             <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs uppercase tracking-wide text-slatey">
