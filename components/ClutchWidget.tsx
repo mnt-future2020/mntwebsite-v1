@@ -48,8 +48,8 @@ export default function ClutchWidget({ className = "" }: { className?: string })
       <div
         className="clutch-widget"
         data-url="https://widget.clutch.co"
-        data-widget-type="7"
-        data-height="65"
+        data-widget-type="1"
+        data-height="40"
         data-nofollow="false"
         data-expandifr="true"
         data-clutchcompany-id="2510934"
