@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 
 // Gated by proxy.ts (any signed-in user) → redirect to the public CDN URL of the
 // installer (fast edge-cached download).
-const DMG_KEY = "downloads/MnT-Monitor-mac-arm64.dmg";
+const DMG_KEY = "downloads/MnT-Monitor-mac-arm64-signed.dmg";
 
 export async function GET() {
   if (!(await isSpacesConfigured()))

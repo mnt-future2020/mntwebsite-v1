@@ -20,6 +20,7 @@
     "productName": "MnT Monitor",
     "files": ["main.js", "preload.js", "index.html", "renderer.js", "assets/**"],
     "directories": { "output": "release" },
+    "afterPack": "build/afterPack.js",
     "win": { "target": "nsis", "icon": "assets/icon.png" },
     "mac": {
       "target": "dmg",
