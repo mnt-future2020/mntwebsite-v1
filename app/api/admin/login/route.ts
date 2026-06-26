@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import { createSession, SESSION_COOKIE } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getRolePerms } from "@/lib/permissions-db";
-import { firstAllowedPath } from "@/lib/permissions";
 
 export const runtime = "nodejs";
 
@@ -19,7 +18,8 @@ export async function POST(req: Request) {
     if (adminEmail && adminHash && em.toLowerCase() === adminEmail.toLowerCase() && bcrypt.compareSync(pw, adminHash)) {
       const perms = await getRolePerms("ADMIN");
       const token = await createSession({ sub: "admin", email: adminEmail, role: "ADMIN", perms });
-      return setCookie(NextResponse.json({ ok: true, role: "ADMIN", redirect: firstAllowedPath(perms) || "/portal" }), token);
+      // Env super-admin has no employee profile → land on the admin dashboard.
+      return setCookie(NextResponse.json({ ok: true, role: "ADMIN", redirect: "/admin" }), token);
     }
 
     // 2) Employee login.
@@ -30,10 +30,8 @@ export async function POST(req: Request) {
       if (emp && emp.passwordHash && emp.status !== "EXITED" && bcrypt.compareSync(pw, emp.passwordHash)) {
         const perms = await getRolePerms(emp.role);
         const token = await createSession({ sub: emp.id, email: emp.email, role: emp.role, perms });
-        return setCookie(
-          NextResponse.json({ ok: true, role: emp.role, redirect: firstAllowedPath(perms) || "/portal" }),
-          token
-        );
+        // Everyone lands on their My workspace dashboard first, regardless of role.
+        return setCookie(NextResponse.json({ ok: true, role: emp.role, redirect: "/portal" }), token);
       }
     } catch {
       // DB not reachable — fall through to invalid.
