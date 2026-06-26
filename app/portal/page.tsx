@@ -88,6 +88,19 @@ export default async function PortalHome() {
         </Link>
       </div>
 
+      <a
+        href="/api/portal/agent-download"
+        className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-brand-200"
+      >
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+          <Icon name="download" className="h-5 w-5" />
+        </span>
+        <div>
+          <h3 className="font-semibold text-ink">Download the Mac app</h3>
+          <p className="mt-0.5 text-sm text-slatey">Work-session monitoring agent for macOS (Apple Silicon).</p>
+        </div>
+      </a>
+
       {latestPayslip && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
           <div className="flex items-center justify-between">

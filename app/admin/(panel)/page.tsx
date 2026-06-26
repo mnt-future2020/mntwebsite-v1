@@ -59,6 +59,19 @@ export default async function Dashboard() {
               <span className="text-sm font-semibold text-ink">Manage SEO</span>
             </Link>
           </div>
+
+          <a
+            href="/api/portal/agent-download"
+            className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-brand-200"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <Icon name="download" className="h-5 w-5" />
+            </span>
+            <span>
+              <span className="block text-sm font-semibold text-ink">Download the Mac monitoring app</span>
+              <span className="text-sm text-slatey">macOS (Apple Silicon) — employees install and sign in</span>
+            </span>
+          </a>
         </>
       )}
     </>
