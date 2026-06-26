@@ -35,8 +35,8 @@ await client.send(
     Key: key,
     Body: readFileSync(file),
     ContentType: "application/x-apple-diskimage",
-    ACL: "private",
+    ACL: "public-read",
   })
 );
-console.log(`✓ Uploaded ${file} → ${s.spacesBucket}/${key} (private)`);
+console.log(`✓ Uploaded ${file} → ${s.spacesBucket}/${key} (public — served via CDN)`);
 await prisma.$disconnect();

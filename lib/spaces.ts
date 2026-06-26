@@ -70,6 +70,14 @@ function publicUrl(c: SpacesCfg, key: string): string {
   }
 }
 
+// CDN URL for a public object — DO Spaces edge cache, much faster for large
+// downloads than the origin. Requires the Space's CDN to be enabled.
+export async function cdnUrl(key: string): Promise<string> {
+  const c = await loadConfig();
+  if (c.region && c.bucket) return `https://${c.bucket}.${c.region}.cdn.digitaloceanspaces.com/${key}`;
+  return c.bucket ? publicUrl(c, key) : "";
+}
+
 // Store a PUBLIC object (e.g. blog images shown to all site visitors) and return
 // its direct public URL.
 export async function putPublicObject(key: string, body: Buffer, contentType: string): Promise<string> {
