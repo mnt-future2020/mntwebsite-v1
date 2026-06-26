@@ -49,12 +49,17 @@ function makeClient(c: SpacesCfg): S3Client {
   });
 }
 
-// Store a screenshot (private — only reachable via a presigned URL).
-export async function putScreenshot(objectKey: string, body: Buffer, contentType = "image/jpeg") {
+// Store any private object (screenshots, employee docs, …).
+export async function putObject(objectKey: string, body: Buffer, contentType = "application/octet-stream") {
   const c = await loadConfig();
   await makeClient(c).send(
     new PutObjectCommand({ Bucket: c.bucket, Key: objectKey, Body: body, ContentType: contentType, ACL: "private" })
   );
+}
+
+// Store a screenshot (private — only reachable via a presigned URL).
+export async function putScreenshot(objectKey: string, body: Buffer, contentType = "image/jpeg") {
+  await putObject(objectKey, body, contentType);
 }
 
 // Short-lived signed URL so the admin can view a private object.

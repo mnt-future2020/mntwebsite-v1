@@ -48,7 +48,7 @@ export default async function EmployeeDetail(props: { params: Promise<{ id: stri
         <div className={sectionCard}>
           <h2 className="text-sm font-semibold text-ink">Documents</h2>
           <div className="mt-3">
-            <EmployeeDocs employeeId={emp.id} initial={emp.documents.map((d) => ({ id: d.id, type: d.type, name: d.name, url: d.url }))} />
+            <EmployeeDocs employeeId={emp.id} initial={emp.documents.map((d) => ({ id: d.id, type: d.type, name: d.name }))} />
           </div>
         </div>
 

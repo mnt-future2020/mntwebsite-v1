@@ -455,7 +455,8 @@ model EmployeeDocument {
   employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   type       String // "Offer Letter", "PAN", "Aadhaar", "Contract", …
   name       String
-  url        String
+  url        String? // external link (legacy); null for uploaded files
+  storageKey String? // object key in Spaces for an uploaded file
   uploadedAt DateTime @default(now())
 
   @@index([employeeId])
