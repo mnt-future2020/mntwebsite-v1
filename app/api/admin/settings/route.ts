@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export async function GET() {
   try {
     const s = await prisma.siteSetting.findUnique({ where: { id: 1 } });
-    return NextResponse.json(s || {});
+    return NextResponse.json({ ...(s || {}), spacesSecret: undefined });
   } catch {
     return NextResponse.json({});
   }
@@ -16,6 +16,10 @@ export async function GET() {
 export async function PUT(req: Request) {
   try {
     const b = await req.json();
+    const str = (v: unknown) => {
+      const x = String(v ?? "").trim();
+      return x || null;
+    };
     const data = {
       // These three columns are non-nullable — a cleared field falls back to the
       // canonical default rather than silently keeping the previous value (which
@@ -28,13 +32,20 @@ export async function PUT(req: Request) {
       gscVerification: b.gscVerification || null,
       bingVerification: b.bingVerification || null,
       robotsExtra: b.robotsExtra || null,
+      spacesRegion: str(b.spacesRegion),
+      spacesBucket: str(b.spacesBucket),
+      spacesKey: str(b.spacesKey),
+      spacesEndpoint: str(b.spacesEndpoint),
     };
+    // Secret is write-only: only overwrite when a new value is sent.
+    const secretUpdate =
+      typeof b.spacesSecret === "string" && b.spacesSecret.trim() ? { spacesSecret: b.spacesSecret.trim() } : {};
     const s = await prisma.siteSetting.upsert({
       where: { id: 1 },
-      update: data,
-      create: { id: 1, ...data },
+      update: { ...data, ...secretUpdate },
+      create: { id: 1, ...data, ...secretUpdate },
     });
-    return NextResponse.json(s);
+    return NextResponse.json({ ...s, spacesSecret: undefined });
   } catch {
     return NextResponse.json({ error: "Save failed." }, { status: 500 });
   }

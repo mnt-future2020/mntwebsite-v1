@@ -52,7 +52,7 @@ const hr: Item[] = [
   { href: "/admin/hr/payroll", label: "Payroll", icon: "wallet", key: "hr.payroll" },
   { href: "/admin/hr/performance", label: "Performance", icon: "spark", key: "hr.performance" },
   { href: "/admin/hr/departments", label: "Departments", icon: "layers", key: "hr.departments" },
-  { href: "/admin/hr/settings", label: "Attendance QR", icon: "compass", key: "hr.settings" },
+  { href: "/admin/hr/settings", label: "HR settings", icon: "compass", key: "hr.settings" },
   { href: "/admin/hr/monitoring", label: "Screen monitoring", icon: "eye", key: "hr.monitoring" },
 ];
 

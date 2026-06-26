@@ -29,10 +29,9 @@ type Props = {
     annualCompOff: number;
   };
   baseUrl?: string;
-  spaces?: { region: string; bucket: string; key: string; endpoint: string; secretSet: boolean };
 };
 
-export default function OrgSettingsForm({ initial, baseUrl, spaces }: Props) {
+export default function OrgSettingsForm({ initial, baseUrl }: Props) {
   const router = useRouter();
   const [f, setF] = useState({
     officeLat: initial.officeLat != null ? String(initial.officeLat) : "",
@@ -47,11 +46,6 @@ export default function OrgSettingsForm({ initial, baseUrl, spaces }: Props) {
     annualCasualLeave: String(initial.annualCasualLeave ?? 12),
     annualSickLeave: String(initial.annualSickLeave ?? 12),
     annualCompOff: String(initial.annualCompOff ?? 0),
-    spacesRegion: spaces?.region || "",
-    spacesBucket: spaces?.bucket || "",
-    spacesKey: spaces?.key || "",
-    spacesEndpoint: spaces?.endpoint || "",
-    spacesSecret: "",
   });
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ kind: "ok" | "err" | "info"; text: string } | null>(null);
@@ -122,11 +116,6 @@ export default function OrgSettingsForm({ initial, baseUrl, spaces }: Props) {
         annualCasualLeave: f.annualCasualLeave,
         annualSickLeave: f.annualSickLeave,
         annualCompOff: f.annualCompOff,
-        spacesRegion: f.spacesRegion,
-        spacesBucket: f.spacesBucket,
-        spacesKey: f.spacesKey,
-        spacesEndpoint: f.spacesEndpoint,
-        spacesSecret: f.spacesSecret,
       }),
     });
     if (res.ok) {
@@ -306,48 +295,6 @@ export default function OrgSettingsForm({ initial, baseUrl, spaces }: Props) {
           </div>
           <p className="mt-3 text-xs text-slate-400">
             Total: {(parseFloat(f.annualPaidLeave) || 0) + (parseFloat(f.annualCasualLeave) || 0) + (parseFloat(f.annualSickLeave) || 0) + (parseFloat(f.annualCompOff) || 0)} days/year
-          </p>
-        </div>
-
-        <div className={card}>
-          <h2 className="text-sm font-semibold text-ink">Screenshot storage (DigitalOcean Spaces)</h2>
-          <p className="mt-1 text-xs text-slatey">
-            Where the desktop monitoring agent stores screenshots. Create a Space + a Spaces access key in your
-            DigitalOcean console, then paste them here — no redeploy needed.
-          </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className={label}>Region</label>
-              <input value={f.spacesRegion} onChange={(e) => up("spacesRegion", e.target.value)} className={field} placeholder="sgp1" />
-            </div>
-            <div>
-              <label className={label}>Bucket (Space name)</label>
-              <input value={f.spacesBucket} onChange={(e) => up("spacesBucket", e.target.value)} className={field} placeholder="mntweb-storage" />
-            </div>
-            <div>
-              <label className={label}>Access key</label>
-              <input value={f.spacesKey} onChange={(e) => up("spacesKey", e.target.value)} className={field} placeholder="DO00…" autoComplete="off" />
-            </div>
-            <div>
-              <label className={label}>
-                Secret key {spaces?.secretSet && <span className="font-semibold text-green-600">· set</span>}
-              </label>
-              <input
-                type="password"
-                value={f.spacesSecret}
-                onChange={(e) => up("spacesSecret", e.target.value)}
-                className={field}
-                placeholder={spaces?.secretSet ? "•••••• (leave blank to keep)" : "Secret key"}
-                autoComplete="new-password"
-              />
-            </div>
-            <div className="sm:col-span-2">
-              <label className={label}>Endpoint (optional)</label>
-              <input value={f.spacesEndpoint} onChange={(e) => up("spacesEndpoint", e.target.value)} className={field} placeholder="auto: https://<region>.digitaloceanspaces.com" />
-            </div>
-          </div>
-          <p className="mt-3 text-[11px] text-slate-400">
-            The secret is write-only — it&apos;s never shown again; leave it blank to keep the current one. Keep the Space private.
           </p>
         </div>
 

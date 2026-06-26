@@ -14,10 +14,29 @@ async function getSettings() {
 
 export default async function SettingsPage() {
   const s = await getSettings();
+  // Build the form's initial data WITHOUT the storage secret — only a flag saying
+  // whether one is set.
+  const initial = s
+    ? {
+        siteName: s.siteName,
+        titleTemplate: s.titleTemplate,
+        defaultDescription: s.defaultDescription,
+        defaultOgImage: s.defaultOgImage,
+        gaMeasurementId: s.gaMeasurementId,
+        gscVerification: s.gscVerification,
+        bingVerification: s.bingVerification,
+        robotsExtra: s.robotsExtra,
+        spacesRegion: s.spacesRegion,
+        spacesBucket: s.spacesBucket,
+        spacesKey: s.spacesKey,
+        spacesEndpoint: s.spacesEndpoint,
+        spacesSecretSet: !!s.spacesSecret,
+      }
+    : {};
   return (
     <>
-      <PageHeader title="Settings" subtitle="Global site name, defaults, analytics and verification." />
-      <SettingsForm initial={s ?? {}} />
+      <PageHeader title="Settings" subtitle="Site defaults, analytics, verification, and object storage." />
+      <SettingsForm initial={initial} />
     </>
   );
 }

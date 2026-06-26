@@ -2,10 +2,9 @@ import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { prisma } from "@/lib/db";
 
-// DigitalOcean Spaces (S3-compatible) storage for monitoring screenshots.
-// Config is read from the OrgSetting row (set in HR settings) first, then falls
-// back to SPACES_* env vars — so it can be configured dynamically in the admin
-// panel without redeploying.
+// DigitalOcean Spaces (S3-compatible) storage for screenshots, employee docs and
+// blog images. Config is read from the SiteSetting row (set in Site settings)
+// first, then falls back to SPACES_* env vars — configurable without redeploying.
 type SpacesCfg = { region: string; bucket: string; key: string; secret: string; endpoint: string };
 
 async function loadConfig(): Promise<SpacesCfg> {
@@ -17,7 +16,7 @@ async function loadConfig(): Promise<SpacesCfg> {
     spacesEndpoint: string | null;
   } | null = null;
   try {
-    row = await prisma.orgSetting.findUnique({
+    row = await prisma.siteSetting.findUnique({
       where: { id: 1 },
       select: { spacesRegion: true, spacesBucket: true, spacesKey: true, spacesSecret: true, spacesEndpoint: true },
     });

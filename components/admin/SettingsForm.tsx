@@ -18,6 +18,11 @@ type SettingsInitial = {
   gscVerification?: string | null;
   bingVerification?: string | null;
   robotsExtra?: string | null;
+  spacesRegion?: string | null;
+  spacesBucket?: string | null;
+  spacesKey?: string | null;
+  spacesEndpoint?: string | null;
+  spacesSecretSet?: boolean;
 };
 
 export default function SettingsForm({ initial }: { initial: SettingsInitial }) {
@@ -30,6 +35,11 @@ export default function SettingsForm({ initial }: { initial: SettingsInitial }) 
     gscVerification: initial.gscVerification ?? "",
     bingVerification: initial.bingVerification ?? "",
     robotsExtra: initial.robotsExtra ?? "",
+    spacesRegion: initial.spacesRegion ?? "",
+    spacesBucket: initial.spacesBucket ?? "",
+    spacesKey: initial.spacesKey ?? "",
+    spacesEndpoint: initial.spacesEndpoint ?? "",
+    spacesSecret: "",
   });
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -98,6 +108,48 @@ export default function SettingsForm({ initial }: { initial: SettingsInitial }) 
       <div className={card}>
         <h2 className="text-sm font-semibold text-ink">robots.txt — extra directives</h2>
         <textarea rows={3} value={f.robotsExtra} onChange={(e) => up("robotsExtra", e.target.value)} className={`${field} mt-3 resize-none font-mono text-xs`} placeholder="e.g. Disallow: /private" />
+      </div>
+
+      <div className={card}>
+        <h2 className="text-sm font-semibold text-ink">Object storage (DigitalOcean Spaces)</h2>
+        <p className="mt-1 text-xs text-slatey">
+          Stores screenshots, employee documents and blog images. Create a Space + a Spaces access key in your
+          DigitalOcean console, then paste them here — no redeploy needed.
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className={labelCls}>Region</label>
+            <input value={f.spacesRegion} onChange={(e) => up("spacesRegion", e.target.value)} className={field} placeholder="sgp1" />
+          </div>
+          <div>
+            <label className={labelCls}>Bucket (Space name)</label>
+            <input value={f.spacesBucket} onChange={(e) => up("spacesBucket", e.target.value)} className={field} placeholder="mntweb-storage" />
+          </div>
+          <div>
+            <label className={labelCls}>Access key</label>
+            <input value={f.spacesKey} onChange={(e) => up("spacesKey", e.target.value)} className={field} placeholder="DO00…" autoComplete="off" />
+          </div>
+          <div>
+            <label className={labelCls}>
+              Secret key {initial.spacesSecretSet && <span className="font-semibold text-green-600">· set</span>}
+            </label>
+            <input
+              type="password"
+              value={f.spacesSecret}
+              onChange={(e) => up("spacesSecret", e.target.value)}
+              className={field}
+              placeholder={initial.spacesSecretSet ? "•••••• (leave blank to keep)" : "Secret key"}
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelCls}>Endpoint <span className="text-slate-400">(optional)</span></label>
+            <input value={f.spacesEndpoint} onChange={(e) => up("spacesEndpoint", e.target.value)} className={field} placeholder="auto: https://<region>.digitaloceanspaces.com" />
+          </div>
+        </div>
+        <p className="mt-3 text-[11px] text-slate-400">
+          The secret is write-only — never shown again; leave it blank to keep the current one.
+        </p>
       </div>
 
       <div className="flex items-center gap-3">
