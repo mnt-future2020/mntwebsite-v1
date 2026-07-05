@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce", {
     title: "Commerce Platform Development for US Brands | MnT",
     description:
-      "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce with ADA, PCI DSS & US sales-tax handled. Commerce platforms engineered to scale for US D2C and marketplace brands.",
+      "Headless & marketplace builds, integrations, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled. Built to scale.",
   });
 }
 

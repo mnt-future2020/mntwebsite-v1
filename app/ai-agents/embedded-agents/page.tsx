@@ -5,9 +5,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/embedded-agents", {
-    title: "Embedded AI Agents for Commerce — Support, Merchandising, SEO | MnT",
+    title: "Embedded AI Agents for Commerce — Support & Ops | MnT",
     description:
-      "Task-specific AI agents built into your platform — SEO/AEO, customer support, merchandising, and analytics agents. Domain-trained, MCP-connected, with human-in-the-loop oversight and evaluation gates.",
+      "Task-specific AI agents in your platform — support, merchandising, SEO/AEO, and analytics. Domain-trained, MCP-connected, human-in-the-loop.",
   });
 }
 

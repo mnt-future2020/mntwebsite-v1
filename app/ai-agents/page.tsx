@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents", {
     title: "AI & Agents for Commerce — Agent-Ready, Embedded AI | MnT",
     description:
-      "AI-native, agent-ready commerce: AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup. Sell more from the traffic you have — and in the new AI shopping channels.",
+      "AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup — for US D2C & marketplace brands.",
   });
 }
 

@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/headless-marketplace", {
     title: "Headless Commerce & Marketplace Development | MnT",
     description:
-      "Composable, API-driven storefronts, low-risk replatforming, and multi-vendor marketplaces for US brands. Headless commerce and marketplace builds engineered to scale with your catalog and traffic.",
+      "Composable, API-driven storefronts, low-risk replatforming, and multi-vendor marketplaces — headless commerce builds engineered to scale.",
   });
 }
 

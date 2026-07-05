@@ -59,6 +59,22 @@ const orgSchema = {
   logo: `${site.url}/mnt-logo.png`,
   email: site.email,
   description: site.description,
+  knowsAbout: [
+    "Agentic commerce",
+    "Agent-Ready Commerce",
+    "Agentic Commerce Protocol (ACP)",
+    "Model Context Protocol (MCP)",
+    "Headless commerce",
+    "Answer Engine Optimization (AEO)",
+    "PCI DSS",
+    "ADA/WCAG accessibility",
+  ],
+  areaServed: { "@type": "Country", name: "United States" },
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: site.email,
+    contactType: "sales",
+  },
   sameAs: [site.social.instagram, site.social.linkedin, site.social.facebook],
 };
 

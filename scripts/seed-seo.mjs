@@ -19,19 +19,19 @@ const PAGES = [
     path: "/",
     title: "MnT — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
+      "AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
   },
   {
     path: "/commerce",
     title: "Commerce Platform Development for US Brands | MnT",
     description:
-      "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce with ADA, PCI DSS & US sales-tax handled. Commerce platforms engineered to scale for US D2C and marketplace brands.",
+      "Headless & marketplace builds, integrations, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled. Built to scale.",
   },
   {
     path: "/ai-agents",
     title: "AI & Agents for Commerce — Agent-Ready, Embedded AI | MnT",
     description:
-      "AI-native, agent-ready commerce: AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup. Sell more from the traffic you have — and in the new AI shopping channels.",
+      "AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup — for US D2C & marketplace brands.",
   },
   {
     path: "/security-compliance",

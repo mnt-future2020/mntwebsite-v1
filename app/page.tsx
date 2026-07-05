@@ -10,6 +10,7 @@ import StackMarquee from "@/components/StackMarquee";
 import SpotlightCard from "@/components/SpotlightCard";
 import Testimonials from "@/components/Testimonials";
 import Integrations from "@/components/Integrations";
+import FAQ, { QA } from "@/components/FAQ";
 import { SectionHeading, Stat } from "@/components/blocks";
 import { images } from "@/lib/site";
 import { caseStudies } from "@/lib/caseStudies";
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
     title: "MnT — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
+      "AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
   });
 }
 
@@ -67,9 +68,44 @@ const engagement = [
   },
 ];
 
+const homeFaq: QA[] = [
+  {
+    q: "What is agent-ready commerce?",
+    a: "Agent-ready commerce means AI shopping agents — like those in ChatGPT and Google — can discover your products, trust your price and inventory data, and complete a purchase. MnT makes your store agent-ready with structured product feeds, real-time sync, and the ACP, UCP, and MCP integrations agents use to buy.",
+  },
+  {
+    q: "What does MnT build?",
+    a: "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and orchestration, B2B/wholesale, and managed commerce with US compliance — plus AI search, embedded AI agents, and agent-readiness.",
+  },
+  {
+    q: "What is the Agentic Commerce Protocol (ACP)?",
+    a: "ACP is an open standard from OpenAI and Stripe that lets AI agents complete purchases on a shopper's behalf. MnT implements ACP, Google's UCP, and a Retail MCP server so your store can be discovered and bought from in AI channels.",
+  },
+  {
+    q: "Do you only work with US brands?",
+    a: "Yes. MnT focuses on US D2C and marketplace brands, where our compliance depth — ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax — and our agentic-commerce work are sharpest.",
+  },
+  {
+    q: "How do we get started?",
+    a: "Start with a free architecture workshop or a free agent-readiness audit. We sketch how we'd build it, or assess your AI-channel readiness, and give you a clear next step — no obligation.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       <Hero />
 
       {/* PROOF BAR */}
@@ -318,6 +354,20 @@ export default function Home() {
       <Integrations />
 
       <Testimonials />
+
+      {/* FAQ */}
+      <section className="bg-soft py-20 sm:py-28">
+        <div className="container-mnt">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Questions buyers ask us first"
+            subtitle="Short, direct answers on agent-ready commerce, ACP, and how we work."
+          />
+          <div className="mt-12">
+            <FAQ items={homeFaq} />
+          </div>
+        </div>
+      </section>
 
       <CTASection />
     </>

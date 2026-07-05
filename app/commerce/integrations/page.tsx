@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/integrations", {
     title: "Commerce Integrations & Orchestration (ERP, OMS, PIM, CDP) | MnT",
     description:
-      "Connect ERP, OMS, PIM, CDP, payments and 3PL into one connected commerce stack. Composable orchestration, data pipelines, and workflow automation so your systems work as one source of truth.",
+      "Connect ERP, OMS, PIM, CDP, payments & 3PL into one commerce stack — orchestration, data pipelines, and automation, one source of truth.",
   });
 }
 

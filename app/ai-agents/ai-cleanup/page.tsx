@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/ai-cleanup", {
     title: "AI Cleanup — Make Your Vibe-Coded MVP Production-Grade | MnT",
     description:
-      "Turn an AI or no-code-built store into a secure, scalable, production-grade platform. Code & security audit, refactor and hardening, test coverage, scalability re-architecture, and production deployment.",
+      "Turn an AI or no-code MVP into a secure, scalable, production-grade store — security audit, refactor, hardening, tests, and production deploy.",
   });
 }
 

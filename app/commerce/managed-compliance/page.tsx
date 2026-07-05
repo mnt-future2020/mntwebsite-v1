@@ -5,9 +5,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/managed-compliance", {
-    title: "Managed Commerce & Compliance — ADA, PCI DSS, Sales-Tax | MnT",
+    title: "Managed Commerce & Compliance — ADA · PCI · Tax | MnT",
     description:
-      "Platform support, monitoring and performance on an SLA — plus ADA/WCAG accessibility, PCI DSS v4.0.1, and US sales-tax/economic-nexus compliance, handled continuously for your live store.",
+      "Support & monitoring on an SLA, plus ADA/WCAG, PCI DSS v4.0.1, and US sales-tax — your live store kept fast, secure, and compliant.",
   });
 }
 

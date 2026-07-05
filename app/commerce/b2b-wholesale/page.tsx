@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/b2b-wholesale", {
     title: "B2B & Wholesale Commerce Development | MnT",
     description:
-      "Customer-specific pricing and catalogs, quote/RFQ workflows, bulk ordering, and ERP-integrated self-serve buying portals. B2B and wholesale commerce that opens a high-margin channel.",
+      "Customer-specific pricing, quote/RFQ, bulk ordering, and ERP-integrated self-serve portals — B2B & wholesale commerce that adds a channel.",
   });
 }
 

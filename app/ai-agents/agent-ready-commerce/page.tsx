@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/agent-ready-commerce", {
     title: "Agent-Ready Commerce — ACP, Google UCP & Retail MCP | MnT",
     description:
-      "Make your store discoverable and buyable by AI shopping agents. Agent-readiness audit, product-feed optimization, real-time price/inventory sync, ACP (OpenAI+Stripe) + Google UCP + Retail MCP, and AEO visibility.",
+      "Make your store discoverable & buyable by AI shopping agents — agent-readiness audit, feed & price sync, ACP + Google UCP + Retail MCP, AEO.",
   });
 }
 
