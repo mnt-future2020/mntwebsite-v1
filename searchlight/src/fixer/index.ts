@@ -1,5 +1,6 @@
 import type { Issue, FixResult } from "../types";
 import type { SearchlightConfig } from "../config";
+import { FIXER_SYSTEM_PROMPT } from "../agents";
 
 /**
  * Lazy, untyped import of the Claude Agent SDK. This keeps the Monitor and
@@ -26,23 +27,17 @@ function buildPrompt(issues: Issue[], config: SearchlightConfig, retryFeedback?:
     )
     .join("\n\n");
 
-  return `You are Searchlight's Fixer — an autonomous SEO/AEO engineer working in a ${config.repo.framework} repository.
+  return `${FIXER_SYSTEM_PROMPT}
 
-Fix ONLY the issues below, by editing the SOURCE that produces each page (metadata, JSON-LD, alt text, links, headings). Do not change unrelated code, copy, or design. Make the smallest change that resolves each issue.
-
-Brand voice for any copy you write: ${config.brandVoice}
-
-NEVER edit files matching these globs: ${config.neverTouch.join(", ")}
+Context for this run:
+- Repository framework: ${config.repo.framework}
+- Brand voice for any copy you write: ${config.brandVoice}
+- NEVER edit files matching: ${config.neverTouch.join(", ")}
+- Title max ${config.checks.titleMaxLength} chars; meta description ${config.checks.metaDescriptionMinLength}-${config.checks.metaDescriptionMaxLength} chars.
 
 ISSUES TO FIX:
 ${list}
-${retryFeedback ? `\nYOUR PREVIOUS ATTEMPT FAILED VERIFICATION:\n${retryFeedback}\nFix the regression and complete the task.\n` : ""}
-GUIDANCE (${config.repo.framework}):
-- Page metadata usually lives in generateMetadata()/resolveMetadata() in the route's page.tsx, in app/layout.tsx, or in a seed script that writes to a DB. Find the real source and edit it there — not the built HTML.
-- Keep titles <= ${config.checks.titleMaxLength} chars; meta descriptions ${config.checks.metaDescriptionMinLength}-${config.checks.metaDescriptionMaxLength} chars, hook first.
-- If per-page SEO is stored in a database/seed, update BOTH the code default and the seed source so the fix survives a re-seed.
-- After editing, run the typecheck to confirm you did not break the build.
-- Finish with a short summary: which files you changed and why.`;
+${retryFeedback ? `\nYOUR PREVIOUS ATTEMPT FAILED VERIFICATION:\n${retryFeedback}\nFix the regression and complete the task.\n` : ""}`;
 }
 
 /**

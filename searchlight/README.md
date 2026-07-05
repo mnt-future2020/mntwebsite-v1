@@ -36,6 +36,7 @@ node dist/cli.js monitor --url https://x.com # audit any site ad-hoc
 node dist/cli.js run --dry-run               # monitor + plan, apply nothing
 node dist/cli.js run                         # full auto: fix the `auto` tier, verify each
 node dist/cli.js verify                      # regression gate (typecheck + build) on the repo
+node dist/cli.js dashboard                   # generate the agents + run-history dashboard (HTML)
 ```
 
 Add `--config <path>` to point at another project's `searchlight.config.json`.
@@ -76,6 +77,18 @@ node dist/cli.js run --no-ship   # force off
 - Never uses `git add -A` — only the files the Fixer changed are staged.
 - A fix that fails the build is **never** shipped — it self-heals or escalates first.
 - **Why push, not "dynamic"?** Only DB-backed metadata could update live without a deploy; schema, alt text, content, and links live in code, so a redeploy is required to reflect them. Auto-push covers every fix type — the standard agent → CI/CD pattern.
+
+## Monitoring (dashboard)
+
+Every `monitor`/`run` writes a structured record to `searchlight/runs/`. Generate a self-contained HTML dashboard from them:
+
+```bash
+node dist/cli.js dashboard   # writes searchlight/dashboard.html — open in a browser
+```
+
+It shows two things:
+- **Agents** — every role's **model**, **tools**, and full **system prompt / instructions** (from `src/agents.ts`, the single source of truth the Fixer also runs on).
+- **Runs** — history of what the agents did: issues found (by tier), pages fixed, escalations, and the commit each run shipped. Each run expands to its issue list.
 
 ## Safety
 
