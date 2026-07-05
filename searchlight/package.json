@@ -1,0 +1,23 @@
+{
+  "name": "searchlight",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Searchlight — an autonomous SEO/AEO agent (Monitor -> Fixer -> Verifier). Repo-native, built on the Claude Agent SDK.",
+  "bin": {
+    "searchlight": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "monitor": "node dist/cli.js monitor",
+    "fix": "node dist/cli.js fix",
+    "verify": "node dist/cli.js verify",
+    "run": "node dist/cli.js run"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.4"
+  }
+}

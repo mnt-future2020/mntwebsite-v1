@@ -1,0 +1,59 @@
+{
+  "site": {
+    "name": "MnT",
+    "baseUrl": "https://mntfuture.com",
+    "sitemapUrl": "https://mntfuture.com/sitemap.xml"
+  },
+  "repo": {
+    "root": "..",
+    "framework": "nextjs",
+    "buildCommand": "npm run build",
+    "typecheckCommand": "npx tsc --noEmit"
+  },
+  "targetKeywords": [
+    "agent-ready commerce",
+    "agentic commerce",
+    "headless commerce development",
+    "AI commerce platform",
+    "ACP OpenAI Stripe"
+  ],
+  "checks": {
+    "maxPages": 40,
+    "titleMaxLength": 60,
+    "metaDescriptionMaxLength": 155,
+    "metaDescriptionMinLength": 70,
+    "requireSchemaTypes": ["Organization"],
+    "checkBrokenLinks": true,
+    "maxLinksToCheck": 80
+  },
+  "autoFix": {
+    "tiers": {
+      "titleLength": "auto",
+      "metaLength": "auto",
+      "missingMeta": "auto",
+      "schema": "auto",
+      "altText": "auto",
+      "canonical": "auto",
+      "h1": "auto",
+      "brokenLinks": "verify",
+      "cwv": "verify",
+      "content": "escalate"
+    },
+    "maxRetries": 2
+  },
+  "deploy": {
+    "enabled": false,
+    "remote": "origin",
+    "branch": "main",
+    "commitPrefix": "searchlight: auto-fix SEO/AEO issues",
+    "push": true
+  },
+  "brandVoice": "Confident, technical, US-commerce focused. AI-native, agent-ready. No hype, no fluff. Front-load the hook; every CTA drives the free architecture workshop or agent-readiness audit.",
+  "neverTouch": [
+    "app/admin/**",
+    "app/portal/**",
+    "prisma/**",
+    ".env*",
+    "searchlight/**"
+  ]
+}
