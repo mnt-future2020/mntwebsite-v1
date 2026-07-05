@@ -7,49 +7,49 @@ const prisma = new PrismaClient();
 
 // Global defaults — mirrors DEFAULT_SETTINGS in lib/settings.ts
 const SITE = {
-  siteName: "MnT — Healthcare & E-Commerce Software Development",
+  siteName: "MnT — AI-Native, Agent-Ready Commerce Platforms",
   titleTemplate: "%s | MnT",
   defaultDescription:
-    "We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global.",
+    "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
 };
 
 // Per-page SEO — mirrors each page's resolveMetadata(...) base values verbatim
 const PAGES = [
   {
     path: "/",
-    title: "MnT — Healthcare & E-Commerce Software Development",
+    title: "MnT — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global. Start your build.",
+      "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
   },
   {
-    path: "/healthcare-software-development",
-    title: "Healthcare Software Development Company | MnT",
+    path: "/commerce",
+    title: "Commerce Platform Development for US Brands | MnT",
     description:
-      "HIPAA & ABDM-compliant healthcare software development — custom platforms, telemedicine, EHR & AI, engineered by a senior team for healthtech founders.",
+      "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce with ADA, PCI DSS & US sales-tax handled. Commerce platforms engineered to scale for US D2C and marketplace brands.",
   },
   {
-    path: "/ecommerce-development",
-    title: "E-Commerce Development Company | Custom & D2C | MnT",
+    path: "/ai-agents",
+    title: "AI & Agents for Commerce — Agent-Ready, Embedded AI | MnT",
     description:
-      "Custom e-commerce development for D2C brands and marketplaces. Headless, Shopify, and bespoke platforms built to convert and scale. India + global delivery.",
+      "AI-native, agent-ready commerce: AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup. Sell more from the traffic you have — and in the new AI shopping channels.",
   },
   {
     path: "/security-compliance",
-    title: "HIPAA, ABDM & SOC 2 Compliant Development | MnT",
+    title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT",
     description:
-      "Compliance engineered into the architecture — HIPAA, ABDM/FHIR, GDPR, ISO 27001, SOC 2. How MnT keeps health and commerce data safe.",
+      "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2, and CCPA/CPRA privacy.",
   },
   {
     path: "/about",
     title: "About MnT — Magizh NexGen Technologies",
     description:
-      "MnT (Magizh NexGen Technologies) — a healthcare & e-commerce software development company. A senior team building compliant platforms, India and global.",
+      "MnT (Magizh NexGen Technologies) builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team — land small, expand big.",
   },
   {
     path: "/contact",
-    title: "Contact MnT — Start a Project",
+    title: "Contact MnT — Book a Free Architecture Workshop",
     description:
-      "Start a project with MnT. Book a 30-minute discovery call with a senior engineer for healthcare or e-commerce software development. India + global.",
+      "Book a free architecture workshop or agent-readiness audit with a senior MnT engineer. AI-native, agent-ready commerce for US D2C and marketplace brands.",
   },
 ];
 

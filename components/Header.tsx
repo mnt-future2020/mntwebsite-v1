@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
-import { healthcareNav, ecommerceNav, companyNav, NavGroup } from "@/lib/site";
+import { commerceNav, aiNav, companyNav, NavGroup } from "@/lib/site";
 
 function MegaMenu({ group }: { group: NavGroup }) {
   return (
@@ -66,17 +66,17 @@ export default function Header() {
         <nav className="hidden items-center gap-1 lg:flex">
           <div className="group relative">
             <button className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-ink transition-colors hover:text-brand-700">
-              Healthcare
+              Commerce
               <Icon name="arrow" className="h-3.5 w-3.5 rotate-90 opacity-50" />
             </button>
-            <MegaMenu group={healthcareNav} />
+            <MegaMenu group={commerceNav} />
           </div>
           <div className="group relative">
             <button className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-ink transition-colors hover:text-brand-700">
-              E-Commerce
+              AI &amp; Agents
               <Icon name="arrow" className="h-3.5 w-3.5 rotate-90 opacity-50" />
             </button>
-            <MegaMenu group={ecommerceNav} />
+            <MegaMenu group={aiNav} />
           </div>
           <Link
             href="/work"
@@ -116,7 +116,7 @@ export default function Header() {
 
         <div className="hidden lg:block">
           <Link href="/contact" className="btn-primary">
-            Start a project
+            Book a workshop
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </div>
@@ -138,7 +138,7 @@ export default function Header() {
       {/* Mobile menu */}
       {open && (
         <div className="fixed inset-x-0 top-[68px] z-40 h-[calc(100dvh-68px)] overflow-y-auto border-t border-slate-100 bg-white px-5 py-6 lg:hidden">
-          {[healthcareNav, ecommerceNav].map((group) => (
+          {[commerceNav, aiNav].map((group) => (
             <div key={group.label} className="border-b border-slate-100 py-2">
               <button
                 onClick={() => setMobileGroup(mobileGroup === group.label ? null : group.label)}
@@ -179,7 +179,7 @@ export default function Header() {
             About
           </Link>
           <Link href="/contact" onClick={() => setOpen(false)} className="btn-primary mt-6 w-full">
-            Start a project
+            Book a workshop
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </div>

@@ -14,8 +14,8 @@ export default function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
-              MnT (Magizh NexGen Technologies) — a healthcare and e-commerce software
-              development company. Two specialisms, one senior team. India + global.
+              MnT (Magizh NexGen Technologies) — we build AI-native, agent-ready
+              commerce platforms for US D2C &amp; marketplace brands.
             </p>
             <div className="mt-6 flex gap-3">
               {[
@@ -43,7 +43,7 @@ export default function Footer() {
                 Newsletter
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/65">
-                Occasional, practical notes on healthcare &amp; e-commerce engineering. No spam.
+                Occasional, practical notes on AI-native, agent-ready commerce. No spam.
               </p>
               <div className="mt-4">
                 <NewsletterForm source="footer" />

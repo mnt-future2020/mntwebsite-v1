@@ -29,6 +29,7 @@ export type HubConfig = {
   audiencesTitle: string;
   audiences: { icon: IconName; title: string; desc: string }[];
   stats: { value: string; label: string }[];
+  addOns?: { icon: IconName; title: string; desc: string }[];
   faq: QA[];
   cta: { title: string; body: string };
 };
@@ -48,7 +49,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
     "@type": "Service",
     serviceType: config.h1,
     provider: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)" },
-    areaServed: ["India", "United States", "Middle East", "Europe"],
+    areaServed: ["United States"],
   };
 
   return (
@@ -72,7 +73,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{config.heroSub}</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link href="/contact" className="btn-primary">
-                  Start a project <Icon name="arrow" className="h-4 w-4" />
+                  Book a workshop <Icon name="arrow" className="h-4 w-4" />
                 </Link>
                 <Link href="#services" className="btn-outline-light">
                   See what we build
@@ -177,7 +178,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
           <SectionHeading
             eyebrow="How we work"
             title="Discovery → Build → Certify → Scale"
-            subtitle="A delivery model designed for regulated, revenue-critical software — predictable, transparent, and senior-led."
+            subtitle="A delivery model built for revenue-critical commerce — predictable, transparent, and senior-led."
           />
           <div className="mt-14">
             <Process />
@@ -196,6 +197,31 @@ export default function HubPage({ config }: { config: HubConfig }) {
           <FAQ items={config.faq} />
         </div>
       </section>
+
+      {config.addOns && config.addOns.length > 0 && (
+        <section className="bg-soft py-20 sm:py-28">
+          <div className="container-mnt">
+            <SectionHeading
+              eyebrow="Add-ons"
+              title="Bundle these onto any build"
+              subtitle="Attach to a platform build — sold as part of the engagement, not standalone."
+            />
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {config.addOns.map((a, i) => (
+                <Reveal key={a.title} delay={i * 70}>
+                  <SpotlightCard className="card card-hover group h-full">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
+                      <Icon name={a.icon} className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-bold text-ink">{a.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-slatey">{a.desc}</p>
+                  </SpotlightCard>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CTASection title={config.cta.title} body={config.cta.body} />
     </>

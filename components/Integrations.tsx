@@ -7,7 +7,7 @@ const integrations: { slug: string; color?: string }[] = [
   { slug: "shopify" },
   { slug: "woocommerce" },
   { slug: "stripe" },
-  { slug: "razorpay" },
+  { slug: "openai" },
   { slug: "paypal" },
   { slug: "mailchimp", color: "#C99A0B" },
   { slug: "googlecloud" },
@@ -41,7 +41,7 @@ export default function Integrations() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-slatey">
-          …and many more — EHR/EMR systems, ABDM/FHIR networks, ERPs, logistics and analytics.
+          …and many more — ERP, OMS, PIM &amp; CDP, 3PL/logistics, tax engines, and the agentic protocols (ACP, UCP, MCP).
         </p>
       </div>
     </section>

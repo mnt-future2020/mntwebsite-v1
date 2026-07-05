@@ -13,10 +13,10 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  siteName: "MnT — Healthcare & E-Commerce Software Development",
+  siteName: "MnT — AI-Native, Agent-Ready Commerce Platforms",
   titleTemplate: "%s | MnT",
   defaultDescription:
-    "We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global.",
+    "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
   defaultOgImage: null,
   gaMeasurementId: null,
   gscVerification: null,
@@ -45,8 +45,8 @@ export async function getSeoOverride(path: string) {
 // The marketing pages whose SEO can be overridden from the admin.
 export const SITE_PATHS: { path: string; label: string }[] = [
   { path: "/", label: "Home" },
-  { path: "/healthcare-software-development", label: "Healthcare hub" },
-  { path: "/ecommerce-development", label: "E-Commerce hub" },
+  { path: "/commerce", label: "Commerce Platforms hub" },
+  { path: "/ai-agents", label: "AI & Agents hub" },
   { path: "/security-compliance", label: "Security & Compliance" },
   { path: "/about", label: "About" },
   { path: "/contact", label: "Contact" },

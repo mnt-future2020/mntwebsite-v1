@@ -30,7 +30,7 @@ export const caseStudies: CaseStudy[] = [
     title: "LOBBI",
     tagline: "India's all-in-one sports & turf booking platform",
     type: "Platform · Built by MnT",
-    category: "Sports & fitness · Two-sided marketplace",
+    category: "Two-sided marketplace · AI booking agent",
     cover: "/work/lobbi-cover-v2.png",
     heroShot: "/work/lobbi-owner.webp",
     liveUrl: "https://lobbi.in",

@@ -3,11 +3,11 @@ import Icon from "./Icon";
 import Reveal from "./Reveal";
 
 export default function CTASection({
-  eyebrow = "Start a project",
-  title = "Tell us what you're building. We'll tell you how we'd build it.",
-  body = "A 30-minute discovery call with a senior engineer — not a sales rep. Walk away with a clear scope, a realistic timeline, and an honest budget range.",
-  primary = { label: "Book a discovery call", href: "/contact" },
-  secondary = { label: "See our process", href: "/about#process" },
+  eyebrow = "Free architecture workshop",
+  title = "Tell us what you're building. We'll show you how we'd build it.",
+  body = "A free architecture workshop with a senior engineer — we sketch how we'd build it: data model, APIs, and a scalability plan. Or get a free agent-readiness audit of your store.",
+  primary = { label: "Book a free workshop", href: "/contact" },
+  secondary = { label: "See our work", href: "/work" },
 }: {
   eyebrow?: string;
   title?: string;

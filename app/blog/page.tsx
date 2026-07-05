@@ -10,9 +10,9 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/blog", {
-    title: "Blog — Healthcare & E-Commerce Engineering Insights | MnT",
+    title: "Blog — AI-Native, Agent-Ready Commerce Insights | MnT",
     description:
-      "Guides and insights on healthcare software, ABDM/FHIR, e-commerce, and vertical SaaS — from the senior engineers at MnT.",
+      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance — from the senior engineers at MnT.",
   });
 }
 
@@ -27,11 +27,11 @@ export default async function BlogIndex() {
         <div className="container-mnt relative py-16 sm:py-20">
           <span className="eyebrow-dark">Insights</span>
           <h1 className="mt-6 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
-            Engineering insights for healthcare &amp; commerce founders.
+            Engineering insights for US commerce founders.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
-            Practical guides on building compliant healthcare software, ABDM/FHIR, e-commerce,
-            and vertical SaaS — written by the people who ship it.
+            Practical guides on AI-native commerce, agent-ready selling, headless builds,
+            and US commerce compliance — written by the people who ship it.
           </p>
         </div>
       </section>

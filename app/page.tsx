@@ -16,54 +16,54 @@ import { caseStudies } from "@/lib/caseStudies";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
-    title: "MnT — Healthcare & E-Commerce Software Development",
+    title: "MnT — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global. Start your build.",
+      "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
   });
 }
 
 const whyMnt = [
   {
-    icon: "users" as const,
-    title: "A senior team, not a staffing pool",
-    desc: "Every line is written by engineers who've shipped regulated, high-traffic systems. No juniors learning on your budget.",
+    icon: "ai" as const,
+    title: "AI-native by default",
+    desc: "AI search, recommendations, assistants, and agents — built into the product where they lift revenue and gated behind evaluations. Not a bolted-on chatbot.",
+  },
+  {
+    icon: "network" as const,
+    title: "Agent-ready before your competitors",
+    desc: "ACP, Google UCP, and a Retail MCP server make your store discoverable and buyable by AI shopping agents — an emerging $900B–$1T channel.",
   },
   {
     icon: "shield" as const,
-    title: "Compliance is architecture",
-    desc: "HIPAA, ABDM, FHIR, SOC 2 and GDPR are designed into the system from day one — never retrofitted before an audit.",
+    title: "US compliance engineered in",
+    desc: "ADA/WCAG accessibility, PCI DSS v4.0.1, and multi-state sales-tax handled from day one — the obligations that start the moment a US store goes live.",
   },
   {
-    icon: "ai" as const,
-    title: "AI-native by default",
-    desc: "From ambient clinical scribes to commerce personalisation, we build AI into the product where it earns its place.",
-  },
-  {
-    icon: "bolt" as const,
-    title: "Built for speed",
-    desc: "Two-week sprints, working software every cycle, and Core Web Vitals treated as a feature — not an afterthought.",
+    icon: "compass" as const,
+    title: "Land small, expand big",
+    desc: "Start with a productized pilot that proves ROI in weeks, grow into a dedicated pod, and expand into a full platform build — senior engineers the whole way.",
   },
 ];
 
 const engagement = [
   {
     icon: "compass" as const,
-    title: "Fixed-bid build",
-    desc: "Defined scope, fixed price, fixed timeline. Best when the spec is clear and you want budget certainty.",
-    points: ["Clear milestones", "Predictable cost", "Ideal for MVPs & v1"],
+    title: "Land",
+    desc: "A productized paid pilot that proves ROI in weeks — AI Commerce Starter, AI Cleanup, or an agent-readiness audit. Small scope, fast proof.",
+    points: ["Fixed, focused scope", "Live in weeks", "Clear, measured outcome"],
   },
   {
     icon: "users" as const,
-    title: "Dedicated team",
-    desc: "An embedded senior squad working as your product team — flexing scope sprint to sprint.",
+    title: "Grow",
+    desc: "A dedicated senior pod working as your embedded product team on a monthly retainer — flexing scope sprint to sprint.",
     points: ["Senior engineers", "Sprint flexibility", "Scales up or down"],
     featured: true,
   },
   {
     icon: "rocket" as const,
-    title: "Co-founding partner",
-    desc: "We build alongside you — part fee, part stake — for founders who want a true technical partner.",
-    points: ["Aligned incentives", "Long-term ownership", "Hands-on senior leadership"],
+    title: "Expand",
+    desc: "A full platform build — headless, marketplace, or B2B — engineered to scale, plus embedded AI agents and a managed SLA.",
+    points: ["Full platform builds", "AI agents & automation", "Managed & compliant"],
   },
 ];
 
@@ -76,13 +76,13 @@ export default function Home() {
       <section className="border-b border-slate-100 bg-white py-12">
         <div className="container-mnt">
           <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-slatey">
-            Trusted to engineer regulated, revenue-critical software
+            Trusted to engineer revenue-critical commerce for US brands
           </p>
           <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
-            <Stat value="2" label="Deep specialisms — healthcare & commerce" />
+            <Stat value="AI-native" label="Search, recs, assistants &amp; agents built in" />
+            <Stat value="Agent-ready" label="ACP · Google UCP · Retail MCP" />
+            <Stat value="US-compliant" label="ADA · PCI DSS · sales-tax handled" />
             <Stat value="100%" label="Senior-engineer delivery" />
-            <Stat value="5+" label="Compliance frameworks engineered in" />
-            <Stat value="Global" label="India-based · US, Gulf &amp; Europe delivery" />
           </div>
         </div>
         <StackMarquee className="mt-12" />
@@ -91,31 +91,31 @@ export default function Home() {
       {/* TWO VERTICALS */}
       <section id="verticals" className="container-mnt py-20 sm:py-28">
         <SectionHeading
-          eyebrow="Two specialisms"
-          title="We go deep in two worlds — not wide across many."
-          subtitle="Generalists build everything adequately. We build healthcare and commerce platforms exceptionally. Pick your vertical."
+          eyebrow="Two sides, one platform"
+          title="Commerce platforms — and the AI that sells them."
+          subtitle="We build the platform, then make it AI-native and agent-ready. Start on either side — most brands do both."
         />
         <div className="mt-14 grid gap-7 lg:grid-cols-2">
           {[
             {
-              icon: "stethoscope" as const,
-              kicker: "Healthcare",
-              title: "Healthcare software development",
-              desc: "Compliant platforms for providers and healthtech founders — telemedicine, EHR/EMR, hospital management, AI, and ABDM/FHIR integration.",
-              href: "/healthcare-software-development",
-              image: images.healthcare,
-              count: "7 service areas",
-              items: ["Custom healthcare software", "Telemedicine · EHR/EMR", "ABDM / FHIR integration", "SaaS for healthtech startups"],
+              icon: "store" as const,
+              kicker: "Commerce Platforms",
+              title: "Commerce platform development",
+              desc: "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
+              href: "/commerce",
+              image: images.commerce,
+              count: "4 services",
+              items: ["Headless & marketplaces", "Integrations & orchestration", "B2B / wholesale", "Managed & compliant"],
             },
             {
-              icon: "cart" as const,
-              kicker: "E-Commerce",
-              title: "E-commerce development",
-              desc: "Stores and platforms engineered to convert and scale — custom builds, D2C brand platforms, marketplaces, Shopify, headless, and B2B.",
-              href: "/ecommerce-development",
-              image: images.ecommerce,
-              count: "7 service areas",
-              items: ["Custom & headless commerce", "D2C & marketplaces", "Shopify & mobile apps", "SaaS for commerce startups"],
+              icon: "ai" as const,
+              kicker: "AI & Agents",
+              title: "AI & agents for commerce",
+              desc: "AI search, recommendations & assistants, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup for MVPs that broke at scale.",
+              href: "/ai-agents",
+              image: images.ai,
+              count: "4 services",
+              items: ["AI search & recommendations", "Agent-ready commerce", "Embedded AI agents", "AI cleanup"],
             },
           ].map((v, i) => (
             <Reveal key={v.kicker} delay={i * 100}>

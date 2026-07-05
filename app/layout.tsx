@@ -21,12 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: s.siteName, template: s.titleTemplate },
     description: s.defaultDescription,
     keywords: [
-      "healthcare software development company",
+      "AI commerce platform development",
+      "agent-ready commerce",
+      "agentic commerce ACP",
+      "headless commerce development",
       "ecommerce development company",
-      "custom healthcare software development",
-      "telemedicine app development",
-      "shopify development agency",
-      "ABDM FHIR integration",
+      "US D2C commerce agency",
       "Magizh NexGen Technologies",
     ],
     openGraph: {

@@ -11,29 +11,29 @@ export default function Hero() {
 
       <div className="container-mnt relative grid items-center gap-12 pb-20 pt-14 sm:pt-16 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16 lg:pb-28 lg:pt-20">
         <div className="animate-fade-up">
-          <span className="eyebrow-dark">Healthcare &amp; e-commerce specialists</span>
+          <span className="eyebrow-dark">AI-native, agent-ready commerce</span>
           <h1 className="mt-7 font-display text-[2.6rem] font-extrabold leading-[1.06] tracking-tight sm:text-[3.6rem]">
-            We build the platforms{" "}
-            <span className="text-brand-300">healthcare and commerce</span> run on.
+            We build commerce platforms{" "}
+            <span className="text-brand-300">ready for AI</span> — and the agents now driving sales.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-            MnT engineers compliant healthcare platforms, high-growth e-commerce
-            stores, and the vertical SaaS products founders take to market. Two
-            specialisms, one senior team — across India and global markets.
+            MnT engineers AI-native, agent-ready commerce for US D2C and marketplace
+            brands — headless &amp; marketplace builds, integrations, B2B, and AI agents
+            that sell in the new agentic channels. Land small, expand big.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/contact" className="btn-primary">
-              Start a project
+              Book a free workshop
               <Icon name="arrow" className="h-4 w-4" />
             </Link>
             <Link href="#verticals" className="btn-outline-light">
-              Explore our work
+              See what we build
             </Link>
           </div>
 
           <div className="mt-11 border-t border-white/10 pt-6">
             <div className="flex flex-wrap items-center gap-x-7 gap-y-3 text-xs font-medium text-white/55">
-              {["HIPAA", "ABDM / FHIR", "ISO 27001", "SOC 2", "GDPR"].map((c) => (
+              {["Agent-ready", "ADA / WCAG", "PCI DSS v4.0.1", "SOC 2", "US sales-tax"].map((c) => (
                 <span key={c} className="inline-flex items-center gap-2">
                   <Icon name="shield" className="h-4 w-4 text-brand-300" />
                   {c}
@@ -49,7 +49,7 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-[1.75rem] ring-1 ring-white/10 shadow-2xl">
             <Image
               src={images.hero}
-              alt="A clinician using MnT software on a laptop"
+              alt="MnT AI-native commerce platform"
               width={1600}
               height={1200}
               priority
@@ -62,7 +62,7 @@ export default function Hero() {
                 <Icon name="check" className="h-5 w-5" />
               </span>
               <p className="text-sm leading-snug text-white/85">
-                Compliant by design — from first commit to certification.
+                AI-native and agent-ready — built to sell to people and to AI.
               </p>
             </div>
           </div>

@@ -7,16 +7,16 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/contact", {
-    title: "Contact MnT — Start a Project",
+    title: "Contact MnT — Book a Free Architecture Workshop",
     description:
-      "Start a project with MnT. Book a 30-minute discovery call with a senior engineer for healthcare or e-commerce software development. India + global.",
+      "Book a free architecture workshop or agent-readiness audit with a senior MnT engineer. AI-native, agent-ready commerce for US D2C and marketplace brands.",
   });
 }
 
 const expect: { icon: IconName; title: string; desc: string }[] = [
+  { icon: "compass", title: "A free architecture workshop", desc: "We sketch how we'd build it — data model, APIs, and a scalability plan you can keep." },
+  { icon: "network", title: "Or a free agent-readiness audit", desc: "We assess your data, feeds, and AI-channel visibility, and show you where the revenue is." },
   { icon: "users", title: "A senior engineer, not a sales rep", desc: "You talk to someone who can actually scope and build what you need." },
-  { icon: "compass", title: "A clear scope & timeline", desc: "Leave the first call with a realistic plan — not a vague proposal weeks later." },
-  { icon: "shield", title: "An honest budget range", desc: "We'll tell you what it really costs and recommend the right engagement for your stage." },
 ];
 
 export default function Contact() {
@@ -29,13 +29,13 @@ export default function Contact() {
         <div className="container-mnt relative pb-20 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
           <div className="mt-8 max-w-3xl animate-fade-up">
-            <span className="eyebrow-dark">Start a project</span>
+            <span className="eyebrow-dark">Free workshop · Free audit</span>
             <h1 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-[3.2rem]">
               Tell us what you&apos;re building.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-              Whether it&apos;s a compliant healthcare platform or a store built to scale, the first
-              step is a 30-minute discovery call. No obligation, no jargon.
+              Whether you&apos;re planning a headless build, going agent-ready, or cleaning up an MVP,
+              start with a free architecture workshop or agent-readiness audit. No obligation, no jargon.
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function Contact() {
                   <Icon name="globe" className="h-5 w-5 text-brand-200" /> {site.domain}
                 </span>
                 <span className="flex items-center gap-3 text-white/80">
-                  <Icon name="pin" className="h-5 w-5 text-brand-200" /> India · serving US, Middle East &amp; Europe
+                  <Icon name="pin" className="h-5 w-5 text-brand-200" /> Built for US D2C &amp; marketplace brands
                 </span>
               </div>
             </div>

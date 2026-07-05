@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/about", {
     title: "About MnT — Magizh NexGen Technologies",
     description:
-      "MnT (Magizh NexGen Technologies) — a healthcare & e-commerce software development company. A senior team building compliant platforms, India and global.",
+      "MnT (Magizh NexGen Technologies) builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team — land small, expand big.",
   });
 }
 
@@ -37,13 +37,12 @@ export default function About() {
           <div className="mt-8 max-w-3xl animate-fade-up">
             <span className="eyebrow-dark">About MnT</span>
             <h1 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-[3.4rem]">
-              A senior team that builds two things exceptionally well.
+              A senior team building commerce ready for AI.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-              MnT — Magizh NexGen Technologies — is a healthcare and e-commerce software
-              development company. We deliberately don&apos;t build everything. We build compliant
-              healthcare platforms and high-growth commerce stores, for clients across India and
-              global markets.
+              MnT — Magizh NexGen Technologies — builds AI-native, agent-ready commerce platforms
+              for US D2C and marketplace brands. We deliberately don&apos;t build everything. We build
+              commerce, and the AI that sells it.
             </p>
           </div>
         </div>
@@ -61,28 +60,29 @@ export default function About() {
             />
             <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-slatey">
               <p>
-                We made a different bet: go deep in two verticals where engineering quality and
-                compliance genuinely decide whether a product succeeds — <strong className="text-ink">healthcare</strong> and{" "}
-                <strong className="text-ink">e-commerce</strong>.
+                We made a different bet: focus on US commerce, where engineering quality, conversion,
+                and compliance genuinely decide whether a brand wins — and where AI is rewriting how
+                people, and now <strong className="text-ink">agents</strong>, buy.
               </p>
               <p>
-                In healthcare, that means platforms that pass HIPAA and ABDM/FHIR certification and
-                hold up in clinical reality. In commerce, it means stores engineered for conversion,
-                Core Web Vitals, and scale. One senior team, two specialisms, no dilution.
+                On the platform side, that means <strong className="text-ink">headless &amp; marketplace
+                builds</strong>, integrations, and B2B — engineered for Core Web Vitals, scale, and US
+                compliance (ADA, PCI DSS, sales-tax). On the <strong className="text-ink">AI &amp; agents</strong>{" "}
+                side, it means search, recommendations, embedded agents, and making your store agent-ready
+                for the emerging $900B–$1T channel.
               </p>
               <p>
-                And for funded startups in both verticals, we go further than client work — we build
-                the <strong className="text-ink">vertical SaaS</strong> product itself: the
-                multi-tenant, subscription platform you take to market, from first MVP to a system
-                ready to raise on.
+                We <strong className="text-ink">land small and expand big</strong>: a productized pilot
+                that proves ROI in weeks, a dedicated pod as you grow, and a full platform build when
+                you&apos;re ready. One senior team, no dilution.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/healthcare-software-development" className="btn-ghost">
-                <Icon name="stethoscope" className="h-4 w-4" /> Healthcare
+              <Link href="/commerce" className="btn-ghost">
+                <Icon name="store" className="h-4 w-4" /> Commerce Platforms
               </Link>
-              <Link href="/ecommerce-development" className="btn-ghost">
-                <Icon name="cart" className="h-4 w-4" /> E-Commerce
+              <Link href="/ai-agents" className="btn-ghost">
+                <Icon name="ai" className="h-4 w-4" /> AI &amp; Agents
               </Link>
             </div>
           </Reveal>
@@ -99,10 +99,10 @@ export default function About() {
               </div>
               <div className="p-8 sm:p-10">
                 <div className="grid grid-cols-2 gap-6">
-                  <Stat value="2" label="Deep specialisms" />
+                  <Stat value="8" label="Commerce &amp; AI services" />
                   <Stat value="100%" label="Senior delivery" />
-                  <Stat value="5+" label="Compliance frameworks" />
-                  <Stat value="4" label="Markets — India · US · Gulf · EU" />
+                  <Stat value="US" label="D2C &amp; marketplace focus" />
+                  <Stat value="AI-native" label="Agent-ready by design" />
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function About() {
         <SectionHeading
           eyebrow="How we work"
           title="Discovery → Build → Certify → Scale"
-          subtitle="A delivery model built for regulated, revenue-critical software — transparent, senior-led, and shipping working software every sprint."
+          subtitle="A delivery model built for revenue-critical commerce — transparent, senior-led, and shipping working software every sprint."
         />
         <div className="mt-14">
           <Process />

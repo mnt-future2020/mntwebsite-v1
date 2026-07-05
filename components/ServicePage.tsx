@@ -10,7 +10,7 @@ import { SectionHeading, Process, CheckList, Breadcrumbs } from "./blocks";
 import { site } from "@/lib/site";
 
 export type ServiceConfig = {
-  slug: string; // full path e.g. /healthcare-software-development/custom
+  slug: string; // full path e.g. /commerce/headless-marketplace
   parent: { label: string; href: string };
   breadcrumb: { label: string; href?: string }[];
   eyebrow: string;
@@ -45,7 +45,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
     "@type": "Service",
     serviceType: config.primaryKeyword,
     provider: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)" },
-    areaServed: ["India", "United States", "Middle East", "Europe"],
+    areaServed: ["United States"],
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -80,7 +80,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{config.heroSub}</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link href="/contact" className="btn-primary">
-                  Start a project <Icon name="arrow" className="h-4 w-4" />
+                  Book a workshop <Icon name="arrow" className="h-4 w-4" />
                 </Link>
                 <Link href={config.parent.href} className="btn-outline-light">
                   Back to {config.parent.label}
@@ -174,7 +174,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
           <SectionHeading
             eyebrow="How we work"
             title="Discovery → Build → Certify → Scale"
-            subtitle="A senior-led delivery model built for regulated, revenue-critical software — predictable and transparent."
+            subtitle="A senior-led delivery model built for revenue-critical commerce — predictable and transparent."
           />
           <div className="mt-14">
             <Process />

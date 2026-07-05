@@ -9,48 +9,48 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
-    title: "HIPAA, ABDM & SOC 2 Compliant Development | MnT",
+    title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT",
     description:
-      "Compliance engineered into the architecture — HIPAA, ABDM/FHIR, GDPR, ISO 27001, SOC 2. How MnT keeps health and commerce data safe.",
+      "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2, and CCPA/CPRA privacy.",
   });
 }
 
 const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }[] = [
   {
-    name: "HIPAA",
+    name: "ADA / WCAG",
     icon: "shield",
-    desc: "Encryption, audit logging, access control, and BAAs — built into healthcare platforms from the first sprint.",
-    tags: ["PHI security", "Audit trails", "Access control"],
+    desc: "Roughly 78% of accessibility lawsuits target e-commerce. We build to WCAG 2.2 AA and keep your store conformant as it changes.",
+    tags: ["WCAG 2.2 AA", "Screen readers", "Keyboard nav"],
   },
   {
-    name: "ABDM & FHIR",
-    icon: "network",
-    desc: "HIP/HIU setup, consent, ABHA linking, and the sandbox-to-certified pathway for India's national health stack.",
-    tags: ["HIP / HIU", "Consent mgmt", "FHIR APIs"],
-  },
-  {
-    name: "ISO 27001",
+    name: "PCI DSS v4.0.1",
     icon: "lock",
-    desc: "Information-security management practices engineered into your build and our delivery pipeline.",
-    tags: ["ISMS", "Risk controls", "Policies"],
+    desc: "Payment flows architected so card data stays out of scope — tokenised, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
+    tags: ["Tokenisation", "Scope reduction", "Continuous controls"],
+  },
+  {
+    name: "Sales-tax & nexus",
+    icon: "records",
+    desc: "Multi-state US sales-tax and economic-nexus handled through Avalara / Anrok — accurate calculation and filing readiness.",
+    tags: ["Economic nexus", "Avalara / Anrok", "Multi-state"],
   },
   {
     name: "SOC 2",
-    icon: "records",
-    desc: "Security, availability, and confidentiality controls — designed for the audit, validated continuously.",
+    icon: "gauge",
+    desc: "Security, availability, and confidentiality controls — designed for the audit and validated continuously in CI/CD.",
     tags: ["Trust criteria", "Monitoring", "Evidence"],
   },
   {
-    name: "GDPR",
+    name: "US data privacy",
     icon: "globe",
-    desc: "Data-residency, consent, and subject-rights handling for India, US (CMS) and EU markets.",
-    tags: ["Data residency", "Consent", "DSARs"],
+    desc: "CCPA / CPRA consent, data-subject rights, and retention handling for US consumer data — engineered in, not bolted on.",
+    tags: ["CCPA / CPRA", "Consent", "DSAR"],
   },
   {
-    name: "PCI-aware commerce",
-    icon: "cart",
-    desc: "Payment flows architected so sensitive card data stays out of scope — tokenised, gateway-handled, audited.",
-    tags: ["Tokenisation", "UPI / cards", "Secure checkout"],
+    name: "Agent-ready integrity",
+    icon: "network",
+    desc: "AI agents only transact on trustworthy data. We keep price and inventory accurate and feeds structured for the agentic channel.",
+    tags: ["Real-time sync", "Feed accuracy", "ACP / MCP"],
   },
 ];
 
@@ -78,9 +78,9 @@ export default function SecurityCompliance() {
               Compliance isn&apos;t a checkbox. It&apos;s architecture.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-              Whether it&apos;s protected health information or payment data, the safest systems are
-              the ones where security and compliance were design decisions — not last-minute patches.
-              Here&apos;s how MnT keeps health and commerce data safe.
+              For a US store, accessibility, payment security, and sales-tax are liabilities the day
+              you launch. The safest systems are the ones where compliance was a design decision — not
+              a last-minute patch. Here&apos;s how MnT builds it in.
             </p>
             <div className="mt-9">
               <Link href="/contact" className="btn-primary">
@@ -130,7 +130,7 @@ export default function SecurityCompliance() {
               align="left"
               eyebrow="How we engineer it"
               title="Five principles behind every secure build."
-              subtitle="The same engineering discipline whether we're building a telemedicine app or a checkout that handles thousands of transactions a minute."
+              subtitle="The same engineering discipline whether we're hardening a checkout that handles thousands of transactions a minute or making a store agent-ready."
             />
           </Reveal>
           <Reveal delay={120}>
@@ -145,36 +145,37 @@ export default function SecurityCompliance() {
       <section className="container-mnt py-20 sm:py-28">
         <SectionHeading
           eyebrow="By vertical"
-          title="Different data, same discipline."
+          title="Different surface, same discipline."
         />
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-card sm:p-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
-                <Icon name="stethoscope" className="h-6 w-6" />
+                <Icon name="store" className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-xl font-bold text-ink">Healthcare data</h3>
+              <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce platforms</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
-                PHI demands the highest bar. We engineer HIPAA-aligned platforms with ABDM/FHIR
-                interoperability and the certification pathway handled end to end.
+                Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenised
+                payments, and WCAG-conformant, secure checkout — with US sales-tax handled, without
+                slowing the store down.
               </p>
-              <Link href="/healthcare-software-development" className="link-arrow mt-6">
-                Healthcare software development <Icon name="arrow" className="h-4 w-4" />
+              <Link href="/commerce" className="link-arrow mt-6">
+                Commerce platform development <Icon name="arrow" className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>
           <Reveal delay={100}>
             <div className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-card sm:p-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
-                <Icon name="cart" className="h-6 w-6" />
+                <Icon name="ai" className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce data</h3>
+              <h3 className="mt-5 font-display text-xl font-bold text-ink">AI &amp; agents</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
-                Customer and payment data stay protected through PCI-aware architecture, tokenised
-                payments, and secure checkout — without slowing the store down.
+                AI ships with guardrails — evaluation gates, human-in-the-loop oversight, and accurate
+                real-time data so agents transact correctly and safely in AI channels.
               </p>
-              <Link href="/ecommerce-development" className="link-arrow mt-6">
-                E-commerce development <Icon name="arrow" className="h-4 w-4" />
+              <Link href="/ai-agents" className="link-arrow mt-6">
+                AI &amp; agents for commerce <Icon name="arrow" className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>
@@ -184,9 +185,9 @@ export default function SecurityCompliance() {
       <CTASection
         eyebrow="Compliance review"
         title="Have a compliance requirement? Let's map it before you build."
-        body="Bring your regulatory surface — HIPAA, ABDM, SOC 2, GDPR — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
-        primary={{ label: "Book a compliance call", href: "/contact" }}
-        secondary={{ label: "Explore the verticals", href: "/" }}
+        body="Bring your regulatory surface — ADA, PCI DSS, sales-tax, SOC 2 — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
+        primary={{ label: "Book a workshop", href: "/contact" }}
+        secondary={{ label: "Explore what we build", href: "/" }}
       />
     </>
   );

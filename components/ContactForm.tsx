@@ -14,7 +14,7 @@ export default function ContactForm() {
     name: "",
     email: "",
     company: "",
-    vertical: "Healthcare software / SaaS",
+    vertical: "Commerce platform build",
     budget: "Not sure yet",
     message: "",
   });
@@ -52,12 +52,12 @@ export default function ContactForm() {
         <h3 className="mt-5 font-display text-2xl font-bold text-ink">Thanks, {form.name.split(" ")[0] || "there"}.</h3>
         <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-slatey">
           Your message is in. A senior engineer — not a sales rep — will reply within one business
-          day to set up your discovery call.
+          day to set up your free workshop.
         </p>
         <button
           onClick={() => {
             setSent(false);
-            setForm({ name: "", email: "", company: "", vertical: "Healthcare software / SaaS", budget: "Not sure yet", message: "" });
+            setForm({ name: "", email: "", company: "", vertical: "Commerce platform build", budget: "Not sure yet", message: "" });
           }}
           className="btn-ghost mt-7"
         >
@@ -96,9 +96,10 @@ export default function ContactForm() {
             What are you building?
           </label>
           <select id="vertical" value={form.vertical} onChange={(e) => update("vertical", e.target.value)} className={fieldClass}>
-            <option>Healthcare software / SaaS</option>
-            <option>E-commerce / commerce SaaS</option>
-            <option>Both / not sure</option>
+            <option>Commerce platform build</option>
+            <option>AI &amp; agents</option>
+            <option>AI cleanup / MVP hardening</option>
+            <option>Not sure yet</option>
           </select>
         </div>
       </div>
@@ -109,8 +110,8 @@ export default function ContactForm() {
         </label>
         <select id="budget" value={form.budget} onChange={(e) => update("budget", e.target.value)} className={fieldClass}>
           <option>Not sure yet</option>
-          <option>Under $25k / ₹15L</option>
-          <option>$25k–$75k / ₹15L–₹50L</option>
+          <option>Under $25k</option>
+          <option>$25k–$75k</option>
           <option>$75k–$200k</option>
           <option>$200k+</option>
         </select>
@@ -137,7 +138,7 @@ export default function ContactForm() {
           </>
         ) : (
           <>
-            Send &amp; book a call <Icon name="arrow" className="h-4 w-4" />
+            Send &amp; book a workshop <Icon name="arrow" className="h-4 w-4" />
           </>
         )}
       </button>

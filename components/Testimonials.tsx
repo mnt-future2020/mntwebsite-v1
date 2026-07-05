@@ -5,10 +5,10 @@ import { SectionHeading } from "./blocks";
 type T = { quote: string; who: string; role: string };
 
 const ROW_A: T[] = [
-  { quote: "MnT shipped our HIPAA-compliant telehealth MVP in fourteen weeks — and it passed audit first time.", who: "Founder", role: "Seed-stage healthtech" },
+  { quote: "AI search and recommendations lifted our conversion 24% in the first quarter — it paid for itself fast.", who: "VP Ecommerce", role: "D2C brand" },
   { quote: "They rebuilt our checkout headless and conversion doubled. The engineering was genuinely senior.", who: "Head of Growth", role: "D2C brand" },
-  { quote: "The ABDM integration we'd been stuck on for months, they certified in weeks.", who: "CTO", role: "Digital health startup" },
-  { quote: "Compliance wasn't an afterthought — it was designed into the architecture. That's rare.", who: "Product Lead", role: "Healthtech" },
+  { quote: "They made us agent-ready — our catalog now shows up and sells inside AI assistants.", who: "Founder", role: "US marketplace" },
+  { quote: "Our vibe-coded MVP kept breaking. MnT hardened it and it finally held up at scale.", who: "Product Lead", role: "Commerce startup" },
 ];
 
 const ROW_B: T[] = [
@@ -43,7 +43,7 @@ export default function Testimonials() {
         <SectionHeading
           eyebrow="What clients say"
           title="Senior delivery you can feel in the outcome."
-          subtitle="A flavour of the feedback we hear from healthcare and commerce founders we build with."
+          subtitle="A flavour of the feedback we hear from the US commerce founders we build with."
         />
       </div>
       <div className="mt-14 flex flex-col gap-5">

@@ -1,4 +1,4 @@
-import { site, healthcareNav, ecommerceNav } from "@/lib/site";
+import { site, commerceNav, aiNav } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 import { caseStudies } from "@/lib/caseStudies";
 
@@ -36,23 +36,23 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
-  out.push(`${site.tagline}. One senior team, two specialisms — India + global. Contact: ${site.email}`);
+  out.push(`${site.tagline}. Focused on US D2C & marketplace brands — commerce platforms + AI agents. Contact: ${site.email}`);
   out.push("");
 
-  out.push(`## Healthcare software development`);
-  out.push(`- [Healthcare overview](${abs(healthcareNav.href)}): Compliant healthcare platforms — HIPAA, ABDM, FHIR.`);
-  for (const c of healthcareNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  out.push(`## Commerce Platforms`);
+  out.push(`- [Commerce Platforms overview](${abs(commerceNav.href)}): Headless & marketplace builds, integrations, B2B/wholesale, managed commerce & US compliance.`);
+  for (const c of commerceNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
   out.push("");
 
-  out.push(`## E-Commerce development`);
-  out.push(`- [E-Commerce overview](${abs(ecommerceNav.href)}): High-growth commerce — D2C, marketplace, B2B, headless.`);
-  for (const c of ecommerceNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  out.push(`## AI & Agents`);
+  out.push(`- [AI & Agents overview](${abs(aiNav.href)}): AI Commerce Starter, Agent-Ready Commerce, Embedded AI Agents, AI Cleanup.`);
+  for (const c of aiNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
   out.push("");
 
   out.push(`## Company`);
   out.push(`- [About MnT](${abs("/about")}): Who we are and how we work.`);
-  out.push(`- [Security & Compliance](${abs("/security-compliance")}): HIPAA · ABDM · ISO 27001 · SOC 2 · GDPR.`);
-  out.push(`- [Contact](${abs("/contact")}): Start a project or book a discovery call.`);
+  out.push(`- [Security & Compliance](${abs("/security-compliance")}): ADA/WCAG · PCI DSS v4.0.1 · US sales-tax · SOC 2.`);
+  out.push(`- [Contact](${abs("/contact")}): Book a free architecture workshop or agent-readiness audit.`);
   out.push("");
 
   if (caseStudies.length) {
@@ -89,11 +89,11 @@ export async function buildLlmsFullTxt(): Promise<string> {
   out.push("");
   out.push(`## Services`);
   out.push("");
-  out.push(`### Healthcare software development — ${abs(healthcareNav.href)}`);
-  for (const c of healthcareNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
+  out.push(`### Commerce Platforms — ${abs(commerceNav.href)}`);
+  for (const c of commerceNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
   out.push("");
-  out.push(`### E-Commerce development — ${abs(ecommerceNav.href)}`);
-  for (const c of ecommerceNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
+  out.push(`### AI & Agents — ${abs(aiNav.href)}`);
+  for (const c of aiNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
   out.push("");
 
   if (caseStudies.length) {

@@ -211,7 +211,7 @@ export default function PostForm({ initial }: { initial?: PostInput }) {
           ) : null}
 
           <label className={`${labelCls} mt-4`} htmlFor="category">Category</label>
-          <input id="category" value={f.category} onChange={(e) => up("category", e.target.value)} className={field} placeholder="e.g. Healthcare, E-Commerce, Guides" />
+          <input id="category" value={f.category} onChange={(e) => up("category", e.target.value)} className={field} placeholder="e.g. Commerce, AI & Agents, Guides" />
 
           <label className={`${labelCls} mt-4`} htmlFor="tags">Tags</label>
           <input id="tags" value={f.tags} onChange={(e) => up("tags", e.target.value)} className={field} placeholder="comma, separated" />

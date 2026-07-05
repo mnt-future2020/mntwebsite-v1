@@ -8,7 +8,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: { absolute: "Our Work — Case Studies | MnT" },
   description:
-    "Platforms MnT has designed and built — real, live products engineered end to end across healthcare, commerce and beyond.",
+    "Platforms MnT has designed and built — real, live products engineered end to end for US D2C and marketplace brands.",
   alternates: { canonical: "/work" },
 };
 

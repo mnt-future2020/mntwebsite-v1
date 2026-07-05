@@ -6,9 +6,9 @@ export const metadata = {
 };
 
 const links = [
-  { label: "Healthcare software", href: "/healthcare-software-development", icon: "stethoscope" as const },
-  { label: "E-commerce development", href: "/ecommerce-development", icon: "cart" as const },
-  { label: "Start a project", href: "/contact", icon: "rocket" as const },
+  { label: "Commerce Platforms", href: "/commerce", icon: "store" as const },
+  { label: "AI & Agents", href: "/ai-agents", icon: "ai" as const },
+  { label: "Book a free workshop", href: "/contact", icon: "rocket" as const },
   { label: "Back to home", href: "/", icon: "arrow" as const },
 ];
 

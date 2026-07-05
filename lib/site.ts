@@ -5,9 +5,9 @@ export const site = {
   url: "https://mntfuture.com",
   email: "info@mntfuture.com",
   phone: "+91 00000 00000",
-  tagline: "Healthcare & E-Commerce Software Development",
+  tagline: "AI-Native, Agent-Ready Commerce Platforms",
   description:
-    "MnT (Magizh NexGen Technologies) is a healthcare and e-commerce software development company. We engineer compliant healthcare platforms and high-growth commerce stores — one senior team, two specialisms, India + global.",
+    "MnT (Magizh NexGen Technologies) builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
   social: {
     instagram: "https://www.instagram.com/mntfuture",
     linkedin: "https://www.linkedin.com/company/mntfuture",
@@ -20,12 +20,10 @@ const u = (id: string, w = 1400) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
 
 export const images = {
-  hero: u("1576091160550-2173dba999ef", 1600), // clinician on laptop — telemedicine
-  healthcare: u("1505751172876-fa1923c5c528"), // doctor
-  hospital: u("1519494026892-80bbd2d6fd0d"), // hospital corridor
-  ecommerce: u("1556742049-0cfed4f6a45d"), // online payment / shopping
-  packages: u("1563013544-824ae1b704d3"), // D2C packaging / fulfilment
-  mobileShopping: u("1586528116311-ad8dd3c8310d"), // mobile commerce
+  hero: u("1556742049-0cfed4f6a45d", 1600), // online commerce / payments
+  commerce: u("1563013544-824ae1b704d3"), // D2C packaging / fulfilment
+  marketplace: u("1586528116311-ad8dd3c8310d"), // mobile commerce
+  ai: u("1677442136019-21780ecad995"), // AI / agents — abstract
   team: u("1497366216548-37526070297c", 1600), // team / office
   dev: u("1581091226825-a6a2a5aee158"), // engineer coding
 };
@@ -38,33 +36,27 @@ export type NavGroup = {
   children: NavChild[];
 };
 
-export const healthcareNav: NavGroup = {
-  label: "Healthcare",
-  href: "/healthcare-software-development",
-  overviewLabel: "Healthcare overview",
+export const commerceNav: NavGroup = {
+  label: "Commerce Platforms",
+  href: "/commerce",
+  overviewLabel: "Commerce Platforms overview",
   children: [
-    { label: "Custom Healthcare Software", href: "/healthcare-software-development/custom", desc: "Bespoke platforms built around your clinical workflow" },
-    { label: "Telemedicine Apps", href: "/healthcare-software-development/telemedicine", desc: "Video visits, e-Rx, scheduling — HIPAA-ready" },
-    { label: "EHR / EMR Development", href: "/healthcare-software-development/ehr-emr", desc: "Interoperable records that actually talk to each other" },
-    { label: "Hospital Management", href: "/healthcare-software-development/hospital-management", desc: "OPD, IPD, billing, pharmacy, labs, ABDM-ready" },
-    { label: "AI in Healthcare", href: "/healthcare-software-development/ai-healthcare", desc: "Ambient scribe, claims automation, analytics" },
-    { label: "ABDM & FHIR Integration", href: "/healthcare-software-development/abdm-fhir", desc: "Connect to India's national health network" },
-    { label: "Healthcare SaaS Products", href: "/healthcare-software-development/saas", desc: "Vertical SaaS for funded healthtech startups" },
+    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace", desc: "Composable storefronts & multi-vendor marketplaces, built to scale" },
+    { label: "Integrations & Orchestration", href: "/commerce/integrations", desc: "Connect ERP, OMS, PIM, CDP, payments & 3PL into one stack" },
+    { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale", desc: "Customer pricing, RFQ, bulk ordering — ERP-integrated" },
+    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },
   ],
 };
 
-export const ecommerceNav: NavGroup = {
-  label: "E-Commerce",
-  href: "/ecommerce-development",
-  overviewLabel: "E-Commerce overview",
+export const aiNav: NavGroup = {
+  label: "AI & Agents",
+  href: "/ai-agents",
+  overviewLabel: "AI & Agents overview",
   children: [
-    { label: "Custom E-Commerce", href: "/ecommerce-development/custom", desc: "For brands that have outgrown templates" },
-    { label: "D2C Brand Platforms", href: "/ecommerce-development/d2c", desc: "Own your customer, own your margin" },
-    { label: "Marketplace Development", href: "/ecommerce-development/marketplace", desc: "Multi-vendor platforms built to scale" },
-    { label: "Shopify / Headless", href: "/ecommerce-development/shopify", desc: "Beyond the theme store — custom & headless" },
-    { label: "B2B E-Commerce", href: "/ecommerce-development/b2b", desc: "Quotes, approvals, account pricing" },
-    { label: "E-Commerce Apps", href: "/ecommerce-development/mobile-app", desc: "Native & cross-platform shopping apps" },
-    { label: "Commerce SaaS Products", href: "/ecommerce-development/saas", desc: "Vertical SaaS for funded commerce startups" },
+    { label: "AI Commerce Starter", href: "/ai-agents/commerce-starter", desc: "AI search, recommendations & a shopping assistant that converts" },
+    { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce", desc: "Make your store discoverable & buyable by AI shopping agents" },
+    { label: "Embedded AI Agents", href: "/ai-agents/embedded-agents", desc: "Task-specific AI agents built into your platform" },
+    { label: "AI Cleanup", href: "/ai-agents/ai-cleanup", desc: "Turn a vibe-coded MVP into a production-grade platform" },
   ],
 };
 
@@ -72,20 +64,20 @@ export const companyNav = {
   label: "Company",
   children: [
     { label: "About MnT", href: "/about", desc: "Who we are and how we work" },
-    { label: "Security & Compliance", href: "/security-compliance", desc: "HIPAA · ABDM · ISO 27001 · SOC 2 · GDPR" },
-    { label: "Blog", href: "/blog", desc: "Guides on healthcare, commerce & SaaS" },
-    { label: "Contact", href: "/contact", desc: "Start a project or book a discovery call" },
+    { label: "Security & Compliance", href: "/security-compliance", desc: "ADA · PCI DSS v4.0.1 · US sales-tax · SOC 2" },
+    { label: "Blog", href: "/blog", desc: "Guides on AI-native & agent-ready commerce" },
+    { label: "Contact", href: "/contact", desc: "Book a free architecture workshop" },
   ],
 };
 
 export const footerNav = [
   {
-    title: "Healthcare",
-    links: healthcareNav.children.map((c) => ({ label: c.label, href: c.href })),
+    title: "Commerce Platforms",
+    links: commerceNav.children.map((c) => ({ label: c.label, href: c.href })),
   },
   {
-    title: "E-Commerce",
-    links: ecommerceNav.children.map((c) => ({ label: c.label, href: c.href })),
+    title: "AI & Agents",
+    links: aiNav.children.map((c) => ({ label: c.label, href: c.href })),
   },
   {
     title: "Company",
@@ -95,8 +87,8 @@ export const footerNav = [
       { label: "Security & Compliance", href: "/security-compliance" },
       { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
-      { label: "Healthcare Hub", href: "/healthcare-software-development" },
-      { label: "E-Commerce Hub", href: "/ecommerce-development" },
+      { label: "Commerce Platforms", href: "/commerce" },
+      { label: "AI & Agents", href: "/ai-agents" },
     ],
   },
 ];

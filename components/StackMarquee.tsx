@@ -16,14 +16,15 @@ const stack: StackItem[] = [
   { name: "Flutter", slug: "flutter", color: "02569B" },
   { name: "Shopify", slug: "shopify", color: "5A8E3B" },
   { name: "Stripe", slug: "stripe", color: "635BFF" },
-  { name: "Razorpay", slug: "razorpay", color: "0C2451" },
+  { name: "PayPal", slug: "paypal", color: "003087" },
+  { name: "OpenAI", slug: "openai", color: "412991" },
   { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4" },
-  { name: "HIPAA", icon: "shield" },
-  { name: "ABDM", icon: "network" },
-  { name: "FHIR", icon: "network" },
-  { name: "ISO 27001", icon: "lock" },
+  { name: "ADA / WCAG", icon: "shield" },
+  { name: "PCI DSS", icon: "lock" },
   { name: "SOC 2", icon: "records" },
-  { name: "GDPR", icon: "globe" },
+  { name: "ACP", icon: "network" },
+  { name: "MCP", icon: "network" },
+  { name: "AEO", icon: "search" },
 ];
 
 export default function StackMarquee({
