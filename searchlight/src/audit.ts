@@ -13,6 +13,8 @@ export interface RunRecord {
   byTier: Record<Tier, number>;
   fixedPages: string[];
   escalatedCount: number;
+  /** Auto issues skipped because memory marks them wontfix/escalated. */
+  memorySkipped?: number;
   shipped: { commit: string; pushed: boolean } | null;
   issues: Issue[];
 }

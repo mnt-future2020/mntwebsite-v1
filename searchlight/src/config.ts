@@ -34,6 +34,12 @@ export interface SearchlightConfig {
   };
   brandVoice: string;
   neverTouch: string[];
+  /**
+   * Optional path (relative to this config file) to a Markdown "site playbook"
+   * the Fixer reads before editing — positioning, voice, good/bad examples, and
+   * a map of where metadata lives. Resolved to an absolute path on load.
+   */
+  contextFile?: string;
 }
 
 /**
@@ -49,7 +55,21 @@ export function loadConfig(configPath: string): SearchlightConfig {
   const raw = JSON.parse(fs.readFileSync(abs, "utf8")) as SearchlightConfig;
   const configDir = path.dirname(abs);
   raw.repo.root = path.resolve(configDir, raw.repo.root);
+  if (raw.contextFile) raw.contextFile = path.resolve(configDir, raw.contextFile);
   return raw;
+}
+
+/**
+ * Read the site playbook (config.contextFile) if configured and present.
+ * Returns "" when unset or unreadable — the Fixer simply runs without it.
+ */
+export function loadContextText(config: SearchlightConfig): string {
+  if (!config.contextFile) return "";
+  try {
+    return fs.readFileSync(config.contextFile, "utf8").trim();
+  } catch {
+    return "";
+  }
 }
 
 export function defaultConfigPath(): string {

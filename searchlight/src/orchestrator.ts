@@ -4,17 +4,30 @@ import { runMonitor } from "./monitor";
 import { runFixer } from "./fixer";
 import { runVerifier } from "./verifier";
 import { runDeployer, type DeployResult } from "./deployer";
+import { newRunId } from "./audit";
+import {
+  loadMemory,
+  saveMemory,
+  shouldSkip,
+  recordOutcome,
+  noteForPage,
+  memoryFilePath,
+} from "./memory";
 
 export interface OrchestrateResult {
   monitor: MonitorResult;
   fixedPages: string[];
   escalated: Issue[];
   verifyGated: Issue[];
+  /** Auto-fixable issues skipped this run because memory marks them wontfix/escalated. */
+  memorySkipped: Issue[];
   deploy?: DeployResult;
 }
 
 export interface OrchestrateOptions {
   dryRun?: boolean;
+  /** Stamp memory entries with this run id (defaults to a fresh one). */
+  runId?: string;
 }
 
 const log = (m: string) => console.log(`[searchlight] ${m}`);
@@ -27,21 +40,42 @@ export async function orchestrate(
   config: SearchlightConfig,
   opts: OrchestrateOptions = {},
 ): Promise<OrchestrateResult> {
+  const runId = opts.runId || newRunId();
+  const memory = loadMemory();
+
   log("Monitoring…");
   const monitor = await runMonitor(config);
   log(`${monitor.issues.length} issues across ${monitor.pagesCrawled} pages.`);
 
-  const auto = monitor.issues.filter((i) => i.tier === "auto");
   const verifyGated = monitor.issues.filter((i) => i.tier === "verify");
   const escalated = monitor.issues.filter((i) => i.tier === "escalate");
 
+  // Memory gate: drop auto-fixable issues a human owns (wontfix) or the loop
+  // already exhausted its retries on (escalated). This is how the agent "learns"
+  // not to re-attempt the same failed or human-rejected fix every run.
+  const memorySkipped: Issue[] = [];
+  const auto = monitor.issues.filter((i) => {
+    if (i.tier !== "auto") return false;
+    const s = shouldSkip(memory, i);
+    if (s.skip) {
+      memorySkipped.push(i);
+      return false;
+    }
+    return true;
+  });
+  if (memorySkipped.length > 0) {
+    log(
+      `Skipping ${memorySkipped.length} issue(s) known to memory (wontfix/escalated) — run \`searchlight memory\` to review.`,
+    );
+  }
+
   if (opts.dryRun) {
     log("Dry run — reporting only, no fixes applied.");
-    return { monitor, fixedPages: [], escalated, verifyGated };
+    return { monitor, fixedPages: [], escalated, verifyGated, memorySkipped };
   }
   if (auto.length === 0) {
     log("No auto-fixable issues to apply.");
-    return { monitor, fixedPages: [], escalated, verifyGated };
+    return { monitor, fixedPages: [], escalated, verifyGated, memorySkipped };
   }
 
   // Group auto issues by page so the Fixer makes one coherent edit per page.
@@ -55,11 +89,12 @@ export async function orchestrate(
   const changedFiles: string[] = [];
   for (const [page, issues] of byPage) {
     log(`Fixing ${issues.length} issue(s) on ${page}…`);
+    const memoryNote = noteForPage(memory, page);
     let feedback: string | undefined;
     let success = false;
 
     for (let attempt = 0; attempt <= config.autoFix.maxRetries; attempt++) {
-      const fix = await runFixer(issues, config, feedback);
+      const fix = await runFixer(issues, config, feedback, memoryNote);
       if (!fix.applied) {
         feedback = `Fixer error: ${fix.error}`;
         log(`  attempt ${attempt + 1}/${config.autoFix.maxRetries + 1}: fixer did not complete — retrying`);
@@ -71,6 +106,7 @@ export async function orchestrate(
         success = true;
         fixedPages.push(page);
         changedFiles.push(...fix.filesChanged);
+        for (const i of issues) recordOutcome(memory, i, "fixed", runId);
         log(`  ✓ verified and kept.`);
         break;
       }
@@ -81,8 +117,13 @@ export async function orchestrate(
     if (!success) {
       log(`  ⚠ escalating ${page} to a human after ${config.autoFix.maxRetries + 1} attempts.`);
       escalated.push(...issues);
+      // Remember the failure so we don't burn API + build time re-attempting it
+      // every run. A human clears it with `searchlight memory --forget <key>`.
+      for (const i of issues) recordOutcome(memory, i, "escalated", runId, feedback);
     }
   }
+
+  saveMemory(memory);
 
   log(
     `Fixed ${fixedPages.length} page(s). Verify-gated (not auto-run this phase): ${verifyGated.length}. Escalated: ${escalated.length}.`,
@@ -93,9 +134,11 @@ export async function orchestrate(
   let deploy: DeployResult | undefined;
   if (config.deploy?.enabled && fixedPages.length > 0 && changedFiles.length > 0) {
     log("Shipping (Verifier passed)…");
+    // Ship the memory file too, so what the agent learned this run persists to
+    // the next one even when CI runs on a fresh, thrown-away machine.
     deploy = runDeployer(
       config,
-      changedFiles,
+      [...changedFiles, memoryFilePath()],
       `Auto-fixed ${auto.length} SEO/AEO issue(s) across ${fixedPages.length} page(s): ${fixedPages.join(", ")}`,
     );
     log(deploy.shipped ? `  ✓ ${deploy.reason}` : `  ⚠ not shipped: ${deploy.reason}`);
@@ -103,5 +146,5 @@ export async function orchestrate(
     log("Shipping skipped — nothing verified to ship.");
   }
 
-  return { monitor, fixedPages, escalated, verifyGated, deploy };
+  return { monitor, fixedPages, escalated, verifyGated, memorySkipped, deploy };
 }

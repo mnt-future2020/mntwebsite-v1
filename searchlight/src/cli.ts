@@ -5,6 +5,7 @@ import { orchestrate } from "./orchestrator";
 import { runVerifier } from "./verifier";
 import { writeRunRecord, byTierCounts, newRunId } from "./audit";
 import { writeDashboard } from "./dashboard";
+import { loadMemory, saveMemory, renderMemory, markWontfix, forget } from "./memory";
 
 function flag(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -25,11 +26,15 @@ Commands:
   run --ship         After verifying, auto-commit + push (triggers redeploy)
   verify             Run the regression gate (typecheck + build) on the repo
   dashboard          Generate a self-contained HTML dashboard (agents + run history)
+  memory             Show what the agent has learned (fixed / escalated / wontfix)
 
 Options:
-  --config <path>     Path to searchlight.config.json (default: alongside the package)
-  --url <baseUrl>     Override the site base URL (uses <baseUrl>/sitemap.xml)
-  --ship / --no-ship  Force auto-push on/off (overrides config.deploy.enabled)`;
+  --config <path>          Path to searchlight.config.json (default: alongside the package)
+  --url <baseUrl>          Override the site base URL (uses <baseUrl>/sitemap.xml)
+  --ship / --no-ship       Force auto-push on/off (overrides config.deploy.enabled)
+  memory --wontfix <key>   Mark an issue "leave it" — never auto-attempt again
+  memory --forget <key>    Drop a memory entry — re-enables auto-fixing it
+  memory --clear           Wipe all learned memory`;
 
 async function main() {
   const cmd = process.argv[2];
@@ -79,10 +84,11 @@ async function main() {
     case "run":
     case "fix": {
       const startedAt = new Date().toISOString();
-      const res = await orchestrate(config, { dryRun: has("dry-run") });
+      const runId = newRunId();
+      const res = await orchestrate(config, { dryRun: has("dry-run"), runId });
       if (!has("dry-run")) {
         writeRunRecord({
-          id: newRunId(),
+          id: runId,
           kind: "run",
           startedAt,
           finishedAt: new Date().toISOString(),
@@ -92,10 +98,35 @@ async function main() {
           byTier: byTierCounts(res.monitor.issues),
           fixedPages: res.fixedPages,
           escalatedCount: res.escalated.length,
+          memorySkipped: res.memorySkipped.length,
           shipped: res.deploy?.shipped ? { commit: res.deploy.commit || "", pushed: res.deploy.pushed } : null,
           issues: res.monitor.issues,
         });
       }
+      break;
+    }
+    case "memory": {
+      const store = loadMemory();
+      if (has("clear")) {
+        saveMemory({ version: store.version || 1, entries: {} });
+        console.log("Memory cleared.");
+        break;
+      }
+      const wontfix = flag("wontfix");
+      if (wontfix) {
+        markWontfix(store, wontfix, flag("reason"));
+        saveMemory(store);
+        console.log(`Marked wontfix: ${wontfix}`);
+        break;
+      }
+      const drop = flag("forget");
+      if (drop) {
+        const ok = forget(store, drop);
+        if (ok) saveMemory(store);
+        console.log(ok ? `Forgot: ${drop}` : `No memory entry for: ${drop}`);
+        break;
+      }
+      console.log(renderMemory(store));
       break;
     }
     case "dashboard": {

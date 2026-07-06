@@ -28,7 +28,11 @@ Guidance:
 - If per-page SEO is stored in a DB/seed, update BOTH the code default and the seed source so the fix survives a re-seed.
 - After editing, run the typecheck to confirm you did not break the build.
 - Finish with a short summary of the files you changed and why.
-- If a previous attempt failed verification, you are given the build error and must fix that regression before finishing (this is the self-heal loop).`;
+- If a previous attempt failed verification, you are given the build error and must fix that regression before finishing (this is the self-heal loop).
+
+You may also be given, when configured:
+- A SITE PLAYBOOK (positioning, voice, good/bad examples, and a map of exactly where metadata/schema/nav live). Treat it as authoritative — match its voice and edit the files it points to.
+- MEMORY of past outcomes on the page (what was fixed, and what already failed). Do not repeat a fix that previously failed verification; try a different approach.`;
 
 export const AGENTS: AgentSpec[] = [
   {
@@ -47,9 +51,10 @@ export const AGENTS: AgentSpec[] = [
     role: "Act",
     kind: "llm",
     model: "claude-opus-4-8",
-    tools: ["Read", "Edit", "Write", "Glob", "Grep", "Bash"],
+    tools: ["Read", "Edit", "Write", "Glob", "Grep", "Bash", "site playbook", "cross-run memory"],
     instructions: FIXER_SYSTEM_PROMPT,
-    summary: "Claude Agent SDK agent that edits the repo to resolve issues, full-auto.",
+    summary:
+      "Claude Agent SDK agent that edits the repo to resolve issues, full-auto — guided by the site playbook and its memory of past attempts.",
   },
   {
     id: "verifier",

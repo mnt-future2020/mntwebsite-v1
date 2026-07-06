@@ -1,5 +1,5 @@
 import type { Issue, FixResult } from "../types";
-import type { SearchlightConfig } from "../config";
+import { loadContextText, type SearchlightConfig } from "../config";
 import { FIXER_SYSTEM_PROMPT } from "../agents";
 
 /**
@@ -19,13 +19,20 @@ async function loadSdk(): Promise<any> {
   }
 }
 
-function buildPrompt(issues: Issue[], config: SearchlightConfig, retryFeedback?: string): string {
+function buildPrompt(
+  issues: Issue[],
+  config: SearchlightConfig,
+  retryFeedback?: string,
+  memoryNote?: string,
+): string {
   const list = issues
     .map(
       (i, n) =>
         `${n + 1}. [${i.checkId}] ${i.title}\n   Page: ${i.url}\n   Problem: ${i.detail}\n   Fix goal: ${i.recommendation}`,
     )
     .join("\n\n");
+
+  const context = loadContextText(config);
 
   return `${FIXER_SYSTEM_PROMPT}
 
@@ -34,7 +41,7 @@ Context for this run:
 - Brand voice for any copy you write: ${config.brandVoice}
 - NEVER edit files matching: ${config.neverTouch.join(", ")}
 - Title max ${config.checks.titleMaxLength} chars; meta description ${config.checks.metaDescriptionMinLength}-${config.checks.metaDescriptionMaxLength} chars.
-
+${context ? `\n===== SITE PLAYBOOK (authoritative for voice, structure, and where things live) =====\n${context}\n===== END PLAYBOOK =====\n` : ""}${memoryNote ? `\nMEMORY — past outcomes on this page (do NOT repeat a fix that already failed):\n${memoryNote}\n` : ""}
 ISSUES TO FIX:
 ${list}
 ${retryFeedback ? `\nYOUR PREVIOUS ATTEMPT FAILED VERIFICATION:\n${retryFeedback}\nFix the regression and complete the task.\n` : ""}`;
@@ -48,9 +55,10 @@ export async function runFixer(
   issues: Issue[],
   config: SearchlightConfig,
   retryFeedback?: string,
+  memoryNote?: string,
 ): Promise<FixResult> {
   const sdk = await loadSdk();
-  const prompt = buildPrompt(issues, config, retryFeedback);
+  const prompt = buildPrompt(issues, config, retryFeedback, memoryNote);
   const id = issues.map((i) => i.id).join(",");
   const filesChanged: string[] = [];
   let summary = "";

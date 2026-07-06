@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { AGENTS, type AgentSpec } from "./agents";
 import { readRunRecords, type RunRecord } from "./audit";
+import { loadMemory, memoryCounts, type MemoryEntry } from "./memory";
 import type { SearchlightConfig } from "./config";
 
 function esc(s: unknown): string {
@@ -58,6 +59,14 @@ const STYLE = `<style>
   .pill{font-family:var(--mono);font-size:.66rem;padding:.12rem .42rem;border-radius:5px}
   .pill.ship{color:#0c1417;background:var(--good)}
   .pill.no{color:var(--muted);border:1px solid var(--line)}
+  .mem{display:grid;gap:6px}
+  .mrow{display:flex;flex-wrap:wrap;gap:.4rem .7rem;align-items:baseline;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:.5rem .7rem}
+  .mrow .st{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.06em;padding:.12rem .42rem;border-radius:5px}
+  .st.fixed{color:#0c1417;background:var(--good)}
+  .st.escalated{color:#0c1417;background:var(--warn)}
+  .st.wontfix{color:var(--muted);border:1px solid var(--line)}
+  .mrow .k{font-family:var(--mono);font-size:.74rem;color:#b8c4c1;word-break:break-all}
+  .mrow .n{font-family:var(--mono);font-size:.7rem;color:var(--muted);width:100%;margin-top:.1rem}
   .issue{font-family:var(--mono);font-size:.75rem;color:#b8c4c1;padding:.18rem 0;border-top:1px solid #1b262a}
   .issue:first-child{border-top:0}
   .issue .sev{color:var(--warn)}
@@ -107,6 +116,28 @@ function runBlock(r: RunRecord): string {
   </details>`;
 }
 
+function memRow(e: MemoryEntry): string {
+  return `<div class="mrow">
+    <span class="st ${esc(e.status)}">${esc(e.status)}</span>
+    <span class="k">${esc(e.key)}</span>
+    ${e.attempts > 1 ? `<span class="tallies">${e.attempts}× failed</span>` : ""}
+    ${e.note ? `<span class="n">↳ ${esc(e.note)}</span>` : ""}
+  </div>`;
+}
+
+function memorySection(): string {
+  const store = loadMemory();
+  const entries = Object.values(store.entries);
+  if (entries.length === 0) {
+    return `<div class="empty">No memory yet. After a <code>run</code>, fixed / escalated / wontfix outcomes are recorded here so the agent doesn't repeat itself.</div>`;
+  }
+  const rank: Record<string, number> = { wontfix: 0, escalated: 1, fixed: 2 };
+  entries.sort((a, b) => rank[a.status] - rank[b.status] || a.page.localeCompare(b.page));
+  const c = memoryCounts(store);
+  return `<div class="tallies" style="margin-bottom:10px">${c.fixed} fixed · ${c.escalated} escalated · ${c.wontfix} wontfix</div>
+    <div class="mem">${entries.map(memRow).join("")}</div>`;
+}
+
 export function renderDashboardInner(config: SearchlightConfig): string {
   const runs = readRunRecords(40);
   const generated = new Date().toISOString().replace("T", " ").slice(0, 19);
@@ -123,6 +154,9 @@ export function renderDashboardInner(config: SearchlightConfig): string {
 
     <h2 class="sec">Agents — model · tools · system prompt</h2>
     <div class="agents">${AGENTS.map(agentCard).join("")}</div>
+
+    <h2 class="sec">Memory — what the agent has learned</h2>
+    ${memorySection()}
 
     <h2 class="sec">Runs — what the agents did (${runs.length})</h2>
     ${runsHtml}

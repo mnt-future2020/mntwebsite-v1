@@ -48,6 +48,7 @@
     "commitPrefix": "searchlight: auto-fix SEO/AEO issues",
     "push": true
   },
+  "contextFile": "./context.md",
   "brandVoice": "Confident, technical, US-commerce focused. AI-native, agent-ready. No hype, no fluff. Front-load the hook; every CTA drives the free architecture workshop or agent-readiness audit.",
   "neverTouch": [
     "app/admin/**",

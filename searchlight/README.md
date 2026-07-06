@@ -37,6 +37,7 @@ node dist/cli.js run --dry-run               # monitor + plan, apply nothing
 node dist/cli.js run                         # full auto: fix the `auto` tier, verify each
 node dist/cli.js verify                      # regression gate (typecheck + build) on the repo
 node dist/cli.js dashboard                   # generate the agents + run-history dashboard (HTML)
+node dist/cli.js memory                      # show what the agent has learned (fixed/escalated/wontfix)
 ```
 
 Add `--config <path>` to point at another project's `searchlight.config.json`.
@@ -55,6 +56,7 @@ One file per project — this is what makes Searchlight reusable. Key fields:
 | `autoFix.maxRetries` | Self-heal attempts before escalating |
 | `brandVoice` | Voice for any copy the Fixer writes |
 | `neverTouch` | Globs the Fixer must never edit (admin, prisma, .env…) |
+| `contextFile` | Path to a Markdown **site playbook** the Fixer reads before editing |
 
 ## What it checks (Phase 0)
 
@@ -90,6 +92,42 @@ It shows two things:
 - **Agents** — every role's **model**, **tools**, and full **system prompt / instructions** (from `src/agents.ts`, the single source of truth the Fixer also runs on).
 - **Runs** — history of what the agents did: issues found (by tier), pages fixed, escalations, and the commit each run shipped. Each run expands to its issue list.
 
+## Knowledge & memory — how the agent "knows" the site
+
+The agents don't store a trained-in copy of the site. Each run assembles knowledge fresh from
+three durable sources, plus Claude's built-in SEO/coding expertise:
+
+1. **The live site** — the Monitor crawls `sitemap.xml` and reads each page's HTML every run.
+2. **The site playbook** (`contextFile` → [`context.md`](context.md)) — positioning, voice,
+   good/bad title-meta examples, and a **map of where metadata/schema/nav live** so the Fixer
+   edits the right source (and keeps the DB seed in sync so fixes survive a re-seed). It's fed
+   into the Fixer's prompt on every fix.
+3. **Persistent memory** (`memory/memory.json`) — what the loop learned in past runs.
+
+### Memory (survives across runs)
+
+Each run is a fresh process — in CI, a thrown-away machine — so "remembering" needs durable
+storage, not RAM. After each run the loop records an outcome per issue:
+
+| Status | Meaning | Next run |
+|---|---|---|
+| `fixed` | fixed and passed the build gate | re-fixes only if it reappears |
+| `escalated` | all retries failed — a human owns it | **skipped** (no wasted API/build time) |
+| `wontfix` | a human said "leave it" | **skipped**, always |
+
+This is what stops the agent re-attempting the same failed fix, or re-touching something a human
+already accepted. The Fixer is also shown the page's history so it won't repeat a fix that failed.
+
+```bash
+node dist/cli.js memory                       # list what's been learned
+node dist/cli.js memory --wontfix "<key>"     # accept an issue — never auto-attempt it again
+node dist/cli.js memory --forget  "<key>"     # drop an entry — re-enables auto-fixing (retry an escalation)
+node dist/cli.js memory --clear               # wipe all memory
+```
+
+`memory/memory.json` is **tracked in git** (unlike `runs/`): when the Shipper ships a fix it
+commits the memory file too, so what was learned persists to the next CI run.
+
 ## Safety
 
 - The Fixer runs `bypassPermissions` but is scoped to `Read/Edit/Write/Glob/Grep/Bash`, denies `rm`/`git push`/`git commit`, and is told to respect `neverTouch`.
@@ -98,6 +136,7 @@ It shows two things:
 
 ## Roadmap
 
+- **Done** — site playbook (`context.md`) + persistent cross-run memory (fixed/escalated/wontfix), fed into the Fixer so it stays on-brand and doesn't repeat failed fixes.
 - **Phase 1** — Search Console integration, content-gap drafting, AI-citation monitoring; per-issue re-verification against a preview build.
 - **Phase 2** — extract adapters/connectors; run against a second repo; dashboard.
 - **Phase 3** — package as the "Embedded SEO/AEO Agent" offering.
