@@ -99,7 +99,7 @@ function runBlock(r: RunRecord): string {
         .slice(0, 60)
         .map(
           (i) =>
-            `<div class="issue"><span class="sev">[${esc(i.severity)}]</span> ${esc(i.title)} — ${esc(i.detail)} <span class="u">${esc(i.url)}</span></div>`,
+            `<div class="issue"><span class="sev">[${esc(i.severity)}]</span>${i.source === "llm" ? ' <span class="badge llm">AI</span>' : ""} ${esc(i.title)} — ${esc(i.detail)} <span class="u">${esc(i.url)}</span></div>`,
         )
         .join("") + (r.issues.length > 60 ? `<div class="issue">…and ${r.issues.length - 60} more</div>` : "")
     : `<div class="issue">No issues.</div>`;

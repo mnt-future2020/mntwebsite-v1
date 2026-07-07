@@ -28,6 +28,8 @@ export interface OrchestrateOptions {
   dryRun?: boolean;
   /** Stamp memory entries with this run id (defaults to a fresh one). */
   runId?: string;
+  /** Run the opt-in LLM Analyst pass during monitoring. */
+  deep?: boolean;
 }
 
 const log = (m: string) => console.log(`[searchlight] ${m}`);
@@ -43,8 +45,8 @@ export async function orchestrate(
   const runId = opts.runId || newRunId();
   const memory = loadMemory();
 
-  log("Monitoring…");
-  const monitor = await runMonitor(config);
+  log(opts.deep ? "Monitoring (deep — LLM Analyst on)…" : "Monitoring…");
+  const monitor = await runMonitor(config, { deep: opts.deep });
   log(`${monitor.issues.length} issues across ${monitor.pagesCrawled} pages.`);
 
   const verifyGated = monitor.issues.filter((i) => i.tier === "verify");

@@ -2,11 +2,20 @@ import type { MonitorResult } from "../types";
 import type { SearchlightConfig } from "../config";
 import { fetchSitemapUrls, fetchSnapshot, checkLinkStatus, mapLimit } from "./crawl";
 import { runChecks, brokenLinkIssues } from "./checks";
+import { runAnalyst } from "../analyst";
 
 const SEVERITY_ORDER: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 };
 
-/** Crawl the site (via sitemap) and return the deterministic issue list. */
-export async function runMonitor(config: SearchlightConfig): Promise<MonitorResult> {
+export interface MonitorOptions {
+  /** Run the opt-in LLM Analyst pass after the deterministic checks. */
+  deep?: boolean;
+}
+
+/** Crawl the site (via sitemap) and return the issue list (deterministic; + LLM if deep). */
+export async function runMonitor(
+  config: SearchlightConfig,
+  opts: MonitorOptions = {},
+): Promise<MonitorResult> {
   const base = config.site.baseUrl.replace(/\/$/, "");
   const sitemap = config.site.sitemapUrl || `${base}/sitemap.xml`;
 
@@ -36,6 +45,20 @@ export async function runMonitor(config: SearchlightConfig): Promise<MonitorResu
       if (status === 0 || status >= 400) broken.set(link, status);
     }
     issues.push(...brokenLinkIssues(broken, foundOn, config));
+  }
+
+  // Opt-in LLM Analyst pass — judgment checks the deterministic Monitor can't
+  // make. Non-fatal: without the SDK/key it logs and returns deterministic-only.
+  if (opts.deep || config.analyst?.enabled) {
+    try {
+      const { pagesJudged, issues: llmIssues } = await runAnalyst(snapshots, config);
+      issues.push(...llmIssues);
+      console.log(
+        `[searchlight] Analyst judged ${pagesJudged} page(s): +${llmIssues.length} quality/AEO issue(s).`,
+      );
+    } catch (e) {
+      console.log(`[searchlight] Analyst skipped: ${(e as Error).message}`);
+    }
   }
 
   issues.sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);

@@ -32,7 +32,8 @@ export function renderReport(r: MonitorResult): string {
     if (!items.length) continue;
     lines.push(`\n## ${tierLabel[tier]}  (${items.length})`);
     for (const i of items) {
-      lines.push(`  ${SEV_ICON[i.severity]} ${i.title} — ${i.detail}`);
+      const tag = i.source === "llm" ? " (AI)" : "";
+      lines.push(`  ${SEV_ICON[i.severity]}${tag} ${i.title} — ${i.detail}`);
       lines.push(`         fix: ${i.recommendation}`);
       lines.push(`         page: ${i.url}`);
     }

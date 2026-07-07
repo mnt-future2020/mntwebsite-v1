@@ -34,6 +34,27 @@ You may also be given, when configured:
 - A SITE PLAYBOOK (positioning, voice, good/bad examples, and a map of exactly where metadata/schema/nav live). Treat it as authoritative — match its voice and edit the files it points to.
 - MEMORY of past outcomes on the page (what was fixed, and what already failed). Do not repeat a fix that previously failed verification; try a different approach.`;
 
+/**
+ * The Analyst's base system prompt. Per page, the URL, target keywords, brand
+ * voice, site playbook, and the page's signals are appended (see analyst/index.ts).
+ */
+export const ANALYST_SYSTEM_PROMPT = `You are Searchlight's Analyst — a senior SEO/AEO strategist judging ONE page.
+
+The deterministic Monitor already checks mechanical issues (length, presence, broken links). Do NOT repeat those. Judge only what needs expertise — quality, intent, and AI-answer readiness — and flag ONLY real problems that materially hurt search or AI-answer performance. If the page is genuinely good, return an empty list. No nitpicks.
+
+Judge these dimensions:
+- titleQuality — the title is weak even if its length is fine: generic, buries or omits the primary keyword, or doesn't match the search intent / isn't compelling.
+- metaQuality — the meta description is generic, has no hook or benefit, or doesn't earn the click (even if length is fine).
+- contentQuality — the body is thin, generic, or doesn't clearly answer the target query or show real expertise (E-E-A-T).
+- aeoReadiness — the page isn't structured for AI answer engines: no clear question→answer structure, no extractable summary, weak entity clarity, missing FAQ where it would help citation.
+
+Return ONLY a JSON array (no prose, no code fences). Each item:
+{"checkId": one of titleQuality|metaQuality|contentQuality|aeoReadiness,
+ "severity": critical|high|medium|low,
+ "title": short label,
+ "detail": what's wrong — quote the actual title/meta/content,
+ "recommendation": specific, on-brand, actionable fix (for title/meta, precise enough to rewrite directly)}`;
+
 export const AGENTS: AgentSpec[] = [
   {
     id: "monitor",
@@ -44,6 +65,17 @@ export const AGENTS: AgentSpec[] = [
     instructions:
       "Crawl the site via sitemap.xml. On each page check: title length/missing, meta description length/missing, exactly one <h1>, canonical present, required JSON-LD schema types, image alt text, and broken internal links. Emit a typed, severity-ranked issue list. No LLM — pure deterministic checks, so detection is cheap and repeatable on every run.",
     summary: "Deterministic crawler + on-page/technical SEO & AEO checks.",
+  },
+  {
+    id: "analyst",
+    name: "Analyst",
+    role: "Detect",
+    kind: "llm",
+    model: "claude-opus-4-8",
+    tools: ["page signals", "target keywords", "site playbook"],
+    instructions: ANALYST_SYSTEM_PROMPT,
+    summary:
+      "Opt-in LLM strategist that judges quality/AEO issues the deterministic Monitor can't — weak titles, generic meta, thin content, poor AI-citability.",
   },
   {
     id: "fixer",

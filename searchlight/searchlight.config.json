@@ -37,9 +37,18 @@
       "h1": "auto",
       "brokenLinks": "verify",
       "cwv": "verify",
-      "content": "escalate"
+      "content": "escalate",
+      "titleQuality": "auto",
+      "metaQuality": "auto",
+      "contentQuality": "escalate",
+      "aeoReadiness": "escalate"
     },
     "maxRetries": 2
+  },
+  "analyst": {
+    "enabled": false,
+    "model": "claude-opus-4-8",
+    "maxPages": 12
   },
   "deploy": {
     "enabled": false,

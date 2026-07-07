@@ -5,13 +5,14 @@ An autonomous **SEO/AEO agent** that watches, fixes, and checks its own work —
 It runs a three-role loop:
 
 ```
-Monitor ─issues─▶ Fixer ─edits─▶ Verifier ─pass─▶ Shipper ─▶ push → host auto-redeploys
-  ▲(deterministic) (Agent SDK)  (typecheck+build)  (git, opt-in)
-  │                                    └─ fail → self-heal (back to Fixer) → escalate after N
+Monitor · Analyst ─issues─▶ Fixer ─edits─▶ Verifier ─pass─▶ Shipper ─▶ push → host auto-redeploys
+  ▲ deterministic    (Agent SDK)   (typecheck+build)  (git, opt-in)
+  │ + LLM (--deep)                       └─ fail → self-heal (back to Fixer) → escalate after N
   └─ runs on a schedule
 ```
 
 - **Monitor** — deterministic. Crawls the site (via `sitemap.xml`) and flags on-page/technical SEO+AEO issues. No API key, no dependencies beyond Node 20+.
+- **Analyst** — *opt-in* LLM (`claude-opus-4-8`). After the deterministic checks, judges the issues a regex **can't**: weak titles, generic meta, thin content, poor AI-citability. Off by default — enable with `--deep` or `analyst.enabled`.
 - **Fixer** — a Claude Agent SDK agent (`claude-opus-4-8`) that edits the repo to resolve issues, fully autonomous, scoped to an editing allow-list and a `neverTouch` list.
 - **Verifier** — deterministic regression gate: the fix only ships if `tsc --noEmit` + the production build still pass. On failure it hands the build output back to the Fixer (the self-heal loop).
 - **Orchestrator** — runs Monitor → Fixer → Verifier per page, retries on failure, escalates after `maxRetries`, then (if enabled) ships.
@@ -31,7 +32,8 @@ npm run build               # compile src → dist
 ## Commands
 
 ```bash
-node dist/cli.js monitor                     # crawl + report (safe, read-only)
+node dist/cli.js monitor                     # crawl + report (safe, read-only, no key)
+node dist/cli.js monitor --deep              # + LLM Analyst: quality/AEO judgment (needs SDK + key)
 node dist/cli.js monitor --url https://x.com # audit any site ad-hoc
 node dist/cli.js run --dry-run               # monitor + plan, apply nothing
 node dist/cli.js run                         # full auto: fix the `auto` tier, verify each
@@ -56,11 +58,29 @@ One file per project — this is what makes Searchlight reusable. Key fields:
 | `autoFix.maxRetries` | Self-heal attempts before escalating |
 | `brandVoice` | Voice for any copy the Fixer writes |
 | `neverTouch` | Globs the Fixer must never edit (admin, prisma, .env…) |
-| `contextFile` | Path to a Markdown **site playbook** the Fixer reads before editing |
+| `contextFile` | Path to a Markdown **site playbook** the Fixer + Analyst read |
+| `analyst` | Opt-in LLM quality/AEO pass — `enabled`, `model`, `maxPages` |
 
-## What it checks (Phase 0)
+## What it checks
 
-Title length/missing · meta description length/missing · single `<h1>` · canonical · required JSON-LD schema · image alt text · broken internal links.
+**Deterministic (Monitor — always on, free):** title length/missing · meta description length/missing · single `<h1>` · canonical · required JSON-LD schema · image alt text · broken internal links.
+
+**LLM judgment (Analyst — `--deep`, opt-in):** title quality (weak/off-intent even if length is fine) · meta quality (generic, no hook) · content quality (thin / low E-E-A-T) · AEO readiness (structured for AI citation?). These are things a regex fundamentally can't judge.
+
+## Deep mode — the LLM Analyst
+
+The split is deliberate: **use the LLM only where judgment is needed.** Detection that a rule can settle (is the title > 60 chars?) stays deterministic — instant, free, 100% repeatable. Detection that needs a strategist (is the title *compelling*?) goes to the Analyst.
+
+```bash
+node dist/cli.js monitor --deep   # deterministic checks, then the LLM Analyst pass
+node dist/cli.js run --deep       # …and the Fixer acts on the auto-tier quality issues too
+```
+
+- **Off by default.** `monitor`/`run` stay deterministic and keyless unless you pass `--deep` (or set `analyst.enabled: true`).
+- **Cost-capped.** Judges at most `analyst.maxPages` pages per run (one LLM call each), reading the already-crawled content — no re-fetch.
+- **Reads the playbook.** The Analyst judges against your `contextFile` (positioning, voice, keywords), so its verdicts are on-strategy, not generic.
+- **Tiers, same as any issue.** `titleQuality` / `metaQuality` → `auto` (the Fixer rewrites, the Verifier gates). `contentQuality` / `aeoReadiness` → `escalate` (drafted for a human — content rewrites shouldn't be blindly auto-shipped).
+- **Never touches the safety net.** The Verifier stays deterministic — an LLM never decides whether the build passed.
 
 ## Shipping / auto-deploy
 
@@ -136,7 +156,7 @@ commits the memory file too, so what was learned persists to the next CI run.
 
 ## Roadmap
 
-- **Done** — site playbook (`context.md`) + persistent cross-run memory (fixed/escalated/wontfix), fed into the Fixer so it stays on-brand and doesn't repeat failed fixes.
+- **Done** — site playbook (`context.md`) + persistent cross-run memory (fixed/escalated/wontfix); opt-in LLM Analyst (`--deep`) for quality/AEO judgment. The Fixer stays on-brand and doesn't repeat failed fixes.
 - **Phase 1** — Search Console integration, content-gap drafting, AI-citation monitoring; per-issue re-verification against a preview build.
 - **Phase 2** — extract adapters/connectors; run against a second repo; dashboard.
 - **Phase 3** — package as the "Embedded SEO/AEO Agent" offering.

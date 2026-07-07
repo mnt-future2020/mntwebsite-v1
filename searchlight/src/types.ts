@@ -7,6 +7,7 @@ export type Severity = "critical" | "high" | "medium" | "low";
 export type Tier = "auto" | "verify" | "escalate";
 
 export type CheckId =
+  // Deterministic (Monitor) — mechanical, rule-based.
   | "titleLength"
   | "metaLength"
   | "missingMeta"
@@ -16,7 +17,15 @@ export type CheckId =
   | "h1"
   | "brokenLinks"
   | "cwv"
-  | "content";
+  | "content"
+  // LLM (Analyst) — judgment-based quality/AEO checks a regex can't make.
+  | "titleQuality"
+  | "metaQuality"
+  | "contentQuality"
+  | "aeoReadiness";
+
+/** The quality/AEO checks only the LLM Analyst can judge. */
+export const LLM_CHECK_IDS: CheckId[] = ["titleQuality", "metaQuality", "contentQuality", "aeoReadiness"];
 
 export interface Issue {
   /** Stable id so the same defect dedupes across runs. */
@@ -32,6 +41,8 @@ export interface Issue {
   /** What a correct fix should achieve (fed to the Fixer). */
   recommendation: string;
   evidence?: Record<string, unknown>;
+  /** Which stage found it: deterministic Monitor checks, or the LLM Analyst. */
+  source?: "deterministic" | "llm";
 }
 
 export interface PageSnapshot {
@@ -46,6 +57,10 @@ export interface PageSnapshot {
   imagesMissingAlt: number;
   imageCount: number;
   internalLinks: string[];
+  /** Heading text (h1–h3), for the Analyst to judge structure/intent. */
+  headings?: string[];
+  /** Visible body text excerpt (tags stripped, capped), for quality judgment. */
+  textExcerpt?: string;
   error?: string;
 }
 

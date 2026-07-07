@@ -21,7 +21,9 @@ Usage: searchlight <command> [options]
 
 Commands:
   monitor            Crawl the site and report issues (deterministic, no API key)
+  monitor --deep     …plus the LLM Analyst (quality/AEO judgment). Needs the SDK + ANTHROPIC_API_KEY
   run                Monitor → Fixer → Verifier loop (auto tier). Needs the Agent SDK + ANTHROPIC_API_KEY
+  run --deep         …with the LLM Analyst pass during monitoring
   run --dry-run      Monitor + plan only; apply nothing
   run --ship         After verifying, auto-commit + push (triggers redeploy)
   verify             Run the regression gate (typecheck + build) on the repo
@@ -31,6 +33,7 @@ Commands:
 Options:
   --config <path>          Path to searchlight.config.json (default: alongside the package)
   --url <baseUrl>          Override the site base URL (uses <baseUrl>/sitemap.xml)
+  --deep                   Add the LLM Analyst pass (overrides config.analyst.enabled)
   --ship / --no-ship       Force auto-push on/off (overrides config.deploy.enabled)
   memory --wontfix <key>   Mark an issue "leave it" — never auto-attempt again
   memory --forget <key>    Drop a memory entry — re-enables auto-fixing it
@@ -63,7 +66,7 @@ async function main() {
   switch (cmd) {
     case "monitor": {
       const startedAt = new Date().toISOString();
-      const result = await runMonitor(config);
+      const result = await runMonitor(config, { deep: has("deep") });
       console.log(renderReport(result));
       writeRunRecord({
         id: newRunId(),
@@ -85,7 +88,7 @@ async function main() {
     case "fix": {
       const startedAt = new Date().toISOString();
       const runId = newRunId();
-      const res = await orchestrate(config, { dryRun: has("dry-run"), runId });
+      const res = await orchestrate(config, { dryRun: has("dry-run"), runId, deep: has("deep") });
       if (!has("dry-run")) {
         writeRunRecord({
           id: runId,

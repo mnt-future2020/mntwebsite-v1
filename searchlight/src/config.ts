@@ -32,6 +32,18 @@ export interface SearchlightConfig {
     commitPrefix: string;
     push: boolean;
   };
+  /**
+   * Analyst role — an opt-in LLM pass that judges quality/AEO issues the
+   * deterministic Monitor can't (weak titles, generic meta, thin content,
+   * poor AI-citability). Runs after the deterministic checks. `--deep`
+   * overrides `enabled`. Needs the Agent SDK + ANTHROPIC_API_KEY.
+   */
+  analyst?: {
+    enabled: boolean;
+    model?: string;
+    /** Cost cap — judge at most this many pages per run. */
+    maxPages?: number;
+  };
   brandVoice: string;
   neverTouch: string[];
   /**

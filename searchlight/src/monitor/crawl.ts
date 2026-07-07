@@ -18,6 +18,30 @@ function extract(re: RegExp, html: string): string | null {
   return m ? decodeEntities(m[1].trim()) : null;
 }
 
+/** Heading text (h1–h3), in document order, for the Analyst. */
+function extractHeadings(html: string): string[] {
+  const out: string[] = [];
+  for (const m of html.matchAll(/<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/gi)) {
+    const text = decodeEntities(m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+    if (text) out.push(text.slice(0, 160));
+  }
+  return out.slice(0, 40);
+}
+
+/** Visible body text (scripts/styles/tags stripped), capped, for quality judgment. */
+function extractText(html: string, max = 4000): string {
+  const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html;
+  const text = decodeEntities(
+    body
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim(),
+  );
+  return text.slice(0, max);
+}
+
 function collectSchemaTypes(node: unknown, out: string[]): void {
   if (!node || typeof node !== "object") return;
   if (Array.isArray(node)) {
@@ -95,6 +119,8 @@ export async function fetchSnapshot(url: string, baseUrl: string): Promise<PageS
       imagesMissingAlt,
       imageCount: imgs.length,
       internalLinks: [...links],
+      headings: extractHeadings(html),
+      textExcerpt: extractText(html),
     };
   } catch (e) {
     return {
