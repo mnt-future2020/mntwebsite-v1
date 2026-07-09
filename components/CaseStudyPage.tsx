@@ -3,6 +3,7 @@ import Icon from "./Icon";
 import Reveal from "./Reveal";
 import CTASection from "./CTASection";
 import SpotlightCard from "./SpotlightCard";
+import FAQ from "./FAQ";
 import { SectionHeading, CheckList, Breadcrumbs } from "./blocks";
 import { site } from "@/lib/site";
 import type { CaseStudy } from "@/lib/caseStudies";
@@ -23,15 +24,20 @@ function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string
 }
 
 export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
+  // Article (not bare CreativeWork): named creator + dates = the entity clarity
+  // answer engines reward when deciding what to cite.
   const schema = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
+    "@type": "Article",
     name: cs.title,
     headline: cs.metaTitle,
     description: cs.summary,
     image: `${site.url}${cs.cover}`,
-    url: cs.liveUrl,
-    creator: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+    url: `${site.url}/work/${cs.slug}`,
+    mainEntityOfPage: `${site.url}/work/${cs.slug}`,
+    ...(cs.dateISO ? { datePublished: cs.dateISO, dateModified: cs.dateISO } : {}),
+    author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+    publisher: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
   };
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -42,11 +48,25 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       { "@type": "ListItem", position: 3, name: cs.title, item: `${site.url}/work/${cs.slug}` },
     ],
   };
+  const faqSchema = cs.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: cs.faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
 
       {/* HERO — split: story + product mockup */}
       <section className="relative overflow-hidden bg-navy text-white">
@@ -76,7 +96,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
             <div className="relative">
               <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-brand/10 blur-2xl" />
               <div className="relative">
-                <BrowserFrame src={cs.heroShot} alt={`${cs.title} product`} url="lobbi.in" />
+                <BrowserFrame src={cs.heroShot} alt={`${cs.title} product`} url={cs.frameUrl || "lobbi.in"} />
               </div>
             </div>
           </Reveal>
@@ -119,7 +139,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       <section className="bg-soft py-16 sm:py-20">
         <div className="container-mnt grid items-start gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
-            <SectionHeading align="left" eyebrow="The challenge" title="Two sides, one platform." />
+            <SectionHeading align="left" eyebrow="The challenge" title={cs.copy?.challengeTitle || "The problem behind the build."} />
           </Reveal>
           <Reveal delay={100}>
             <p className="text-lg leading-relaxed text-slatey">{cs.problem}</p>
@@ -143,10 +163,43 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
       </section>
 
+      {/* RESULTS — the honest before → after proof */}
+      {cs.results && cs.results.length > 0 && (
+        <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
+          <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-20" />
+          <div className="pointer-events-none absolute -right-40 top-0 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[130px]" />
+          <div className="container-mnt relative">
+            <Reveal>
+              <span className="eyebrow-dark">Results</span>
+              <h2 className="mt-5 max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+                {cs.resultsTitle || "What did the build change?"}
+              </h2>
+              {cs.resultsIntro && (
+                <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/75">{cs.resultsIntro}</p>
+              )}
+            </Reveal>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {cs.results.map((r, i) => (
+                <Reveal key={r.metric} delay={i * 70}>
+                  <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-200">{r.metric}</div>
+                    <div className="mt-4 text-sm text-white/55">{r.before}</div>
+                    <div className="mt-1.5 flex items-start gap-2">
+                      <Icon name="arrow" className="mt-1.5 h-4 w-4 shrink-0 rotate-90 text-brand-300 sm:rotate-0" />
+                      <div className="font-display text-lg font-bold leading-snug text-white">{r.after}</div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* WHAT WE BUILT */}
       <section className="bg-soft py-16 sm:py-20">
         <div className="container-mnt">
-          <SectionHeading eyebrow="What we built" title="A consumer app and an operations platform." />
+          <SectionHeading eyebrow="What we built" title={cs.copy?.buildTitle || "What we shipped."} />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {cs.build.map((b, i) => (
               <Reveal key={b.audience} delay={i * 100}>
@@ -194,7 +247,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
           <SectionHeading
             eyebrow="Engineering highlights"
             title="Where the hard problems were."
-            subtitle="The parts that make LOBBI hold up under real, concurrent, money-moving load."
+            subtitle={cs.copy?.highlightsSubtitle}
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cs.highlights.map((h, i) => (
@@ -216,7 +269,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       <section className="container-mnt py-16 sm:py-20">
         <SectionHeading
           eyebrow="Tech decisions"
-          title="Why we chose each piece — and what it bought LOBBI."
+          title={cs.copy?.techTitle || "Why we chose each piece."}
           subtitle="Every technology earned its place by solving a specific problem better than the alternatives."
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
@@ -267,9 +320,22 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
       </section>
 
+      {/* FAQ — real buyer questions; emitted as FAQPage JSON-LD above */}
+      {cs.faq && cs.faq.length > 0 && (
+        <section className="container-mnt py-16 sm:py-20">
+          <SectionHeading eyebrow="FAQ" title="The questions buyers ask about this build." />
+          <div className="mt-12">
+            <FAQ items={cs.faq} />
+          </div>
+        </section>
+      )}
+
       <CTASection
-        title="Have a platform like this in mind?"
-        body="LOBBI is the kind of multi-sided, real-time platform we specialise in. Tell us your idea — we'll show you how we'd architect it."
+        title={cs.copy?.ctaTitle || "Have a platform like this in mind?"}
+        body={
+          cs.copy?.ctaBody ||
+          "This is the kind of platform we specialise in. Tell us your idea — we'll show you how we'd architect it."
+        }
       />
     </>
   );
