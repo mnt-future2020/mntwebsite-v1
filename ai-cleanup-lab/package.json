@@ -1,0 +1,13 @@
+{
+  "name": "ai-cleanup-lab",
+  "version": "0.0.1",
+  "private": true,
+  "description": "MnT AI Cleanup R&D lab — a deliberately vibe-coded store, its exploits and load failures, and the hardened rebuild. Localhost-only, zero dependencies.",
+  "scripts": {
+    "seed": "node data/seed.js",
+    "before": "node before/server.js",
+    "after": "node after/server.js",
+    "scan": "node lab/scan.js",
+    "lab": "node lab/run-all.js"
+  }
+}

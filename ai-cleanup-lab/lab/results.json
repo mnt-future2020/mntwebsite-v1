@@ -1,0 +1,90 @@
+{
+  "ranAt": "2026-07-09T06:17:37.257Z",
+  "node": "v25.2.1",
+  "before": {
+    "label": "BEFORE",
+    "security": {
+      "critical": 2,
+      "high": 3,
+      "medium": 2,
+      "total": 7
+    },
+    "exploited": 5,
+    "exploits": [
+      {
+        "id": "code-injection",
+        "exploited": true
+      },
+      {
+        "id": "reflected-xss",
+        "exploited": true
+      },
+      {
+        "id": "broken-access-control",
+        "exploited": true
+      },
+      {
+        "id": "secret-exposure",
+        "exploited": true
+      },
+      {
+        "id": "price-manipulation",
+        "exploited": true
+      }
+    ],
+    "load": {
+      "total": 3000,
+      "concurrency": 60,
+      "seconds": 4.46,
+      "rps": 672,
+      "errors": 0,
+      "errorRate": 0,
+      "p50": 82,
+      "p95": 90,
+      "p99": 631
+    }
+  },
+  "after": {
+    "label": "AFTER",
+    "security": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "total": 0
+    },
+    "exploited": 0,
+    "exploits": [
+      {
+        "id": "code-injection",
+        "exploited": false
+      },
+      {
+        "id": "reflected-xss",
+        "exploited": false
+      },
+      {
+        "id": "broken-access-control",
+        "exploited": false
+      },
+      {
+        "id": "secret-exposure",
+        "exploited": false
+      },
+      {
+        "id": "price-manipulation",
+        "exploited": false
+      }
+    ],
+    "load": {
+      "total": 3000,
+      "concurrency": 60,
+      "seconds": 0.09,
+      "rps": 32258,
+      "errors": 0,
+      "errorRate": 0,
+      "p50": 1,
+      "p95": 3,
+      "p99": 10
+    }
+  }
+}
