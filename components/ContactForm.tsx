@@ -142,7 +142,8 @@ export default function ContactForm() {
           </>
         )}
       </button>
-      <p className="mt-4 text-xs text-slate-400">
+      {/* slate-500, not 400 — 12px text on white needs ≥4.5:1 contrast (WCAG AA) */}
+      <p className="mt-4 text-xs text-slate-500">
         By submitting you agree to be contacted about your enquiry. We never share your details.
       </p>
     </form>

@@ -25,7 +25,8 @@ body {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
   }
   .btn-primary {
-    @apply btn bg-brand text-white shadow-glow hover:bg-brand-600 hover:-translate-y-0.5;
+    /* brand-700 (not brand) — white 14px text needs ≥4.5:1 (WCAG AA); #2095F1 is 3.16:1, #0E66C2 is 5.7:1 */
+    @apply btn bg-brand-700 text-white shadow-glow hover:bg-brand-800 hover:-translate-y-0.5;
   }
   .btn-ghost {
     @apply btn border border-slate-200 bg-white text-ink hover:border-brand-300 hover:text-brand-700;
