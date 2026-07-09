@@ -309,6 +309,132 @@ export const caseStudies: CaseStudy[] = [
         "Searchlight is the pattern behind our Embedded AI Agents service — domain-trained agents with hard safety gates. Book a free agent-readiness audit and we'll map where one pays off in your commerce stack.",
     },
   },
+  {
+    slug: "wcag-compliance",
+    title: "WCAG 2.1 AA",
+    tagline:
+      "We ran an accessibility audit on our own site and fixed every failure in the design system — no overlay widget. Seven failing checks to zero, measured with axe-core.",
+    type: "Internal audit · Dogfooded by MnT",
+    category: "ADA / WCAG compliance · Design tokens",
+    cover: "/work/wcag-cover.png",
+    heroShot: "/work/wcag-scan.png",
+    frameUrl: "axe-core · mntfuture.com",
+    liveUrl: "https://mntfuture.com",
+    liveLabel: "The site itself is the proof",
+    dateISO: "2026-07-09",
+    summary:
+      "Most US accessibility lawsuits target ecommerce, and the overlay-widget shortcut has been publicly discredited — so we proved the honest workflow on our own site first. An axe-core baseline (WCAG 2.1 A + AA) across nine key pages of mntfuture.com found 7 failing nodes, all traced to four root causes. We fixed them at the design-token level in July 2026 and re-scanned: zero violations, brand intact, no overlay.",
+    facts: [
+      { value: "7 → 0", label: "Failing axe nodes after remediation" },
+      { value: "9", label: "Key pages scanned — all now violation-free" },
+      { value: "4", label: "Root causes — fixed in the design system" },
+      { value: "0", label: "Overlay widgets used" },
+    ],
+    scope: [
+      { label: "Role", value: "Accessibility audit + remediation" },
+      { label: "Standard", value: "WCAG 2.1 A + AA (axe-core)" },
+      { label: "Delivered", value: "Token fixes · a11y-safe 3rd-party embeds" },
+      { label: "Status", value: "0 violations across scanned pages" },
+    ],
+    problem:
+      "Accessibility is now a commerce-specific legal risk: the large majority of US ADA website lawsuits target ecommerce, and the FTC's action against overlay vendors ended the 'install a widget' era — courts and plaintiffs treat overlays as evidence of neglect, not compliance. The honest fix lives in the design system itself. Before selling that workflow to clients, we held ourselves to it: audit our own site, fix the real tokens, publish the real numbers.",
+    approach: [
+      { no: "01", title: "Baseline, honestly", desc: "axe-core against nine key pages — home, both vertical hubs, service pages, work, contact, blog — scoped to WCAG 2.1 A and AA rules. Result: 7 failing nodes across 5 pages." },
+      { no: "02", title: "Trace to root causes", desc: "Every failure mapped to four causes — two contrast failures in shared components, one in a global button token, and a third-party iframe with a machine-generated title." },
+      { no: "03", title: "Fix the system, not the page", desc: "Contrast fixed by moving tokens within the existing brand palette (brand → brand-700); the third-party embed wrapped with a guard that enforces an accessible name." },
+      { no: "04", title: "Re-scan and keep scanning", desc: "Same scanner, same rules: zero violations on all nine pages. The scan is repeatable on any deploy — the same workflow we run for client stores." },
+    ],
+    build: [
+      {
+        audience: "The audit",
+        icon: "search",
+        points: [
+          "axe-core engine — the industry-standard WCAG rule set, run in a real browser",
+          "Nine key pages scanned: home, /commerce, /ai-agents, services, work, contact, blog",
+          "Contrast math checked against WCAG AA thresholds (≥ 4.5:1 for body-size text)",
+          "Third-party embeds audited too — iframes need accessible names (WCAG 4.1.2)",
+        ],
+      },
+      {
+        audience: "The fixes",
+        icon: "shield",
+        points: [
+          "Global .btn-primary token: white on #2095F1 was 3.16:1 → brand-700 #0E66C2, 5.7:1 — one token, every CTA passes",
+          "Footer Subscribe button — rendered on every page — same root cause, same fix",
+          "Form microcopy: slate-400 on white was 2.56:1 → slate-500, 4.76:1",
+          "Clutch reviews iframe: script kept overwriting the title with a handshake string → a MutationObserver enforces a descriptive name",
+        ],
+      },
+    ],
+    productShots: [
+      { src: "/work/wcag-scan.png", title: "Before / after, per page", desc: "The axe-core scan across nine key pages — 7 failing nodes before, zero after." },
+      { src: "/work/wcag-fixes.png", title: "Four root-cause fixes", desc: "Contrast math and an accessible name for a third-party iframe — fixed in the design system, not painted over." },
+      { src: "/work/wcag-cover.png", title: "The honest scoreboard", desc: "Real, dated numbers from our own site — the same audit we run for client stores." },
+    ],
+    highlights: [
+      { icon: "layers", title: "Token-level remediation", desc: "One design-token change fixed every primary CTA on the site at once — and the fix can't drift, because new pages inherit it." },
+      { icon: "shield", title: "No overlay widget", desc: "Post-FTC, overlays are a liability. Every fix here is in the actual HTML, CSS and components — the only kind that stands up to an audit." },
+      { icon: "network", title: "Third-party embeds handled", desc: "You can't edit a vendor's iframe, but you can guard it: a MutationObserver keeps a descriptive accessible name on the Clutch widget." },
+      { icon: "spark", title: "Brand preserved", desc: "The fix moved within MnT's own palette — brand-700 is still unmistakably MnT blue. Compliance didn't cost the design." },
+      { icon: "gauge", title: "Repeatable on every deploy", desc: "The scan is scripted and re-runnable — accessibility as a regression gate, not a one-time certificate." },
+      { icon: "check", title: "Honest scope", desc: "Automated rules catch the measurable layer. Keyboard-flow and screen-reader review is the manual layer we run on client engagements." },
+    ],
+    techDecisions: [
+      { tech: "axe-core (WCAG 2.1 A/AA)", used: "The audit engine, run in a real browser against each page.", advantage: "The same rule set plaintiffs' auditors use — deterministic, repeatable, and mapped rule-by-rule to WCAG success criteria." },
+      { tech: "Design-token remediation", used: "Contrast fixes made in the shared Tailwind tokens, not per-page overrides.", advantage: "One change fixes every instance sitewide — including pages that don't exist yet." },
+      { tech: "In-palette color steps", used: "brand → brand-700 and slate-400 → slate-500 from the existing scale.", advantage: "Passes AA without inventing new colors — the brand system stays coherent." },
+      { tech: "MutationObserver guard", used: "Enforces a descriptive title on the third-party Clutch iframe.", advantage: "Vendor scripts can overwrite attributes at any time; the guard makes the accessible name stick without forking their code." },
+    ],
+    stack: [
+      { group: "Audit", items: ["axe-core 4", "WCAG 2.1 A + AA"] },
+      { group: "Remediation", items: ["Tailwind design tokens", "React components"] },
+      { group: "Guards", items: ["MutationObserver", "Repeatable scan script"] },
+      { group: "Site", items: ["Next.js App Router", "TypeScript"] },
+    ],
+    metaTitle: "WCAG 2.1 AA on Our Own Site — No Overlay | MnT",
+    metaDescription:
+      "MnT audited its own site with axe-core and fixed every WCAG AA failure at the design-token level — 7 failing checks to 0 across 9 pages, no overlay widget.",
+    resultsTitle: "What did zero violations actually take?",
+    resultsIntro:
+      "In July 2026, an axe-core scan (WCAG 2.1 A + AA) of mntfuture.com found 7 failing nodes across 5 of 9 key pages. Every failure traced to four root causes. We fixed them in the design system — two tokens, one text color, one iframe guard — and re-scanned: zero violations on all nine pages, with the brand palette intact.",
+    results: [
+      { metric: "Failing axe nodes", before: "7", after: "0" },
+      { metric: "Pages with violations", before: "5 of 9", after: "0 of 9" },
+      { metric: "Primary CTA contrast", before: "3.16:1 (fail)", after: "5.7:1 (AA ✓)" },
+      { metric: "Fix location", before: "— (overlay era)", after: "Design tokens, in the repo" },
+    ],
+    faq: [
+      {
+        q: "Why not just install an accessibility overlay widget?",
+        a: "Because overlays don't fix the underlying code — and after the FTC's $1M action against overlay marketing claims, they're treated as a liability, not a defense. Most ADA web lawsuits still target ecommerce sites, overlays installed or not. The only remediation that stands up to an audit is in the actual HTML, CSS and components.",
+      },
+      {
+        q: "How can four fixes clean an entire site?",
+        a: "Because the failures lived in shared code, not individual pages: a global button token, a footer component rendered on every page, one form style, and one third-party embed. Fixing the design system fixes every page that uses it — including future ones. That's why we remediate tokens, not screenshots.",
+      },
+      {
+        q: "Did the brand have to change?",
+        a: "No — the fix moved within MnT's existing palette. The primary button went from brand (#2095F1) to brand-700 (#0E66C2): same blue family, 5.7:1 contrast instead of 3.16:1. Accessible and on-brand are not in tension if the design system has proper color scales.",
+      },
+      {
+        q: "Is an automated scan enough for ADA compliance?",
+        a: "No, and we say so plainly: automated rules like axe-core catch the objectively measurable layer — contrast, names, structure. Full WCAG conformance also needs manual keyboard-flow, focus-order and screen-reader review. That manual layer is part of our client engagements; this case study shows the automated layer done honestly.",
+      },
+      {
+        q: "Can you run this on our store?",
+        a: "Yes — this is the exact workflow inside our Managed Commerce & Compliance service: baseline scan, root-cause remediation in your design system, a re-scan you can verify, and the manual review on top. Book a free architecture workshop and we'll scope your store's ADA exposure.",
+      },
+    ],
+    copy: {
+      challengeTitle: "The overlay era is over.",
+      buildTitle: "The audit and the fixes.",
+      highlightsSubtitle: "Why token-level remediation beats page-by-page patching — and what we deliberately don't claim.",
+      techTitle: "Why we fixed it this way.",
+      ctaTitle: "Is your store carrying ADA risk?",
+      ctaBody:
+        "Most US accessibility lawsuits target ecommerce. We'll run this exact audit on your store — baseline scan, root-cause fixes in your design system, verifiable re-scan. Book a free architecture workshop to scope it.",
+    },
+  },
 ];
 
 export function getCaseStudy(slug: string) {
