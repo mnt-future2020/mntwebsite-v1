@@ -391,6 +391,7 @@ model LeaveRequest {
   startDate   DateTime
   endDate     DateTime
   days        Float       @default(1)
+  halfDay     Boolean     @default(false) // single-day half-day leave (0.5 day)
   reason      String?
   status      LeaveStatus @default(PENDING)
   approverNote String?

@@ -24,18 +24,22 @@ export async function POST(req: Request) {
   if (!emp) return NextResponse.json({ error: "No employee profile on this account." }, { status: 400 });
   try {
     const b = await req.json();
-    if (!b.startDate || !b.endDate)
+    const halfDay = Boolean(b.halfDay);
+    if (!b.startDate || (!halfDay && !b.endDate))
       return NextResponse.json({ error: "Start and end dates are required." }, { status: 400 });
-    if (new Date(b.endDate) < new Date(b.startDate))
+    // A half-day is a single day worth 0.5; ignore any end date the client sent.
+    const endDate = halfDay ? b.startDate : b.endDate;
+    if (new Date(endDate) < new Date(b.startDate))
       return NextResponse.json({ error: "End date can't be before start date." }, { status: 400 });
-    const days = leaveDays(b.startDate, b.endDate);
+    const days = halfDay ? 0.5 : leaveDays(b.startDate, endDate);
     const leave = await prisma.leaveRequest.create({
       data: {
         employeeId: emp.id,
         kind: (b.kind || "PAID") as never,
         startDate: new Date(b.startDate),
-        endDate: new Date(b.endDate),
+        endDate: new Date(endDate),
         days,
+        halfDay,
         reason: b.reason || null,
         status: "PENDING",
       },

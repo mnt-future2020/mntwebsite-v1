@@ -51,6 +51,19 @@ export function leaveDays(start: Date | string, end: Date | string) {
   return Math.max(1, Math.round(ms / 86400000) + 1);
 }
 
+// Every day-start Date in [start, end] inclusive. Same normalization the
+// attendance API uses (local midnight), so the dates line up on the
+// (employeeId, date) unique key when a leave marks attendance.
+export function eachDay(start: Date | string, end: Date | string): Date[] {
+  const a = new Date(start);
+  a.setHours(0, 0, 0, 0);
+  const b = new Date(end);
+  b.setHours(0, 0, 0, 0);
+  const out: Date[] = [];
+  for (let d = new Date(a); d <= b; d.setDate(d.getDate() + 1)) out.push(new Date(d));
+  return out;
+}
+
 export type PayslipInput = {
   basic: number;
   hra: number;

@@ -31,7 +31,7 @@ const KINDS = ["PAID", "SICK", "CASUAL", "COMP_OFF", "UNPAID"];
 export default function LeaveSelfService({ initial, balances }: { initial: Leave[]; balances: Balances }) {
   const router = useRouter();
   const [leaves, setLeaves] = useState<Leave[]>(initial);
-  const [f, setF] = useState({ kind: "PAID", startDate: "", endDate: "", reason: "" });
+  const [f, setF] = useState({ kind: "PAID", startDate: "", endDate: "", reason: "", halfDay: false });
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const up = (k: string, v: string) => setF((s) => ({ ...s, [k]: v }));
@@ -41,6 +41,7 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
   const selectedRemaining = selectedField ? balances[selectedField] : null;
 
   const dayCount = () => {
+    if (f.halfDay) return 0.5;
     if (!f.startDate || !f.endDate) return 0;
     const a = new Date(f.startDate);
     const b = new Date(f.endDate);
@@ -49,16 +50,17 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (f.startDate && f.endDate && f.endDate < f.startDate) {
+    if (!f.halfDay && f.startDate && f.endDate && f.endDate < f.startDate) {
       setErr("End date can't be before the start date.");
       return;
     }
     setBusy(true);
     setErr(null);
+    const payload = f.halfDay ? { ...f, endDate: f.startDate } : f;
     const res = await fetch("/api/portal/leave", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(f),
+      body: JSON.stringify(payload),
     });
     const d = await res.json().catch(() => ({}));
     if (res.ok) {
@@ -75,7 +77,7 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
         },
         ...l,
       ]);
-      setF({ kind: "PAID", startDate: "", endDate: "", reason: "" });
+      setF({ kind: "PAID", startDate: "", endDate: "", reason: "", halfDay: false });
       router.refresh();
     } else {
       setErr(d.error || "Couldn't submit.");
@@ -130,16 +132,32 @@ export default function LeaveSelfService({ initial, balances }: { initial: Leave
               <p className="mt-1.5 text-xs text-slatey">Unpaid leave — no balance deducted.</p>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <label className="flex items-center gap-2 text-xs font-medium text-slatey">
+            <input
+              type="checkbox"
+              checked={f.halfDay}
+              onChange={(e) => setF((s) => ({ ...s, halfDay: e.target.checked }))}
+              className="h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand"
+            />
+            Half day (0.5 day)
+          </label>
+          {f.halfDay ? (
             <div>
-              <label className={label}>From</label>
+              <label className={label}>Date</label>
               <input type="date" value={f.startDate} onChange={(e) => up("startDate", e.target.value)} className={field} required />
             </div>
-            <div>
-              <label className={label}>To</label>
-              <input type="date" value={f.endDate} onChange={(e) => up("endDate", e.target.value)} className={field} required />
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={label}>From</label>
+                <input type="date" value={f.startDate} onChange={(e) => up("startDate", e.target.value)} className={field} required />
+              </div>
+              <div>
+                <label className={label}>To</label>
+                <input type="date" value={f.endDate} onChange={(e) => up("endDate", e.target.value)} className={field} required />
+              </div>
             </div>
-          </div>
+          )}
           <div>
             <label className={label}>Reason</label>
             <textarea rows={3} value={f.reason} onChange={(e) => up("reason", e.target.value)} className={`${field} resize-none`} placeholder="Optional note for your manager" />

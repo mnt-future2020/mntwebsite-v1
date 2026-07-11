@@ -21,14 +21,18 @@ export async function POST(req: Request) {
     }
     if (await managerBlocked(String(b.employeeId)))
       return NextResponse.json({ error: "You can only create requests for your team." }, { status: 403 });
-    const days = leaveDays(b.startDate, b.endDate);
+    // A half-day is a single day worth 0.5; ignore any end date the client sent.
+    const halfDay = Boolean(b.halfDay);
+    const endDate = halfDay ? b.startDate : b.endDate;
+    const days = halfDay ? 0.5 : leaveDays(b.startDate, endDate);
     const leave = await prisma.leaveRequest.create({
       data: {
         employeeId: b.employeeId,
         kind: (b.kind || "PAID") as never,
         startDate: new Date(b.startDate),
-        endDate: new Date(b.endDate),
+        endDate: new Date(endDate),
         days,
+        halfDay,
         reason: b.reason || null,
         status: "PENDING",
       },

@@ -18,7 +18,7 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   const router = useRouter();
   const [leaves, setLeaves] = useState(l0);
   const [holidays, setHolidays] = useState(h0);
-  const [form, setForm] = useState({ employeeId: employees[0]?.id || "", kind: "PAID", startDate: "", endDate: "", reason: "" });
+  const [form, setForm] = useState({ employeeId: employees[0]?.id || "", kind: "PAID", startDate: "", endDate: "", reason: "", halfDay: false });
   const [hol, setHol] = useState({ date: "", name: "" });
   const [editHolId, setEditHolId] = useState<string | null>(null);
   const [editHol, setEditHol] = useState({ date: "", name: "" });
@@ -48,13 +48,14 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
   };
   const addLeave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.employeeId || !form.startDate || !form.endDate) return;
-    const res = await fetch("/api/admin/hr/leave", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) }).catch(() => null);
+    if (!form.employeeId || !form.startDate || (!form.halfDay && !form.endDate)) return;
+    const payload = form.halfDay ? { ...form, endDate: form.startDate } : form;
+    const res = await fetch("/api/admin/hr/leave", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(() => null);
     if (res && res.ok) {
       const d = await res.json();
       const name = employees.find((x) => x.id === form.employeeId)?.name || "";
       setLeaves((s) => [{ ...d, employeeName: name, startDate: d.startDate, endDate: d.endDate }, ...s]);
-      setForm({ ...form, startDate: "", endDate: "", reason: "" });
+      setForm({ ...form, startDate: "", endDate: "", reason: "", halfDay: false });
       toast("Leave added");
     } else {
       toast((res && (await res.json().catch(() => ({})))?.error) || "Couldn't add leave", "err");
@@ -103,7 +104,7 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
     } else alert("Update failed.");
   };
 
-  const estDays = form.startDate && form.endDate ? leaveDays(form.startDate, form.endDate) : 0;
+  const estDays = form.halfDay ? 0.5 : form.startDate && form.endDate ? leaveDays(form.startDate, form.endDate) : 0;
 
   // Remaining balance for an employee + leave type (null = no balance, e.g. UNPAID).
   const balanceFor = (employeeId: string, kind: string): number | null => {
@@ -171,10 +172,18 @@ export default function LeaveManager({ leaves: l0, employees, holidays: h0 }: { 
             ) : (
               <p className="text-xs text-slate-400">Unpaid — no balance deducted.</p>
             )}
-            <div className="grid grid-cols-2 gap-2">
-              <DateField label="Start" value={form.startDate} onChange={(v) => setForm({ ...form, startDate: v })} />
-              <DateField label="End" value={form.endDate} onChange={(v) => setForm({ ...form, endDate: v })} />
-            </div>
+            <label className="flex items-center gap-2 text-xs font-medium text-slatey">
+              <input type="checkbox" checked={form.halfDay} onChange={(e) => setForm({ ...form, halfDay: e.target.checked })} className="h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand" />
+              Half day (0.5 day)
+            </label>
+            {form.halfDay ? (
+              <DateField label="Date" value={form.startDate} onChange={(v) => setForm({ ...form, startDate: v })} />
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <DateField label="Start" value={form.startDate} onChange={(v) => setForm({ ...form, startDate: v })} />
+                <DateField label="End" value={form.endDate} onChange={(v) => setForm({ ...form, endDate: v })} />
+              </div>
+            )}
             <textarea rows={2} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={`${field} resize-none`} placeholder="Reason (optional)" />
             {estDays > 0 && <p className="text-xs text-slate-400">{estDays} day(s)</p>}
           </div>

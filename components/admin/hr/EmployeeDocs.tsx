@@ -8,13 +8,34 @@ type Doc = { id: string; type: string; name: string };
 const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 
+// Common document categories. The category is a label, not the file name.
+const DOC_TYPES = [
+  "Document",
+  "Offer Letter",
+  "Appointment Letter",
+  "Contract",
+  "PAN Card",
+  "Aadhaar",
+  "Payslip",
+  "Certificate",
+  "ID Proof",
+  "Other",
+];
+
 export default function EmployeeDocs({ employeeId, initial }: { employeeId: string; initial: Doc[] }) {
   const [docs, setDocs] = useState<Doc[]>(initial);
-  const [type, setType] = useState("Offer Letter");
+  const [type, setType] = useState("Document");
   const [name, setName] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  // Picking a file fills the name with its real filename (still editable), so
+  // each document is saved under its actual name — not a stale default.
+  const chooseFile = (f: File | null) => {
+    setFile(f);
+    if (f && !name.trim()) setName(f.name.replace(/\.[^.]+$/, ""));
+  };
 
   const add = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +56,7 @@ export default function EmployeeDocs({ employeeId, initial }: { employeeId: stri
       setDocs((s) => [created, ...s]);
       setName("");
       setFile(null);
+      setType("Document");
       if (fileRef.current) fileRef.current.value = "";
       toast("Document uploaded");
     } else {
@@ -79,12 +101,18 @@ export default function EmployeeDocs({ employeeId, initial }: { employeeId: stri
         )}
       </div>
       <form onSubmit={add} className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1.2fr_1.4fr_auto]">
-        <input value={type} onChange={(e) => setType(e.target.value)} className={field} placeholder="Type" />
-        <input value={name} onChange={(e) => setName(e.target.value)} className={field} placeholder="Document name (optional)" />
+        <select value={type} onChange={(e) => setType(e.target.value)} className={field} aria-label="Document type">
+          {DOC_TYPES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <input value={name} onChange={(e) => setName(e.target.value)} className={field} placeholder="Document name" />
         <input
           ref={fileRef}
           type="file"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
+          onChange={(e) => chooseFile(e.target.files?.[0] || null)}
           className="rounded-lg border border-slate-200 bg-white text-sm text-slatey file:mr-3 file:border-0 file:bg-brand-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-brand-700"
         />
         <button type="submit" disabled={busy} className="btn-ghost shrink-0 disabled:opacity-70">
