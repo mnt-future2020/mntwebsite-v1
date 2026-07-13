@@ -9,18 +9,17 @@ export async function PATCH(req: Request, props: Ctx) {
   const { id } = await props.params;
   try {
     const b = await req.json();
-    const c = await prisma.client.update({
-      where: { id },
-      data: {
-        name: String(b.name || "").trim(),
-        contact: (b.contact as string)?.trim() || null,
-        email: (b.email as string)?.trim() || null,
-        phone: (b.phone as string)?.trim() || null,
-        website: (b.website as string)?.trim() || null,
-        status: (b.status as string) as never,
-        notes: (b.notes as string) || null,
-      },
-    });
+    // Partial update — only touch keys the caller sent (inline-field saves).
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any = {};
+    if ("name" in b) data.name = String(b.name || "").trim();
+    if ("contact" in b) data.contact = (b.contact as string)?.trim() || null;
+    if ("email" in b) data.email = (b.email as string)?.trim() || null;
+    if ("phone" in b) data.phone = (b.phone as string)?.trim() || null;
+    if ("website" in b) data.website = (b.website as string)?.trim() || null;
+    if ("status" in b && b.status) data.status = b.status as never;
+    if ("notes" in b) data.notes = (b.notes as string) || null;
+    const c = await prisma.client.update({ where: { id }, data });
     return NextResponse.json(c);
   } catch {
     return NextResponse.json({ error: "Update failed." }, { status: 500 });

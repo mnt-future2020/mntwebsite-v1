@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Icon from "@/components/Icon";
 import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
@@ -80,7 +81,7 @@ export default function ContactsManager({ initial, companies, owners }: { initia
               <tbody className="divide-y divide-slate-100">
                 {view.map((c) => (
                   <tr key={c.id} className={`hover:bg-slate-50 ${editId === c.id ? "bg-brand-50/40" : ""}`}>
-                    <td className="px-5 py-3"><div className="font-medium text-ink">{[c.firstName, c.lastName].filter(Boolean).join(" ")}</div><div className="text-xs text-slate-400">{c.title || ""}{c.email ? ` · ${c.email}` : ""}</div></td>
+                    <td className="px-5 py-3"><Link href={`/admin/crm/contacts/${c.id}`} className="font-medium text-ink hover:text-brand-700 hover:underline">{[c.firstName, c.lastName].filter(Boolean).join(" ")}</Link><div className="text-xs text-slate-400">{c.title || ""}{c.email ? ` · ${c.email}` : ""}</div></td>
                     <td className="px-5 py-3 text-slatey">{c.client?.name || "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c.owner ? [c.owner.firstName, c.owner.lastName].filter(Boolean).join(" ") : "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c._count?.deals ?? 0}</td>

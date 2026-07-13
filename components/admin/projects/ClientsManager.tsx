@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Icon from "@/components/Icon";
 import { CLIENT_STATUSES, CLIENT_STATUS_STYLE, titleCase } from "@/lib/projects";
 
@@ -21,7 +22,16 @@ const field =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 const blank = { name: "", contact: "", email: "", phone: "", website: "", status: "ACTIVE", notes: "" };
 
-export default function ClientsManager({ initial, apiBase = "/api/admin/projects/clients" }: { initial: Client[]; apiBase?: string }) {
+export default function ClientsManager({
+  initial,
+  apiBase = "/api/admin/projects/clients",
+  recordBase,
+}: {
+  initial: Client[];
+  apiBase?: string;
+  // When set, the client name links to a record page (e.g. "/admin/crm/companies").
+  recordBase?: string;
+}) {
   const router = useRouter();
   const [clients, setClients] = useState<Client[]>(initial);
   const [editId, setEditId] = useState<string | null>(null);
@@ -109,7 +119,13 @@ export default function ClientsManager({ initial, apiBase = "/api/admin/projects
               {clients.map((c) => (
                 <tr key={c.id} className={`hover:bg-slate-50 ${editId === c.id ? "bg-brand-50/40" : ""}`}>
                   <td className="px-5 py-3">
-                    <div className="font-medium text-ink">{c.name}</div>
+                    {recordBase ? (
+                      <Link href={`${recordBase}/${c.id}`} className="font-medium text-ink hover:text-brand-700 hover:underline">
+                        {c.name}
+                      </Link>
+                    ) : (
+                      <div className="font-medium text-ink">{c.name}</div>
+                    )}
                     {c.website && <div className="text-xs text-slate-400">{c.website}</div>}
                   </td>
                   <td className="px-5 py-3 text-slatey">

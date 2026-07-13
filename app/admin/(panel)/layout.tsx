@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import AdminNav from "@/components/admin/AdminNav";
 import PanelShell from "@/components/admin/PanelShell";
+import CommandPalette from "@/components/admin/CommandPalette";
 import { Toaster } from "@/components/admin/Toast";
 import { getSession } from "@/lib/auth";
 import { getRolePerms } from "@/lib/permissions-db";
@@ -31,6 +32,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
         {children}
       </PanelShell>
       <Toaster />
+      <CommandPalette />
     </>
   );
 }

@@ -25,6 +25,7 @@ export default async function CrmCompaniesPage() {
       ) : (
         <ClientsManager
           apiBase="/api/admin/crm/companies"
+          recordBase="/admin/crm/companies"
           initial={clients.map((c) => ({
             id: c.id,
             name: c.name,

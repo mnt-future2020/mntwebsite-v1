@@ -40,6 +40,7 @@ const projects: Item[] = [
 
 const crm: Item[] = [
   { href: "/admin/crm", label: "Pipeline", icon: "network", key: "crm", exact: true },
+  { href: "/admin/crm/inbox", label: "Inbox", icon: "bell", key: "crm" },
   { href: "/admin/crm/contacts", label: "Contacts", icon: "users", key: "crm" },
   { href: "/admin/crm/companies", label: "Companies", icon: "building", key: "crm" },
 ];
