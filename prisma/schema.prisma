@@ -716,6 +716,40 @@ enum DealStage {
   LOST
 }
 
+// How a custom pipeline stage counts toward open / won / lost.
+enum StageKind {
+  OPEN
+  WON
+  LOST
+}
+
+// A sales pipeline — a named set of ordered stages. Brands can run several
+// (e.g. "New business", "Partnerships"). One is the default for new deals.
+model Pipeline {
+  id        String          @id @default(cuid())
+  name      String
+  isDefault Boolean         @default(false)
+  order     Int             @default(0)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  stages    PipelineStage[]
+  deals     Deal[]
+}
+
+model PipelineStage {
+  id          String    @id @default(cuid())
+  pipelineId  String
+  pipeline    Pipeline  @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  name        String
+  kind        StageKind @default(OPEN)
+  probability Int       @default(10) // default win-probability suggested on entry
+  color       String    @default("slate") // token → chip/accent classes (lib/crm)
+  order       Int       @default(0)
+  deals       Deal[]
+
+  @@index([pipelineId])
+}
+
 enum ActivityType {
   NOTE
   CALL
@@ -759,7 +793,11 @@ model Deal {
   contact           Contact?  @relation(fields: [contactId], references: [id], onDelete: SetNull)
   ownerId           String?
   owner             Employee? @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  stage             DealStage @default(NEW)
+  stage             DealStage @default(NEW) // legacy enum — kept as a fallback; stageRef is authoritative
+  pipelineId        String?
+  pipeline          Pipeline?      @relation(fields: [pipelineId], references: [id], onDelete: SetNull)
+  stageId           String?
+  stageRef          PipelineStage? @relation(fields: [stageId], references: [id], onDelete: SetNull)
   value             Int       @default(0) // deal size, whole currency units
   currency          String    @default("INR")
   probability       Int       @default(10) // % chance of winning (0-100)

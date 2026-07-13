@@ -7,7 +7,7 @@ import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
 import InlineField from "@/components/admin/crm/InlineField";
 import ActivityTimeline from "@/components/admin/crm/ActivityTimeline";
-import { contactName, money, isOpenStage, STAGE_LABELS, STAGE_STYLE } from "@/lib/crm";
+import { contactName, money, dealIsOpen, dealStageName, dealStageChip } from "@/lib/crm";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Any = any;
@@ -37,7 +37,7 @@ export default function CompanyRecord({
   const router = useRouter();
   const [c, setC] = useState<Any>(company);
 
-  const openDeals = useMemo(() => deals.filter((d) => isOpenStage(d.stage)), [deals]);
+  const openDeals = useMemo(() => deals.filter(dealIsOpen), [deals]);
   const pipeline = useMemo(() => openDeals.reduce((s, d) => s + (d.value || 0), 0), [openDeals]);
 
   const save = (key: string) => async (value: string) => {
@@ -155,7 +155,7 @@ export default function CompanyRecord({
                       <p className="truncate text-sm font-medium text-ink">{d.title}</p>
                       <p className="text-xs text-slate-400">{money(d.value, d.currency)}</p>
                     </div>
-                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${STAGE_STYLE[d.stage]}`}>{STAGE_LABELS[d.stage]}</span>
+                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${dealStageChip(d)}`}>{dealStageName(d)}</span>
                   </li>
                 ))}
               </ul>

@@ -7,7 +7,7 @@ import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
 import InlineField from "@/components/admin/crm/InlineField";
 import ActivityTimeline from "@/components/admin/crm/ActivityTimeline";
-import { contactName, money, STAGE_LABELS, STAGE_STYLE, fmtDate, followUpStatus, FOLLOWUP_STYLE } from "@/lib/crm";
+import { contactName, money, dealStageName, dealStageChip, fmtDate, followUpStatus, FOLLOWUP_STYLE } from "@/lib/crm";
 
 type Opt = { id: string; label: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -118,7 +118,7 @@ export default function ContactRecord({
                       <p className="truncate text-sm font-medium text-ink">{d.title}</p>
                       <p className="text-xs text-slate-400">{money(d.value, d.currency)}</p>
                     </div>
-                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${STAGE_STYLE[d.stage]}`}>{STAGE_LABELS[d.stage]}</span>
+                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${dealStageChip(d)}`}>{dealStageName(d)}</span>
                   </li>
                 ))}
               </ul>

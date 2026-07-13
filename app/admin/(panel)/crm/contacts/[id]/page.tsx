@@ -10,7 +10,7 @@ async function getData(id: string) {
   try {
     const [contact, deals, activities, companies, employees] = await Promise.all([
       prisma.contact.findUnique({ where: { id }, include: { client: true, owner: true } }),
-      prisma.deal.findMany({ where: { contactId: id }, orderBy: { createdAt: "desc" } }),
+      prisma.deal.findMany({ where: { contactId: id }, orderBy: { createdAt: "desc" }, include: { stageRef: true } }),
       prisma.activity.findMany({ where: { contactId: id }, orderBy: { createdAt: "desc" }, include: { owner: true } }),
       prisma.client.findMany({ orderBy: { name: "asc" } }),
       prisma.employee.findMany({ where: { status: { not: "EXITED" } }, orderBy: { firstName: "asc" } }),

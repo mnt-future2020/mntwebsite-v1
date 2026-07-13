@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/Icon";
 import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
-import { DEAL_STAGES, STAGE_LABELS, ACTIVITY_TYPES, ACTIVITY_ICON, fmtDate, money, titleCase } from "@/lib/crm";
+import { ACTIVITY_TYPES, ACTIVITY_ICON, fmtDate, titleCase } from "@/lib/crm";
 
 type Opt = { id: string; label: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,13 +14,15 @@ const field = "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text
 const lbl = "mb-1 block text-xs font-medium text-slatey";
 const dval = (d: unknown) => (d ? new Date(String(d)).toISOString().slice(0, 10) : "");
 
-export default function DealDrawer({ deal, companies, contacts, owners, onSaved, onDeleted, onClose }: {
-  deal: Any; companies: Opt[]; contacts: Opt[]; owners: Opt[];
+export default function DealDrawer({ deal, pipelines, companies, contacts, owners, onSaved, onDeleted, onClose }: {
+  deal: Any; pipelines: Any[]; companies: Opt[]; contacts: Opt[]; owners: Opt[];
   onSaved: (d: Any) => void; onDeleted: (id: string) => void; onClose: () => void;
 }) {
+  const fallbackPipe = pipelines.find((p) => p.isDefault) || pipelines[0];
   const [f, setF] = useState({
     title: deal.title, clientId: deal.clientId || "", contactId: deal.contactId || "", ownerId: deal.ownerId || "",
-    stage: deal.stage, value: String(deal.value || 0), currency: deal.currency || "INR",
+    pipelineId: deal.pipelineId || fallbackPipe?.id || "", stageId: deal.stageId || "",
+    value: String(deal.value || 0), currency: deal.currency || "INR",
     probability: String(deal.probability ?? 10), expectedCloseDate: dval(deal.expectedCloseDate),
     nextFollowUp: dval(deal.nextFollowUp),
     source: deal.source || "", notes: deal.notes || "", lostReason: deal.lostReason || "",
@@ -32,6 +34,16 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
   const [busy, setBusy] = useState(false);
   const up = (k: string, v: string) => setF((s) => ({ ...s, [k]: v }));
 
+  const pipeline = pipelines.find((p) => p.id === f.pipelineId) || fallbackPipe;
+  const stages: Any[] = pipeline?.stages || [];
+  const selStage = stages.find((s) => s.id === f.stageId);
+  const isLost = selStage?.kind === "LOST";
+
+  const pickPipeline = (id: string) => {
+    const p = pipelines.find((x) => x.id === id);
+    setF((s) => ({ ...s, pipelineId: id, stageId: p?.stages?.[0]?.id || "" }));
+  };
+
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onEsc);
@@ -42,9 +54,17 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
   const save = async () => {
     if (!f.title.trim()) return toast("Title required", "err");
     setBusy(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const body: any = {
+      title: f.title, clientId: f.clientId || null, contactId: f.contactId || null, ownerId: f.ownerId || null,
+      value: Number(f.value) || 0, currency: f.currency, probability: Number(f.probability) || 0,
+      expectedCloseDate: f.expectedCloseDate || null, nextFollowUp: f.nextFollowUp || null,
+      source: f.source || null, notes: f.notes || null, lostReason: f.lostReason || null,
+    };
+    // Only send stageId when it changed — avoids resetting the aging clock on unrelated edits.
+    if (f.stageId && f.stageId !== deal.stageId) body.stageId = f.stageId;
     const res = await fetch(`/api/admin/crm/deals/${deal.id}`, {
-      method: "PATCH", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...f, value: Number(f.value) || 0, probability: Number(f.probability) || 0, clientId: f.clientId || null, contactId: f.contactId || null, ownerId: f.ownerId || null, expectedCloseDate: f.expectedCloseDate || null, nextFollowUp: f.nextFollowUp || null }),
+      method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
     });
     setBusy(false);
     if (res.ok) { onSaved(await res.json()); toast("Deal saved"); onClose(); }
@@ -66,7 +86,6 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
     if (res.ok) { const a = await res.json(); setActs((s) => [a, ...s]); setActSubject(""); setActDue(""); toast("Activity logged"); }
     else toast("Couldn't log activity", "err");
   };
-
   const toggleDone = async (a: Any) => {
     setActs((s) => s.map((x) => (x.id === a.id ? { ...x, done: !x.done } : x)));
     await fetch(`/api/admin/crm/activities/${a.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ done: !a.done }) });
@@ -85,10 +104,12 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
         <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
           <div><label className={lbl}>Title</label><input value={f.title} onChange={(e) => up("title", e.target.value)} className={field} /></div>
           <div className="grid grid-cols-2 gap-3">
-            <div><label className={lbl}>Stage</label><select value={f.stage} onChange={(e) => up("stage", e.target.value)} className={field}>{DEAL_STAGES.map((s) => <option key={s} value={s}>{STAGE_LABELS[s]}</option>)}</select></div>
+            <div><label className={lbl}>Pipeline</label><select value={f.pipelineId} onChange={(e) => pickPipeline(e.target.value)} className={field}>{pipelines.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></div>
+            <div><label className={lbl}>Stage</label><select value={f.stageId} onChange={(e) => up("stageId", e.target.value)} className={field}>{stages.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</select></div>
             <div><label className={lbl}>Owner</label><select value={f.ownerId} onChange={(e) => up("ownerId", e.target.value)} className={field}><option value="">—</option>{owners.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}</select></div>
-            <div><label className={lbl}>Value</label><input value={f.value} onChange={(e) => up("value", e.target.value)} type="number" className={field} /></div>
             <div><label className={lbl}>Win probability %</label><input value={f.probability} onChange={(e) => up("probability", e.target.value)} type="number" className={field} /></div>
+            <div><label className={lbl}>Value</label><input value={f.value} onChange={(e) => up("value", e.target.value)} type="number" className={field} /></div>
+            <div><label className={lbl}>Currency</label><input value={f.currency} onChange={(e) => up("currency", e.target.value)} className={field} /></div>
             <div><label className={lbl}>Company</label><select value={f.clientId} onChange={(e) => up("clientId", e.target.value)} className={field}><option value="">—</option>{companies.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
             <div><label className={lbl}>Contact</label><select value={f.contactId} onChange={(e) => up("contactId", e.target.value)} className={field}><option value="">—</option>{contacts.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
             <DateField label="Expected close" value={f.expectedCloseDate} onChange={(v) => up("expectedCloseDate", v)} />
@@ -96,7 +117,7 @@ export default function DealDrawer({ deal, companies, contacts, owners, onSaved,
             <div><label className={lbl}>Source</label><input value={f.source} onChange={(e) => up("source", e.target.value)} className={field} placeholder="Referral, inbound…" /></div>
           </div>
           <div><label className={lbl}>Notes</label><textarea value={f.notes} onChange={(e) => up("notes", e.target.value)} className={field} rows={3} /></div>
-          {f.stage === "LOST" && (
+          {isLost && (
             <div><label className={lbl}>Lost reason</label><input value={f.lostReason} onChange={(e) => up("lostReason", e.target.value)} className={field} placeholder="Price, competitor, timing…" /></div>
           )}
 

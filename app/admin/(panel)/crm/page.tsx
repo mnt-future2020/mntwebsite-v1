@@ -2,20 +2,29 @@ import { prisma } from "@/lib/db";
 import { PageHeader, StatCard, DbNotice } from "@/components/admin/ui";
 import Icon from "@/components/Icon";
 import DealPipeline from "@/components/admin/crm/DealPipeline";
+import { ensureDefaultPipeline } from "@/lib/pipelines";
 import { fullName } from "@/lib/hr";
-import { money, weightedValue, contactName, isOpenStage, followUpStatus, isStale } from "@/lib/crm";
+import { money, weightedValue, contactName, dealIsOpen, dealIsWon, followUpStatus, isStale } from "@/lib/crm";
 
 export const dynamic = "force-dynamic";
 
 async function getData() {
   try {
-    const [deals, clients, contacts, employees] = await Promise.all([
-      prisma.deal.findMany({ orderBy: [{ stage: "asc" }, { createdAt: "desc" }], include: { client: true, contact: true, owner: true } }),
+    await ensureDefaultPipeline(); // guarantee at least one pipeline exists
+    const [pipelines, deals, clients, contacts, employees] = await Promise.all([
+      prisma.pipeline.findMany({
+        orderBy: { order: "asc" },
+        include: { stages: { orderBy: { order: "asc" } }, _count: { select: { deals: true } } },
+      }),
+      prisma.deal.findMany({
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+        include: { client: true, contact: true, owner: true, stageRef: true },
+      }),
       prisma.client.findMany({ orderBy: { name: "asc" } }),
       prisma.contact.findMany({ orderBy: { firstName: "asc" } }),
       prisma.employee.findMany({ where: { status: { not: "EXITED" } }, orderBy: { firstName: "asc" } }),
     ]);
-    return { deals, clients, contacts, employees };
+    return { pipelines, deals, clients, contacts, employees };
   } catch {
     return null;
   }
@@ -31,14 +40,16 @@ export default async function CrmPipelinePage() {
       </>
     );
   }
-  const { deals, clients, contacts, employees } = data;
-  const open = deals.filter((d) => isOpenStage(d.stage));
+  const { pipelines, deals, clients, contacts, employees } = data;
+  const open = deals.filter(dealIsOpen);
   const openValue = open.reduce((s, d) => s + d.value, 0);
   const weighted = weightedValue(deals);
   const monthStart = new Date();
   monthStart.setDate(1);
   monthStart.setHours(0, 0, 0, 0);
-  const wonThisMonth = deals.filter((d) => d.stage === "WON" && d.closedAt && new Date(d.closedAt) >= monthStart).reduce((s, d) => s + d.value, 0);
+  const wonThisMonth = deals
+    .filter((d) => dealIsWon(d) && d.closedAt && new Date(d.closedAt) >= monthStart)
+    .reduce((s, d) => s + d.value, 0);
   const fuOverdue = open.filter((d) => followUpStatus(d.nextFollowUp) === "overdue").length;
   const fuToday = open.filter((d) => followUpStatus(d.nextFollowUp) === "today").length;
   const staleCount = open.filter((d) => isStale(d)).length;
@@ -64,6 +75,7 @@ export default async function CrmPipelinePage() {
 
       <div className="mt-8">
         <DealPipeline
+          pipelines={pipelines}
           initial={deals}
           companies={clients.map((c) => ({ id: c.id, label: c.name }))}
           contacts={contacts.map((c) => ({ id: c.id, label: contactName(c) }))}
