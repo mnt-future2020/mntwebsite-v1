@@ -52,12 +52,17 @@ export async function PATCH(req: Request, props: Ctx) {
           data.nextFollowUp = null;
           if (!has(b, "probability")) data.probability = 0;
         } else {
-          data.closedAt = null; // reopened
+          data.closedAt = null; // reopened / still open
+          // Only auto-suggest a follow-up when reopening a closed deal or when
+          // none is set — never clobber a user-set date on a routine open→open move.
           if (!has(b, "nextFollowUp")) {
-            const f = new Date();
-            f.setHours(0, 0, 0, 0);
-            f.setDate(f.getDate() + 3);
-            data.nextFollowUp = f;
+            const cur = await prisma.deal.findUnique({ where: { id }, select: { closedAt: true, nextFollowUp: true } });
+            if (cur?.closedAt || !cur?.nextFollowUp) {
+              const f = new Date();
+              f.setHours(0, 0, 0, 0);
+              f.setDate(f.getDate() + 3);
+              data.nextFollowUp = f;
+            }
           }
         }
       }

@@ -12,7 +12,7 @@ export async function PATCH(req: Request, props: Ctx) {
     // Partial update — only touch keys the caller sent (inline-field saves).
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = {};
-    if ("name" in b) data.name = String(b.name || "").trim();
+    if ("name" in b) { const v = String(b.name || "").trim(); if (v) data.name = v; } // required — ignore blanks
     if ("contact" in b) data.contact = (b.contact as string)?.trim() || null;
     if ("email" in b) data.email = (b.email as string)?.trim() || null;
     if ("phone" in b) data.phone = (b.phone as string)?.trim() || null;

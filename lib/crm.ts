@@ -121,11 +121,14 @@ export function openValue(deals: DealLike[]) {
 export type FollowUp = "overdue" | "today" | "soon" | null;
 export function followUpStatus(d?: string | Date | null): FollowUp {
   if (!d) return null;
+  // Date-only fields are stored at UTC midnight. Compare calendar days (the
+  // stored date's UTC day vs. the viewer's local day) so a US viewer isn't shown
+  // a follow-up as overdue a day early. Works the same on server and client.
   const due = new Date(d);
-  due.setHours(0, 0, 0, 0);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const days = Math.round((due.getTime() - today.getTime()) / 86400000);
+  const dueDay = Date.UTC(due.getUTCFullYear(), due.getUTCMonth(), due.getUTCDate());
+  const now = new Date();
+  const todayDay = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const days = Math.round((dueDay - todayDay) / 86400000);
   if (days < 0) return "overdue";
   if (days === 0) return "today";
   return "soon";

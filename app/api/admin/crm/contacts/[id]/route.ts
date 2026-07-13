@@ -13,7 +13,7 @@ export async function PATCH(req: Request, props: Ctx) {
     // save (record page) never wipes the fields it didn't include.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = {};
-    if ("firstName" in b) data.firstName = String(b.firstName || "").trim();
+    if ("firstName" in b) { const v = String(b.firstName || "").trim(); if (v) data.firstName = v; } // required — ignore blanks
     if ("lastName" in b) data.lastName = (b.lastName as string)?.trim() || null;
     if ("email" in b) data.email = (b.email as string)?.trim() || null;
     if ("phone" in b) data.phone = (b.phone as string)?.trim() || null;

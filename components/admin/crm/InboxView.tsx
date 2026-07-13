@@ -21,7 +21,7 @@ const BUCKETS = [
   { key: "overdue", label: "Overdue", tint: "text-red-700" },
   { key: "today", label: "Today", tint: "text-amber-700" },
   { key: "soon", label: "Upcoming", tint: "text-slatey" },
-  { key: "later", label: "No date", tint: "text-slate-400" },
+  { key: "later", label: "No date", tint: "text-slate-500" },
 ] as const;
 
 export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any[]; followUps: Any[]; recent: Any[] }) {
@@ -46,29 +46,29 @@ export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any
         <section className="rounded-2xl border border-slate-200 bg-white">
           <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
             <h2 className="text-sm font-semibold text-ink">My tasks</h2>
-            <span className="text-xs text-slate-400">{tasks.length} open</span>
+            <span className="text-xs text-slate-500">{tasks.length} open</span>
           </div>
           {tasks.length === 0 ? (
-            <p className="px-5 py-10 text-center text-sm text-slate-400">Nothing open — you&apos;re all caught up. 🎉</p>
+            <p className="px-5 py-10 text-center text-sm text-slate-500">Nothing open — you&apos;re all caught up. 🎉</p>
           ) : (
             <div className="divide-y divide-slate-100">
               {grouped.map((g) =>
                 g.items.length === 0 ? null : (
                   <div key={g.key} className="px-5 py-3">
                     <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${g.tint}`}>
-                      {g.label} <span className="text-slate-300">· {g.items.length}</span>
+                      {g.label} <span className="text-slate-400">· {g.items.length}</span>
                     </p>
                     <ul className="space-y-1.5">
                       {g.items.map((a) => {
                         const ctx = contextOf(a);
                         return (
                           <li key={a.id} className="flex items-start gap-2.5">
-                            <button onClick={() => done(a)} title="Mark done" className="mt-0.5 text-slate-300 hover:text-green-600">
+                            <button onClick={() => done(a)} title="Mark done" className="mt-0.5 text-slate-400 hover:text-green-600">
                               <Icon name="check" className="h-4 w-4" />
                             </button>
                             <div className="min-w-0 flex-1">
                               <p className="text-sm text-ink">{a.subject}</p>
-                              <p className="flex flex-wrap items-center gap-x-2 text-[11px] text-slate-400">
+                              <p className="flex flex-wrap items-center gap-x-2 text-[11px] text-slate-500">
                                 {a.dueDate && (
                                   <span className={`rounded-full px-1.5 py-0.5 font-semibold ${FOLLOWUP_STYLE[followUpStatus(a.dueDate) || "soon"]}`}>
                                     {fmtDate(a.dueDate)}
@@ -95,7 +95,7 @@ export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any
             <h2 className="text-sm font-semibold text-ink">Recent activity</h2>
           </div>
           {recent.length === 0 ? (
-            <p className="px-5 py-8 text-center text-sm text-slate-400">No activity logged yet.</p>
+            <p className="px-5 py-8 text-center text-sm text-slate-500">No activity logged yet.</p>
           ) : (
             <ul className="divide-y divide-slate-100">
               {recent.map((a) => {
@@ -106,8 +106,8 @@ export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any
                       <Icon name={a.type === "TASK" && a.done ? "check" : ACTIVITY_ICON[a.type]} className="h-3.5 w-3.5" />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className={`truncate text-sm ${a.done ? "text-slate-400 line-through" : "text-ink"}`}>{a.subject}</p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className={`truncate text-sm ${a.done ? "text-slate-500 line-through" : "text-ink"}`}>{a.subject}</p>
+                      <p className="text-[11px] text-slate-500">
                         {titleCase(a.type)} · {fmtDate(a.createdAt)}
                         {ctx && <> · {ctx.href ? <Link href={ctx.href} className="hover:text-brand-700 hover:underline">{ctx.label}</Link> : ctx.label}</>}
                       </p>
@@ -124,10 +124,10 @@ export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any
       <section className="h-fit rounded-2xl border border-slate-200 bg-white">
         <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
           <h2 className="text-sm font-semibold text-ink">Follow-ups due</h2>
-          <span className="text-xs text-slate-400">{followUps.length}</span>
+          <span className="text-xs text-slate-500">{followUps.length}</span>
         </div>
         {followUps.length === 0 ? (
-          <p className="px-5 py-8 text-center text-sm text-slate-400">No follow-ups due or overdue.</p>
+          <p className="px-5 py-8 text-center text-sm text-slate-500">No follow-ups due or overdue.</p>
         ) : (
           <ul className="divide-y divide-slate-100">
             {followUps.map((f) => (
@@ -139,7 +139,7 @@ export default function InboxView({ tasks: t0, followUps, recent }: { tasks: Any
                       {f.status === "overdue" ? "Overdue" : "Today"}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-slate-500">
                     {f.kind === "deal" ? "Deal" : "Contact"} · {fmtDate(f.date)}
                     {f.sub ? ` · ${f.sub}` : ""}
                   </p>

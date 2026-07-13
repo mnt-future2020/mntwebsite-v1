@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
 import DealDrawer from "@/components/admin/crm/DealDrawer";
@@ -61,6 +61,8 @@ export default function DealPipeline({
   const weighted = weightedValue(inPipeline);
   const overdueCount = inPipeline.filter((d) => followUpStatus(d.nextFollowUp) === "overdue").length;
 
+  const addingRef = useRef(false);
+
   const move = async (id: string, stage: Any) => {
     const d = deals.find((x) => x.id === id);
     if (!d || d.stageId === stage.id) return;
@@ -70,26 +72,32 @@ export default function DealPipeline({
       if (r === null) return;
       lostReason = r;
     }
+    const prev = deals; // snapshot for rollback
     setDeals((s) => s.map((x) => (x.id === id ? { ...x, stageId: stage.id, pipelineId: pipeline.id, stageRef: stage } : x)));
     const body: Any = { stageId: stage.id };
     if (lostReason !== undefined) body.lostReason = lostReason;
-    const res = await fetch(`/api/admin/crm/deals/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-    if (res.ok) {
+    const res = await fetch(`/api/admin/crm/deals/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).catch(() => null);
+    if (res && res.ok) {
       const u = await res.json();
       setDeals((s) => s.map((x) => (x.id === id ? u : x)));
       toast(`Moved to ${stage.name}`);
-    } else toast("Couldn't move deal", "err");
+    } else {
+      setDeals(prev); // revert — the drop failed
+      toast("Couldn't move deal", "err");
+    }
   };
 
   const add = async (stage: Any) => {
     const title = newTitle.trim();
-    if (!title) return;
-    const res = await fetch("/api/admin/crm/deals", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title, stageId: stage.id }) });
-    if (res.ok) {
+    if (!title || addingRef.current) return; // guard against Enter + blur double-submit
+    addingRef.current = true;
+    setNewTitle("");
+    setAdding(null);
+    const res = await fetch("/api/admin/crm/deals", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title, stageId: stage.id }) }).catch(() => null);
+    addingRef.current = false;
+    if (res && res.ok) {
       const d = await res.json();
       setDeals((s) => [...s, d]);
-      setNewTitle("");
-      setAdding(null);
       toast("Deal added");
     } else toast("Couldn't add deal", "err");
   };
@@ -122,7 +130,7 @@ export default function DealPipeline({
               className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${p.id === pipeId ? "bg-brand-50 text-brand-700" : "text-slatey hover:bg-slate-50"}`}
             >
               {p.name}
-              {p.isDefault && <span className="ml-1.5 text-[10px] text-slate-300">default</span>}
+              {p.isDefault && <span className="ml-1.5 text-[10px] text-slate-400">default</span>}
             </button>
           ))}
         </div>
@@ -144,7 +152,7 @@ export default function DealPipeline({
       {/* Filters */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <div className="relative">
-          <Icon name="search" className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Icon name="search" className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search deals…" className="w-52 rounded-lg border border-slate-200 py-1.5 pl-8 pr-3 text-sm focus:border-brand focus:outline-none" />
         </div>
         <select value={fOwner} onChange={(e) => setFOwner(e.target.value)} className="rounded-lg border border-slate-200 px-2 py-1.5 text-sm text-slatey focus:border-brand focus:outline-none">
@@ -159,7 +167,7 @@ export default function DealPipeline({
         >
           <Icon name="bell" className="h-3.5 w-3.5" /> Needs follow-up{overdueCount > 0 ? ` · ${overdueCount}` : ""}
         </button>
-        <span className="ml-auto text-xs text-slate-400">
+        <span className="ml-auto text-xs text-slate-500">
           Open <b className="text-ink">{money(openVal)}</b> · Weighted <b className="text-ink">{money(weighted)}</b> · {filtered.length}/{inPipeline.length}
         </span>
       </div>
@@ -184,9 +192,9 @@ export default function DealPipeline({
                 <span className="flex min-w-0 items-center gap-2">
                   <span className={`h-2 w-2 shrink-0 rounded-full ${c.dot}`} />
                   <span className="truncate text-sm font-semibold text-ink">{stage.name}</span>
-                  <span className="rounded-full bg-white px-1.5 text-[11px] text-slate-400">{col.length}</span>
+                  <span className="rounded-full bg-white px-1.5 text-[11px] text-slate-500">{col.length}</span>
                 </span>
-                {total > 0 && <span className="shrink-0 text-[11px] font-medium text-slate-400">{money(total)}</span>}
+                {total > 0 && <span className="shrink-0 text-[11px] font-medium text-slate-500">{money(total)}</span>}
               </div>
 
               <div className="flex flex-1 flex-col gap-2 overflow-y-auto px-2 pb-2">
@@ -198,10 +206,14 @@ export default function DealPipeline({
                     <div
                       key={d.id}
                       draggable
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Deal: ${d.title}. Press Enter to open.`}
                       onDragStart={() => setDragId(d.id)}
                       onDragEnd={() => setDragId(null)}
                       onClick={() => setOpenId(d.id)}
-                      className={`group cursor-pointer rounded-xl border bg-white p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md ${dragId === d.id ? "opacity-50" : ""} ${stale ? "border-amber-300" : "border-slate-200"}`}
+                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpenId(d.id); } }}
+                      className={`group cursor-pointer rounded-xl border bg-white p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-1 ${dragId === d.id ? "opacity-50" : ""} ${stale ? "border-amber-300" : "border-slate-200"}`}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <p className="text-sm font-semibold leading-snug text-ink">{d.title}</p>
@@ -211,10 +223,10 @@ export default function DealPipeline({
                           </span>
                         )}
                       </div>
-                      {d.client?.name && <p className="mt-0.5 text-xs text-slate-400">{d.client.name}</p>}
+                      {d.client?.name && <p className="mt-0.5 text-xs text-slate-500">{d.client.name}</p>}
                       <div className="mt-2 flex items-center justify-between">
                         <span className="text-sm font-bold text-ink">{money(d.value, d.currency)}</span>
-                        {d.contact && <span className="truncate text-[11px] text-slate-400">{contactName(d.contact)}</span>}
+                        {d.contact && <span className="truncate text-[11px] text-slate-500">{contactName(d.contact)}</span>}
                       </div>
                       {(fu || stale || age != null) && (
                         <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-slate-50 pt-2">
@@ -224,13 +236,13 @@ export default function DealPipeline({
                             </span>
                           )}
                           {stale && <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700"><Icon name="bell" className="h-2.5 w-2.5" /> Stale</span>}
-                          {age != null && <span className="text-[10px] text-slate-400">{age}d in stage</span>}
+                          {age != null && <span className="text-[10px] text-slate-500">{age}d in stage</span>}
                         </div>
                       )}
                     </div>
                   );
                 })}
-                {col.length === 0 && <p className="px-1 py-6 text-center text-xs text-slate-300">Drop a deal here</p>}
+                {col.length === 0 && <p className="px-1 py-6 text-center text-xs text-slate-400">Drop a deal here</p>}
               </div>
 
               <div className="px-2 pb-2">
@@ -245,7 +257,7 @@ export default function DealPipeline({
                     className="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
                   />
                 ) : (
-                  <button onClick={() => { setAdding(stage.id); setNewTitle(""); }} className="flex w-full items-center gap-1 rounded-lg px-1.5 py-1 text-xs font-medium text-slate-400 hover:text-brand-700">
+                  <button onClick={() => { setAdding(stage.id); setNewTitle(""); }} className="flex w-full items-center gap-1 rounded-lg px-1.5 py-1 text-xs font-medium text-slate-500 hover:text-brand-700">
                     <Icon name="plus" className="h-3.5 w-3.5" /> Add deal
                   </button>
                 )}
@@ -254,7 +266,7 @@ export default function DealPipeline({
           );
         })}
         {stages.length === 0 && (
-          <div className="rounded-2xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-400">
+          <div className="rounded-2xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">
             This pipeline has no stages yet.{" "}
             <button onClick={() => setManage(pipeline)} className="font-medium text-brand-700 hover:underline">Add stages</button>
           </div>

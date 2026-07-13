@@ -49,6 +49,7 @@ export async function POST(req: Request) {
     }
 
     const probability = b.probability != null ? Math.max(0, Math.min(100, parseInt(String(b.probability), 10) || 0)) : stageProbability ?? 10;
+    const closed = kind === "WON" || kind === "LOST"; // a deal created straight into a closed stage is closed now
     const d = await prisma.deal.create({
       data: {
         title,
@@ -59,11 +60,12 @@ export async function POST(req: Request) {
         stageId: stageId || null,
         stage: legacyFor(kind) as never,
         stageEnteredAt: new Date(),
+        closedAt: closed ? new Date() : null,
         value: parseInt(String(b.value ?? "0"), 10) || 0,
         currency: (b.currency as string) || "INR",
         probability,
         expectedCloseDate: b.expectedCloseDate ? new Date(String(b.expectedCloseDate)) : null,
-        nextFollowUp: b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null,
+        nextFollowUp: closed ? null : b.nextFollowUp ? new Date(String(b.nextFollowUp)) : null,
         source: (b.source as string) || null,
         notes: (b.notes as string) || null,
       },

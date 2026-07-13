@@ -104,7 +104,7 @@ export default function ActivityTimeline({ scope, initial }: { scope: Scope; ini
 
       {/* Timeline */}
       {acts.length === 0 ? (
-        <p className="mt-4 px-1 text-sm text-slate-400">No activity yet — log the first note or task above.</p>
+        <p className="mt-4 px-1 text-sm text-slate-500">No activity yet — log the first note or task above.</p>
       ) : (
         <ol className="mt-4 space-y-1">
           {acts.map((a, i) => {
@@ -120,28 +120,28 @@ export default function ActivityTimeline({ scope, initial }: { scope: Scope; ini
                 <div className="min-w-0 flex-1 rounded-xl border border-slate-100 bg-white px-3 py-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <p className={`text-sm ${a.done ? "text-slate-400 line-through" : "text-ink"}`}>
+                      <p className={`text-sm ${a.done ? "text-slate-500 line-through" : "text-ink"}`}>
                         {isTask && (
                           <button onClick={() => toggle(a)} title={a.done ? "Mark not done" : "Mark done"} className="mr-1.5 align-middle">
-                            <Icon name={a.done ? "check" : "clock"} className={`inline h-4 w-4 ${a.done ? "text-green-600" : "text-slate-300 hover:text-brand-500"}`} />
+                            <Icon name={a.done ? "check" : "clock"} className={`inline h-4 w-4 ${a.done ? "text-green-600" : "text-slate-400 hover:text-brand-500"}`} />
                           </button>
                         )}
                         {a.subject}
                       </p>
                       {a.body && <p className="mt-0.5 text-xs text-slatey">{a.body}</p>}
-                      <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-400">
+                      <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-500">
                         <span>{titleCase(a.type)}</span>
                         <span>·</span>
                         <span>{fmtDate(a.createdAt)}</span>
                         {a.owner && <><span>·</span><span>{fullName(a.owner)}</span></>}
                         {a.dueDate && (
-                          <span className={`rounded-full px-1.5 py-0.5 font-semibold ${fu ? FOLLOWUP_STYLE[fu] : "bg-slate-100 text-slate-400"}`}>
+                          <span className={`rounded-full px-1.5 py-0.5 font-semibold ${fu ? FOLLOWUP_STYLE[fu] : "bg-slate-100 text-slate-500"}`}>
                             due {fmtDate(a.dueDate)}
                           </span>
                         )}
                       </p>
                     </div>
-                    <button onClick={() => del(a.id)} title="Delete" className="shrink-0 rounded-lg p-1 text-slate-300 opacity-0 transition-opacity hover:bg-red-50 hover:text-red-500 group-hover:opacity-100">
+                    <button onClick={() => del(a.id)} title="Delete" className="shrink-0 rounded-lg p-1 text-slate-400 opacity-0 transition-opacity hover:bg-red-50 hover:text-red-500 group-hover:opacity-100">
                       <Icon name="trash" className="h-3.5 w-3.5" />
                     </button>
                   </div>

@@ -20,7 +20,12 @@ async function getData() {
         take: 20,
       }),
       prisma.deal.findMany({
-        where: { nextFollowUp: { not: null }, stage: { in: OPEN_STAGES as unknown as string[] } as never },
+        // "Open" by the stage relation's kind; fall back to the legacy enum for
+        // any deal not yet mapped onto a pipeline stage.
+        where: {
+          nextFollowUp: { not: null },
+          OR: [{ stageRef: { kind: "OPEN" } }, { stageId: null, stage: { in: OPEN_STAGES as unknown as string[] } as never }],
+        },
         orderBy: { nextFollowUp: "asc" },
         include: { client: true },
         take: 100,

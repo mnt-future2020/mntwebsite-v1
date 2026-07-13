@@ -106,7 +106,7 @@ export default function CompanyRecord({
       <div className="mt-6 grid gap-6 lg:grid-cols-[360px_1fr]">
         <div className="space-y-6">
           <div className="rounded-2xl border border-slate-200 bg-white p-2">
-            <p className="px-2.5 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Details</p>
+            <p className="px-2.5 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Details</p>
             <InlineField label="Name" icon="building" value={c.name || ""} onSave={save("name")} />
             <InlineField label="Primary contact" value={c.contact || ""} onSave={save("contact")} placeholder="Add a name" />
             <InlineField label="Email" icon="mail" type="email" value={c.email || ""} onSave={save("email")} placeholder="Add an email" />
@@ -118,11 +118,11 @@ export default function CompanyRecord({
 
           <div className="rounded-2xl border border-slate-200 bg-white p-4">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">People</p>
-              <span className="text-xs text-slate-400">{contacts.length}</span>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">People</p>
+              <span className="text-xs text-slate-500">{contacts.length}</span>
             </div>
             {contacts.length === 0 ? (
-              <p className="mt-3 text-sm text-slate-400">No contacts at this company yet.</p>
+              <p className="mt-3 text-sm text-slate-500">No contacts at this company yet.</p>
             ) : (
               <ul className="mt-3 space-y-1">
                 {contacts.map((p) => (
@@ -130,9 +130,9 @@ export default function CompanyRecord({
                     <Link href={`/admin/crm/contacts/${p.id}`} className="flex items-center justify-between gap-2 rounded-xl px-3 py-2 hover:bg-slate-50">
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-ink">{contactName(p)}</p>
-                        {p.title && <p className="text-xs text-slate-400">{p.title}</p>}
+                        {p.title && <p className="text-xs text-slate-500">{p.title}</p>}
                       </div>
-                      <Icon name="arrow" className="h-3.5 w-3.5 shrink-0 text-slate-300" />
+                      <Icon name="arrow" className="h-3.5 w-3.5 shrink-0 text-slate-400" />
                     </Link>
                   </li>
                 ))}
@@ -142,18 +142,18 @@ export default function CompanyRecord({
 
           <div className="rounded-2xl border border-slate-200 bg-white p-4">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Deals</p>
-              <span className="text-xs text-slate-400">{deals.length}</span>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Deals</p>
+              <span className="text-xs text-slate-500">{deals.length}</span>
             </div>
             {deals.length === 0 ? (
-              <p className="mt-3 text-sm text-slate-400">No deals with this company yet.</p>
+              <p className="mt-3 text-sm text-slate-500">No deals with this company yet.</p>
             ) : (
               <ul className="mt-3 space-y-2">
                 {deals.map((d) => (
                   <li key={d.id} className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 px-3 py-2">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium text-ink">{d.title}</p>
-                      <p className="text-xs text-slate-400">{money(d.value, d.currency)}</p>
+                      <p className="text-xs text-slate-500">{money(d.value, d.currency)}</p>
                     </div>
                     <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${dealStageChip(d)}`}>{dealStageName(d)}</span>
                   </li>
@@ -164,7 +164,7 @@ export default function CompanyRecord({
         </div>
 
         <div>
-          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Activity</p>
+          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Activity</p>
           <ActivityTimeline scope={{ clientId: c.id }} initial={activities} />
         </div>
       </div>

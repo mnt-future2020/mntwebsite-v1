@@ -69,7 +69,7 @@ export default function ContactRecord({
             {c.title && <span>{c.title}</span>}
             {c.client && (
               <>
-                {c.title && <span className="text-slate-300">·</span>}
+                {c.title && <span className="text-slate-400">·</span>}
                 <Link href={`/admin/crm/companies/${c.client.id}`} className="inline-flex items-center gap-1 text-brand-700 hover:underline">
                   <Icon name="building" className="h-3.5 w-3.5" /> {c.client.name}
                 </Link>
@@ -91,7 +91,7 @@ export default function ContactRecord({
         {/* Details + related */}
         <div className="space-y-6">
           <div className="rounded-2xl border border-slate-200 bg-white p-2">
-            <p className="px-2.5 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Details</p>
+            <p className="px-2.5 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Details</p>
             <InlineField label="First name" value={c.firstName || ""} onSave={save("firstName")} />
             <InlineField label="Last name" value={c.lastName || ""} onSave={save("lastName")} />
             <InlineField label="Job title" value={c.title || ""} onSave={save("title")} placeholder="Add a title" />
@@ -105,18 +105,18 @@ export default function ContactRecord({
 
           <div className="rounded-2xl border border-slate-200 bg-white p-4">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Deals</p>
-              <span className="text-xs text-slate-400">{deals.length}</span>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Deals</p>
+              <span className="text-xs text-slate-500">{deals.length}</span>
             </div>
             {deals.length === 0 ? (
-              <p className="mt-3 text-sm text-slate-400">No deals linked yet.</p>
+              <p className="mt-3 text-sm text-slate-500">No deals linked yet.</p>
             ) : (
               <ul className="mt-3 space-y-2">
                 {deals.map((d) => (
                   <li key={d.id} className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 px-3 py-2">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium text-ink">{d.title}</p>
-                      <p className="text-xs text-slate-400">{money(d.value, d.currency)}</p>
+                      <p className="text-xs text-slate-500">{money(d.value, d.currency)}</p>
                     </div>
                     <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${dealStageChip(d)}`}>{dealStageName(d)}</span>
                   </li>
@@ -128,7 +128,7 @@ export default function ContactRecord({
 
         {/* Activity */}
         <div>
-          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Activity</p>
+          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Activity</p>
           <ActivityTimeline scope={{ contactId: c.id, clientId: c.clientId || undefined }} initial={activities} />
         </div>
       </div>

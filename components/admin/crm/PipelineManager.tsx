@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import { toast } from "@/components/admin/Toast";
+import { useModalA11y } from "@/components/admin/useModalA11y";
 import { STAGE_COLOR_TOKENS, stageColor } from "@/lib/crm";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,15 +44,15 @@ export default function PipelineManager({
       : NEW_STAGES
   );
   const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onEsc);
-    return () => window.removeEventListener("keydown", onEsc);
-  }, [onClose]);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useModalA11y(panelRef, onClose);
 
   const upd = (i: number, patch: Partial<Stage>) => setStages((s) => s.map((x, j) => (j === i ? { ...x, ...patch } : x)));
-  const remove = (i: number) => setStages((s) => s.filter((_, j) => j !== i));
+  const remove = (i: number) => {
+    // A persisted stage may hold deals (the API blocks its deletion) — confirm first.
+    if (stages[i]?.id && !confirm("Remove this stage? Any deals in it must be reassigned before you can save.")) return;
+    setStages((s) => s.filter((_, j) => j !== i));
+  };
   const addStage = () => setStages((s) => [...s, { name: `Stage ${s.length + 1}`, kind: "OPEN", color: "slate", probability: 50 }]);
   const swap = (i: number, j: number) => {
     if (j < 0 || j >= stages.length) return;
@@ -93,10 +94,10 @@ export default function PipelineManager({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[8vh]">
       <div className="absolute inset-0 bg-slate-900/25" onClick={onClose} />
-      <div className="relative flex max-h-[84vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      <div ref={panelRef} role="dialog" aria-modal="true" aria-label={pipeline ? "Edit pipeline" : "New pipeline"} className="relative flex max-h-[84vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
           <h2 className="text-sm font-semibold text-ink">{pipeline ? "Edit pipeline" : "New pipeline"}</h2>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
+          <button onClick={onClose} aria-label="Close" className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
         </div>
 
         <div className="flex-1 space-y-5 overflow-y-auto px-5 py-5">
@@ -113,16 +114,16 @@ export default function PipelineManager({
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-xs font-semibold uppercase tracking-wide text-slate-400">Stages</label>
-              <span className="text-[11px] text-slate-400">order = board columns, left → right</span>
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Stages</label>
+              <span className="text-[11px] text-slate-500">order = board columns, left → right</span>
             </div>
             <div className="space-y-2">
               {stages.map((s, i) => (
                 <div key={s.id || i} className="rounded-xl border border-slate-200 bg-slate-50/60 p-2.5">
                   <div className="flex items-center gap-2">
                     <div className="flex flex-col">
-                      <button type="button" onClick={() => swap(i, i - 1)} disabled={i === 0} className="text-slate-300 hover:text-brand-600 disabled:opacity-30"><Icon name="arrow" className="h-3 w-3 -rotate-90" /></button>
-                      <button type="button" onClick={() => swap(i, i + 1)} disabled={i === stages.length - 1} className="text-slate-300 hover:text-brand-600 disabled:opacity-30"><Icon name="arrow" className="h-3 w-3 rotate-90" /></button>
+                      <button type="button" onClick={() => swap(i, i - 1)} disabled={i === 0} aria-label="Move stage up" className="p-0.5 text-slate-400 hover:text-brand-600 disabled:opacity-30"><Icon name="arrow" className="h-3.5 w-3.5 -rotate-90" /></button>
+                      <button type="button" onClick={() => swap(i, i + 1)} disabled={i === stages.length - 1} aria-label="Move stage down" className="p-0.5 text-slate-400 hover:text-brand-600 disabled:opacity-30"><Icon name="arrow" className="h-3.5 w-3.5 rotate-90" /></button>
                     </div>
                     <input value={s.name} onChange={(e) => upd(i, { name: e.target.value })} className={`${field} flex-1`} placeholder="Stage name" />
                     <select value={s.kind} onChange={(e) => upd(i, { kind: e.target.value })} className={`${field} w-24`} title="Counts as">
@@ -130,9 +131,9 @@ export default function PipelineManager({
                     </select>
                     <div className="flex items-center gap-1" title="Default win probability">
                       <input type="number" min={0} max={100} value={s.probability} onChange={(e) => upd(i, { probability: Math.max(0, Math.min(100, parseInt(e.target.value) || 0)) })} className={`${field} w-16`} />
-                      <span className="text-xs text-slate-400">%</span>
+                      <span className="text-xs text-slate-500">%</span>
                     </div>
-                    <button type="button" onClick={() => remove(i)} className="rounded-lg p-1.5 text-slate-300 hover:bg-red-50 hover:text-red-500" title="Remove stage"><Icon name="trash" className="h-4 w-4" /></button>
+                    <button type="button" onClick={() => remove(i)} aria-label="Remove stage" className="rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-500" title="Remove stage"><Icon name="trash" className="h-4 w-4" /></button>
                   </div>
                   <div className="mt-2 flex items-center gap-1.5 pl-7">
                     {STAGE_COLOR_TOKENS.map((tok) => (
@@ -141,8 +142,12 @@ export default function PipelineManager({
                         type="button"
                         onClick={() => upd(i, { color: tok })}
                         title={tok}
-                        className={`h-4 w-4 rounded-full ${stageColor(tok).dot} ${s.color === tok ? "ring-2 ring-slate-400 ring-offset-1" : ""}`}
-                      />
+                        aria-label={`Colour: ${tok}`}
+                        aria-pressed={s.color === tok}
+                        className={`grid h-6 w-6 place-items-center rounded-full ${s.color === tok ? "ring-2 ring-slate-400 ring-offset-1" : ""}`}
+                      >
+                        <span className={`h-3.5 w-3.5 rounded-full ${stageColor(tok).dot}`} />
+                      </button>
                     ))}
                   </div>
                 </div>

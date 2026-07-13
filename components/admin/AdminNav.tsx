@@ -101,6 +101,15 @@ export default function AdminNav({
 
   return (
     <div className="flex h-full flex-col">
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
+        className="mb-2 flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-500 transition-colors hover:border-brand-300 hover:text-brand-700"
+      >
+        <Icon name="search" className="h-4 w-4" />
+        <span className="flex-1 text-left">Search…</span>
+        <kbd className="rounded border border-slate-200 px-1.5 py-0.5 text-[10px] text-slate-500">⌘K</kbd>
+      </button>
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">
         {isEmployee && (
           <NavGroup title="My workspace" items={myWorkspace} storageKey="mnt_self_nav_open" pathname={pathname} renderItem={renderItem} />

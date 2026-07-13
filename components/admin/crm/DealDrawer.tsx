@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import DateField from "@/components/admin/DateField";
 import { toast } from "@/components/admin/Toast";
+import { useModalA11y } from "@/components/admin/useModalA11y";
 import { ACTIVITY_TYPES, ACTIVITY_ICON, fmtDate, titleCase } from "@/lib/crm";
 
 type Opt = { id: string; label: string };
@@ -28,11 +29,14 @@ export default function DealDrawer({ deal, pipelines, companies, contacts, owner
     source: deal.source || "", notes: deal.notes || "", lostReason: deal.lostReason || "",
   });
   const [acts, setActs] = useState<Any[]>([]);
+  const [loadingActs, setLoadingActs] = useState(true);
   const [actType, setActType] = useState("NOTE");
   const [actSubject, setActSubject] = useState("");
   const [actDue, setActDue] = useState("");
   const [busy, setBusy] = useState(false);
   const up = (k: string, v: string) => setF((s) => ({ ...s, [k]: v }));
+  const panelRef = useRef<HTMLDivElement>(null);
+  useModalA11y(panelRef, onClose);
 
   const pipeline = pipelines.find((p) => p.id === f.pipelineId) || fallbackPipe;
   const stages: Any[] = pipeline?.stages || [];
@@ -45,11 +49,13 @@ export default function DealDrawer({ deal, pipelines, companies, contacts, owner
   };
 
   useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onEsc);
-    fetch(`/api/admin/crm/deals/${deal.id}`).then((r) => r.json()).then((d) => setActs(d.activities || [])).catch(() => {});
-    return () => window.removeEventListener("keydown", onEsc);
-  }, [deal.id, onClose]);
+    setLoadingActs(true);
+    fetch(`/api/admin/crm/deals/${deal.id}`)
+      .then((r) => r.json())
+      .then((d) => setActs(d.activities || []))
+      .catch(() => {})
+      .finally(() => setLoadingActs(false));
+  }, [deal.id]);
 
   const save = async () => {
     if (!f.title.trim()) return toast("Title required", "err");
@@ -95,10 +101,10 @@ export default function DealDrawer({ deal, pipelines, companies, contacts, owner
   return (
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-slate-900/20" onClick={onClose} />
-      <div className="absolute inset-y-0 right-0 flex w-full max-w-[480px] flex-col bg-white shadow-2xl">
+      <div ref={panelRef} role="dialog" aria-modal="true" aria-label="Deal details" className="absolute inset-y-0 right-0 flex w-full max-w-[480px] flex-col bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
           <h2 className="text-sm font-semibold text-ink">Deal</h2>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
+          <button onClick={onClose} aria-label="Close" className="rounded-lg p-1.5 text-slatey hover:bg-slate-100"><Icon name="x" className="h-4 w-4" /></button>
         </div>
 
         <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
@@ -129,23 +135,23 @@ export default function DealDrawer({ deal, pipelines, companies, contacts, owner
                 {ACTIVITY_TYPES.map((t) => <option key={t} value={t}>{titleCase(t)}</option>)}
               </select>
               <input value={actSubject} onChange={(e) => setActSubject(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addActivity()} placeholder="Log a note, call, task…" className={`${field} flex-1 min-w-[140px]`} />
-              <button onClick={addActivity} className="btn-primary shrink-0"><Icon name="plus" className="h-4 w-4" /></button>
+              <button onClick={addActivity} aria-label="Log activity" className="btn-primary shrink-0"><Icon name="plus" className="h-4 w-4" /></button>
             </div>
             {actType === "TASK" && (
               <input type="date" value={actDue} onChange={(e) => setActDue(e.target.value)} className={`${field} mt-2`} title="Task due date" />
             )}
             <ul className="mt-3 space-y-2">
-              {acts.length === 0 && <li className="text-xs text-slate-400">No activity yet.</li>}
-              {acts.map((a) => (
+              {loadingActs ? <li className="text-xs text-slate-500">Loading activity…</li> : acts.length === 0 && <li className="text-xs text-slate-500">No activity yet.</li>}
+              {!loadingActs && acts.map((a) => (
                 <li key={a.id} className="flex items-start gap-2 rounded-lg border border-slate-100 px-3 py-2 text-sm">
                   <button onClick={() => a.type === "TASK" && toggleDone(a)} className={`mt-0.5 ${a.type === "TASK" ? "cursor-pointer" : ""}`} title={a.type}>
-                    <Icon name={a.type === "TASK" && a.done ? "check" : ACTIVITY_ICON[a.type]} className={`h-4 w-4 ${a.done ? "text-green-600" : "text-slate-400"}`} />
+                    <Icon name={a.type === "TASK" && a.done ? "check" : ACTIVITY_ICON[a.type]} className={`h-4 w-4 ${a.done ? "text-green-600" : "text-slate-500"}`} />
                   </button>
                   <div className="min-w-0 flex-1">
-                    <p className={`text-ink ${a.done ? "line-through text-slate-400" : ""}`}>{a.subject}</p>
-                    <p className="text-[11px] text-slate-400">{titleCase(a.type)} · {fmtDate(a.createdAt)}{a.dueDate ? <span className={a.done ? "" : "text-amber-600"}> · due {fmtDate(a.dueDate)}</span> : ""}</p>
+                    <p className={`text-ink ${a.done ? "line-through text-slate-500" : ""}`}>{a.subject}</p>
+                    <p className="text-[11px] text-slate-500">{titleCase(a.type)} · {fmtDate(a.createdAt)}{a.dueDate ? <span className={a.done ? "" : "text-amber-600"}> · due {fmtDate(a.dueDate)}</span> : ""}</p>
                   </div>
-                  <button onClick={() => delActivity(a.id)} className="text-slate-300 hover:text-red-500"><Icon name="x" className="h-3.5 w-3.5" /></button>
+                  <button onClick={() => delActivity(a.id)} aria-label="Delete activity" className="text-slate-400 hover:text-red-500"><Icon name="x" className="h-3.5 w-3.5" /></button>
                 </li>
               ))}
             </ul>

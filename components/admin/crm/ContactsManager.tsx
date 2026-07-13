@@ -13,7 +13,7 @@ type Opt = { id: string; label: string };
 type Contact = any;
 
 const field =
-  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-500 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-100";
 const dval = (d: unknown) => (d ? String(d).slice(0, 10) : "");
 const blank = { firstName: "", lastName: "", email: "", phone: "", title: "", clientId: "", ownerId: "", notes: "", nextFollowUp: "" };
 
@@ -67,7 +67,7 @@ export default function ContactsManager({ initial, companies, owners }: { initia
     <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <div>
         <div className="mb-3 relative">
-          <Icon name="search" className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Icon name="search" className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search contacts…" className="w-full rounded-lg border border-slate-200 py-1.5 pl-8 pr-3 text-sm focus:border-brand focus:outline-none sm:w-64" />
         </div>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
@@ -81,21 +81,21 @@ export default function ContactsManager({ initial, companies, owners }: { initia
               <tbody className="divide-y divide-slate-100">
                 {view.map((c) => (
                   <tr key={c.id} className={`hover:bg-slate-50 ${editId === c.id ? "bg-brand-50/40" : ""}`}>
-                    <td className="px-5 py-3"><Link href={`/admin/crm/contacts/${c.id}`} className="font-medium text-ink hover:text-brand-700 hover:underline">{[c.firstName, c.lastName].filter(Boolean).join(" ")}</Link><div className="text-xs text-slate-400">{c.title || ""}{c.email ? ` · ${c.email}` : ""}</div></td>
+                    <td className="px-5 py-3"><Link href={`/admin/crm/contacts/${c.id}`} className="font-medium text-ink hover:text-brand-700 hover:underline">{[c.firstName, c.lastName].filter(Boolean).join(" ")}</Link><div className="text-xs text-slate-500">{c.title || ""}{c.email ? ` · ${c.email}` : ""}</div></td>
                     <td className="px-5 py-3 text-slatey">{c.client?.name || "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c.owner ? [c.owner.firstName, c.owner.lastName].filter(Boolean).join(" ") : "—"}</td>
                     <td className="px-5 py-3 text-slatey">{c._count?.deals ?? 0}</td>
                     <td className="px-5 py-3">
                       {(() => { const fu = followUpStatus(c.nextFollowUp); return (
                         <div className="text-xs">
-                          {fu ? <span className={`inline-block rounded-full px-1.5 py-0.5 font-semibold ${FOLLOWUP_STYLE[fu]}`}>{fu === "overdue" ? `Overdue · ${fmtDate(c.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(c.nextFollowUp)}</span> : <span className="text-slate-300">—</span>}
-                          {c.lastContactedAt && <div className="mt-0.5 text-[10px] text-slate-400">last: {fmtDate(c.lastContactedAt)}</div>}
+                          {fu ? <span className={`inline-block rounded-full px-1.5 py-0.5 font-semibold ${FOLLOWUP_STYLE[fu]}`}>{fu === "overdue" ? `Overdue · ${fmtDate(c.nextFollowUp)}` : fu === "today" ? "Today" : fmtDate(c.nextFollowUp)}</span> : <span className="text-slate-400">—</span>}
+                          {c.lastContactedAt && <div className="mt-0.5 text-[10px] text-slate-500">last: {fmtDate(c.lastContactedAt)}</div>}
                         </div>
                       ); })()}
                     </td>
                     <td className="px-5 py-3 text-right">
-                      <button onClick={() => edit(c)} className="rounded-lg p-1.5 text-slatey hover:bg-slate-100 hover:text-ink"><Icon name="edit" className="h-4 w-4" /></button>
-                      <button onClick={() => del(c)} className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button>
+                      <button onClick={() => edit(c)} aria-label={`Edit ${c.firstName}`} className="rounded-lg p-1.5 text-slatey hover:bg-slate-100 hover:text-ink"><Icon name="edit" className="h-4 w-4" /></button>
+                      <button onClick={() => del(c)} aria-label={`Delete ${c.firstName}`} className="rounded-lg p-1.5 text-slatey hover:bg-red-50 hover:text-red-600"><Icon name="trash" className="h-4 w-4" /></button>
                     </td>
                   </tr>
                 ))}

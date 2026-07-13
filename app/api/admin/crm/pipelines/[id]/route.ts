@@ -25,40 +25,49 @@ export async function PATCH(req: Request, props: Ctx) {
   const { id } = await props.params;
   try {
     const b = await req.json();
+    const stagesIn = Array.isArray(b.stages) ? (b.stages as { id?: string }[]) : null;
 
-    if (has(b, "name") || has(b, "isDefault")) {
-      const data: Record<string, unknown> = {};
-      if (has(b, "name") && String(b.name).trim()) data.name = String(b.name).trim();
-      if (has(b, "isDefault")) data.isDefault = Boolean(b.isDefault);
-      await prisma.pipeline.update({ where: { id }, data });
-      if (data.isDefault === true) {
-        await prisma.pipeline.updateMany({ where: { id: { not: id }, isDefault: true }, data: { isDefault: false } });
-      }
-    }
-
-    // Reconcile stages against the sent array: update-by-id, create new, delete
-    // removed (blocked when a removed stage still holds deals).
-    if (Array.isArray(b.stages)) {
-      const incoming = b.stages as { id?: string }[];
-      const keep = new Set(incoming.filter((s) => s.id).map((s) => s.id));
+    // Guard checks FIRST — return before any mutation so a rejected save never
+    // leaves the pipeline half-edited.
+    let toDelete: string[] = [];
+    if (stagesIn) {
+      const keep = new Set(stagesIn.filter((s) => s.id).map((s) => s.id));
       const existing = await prisma.pipelineStage.findMany({
         where: { pipelineId: id },
         include: { _count: { select: { deals: true } } },
       });
-      for (const st of existing) {
-        if (!keep.has(st.id)) {
-          if (st._count.deals > 0)
-            return NextResponse.json({ error: `“${st.name}” has ${st._count.deals} deal(s) — move them before deleting the stage.` }, { status: 409 });
-          await prisma.pipelineStage.delete({ where: { id: st.id } });
+      const removed = existing.filter((st) => !keep.has(st.id));
+      const blocked = removed.find((st) => st._count.deals > 0);
+      if (blocked)
+        return NextResponse.json({ error: `“${blocked.name}” has ${blocked._count.deals} deal(s) — move them before deleting the stage.` }, { status: 409 });
+      toDelete = removed.map((st) => st.id);
+    }
+
+    const nameChange = has(b, "name") && String(b.name).trim();
+    const setDefault = has(b, "isDefault");
+
+    // Apply everything atomically.
+    await prisma.$transaction(async (tx) => {
+      if (nameChange || setDefault) {
+        const data: Record<string, unknown> = {};
+        if (nameChange) data.name = String(b.name).trim();
+        if (setDefault) data.isDefault = Boolean(b.isDefault);
+        await tx.pipeline.update({ where: { id }, data });
+        if (data.isDefault === true) {
+          await tx.pipeline.updateMany({ where: { id: { not: id }, isDefault: true }, data: { isDefault: false } });
         }
       }
-      for (let i = 0; i < incoming.length; i++) {
-        const s = incoming[i];
-        const fields = stageFields(s, i);
-        if (s.id) await prisma.pipelineStage.update({ where: { id: s.id }, data: fields });
-        else await prisma.pipelineStage.create({ data: { ...fields, pipelineId: id } });
+      if (stagesIn) {
+        if (toDelete.length) await tx.pipelineStage.deleteMany({ where: { id: { in: toDelete }, pipelineId: id } });
+        for (let i = 0; i < stagesIn.length; i++) {
+          const s = stagesIn[i];
+          const fields = stageFields(s, i);
+          // updateMany scoped to this pipeline → a foreign/stale id is a no-op, never cross-pipeline corruption.
+          if (s.id) await tx.pipelineStage.updateMany({ where: { id: s.id, pipelineId: id }, data: fields });
+          else await tx.pipelineStage.create({ data: { ...fields, pipelineId: id } });
+        }
       }
-    }
+    });
 
     const updated = await prisma.pipeline.findUnique({
       where: { id },

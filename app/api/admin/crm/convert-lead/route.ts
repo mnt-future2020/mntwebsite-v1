@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { ensureDefaultPipeline } from "@/lib/pipelines";
 
 export const runtime = "nodejs";
+const legacyFor = (kind: string) => (kind === "WON" ? "WON" : kind === "LOST" ? "LOST" : "NEW");
 
 // Turn an inbound Lead into a CRM Deal: find/create the company, create a contact,
 // open a deal, and mark the lead QUALIFIED.
@@ -16,6 +18,11 @@ export async function POST(req: Request) {
     if (lead.status === "QUALIFIED" || lead.status === "WON") {
       return NextResponse.json({ error: "This lead has already been converted." }, { status: 409 });
     }
+
+    // Resolve the default pipeline's first stage so the new deal lands on the
+    // board (a null stageId would make it invisible in the kanban).
+    const pipe = await ensureDefaultPipeline();
+    const firstStage = pipe.stages[0];
 
     // Do the whole conversion atomically so a partial failure can't orphan a
     // contact/company without a deal (or leave the lead un-qualified after writes).
@@ -41,7 +48,11 @@ export async function POST(req: Request) {
           title: lead.company ? `${lead.company} — ${lead.vertical || "Software"}` : `${lead.name} — ${lead.vertical || "Software"}`,
           clientId,
           contactId: contact.id,
-          stage: "NEW",
+          pipelineId: pipe.id,
+          stageId: firstStage?.id || null,
+          stage: legacyFor(firstStage?.kind || "OPEN") as never,
+          stageEnteredAt: new Date(),
+          probability: firstStage?.probability ?? 10,
           value,
           source: lead.source || "lead",
           notes: lead.message || null,

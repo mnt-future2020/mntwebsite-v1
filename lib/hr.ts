@@ -39,7 +39,9 @@ export function inr(n?: number | null) {
 
 export function fmtDate(d?: Date | string | null) {
   if (!d) return "—";
-  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  // Date-only values are stored at UTC midnight — format in UTC so the stored
+  // calendar day shows correctly regardless of the viewer's timezone.
+  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 }
 
 export function leaveDays(start: Date | string, end: Date | string) {

@@ -51,7 +51,7 @@ export default function InlineField({ label, value, onSave, type = "text", optio
   };
 
   const display = () => {
-    if (!value) return <span className="text-slate-300">{placeholder || "—"}</span>;
+    if (!value) return <span className="text-slate-400">{placeholder || "—"}</span>;
     if (type === "date") return fmtDate(value);
     if (type === "select") return options?.find((o) => o.value === value)?.label || value;
     if (type === "email") return <span className="text-brand-700">{value}</span>;
@@ -64,7 +64,7 @@ export default function InlineField({ label, value, onSave, type = "text", optio
   return (
     <div className="group flex items-start gap-3 rounded-lg px-2.5 py-2 hover:bg-slate-50">
       <span className="mt-0.5 flex w-32 shrink-0 items-center gap-1.5 text-xs font-medium text-slatey">
-        {icon && <Icon name={icon} className="h-3.5 w-3.5 text-slate-400" />}
+        {icon && <Icon name={icon} className="h-3.5 w-3.5 text-slate-500" />}
         {label}
       </span>
       <div className="min-w-0 flex-1">
@@ -100,8 +100,8 @@ export default function InlineField({ label, value, onSave, type = "text", optio
             onClick={() => setEditing(true)}
             className="flex w-full items-center justify-between gap-2 rounded-lg px-1 py-1 text-left text-sm text-ink"
           >
-            <span className="min-w-0 truncate">{busy ? <span className="text-slate-400">Saving…</span> : display()}</span>
-            <Icon name="edit" className="h-3.5 w-3.5 shrink-0 text-slate-300 opacity-0 transition-opacity group-hover:opacity-100" />
+            <span className="min-w-0 truncate">{busy ? <span className="text-slate-500">Saving…</span> : display()}</span>
+            <Icon name="edit" className="h-3.5 w-3.5 shrink-0 text-slate-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
         )}
       </div>
