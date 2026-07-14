@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/ai-agents/ai-cleanup",
     "/security-compliance",
     "/about",
+    "/open-source",
     "/contact",
     "/work",
     "/blog",

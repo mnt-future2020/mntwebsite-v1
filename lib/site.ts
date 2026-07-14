@@ -65,6 +65,7 @@ export const companyNav = {
   children: [
     { label: "About MnT", href: "/about", desc: "Who we are and how we work" },
     { label: "Security & Compliance", href: "/security-compliance", desc: "ADA · PCI DSS v4.0.1 · US sales-tax · SOC 2" },
+    { label: "Open Source", href: "/open-source", desc: "agentready & our agentic-commerce tooling — MIT-licensed" },
     { label: "Blog", href: "/blog", desc: "Guides on AI-native & agent-ready commerce" },
     { label: "Contact", href: "/contact", desc: "Book a free architecture workshop" },
   ],
@@ -84,6 +85,7 @@ export const footerNav = [
     links: [
       { label: "About", href: "/about" },
       { label: "Work", href: "/work" },
+      { label: "Open Source", href: "/open-source" },
       { label: "Security & Compliance", href: "/security-compliance" },
       { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
