@@ -6,12 +6,24 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 // In-memory friction (per server instance): 10 scans/hour/IP, 60s per-domain cooldown.
+// Size-capped so spoofed keys can't grow the maps without bound.
 const ipHits = new Map<string, number[]>();
 const domainLast = new Map<string, number>();
 const IP_LIMIT = 10;
 const DOMAIN_COOLDOWN_MS = 60_000;
+const MAX_TRACKED_KEYS = 10_000;
 
-// SSRF guard on the initial target (private ranges, localhost, link-local).
+function boundedSet<V>(map: Map<string, V>, key: string, value: V): void {
+  if (map.size >= MAX_TRACKED_KEYS && !map.has(key)) {
+    const oldest = map.keys().next().value;
+    if (oldest !== undefined) map.delete(oldest);
+  }
+  map.set(key, value);
+}
+
+// First-line lexical guard; the authoritative SSRF protection (resolved-IP validation,
+// per-redirect-hop re-check, IPv6-mapped, DNS-rebinding pinning) lives in the core
+// scanner (@mntglobal/agentready-core ≥0.1.2 — scan() is called without allowPrivateNetworks).
 const BLOCKED_HOST =
   /^(localhost|.*\.local|.*\.internal|0\.0\.0\.0|127\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1)/i;
 
@@ -57,15 +69,33 @@ export async function POST(req: Request) {
     );
   }
   hits.push(now);
-  ipHits.set(ip, hits);
-  domainLast.set(target.hostname, now);
+  boundedSet(ipHits, ip, hits);
+  boundedSet(domainLast, target.hostname, now);
 
+  const startedAt = Date.now();
   try {
     const report = await scan(target.toString());
+    console.log(
+      JSON.stringify({
+        evt: "agentready_scan",
+        host: target.hostname,
+        grade: report.grade,
+        score: report.score,
+        ms: Date.now() - startedAt,
+      })
+    );
     return NextResponse.json({ report });
   } catch (error) {
+    console.error(
+      JSON.stringify({
+        evt: "agentready_scan_error",
+        host: target.hostname,
+        error: error instanceof Error ? error.message : String(error),
+      })
+    );
+    // Generic message — don't leak internal cause codes (would make the endpoint an oracle).
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Scan failed — please try again." },
+      { error: "Scan failed — the store may be unreachable or refusing automated requests." },
       { status: 502 }
     );
   }
