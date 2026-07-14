@@ -2,8 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Report, CheckResult, Category } from "@mntglobal/agentready-core";
-import { CATEGORIES } from "@mntglobal/agentready-core";
 import Icon from "./Icon";
+
+// Local copy of the category metadata: client bundles must never import runtime
+// values from agentready-core (it pulls in server-only node: builtins via undici).
+const CATEGORY_META = [
+  { key: "structured-data", label: "Structured Data" },
+  { key: "agent-access", label: "Agent Access" },
+  { key: "product-feeds", label: "Product Feeds" },
+  { key: "protocol-endpoints", label: "Protocol Endpoints" },
+  { key: "machine-readability", label: "Machine Readability" },
+  { key: "aeo-citability", label: "AEO Citability" },
+  { key: "data-freshness", label: "Data Freshness" },
+  { key: "accessibility", label: "Accessibility" },
+] as const;
 
 const STAGES = [
   "Fetching your store the way an agent does…",
@@ -115,12 +127,12 @@ function ReportPanel({ report }: { report: Report }) {
       </div>
 
       <div className="mt-8 space-y-2.5">
-        {Object.entries(CATEGORIES).map(([key, meta]) => {
+        {CATEGORY_META.map(({ key, label }) => {
           const scored = byCategory.get(key as Category);
           const pct = scored && scored.max > 0 ? (scored.earned / scored.max) * 100 : 0;
           return (
             <div key={key} className="grid grid-cols-[150px_1fr_60px] items-center gap-3 text-sm sm:grid-cols-[180px_1fr_70px]">
-              <span className="truncate text-slate-700">{meta.label}</span>
+              <span className="truncate text-slate-700">{label}</span>
               <div className="h-2.5 overflow-hidden rounded-full bg-slate-100">
                 <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${pct}%` }} />
               </div>
@@ -151,13 +163,13 @@ function ReportPanel({ report }: { report: Report }) {
           All {report.results.length} checks (with evidence)
         </summary>
         <div className="mt-4 space-y-5">
-          {Object.entries(CATEGORIES).map(([key, meta]) => {
+          {CATEGORY_META.map(({ key, label }) => {
             const rows = report.results.filter((r) => r.category === (key as Category));
             if (rows.length === 0) return null;
             return (
               <div key={key}>
                 <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-700">
-                  {meta.label}
+                  {label}
                 </div>
                 <div className="mt-2 space-y-3">
                   {rows.map((result) => (
