@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const SCANNER_URL = "https://agentready.mntfuture.com";
+const SCANNER_URL = "/agentready";
 const GITHUB_URL = "https://github.com/MnT-Global/agentready";
 const NPM_URL = "https://www.npmjs.com/package/@mntglobal/agentready";
 
@@ -29,7 +29,7 @@ const softwareSchema = {
     "Open-source store agent-readiness scanner: 29 checks across structured data, agent access, product feeds, and ACP / Google UCP / MCP protocol discovery.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   license: "https://opensource.org/licenses/MIT",
-  url: SCANNER_URL,
+  url: `${site.url}/agentready`,
   downloadUrl: NPM_URL,
   author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
 };
