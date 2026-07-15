@@ -77,6 +77,16 @@ const TRUST = [
   { icon: "eye" as const, text: "Open source (MIT) — audit every check on GitHub." },
 ];
 
+const FLAGS = [
+  { flag: "--experimental", desc: "Also run flow-tier checks and look up dependency CVEs (OSV)." },
+  { flag: "--html report.html", desc: "Write a self-contained, shareable HTML report card." },
+  { flag: "--ci --min-grade B", desc: "Exit non-zero below the grade — gate your pipeline." },
+  { flag: "--sarif out.sarif", desc: "SARIF 2.1.0 — upload to GitHub's code-scanning tab." },
+  { flag: "--md", desc: "Markdown summary, ideal for a PR comment." },
+  { flag: "--json", desc: "Machine-readable JSON to stdout for your own tooling." },
+  { flag: "--offline", desc: "Skip the one network call (the CVE lookup) entirely." },
+];
+
 export default function VibecheckPage() {
   return (
     <>
@@ -247,6 +257,96 @@ export default function VibecheckPage() {
         </div>
       </section>
 
+      {/* Get started */}
+      <section className="bg-slate-50">
+        <div className="container-mnt py-20 sm:py-24">
+          <SectionHeading
+            eyebrow="Get started"
+            title={
+              <>
+                One command. <span className="text-brand">No install, no config.</span>
+              </>
+            }
+            subtitle="vibecheck runs straight from npx on any machine with Node 20+. It reads your source locally — nothing is uploaded, nothing is stored."
+          />
+          <div className="mx-auto mt-12 max-w-3xl space-y-5">
+            <Reveal>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                    1
+                  </span>
+                  <h3 className="font-bold text-navy">Scan a folder on your machine</h3>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Point it at any project directory — no install step, no sign-up.
+                </p>
+                <pre className="mt-4 overflow-x-auto rounded-xl bg-navy px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
+                  npx @mntglobal/vibecheck ./your-store
+                </pre>
+              </div>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                    2
+                  </span>
+                  <h3 className="font-bold text-navy">Scan any GitHub repo</h3>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  vibecheck reads local source, not a URL. Clone the repo first, then scan the
+                  folder.
+                </p>
+                <pre className="mt-4 overflow-x-auto rounded-xl bg-navy px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">{`git clone https://github.com/you/store.git
+cd store
+npx @mntglobal/vibecheck .`}</pre>
+              </div>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                    3
+                  </span>
+                  <h3 className="font-bold text-navy">Go deeper, or share the result</h3>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Add a flag for flow-tier checks, a shareable card, or a CI gate.
+                </p>
+                <div className="mt-4 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200">
+                  {FLAGS.map((f) => (
+                    <div
+                      key={f.flag}
+                      className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4"
+                    >
+                      <code className="w-fit flex-none rounded-md bg-navy px-2 py-1 font-mono text-xs text-brand-200">
+                        {f.flag}
+                      </code>
+                      <span className="text-sm leading-relaxed text-slate-600">{f.desc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <Reveal delay={0.15}>
+            <p className="mt-8 text-center text-sm text-slate-500">
+              Full flag reference and the check catalog live on{" "}
+              <a
+                href={GITHUB_URL}
+                className="font-semibold text-brand hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              .
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Outputs */}
       <section className="container-mnt py-20 sm:py-24">
         <SectionHeading
@@ -276,7 +376,7 @@ export default function VibecheckPage() {
             <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
               .github/workflows/vibecheck.yml
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-xl bg-navy px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Global/vibecheck@v0.1.0
+            <pre className="mt-3 overflow-x-auto rounded-xl bg-navy px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Global/vibecheck@v0.1.1
   with:
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">
