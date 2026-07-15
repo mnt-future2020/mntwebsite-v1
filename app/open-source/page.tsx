@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
     title: "Open Source — agentready & agentic-commerce tooling | MnT",
     description:
-      "MnT's open-source tools for agentic commerce: agentready, the store agent-readiness scanner (ACP · Google UCP · MCP), free hosted scan, MIT-licensed. vibecheck, retail-mcp and acp-testkit are next.",
+      "MnT's open-source tools for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
   });
 }
 
@@ -42,13 +42,22 @@ const CHECK_AREAS = [
   { icon: "gauge" as const, title: "Feeds, freshness & AEO", desc: "Catalog endpoints, sitemap freshness, price consistency, citability, a11y quick pass." },
 ];
 
-const ROADMAP = [
+const LIVE_TOOLS = [
   {
-    name: "vibecheck",
-    when: "September 2026",
-    desc: "Production-readiness auditor for AI-built stores — injection points, exposed secrets, price-tamper logic, load behaviour. Born from our AI Cleanup Lab.",
+    name: "agentready",
+    href: "/agentready",
+    desc: "Store agent-readiness scanner — 29 checks across structured data, agent access, feeds and ACP · Google UCP · MCP discovery. Free hosted scan.",
     icon: "eye" as const,
   },
+  {
+    name: "vibecheck",
+    href: "/vibecheck",
+    desc: "Security & production-readiness scanner for AI-built stores — 26 checks: secrets, injection, commerce-logic tampering, dependency CVEs. SARIF + a GitHub Action.",
+    icon: "shield" as const,
+  },
+];
+
+const ROADMAP = [
   {
     name: "retail-mcp",
     when: "October 2026",
@@ -348,15 +357,39 @@ export default function OpenSourcePage() {
       {/* Roadmap */}
       <section className="container-mnt py-20 sm:py-24">
         <SectionHeading
-          eyebrow="Roadmap"
+          eyebrow="The program"
           title={
             <>
-              agentready is the first of <span className="text-brand">four</span>.
+              Two live. <span className="text-brand">Two on the way.</span>
             </>
           }
           subtitle="Every tool maps to a real problem we fix for clients — no orphan repos, no abandonware."
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {LIVE_TOOLS.map((item, i) => (
+            <Reveal key={item.name} delay={i * 0.05}>
+              <Link
+                href={item.href}
+                className="group block h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
+                    <Icon name={item.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
+                  </span>
+                </div>
+                <h3 className="mt-4 font-mono text-lg font-bold text-navy">{item.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+                  Explore <Icon name="arrow" className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {ROADMAP.map((item, i) => (
             <Reveal key={item.name} delay={i * 0.05}>
               <div className="h-full rounded-2xl border border-dashed border-slate-300 bg-white p-7">
