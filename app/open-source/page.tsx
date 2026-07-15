@@ -2,119 +2,100 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
 import FAQ, { type QA } from "@/components/FAQ";
-import Icon from "@/components/Icon";
+import Icon, { type IconName } from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import { Breadcrumbs, SectionHeading } from "@/components/blocks";
 import { resolveMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
+const GITHUB_ORG = "https://github.com/MnT-Global";
+
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
-    title: "Open Source — agentready & agentic-commerce tooling | MnT",
+    title: "Open Source — agentic & AI-native commerce tooling | MnT",
     description:
-      "MnT's open-source tools for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
+      "MnT's open-source program for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
   });
 }
 
-const SCANNER_URL = "/agentready";
-const GITHUB_URL = "https://github.com/MnT-Global/agentready";
-const NPM_URL = "https://www.npmjs.com/package/@mntglobal/agentready";
+type Tool = {
+  name: string;
+  icon: IconName;
+  tagline: string;
+  desc: string;
+  maps: string;
+} & ({ status: "live"; href: string } | { status: "soon"; when: string });
 
-const softwareSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "agentready",
-  applicationCategory: "DeveloperApplication",
-  operatingSystem: "Node.js 20+",
-  description:
-    "Open-source store agent-readiness scanner: 29 checks across structured data, agent access, product feeds, and ACP / Google UCP / MCP protocol discovery.",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  license: "https://opensource.org/licenses/MIT",
-  url: `${site.url}/agentready`,
-  downloadUrl: NPM_URL,
-  author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
-};
-
-const CHECK_AREAS = [
-  { icon: "layers" as const, title: "Structured data depth", desc: "Product/Offer/ProductGroup JSON-LD — price, availability, identifiers, ratings." },
-  { icon: "shield" as const, title: "Agent access policy", desc: "robots.txt scored by purpose: blocking a training bot is fine; blocking a shopping agent costs sales." },
-  { icon: "network" as const, title: "Protocol discovery", desc: "ACP feed-readiness, Google UCP manifest, live MCP endpoints — the 2026 transaction layer." },
-  { icon: "gauge" as const, title: "Feeds, freshness & AEO", desc: "Catalog endpoints, sitemap freshness, price consistency, citability, a11y quick pass." },
-];
-
-const LIVE_TOOLS = [
+const TOOLS: Tool[] = [
   {
     name: "agentready",
+    status: "live",
     href: "/agentready",
-    desc: "Store agent-readiness scanner — 29 checks across structured data, agent access, feeds and ACP · Google UCP · MCP discovery. Free hosted scan.",
-    icon: "eye" as const,
+    icon: "eye",
+    tagline: "Is your store visible to AI shopping agents?",
+    desc: "29 checks across structured data, agent access, product feeds and ACP · Google UCP · MCP discovery. Free hosted scan + CLI.",
+    maps: "Agent-Ready Commerce",
   },
   {
     name: "vibecheck",
+    status: "live",
     href: "/vibecheck",
-    desc: "Security & production-readiness scanner for AI-built stores — 26 checks: secrets, injection, commerce-logic tampering, dependency CVEs. SARIF + a GitHub Action.",
-    icon: "shield" as const,
+    icon: "shield",
+    tagline: "Is your AI-built store secure & production-ready?",
+    desc: "26 checks: secrets, injection, commerce-logic tampering, dependency CVEs, production hardening. SARIF + a GitHub Action.",
+    maps: "AI Cleanup",
   },
-];
-
-const ROADMAP = [
   {
     name: "retail-mcp",
+    status: "soon",
     when: "October 2026",
-    desc: "Open-source Retail MCP server kit — expose catalog, inventory and pricing to AI agents securely. Shopify adapter first.",
-    icon: "store" as const,
+    icon: "store",
+    tagline: "Expose your catalog to AI agents, securely.",
+    desc: "Open-source Retail MCP server kit — catalog, inventory and pricing for AI agents. Shopify adapter first.",
+    maps: "Embedded Agents",
   },
   {
     name: "acp-testkit",
+    status: "soon",
     when: "October 2026",
-    desc: "Agentic-checkout conformance suite + a mock shopping agent — test your ACP/UCP integration before a real agent embarrasses you.",
+    icon: "check",
+    tagline: "Test your agentic checkout before a real agent does.",
+    desc: "Agentic-checkout conformance suite + a mock shopping agent for your ACP / Google UCP integration.",
+    maps: "Integrations & Orchestration",
+  },
+];
+
+const VALUES = [
+  {
+    icon: "eye" as const,
+    title: "Prove it, don't claim it",
+    desc: "The agentic-commerce protocols are months old and full of bold claims. We publish working, inspectable tools instead — run them yourself, no marketing required.",
+  },
+  {
     icon: "check" as const,
-  },
-];
-
-const CATEGORY_POINTS = [
-  { name: "Structured Data", pts: 25, desc: "Product/Offer/ProductGroup JSON-LD: price, availability, GTIN, ratings" },
-  { name: "Protocol Endpoints", pts: 15, desc: "ACP feed-readiness · Google UCP manifest · live MCP endpoints" },
-  { name: "Agent Access", pts: 15, desc: "robots.txt by purpose-class, llms.txt, no bot-walls" },
-  { name: "Product Feeds", pts: 12, desc: "Sitemap product coverage, open catalog endpoints, feed signals" },
-  { name: "Machine Readability", pts: 10, desc: "Content in the initial HTML — agents don't run your JavaScript" },
-  { name: "AEO Citability", pts: 10, desc: "Metadata, FAQ markup, shipping/returns policy discoverability" },
-  { name: "Data Freshness", pts: 8, desc: "Sitemap lastmod, HTTP validators, schema-vs-page price consistency" },
-  { name: "Accessibility", pts: 5, desc: "Quick pass: alt coverage, lang/labels, heading order" },
-];
-
-const USE_WAYS = [
-  {
-    icon: "bolt" as const,
-    title: "In your terminal",
-    desc: "One command — npm downloads and runs it. Your machine fetches your store directly; nothing touches our servers.",
-    code: "npx @mntglobal/agentready your-store.com",
-    link: { label: "CLI docs on GitHub", href: GITHUB_URL },
+    title: "Honest limitations",
+    desc: "Every README documents what the tool can't do. Heuristics are labelled, benchmarks state their conditions, and evidence is quoted from your own code or store.",
   },
   {
-    icon: "search" as const,
-    title: "In your browser",
-    desc: "No terminal needed — the same engine runs on our site. Free score, no email required.",
-    code: null,
-    link: { label: "mntfuture.com/agentready", href: "/agentready" },
+    icon: "lock" as const,
+    title: "MIT, no lock-in",
+    desc: "Use it, fork it, build on the engine. The code is free forever; the engineering behind the fixes is our business, not the tool.",
   },
   {
-    icon: "github" as const,
-    title: "As source code",
-    desc: "Clone it, read every check, run the 152 tests, or build your own tooling on the core engine (MIT).",
-    code: "git clone https://github.com/MnT-Global/agentready",
-    link: { label: "Browse the repository", href: GITHUB_URL },
+    icon: "network" as const,
+    title: "Maps to real work",
+    desc: "Every tool ladders into a service we actually deliver for clients. No orphan repos, no abandonware — each one earns its place.",
   },
 ];
 
 const FAQ_ITEMS: QA[] = [
   {
-    q: "Is agentready really free?",
-    a: "Yes — MIT-licensed, forever. The CLI is free, the hosted scan is free, and no email is needed for the score. Our business is the engineering behind the fixes, not the scanner.",
+    q: "Are the tools really free?",
+    a: "Yes — MIT-licensed, forever. The CLIs are free, agentready's hosted scan is free, and no email is needed for a score. Our business is the engineering behind the fixes, not the tools.",
   },
   {
-    q: "Do you see my store's data when I scan?",
-    a: "With the CLI: nothing reaches us — it runs on your machine and fetches your store directly. With the web scanner: our server fetches your public pages to compute the score shown to you; we only keep your email and grade if you request the fix plan.",
+    q: "Do you see my code or my store's data?",
+    a: "vibecheck's CLI scans your code entirely on your machine — nothing reaches us. agentready's CLI fetches your store directly from your machine. Only agentready's web scanner has our server fetch your public pages to compute the score shown to you; we keep your email and grade only if you request the fix plan.",
   },
   {
     q: "Can anyone change the code?",
@@ -122,7 +103,7 @@ const FAQ_ITEMS: QA[] = [
   },
   {
     q: "Why open-source this instead of selling it?",
-    a: "The agentic-commerce protocols are months old and full of bold claims. Publishing working, inspectable tools is how we prove we're practitioners — and stores that discover gaps often ask us to fix them. Honest exchange.",
+    a: "The agentic-commerce and AI-codegen waves are new and full of bold claims. Publishing working, inspectable tools is how we prove we're practitioners — and teams who discover gaps with our tools often ask us to fix them. Honest exchange.",
   },
 ];
 
@@ -136,20 +117,26 @@ const faqSchema = {
   })),
 };
 
-const TERMINAL_LINES = [
-  { text: "$ npx @mntglobal/agentready aeropress.com", cls: "text-white" },
-  { text: "", cls: "" },
-  { text: "  B+   88/100 — 7 fixes to become fully agent-ready", cls: "text-brand-300 font-semibold" },
-  { text: "", cls: "" },
-  { text: "  ████████████  Agent Access         15/15", cls: "text-emerald-400" },
-  { text: "  ███████████░  Structured Data      23.5/25", cls: "text-emerald-400" },
-  { text: "  ██████████░░  Protocol Endpoints   11/13", cls: "text-emerald-400" },
-  { text: "  ██████░░░░░░  Data Freshness       4/8", cls: "text-amber-400" },
-  { text: "", cls: "" },
-  { text: "  ✓ PE-02 UCP manifest — discoverable by Google's", cls: "text-white/70" },
-  { text: "    agentic surfaces (v2026-04-08)", cls: "text-white/70" },
-  { text: "  ⚠ SD-04 Identifiers missing: gtin/mpn", cls: "text-amber-400/90" },
-];
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "MnT open-source tools",
+  itemListElement: TOOLS.map((tool, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "SoftwareApplication",
+      name: tool.name,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Node.js 20+",
+      description: tool.desc,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      license: "https://opensource.org/licenses/MIT",
+      ...(tool.status === "live" ? { url: `${site.url}${tool.href}` } : {}),
+      author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+    },
+  })),
+};
 
 export default function OpenSourcePage() {
   return (
@@ -157,7 +144,7 @@ export default function OpenSourcePage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
       <script
         type="application/ld+json"
@@ -179,237 +166,142 @@ export default function OpenSourcePage() {
                   Open source
                 </div>
                 <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] sm:text-5xl">
-                  We open-source our <span className="text-brand-300">agentic-commerce</span>{" "}
-                  tooling.
+                  We open-source our{" "}
+                  <span className="text-brand-300">agentic-commerce</span> tooling.
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
-                  Anyone can claim &ldquo;agent-ready.&rdquo; We publish the tools that prove it —
-                  MIT-licensed, honest limitations in every README, benchmarks you can reproduce.
-                  Starting with <strong className="text-white">agentready</strong>: scan any store
-                  and see exactly what AI shopping agents see.
+                  Anyone can claim &ldquo;agent-ready&rdquo; or &ldquo;secure.&rdquo; We publish the
+                  tools that prove it — MIT-licensed, with honest limitations in every README and
+                  benchmarks you can reproduce. <strong className="text-white">Two are live</strong>,
+                  two are on the way.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href={SCANNER_URL}
+                    href="#tools"
                     className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition hover:bg-brand-600"
                   >
-                    Scan your store free <Icon name="arrow" className="h-4 w-4" />
+                    Browse the tools <Icon name="arrow" className="h-4 w-4" />
                   </a>
                   <a
-                    href={GITHUB_URL}
+                    href={GITHUB_ORG}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-semibold text-white/85 transition hover:bg-white/10"
                   >
-                    <Icon name="github" className="h-4 w-4" /> Star on GitHub
+                    <Icon name="github" className="h-4 w-4" /> GitHub org
                   </a>
                 </div>
                 <p className="mt-5 text-sm text-white/50">
-                  No email needed for the score · ~15 polite requests · MIT
+                  MIT-licensed · deterministic · reproducible benchmarks
                 </p>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="rounded-3xl border border-white/10 bg-[#050f1f] p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
-                <div className="mb-4 flex gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-white/15" />
-                  <span className="h-3 w-3 rounded-full bg-white/15" />
-                  <span className="h-3 w-3 rounded-full bg-white/15" />
+              <div className="rounded-3xl border border-white/10 bg-[#050f1f] p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
+                  The toolkit
                 </div>
-                <pre className="overflow-x-auto font-mono text-[13px] leading-relaxed">
-                  {TERMINAL_LINES.map((line, i) => (
-                    <div key={`${i}-${line.text.slice(0, 12)}`} className={line.cls}>
-                      {line.text || " "}
-                    </div>
+                <ul className="mt-4 divide-y divide-white/5">
+                  {TOOLS.map((tool) => (
+                    <li key={tool.name} className="flex items-center gap-3 py-3">
+                      <span
+                        className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                          tool.status === "live" ? "bg-brand/15 text-brand-300" : "bg-white/5 text-white/40"
+                        }`}
+                      >
+                        <Icon name={tool.icon} className="h-4 w-4" />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="font-mono text-sm font-bold text-white">{tool.name}</div>
+                        <div className="truncate text-xs text-white/50">{tool.tagline}</div>
+                      </div>
+                      <span
+                        className={`ml-auto shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+                          tool.status === "live"
+                            ? "bg-emerald-500/15 text-emerald-300"
+                            : "bg-white/5 text-white/45"
+                        }`}
+                      >
+                        {tool.status === "live" ? "Live" : tool.when}
+                      </span>
+                    </li>
                   ))}
-                </pre>
+                </ul>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* What agentready checks */}
-      <section className="container-mnt py-20 sm:py-24">
+      {/* The tools */}
+      <section id="tools" className="container-mnt scroll-mt-24 py-20 sm:py-24">
         <SectionHeading
-          eyebrow="agentready"
+          eyebrow="The tools"
           title={
             <>
-              29 checks. 100 points. <span className="text-brand">One honest grade.</span>
+              Four tools. <span className="text-brand">One honest program.</span>
             </>
           }
-          subtitle="agentready fetches your store the way an agent does — no JavaScript, no mercy — and grades what it finds, with evidence quoted from your actual pages."
+          subtitle="Each maps to a real problem we fix for clients — and each ships with the MnT repo standard: a 30-second quickstart, honest limitations, and tests you can run."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {CHECK_AREAS.map((area, i) => (
-            <Reveal key={area.title} delay={i * 0.05}>
-              <div className="h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
-                  <Icon name={area.icon} className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 text-lg font-bold text-navy">{area.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{area.desc}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500">
-            <a href={GITHUB_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
-              <Icon name="github" className="h-4 w-4" /> MnT-Global/agentready
-            </a>
-            <a href={NPM_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
-              <Icon name="download" className="h-4 w-4" /> npx @mntglobal/agentready
-            </a>
-            <a href={`${GITHUB_URL}/blob/main/docs/checks.md`} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
-              <Icon name="link" className="h-4 w-4" /> Full check reference
-            </a>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* The 100-point scale */}
-      <section className="bg-navy">
-        <div className="container-mnt py-20 sm:py-24">
-          <SectionHeading
-            tone="dark"
-            eyebrow="The scale"
-            title={
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {TOOLS.map((tool, i) => {
+            const inner = (
               <>
-                How the <span className="text-brand-300">100 points</span> break down.
-              </>
-            }
-            subtitle="Weights reflect what actually moves agent visibility in 2026 — protocol discovery weighs more than accessibility because that's where stores lose sales today."
-          />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {CATEGORY_POINTS.map((cat, i) => (
-              <Reveal key={cat.name} delay={i * 0.03}>
-                <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand/20 font-mono text-sm font-bold text-brand-300">
-                    {cat.pts}
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
+                      tool.status === "live" ? "bg-brand-50 text-brand" : "bg-slate-100 text-slate-500"
+                    }`}
+                  >
+                    <Icon name={tool.icon} className="h-5 w-5" />
                   </span>
-                  <div>
-                    <h3 className="font-bold text-white">{cat.name}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-white/60">{cat.desc}</p>
+                  {tool.status === "live" ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
+                    </span>
+                  ) : (
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+                      {tool.when}
+                    </span>
+                  )}
+                </div>
+                <h3 className="mt-4 font-mono text-xl font-bold text-navy">{tool.name}</h3>
+                <p className="mt-1 text-sm font-medium text-slate-500">{tool.tagline}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{tool.desc}</p>
+                <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="text-xs text-slate-400">
+                    Feeds <span className="font-semibold text-slate-600">{tool.maps}</span>
+                  </span>
+                  {tool.status === "live" && (
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+                      Explore <Icon name="arrow" className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+                    </span>
+                  )}
+                </div>
+              </>
+            );
+            return (
+              <Reveal key={tool.name} delay={i * 0.05}>
+                {tool.status === "live" ? (
+                  <Link
+                    href={tool.href}
+                    className="group block h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <div className="h-full rounded-2xl border border-dashed border-slate-300 bg-white p-7">
+                    {inner}
                   </div>
-                </div>
+                )}
               </Reveal>
-            ))}
-          </div>
-          <p className="mt-8 text-center text-sm text-white/50">
-            Every check ships with evidence quoted from your pages and a concrete fix —{" "}
-            <a
-              href={`${GITHUB_URL}/blob/main/docs/checks.md`}
-              className="font-semibold text-brand-300 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              see the full 29-check reference
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* Why we open source */}
-      <section className="bg-slate-50">
-        <div className="container-mnt py-20 sm:py-24">
-          <SectionHeading
-            eyebrow="Why"
-            title={
-              <>
-                Proof over promises. <span className="text-brand">Honesty over hype.</span>
-              </>
-            }
-            subtitle="The agentic-commerce protocols are months old. Everyone claims expertise — we'd rather show working code."
-          />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {[
-              {
-                icon: "eye" as const,
-                title: "Inspectable expertise",
-                desc: "Our protocol research, spec pins and probe data ship in the repo. You can audit what we scan — closed-source competitors can't say that.",
-              },
-              {
-                icon: "spark" as const,
-                title: "Honest by design",
-                desc: "Every README has a limitations section. Checks that can't run are excluded from your score — never counted against you. If no vendor consumes llms.txt, the report says so.",
-              },
-              {
-                icon: "rocket" as const,
-                title: "Free tools, expert fixes",
-                desc: "The scanners are MIT-licensed forever. Our business is the engineering behind the fixes — platform builds, protocol integrations, embedded agents.",
-              },
-            ].map((point, i) => (
-              <Reveal key={point.title} delay={i * 0.05}>
-                <div className="h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
-                    <Icon name={point.icon} className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 text-lg font-bold text-navy">{point.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{point.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Roadmap */}
-      <section className="container-mnt py-20 sm:py-24">
-        <SectionHeading
-          eyebrow="The program"
-          title={
-            <>
-              Two live. <span className="text-brand">Two on the way.</span>
-            </>
-          }
-          subtitle="Every tool maps to a real problem we fix for clients — no orphan repos, no abandonware."
-        />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {LIVE_TOOLS.map((item, i) => (
-            <Reveal key={item.name} delay={i * 0.05}>
-              <Link
-                href={item.href}
-                className="group block h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
-                    <Icon name={item.icon} className="h-5 w-5" />
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
-                  </span>
-                </div>
-                <h3 className="mt-4 font-mono text-lg font-bold text-navy">{item.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
-                  Explore <Icon name="arrow" className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          {ROADMAP.map((item, i) => (
-            <Reveal key={item.name} delay={i * 0.05}>
-              <div className="h-full rounded-2xl border border-dashed border-slate-300 bg-white p-7">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-500">
-                    <Icon name={item.icon} className="h-5 w-5" />
-                  </span>
-                  <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
-                    {item.when}
-                  </span>
-                </div>
-                <h3 className="mt-4 font-mono text-lg font-bold text-navy">{item.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
-              </div>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
         <p className="mt-10 text-center text-sm text-slate-500">
           Follow along:{" "}
-          <a href={GITHUB_URL} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
+          <a href={GITHUB_ORG} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
             github.com/MnT-Global
           </a>{" "}
           · or{" "}
@@ -419,41 +311,28 @@ export default function OpenSourcePage() {
         </p>
       </section>
 
-      {/* Use it your way */}
-      <section className="bg-slate-50">
+      {/* How we build in the open */}
+      <section className="bg-navy">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
-            eyebrow="Get started"
+            tone="dark"
+            eyebrow="How we build in the open"
             title={
               <>
-                Use it <span className="text-brand">your way.</span>
+                Senior by default. <span className="text-brand-300">Honesty over hype.</span>
               </>
             }
-            subtitle="Same open-source engine everywhere — pick whichever fits how you work."
+            subtitle="The same standard runs through every repo — so a tool of ours reads like our engineering, not a demo."
           />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {USE_WAYS.map((way, i) => (
-              <Reveal key={way.title} delay={i * 0.05}>
-                <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
-                    <Icon name={way.icon} className="h-5 w-5" />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {VALUES.map((value, i) => (
+              <Reveal key={value.title} delay={i * 0.05}>
+                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-brand-300">
+                    <Icon name={value.icon} className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-4 text-lg font-bold text-navy">{way.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{way.desc}</p>
-                  {way.code && (
-                    <code className="mt-4 block overflow-x-auto rounded-xl bg-navy px-4 py-3 font-mono text-xs text-brand-200">
-                      {way.code}
-                    </code>
-                  )}
-                  <a
-                    href={way.link.href}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"
-                    {...(way.link.href.startsWith("http")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    {way.link.label} <Icon name="arrow" className="h-3.5 w-3.5" />
-                  </a>
+                  <h3 className="mt-4 text-lg font-bold text-white">{value.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">{value.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -477,9 +356,9 @@ export default function OpenSourcePage() {
       </section>
 
       <CTASection
-        eyebrow="From scan to fix"
-        title="agentready finds the gaps. We build the fixes."
-        body="Run the free scan, then bring the report to a free architecture workshop — a senior engineer maps every finding to a concrete fix plan for your platform."
+        eyebrow="From tool to fix"
+        title="Our tools find the gaps. We build the fixes."
+        body="Run any of them, then bring the report to a free architecture workshop — a senior engineer maps every finding to a concrete fix plan for your platform."
       />
     </>
   );
