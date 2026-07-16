@@ -60,7 +60,7 @@ const config: HubConfig = {
   faq: [
     { q: "Where should we start with AI?", a: "Almost always the AI Commerce Starter — semantic search, recommendations, and a shopping assistant convert your existing traffic and pay for themselves quickly. From there, agent-readiness and embedded agents expand the impact." },
     { q: "What does \"agent-ready\" actually mean?", a: "It means AI shopping agents can discover your products, trust your price and inventory data, and complete a purchase. We implement ACP (OpenAI+Stripe), Google's UCP, and a Retail MCP server, and optimize your product feed and AEO visibility." },
-    { q: "Is this just a chatbot?", a: "No. Embedded AI agents are task-specific and connected to your tools via MCP — an SEO/AEO agent, a support agent, a merchandising agent, an analytics agent — doing real work with human-in-the-loop oversight and evaluation gates." },
+    { q: "Is this just a chatbot?", a: "No. Embedded AI agents are task-specific and connected to your tools via MCP — an SEO/AEO agent, a support agent, a merchandising agent, an inventory & demand agent — doing real work with human-in-the-loop oversight and evaluation gates." },
     { q: "Our store was built with AI/no-code and keeps breaking. Can you help?", a: "Yes — that's AI Cleanup. AI-generated code has ~2.7× more vulnerabilities; we run a security audit, refactor and harden, re-architect for scale, and deploy it production-grade." },
     { q: "How do you keep AI reliable?", a: "Every deployment ships with evaluation gates that measure quality and human-in-the-loop oversight for anything customer-facing. We instrument lift so you can see the impact, not just take it on faith." },
   ],
