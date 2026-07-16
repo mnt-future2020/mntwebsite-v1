@@ -51,7 +51,7 @@ const TOOLS: Tool[] = [
     when: "October 2026",
     icon: "store",
     tagline: "Expose your catalog to AI agents, securely.",
-    desc: "Open-source Retail MCP server kit — catalog, inventory and pricing for AI agents. Shopify adapter first.",
+    desc: "Open-source Retail MCP server kit — catalog, inventory and pricing for AI agents. Headless engines first; Shopify already ships its own.",
     maps: "Embedded Agents",
   },
   {
