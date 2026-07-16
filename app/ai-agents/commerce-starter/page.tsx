@@ -53,7 +53,7 @@ const config: ServiceConfig = {
   approachPoints: [
     "Smart search converts roughly 4× better than keyword search — a direct revenue lever.",
     "AI personalization lifts revenue by around 40% by matching products to each shopper.",
-    "Typical clients see a 19–27% conversion lift within 90 days, live in 8–12 weeks.",
+    "Live in two weeks — the search, recommendation and assistant layers already exist; we fit them to your catalog rather than build them.",
     "Every change is gated behind evaluations and instrumented — measured impact, not hype.",
   ],
   related: [
@@ -63,7 +63,7 @@ const config: ServiceConfig = {
     { label: "Integrations & Orchestration", href: "/commerce/integrations" },
   ],
   faq: [
-    { q: "How fast will we see results?", a: "Most clients are live in 8–12 weeks and see a 19–27% conversion lift within 90 days. Because it works on your existing traffic, the ROI shows up quickly." },
+    { q: "How fast will we see results?", a: "Live in two weeks from a signed scope and access to your catalog. It's quick because we're not building the AI — search, recommendations and the assistant already exist as a product; the two weeks goes on fitting them to your catalog and instrumenting the lift. Because it works on the traffic you already have, the ROI shows up soon after. The clock runs on both sides, though: we need the scope signed and catalog access at kickoff, and change requests get their own scope and timeline." },
     { q: "Do we need to re-platform first?", a: "No. The Starter is designed to drop into your current store — headless or templated. If a rebuild makes sense later, that's a separate Commerce Platforms conversation." },
     { q: "How do you prove the AI is actually helping?", a: "We instrument conversion and revenue and put evaluation gates around every AI change. You get a clear before/after on lift — we treat it as a measurable engineering outcome." },
     { q: "Which AI models do you use?", a: "We use the best model for each job and keep it swappable — you're never locked to one provider. Search, recommendations, and the assistant each use what performs best and safest for your data." },
