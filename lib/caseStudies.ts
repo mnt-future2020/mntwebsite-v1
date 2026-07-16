@@ -48,6 +48,140 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "mnt-commerce",
+    title: "MnT Commerce",
+    tagline:
+      "The AI-native commerce platform we start client builds from — semantic search, a shopping assistant, and an ops agent that writes its own code and can't run it until you say so.",
+    type: "Platform · Built & dogfooded by MnT",
+    category: "AI-native headless commerce",
+    cover: "/work/mnt-commerce-cover.png",
+    heroShot: "/work/mnt-commerce-copilot-approval.png",
+    frameUrl: "MnT Commerce · admin",
+    dateISO: "2026-07-16",
+    summary:
+      "MnT Commerce is the base we start client commerce work from: a headless engine with AI built into the product rather than bolted on. Shoppers get semantic search and a conversational assistant; operators get an Ops Copilot that answers questions about the store, then proposes changes as real workflow code it cannot execute until a human approves. We ran every AI path against it for real — including the one that creates a promotion — and the approval gate held: zero store changes reached the database before a human clicked Approve.",
+    facts: [
+      { value: "0", label: "Store changes the agent made without a human approval" },
+      { value: "4/4", label: "Semantic queries ranked correctly after fixing the catalog text (was 2/3)" },
+      { value: "7", label: "Custom modules on the commerce engine — zero forks of it" },
+      { value: "1 file", label: "What changes to re-brand the whole platform for a client" },
+    ],
+    scope: [
+      { label: "Role", value: "Platform architecture + AI engineering" },
+      { label: "Stack", value: "Medusa v2 · Postgres + pgvector · Claude · Voyage" },
+      { label: "Delivered", value: "Semantic search · Recommendations · Shopping assistant · Ops Copilot" },
+      { label: "Status", value: "Internal platform — the base for client builds" },
+    ],
+    problem:
+      "Most \"AI commerce\" is a chatbot parked next to a store: it can describe the catalog but it cannot change anything, because nobody trusts it to. The moment an agent can actually act — create a promotion, move inventory, place a restock order — the hard problem stops being intelligence and becomes authority. An agent that can spend your money is a different engineering problem from one that can answer a question, and it needs a different architecture: one where the interesting work is what the agent is prevented from doing.",
+    approach: [
+      { no: "01", title: "Split reading from writing, in the executor", desc: "Research runs through a read-only executor that refuses code with side effects. The identical code that creates a promotion is blocked while the agent is investigating and only becomes runnable after a human approves it. The boundary is enforced where the code executes — not in the prompt." },
+      { no: "02", title: "Let the agent write code, not call a fixed API", desc: "Rather than a menu of pre-baked actions, the Copilot composes the engine's own workflows — the same ones the admin UI calls. You read the actual code before approving it, so the review surface is the change itself, not a summary of it." },
+      { no: "03", title: "Make every AI path degrade, not fail", desc: "No key, no credits, provider outage — every feature falls back to a deterministic path: rule-based chat, keyword search, affinity recommendations. Shoppers see a working store; the real provider error goes to the logs." },
+      { no: "04", title: "Dogfood it: run every path for real", desc: "We put a live key on it and exercised each AI feature end to end — chat, embeddings, semantic ranking, Copilot reports, and the full propose → approve → execute chain. Two real bugs surfaced that no amount of reading the code would have found." },
+    ],
+    build: [
+      {
+        audience: "The shopper side",
+        icon: "chat",
+        points: [
+          "Semantic search — Voyage embeddings in Postgres via pgvector, ranked by cosine distance, blended with keyword matching and per-shopper affinity",
+          "Conversational assistant — a Claude tool-loop that searches, recommends, and manages the cart in natural language",
+          "Per-shopper recommendations — affinity scoring from real activity, with cold-start handling and optional AI curation",
+          "Shopper profiles — anonymous activity that merges into the customer record on login",
+          "Every path has a deterministic fallback that runs with no AI key at all",
+        ],
+      },
+      {
+        audience: "The operator side",
+        icon: "shield",
+        points: [
+          "Ops Copilot — asks and answers questions about live store data, writing and running its own read-only queries",
+          "Proposals, not actions — changes arrive as reviewable workflow code with a risk tier, held at zero effect until approved",
+          "Multi-step plans that halt on the first failure instead of half-applying",
+          "Demand and restock — velocity from real activity, stockout projection, and drafted purchase orders for approval",
+          "Proactive checks on a schedule — digests and low-stock alerts, idempotent per day",
+          "Every approval records who approved it",
+        ],
+      },
+    ],
+    productShots: [
+      { src: "/work/mnt-commerce-copilot-approval.png", title: "The approval gate", desc: "The Copilot has written real workflow code and is holding it. Nothing has reached the store yet — the promotion does not exist until Approve is clicked." },
+      { src: "/work/mnt-commerce-copilot-report.png", title: "A self-correcting research loop", desc: "Asked about stock, it queried the store, noticed its own query was missing a field, refined it, and answered — read-only throughout." },
+      { src: "/work/mnt-commerce-chat.png", title: "The shopping assistant", desc: "\"Breathable for a hot summer day\" returns the lightweight tee — matched on meaning, then explained with the product's real specs." },
+    ],
+    highlights: [
+      { icon: "shield", title: "The approval gate is the product", desc: "Store changes are proposed as code and held at zero effect. Before approval the promotion did not exist in the database; after one click it did, with the approver's ID on the record." },
+      { icon: "code", title: "Code, not a fixed action menu", desc: "The agent composes the commerce engine's own workflows — so what you approve is the real change, and the agent isn't limited to actions we predicted in advance." },
+      { icon: "bolt", title: "Fallback-first, not AI-first", desc: "Every AI feature has a deterministic path underneath it. The store kept selling with no key, no credits, and a provider returning 400s — because that is exactly how we ran it for weeks." },
+      { icon: "layers", title: "Composable — including removable", desc: "Seven custom modules, zero forks of the commerce engine. The chat feature can be deleted without touching search, recommendations, or the Copilot; shared catalog logic is deliberately feature-agnostic." },
+      { icon: "ai", title: "AI config is global and in the admin", desc: "One place owns the provider key and model for every AI feature — set in the dashboard, not in an env file, never returned to the browser unmasked." },
+      { icon: "network", title: "White-label in one file", desc: "Brand name, tagline, mark and colours live in a single module that drives the admin shell, favicon, and widget — via the framework's supported extension points, so upgrades don't undo it." },
+    ],
+    techDecisions: [
+      { tech: "Medusa v2 (unforked)", used: "The commerce engine — products, carts, orders, promotions, inventory.", advantage: "Everything we added is a module beside it, not a patch inside it. Clients get an upgradeable engine and full code ownership, with no fork to maintain." },
+      { tech: "Read-only executor for research", used: "The boundary between the Copilot investigating and the Copilot acting.", advantage: "The same code is blocked in research mode and runnable only post-approval. Authority is enforced by the runtime, not requested in a prompt." },
+      { tech: "pgvector in the existing Postgres", used: "Product embeddings and cosine ranking, alongside keyword search.", advantage: "Semantic search with no extra service to run, pay for, or keep in sync — the vectors live next to the catalog they describe." },
+      { tech: "Voyage embeddings", used: "Turning product text into vectors; re-indexed automatically when the text changes.", advantage: "Anthropic has no embeddings API, and Voyage is the recommended pairing. Content-hashed, so editing a description is the whole re-index step." },
+      { tech: "Claude tool-loops (provider SDK, no framework)", used: "The shopping assistant and the Ops Copilot.", advantage: "Direct control over the loop, the tools, and the failure path — which is what lets every branch fall back cleanly instead of throwing." },
+      { tech: "Deterministic engines under every AI feature", used: "Rule-based chat, keyword search, affinity recommendations.", advantage: "The AI is an upgrade, not a dependency. Turning it off degrades the experience; it does not break the store." },
+    ],
+    stack: [
+      { group: "Commerce", items: ["Medusa v2", "PostgreSQL", "Core workflows", "7 custom modules"] },
+      { group: "AI", items: ["Claude (Anthropic)", "Voyage embeddings", "pgvector + pg_trgm", "Admin-managed keys"] },
+      { group: "Safety", items: ["Read-only executor", "Human approval gates", "Risk tiers", "Approver audit trail"] },
+      { group: "Delivery", items: ["TypeScript", "Node 20", "Hand-written migrations", "One-file white-label"] },
+    ],
+    metaTitle: "MnT Commerce — AI-Native Commerce Platform | MnT Case Study",
+    metaDescription:
+      "The AI-native commerce base MnT builds clients on: semantic search, a shopping assistant, and an ops agent that writes real workflow code it can't run until a human approves.",
+    resultsTitle: "What happened when we ran the AI against our own store?",
+    resultsIntro:
+      "Asked in one sentence to create a 10% promotion, the Ops Copilot wrote the engine's own workflow code and stopped. The promotion did not exist in the database until a human clicked Approve — then it did, with the approver's ID recorded against it. Semantic search initially ranked one of three probe queries wrong; the fix was the catalog text, not the retrieval code.",
+    results: [
+      { metric: "Store changes the agent made before approval", before: "—", after: "0 — held as reviewable code" },
+      { metric: "Creating a promotion", before: "Admin form, filled by hand", after: "One sentence, one approval click" },
+      { metric: "\"Breathable for a hot summer day\" ranked", before: "Sweatpants (wrong)", after: "Lightweight tee (correct)" },
+      { metric: "Semantic ranking confidence (1st vs 2nd)", before: "0.006 — indistinguishable", after: "0.05–0.08" },
+      { metric: "Probe queries ranked correctly", before: "2 of 3", after: "4 of 4" },
+    ],
+    faq: [
+      {
+        q: "Is this a real client's store?",
+        a: "No — and we're explicit about that. MnT Commerce is our own platform, built as the base we start client work from, running on a small demo catalog we wrote ourselves. The engineering is real and every number here came from running it; the traffic is not. We have no conversion data from it and don't claim any.",
+      },
+      {
+        q: "How can an AI agent change a store without breaking it?",
+        a: "It can't act on its own. The Copilot proposes changes as real workflow code with a risk tier, and a read-only executor refuses to run anything with side effects while it's researching. We tested this by asking it for a promotion: it wrote the code, and the promotion did not exist in the database until a human approved it. Every approval records who approved it.",
+      },
+      {
+        q: "Which parts use an LLM — and which deliberately don't?",
+        a: "Claude handles judgment: understanding what a shopper means, deciding what to propose, writing the change. Everything else is ordinary code — the approval gate, the executor's read-only check, the vector maths, the workflows that actually touch the database. The model never grades its own work and never holds the authority to act.",
+      },
+      {
+        q: "What broke when you ran it for real?",
+        a: "Two things worth reporting. A model-specific API parameter was being sent unconditionally while the model itself was admin-selectable, so choosing one of the three models returned a 400 — a bug only a live run finds. And an AI failure was being swallowed into a silent fallback, which meant the real cause (an unfunded account, not the code) stayed invisible until we logged the provider's actual error. Both are fixed; both are why we dogfood.",
+      },
+      {
+        q: "Our search results are bad — is that fixable?",
+        a: "Usually, and usually not in the retrieval code. Ours ranked one query wrong at first, and the cause was the catalog: every product description was the same marketing sentence with one word swapped, so there was nothing distinguishing to match on. Rewriting four descriptions with real detail — fabric weight, warmth, season — fixed the wrong result and widened the confidence gap between the top two hits by roughly ten times. We look at your product text before we touch your search stack.",
+      },
+      {
+        q: "Are we locked into your AI, or your commerce engine?",
+        a: "No to both, by construction. The engine is unforked and every feature we added is a separate module — we tested that the chat feature can be deleted without disturbing search, recommendations, or the Copilot. Each AI feature has a deterministic fallback underneath it, so switching the AI off degrades the experience rather than breaking the store. You get full code ownership.",
+      },
+    ],
+    copy: {
+      challengeTitle: "An agent that can spend your money is a different problem.",
+      buildTitle: "One platform, two audiences.",
+      highlightsSubtitle: "Capability is the easy half. These are the decisions that make an acting agent safe enough to put near a real store.",
+      techTitle: "Why each piece is there — and what it buys you.",
+      ctaTitle: "Want this as the base for your store?",
+      ctaBody:
+        "MnT Commerce is where our client builds start — your brand, your catalog, your storefront, on a platform where the AI is already built in and already gated. Book a free architecture workshop and we'll map it to your stack.",
+    },
+  },
+  {
     slug: "lobbi",
     title: "LOBBI",
     tagline:
