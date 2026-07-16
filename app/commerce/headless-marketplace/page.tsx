@@ -68,7 +68,7 @@ const config: ServiceConfig = {
     { q: "Can you migrate us without losing SEO or traffic?", a: "Yes. Replatforming is a core service — we preserve URL structure, redirects, and metadata, and cut over in a low-risk, staged way so rankings and revenue hold." },
     { q: "Do I own the code?", a: "Completely. We build on open, composable architecture and hand over full ownership — no proprietary lock-in and no black boxes." },
     { q: "Which platforms do you build on?", a: "We're composable-first and platform-honest — headless with the commerce engine that fits your stage, plus custom services where it earns its place. We'll recommend the right architecture in a free workshop." },
-    { q: "Can you add AI search and recommendations?", a: "Yes — that's our AI Commerce Starter service. Semantic search, personalized recommendations, and a shopping assistant drop into a headless storefront cleanly." },
+    { q: "Can you add AI search and recommendations?", a: "They're already in the platform we build you on — semantic search, personalized recommendations and a shopping assistant, plus an ops agent for the admin side. That's our AI Commerce Starter, and most builds run it as the first two weeks so the AI is working before the storefront lands on top of it." },
   ],
   cta: {
     title: "Outgrown your template? Let's architect the next platform.",
