@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/workshop", {
     title: "Free Architecture Workshop — Commerce Tech Consulting | MnT Future",
     description:
-      "A free 45-minute working session with a senior commerce consultant: bring your problem, we sketch the solution live — data model, APIs, AI & agent opportunities — and you keep the plan.",
+      "A free 45-minute consulting session with a senior commerce consultant: bring your problem, get the solution that fits your business — and keep the written recommendation brief.",
   });
 }
 
@@ -38,7 +38,7 @@ const steps = [
   {
     no: "03",
     title: "You keep the plan",
-    desc: "After the session you get a written architecture brief — the sketch, the risks, and a prioritized roadmap with honest effort framing. Yours, whether you hire us or not.",
+    desc: "After the session you get a written recommendation brief — the diagnosis, the solution that fits your business, and what to do first. Yours, whether you hire us or not.",
   },
   {
     no: "04",
@@ -48,10 +48,10 @@ const steps = [
 ];
 
 const deliverables = [
-  "An architecture sketch — data model, APIs, and the integrations that matter",
-  "An AI & agent-opportunity map — search, assistants, ACP / UCP / MCP readiness",
-  "A prioritized roadmap with honest effort framing — what to build first, and why",
-  "A straight build recommendation — Shopify, Hydrogen, or custom AI-native",
+  "A clear diagnosis of your problem — what's holding your commerce back, and what it's costing you",
+  "The solution that fits your business — matched to your stage, your stack, and your budget",
+  "Where AI can grow your revenue — the opportunities worth taking, in plain language",
+  "A straight recommendation and what to do first — Shopify, Hydrogen, or custom, with honest effort framing",
   "The brief is yours to keep, even if we never work together",
 ];
 
@@ -101,7 +101,7 @@ const faq = [
   },
   {
     q: "What happens after the workshop?",
-    a: "You get the architecture brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
+    a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
   },
 ];
 
@@ -182,7 +182,7 @@ export default function Workshop() {
           <SectionTitle
             eyebrow="How the workshop works"
             title="A working session, not a pitch."
-            sub="One hour of real consulting with a defined shape — so you know exactly what you're signing up for."
+            sub="One hour of real consulting with a defined shape — no surprises."
           />
         </Reveal>
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
@@ -206,7 +206,7 @@ export default function Workshop() {
               align="left"
               eyebrow="What you leave with"
               title="Consulting output you keep — not meeting notes."
-              sub="The workshop ends with a written architecture brief. It's the artifact clients later build from — and the reason the session is worth your hour even if you never hire us."
+              sub="The workshop ends with a written recommendation brief — your problem, the solution that fits, and what to do first. It's the reason the session is worth your hour even if you never hire us."
             />
             <Link
               href="/work"
@@ -219,7 +219,7 @@ export default function Workshop() {
           <Reveal delay={120}>
             <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:p-10">
               <div className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-                The architecture brief
+                The recommendation brief
               </div>
               <div className="mt-5 flex flex-col gap-4">
                 {deliverables.map((d) => (
