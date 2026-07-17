@@ -85,8 +85,13 @@ export function Stat({
   label: string;
   tone?: "light" | "dark";
 }) {
+  // Values wrap at different line counts across a row ("100%" is one line,
+  // "US-compliant" is two), which pushed each label to its own height. Spanning
+  // the parent's two rows as a subgrid sizes the value track to the tallest in
+  // the row, so every label starts on the same line — and a row of short values
+  // stays tight instead of reserving space it doesn't need.
   return (
-    <div>
+    <div className="row-span-2 grid grid-rows-subgrid gap-y-2">
       <div
         className={`font-display text-4xl font-extrabold tracking-tight sm:text-5xl ${
           tone === "dark" ? "text-white" : "text-ink"
@@ -94,7 +99,7 @@ export function Stat({
       >
         <Counter value={value} />
       </div>
-      <div className={`mt-2 text-sm ${tone === "dark" ? "text-white/60" : "text-slatey"}`}>
+      <div className={`text-sm ${tone === "dark" ? "text-white/60" : "text-slatey"}`}>
         {label}
       </div>
     </div>
