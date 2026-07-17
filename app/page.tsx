@@ -144,9 +144,9 @@ export default function Home() {
           Trusted to engineer revenue-critical commerce for US brands
         </p>
         <div className="mx-auto mt-9 grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 sm:px-7 lg:grid-cols-4">
-          {proofStats.map((s) => (
+          {proofStats.map((s, i) => (
             <Reveal key={s.value}>
-              <div className="border-l border-line px-5 text-center">
+              <div className={`px-5 text-center ${i > 0 ? "border-l border-line" : ""}`}>
                 <div className="font-display text-[26px] font-bold text-ink">{s.value}</div>
                 <div className="mt-1.5 text-[13.5px] leading-normal text-slate-500">{s.label}</div>
               </div>
