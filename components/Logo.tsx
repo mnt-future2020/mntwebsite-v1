@@ -14,8 +14,8 @@ export default function Logo({
       <Image
         src={src}
         alt="MnT Future"
-        width={899}
-        height={430}
+        width={1815}
+        height={375}
         priority
         className="h-9 w-auto sm:h-10"
       />
