@@ -80,6 +80,12 @@ const orgSchema = {
     contactType: "sales",
   },
   sameAs: [site.social.instagram, site.social.linkedin, site.social.facebook],
+  memberOf: [
+    { "@type": "Organization", name: "AWS Partner Network" },
+    { "@type": "Organization", name: "Google Cloud Partner Advantage" },
+    { "@type": "Organization", name: "Shopify Partners" },
+    { "@type": "Organization", name: "NVIDIA Developer Program" },
+  ],
 };
 
 const websiteSchema = {

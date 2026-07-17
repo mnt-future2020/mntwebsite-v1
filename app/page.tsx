@@ -7,6 +7,7 @@ import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import StackMarquee from "@/components/StackMarquee";
+import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
 import Testimonials from "@/components/Testimonials";
 import FAQ, { QA } from "@/components/FAQ";
@@ -155,6 +156,8 @@ export default function Home() {
         </div>
         <StackMarquee className="mt-11 pb-11" />
       </section>
+
+      <Partners />
 
       {/* TWO VERTICALS */}
       <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">

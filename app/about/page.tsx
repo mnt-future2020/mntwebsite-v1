@@ -3,6 +3,7 @@ import Image from "next/image";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
+import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
 import { resolveMetadata } from "@/lib/seo";
 
@@ -108,6 +109,8 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      <Partners />
 
       <div className="pt-24">
         <CTASection />
