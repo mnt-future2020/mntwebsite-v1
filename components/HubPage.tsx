@@ -59,7 +59,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-50" />
         <div className="pointer-events-none absolute -left-40 -top-24 h-[28rem] w-[28rem] rounded-full bg-brand/25 blur-[120px]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-navy" />
@@ -138,7 +138,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <div className="relative overflow-hidden rounded-[2rem] bg-navy p-8 text-white shadow-glow sm:p-10">
+            <div className="relative overflow-hidden rounded-[2rem] bg-deep p-8 text-white shadow-glow sm:p-10">
               <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-brand/30 blur-2xl" />
               <div className="grid grid-cols-2 gap-5">
                 {config.stats.map((s) => (

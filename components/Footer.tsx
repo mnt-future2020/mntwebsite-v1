@@ -7,7 +7,7 @@ import { site, footerNav } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-navy text-white">
+    <footer className="relative overflow-hidden bg-deep text-white">
       <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-brand/20 blur-3xl" />
       <div className="container-mnt relative py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -73,10 +73,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/50">
+          <p className="text-xs text-white/60">
             © {new Date().getFullYear()} Magizh NexGen Technologies. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/60">
             <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1.5 hover:text-white">
               <Icon name="mail" className="h-4 w-4" /> {site.email}
             </a>

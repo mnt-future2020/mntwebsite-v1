@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function WorkIndex() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-40" />
         <div className="pointer-events-none absolute -left-40 -top-24 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[120px]" />
         <div className="container-mnt relative py-16 sm:py-20">

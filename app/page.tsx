@@ -250,7 +250,7 @@ export default function Home() {
               <SpotlightCard
                 className={`relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-300 ${
                   m.featured
-                    ? "border-transparent bg-navy text-white shadow-glow"
+                    ? "border-transparent bg-deep text-white shadow-glow"
                     : "border-slate-100 bg-white shadow-card hover:-translate-y-1 hover:shadow-cardhover"
                 }`}
               >

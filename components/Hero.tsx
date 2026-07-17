@@ -5,7 +5,7 @@ import { images } from "@/lib/site";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
+    <section className="relative overflow-hidden bg-deep text-white">
       <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-40" />
       <div className="pointer-events-none absolute -left-40 top-0 h-[26rem] w-[26rem] rounded-full bg-brand/15 blur-[130px]" />
 

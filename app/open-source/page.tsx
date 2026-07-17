@@ -153,7 +153,7 @@ export default function OpenSourcePage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />
@@ -191,7 +191,7 @@ export default function OpenSourcePage() {
                     <Icon name="github" className="h-4 w-4" /> GitHub org
                   </a>
                 </div>
-                <p className="mt-5 text-sm text-white/50">
+                <p className="mt-5 text-sm text-white/60">
                   MIT-licensed · deterministic · reproducible benchmarks
                 </p>
               </div>
@@ -213,7 +213,7 @@ export default function OpenSourcePage() {
                       </span>
                       <div className="min-w-0">
                         <div className="font-mono text-sm font-bold text-white">{tool.name}</div>
-                        <div className="truncate text-xs text-white/50">{tool.tagline}</div>
+                        <div className="truncate text-xs text-white/60">{tool.tagline}</div>
                       </div>
                       <span
                         className={`ml-auto shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
@@ -312,7 +312,7 @@ export default function OpenSourcePage() {
       </section>
 
       {/* How we build in the open */}
-      <section className="bg-navy">
+      <section className="bg-deep">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
             tone="dark"

@@ -97,7 +97,7 @@ export default function VibecheckPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />
@@ -217,7 +217,7 @@ export default function VibecheckPage() {
       </section>
 
       {/* Prove it broken → prove it fixed */}
-      <section className="bg-navy">
+      <section className="bg-deep">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
             tone="dark"
@@ -281,7 +281,7 @@ export default function VibecheckPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Point it at any project directory — no install step, no sign-up.
                 </p>
-                <pre className="mt-4 overflow-x-auto rounded-xl bg-navy px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
+                <pre className="mt-4 overflow-x-auto rounded-xl bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
                   npx @mntglobal/vibecheck ./your-store
                 </pre>
               </div>
@@ -298,7 +298,7 @@ export default function VibecheckPage() {
                   vibecheck reads local source, not a URL. Clone the repo first, then scan the
                   folder.
                 </p>
-                <pre className="mt-4 overflow-x-auto rounded-xl bg-navy px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">{`git clone https://github.com/you/store.git
+                <pre className="mt-4 overflow-x-auto rounded-xl bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">{`git clone https://github.com/you/store.git
 cd store
 npx @mntglobal/vibecheck .`}</pre>
               </div>
@@ -320,7 +320,7 @@ npx @mntglobal/vibecheck .`}</pre>
                       key={f.flag}
                       className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4"
                     >
-                      <code className="w-fit flex-none rounded-md bg-navy px-2 py-1 font-mono text-xs text-brand-200">
+                      <code className="w-fit flex-none rounded-md bg-deep px-2 py-1 font-mono text-xs text-brand-200">
                         {f.flag}
                       </code>
                       <span className="text-sm leading-relaxed text-slate-600">{f.desc}</span>
@@ -376,7 +376,7 @@ npx @mntglobal/vibecheck .`}</pre>
             <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
               .github/workflows/vibecheck.yml
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-xl bg-navy px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Future/vibecheck@v0.1.1
+            <pre className="mt-3 overflow-x-auto rounded-xl bg-deep px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Future/vibecheck@v0.1.1
   with:
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">

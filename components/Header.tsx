@@ -26,7 +26,7 @@ function MegaMenu({ group }: { group: NavGroup }) {
         </div>
         <Link
           href={group.href}
-          className="mt-1 flex items-center justify-between rounded-2xl bg-navy px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
+          className="mt-1 flex items-center justify-between rounded-2xl bg-deep px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
         >
           {group.overviewLabel}
           <Icon name="arrow" className="h-4 w-4" />

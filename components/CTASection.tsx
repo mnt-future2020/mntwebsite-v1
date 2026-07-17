@@ -18,7 +18,7 @@ export default function CTASection({
   return (
     <section className="container-mnt py-20 sm:py-24">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-navy px-7 py-14 text-center sm:px-16 sm:py-20">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-deep px-7 py-14 text-center sm:px-16 sm:py-20">
           <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
           <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-brand/30 blur-3xl" />
           <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-brand-700/30 blur-3xl" />

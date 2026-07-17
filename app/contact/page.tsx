@@ -23,7 +23,7 @@ export default function Contact() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-50" />
         <div className="pointer-events-none absolute -right-32 -top-24 h-[26rem] w-[26rem] rounded-full bg-brand/25 blur-[120px]" />
         <div className="container-mnt relative pb-20 pt-10 sm:pb-24 sm:pt-14">
@@ -64,7 +64,7 @@ export default function Contact() {
               </ul>
             </div>
 
-            <div className="rounded-[2rem] bg-navy p-7 text-white shadow-glow">
+            <div className="rounded-[2rem] bg-deep p-7 text-white shadow-glow">
               <h2 className="font-display text-lg font-bold">Prefer to reach out directly?</h2>
               <div className="mt-5 space-y-4 text-sm">
                 <a href={`mailto:${site.email}`} className="flex items-center gap-3 text-white/80 hover:text-white">

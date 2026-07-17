@@ -29,6 +29,15 @@ const config: Config = {
           800: "#0C2547",
           700: "#123058",
         },
+        // Endpoints of the brand gradient. Derived from #2095F1 and #3E51B6 by
+        // darkening each until white/55 — the tightest opacity the site uses on
+        // a dark background — clears AA. The brand hues at full strength give
+        // 2.81:1 and 3.27:1 there, which is the exact class of failure the WCAG
+        // case study is about.
+        deep: {
+          blue: "#083B71",
+          indigo: "#2A367A",
+        },
         ink: "#0E1B2E",
         slatey: "#475569",
         soft: "#F4F8FD",
@@ -48,6 +57,11 @@ const config: Config = {
       backgroundImage: {
         "grid-faint":
           "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+        // The dark sections. Replaces flat navy — same diagonal as the brand
+        // spec, at the depth the text scale needs. `bg-deep` is a
+        // background-image, so opacity modifiers (bg-deep/70) do nothing; use
+        // bg-navy/x for scrims.
+        deep: "linear-gradient(135deg, #083B71 0%, #2A367A 100%)",
       },
       keyframes: {
         "fade-up": {

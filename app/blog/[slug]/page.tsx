@@ -78,7 +78,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <article>
-        <header className="relative overflow-hidden bg-navy text-white">
+        <header className="relative overflow-hidden bg-deep text-white">
           <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-40" />
           <div className="pointer-events-none absolute -left-40 -top-24 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[120px]" />
           <div className="container-mnt relative py-14 sm:py-16">

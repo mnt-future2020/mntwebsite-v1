@@ -43,7 +43,7 @@ export default function AgentReadyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="relative overflow-hidden bg-navy pb-20 text-white sm:pb-24">
+      <section className="relative overflow-hidden bg-deep pb-20 text-white sm:pb-24">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />

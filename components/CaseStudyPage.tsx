@@ -69,7 +69,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       )}
 
       {/* HERO — split: story + product mockup */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-25" />
         <div className="pointer-events-none absolute -left-40 top-10 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[130px]" />
         <div className="container-mnt relative grid items-center gap-12 pb-16 pt-10 sm:pt-12 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
@@ -165,7 +165,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* RESULTS — the honest before → after proof */}
       {cs.results && cs.results.length > 0 && (
-        <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
+        <section className="relative overflow-hidden bg-deep py-16 text-white sm:py-20">
           <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-20" />
           <div className="pointer-events-none absolute -right-40 top-0 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[130px]" />
           <div className="container-mnt relative">

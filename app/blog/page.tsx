@@ -21,7 +21,7 @@ export default async function BlogIndex() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-40" />
         <div className="pointer-events-none absolute -left-40 -top-24 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[120px]" />
         <div className="container-mnt relative py-16 sm:py-20">
@@ -50,7 +50,7 @@ export default async function BlogIndex() {
                 href={`/blog/${p.slug}`}
                 className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-100 hover:shadow-cardhover"
               >
-                <div className="img-zoom relative h-44 overflow-hidden bg-navy">
+                <div className="img-zoom relative h-44 overflow-hidden bg-deep">
                   {p.coverImage ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img src={p.coverImage} alt={p.title} className="h-full w-full object-cover" />
