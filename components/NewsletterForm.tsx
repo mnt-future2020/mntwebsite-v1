@@ -25,7 +25,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
         return;
       }
       setState("done");
-      setMsg(data.message || "Thanks for subscribing!");
+      setMsg(data.message || "Subscribed — see you in the next issue.");
       setEmail("");
     } catch {
       setState("error");
@@ -35,8 +35,8 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
 
   if (state === "done") {
     return (
-      <div className="flex items-start gap-2.5 rounded-xl border border-brand/30 bg-brand/10 px-4 py-3 text-sm text-white/90">
-        <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-brand-200" />
+      <div className="flex items-center gap-2 text-[13.5px] text-green-300">
+        <Icon name="check" className="h-[15px] w-[15px] shrink-0" />
         <span>{msg}</span>
       </div>
     );
@@ -44,7 +44,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
 
   return (
     <form onSubmit={submit} noValidate>
-      <div className="flex flex-col gap-2.5 sm:flex-row">
+      <div className="flex gap-2">
         <input
           type="email"
           required
@@ -52,14 +52,14 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@company.com"
           aria-label="Email address"
-          className="min-w-0 flex-1 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand"
+          className="min-w-0 flex-1 rounded-[9px] border border-white/25 bg-white/[0.08] px-[13px] py-2.5 text-[13.5px] text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-500"
         />
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-800 disabled:opacity-60"
+          className="rounded-[9px] bg-brand-500 px-[18px] py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:bg-brand-400 disabled:opacity-60"
         >
-          {state === "loading" ? "Subscribing…" : "Subscribe"}
+          {state === "loading" ? "…" : "Subscribe"}
         </button>
       </div>
       {state === "error" && <p className="mt-2 text-xs text-red-300">{msg}</p>}

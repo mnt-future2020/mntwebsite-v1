@@ -1,57 +1,44 @@
-import Icon, { type IconName } from "./Icon";
 import Marquee from "./Marquee";
-import BrandLogo from "./BrandLogo";
 
-// Tech stack (real brand logos via Simple Icons CDN) + compliance standards (icon glyphs).
-type StackItem = { name: string; slug?: string; color?: string; icon?: IconName };
-
-const stack: StackItem[] = [
-  { name: "Next.js", slug: "nextdotjs", color: "0A1B33" },
-  { name: "React", slug: "react", color: "149ECA" },
-  { name: "TypeScript", slug: "typescript", color: "3178C6" },
-  { name: "Node.js", slug: "nodedotjs", color: "5FA04E" },
-  { name: "FastAPI", slug: "fastapi", color: "009688" },
-  { name: "PostgreSQL", slug: "postgresql", color: "4169E1" },
-  { name: "AWS", icon: "cloud" },
-  { name: "Flutter", slug: "flutter", color: "02569B" },
-  { name: "Shopify", slug: "shopify", color: "5A8E3B" },
-  { name: "Stripe", slug: "stripe", color: "635BFF" },
-  { name: "PayPal", slug: "paypal", color: "003087" },
-  { name: "OpenAI", slug: "openai", color: "412991" },
-  { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4" },
-  { name: "ADA / WCAG", icon: "shield" },
-  { name: "PCI DSS", icon: "lock" },
-  { name: "SOC 2", icon: "records" },
-  { name: "ACP", icon: "network" },
-  { name: "MCP", icon: "network" },
-  { name: "AEO", icon: "search" },
+// Tech stack + compliance standards — v3 text pills.
+const stack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Node.js",
+  "FastAPI",
+  "PostgreSQL",
+  "AWS",
+  "Flutter",
+  "Shopify",
+  "Stripe",
+  "PayPal",
+  "OpenAI",
+  "Tailwind CSS",
+  "ADA / WCAG",
+  "PCI DSS",
+  "SOC 2",
+  "ACP",
+  "MCP",
+  "AEO",
 ];
 
 export default function StackMarquee({
   className = "",
-  duration = "60s",
+  duration = "55s",
 }: {
   className?: string;
   duration?: string;
 }) {
   return (
     <div className={className}>
-      <Marquee duration={duration} gap="1.25rem">
-        {stack.map((item) => (
+      <Marquee duration={duration} gap="0.875rem">
+        {stack.map((name) => (
           <span
-            key={item.name}
-            className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-semibold text-ink"
+            key={name}
+            className="inline-flex items-center whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-[22px] py-[11px] text-[14.5px] font-semibold text-slate-700"
           >
-            {item.slug ? (
-              <BrandLogo
-                slug={item.slug}
-                color={item.color ? `#${item.color}` : undefined}
-                className="h-7 w-7 shrink-0"
-              />
-            ) : (
-              <Icon name={item.icon as IconName} className="h-7 w-7 shrink-0 text-brand" />
-            )}
-            {item.name}
+            {name}
           </span>
         ))}
       </Marquee>

@@ -1,30 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import Icon from "./Icon";
 
 export type QA = { q: string; a: string };
 
 export default function FAQ({ items }: { items: QA[] }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <div className="mx-auto max-w-3xl divide-y divide-slate-100 overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-card">
+    <div className="mx-auto flex max-w-3xl flex-col gap-3">
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
-          <div key={item.q}>
+          <div
+            key={item.q}
+            className="overflow-hidden rounded-xl border border-slate-200 bg-white transition-all hover:border-brand-200 hover:shadow-[0_8px_22px_-12px_rgba(14,102,194,0.18)]"
+          >
             <button
               onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-display text-base font-semibold text-ink"
               aria-expanded={isOpen}
             >
-              <span className="text-base font-semibold text-ink">{item.q}</span>
-              <span
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
-                  isOpen ? "bg-brand text-white" : "bg-brand-50 text-brand-700"
-                }`}
-              >
-                <Icon name={isOpen ? "check" : "arrow"} className={`h-4 w-4 ${isOpen ? "" : "rotate-90"}`} />
+              {item.q}
+              <span className="shrink-0 text-lg font-normal text-brand-700">
+                {isOpen ? "−" : "+"}
               </span>
             </button>
             <div
@@ -33,7 +31,7 @@ export default function FAQ({ items }: { items: QA[] }) {
               }`}
             >
               <div className="overflow-hidden">
-                <p className="px-6 pb-6 text-[15px] leading-relaxed text-slatey">{item.a}</p>
+                <p className="px-6 pb-[22px] text-[14.5px] leading-[1.7] text-slatey">{item.a}</p>
               </div>
             </div>
           </div>

@@ -164,18 +164,27 @@ export function CheckList({ items, tone = "light" }: { items: string[]; tone?: "
   );
 }
 
-export function Breadcrumbs({ trail }: { trail: { label: string; href?: string }[] }) {
+export function Breadcrumbs({
+  trail,
+  tone = "dark",
+}: {
+  trail: { label: string; href?: string }[];
+  tone?: "dark" | "light";
+}) {
+  const base = tone === "dark" ? "text-white/55" : "text-slate-500";
+  const current = tone === "dark" ? "text-white/80" : "text-ink";
+  const hover = tone === "dark" ? "hover:text-white" : "hover:text-brand-700";
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-white/55">
+    <nav aria-label="Breadcrumb" className={`text-sm ${base}`}>
       <ol className="flex flex-wrap items-center gap-1.5">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-1.5">
             {t.href ? (
-              <Link href={t.href} className="hover:text-white">
+              <Link href={t.href} className={hover}>
                 {t.label}
               </Link>
             ) : (
-              <span className="text-white/80">{t.label}</span>
+              <span className={current}>{t.label}</span>
             )}
             {i < trail.length - 1 && <span className="opacity-50">/</span>}
           </li>

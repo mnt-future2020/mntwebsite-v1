@@ -1,6 +1,6 @@
 import Icon from "./Icon";
 import Marquee from "./Marquee";
-import { SectionHeading } from "./blocks";
+import SectionTitle from "./SectionTitle";
 
 type T = { quote: string; who: string; role: string };
 
@@ -20,16 +20,18 @@ const ROW_B: T[] = [
 
 function Card({ t }: { t: T }) {
   return (
-    <figure className="flex w-[340px] shrink-0 flex-col rounded-3xl border border-slate-100 bg-white p-6 shadow-card sm:w-[380px]">
-      <Icon name="quote" className="h-7 w-7 text-brand-200" />
-      <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-ink">“{t.quote}”</blockquote>
-      <figcaption className="mt-5 flex items-center gap-3 border-t border-slate-100 pt-4">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">
-          {t.who.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+    <figure className="flex w-[320px] shrink-0 flex-col rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)] sm:w-[380px]">
+      <Icon name="quote" className="h-6 w-6 text-brand-200" />
+      <blockquote className="mt-2.5 flex-1 text-[14.5px] leading-[1.65] text-slate-700">
+        “{t.quote}”
+      </blockquote>
+      <figcaption className="mt-4 flex items-center gap-[11px] border-t border-slate-100 pt-3.5">
+        <span className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-brand-50 text-[11px] font-bold text-brand-700">
+          {t.who.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
         </span>
-        <span className="text-sm">
-          <span className="block font-semibold text-ink">{t.who}</span>
-          <span className="block text-xs text-slatey">{t.role}</span>
+        <span>
+          <span className="block text-[13.5px] font-semibold text-ink">{t.who}</span>
+          <span className="block text-xs text-slate-500">{t.role}</span>
         </span>
       </figcaption>
     </figure>
@@ -38,21 +40,21 @@ function Card({ t }: { t: T }) {
 
 export default function Testimonials() {
   return (
-    <section className="overflow-hidden py-20 sm:py-28">
-      <div className="container-mnt">
-        <SectionHeading
+    <section className="overflow-hidden py-24">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
+        <SectionTitle
           eyebrow="What clients say"
           title="Senior delivery you can feel in the outcome."
-          subtitle="A flavour of the feedback we hear from the US commerce founders we build with."
+          sub="A flavour of the feedback we hear from the US commerce founders we build with."
         />
       </div>
-      <div className="mt-14 flex flex-col gap-5">
-        <Marquee duration="48s">
+      <div className="mt-12 flex flex-col gap-[18px]">
+        <Marquee duration="48s" gap="1.125rem">
           {ROW_A.map((t) => (
             <Card key={t.quote} t={t} />
           ))}
         </Marquee>
-        <Marquee duration="54s" reverse>
+        <Marquee duration="54s" gap="1.125rem" reverse>
           {ROW_B.map((t) => (
             <Card key={t.quote} t={t} />
           ))}

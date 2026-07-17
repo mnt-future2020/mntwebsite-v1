@@ -41,10 +41,13 @@ const config: Config = {
         ink: "#0E1B2E",
         slatey: "#475569",
         soft: "#F4F8FD",
+        // v3 design surfaces: tinted section background + hairline border
+        mist: "#F5F9FD",
+        line: "#E8EDF3",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
-        display: ["Sora", "Inter", "system-ui", "sans-serif"],
+        sans: ['"Source Sans 3"', "system-ui", "-apple-system", '"Segoe UI"', "Roboto", "sans-serif"],
+        display: ["Sora", '"Source Sans 3"', "system-ui", "sans-serif"],
       },
       borderRadius: {
         "4xl": "2rem",

@@ -1,14 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
 import Icon, { IconName } from "./Icon";
 import Reveal from "./Reveal";
-import Counter from "./Counter";
 import FAQ, { QA } from "./FAQ";
 import { site } from "@/lib/site";
 import CTASection from "./CTASection";
 import StackMarquee from "./StackMarquee";
-import SpotlightCard from "./SpotlightCard";
-import { SectionHeading, ServiceCard, Process, CheckList, Breadcrumbs } from "./blocks";
+import SectionTitle from "./SectionTitle";
+import { Breadcrumbs } from "./blocks";
 
 export type HubConfig = {
   vertical: string;
@@ -59,94 +57,95 @@ export default function HubPage({ config }: { config: HubConfig }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-50" />
-        <div className="pointer-events-none absolute -left-40 -top-24 h-[28rem] w-[28rem] rounded-full bg-brand/25 blur-[120px]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-navy" />
-        <div className="container-mnt relative pb-20 pt-10 sm:pt-12">
-          <Breadcrumbs trail={config.breadcrumb} />
-          <div className="mt-8 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div className="animate-fade-up">
-              <span className="eyebrow-dark">{config.eyebrow}</span>
-              <h1 className="mt-6 font-display text-[2.3rem] font-extrabold leading-[1.08] tracking-tight sm:text-[3.2rem]">
-                {config.h1}
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{config.heroSub}</p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link href="/contact" className="btn-primary">
-                  Book a workshop <Icon name="arrow" className="h-4 w-4" />
-                </Link>
-                <Link href="#services" className="btn-outline-light">
-                  See what we build
-                </Link>
-              </div>
-              <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs font-medium text-white/55">
-                {config.heroChips.map((c) => (
-                  <span key={c} className="inline-flex items-center gap-2">
-                    <Icon name="check" className="h-4 w-4 text-brand-300" />
-                    {c}
-                  </span>
-                ))}
-              </div>
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+        <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-10 sm:px-7 lg:pt-12">
+          <Breadcrumbs trail={config.breadcrumb} tone="light" />
+          <div className="mt-9 animate-fade-up">
+            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+              {config.vertical}
             </div>
-            <div className="relative animate-fade-up" style={{ animationDelay: "120ms" }}>
-              <div className="relative overflow-hidden rounded-[1.75rem] ring-1 ring-white/10 shadow-2xl">
-                <Image
-                  src={config.heroImage}
-                  alt={config.h1}
-                  width={1400}
-                  height={1100}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                  className="h-[320px] w-full object-cover sm:h-[420px]"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/55 to-transparent" />
-              </div>
+            <h1 className="mt-[18px] max-w-[760px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[46px]">
+              {config.h1}
+            </h1>
+            <p className="mt-5 max-w-[620px] text-[17px] leading-[1.65] text-slatey">
+              {config.heroSub}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
+              {config.heroChips.map((c) => (
+                <span key={c} className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-slatey">
+                  <Icon name="check" className="h-[15px] w-[15px] text-brand-700" />
+                  {c}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="container-mnt py-20 sm:py-28">
-        <SectionHeading eyebrow="What we build" title={config.servicesTitle} subtitle={config.servicesSub} />
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section id="services" className="mx-auto max-w-[1200px] px-5 pb-24 pt-[72px] sm:px-7">
+        <Reveal>
+          <SectionTitle eyebrow="What we build" title={config.servicesTitle} sub={config.servicesSub} />
+        </Reveal>
+        <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
           {config.services.map((s, i) => (
-            <ServiceCard key={s.title} icon={s.icon} title={s.title} desc={s.desc} href={s.href} index={i} />
+            <Reveal key={s.title} delay={i * 70}>
+              <Link
+                href={s.href ?? "/contact"}
+                className="group flex h-full flex-col rounded-[14px] border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_16px_36px_-16px_rgba(14,102,194,0.22)]"
+              >
+                <div className="font-display text-[13px] font-bold text-brand-700">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 className="mt-3.5 font-display text-[21px] font-bold text-ink">{s.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{s.desc}</p>
+                <span className="mt-auto inline-flex items-center gap-[7px] pt-5 text-sm font-semibold text-brand-700">
+                  {s.href ? "Explore this service" : "Talk to us about this"}
+                  <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* STACK STRIP */}
-      <section className="border-y border-slate-100 bg-white py-12">
-        <p className="container-mnt text-center text-xs font-semibold uppercase tracking-[0.18em] text-slatey">
+      <section className="border-y border-line pt-12">
+        <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
           The modern, proven stack we build on
         </p>
-        <StackMarquee className="mt-8" />
+        <StackMarquee className="mt-8 pb-12" />
       </section>
 
-      {/* DIFFERENTIATOR */}
-      <section className="bg-soft py-20 sm:py-28">
-        <div className="container-mnt grid items-center gap-14 lg:grid-cols-2">
+      {/* DIFFERENTIATOR + STATS */}
+      <section className="bg-mist py-24">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 sm:px-7 lg:grid-cols-2">
           <Reveal>
-            <SectionHeading align="left" eyebrow={config.diff.eyebrow} title={config.diff.title} subtitle={config.diff.sub} />
-            <div className="mt-8">
-              <CheckList items={config.diff.points} />
+            <SectionTitle align="left" eyebrow={config.diff.eyebrow} title={config.diff.title} sub={config.diff.sub} />
+            <div className="mt-8 flex flex-col gap-4">
+              {config.diff.points.map((p) => (
+                <div key={p} className="flex items-start gap-[13px]">
+                  <span className="mt-px flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700">
+                    <Icon name="check" className="h-3 w-3" />
+                  </span>
+                  <span className="text-[14.5px] leading-relaxed text-slate-700">{p}</span>
+                </div>
+              ))}
             </div>
-            <Link href="/security-compliance" className="link-arrow mt-8">
-              How we engineer compliance <Icon name="arrow" className="h-4 w-4" />
+            <Link
+              href="/security-compliance"
+              className="mt-8 inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+            >
+              How we engineer compliance <Icon name="arrow" className="h-3.5 w-3.5" />
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <div className="relative overflow-hidden rounded-[2rem] bg-deep p-8 text-white shadow-glow sm:p-10">
-              <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-brand/30 blur-2xl" />
-              <div className="grid grid-cols-2 gap-5">
+            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:p-10">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 {config.stats.map((s) => (
-                  <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                    <div className="font-display text-3xl font-extrabold text-white">
-                      <Counter value={s.value} />
-                    </div>
-                    <div className="mt-1.5 text-xs leading-snug text-white/60">{s.label}</div>
+                  <div key={s.label} className="border-l-[3px] border-brand-200 pl-3.5">
+                    <div className="font-display text-[23px] font-bold text-ink">{s.value}</div>
+                    <div className="mt-1 text-[12.5px] leading-normal text-slate-500">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -156,75 +155,68 @@ export default function HubPage({ config }: { config: HubConfig }) {
       </section>
 
       {/* WHO WE SERVE */}
-      <section className="container-mnt py-20 sm:py-28">
-        <SectionHeading eyebrow="Who we serve" title={config.audiencesTitle} />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+        <Reveal>
+          <SectionTitle eyebrow="Who we serve" title={config.audiencesTitle} />
+        </Reveal>
+        <div className="mt-[52px] grid gap-[22px] md:grid-cols-3">
           {config.audiences.map((a, i) => (
             <Reveal key={a.title} delay={i * 80}>
-              <SpotlightCard className="card card-hover group h-full">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
-                  <Icon name={a.icon} className="h-6 w-6" />
+              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
+                <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                  <Icon name={a.icon} className="h-[23px] w-[23px]" />
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-ink">{a.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-slatey">{a.desc}</p>
-              </SpotlightCard>
+                <h3 className="mt-[18px] font-display text-[19px] font-bold text-ink">{a.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{a.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* PROCESS */}
-      <section className="bg-soft py-20 sm:py-28">
-        <div className="container-mnt">
-          <SectionHeading
-            eyebrow="How we work"
-            title="Discovery → Build → Certify → Scale"
-            subtitle="A delivery model built for revenue-critical commerce — predictable, transparent, and senior-led."
-          />
-          <div className="mt-14">
-            <Process />
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="container-mnt py-20 sm:py-28">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Questions buyers ask us first"
-          subtitle="Short, direct answers — the same ones we give on a discovery call."
-        />
-        <div className="mt-12">
+      <section className="border-t border-line bg-mist py-24">
+        <div className="mx-auto max-w-[860px] px-5 sm:px-7">
+          <Reveal>
+            <SectionTitle
+              eyebrow="FAQ"
+              title="Questions buyers ask us first"
+              sub="Short, direct answers — the same ones we give on a discovery call."
+              className="mb-11"
+            />
+          </Reveal>
           <FAQ items={config.faq} />
         </div>
       </section>
 
       {config.addOns && config.addOns.length > 0 && (
-        <section className="bg-soft py-20 sm:py-28">
-          <div className="container-mnt">
-            <SectionHeading
+        <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+          <Reveal>
+            <SectionTitle
               eyebrow="Add-ons"
               title="Bundle these onto any build"
-              subtitle="Attach to a platform build — sold as part of the engagement, not standalone."
+              sub="Attach to a platform build — sold as part of the engagement, not standalone."
             />
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {config.addOns.map((a, i) => (
-                <Reveal key={a.title} delay={i * 70}>
-                  <SpotlightCard className="card card-hover group h-full">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
-                      <Icon name={a.icon} className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-5 text-lg font-bold text-ink">{a.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-slatey">{a.desc}</p>
-                  </SpotlightCard>
-                </Reveal>
-              ))}
-            </div>
+          </Reveal>
+          <div className="mt-[52px] grid gap-[22px] sm:grid-cols-2 lg:grid-cols-4">
+            {config.addOns.map((a, i) => (
+              <Reveal key={a.title} delay={i * 70}>
+                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
+                  <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                    <Icon name={a.icon} className="h-[23px] w-[23px]" />
+                  </div>
+                  <h3 className="mt-[18px] font-display text-[19px] font-bold text-ink">{a.title}</h3>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{a.desc}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
       )}
 
-      <CTASection title={config.cta.title} body={config.cta.body} />
+      <div className={config.addOns && config.addOns.length > 0 ? "" : "pt-24"}>
+        <CTASection title={config.cta.title} body={config.cta.body} />
+      </div>
     </>
   );
 }

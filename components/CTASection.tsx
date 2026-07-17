@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 export default function CTASection({
   eyebrow = "Free architecture workshop",
   title = "Tell us what you're building. We'll show you how we'd build it.",
-  body = "A free architecture workshop with a senior engineer — we sketch how we'd build it: data model, APIs, and a scalability plan. Or get a free agent-readiness audit of your store.",
+  body = "A free architecture workshop with a senior engineer — data model, APIs, and a scalability plan. Or a free agent-readiness audit of your store.",
   primary = { label: "Book a free workshop", href: "/contact" },
   secondary = { label: "See our work", href: "/work" },
 }: {
@@ -16,26 +16,43 @@ export default function CTASection({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="container-mnt py-20 sm:py-24">
+    <section className="mx-auto max-w-[1200px] px-5 pb-24 sm:px-7">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-deep px-7 py-14 text-center sm:px-16 sm:py-20">
-          <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
-          <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-brand/30 blur-3xl" />
-          <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-brand-700/30 blur-3xl" />
-          <div className="relative mx-auto max-w-2xl">
-            <span className="eyebrow-dark">{eyebrow}</span>
-            <h2 className="mt-6 font-display text-3xl font-extrabold tracking-tight text-white sm:text-[2.6rem] sm:leading-[1.1]">
+        <div className="relative overflow-hidden rounded-[20px] bg-gradient-to-br from-brand-700 to-brand-900 px-8 py-[72px] text-center">
+          {/* faint grid */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+              backgroundSize: "44px 44px",
+            }}
+          />
+          <div className="pointer-events-none absolute -left-[70px] -top-[70px] h-[260px] w-[260px] rounded-full bg-brand-500/45 blur-[80px]" />
+          <div className="pointer-events-none absolute -bottom-20 -right-[60px] h-[260px] w-[260px] rounded-full bg-brand-200/30 blur-[80px]" />
+
+          <div className="relative mx-auto max-w-[680px]">
+            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-200">
+              {eyebrow}
+            </div>
+            <h2 className="mt-[18px] font-display text-[28px] font-bold leading-[1.18] tracking-[-0.02em] text-white sm:text-4xl">
               {title}
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70">
+            <p className="mx-auto mt-4 max-w-[540px] text-[15.5px] leading-[1.65] text-white/[0.85]">
               {body}
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href={primary.href} className="btn-white w-full sm:w-auto">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+              <Link
+                href={primary.href}
+                className="inline-flex items-center gap-2 rounded-[10px] bg-white px-7 py-3.5 text-[15px] font-semibold text-ink transition-colors hover:bg-brand-50"
+              >
                 {primary.label}
-                <Icon name="arrow" className="h-4 w-4" />
+                <Icon name="arrow" className="h-[15px] w-[15px]" />
               </Link>
-              <Link href={secondary.href} className="btn-outline-light w-full sm:w-auto">
+              <Link
+                href={secondary.href}
+                className="inline-flex items-center gap-2 rounded-[10px] border border-white/50 px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-white/[0.12]"
+              >
                 {secondary.label}
               </Link>
             </div>
