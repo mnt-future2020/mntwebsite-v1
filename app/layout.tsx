@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import PWARegister from "@/components/PWARegister";
+import ScrollReset from "@/components/ScrollReset";
 import { site } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings";
 
@@ -96,7 +97,10 @@ export default async function RootLayout({
 }) {
   const settings = await getSiteSettings();
   return (
-    <html lang="en">
+    // data-scroll-behavior: Next 16 only suppresses CSS smooth-scroll during
+    // its route-change scroll resets when this attribute is present — without
+    // it, navigations fail to land at the top of the new page.
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -128,6 +132,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
+        <ScrollReset />
         <PWARegister />
         <SiteHeader />
         <main>{children}</main>

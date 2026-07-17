@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +12,16 @@ export default function Logo({
 }) {
   const src = variant === "light" ? "/mnt-logo-white.png" : "/mnt-logo.png";
   return (
-    <Link href="/" aria-label="MnT Future, home" className={`inline-flex items-center ${className}`}>
+    <Link
+      href="/"
+      aria-label="MnT Future, home"
+      className={`inline-flex items-center ${className}`}
+      // Same-route clicks don't re-navigate, so the router never scrolls —
+      // take the user to the top ourselves when they're already home.
+      onClick={() => {
+        if (window.location.pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
       <Image
         src={src}
         alt="MnT Future"
