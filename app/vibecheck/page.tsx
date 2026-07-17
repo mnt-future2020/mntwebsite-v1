@@ -7,9 +7,9 @@ import { Breadcrumbs, SectionHeading } from "@/components/blocks";
 import { resolveMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const GITHUB_URL = "https://github.com/MnT-Global/vibecheck";
+const GITHUB_URL = "https://github.com/MnT-Future/vibecheck";
 const NPM_URL = "https://www.npmjs.com/package/@mntglobal/vibecheck";
-const ACTION_URL = "https://github.com/MnT-Global/vibecheck#github-action";
+const ACTION_URL = "https://github.com/MnT-Future/vibecheck#github-action";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/vibecheck", {
@@ -204,7 +204,7 @@ export default function VibecheckPage() {
         <Reveal delay={0.1}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500">
             <a href={GITHUB_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
-              <Icon name="github" className="h-4 w-4" /> MnT-Global/vibecheck
+              <Icon name="github" className="h-4 w-4" /> MnT-Future/vibecheck
             </a>
             <a href={NPM_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
               <Icon name="download" className="h-4 w-4" /> npx @mntglobal/vibecheck
@@ -376,7 +376,7 @@ npx @mntglobal/vibecheck .`}</pre>
             <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
               .github/workflows/vibecheck.yml
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-xl bg-navy px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Global/vibecheck@v0.1.1
+            <pre className="mt-3 overflow-x-auto rounded-xl bg-navy px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Future/vibecheck@v0.1.1
   with:
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">

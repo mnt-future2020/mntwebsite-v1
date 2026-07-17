@@ -8,7 +8,7 @@ import { Breadcrumbs, SectionHeading } from "@/components/blocks";
 import { resolveMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const GITHUB_ORG = "https://github.com/MnT-Global";
+const GITHUB_ORG = "https://github.com/MnT-Future";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
@@ -302,7 +302,7 @@ export default function OpenSourcePage() {
         <p className="mt-10 text-center text-sm text-slate-500">
           Follow along:{" "}
           <a href={GITHUB_ORG} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
-            github.com/MnT-Global
+            github.com/MnT-Future
           </a>{" "}
           · or{" "}
           <Link href="/newsletter" className="font-semibold text-brand hover:underline">
