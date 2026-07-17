@@ -1,4 +1,4 @@
-// MnT — admin CMS data model (PostgreSQL via Prisma)
+// MnT Future — admin CMS data model (PostgreSQL via Prisma)
 generator client {
   provider = "prisma-client-js"
 }
@@ -24,7 +24,7 @@ model Post {
   status      PostStatus @default(DRAFT)
   category    String?
   tags        String[]   @default([])
-  author      String     @default("MnT Team")
+  author      String     @default("MnT Future Team")
   readingMins Int        @default(5)
 
   // Per-post SEO
@@ -123,8 +123,8 @@ model SeoSetting {
 // Global site-wide SEO + analytics (single row, id = 1)
 model SiteSetting {
   id                 Int      @id @default(1)
-  siteName           String   @default("MnT — Healthcare & E-Commerce Software Development")
-  titleTemplate      String   @default("%s | MnT")
+  siteName           String   @default("MnT Future — AI-Native, Agent-Ready Commerce")
+  titleTemplate      String   @default("%s | MnT Future")
   defaultDescription String   @default("We engineer compliant healthcare platforms and high-growth e-commerce stores. Two specialisms, one senior team. India + global.")
   defaultOgImage     String?
   gaMeasurementId    String? // GA4, e.g. G-XXXXXXX
