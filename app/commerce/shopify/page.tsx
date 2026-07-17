@@ -14,13 +14,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/shopify", {
     title: "Shopify Store Development — Official Shopify Partner | MnT Future",
     description:
-      "Official Shopify Partner builds: fast, conversion-ready Shopify stores with AI search, agent-ready feeds, and a designed upgrade path to a custom AI-native platform when you outgrow it.",
+      "Official Shopify Partner builds: fast, conversion-ready Shopify stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds — and a designed upgrade path to a custom AI-native platform.",
   });
 }
 
 const chips = [
   "Official Shopify Partner",
   "Live in weeks",
+  "Hydrogen (React) storefronts",
   "AI & agent-ready add-ons",
   "Upgrade path to custom",
 ];
@@ -92,15 +93,19 @@ const faq = [
   },
   {
     q: "Can a Shopify store be AI-native and agent-ready?",
-    a: "Substantially, yes. We add AI search and recommendations, structured product feeds, and agentic-checkout readiness on Shopify — Shopify participates in the emerging agent ecosystem. The deepest agent workflows — custom ops agents, platform-level AI with approval gates — need platform control, which is where our custom AI-native builds come in.",
+    a: "Substantially, yes. Shopify already participates in the agent ecosystem — stores expose a storefront MCP endpoint, publish Google UCP manifests, and can sell through ChatGPT via the Agentic Commerce Protocol. We layer on AI search and recommendations and clean, structured product data so agents can actually find and trust your catalog. The deepest agent workflows — custom ops agents, platform-level AI with approval gates — need platform control, which is where our custom AI-native builds come in.",
+  },
+  {
+    q: "What is Hydrogen, and when do you use it?",
+    a: "Hydrogen is Shopify's official React framework for building fully custom, headless storefronts, deployed on Oxygen, Shopify's edge hosting. We use it when a brand wants app-grade UX, custom pages, and logic beyond what themes allow — while keeping Shopify's checkout, admin, and infrastructure underneath. It's the natural middle step between a theme store and a fully custom platform.",
   },
   {
     q: "Can we start on Shopify and move to a custom platform later?",
-    a: "That's the designed path, not an afterthought. Because the same senior team builds both, graduating to a custom AI-native platform is a planned migration — catalog, customers, SEO, and integrations carried over — not a re-platform trauma with a new agency.",
+    a: "That's the designed path, not an afterthought. Theme store, Hydrogen headless storefront, custom AI-native platform — each step carries forward. Because the same senior team builds all three, graduating is a planned migration — catalog, customers, SEO, and integrations carried over — not a re-platform trauma with a new agency.",
   },
   {
     q: "What does a Shopify build include?",
-    a: "Store architecture and theme build, app selection and integrations, payments and shipping setup, analytics, ADA-minded accessibility, and launch support — typically live in weeks. AI search, agent-ready feeds, and CRO are available as add-ons or a growth retainer.",
+    a: "Store architecture and theme or Hydrogen build, app selection and integrations, payments and shipping setup, analytics, ADA-minded accessibility, and launch support — typically live in weeks. AI search, agent-ready feeds, and CRO are available as add-ons or a growth retainer.",
   },
 ];
 
@@ -184,6 +189,40 @@ export default function ShopifyBuilds() {
             </Reveal>
           ))}
         </div>
+
+        {/* ADVANCED: HYDROGEN */}
+        <Reveal delay={280}>
+          <div className="mt-[22px] grid overflow-hidden rounded-[14px] border border-slate-200 bg-gradient-to-br from-slate-50 to-brand-50/60 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="p-8 sm:p-10">
+              <div className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+                Advanced Shopify
+              </div>
+              <h3 className="mt-3 font-display text-[24px] font-bold text-ink">
+                Hydrogen storefronts — headless, without leaving Shopify.
+              </h3>
+              <p className="mt-3 text-[14.5px] leading-[1.65] text-slatey">
+                When a theme becomes the ceiling but the platform isn&apos;t, we build with{" "}
+                <strong className="font-semibold text-ink">Hydrogen</strong> — Shopify&apos;s React
+                framework for fully custom storefronts, deployed on Oxygen, Shopify&apos;s edge
+                hosting. App-grade UX, custom pages and logic, sub-second performance — with
+                Shopify&apos;s checkout, admin, and infrastructure still underneath.
+              </p>
+            </div>
+            <div className="flex flex-col justify-center gap-3 border-t border-slate-200 p-8 sm:p-10 lg:border-l lg:border-t-0">
+              {[
+                "Hydrogen + Oxygen — Shopify's own React stack",
+                "Fully custom storefront UX, no theme limits",
+                "Shopify checkout & admin underneath",
+                "The natural step before going fully custom",
+              ].map((p) => (
+                <span key={p} className="flex items-start gap-[9px] text-[13.5px] font-medium text-slate-700">
+                  <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-700" />
+                  {p}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* SHOPIFY VS CUSTOM — the positioning centerpiece */}
