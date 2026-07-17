@@ -8,11 +8,37 @@ const fieldClass =
 
 const labelClass = "flex flex-col gap-[7px] text-[13px] font-semibold text-slate-700";
 
+const NEED_OPTIONS = [
+  "Commerce platform build",
+  "Shopify store build",
+  "AI & agents / agent-ready",
+  "AI cleanup / MVP rescue",
+  "Something else / not sure yet",
+];
+
+const STAGE_OPTIONS = [
+  "No store yet — starting fresh",
+  "On Shopify / a template platform",
+  "On a custom / headless platform",
+  "Running a marketplace or B2B channel",
+  "MVP built, struggling at scale",
+];
+
+const BUDGET_OPTIONS = ["Not sure yet", "Under $25k", "$25k–$75k", "$75k–$200k", "$200k+"];
+
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    need: NEED_OPTIONS[0],
+    stage: STAGE_OPTIONS[0],
+    budget: BUDGET_OPTIONS[0],
+    message: "",
+  });
 
   const update = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -28,7 +54,16 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          vertical: form.need,
+          budget: form.budget,
+          // The lead table has no column for stage — carry it in the message
+          // as a labelled first line so the team sees it with the enquiry.
+          message: `Where they are today: ${form.stage}\n\n${form.message}`,
+        }),
       });
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
@@ -72,7 +107,7 @@ export default function ContactForm() {
           />
         </label>
         <label className={labelClass}>
-          Email
+          Work email
           <input
             type="email"
             required
@@ -83,23 +118,65 @@ export default function ContactForm() {
           />
         </label>
       </div>
+
       <label className={labelClass}>
-        Company
+        Company / store URL
         <input
           value={form.company}
           onChange={(e) => update("company", e.target.value)}
-          placeholder="Company / store URL"
+          placeholder="yourstore.com — helps us prep before the call"
           className={fieldClass}
         />
       </label>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className={labelClass}>
+          What do you need?
+          <select
+            value={form.need}
+            onChange={(e) => update("need", e.target.value)}
+            className={fieldClass}
+          >
+            {NEED_OPTIONS.map((o) => (
+              <option key={o}>{o}</option>
+            ))}
+          </select>
+        </label>
+        <label className={labelClass}>
+          Where are you today?
+          <select
+            value={form.stage}
+            onChange={(e) => update("stage", e.target.value)}
+            className={fieldClass}
+          >
+            {STAGE_OPTIONS.map((o) => (
+              <option key={o}>{o}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       <label className={labelClass}>
-        What are you building?
+        Indicative budget
+        <select
+          value={form.budget}
+          onChange={(e) => update("budget", e.target.value)}
+          className={fieldClass}
+        >
+          {BUDGET_OPTIONS.map((o) => (
+            <option key={o}>{o}</option>
+          ))}
+        </select>
+      </label>
+
+      <label className={labelClass}>
+        What&apos;s the problem — or what are you building?
         <textarea
           required
           rows={5}
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
-          placeholder="A headless rebuild, a marketplace, agent-readiness for our store…"
+          placeholder="The bottleneck, the goal, the stack — whatever a senior engineer should read before your session…"
           className={`${fieldClass} resize-y`}
         />
       </label>
@@ -127,6 +204,10 @@ export default function ContactForm() {
           </>
         )}
       </button>
+      {/* slate-500, not 400 — 12px text on white needs ≥4.5:1 contrast (WCAG AA) */}
+      <p className="text-xs text-slate-500">
+        By submitting you agree to be contacted about your enquiry. We never share your details.
+      </p>
     </form>
   );
 }
