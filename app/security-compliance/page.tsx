@@ -84,7 +84,7 @@ export default function SecurityCompliance() {
             </p>
             <div className="mt-9">
               <Link href="/contact" className="btn-primary">
-                Talk to a senior engineer <Icon name="arrow" className="h-4 w-4" />
+                Talk to a senior consultant <Icon name="arrow" className="h-4 w-4" />
               </Link>
             </div>
           </div>

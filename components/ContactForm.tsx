@@ -87,7 +87,7 @@ export default function ContactForm() {
           Thanks — we&apos;ll be in touch.
         </h3>
         <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-slatey">
-          A senior engineer will reply within one business day to schedule your workshop.
+          A senior consultant will reply within one business day to schedule your workshop.
         </p>
       </div>
     );
@@ -176,7 +176,7 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
-          placeholder="The bottleneck, the goal, the stack — whatever a senior engineer should read before your session…"
+          placeholder="The bottleneck, the goal, the stack — whatever a senior consultant should read before your session…"
           className={`${fieldClass} resize-y`}
         />
       </label>

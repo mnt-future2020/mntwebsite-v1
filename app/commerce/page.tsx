@@ -82,7 +82,7 @@ const config: HubConfig = {
   ],
   cta: {
     title: "Ready to build a platform that scales with you?",
-    body: "Book a free architecture workshop with a senior commerce engineer. Bring your brand and your goals — leave with a platform recommendation, an architecture sketch, and a clear next step.",
+    body: "Book a free architecture workshop with a senior commerce consultant. Bring your brand and your goals — leave with a platform recommendation, an architecture sketch, and a clear next step.",
   },
 };
 

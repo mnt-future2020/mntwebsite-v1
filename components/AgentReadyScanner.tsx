@@ -214,7 +214,7 @@ function ReportPanel({ report }: { report: Report }) {
         <div className="rounded-2xl border border-slate-200 bg-deep p-7 text-white">
           <h3 className="text-lg font-bold">Or talk to the team that built this</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/70">
-            Bring this report to a free architecture workshop — a senior engineer maps every
+            Bring this report to a free architecture workshop — a senior consultant maps every
             finding to a concrete fix plan for your platform.
           </p>
           <a

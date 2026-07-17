@@ -333,7 +333,7 @@ export default function ShopifyBuilds() {
       <div className="pt-24">
         <CTASection
           title="Not sure if it's Shopify or custom? That's the workshop."
-          body="A free architecture session with a senior engineer — we look at your catalog, integrations, and roadmap, and tell you honestly which build fits your stage."
+          body="A free architecture session with a senior consultant — we look at your catalog, integrations, and roadmap, and tell you honestly which build fits your stage."
         />
       </div>
     </>

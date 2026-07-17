@@ -13,13 +13,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/workshop", {
     title: "Free Architecture Workshop — Commerce Tech Consulting | MnT Future",
     description:
-      "A free 45-minute working session with a senior commerce engineer: bring your problem, we sketch the solution live — data model, APIs, AI & agent opportunities — and you keep the plan.",
+      "A free 45-minute working session with a senior commerce consultant: bring your problem, we sketch the solution live — data model, APIs, AI & agent opportunities — and you keep the plan.",
   });
 }
 
 const chips = [
   "45 minutes, live",
-  "Senior engineer, not a sales rep",
+  "Senior consultant, not a sales rep",
   "You keep the plan",
   "No obligation",
 ];
@@ -28,7 +28,7 @@ const steps = [
   {
     no: "01",
     title: "Tell us the problem",
-    desc: "The form takes two minutes — your store, your stack, and what's breaking or what's next. A senior engineer reads it before the call, so we start at the real question.",
+    desc: "The form takes two minutes — your store, your stack, and what's breaking or what's next. A senior consultant reads it before the call, so we start at the real question.",
   },
   {
     no: "02",
@@ -85,7 +85,7 @@ const faq = [
   },
   {
     q: "Is this a sales call?",
-    a: "You talk to a senior engineer who would actually architect your build — not a sales rep with a slide deck. The session is spent on your problem, and the recommendation is honest even when it's 'don't build custom yet' or 'Shopify is enough for your stage.'",
+    a: "You talk to a senior consultant who would actually architect your build — not a sales rep with a slide deck. The session is spent on your problem, and the recommendation is honest even when it's 'don't build custom yet' or 'Shopify is enough for your stage.'",
   },
   {
     q: "What should we prepare?",
@@ -145,7 +145,7 @@ export default function Workshop() {
               Bring your commerce problem. Leave with the plan.
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
-              A free 45-minute working session with a senior commerce engineer. We dig into your
+              A free 45-minute working session with a senior commerce consultant. We dig into your
               store, your stack, and your bottleneck, sketch the solution live — and you keep the
               written plan whether you hire us or not.
             </p>
@@ -311,7 +311,7 @@ export default function Workshop() {
               Two minutes now. A plan by next week.
             </h2>
             <p className="mt-4 text-[16px] leading-[1.65] text-slatey">
-              Tell us what you&apos;re building and what&apos;s in the way. A senior engineer — the
+              Tell us what you&apos;re building and what&apos;s in the way. A senior consultant — the
               one who&apos;d run your session — replies within one business day to schedule it.
             </p>
             <div className="mt-8 flex flex-col gap-4">
