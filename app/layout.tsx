@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import PWARegister from "@/components/PWARegister";
@@ -125,22 +126,30 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        {settings.gaMeasurementId && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${settings.gaMeasurementId}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.gaMeasurementId}');`,
-              }}
-            />
-          </>
-        )}
       </head>
       <body>
         <PWARegister />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
+        {/* next/script, not raw <script> — React never executes raw inline
+            scripts on client renders, and Script also survives client-side
+            navigations. */}
+        {settings.gaMeasurementId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${settings.gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.gaMeasurementId}');`,
+              }}
+            />
+          </>
+        )}
       </body>
     </html>
   );
