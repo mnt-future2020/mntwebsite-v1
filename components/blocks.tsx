@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Icon, { IconName } from "./Icon";
 import Reveal from "./Reveal";
+import { site } from "@/lib/site";
 import Counter from "./Counter";
 import SpotlightCard from "./SpotlightCard";
 
@@ -174,8 +175,19 @@ export function Breadcrumbs({
   const base = tone === "dark" ? "text-white/55" : "text-slate-500";
   const current = tone === "dark" ? "text-white/80" : "text-ink";
   const hover = tone === "dark" ? "hover:text-white" : "hover:text-brand-700";
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((t, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: t.label,
+      ...(t.href ? { item: `${site.url}${t.href === "/" ? "" : t.href}` } : {}),
+    })),
+  };
   return (
     <nav aria-label="Breadcrumb" className={`text-sm ${base}`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <ol className="flex flex-wrap items-center gap-1.5">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-1.5">

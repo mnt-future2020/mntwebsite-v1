@@ -103,6 +103,14 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
           rel="stylesheet"
         />
+        {/* Raw tag, not metadata alternates.types — pages that return their own
+            `alternates` (via resolveMetadata) would override the layout's. */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="MnT Future — Blog"
+          href="/feed.xml"
+        />
         {settings.gscVerification && (
           <meta name="google-site-verification" content={settings.gscVerification} />
         )}
