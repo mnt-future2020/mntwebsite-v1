@@ -13,6 +13,9 @@ const nextConfig = {
     return [
       // The workshop briefly lived at /workshop before its strategy-session rename.
       { source: "/workshop", destination: "/strategy-session", permanent: true },
+      // The open-source tools moved under their hub for proper slugs.
+      { source: "/agentready", destination: "/open-source/agentready", permanent: true },
+      { source: "/vibecheck", destination: "/open-source/vibecheck", permanent: true },
       { source: "/ecommerce-development", destination: "/commerce", permanent: true },
       { source: "/ecommerce-development/custom", destination: "/commerce/headless-marketplace", permanent: true },
       { source: "/ecommerce-development/d2c", destination: "/commerce/headless-marketplace", permanent: true },

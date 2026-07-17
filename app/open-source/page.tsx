@@ -30,7 +30,7 @@ const TOOLS: Tool[] = [
   {
     name: "agentready",
     status: "live",
-    href: "/agentready",
+    href: "/open-source/agentready",
     icon: "eye",
     tagline: "Is your store visible to AI shopping agents?",
     desc: "29 checks across structured data, agent access, product feeds and ACP · Google UCP · MCP discovery. Free hosted scan + CLI.",
@@ -39,7 +39,7 @@ const TOOLS: Tool[] = [
   {
     name: "vibecheck",
     status: "live",
-    href: "/vibecheck",
+    href: "/open-source/vibecheck",
     icon: "shield",
     tagline: "Is your AI-built store secure & production-ready?",
     desc: "26 checks: secrets, injection, commerce-logic tampering, dependency CVEs, production hardening. SARIF + a GitHub Action.",

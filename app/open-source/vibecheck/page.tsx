@@ -12,7 +12,7 @@ const NPM_URL = "https://www.npmjs.com/package/@mntglobal/vibecheck";
 const ACTION_URL = "https://github.com/MnT-Future/vibecheck#github-action";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return resolveMetadata("/vibecheck", {
+  return resolveMetadata("/open-source/vibecheck", {
     title: "vibecheck — is your AI-built store secure & production-ready? | MnT Future",
     description:
       "Open-source scanner for AI-generated commerce codebases: 26 checks across secrets, injection, access control, commerce-logic tampering, dependency CVEs and more. Deterministic, private, MIT. npx @mntglobal/vibecheck.",
