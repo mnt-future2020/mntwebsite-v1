@@ -102,7 +102,6 @@ export default function AgentReadyPage() {
       </section>
 
       <CTASection
-        eyebrow="From scan to fix"
         title="agentready finds the gaps. We build the fixes."
         body="Bring your report to a free architecture workshop — a senior engineer maps every finding to a concrete fix plan: feeds, schema, UCP/MCP integration, the lot."
       />

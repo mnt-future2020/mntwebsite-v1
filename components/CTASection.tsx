@@ -3,13 +3,11 @@ import Icon from "./Icon";
 import Reveal from "./Reveal";
 
 export default function CTASection({
-  eyebrow = "Free architecture workshop",
   title = "Tell us what you're building. We'll show you how we'd build it.",
   body = "A free architecture workshop with a senior engineer — data model, APIs, and a scalability plan. Or a free agent-readiness audit of your store.",
   primary = { label: "Book a free workshop", href: "/contact" },
   secondary = { label: "See our work", href: "/work" },
 }: {
-  eyebrow?: string;
   title?: string;
   body?: string;
   primary?: { label: string; href: string };
@@ -32,10 +30,7 @@ export default function CTASection({
           <div className="pointer-events-none absolute -bottom-20 -right-[60px] h-[260px] w-[260px] rounded-full bg-brand-200/30 blur-[80px]" />
 
           <div className="relative mx-auto max-w-[680px]">
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-200">
-              {eyebrow}
-            </div>
-            <h2 className="mt-[18px] font-display text-[28px] font-bold leading-[1.18] tracking-[-0.02em] text-white sm:text-4xl">
+            <h2 className="font-display text-[28px] font-bold leading-[1.18] tracking-[-0.02em] text-white sm:text-4xl">
               {title}
             </h2>
             <p className="mx-auto mt-4 max-w-[540px] text-[15.5px] leading-[1.65] text-white/[0.85]">

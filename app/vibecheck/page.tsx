@@ -390,7 +390,6 @@ npx @mntglobal/vibecheck .`}</pre>
       </section>
 
       <CTASection
-        eyebrow="From scan to fix"
         title="vibecheck finds the holes. We close them."
         body="Run the scan, then bring the report to a free architecture workshop — a senior engineer maps every finding to a concrete fix: auth, validation, secrets, the load pathology, the lot. That's our AI Cleanup service."
       />

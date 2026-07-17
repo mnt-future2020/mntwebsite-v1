@@ -356,7 +356,6 @@ export default function OpenSourcePage() {
       </section>
 
       <CTASection
-        eyebrow="From tool to fix"
         title="Our tools find the gaps. We build the fixes."
         body="Run any of them, then bring the report to a free architecture workshop — a senior engineer maps every finding to a concrete fix plan for your platform."
       />
