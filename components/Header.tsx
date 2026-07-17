@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
+import AnnouncementBar from "./AnnouncementBar";
 import { commerceNav, aiNav } from "@/lib/site";
 
 const navLinks = [
@@ -21,7 +22,9 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-line bg-white/[0.92] backdrop-blur-md">
+    <>
+      <AnnouncementBar />
+      <header className="sticky top-0 z-50 w-full border-b border-line bg-white/[0.92] backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-7">
         <Logo />
 
@@ -103,6 +106,7 @@ export default function Header() {
           </Link>
         </div>
       )}
-    </header>
+      </header>
+    </>
   );
 }
