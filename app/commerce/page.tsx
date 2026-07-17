@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce", {
-    title: "Commerce Platform Development for US Brands | MnT",
+    title: "Commerce Platform Development for US Brands | MnT Future",
     description:
       "Headless & marketplace builds, integrations, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled. Built to scale.",
   });

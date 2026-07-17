@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getSeoOverride } from "./settings";
 
 // Merge a page's built-in SEO defaults with any admin override (from the SEO panel).
-// `base.title` should be the full intended title (including any "| MnT" suffix).
+// `base.title` should be the full intended title (including any "| MnT Future" suffix).
 export async function resolveMetadata(
   path: string,
   base: { title: string; description: string; ogImage?: string }

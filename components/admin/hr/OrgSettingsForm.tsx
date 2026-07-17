@@ -133,7 +133,7 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
     if (!svg) return;
     const w = window.open("", "_blank", "width=520,height=680");
     if (!w) return;
-    w.document.write(`<!doctype html><html><head><title>MnT Attendance QR</title>
+    w.document.write(`<!doctype html><html><head><title>MnT Future Attendance QR</title>
       <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
         body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff}
@@ -146,7 +146,7 @@ export default function OrgSettingsForm({ initial, baseUrl }: Props) {
       </style></head><body>
       <div class="card">
         <h1>Scan to mark attendance</h1>
-        <p>MnT &middot; Magizh NexGen Technologies</p>
+        <p>MnT Future</p>
         <div class="qr">${svg}</div>
         <div class="url">${scanUrl}</div>
         <div class="note">Open the camera, scan this code, then check&nbsp;in / break / check&nbsp;out.

@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/headless-marketplace", {
-    title: "Headless Commerce & Marketplace Development | MnT",
+    title: "Headless Commerce & Marketplace Development | MnT Future",
     description:
       "Composable, API-driven storefronts, low-risk replatforming, and multi-vendor marketplaces — headless commerce builds engineered to scale.",
   });

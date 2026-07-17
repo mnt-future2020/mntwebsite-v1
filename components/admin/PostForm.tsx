@@ -45,7 +45,7 @@ export default function PostForm({ initial }: { initial?: PostInput }) {
     status: initial?.status ?? ("DRAFT" as "DRAFT" | "PUBLISHED"),
     category: initial?.category ?? "",
     tags: (initial?.tags ?? []).join(", "),
-    author: initial?.author ?? "MnT Team",
+    author: initial?.author ?? "MnT Future Team",
     metaTitle: initial?.metaTitle ?? "",
     metaDescription: initial?.metaDescription ?? "",
     ogImage: initial?.ogImage ?? "",

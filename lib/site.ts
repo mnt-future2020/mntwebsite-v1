@@ -1,5 +1,8 @@
 export const site = {
-  name: "MnT",
+  // The brand. Use this everywhere the company is named.
+  name: "MnT Future",
+  // The registered entity. Legal surfaces only — terms, privacy, contracts, and
+  // the `legalName` field in structured data. Not the brand.
   legalName: "Magizh NexGen Technologies",
   domain: "mntfuture.com",
   url: "https://mntfuture.com",
@@ -7,7 +10,7 @@ export const site = {
   phone: "+91 00000 00000",
   tagline: "AI-Native, Agent-Ready Commerce Platforms",
   description:
-    "MnT (Magizh NexGen Technologies) builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
+    "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
   social: {
     instagram: "https://www.instagram.com/mntfuture",
     linkedin: "https://www.linkedin.com/company/mntfuture",
@@ -63,7 +66,7 @@ export const aiNav: NavGroup = {
 export const companyNav = {
   label: "Company",
   children: [
-    { label: "About MnT", href: "/about", desc: "Who we are and how we work" },
+    { label: "About MnT Future", href: "/about", desc: "Who we are and how we work" },
     { label: "Security & Compliance", href: "/security-compliance", desc: "ADA · PCI DSS v4.0.1 · US sales-tax · SOC 2" },
     { label: "Open Source", href: "/open-source", desc: "agentready & our agentic-commerce tooling — MIT-licensed" },
     { label: "Blog", href: "/blog", desc: "Guides on AI-native & agent-ready commerce" },

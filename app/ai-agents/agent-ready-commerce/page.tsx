@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/agent-ready-commerce", {
-    title: "Agent-Ready Commerce — ACP, Google UCP & Retail MCP | MnT",
+    title: "Agent-Ready Commerce — ACP, Google UCP & Retail MCP | MnT Future",
     description:
       "Make your store discoverable & buyable by AI shopping agents — agent-readiness audit, feed & price sync, ACP + Google UCP + Retail MCP, AEO.",
   });

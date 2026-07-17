@@ -6,10 +6,10 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/portal",
-    name: "MnT Workspace",
-    short_name: "MnT",
+    name: "MnT Future Workspace",
+    short_name: "MnT Future",
     description:
-      "MnT employee & admin workspace — attendance, leave, payslips, projects and more.",
+      "MnT Future employee & admin workspace — attendance, leave, payslips, projects and more.",
     start_url: "/portal",
     scope: "/",
     display: "standalone",

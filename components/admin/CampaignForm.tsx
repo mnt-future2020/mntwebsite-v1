@@ -184,7 +184,7 @@ export default function CampaignForm({
                 placeholder="Paste your email body HTML here…"
               />
               <p className="mt-1.5 text-xs text-slatey">
-                Paste the email <strong>body</strong> HTML (headings, paragraphs, links). MnT&apos;s header,
+                Paste the email <strong>body</strong> HTML (headings, paragraphs, links). MnT Future&apos;s header,
                 footer, and unsubscribe link are added automatically.
               </p>
             </>

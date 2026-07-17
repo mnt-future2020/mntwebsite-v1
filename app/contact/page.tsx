@@ -7,9 +7,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/contact", {
-    title: "Contact MnT — Book a Free Architecture Workshop",
+    title: "Contact MnT Future — Book a Free Architecture Workshop",
     description:
-      "Book a free architecture workshop or agent-readiness audit with a senior MnT engineer. AI-native, agent-ready commerce for US D2C and marketplace brands.",
+      "Book a free architecture workshop or agent-readiness audit with a senior MnT Future engineer. AI-native, agent-ready commerce for US D2C and marketplace brands.",
   });
 }
 

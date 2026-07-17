@@ -14,7 +14,7 @@ export default function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
-              MnT (Magizh NexGen Technologies) — we build AI-native, agent-ready
+              MnT Future — we build AI-native, agent-ready
               commerce platforms for US D2C &amp; marketplace brands.
             </p>
             <div className="mt-6 flex gap-3">

@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/commerce-starter", {
-    title: "AI Commerce Starter — Search, Recs & Assistant | MnT",
+    title: "AI Commerce Starter — Search, Recs & Assistant | MnT Future",
     description:
       "AI search, personalized recommendations and a shopping assistant — already built, fitted to your catalog and instrumented for lift. Live in two weeks.",
   });

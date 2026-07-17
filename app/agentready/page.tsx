@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/agentready", {
-    title: "Free Agent-Readiness Scan — is your store visible to AI agents? | MnT",
+    title: "Free Agent-Readiness Scan — is your store visible to AI agents? | MnT Future",
     description:
       "Scan any store free: 29 checks across structured data, agent access, feeds and ACP · Google UCP · MCP discovery. Letter grade + prioritized fixes in seconds. No email needed for the score.",
   });
@@ -25,7 +25,7 @@ const softwareSchema = {
     "Free scan that grades any e-commerce store's readiness for AI shopping agents: 29 checks incl. ACP, Google UCP and MCP protocol discovery.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   url: `${site.url}/agentready`,
-  provider: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+  provider: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
 };
 
 const TRUST_POINTS = [

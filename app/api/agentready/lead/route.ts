@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         });
         const to = process.env.MAIL_TO || "info@mntfuture.com";
         const from =
-          process.env.MAIL_FROM || `MnT Website <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
+          process.env.MAIL_FROM || `MnT Future <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
         await transporter.sendMail({
           from,
           to,

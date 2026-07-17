@@ -36,8 +36,8 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
     url: `${site.url}/work/${cs.slug}`,
     mainEntityOfPage: `${site.url}/work/${cs.slug}`,
     ...(cs.dateISO ? { datePublished: cs.dateISO, dateModified: cs.dateISO } : {}),
-    author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
-    publisher: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+    author: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
+    publisher: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
   };
   const breadcrumb = {
     "@context": "https://schema.org",

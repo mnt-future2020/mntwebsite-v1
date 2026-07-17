@@ -44,7 +44,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: config.primaryKeyword,
-    provider: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)" },
+    provider: { "@type": "Organization", name: site.name, legalName: site.legalName },
     areaServed: ["United States"],
   };
   const breadcrumbSchema = {
@@ -155,7 +155,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
       <section className="container-mnt py-20 sm:py-24">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
-            <SectionHeading align="left" eyebrow="Why MnT" title={config.approachTitle} subtitle={config.approachSub} />
+            <SectionHeading align="left" eyebrow="Why MnT Future" title={config.approachTitle} subtitle={config.approachSub} />
             <Link href="/security-compliance" className="link-arrow mt-7">
               How we engineer compliance <Icon name="arrow" className="h-4 w-4" />
             </Link>

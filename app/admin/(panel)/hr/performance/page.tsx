@@ -21,7 +21,7 @@ export default async function PerformancePage() {
   const data = await getData();
   return (
     <>
-      <PageHeader title="Performance" subtitle="Appraisals, ratings and hikes — MnT runs reviews on performance, not the calendar." />
+      <PageHeader title="Performance" subtitle="Appraisals, ratings and hikes — MnT Future runs reviews on performance, not the calendar." />
       {data === null ? (
         <DbNotice />
       ) : data.employees.length === 0 ? (

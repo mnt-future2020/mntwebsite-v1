@@ -68,7 +68,7 @@ export async function GET(req: Request) {
       <p style="margin:0 0 16px">${o.deals.length} deal${o.deals.length > 1 ? "s" : ""} need a follow-up today or earlier:</p>
       <ul style="margin:0 0 20px;padding-left:18px">${rows}</ul>
       <p style="margin:0"><a href="${base}/admin/crm" style="display:inline-block;background:#0E66C2;color:#fff;text-decoration:none;padding:10px 18px;border-radius:10px;font-weight:600">Open pipeline</a></p>`;
-    const r = await sendInternal(o.email, `${o.deals.length} follow-up${o.deals.length > 1 ? "s" : ""} due — MnT CRM`, inner);
+    const r = await sendInternal(o.email, `${o.deals.length} follow-up${o.deals.length > 1 ? "s" : ""} due — MnT Future CRM`, inner);
     if (r.sent) sent++;
     else if (r.skipped) skipped++;
     else failed++;

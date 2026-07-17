@@ -13,7 +13,7 @@ const ACTION_URL = "https://github.com/MnT-Global/vibecheck#github-action";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/vibecheck", {
-    title: "vibecheck — is your AI-built store secure & production-ready? | MnT",
+    title: "vibecheck — is your AI-built store secure & production-ready? | MnT Future",
     description:
       "Open-source scanner for AI-generated commerce codebases: 26 checks across secrets, injection, access control, commerce-logic tampering, dependency CVEs and more. Deterministic, private, MIT. npx @mntglobal/vibecheck.",
   });
@@ -31,7 +31,7 @@ const softwareSchema = {
   license: "https://opensource.org/licenses/MIT",
   url: `${site.url}/vibecheck`,
   downloadUrl: NPM_URL,
-  author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+  author: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
 };
 
 const TERMINAL_LINES: { text: string; cls: string }[] = [
@@ -397,7 +397,7 @@ npx @mntglobal/vibecheck .`}</pre>
 
       <section className="container-mnt pb-20 text-center">
         <p className="text-sm text-slate-500">
-          Part of MnT&apos;s open-source program —{" "}
+          Part of MnT Future&apos;s open-source program —{" "}
           <Link href="/open-source" className="font-semibold text-brand hover:underline">
             see all our agentic-commerce tooling
           </Link>

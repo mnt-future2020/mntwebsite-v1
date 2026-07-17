@@ -12,7 +12,7 @@ const SRC = "https://widget.clutch.co/static/js/widget.js";
 // Accessible name for the third-party iframe (WCAG 4.1.2 / axe `frame-title`).
 // Clutch's iframe-resizer overwrites `title` with a handshake string, so we
 // enforce ours via a MutationObserver for as long as the widget is mounted.
-const IFRAME_TITLE = "Clutch — MnT verified client reviews";
+const IFRAME_TITLE = "Clutch — MnT Future verified client reviews";
 
 // Clutch verified-reviews badge. The Clutch script scans the DOM for
 // `.clutch-widget` nodes and renders an iframe into each. We load the script

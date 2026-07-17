@@ -27,7 +27,7 @@ export default async function HrDashboard() {
   const d = await getData();
   return (
     <>
-      <PageHeader title="Human resources" subtitle="Headcount, attendance, leave and payroll for MnT." />
+      <PageHeader title="Human resources" subtitle="Headcount, attendance, leave and payroll for MnT Future." />
       {!d ? (
         <DbNotice />
       ) : (

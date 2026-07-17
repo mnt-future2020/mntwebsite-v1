@@ -35,7 +35,7 @@ export async function POST(req: Request) {
         coverImage: b.coverImage || null,
         category: b.category || null,
         tags: Array.isArray(b.tags) ? b.tags : [],
-        author: b.author || "MnT Team",
+        author: b.author || "MnT Future Team",
         status,
         readingMins: readingMinutes(contentHtml),
         metaTitle: b.metaTitle || null,

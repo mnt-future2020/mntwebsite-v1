@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/b2b-wholesale", {
-    title: "B2B & Wholesale Commerce Development | MnT",
+    title: "B2B & Wholesale Commerce Development | MnT Future",
     description:
       "Customer-specific pricing, quote/RFQ, bulk ordering, and ERP-integrated self-serve portals — B2B & wholesale commerce that adds a channel.",
   });

@@ -4,6 +4,7 @@ import Icon, { IconName } from "./Icon";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 import FAQ, { QA } from "./FAQ";
+import { site } from "@/lib/site";
 import CTASection from "./CTASection";
 import StackMarquee from "./StackMarquee";
 import SpotlightCard from "./SpotlightCard";
@@ -48,7 +49,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: config.h1,
-    provider: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)" },
+    provider: { "@type": "Organization", name: site.name, legalName: site.legalName },
     areaServed: ["United States"],
   };
 

@@ -9,7 +9,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
-    title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT",
+    title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT Future",
     description:
       "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2, and CCPA/CPRA privacy.",
   });
@@ -80,7 +80,7 @@ export default function SecurityCompliance() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
               For a US store, accessibility, payment security, and sales-tax are liabilities the day
               you launch. The safest systems are the ones where compliance was a design decision — not
-              a last-minute patch. Here&apos;s how MnT builds it in.
+              a last-minute patch. Here&apos;s how MnT Future builds it in.
             </p>
             <div className="mt-9">
               <Link href="/contact" className="btn-primary">

@@ -12,9 +12,9 @@ const GITHUB_ORG = "https://github.com/MnT-Global";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
-    title: "Open Source — agentic & AI-native commerce tooling | MnT",
+    title: "Open Source — agentic & AI-native commerce tooling | MnT Future",
     description:
-      "MnT's open-source program for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
+      "MnT Future's open-source program for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
   });
 }
 
@@ -99,7 +99,7 @@ const FAQ_ITEMS: QA[] = [
   },
   {
     q: "Can anyone change the code?",
-    a: "Anyone can propose a change (fork → pull request), but nothing merges without our review, passing tests, and a signed-off commit. Only the MnT team can push to the main branch.",
+    a: "Anyone can propose a change (fork → pull request), but nothing merges without our review, passing tests, and a signed-off commit. Only the MnT Future team can push to the main branch.",
   },
   {
     q: "Why open-source this instead of selling it?",
@@ -120,7 +120,7 @@ const faqSchema = {
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "MnT open-source tools",
+  name: "MnT Future open-source tools",
   itemListElement: TOOLS.map((tool, i) => ({
     "@type": "ListItem",
     position: i + 1,
@@ -133,7 +133,7 @@ const itemListSchema = {
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       license: "https://opensource.org/licenses/MIT",
       ...(tool.status === "live" ? { url: `${site.url}${tool.href}` } : {}),
-      author: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)", url: site.url },
+      author: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
     },
   })),
 };
@@ -242,7 +242,7 @@ export default function OpenSourcePage() {
               Four tools. <span className="text-brand">One honest program.</span>
             </>
           }
-          subtitle="Each maps to a real problem we fix for clients — and each ships with the MnT repo standard: a 30-second quickstart, honest limitations, and tests you can run."
+          subtitle="Each maps to a real problem we fix for clients — and each ships with the MnT Future repo standard: a 30-second quickstart, honest limitations, and tests you can run."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {TOOLS.map((tool, i) => {

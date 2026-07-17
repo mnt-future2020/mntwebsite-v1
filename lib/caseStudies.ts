@@ -4,7 +4,7 @@ export type CaseStudy = {
   slug: string;
   title: string;
   tagline: string;
-  type: string; // honest label, e.g. "Platform · Built by MnT"
+  type: string; // honest label, e.g. "Platform · Built by MnT Future"
   category: string;
   cover: string; // OG / social + card image
   heroShot: string; // product mockup shown in the hero
@@ -52,7 +52,7 @@ export const caseStudies: CaseStudy[] = [
     title: "MnT Commerce",
     tagline:
       "The AI-native commerce platform we start client builds from — semantic search, a shopping assistant, and an ops agent that writes its own code and can't run it until you say so.",
-    type: "Platform · Built & dogfooded by MnT",
+    type: "Platform · Built & dogfooded by MnT Future",
     category: "AI-native headless commerce",
     cover: "/work/mnt-commerce-cover.png",
     heroShot: "/work/mnt-commerce-copilot-approval.png",
@@ -132,9 +132,9 @@ export const caseStudies: CaseStudy[] = [
       { group: "Safety", items: ["Read-only executor", "Human approval gates", "Risk tiers", "Approver audit trail"] },
       { group: "Delivery", items: ["TypeScript", "Node 20", "Hand-written migrations", "One-file white-label"] },
     ],
-    metaTitle: "MnT Commerce — AI-Native Commerce Platform | MnT Case Study",
+    metaTitle: "MnT Commerce — AI-Native Commerce Platform | MnT Future Case Study",
     metaDescription:
-      "The AI-native commerce base MnT builds clients on: semantic search, a shopping assistant, and an ops agent that writes real workflow code it can't run until a human approves.",
+      "The AI-native commerce base MnT Future builds clients on: semantic search, a shopping assistant, and an ops agent that writes real workflow code it can't run until a human approves.",
     resultsTitle: "What happened when we ran the AI against our own store?",
     resultsIntro:
       "Asked in one sentence to create a 10% promotion, the Ops Copilot wrote the engine's own workflow code and stopped. The promotion did not exist in the database until a human clicked Approve — then it did, with the approver's ID recorded against it. Semantic search initially ranked one of three probe queries wrong; the fix was the catalog text, not the retrieval code.",
@@ -186,7 +186,7 @@ export const caseStudies: CaseStudy[] = [
     title: "LOBBI",
     tagline:
       "A two-sided marketplace with an embedded AI booking agent — three apps, real-time inventory and split payments, engineered end to end.",
-    type: "Platform · Built by MnT",
+    type: "Platform · Built by MnT Future",
     category: "Two-sided marketplace · AI booking agent",
     cover: "/work/lobbi-cover-v2.png",
     heroShot: "/work/lobbi-owner.webp",
@@ -194,7 +194,7 @@ export const caseStudies: CaseStudy[] = [
     liveLabel: "Visit lobbi.in",
     frameUrl: "lobbi.in",
     summary:
-      "LOBBI is a live two-sided marketplace: players discover and book sports venues, owners run slots, pricing and payouts. MnT designed and engineered all of it — a player app, a venue-owner app, a web app, a real-time FastAPI backend with marketplace payments, and an embedded AI booking agent in WhatsApp. It's the same architecture a US marketplace needs: real-time inventory, split payouts, and an AI agent that transacts safely.",
+      "LOBBI is a live two-sided marketplace: players discover and book sports venues, owners run slots, pricing and payouts. MnT Future designed and engineered all of it — a player app, a venue-owner app, a web app, a real-time FastAPI backend with marketplace payments, and an embedded AI booking agent in WhatsApp. It's the same architecture a US marketplace needs: real-time inventory, split payouts, and an AI agent that transacts safely.",
     facts: [
       { value: "3", label: "Apps shipped (2 native + web)" },
       { value: "Real-time", label: "Live slot availability" },
@@ -276,9 +276,9 @@ export const caseStudies: CaseStudy[] = [
       { group: "AI & messaging", items: ["Claude (Anthropic)", "WhatsApp Cloud API"] },
       { group: "Payments & infra", items: ["Cashfree Easy Split", "AWS S3", "Firebase (FCM)"] },
     ],
-    metaTitle: "LOBBI — Marketplace With an AI Booking Agent | MnT",
+    metaTitle: "LOBBI — Marketplace With an AI Booking Agent | MnT Future",
     metaDescription:
-      "How MnT built LOBBI, a live two-sided marketplace: player and owner apps, real-time slot inventory, split payments, and a safe AI booking agent in WhatsApp.",
+      "How MnT Future built LOBBI, a live two-sided marketplace: player and owner apps, real-time slot inventory, split payments, and a safe AI booking agent in WhatsApp.",
     resultsTitle: "What did the architecture buy?",
     resultsIntro:
       "LOBBI runs three apps on one shared backend. Two-phase Redis locking makes double bookings impossible under concurrent demand, Cashfree Easy Split moves marketplace money with zero manual reconciliation, and a read-only Claude agent takes bookings in WhatsApp — every action confirmed by a one-time signed link, so the AI never writes to the database.",
@@ -302,7 +302,7 @@ export const caseStudies: CaseStudy[] = [
         a: "Yes — the architecture maps one-to-one. Swap Cashfree Easy Split for Stripe Connect (split payments, payouts, refunds), keep the real-time inventory and locking layer, and the embedded-agent pattern works on any channel: WhatsApp, SMS, or web chat. This build is our production proof for US marketplace and agent-ready commerce work.",
       },
       {
-        q: "What did MnT deliver end to end?",
+        q: "What did MnT Future deliver end to end?",
         a: "Product design, the player app, the venue-owner app, the web app, the FastAPI backend with payments and settlements, and the AI booking agent — one senior team, from architecture to Google Play.",
       },
     ],
@@ -321,14 +321,14 @@ export const caseStudies: CaseStudy[] = [
     title: "Searchlight",
     tagline:
       "An autonomous SEO/AEO agent that works like an employee — it watches the site, fixes what it finds, and verifies its own work before anything ships.",
-    type: "Internal product · Built & dogfooded by MnT",
+    type: "Internal product · Built & dogfooded by MnT Future",
     category: "Autonomous AI agent · SEO/AEO",
     cover: "/work/searchlight-cover-v2.png",
     heroShot: "/work/searchlight-dashboard-v2.png",
     frameUrl: "searchlight · mntfuture.com",
     dateISO: "2026-07-07",
     summary:
-      "Searchlight is a five-role agent system MnT built on the Claude Agent SDK and pointed at its own site, mntfuture.com. A deterministic Monitor crawls every page; an LLM Analyst judges quality and AI-citability; an LLM Fixer edits the actual source code; a deterministic Verifier blocks anything that breaks the build; an opt-in Shipper commits and deploys. In its first AI-driven fix pass (July 2026), open on-page issues fell from 20 to 6.",
+      "Searchlight is a five-role agent system MnT Future built on the Claude Agent SDK and pointed at its own site, mntfuture.com. A deterministic Monitor crawls every page; an LLM Analyst judges quality and AI-citability; an LLM Fixer edits the actual source code; a deterministic Verifier blocks anything that breaks the build; an opt-in Shipper commits and deploys. In its first AI-driven fix pass (July 2026), open on-page issues fell from 20 to 6.",
     facts: [
       { value: "20 → 6", label: "Open on-page issues after the first AI fix pass (−70%)" },
       { value: "5", label: "Agent roles — 2 LLM, 3 deterministic" },
@@ -399,9 +399,9 @@ export const caseStudies: CaseStudy[] = [
       { group: "Safety", items: ["tsc + build gate", "neverTouch globs", "Tiered auto/verify/escalate"] },
       { group: "Ops", items: ["Git + GitHub", "DigitalOcean CI", "HTML dashboard"] },
     ],
-    metaTitle: "Searchlight — Autonomous SEO/AEO Agent | MnT Case Study",
+    metaTitle: "Searchlight — Autonomous SEO/AEO Agent | MnT Future Case Study",
     metaDescription:
-      "MnT built an autonomous SEO/AEO agent on the Claude Agent SDK and ran it on its own site: open issues cut 20 → 6, every fix gated by the production build.",
+      "MnT Future built an autonomous SEO/AEO agent on the Claude Agent SDK and ran it on its own site: open issues cut 20 → 6, every fix gated by the production build.",
     resultsTitle: "What happened when we pointed it at our own site?",
     resultsIntro:
       "In July 2026, Searchlight's Monitor found 20 open on-page SEO/AEO issues across mntfuture.com. After the first AI-driven fix pass — every change human-reviewed and shipped through normal CI — the same Monitor measured 6 remaining, a 70% reduction. The longest meta description tightened from 197 to 150 characters and the longest title from 72 to 58.",
@@ -430,7 +430,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "Can Searchlight run on another site?",
-        a: "Yes — it's config-driven by design: one JSON file sets the site URL, thresholds, fix tiers, brand voice, playbook and neverTouch paths. This is the engine behind MnT's Embedded AI Agents service — the same pattern, domain-trained for your stack.",
+        a: "Yes — it's config-driven by design: one JSON file sets the site URL, thresholds, fix tiers, brand voice, playbook and neverTouch paths. This is the engine behind MnT Future's Embedded AI Agents service — the same pattern, domain-trained for your stack.",
       },
     ],
     copy: {
@@ -448,7 +448,7 @@ export const caseStudies: CaseStudy[] = [
     title: "WCAG 2.1 AA",
     tagline:
       "We ran an accessibility audit on our own site and fixed every failure in the design system — no overlay widget. Seven failing checks to zero, measured with axe-core.",
-    type: "Internal audit · Dogfooded by MnT",
+    type: "Internal audit · Dogfooded by MnT Future",
     category: "ADA / WCAG compliance · Design tokens",
     cover: "/work/wcag-cover.png",
     heroShot: "/work/wcag-scan.png",
@@ -509,7 +509,7 @@ export const caseStudies: CaseStudy[] = [
       { icon: "layers", title: "Token-level remediation", desc: "One design-token change fixed every primary CTA on the site at once — and the fix can't drift, because new pages inherit it." },
       { icon: "shield", title: "No overlay widget", desc: "Post-FTC, overlays are a liability. Every fix here is in the actual HTML, CSS and components — the only kind that stands up to an audit." },
       { icon: "network", title: "Third-party embeds handled", desc: "You can't edit a vendor's iframe, but you can guard it: a MutationObserver keeps a descriptive accessible name on the Clutch widget." },
-      { icon: "spark", title: "Brand preserved", desc: "The fix moved within MnT's own palette — brand-700 is still unmistakably MnT blue. Compliance didn't cost the design." },
+      { icon: "spark", title: "Brand preserved", desc: "The fix moved within MnT Future's own palette — brand-700 is still unmistakably MnT Future blue. Compliance didn't cost the design." },
       { icon: "gauge", title: "Repeatable on every deploy", desc: "The scan is scripted and re-runnable — accessibility as a regression gate, not a one-time certificate." },
       { icon: "check", title: "Honest scope", desc: "Automated rules catch the measurable layer. Keyboard-flow and screen-reader review is the manual layer we run on client engagements." },
     ],
@@ -525,9 +525,9 @@ export const caseStudies: CaseStudy[] = [
       { group: "Guards", items: ["MutationObserver", "Repeatable scan script"] },
       { group: "Site", items: ["Next.js App Router", "TypeScript"] },
     ],
-    metaTitle: "WCAG 2.1 AA on Our Own Site — No Overlay | MnT",
+    metaTitle: "WCAG 2.1 AA on Our Own Site — No Overlay | MnT Future",
     metaDescription:
-      "MnT audited its own site with axe-core and fixed every WCAG AA failure at the design-token level — 7 failing checks to 0 across 9 pages, no overlay widget.",
+      "MnT Future audited its own site with axe-core and fixed every WCAG AA failure at the design-token level — 7 failing checks to 0 across 9 pages, no overlay widget.",
     resultsTitle: "What did zero violations actually take?",
     resultsIntro:
       "In July 2026, an axe-core scan (WCAG 2.1 A + AA) of mntfuture.com found 7 failing nodes across 5 of 9 key pages. Every failure traced to four root causes. We fixed them in the design system — two tokens, one text color, one iframe guard — and re-scanned: zero violations on all nine pages, with the brand palette intact.",
@@ -548,7 +548,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "Did the brand have to change?",
-        a: "No — the fix moved within MnT's existing palette. The primary button went from brand (#2095F1) to brand-700 (#0E66C2): same blue family, 5.7:1 contrast instead of 3.16:1. Accessible and on-brand are not in tension if the design system has proper color scales.",
+        a: "No — the fix moved within MnT Future's existing palette. The primary button went from brand (#2095F1) to brand-700 (#0E66C2): same blue family, 5.7:1 contrast instead of 3.16:1. Accessible and on-brand are not in tension if the design system has proper color scales.",
       },
       {
         q: "Is an automated scan enough for ADA compliance?",
@@ -574,7 +574,7 @@ export const caseStudies: CaseStudy[] = [
     title: "AI Cleanup Lab",
     tagline:
       "We built a deliberately 'vibe-coded' store, proved it was broken with live exploits and a load test, then rebuilt it hardened — every number measured, before and after.",
-    type: "R&D lab · Built by MnT",
+    type: "R&D lab · Built by MnT Future",
     category: "AI Cleanup · security & scalability",
     cover: "/work/cleanup-cover.png",
     heroShot: "/work/cleanup-exploits.png",
@@ -651,9 +651,9 @@ export const caseStudies: CaseStudy[] = [
       { group: "Fixes", items: ["Input validation", "AuthN/Z", "Output escaping"] },
       { group: "Scale", items: ["In-memory index", "Rate limiting", "No hot-path disk I/O"] },
     ],
-    metaTitle: "AI Cleanup — The Vibe-Coded Store That Broke | MnT",
+    metaTitle: "AI Cleanup — The Vibe-Coded Store That Broke | MnT Future",
     metaDescription:
-      "MnT built a deliberately vibe-coded store, proved it broken (7 findings, 5/5 exploits, ~680 req/s), then rebuilt it: 0 findings, 0 exploits, ~33,000 req/s.",
+      "MnT Future built a deliberately vibe-coded store, proved it broken (7 findings, 5/5 exploits, ~680 req/s), then rebuilt it: 0 findings, 0 exploits, ~33,000 req/s.",
     resultsTitle: "What did the re-architecture actually change?",
     resultsIntro:
       "Measured before and after on the same store, same tests (July 2026). Static findings went from 7 (2 critical) to 0. Live exploits went from 5 of 5 landing to 0 of 5. Throughput rose from ~680 to ~33,000 requests per second, and p99 tail latency dropped from ~650ms to ~12ms — driven by removing a synchronous full-database disk read from every request.",
@@ -666,7 +666,7 @@ export const caseStudies: CaseStudy[] = [
     faq: [
       {
         q: "Is this a real client's store?",
-        a: "No — and we're explicit about that. It's an R&D lab: MnT built the intentionally broken store to demonstrate the AI Cleanup workflow with evidence rather than a real client's incident. Every number comes from a reproducible run (npm run lab), not an estimate. The vulnerabilities and the fixes are exactly what we find and do on real engagements.",
+        a: "No — and we're explicit about that. It's an R&D lab: MnT Future built the intentionally broken store to demonstrate the AI Cleanup workflow with evidence rather than a real client's incident. Every number comes from a reproducible run (npm run lab), not an estimate. The vulnerabilities and the fixes are exactly what we find and do on real engagements.",
       },
       {
         q: "What actually made it insecure?",

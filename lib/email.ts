@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 const apiKey = process.env.RESEND_API_KEY;
 const resend = apiKey ? new Resend(apiKey) : null;
 
-export const FROM = process.env.NEWSLETTER_FROM || `MnT <onboarding@resend.dev>`;
+export const FROM = process.env.NEWSLETTER_FROM || `MnT Future <onboarding@resend.dev>`;
 // Subscriber replies are routed here — should be a real, monitored mailbox.
 export const REPLY_TO = process.env.NEWSLETTER_REPLY_TO || `info@${site.domain}`;
 
@@ -53,7 +53,7 @@ export function wrapEmail(
   <body style="margin:0;background:#f4f8fd;padding:24px">
     ${pre}
     <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;font-family:Arial,Helvetica,sans-serif;color:#0E1B2E">
-      <div style="font-size:20px;font-weight:800;color:#0E66C2;margin-bottom:24px">MnT</div>
+      <div style="font-size:20px;font-weight:800;color:#0E66C2;margin-bottom:24px">MnT Future</div>
       <div style="font-size:15px;line-height:1.7">${innerHtml}</div>
       ${footer}
     </div>
@@ -86,19 +86,19 @@ export async function sendConfirmation(
   const url = confirmUrl(token);
   const html = wrapEmail(
     `<h1 style="font-size:20px;margin:0 0 12px">Confirm your subscription</h1>
-     <p style="margin:0 0 20px">Tap the button below to confirm you'd like updates from MnT on AI-native, agent-ready commerce. If this wasn't you, just ignore this email.</p>
+     <p style="margin:0 0 20px">Tap the button below to confirm you'd like updates from MnT Future on AI-native, agent-ready commerce. If this wasn't you, just ignore this email.</p>
      <p style="margin:0 0 24px">
        <a href="${url}" style="display:inline-block;background:#0E66C2;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600">Confirm subscription</a>
      </p>
      <p style="margin:0;font-size:13px;color:#64748b">Or paste this link: <br><a href="${url}" style="color:#0E66C2">${url}</a></p>`,
-    { preheader: "Confirm your MnT newsletter subscription" }
+    { preheader: "Confirm your MnT Future newsletter subscription" }
   );
   try {
     const { error } = await resend.emails.send({
       from: FROM,
       to,
       replyTo: REPLY_TO,
-      subject: "Confirm your MnT subscription",
+      subject: "Confirm your MnT Future subscription",
       html,
     });
     if (error) return { sent: false, error: error.message };
@@ -176,17 +176,17 @@ export async function sendInvites(
     const chunk = recipients.slice(i, i + chunkSize);
     const messages = chunk.map((r) => {
       const cUrl = confirmUrl(r.token);
-      const inner = `<h1 style="font-size:20px;margin:0 0 12px">Would you like updates from MnT?</h1>
-        <p style="margin:0 0 16px">You're receiving this because you're a contact of MnT. If you'd like occasional, practical notes on AI-native, agent-ready commerce, confirm below. If not, just ignore this email — you won't hear from us again.</p>
+      const inner = `<h1 style="font-size:20px;margin:0 0 12px">Would you like updates from MnT Future?</h1>
+        <p style="margin:0 0 16px">You're receiving this because you're a contact of MnT Future. If you'd like occasional, practical notes on AI-native, agent-ready commerce, confirm below. If not, just ignore this email — you won't hear from us again.</p>
         <p style="margin:0 0 24px"><a href="${cUrl}" style="display:inline-block;background:#0E66C2;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600">Yes, subscribe me</a></p>
         <p style="margin:0;font-size:13px;color:#64748b">Or paste this link:<br><a href="${cUrl}" style="color:#0E66C2">${cUrl}</a></p>`;
       return {
         from: FROM,
         to: r.email,
         replyTo: REPLY_TO,
-        subject: "Would you like updates from MnT?",
+        subject: "Would you like updates from MnT Future?",
         html: wrapEmail(inner, {
-          preheader: "Confirm to join the MnT newsletter",
+          preheader: "Confirm to join the MnT Future newsletter",
           unsubscribeUrl: unsubscribeUrl(r.token),
         }),
         headers: {

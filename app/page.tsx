@@ -17,7 +17,7 @@ import { caseStudies } from "@/lib/caseStudies";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
-    title: "MnT — AI-Native, Agent-Ready Commerce Platforms for US Brands",
+    title: "MnT Future — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
       "AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
   });
@@ -71,19 +71,19 @@ const engagement = [
 const homeFaq: QA[] = [
   {
     q: "What is agent-ready commerce?",
-    a: "Agent-ready commerce means AI shopping agents — like those in ChatGPT and Google — can discover your products, trust your price and inventory data, and complete a purchase. MnT makes your store agent-ready with structured product feeds, real-time sync, and the ACP, UCP, and MCP integrations agents use to buy.",
+    a: "Agent-ready commerce means AI shopping agents — like those in ChatGPT and Google — can discover your products, trust your price and inventory data, and complete a purchase. MnT Future makes your store agent-ready with structured product feeds, real-time sync, and the ACP, UCP, and MCP integrations agents use to buy.",
   },
   {
-    q: "What does MnT build?",
-    a: "MnT builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and orchestration, B2B/wholesale, and managed commerce with US compliance — plus AI search, embedded AI agents, and agent-readiness.",
+    q: "What does MnT Future build?",
+    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and orchestration, B2B/wholesale, and managed commerce with US compliance — plus AI search, embedded AI agents, and agent-readiness.",
   },
   {
     q: "What is the Agentic Commerce Protocol (ACP)?",
-    a: "ACP is an open standard from OpenAI and Stripe that lets AI agents complete purchases on a shopper's behalf. MnT implements ACP, Google's UCP, and a Retail MCP server so your store can be discovered and bought from in AI channels.",
+    a: "ACP is an open standard from OpenAI and Stripe that lets AI agents complete purchases on a shopper's behalf. MnT Future implements ACP, Google's UCP, and a Retail MCP server so your store can be discovered and bought from in AI channels.",
   },
   {
     q: "Do you only work with US brands?",
-    a: "Yes. MnT focuses on US D2C and marketplace brands, where our compliance depth — ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax — and our agentic-commerce work are sharpest.",
+    a: "Yes. MnT Future focuses on US D2C and marketplace brands, where our compliance depth — ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax — and our agentic-commerce work are sharpest.",
   },
   {
     q: "How do we get started?",
@@ -214,7 +214,7 @@ export default function Home() {
       <section className="bg-soft py-20 sm:py-28">
         <div className="container-mnt">
           <SectionHeading
-            eyebrow="Why MnT"
+            eyebrow="Why MnT Future"
             title="The reasons founders pick us — and stay."
             subtitle="Specialist depth, compliance built into the architecture, AI where it counts, and the speed of a senior team."
           />

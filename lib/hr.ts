@@ -1,4 +1,4 @@
-// MnT HR policy constants (from company HR policy).
+// MnT Future HR policy constants (from company HR policy).
 export const HR = {
   annualPaidLeave: 12,
   monthlyAccrual: 1,

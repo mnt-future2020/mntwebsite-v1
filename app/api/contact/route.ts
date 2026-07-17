@@ -59,7 +59,7 @@ export async function POST(req: Request) {
           auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
         });
         const to = process.env.MAIL_TO || "info@mntfuture.com";
-        const from = process.env.MAIL_FROM || `MnT Website <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
+        const from = process.env.MAIL_FROM || `MnT Future <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
         const rows = [
           ["Name", name],
           ["Email", email],

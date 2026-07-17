@@ -69,7 +69,7 @@ function LeadCard({ report }: { report: Report }) {
       <h3 className="text-lg font-bold text-navy">Want the engineer-grade fix plan?</h3>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
         We&apos;ll send a prioritized remediation plan for every finding — mapped to your
-        platform, with effort estimates. Free, from the MnT engineering team.
+        platform, with effort estimates. Free, from the MnT Future engineering team.
       </p>
       {state === "sent" ? (
         <p className="mt-4 text-sm font-semibold text-emerald-600">

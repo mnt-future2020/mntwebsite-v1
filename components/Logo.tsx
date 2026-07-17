@@ -10,10 +10,10 @@ export default function Logo({
 }) {
   const src = variant === "light" ? "/mnt-logo-white.png" : "/mnt-logo.png";
   return (
-    <Link href="/" aria-label="MnT — Magizh NexGen Technologies, home" className={`inline-flex items-center ${className}`}>
+    <Link href="/" aria-label="MnT Future, home" className={`inline-flex items-center ${className}`}>
       <Image
         src={src}
-        alt="MnT — Magizh NexGen Technologies"
+        alt="MnT Future"
         width={899}
         height={430}
         priority

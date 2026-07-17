@@ -11,9 +11,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/about", {
-    title: "About MnT — Magizh NexGen Technologies",
+    title: "About MnT Future — AI-Native Commerce Engineering",
     description:
-      "MnT (Magizh NexGen Technologies) builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team — land small, expand big.",
+      "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team — land small, expand big.",
   });
 }
 
@@ -35,12 +35,12 @@ export default function About() {
         <div className="container-mnt relative pb-20 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About" }]} />
           <div className="mt-8 max-w-3xl animate-fade-up">
-            <span className="eyebrow-dark">About MnT</span>
+            <span className="eyebrow-dark">About MnT Future</span>
             <h1 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-[3.4rem]">
               A senior team building commerce ready for AI.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-              MnT — Magizh NexGen Technologies — builds AI-native, agent-ready commerce platforms
+              MnT Future builds AI-native, agent-ready commerce platforms
               for US D2C and marketplace brands. We deliberately don&apos;t build everything. We build
               commerce, and the AI that sells it.
             </p>
@@ -91,7 +91,7 @@ export default function About() {
               <div className="img-zoom relative h-60 w-full sm:h-72">
                 <Image
                   src={images.team}
-                  alt="The MnT engineering team at work"
+                  alt="The MnT Future engineering team at work"
                   fill
                   sizes="(max-width: 1024px) 100vw, 48vw"
                   className="object-cover"

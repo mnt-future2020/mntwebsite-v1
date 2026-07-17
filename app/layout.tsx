@@ -45,15 +45,17 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: { canonical: site.url },
     robots: { index: true, follow: true },
-    applicationName: "MnT Workspace",
-    appleWebApp: { capable: true, statusBarStyle: "default", title: "MnT" },
+    applicationName: "MnT Future Workspace",
+    appleWebApp: { capable: true, statusBarStyle: "default", title: "MnT Future" },
   };
 }
 
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "MnT (Magizh NexGen Technologies)",
+  // schema.org has a dedicated `legalName` — the entity belongs there, not
+  // bracketed into the brand name.
+  name: site.name,
   legalName: site.legalName,
   url: site.url,
   logo: `${site.url}/mnt-logo.png`,
@@ -81,9 +83,9 @@ const orgSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "MnT — Magizh NexGen Technologies",
+  name: site.name,
   url: site.url,
-  publisher: { "@type": "Organization", name: "MnT (Magizh NexGen Technologies)" },
+  publisher: { "@type": "Organization", name: site.name, legalName: site.legalName },
 };
 
 export default async function RootLayout({

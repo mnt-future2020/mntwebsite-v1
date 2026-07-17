@@ -28,7 +28,7 @@ type SettingsInitial = {
 export default function SettingsForm({ initial }: { initial: SettingsInitial }) {
   const [f, setF] = useState({
     siteName: initial.siteName ?? "",
-    titleTemplate: initial.titleTemplate ?? "%s | MnT",
+    titleTemplate: initial.titleTemplate ?? "%s | MnT Future",
     defaultDescription: initial.defaultDescription ?? "",
     defaultOgImage: initial.defaultOgImage ?? "",
     gaMeasurementId: initial.gaMeasurementId ?? "",
@@ -74,7 +74,7 @@ export default function SettingsForm({ initial }: { initial: SettingsInitial }) 
           </div>
           <div>
             <label className={labelCls}>Title template <span className="text-slate-400">(use %s for the page title)</span></label>
-            <input value={f.titleTemplate} onChange={(e) => up("titleTemplate", e.target.value)} className={field} placeholder="%s | MnT" />
+            <input value={f.titleTemplate} onChange={(e) => up("titleTemplate", e.target.value)} className={field} placeholder="%s | MnT Future" />
           </div>
           <div>
             <label className={labelCls}>Default meta description</label>

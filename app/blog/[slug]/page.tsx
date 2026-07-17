@@ -19,7 +19,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const params = await props.params;
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: "Post not found" };
-  const title = post.metaTitle || `${post.title} | MnT`;
+  const title = post.metaTitle || `${post.title} | MnT Future`;
   const description = post.metaDescription || post.excerpt || "";
   const image = post.ogImage || post.coverImage || undefined;
   return {
@@ -54,10 +54,11 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     image: post.coverImage ? [post.coverImage] : undefined,
     datePublished: post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined,
     dateModified: new Date(post.updatedAt).toISOString(),
-    author: { "@type": "Organization", name: post.author || "MnT" },
+    author: { "@type": "Organization", name: post.author || "MnT Future" },
     publisher: {
       "@type": "Organization",
-      name: "MnT (Magizh NexGen Technologies)",
+      name: site.name,
+      legalName: site.legalName,
       logo: { "@type": "ImageObject", url: `${site.url}/mnt-logo.png` },
     },
     mainEntityOfPage: url,

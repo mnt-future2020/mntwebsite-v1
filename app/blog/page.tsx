@@ -10,9 +10,9 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/blog", {
-    title: "Blog — AI-Native, Agent-Ready Commerce Insights | MnT",
+    title: "Blog — AI-Native, Agent-Ready Commerce Insights | MnT Future",
     description:
-      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance — from the senior engineers at MnT.",
+      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance — from the senior engineers at MnT Future.",
   });
 }
 

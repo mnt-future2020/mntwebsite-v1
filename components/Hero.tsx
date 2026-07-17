@@ -17,7 +17,7 @@ export default function Hero() {
             <span className="text-brand-300">ready for AI</span> — and the agents now driving sales.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-            MnT engineers AI-native, agent-ready commerce for US D2C and marketplace
+            MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace
             brands — headless &amp; marketplace builds, integrations, B2B, and AI agents
             that sell in the new agentic channels. Land small, expand big.
           </p>
@@ -49,7 +49,7 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-[1.75rem] ring-1 ring-white/10 shadow-2xl">
             <Image
               src={images.hero}
-              alt="MnT AI-native commerce platform"
+              alt="MnT Future AI-native commerce platform"
               width={1600}
               height={1200}
               priority
