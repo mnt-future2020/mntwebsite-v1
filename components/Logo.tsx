@@ -14,8 +14,10 @@ export default function Logo({
       <Image
         src={src}
         alt="MnT Future"
-        width={1815}
-        height={375}
+        // Intrinsic size of mnt-logo.png. The white variant is 2784×538 — a
+        // 0.09% aspect difference, invisible under h-9 w-auto.
+        width={2828}
+        height={546}
         priority
         className="h-9 w-auto sm:h-10"
       />
