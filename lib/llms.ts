@@ -50,6 +50,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
 
   out.push(`## Company`);
+  out.push(`- [Book a free workshop](${abs("/workshop")}): Free 45-minute commerce tech consulting session — bring the problem, leave with a written architecture brief.`);
   out.push(`- [About MnT Future](${abs("/about")}): Who we are and how we work.`);
   out.push(`- [Security & Compliance](${abs("/security-compliance")}): ADA/WCAG · PCI DSS v4.0.1 · US sales-tax · SOC 2.`);
   out.push(`- [Contact](${abs("/contact")}): Book a free architecture workshop or agent-readiness audit.`);

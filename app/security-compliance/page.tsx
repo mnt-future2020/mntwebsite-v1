@@ -185,7 +185,7 @@ export default function SecurityCompliance() {
       <CTASection
         title="Have a compliance requirement? Let's map it before you build."
         body="Bring your regulatory surface — ADA, PCI DSS, sales-tax, SOC 2 — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
-        primary={{ label: "Book a workshop", href: "/contact" }}
+        primary={{ label: "Book a workshop", href: "/workshop" }}
         secondary={{ label: "Explore what we build", href: "/" }}
       />
     </>

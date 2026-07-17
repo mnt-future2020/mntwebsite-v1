@@ -8,7 +8,7 @@ export const metadata = {
 const links = [
   { label: "Commerce Platforms", href: "/commerce", icon: "store" as const },
   { label: "AI & Agents", href: "/ai-agents", icon: "ai" as const },
-  { label: "Book a free workshop", href: "/contact", icon: "rocket" as const },
+  { label: "Book a free workshop", href: "/workshop", icon: "rocket" as const },
   { label: "Back to home", href: "/", icon: "arrow" as const },
 ];
 

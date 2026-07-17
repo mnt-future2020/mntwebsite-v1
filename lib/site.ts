@@ -87,6 +87,7 @@ export const footerNav = [
   {
     title: "Company",
     links: [
+      { label: "Book a workshop", href: "/workshop" },
       { label: "About", href: "/about" },
       { label: "Work", href: "/work" },
       { label: "Open Source", href: "/open-source" },

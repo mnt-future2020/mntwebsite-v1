@@ -134,7 +134,7 @@ export default function WorkIndex() {
               </p>
               <div className="mt-[22px]">
                 <Link
-                  href="/contact"
+                  href="/workshop"
                   className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
                 >
                   Book a workshop

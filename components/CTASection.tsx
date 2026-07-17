@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 export default function CTASection({
   title = "Tell us what you're building. We'll show you how we'd build it.",
   body = "A free architecture workshop with a senior engineer — data model, APIs, and a scalability plan. Or a free agent-readiness audit of your store.",
-  primary = { label: "Book a free workshop", href: "/contact" },
+  primary = { label: "Book a free workshop", href: "/workshop" },
   secondary = { label: "See our work", href: "/work" },
 }: {
   title?: string;

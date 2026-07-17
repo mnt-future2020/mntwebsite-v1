@@ -218,7 +218,7 @@ function ReportPanel({ report }: { report: Report }) {
             finding to a concrete fix plan for your platform.
           </p>
           <a
-            href="/contact"
+            href="/workshop"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600"
           >
             Book a free workshop <Icon name="arrow" className="h-4 w-4" />
