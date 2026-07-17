@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
+import BrandLogo from "./BrandLogo";
 import AnnouncementBar from "./AnnouncementBar";
 import { commerceNav, aiNav } from "@/lib/site";
 
@@ -40,7 +41,16 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/open-source"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 py-1 pl-1.5 pr-3.5 transition-colors hover:border-brand-300 hover:text-brand-700"
+          >
+            <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-slate-100">
+              <BrandLogo slug="github" className="h-4 w-4" />
+            </span>
+            <span className="text-[13.5px] font-semibold text-slate-700">Open Source</span>
+          </Link>
           <Link
             href="/strategy-session"
             className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-[22px] py-[11px] text-[14.5px] font-semibold text-white transition-colors hover:bg-brand-800"
@@ -95,6 +105,14 @@ export default function Header() {
           </Link>
           <Link href="/about" onClick={() => setOpen(false)} className="block border-b border-slate-100 py-4 text-base font-semibold text-ink">
             About
+          </Link>
+          <Link
+            href="/open-source"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2.5 border-b border-slate-100 py-4 text-base font-semibold text-ink"
+          >
+            <BrandLogo slug="github" className="h-5 w-5" />
+            Open Source
           </Link>
           <Link
             href="/strategy-session"
