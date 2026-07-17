@@ -48,6 +48,7 @@ export const commerceNav: NavGroup = {
     { label: "Integrations & Orchestration", href: "/commerce/integrations", desc: "Connect ERP, OMS, PIM, CDP, payments & 3PL into one stack" },
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale", desc: "Customer pricing, RFQ, bulk ordering — ERP-integrated" },
     { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },
+    { label: "Shopify Store Builds", href: "/commerce/shopify", desc: "Official-partner Shopify builds with an upgrade path to custom AI-native" },
   ],
 };
 

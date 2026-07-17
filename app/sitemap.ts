@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/commerce/integrations",
     "/commerce/b2b-wholesale",
     "/commerce/managed-compliance",
+    "/commerce/shopify",
     "/ai-agents",
     "/ai-agents/commerce-starter",
     "/ai-agents/agent-ready-commerce",

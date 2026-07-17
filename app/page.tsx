@@ -78,7 +78,7 @@ const engagement = [
   {
     no: "01",
     title: "Land",
-    desc: "A productized paid pilot that proves ROI in weeks — AI Commerce Starter, AI Cleanup, or an agent-readiness audit. Small scope, fast proof.",
+    desc: "A productized paid pilot that proves ROI in weeks — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a fast Shopify store build. Small scope, fast proof.",
     points: ["Fixed, focused scope", "Live in weeks", "Clear, measured outcome"],
     featured: false,
   },
@@ -114,6 +114,10 @@ const homeFaq: QA[] = [
   {
     q: "Do you only work with US brands?",
     a: "Yes. MnT Future focuses on US D2C and marketplace brands, where our compliance depth — ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax — and our agentic-commerce work are sharpest.",
+  },
+  {
+    q: "Do you build Shopify stores, or only custom platforms?",
+    a: "Both. As an official Shopify Partner we launch fast, conversion-ready Shopify stores when speed matters. Our flagship is custom AI-native commerce — if you can spec it, we can build it — and because the same team builds both, Shopify clients graduate to a custom platform when scale demands, without a re-platform trauma.",
   },
   {
     q: "How do we get started?",
