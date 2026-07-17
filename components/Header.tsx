@@ -26,34 +26,40 @@ export default function Header() {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full border-b border-line bg-white/[0.92] backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-7">
-        <Logo />
+      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center gap-6 px-5 sm:px-7">
+        {/* flex-1 on both side groups keeps the nav truly centered. */}
+        <div className="flex flex-1 items-center">
+          <Logo />
+        </div>
 
         <nav className="hidden items-center gap-1.5 lg:flex">
           {navLinks.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              className="rounded-lg px-3.5 py-2 text-[14.5px] font-medium text-slate-700 transition-colors hover:bg-[#F1F6FC] hover:text-brand-700"
+              className="whitespace-nowrap rounded-lg px-3.5 py-2 text-[14.5px] font-medium text-slate-700 transition-colors hover:bg-[#F1F6FC] hover:text-brand-700"
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden flex-1 items-center justify-end gap-3 lg:flex">
           <Link
             href="/open-source"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 py-1 pl-1.5 pr-3.5 transition-colors hover:border-brand-300 hover:text-brand-700"
+            aria-label="Open Source"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 p-1 transition-colors hover:border-brand-300 hover:text-brand-700 xl:pr-3.5"
           >
             <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-slate-100">
               <BrandLogo slug="github" className="h-4 w-4" />
             </span>
-            <span className="text-[13.5px] font-semibold text-slate-700">Open Source</span>
+            <span className="hidden whitespace-nowrap text-[13.5px] font-semibold text-slate-700 xl:inline">
+              Open Source
+            </span>
           </Link>
           <Link
             href="/strategy-session"
-            className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-[22px] py-[11px] text-[14.5px] font-semibold text-white transition-colors hover:bg-brand-800"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] bg-brand-700 px-[22px] py-[11px] text-[14.5px] font-semibold text-white transition-colors hover:bg-brand-800"
           >
             Book a strategy session
             <Icon name="arrow" className="h-[15px] w-[15px]" />
