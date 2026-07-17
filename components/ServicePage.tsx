@@ -79,8 +79,8 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{config.heroSub}</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link href="/workshop" className="btn-primary">
-                  Book a workshop <Icon name="arrow" className="h-4 w-4" />
+                <Link href="/strategy-session" className="btn-primary">
+                  Book a strategy session <Icon name="arrow" className="h-4 w-4" />
                 </Link>
                 <Link href={config.parent.href} className="btn-outline-light">
                   Back to {config.parent.label}

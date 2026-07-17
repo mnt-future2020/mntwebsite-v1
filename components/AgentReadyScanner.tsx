@@ -214,14 +214,14 @@ function ReportPanel({ report }: { report: Report }) {
         <div className="rounded-2xl border border-slate-200 bg-deep p-7 text-white">
           <h3 className="text-lg font-bold">Or talk to the team that built this</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/70">
-            Bring this report to a free architecture workshop — a senior consultant maps every
+            Bring this report to a free strategy session — a senior consultant maps every
             finding to a concrete fix plan for your platform.
           </p>
           <a
-            href="/workshop"
+            href="/strategy-session"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600"
           >
-            Book a free workshop <Icon name="arrow" className="h-4 w-4" />
+            Book a free strategy session <Icon name="arrow" className="h-4 w-4" />
           </a>
         </div>
       </div>

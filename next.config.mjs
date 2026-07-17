@@ -11,6 +11,8 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // The workshop briefly lived at /workshop before its strategy-session rename.
+      { source: "/workshop", destination: "/strategy-session", permanent: true },
       { source: "/ecommerce-development", destination: "/commerce", permanent: true },
       { source: "/ecommerce-development/custom", destination: "/commerce/headless-marketplace", permanent: true },
       { source: "/ecommerce-development/d2c", destination: "/commerce/headless-marketplace", permanent: true },

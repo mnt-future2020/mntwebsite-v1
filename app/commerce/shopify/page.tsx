@@ -89,7 +89,7 @@ const faq = [
   },
   {
     q: "Shopify or a custom platform — which should we choose?",
-    a: "Shopify when speed matters: standard D2C catalog, lean team, launch in weeks. Custom when scale demands: complex catalogs, marketplaces, B2B logic, unique checkout, deep integrations, and AI at the core. We build both, so our recommendation is an architecture decision, not a sales pitch — that's what the free workshop settles.",
+    a: "Shopify when speed matters: standard D2C catalog, lean team, launch in weeks. Custom when scale demands: complex catalogs, marketplaces, B2B logic, unique checkout, deep integrations, and AI at the core. We build both, so our recommendation is an architecture decision, not a sales pitch — that's what the free strategy session settles.",
   },
   {
     q: "Can a Shopify store be AI-native and agent-ready?",
@@ -232,7 +232,7 @@ export default function ShopifyBuilds() {
             <SectionTitle
               eyebrow="An honest recommendation"
               title="Shopify when speed matters. Custom when scale demands."
-              sub="We build both — so which one we recommend is an architecture decision, not a sales pitch. This is roughly how we call it in a workshop:"
+              sub="We build both — so which one we recommend is an architecture decision, not a sales pitch. This is roughly how we call it in a strategy session:"
             />
           </Reveal>
           <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-2">
@@ -332,7 +332,7 @@ export default function ShopifyBuilds() {
 
       <div className="pt-24">
         <CTASection
-          title="Not sure if it's Shopify or custom? That's the workshop."
+          title="Not sure if it's Shopify or custom? That's the session."
           body="A free architecture session with a senior consultant — we look at your catalog, integrations, and roadmap, and tell you honestly which build fits your stage."
         />
       </div>

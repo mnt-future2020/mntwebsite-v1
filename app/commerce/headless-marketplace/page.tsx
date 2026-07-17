@@ -67,12 +67,12 @@ const config: ServiceConfig = {
     { q: "How long does a headless build take?", a: "About four weeks from a signed scope and your catalog in hand. That's fast because we don't start from a blank repo — the commerce engine, the AI layer and the admin already exist, so the four weeks goes on your storefront rather than the platform underneath it. The clock runs on both sides: we need the scope signed and your content ready at kickoff, and change requests get their own scope and timeline. Marketplaces and complex migrations take longer. We work in two-week sprints so you see working software every cycle, not status decks." },
     { q: "Can you migrate us without losing SEO or traffic?", a: "Yes. Replatforming is a core service — we preserve URL structure, redirects, and metadata, and cut over in a low-risk, staged way so rankings and revenue hold." },
     { q: "Do I own the code?", a: "Completely. We build on open, composable architecture and hand over full ownership — no proprietary lock-in and no black boxes." },
-    { q: "Which platforms do you build on?", a: "We're composable-first and platform-honest — headless with the commerce engine that fits your stage, plus custom services where it earns its place. We'll recommend the right architecture in a free workshop." },
+    { q: "Which platforms do you build on?", a: "We're composable-first and platform-honest — headless with the commerce engine that fits your stage, plus custom services where it earns its place. We'll recommend the right architecture in a free strategy session." },
     { q: "Can you add AI search and recommendations?", a: "They're already in the platform we build you on — semantic search, personalized recommendations and a shopping assistant, plus an ops agent for the admin side. That's our AI Commerce Starter, and most builds run it as the first two weeks so the AI is working before the storefront lands on top of it." },
   ],
   cta: {
     title: "Outgrown your template? Let's architect the next platform.",
-    body: "Book a free architecture workshop — we'll sketch the data model, APIs, and scalability plan for your headless or marketplace build.",
+    body: "Book a free strategy session — we'll sketch the data model, APIs, and scalability plan for your headless or marketplace build.",
   },
 };
 

@@ -121,7 +121,7 @@ const homeFaq: QA[] = [
   },
   {
     q: "How do we get started?",
-    a: "Start with a free architecture workshop or a free agent-readiness audit. We sketch how we'd build it, or assess your AI-channel readiness, and give you a clear next step — no obligation.",
+    a: "Start with a free strategy session or a free agent-readiness audit. We sketch how we'd build it, or assess your AI-channel readiness, and give you a clear next step — no obligation.",
   },
 ];
 
@@ -333,15 +333,15 @@ export default function Home() {
               <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
                 <h3 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h3>
                 <p className="mx-auto mt-3 max-w-[360px] text-[14.5px] leading-relaxed text-slatey">
-                  Book a free architecture workshop — we&apos;ll show you exactly how we&apos;d build
+                  Book a free strategy session — we&apos;ll show you exactly how we&apos;d build
                   it: database design, APIs, scalability plan.
                 </p>
                 <div className="mt-[22px]">
                   <Link
-                    href="/workshop"
+                    href="/strategy-session"
                     className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
                   >
-                    Book a workshop
+                    Book a strategy session
                     <Icon name="arrow" className="h-[15px] w-[15px]" />
                   </Link>
                 </div>

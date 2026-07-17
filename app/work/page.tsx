@@ -124,20 +124,20 @@ export default function WorkIndex() {
             </Reveal>
           ))}
 
-          {/* Workshop CTA card */}
+          {/* Strategy-session CTA card */}
           <Reveal delay={rest.length * 80}>
             <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
               <h2 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h2>
               <p className="mx-auto mt-3 max-w-[360px] text-[14.5px] leading-[1.6] text-slatey">
-                Book a free architecture workshop — we&apos;ll show you exactly how we&apos;d build
+                Book a free strategy session — we&apos;ll show you exactly how we&apos;d build
                 it: database design, APIs, scalability plan.
               </p>
               <div className="mt-[22px]">
                 <Link
-                  href="/workshop"
+                  href="/strategy-session"
                   className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
                 >
-                  Book a workshop
+                  Book a strategy session
                   <Icon name="arrow" className="h-[15px] w-[15px]" />
                 </Link>
               </div>

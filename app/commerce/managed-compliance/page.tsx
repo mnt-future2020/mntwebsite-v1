@@ -70,7 +70,7 @@ const config: ServiceConfig = {
   ],
   cta: {
     title: "Keep your store fast, secure, and compliant.",
-    body: "Book a free workshop and we'll audit your uptime, accessibility, PCI scope, and sales-tax setup — and show you what a managed SLA would cover.",
+    body: "Book a free strategy session and we'll audit your uptime, accessibility, PCI scope, and sales-tax setup — and show you what a managed SLA would cover.",
   },
 };
 

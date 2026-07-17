@@ -42,10 +42,10 @@ export default function Hero() {
 
           <div className="mt-[34px] flex flex-wrap gap-3.5">
             <Link
-              href="/workshop"
+              href="/strategy-session"
               className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15.5px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
             >
-              Book a free workshop
+              Book a free strategy session
               <Icon name="arrow" className="h-4 w-4" />
             </Link>
             <Link

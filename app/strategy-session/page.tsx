@@ -10,8 +10,8 @@ import { site } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return resolveMetadata("/workshop", {
-    title: "Free Architecture Workshop — Commerce Tech Consulting | MnT Future",
+  return resolveMetadata("/strategy-session", {
+    title: "Free Strategy Session — Commerce Tech Consulting | MnT Future",
     description:
       "A free 45-minute consulting session with a senior commerce consultant: bring your problem, get the solution that fits your business — and keep the written recommendation brief.",
   });
@@ -80,7 +80,7 @@ const audiences = [
 
 const faq = [
   {
-    q: "Is the workshop really free?",
+    q: "Is the strategy session really free?",
     a: "Yes — no invoice, no obligation, no credit card. We invest the hour because a working session is the best possible demonstration of how we think and build. The written brief you keep is real consulting output, free.",
   },
   {
@@ -100,7 +100,7 @@ const faq = [
     a: "Happy to sign one before the session if you'd like — just mention it in the form and we'll handle it before the call.",
   },
   {
-    q: "What happens after the workshop?",
+    q: "What happens after the session?",
     a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
   },
 ];
@@ -118,13 +118,13 @@ const faqSchema = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: "Commerce technology consulting — free architecture workshop",
+  serviceType: "Commerce technology consulting — free strategy session",
   provider: { "@type": "Organization", name: site.name, legalName: site.legalName },
   areaServed: ["United States"],
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
 
-export default function Workshop() {
+export default function StrategySession() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
@@ -134,12 +134,12 @@ export default function Workshop() {
       <section className="border-b border-line bg-gradient-to-b from-mist to-white">
         <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-10 sm:px-7 lg:pt-12">
           <Breadcrumbs
-            trail={[{ label: "Home", href: "/" }, { label: "Book a workshop" }]}
+            trail={[{ label: "Home", href: "/" }, { label: "Book a strategy session" }]}
             tone="light"
           />
           <div className="mt-9 animate-fade-up">
             <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              Free workshop · Commerce tech consulting
+              Free strategy session · Commerce tech consulting
             </div>
             <h1 className="mt-[18px] max-w-[820px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[46px]">
               Bring your commerce problem. Leave with the plan.
@@ -154,7 +154,7 @@ export default function Workshop() {
                 href="#book"
                 className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15.5px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
               >
-                Book my workshop
+                Book my strategy session
                 <Icon name="arrow" className="h-4 w-4" />
               </a>
               <a
@@ -180,7 +180,7 @@ export default function Workshop() {
       <section id="how" className="mx-auto max-w-[1200px] scroll-mt-24 px-5 pb-24 pt-[72px] sm:px-7">
         <Reveal>
           <SectionTitle
-            eyebrow="How the workshop works"
+            eyebrow="How the session works"
             title="A working session, not a pitch."
             sub="One hour of real consulting with a defined shape — no surprises."
           />
@@ -206,7 +206,7 @@ export default function Workshop() {
               align="left"
               eyebrow="What you leave with"
               title="Consulting output you keep — not meeting notes."
-              sub="The workshop ends with a written recommendation brief — your problem, the solution that fits, and what to do first. It's the reason the session is worth your hour even if you never hire us."
+              sub="The session ends with a written recommendation brief — your problem, the solution that fits, and what to do first. It's the reason the session is worth your hour even if you never hire us."
             />
             <Link
               href="/work"
@@ -305,7 +305,7 @@ export default function Workshop() {
         <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-24 sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              Book your workshop
+              Book your strategy session
             </div>
             <h2 className="mt-4 font-display text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[38px]">
               Two minutes now. A plan by next week.

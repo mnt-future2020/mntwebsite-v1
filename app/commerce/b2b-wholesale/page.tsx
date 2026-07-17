@@ -67,11 +67,11 @@ const config: ServiceConfig = {
     { q: "Do you integrate with our ERP?", a: "Yes — ERP and inventory integration is central to B2B. Pricing, stock, credit limits, and order status sync in real time so the portal always reflects reality." },
     { q: "Can buyers get their negotiated pricing automatically?", a: "That's the point. Customer-specific price lists and contract pricing are applied per account, so each buyer sees exactly their prices and catalog without a rep in the loop." },
     { q: "What about quotes and approvals?", a: "We build RFQ, negotiation, and multi-step purchase approvals — including account hierarchies and net terms — so complex B2B buying happens self-serve." },
-    { q: "How do we start?", a: "With a free architecture workshop. We map your pricing rules, catalog, and ERP, then design the portal and integrations around how your customers buy." },
+    { q: "How do we start?", a: "With a free strategy session. We map your pricing rules, catalog, and ERP, then design the portal and integrations around how your customers buy." },
   ],
   cta: {
     title: "Open your wholesale channel — without the manual work.",
-    body: "Book a free architecture workshop and we'll design the B2B portal, pricing, and ERP integration around your buyers.",
+    body: "Book a free strategy session and we'll design the B2B portal, pricing, and ERP integration around your buyers.",
   },
 };
 

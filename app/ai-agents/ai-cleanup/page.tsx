@@ -71,7 +71,7 @@ const config: ServiceConfig = {
   ],
   cta: {
     title: "Ship fast was step one. Let's make it production-grade.",
-    body: "Book a free workshop and we'll run a quick read on your codebase and architecture — and show you what it takes to make it secure and scalable.",
+    body: "Book a free strategy session and we'll run a quick read on your codebase and architecture — and show you what it takes to make it secure and scalable.",
   },
 };
 

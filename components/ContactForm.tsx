@@ -87,7 +87,7 @@ export default function ContactForm() {
           Thanks — we&apos;ll be in touch.
         </h3>
         <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-slatey">
-          A senior consultant will reply within one business day to schedule your workshop.
+          A senior consultant will reply within one business day to schedule your strategy session.
         </p>
       </div>
     );
@@ -199,7 +199,7 @@ export default function ContactForm() {
           </>
         ) : (
           <>
-            Book my free workshop
+            Book my free strategy session
             <Icon name="arrow" className="h-4 w-4" />
           </>
         )}

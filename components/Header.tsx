@@ -42,10 +42,10 @@ export default function Header() {
 
         <div className="hidden lg:block">
           <Link
-            href="/workshop"
+            href="/strategy-session"
             className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-[22px] py-[11px] text-[14.5px] font-semibold text-white transition-colors hover:bg-brand-800"
           >
-            Book a workshop
+            Book a strategy session
             <Icon name="arrow" className="h-[15px] w-[15px]" />
           </Link>
         </div>
@@ -97,11 +97,11 @@ export default function Header() {
             About
           </Link>
           <Link
-            href="/workshop"
+            href="/strategy-session"
             onClick={() => setOpen(false)}
             className="mt-6 flex w-full items-center justify-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-brand-800"
           >
-            Book a workshop
+            Book a strategy session
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </div>

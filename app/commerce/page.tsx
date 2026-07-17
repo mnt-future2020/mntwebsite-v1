@@ -73,16 +73,16 @@ const config: HubConfig = {
   ],
   faq: [
     { q: "Do you only build for US brands?", a: "Our focus is US D2C and marketplace brands — that's where our compliance depth (ADA, PCI DSS, sales-tax) and agentic-commerce work is sharpest. We build cross-border and international as an add-on when a US brand expands." },
-    { q: "Headless or a template — which should I choose?", a: "A template is fine until it isn't. Go headless/composable when you've outgrown the platform: complex catalogs, unique checkout logic, deep integrations, or marketplace mechanics. We'll recommend honestly based on your stage in a free architecture workshop." },
+    { q: "Headless or a template — which should I choose?", a: "A template is fine until it isn't. Go headless/composable when you've outgrown the platform: complex catalogs, unique checkout logic, deep integrations, or marketplace mechanics. We'll recommend honestly based on your stage in a free strategy session." },
     { q: "Can you build a multi-vendor marketplace?", a: "Yes — end to end: vendor onboarding and payouts, commission logic, search and discovery, logistics, and trust/ratings, architected to scale supply and demand from day one." },
     { q: "Will my systems actually talk to each other?", a: "That's the Integrations & Orchestration service. We connect ERP, OMS, PIM, CDP, payments and 3PL into a single source of truth with automation across systems — so data is accurate everywhere and ops are far less manual." },
     { q: "What about ADA and PCI compliance?", a: "78% of accessibility lawsuits target e-commerce, and PCI DSS v4.0.1 is now mandatory. We build ADA/WCAG and PCI in from the start and can keep them continuously compliant under a managed SLA, along with US sales-tax/economic-nexus." },
     { q: "Do you also build Shopify stores?", a: "Yes — we're an official Shopify Partner. When launching in weeks matters more than custom logic, we build fast, conversion-ready Shopify stores with AI search and agent-ready feeds. And because the same team builds our custom AI-native platforms, you graduate to custom when you outgrow Shopify — a planned migration, not a re-platform trauma." },
-    { q: "How do we start?", a: "With a free architecture workshop. We sketch how we'd build it — data model, APIs, scalability — and give you a clear plan. Most engagements start as a small productized pilot and expand into a full build." },
+    { q: "How do we start?", a: "With a free strategy session. We sketch how we'd build it — data model, APIs, scalability — and give you a clear plan. Most engagements start as a small productized pilot and expand into a full build." },
   ],
   cta: {
     title: "Ready to build a platform that scales with you?",
-    body: "Book a free architecture workshop with a senior commerce consultant. Bring your brand and your goals — leave with a platform recommendation, an architecture sketch, and a clear next step.",
+    body: "Book a free strategy session with a senior commerce consultant. Bring your brand and your goals — leave with a platform recommendation, an architecture sketch, and a clear next step.",
   },
 };
 

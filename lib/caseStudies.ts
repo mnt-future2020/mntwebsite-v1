@@ -178,7 +178,7 @@ export const caseStudies: CaseStudy[] = [
       techTitle: "Why each piece is there — and what it buys you.",
       ctaTitle: "Want this as the base for your store?",
       ctaBody:
-        "MnT Commerce is where our client builds start — your brand, your catalog, your storefront, on a platform where the AI is already built in and already gated. Book a free architecture workshop and we'll map it to your stack.",
+        "MnT Commerce is where our client builds start — your brand, your catalog, your storefront, on a platform where the AI is already built in and already gated. Book a free strategy session and we'll map it to your stack.",
     },
   },
   {
@@ -556,7 +556,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "Can you run this on our store?",
-        a: "Yes — this is the exact workflow inside our Managed Commerce & Compliance service: baseline scan, root-cause remediation in your design system, a re-scan you can verify, and the manual review on top. Book a free architecture workshop and we'll scope your store's ADA exposure.",
+        a: "Yes — this is the exact workflow inside our Managed Commerce & Compliance service: baseline scan, root-cause remediation in your design system, a re-scan you can verify, and the manual review on top. Book a free strategy session and we'll scope your store's ADA exposure.",
       },
     ],
     copy: {
@@ -566,7 +566,7 @@ export const caseStudies: CaseStudy[] = [
       techTitle: "Why we fixed it this way.",
       ctaTitle: "Is your store carrying ADA risk?",
       ctaBody:
-        "Most US accessibility lawsuits target ecommerce. We'll run this exact audit on your store — baseline scan, root-cause fixes in your design system, verifiable re-scan. Book a free architecture workshop to scope it.",
+        "Most US accessibility lawsuits target ecommerce. We'll run this exact audit on your store — baseline scan, root-cause fixes in your design system, verifiable re-scan. Book a free strategy session to scope it.",
     },
   },
   {
@@ -682,7 +682,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "My store was built with AI or no-code — can you do this on it?",
-        a: "Yes — this is our AI Cleanup service: a security audit (AI-generated code carries measurably more vulnerabilities), a re-architecture for scale, test coverage, and a clean production handover. Book a free architecture workshop and we'll scope your store's real exposure.",
+        a: "Yes — this is our AI Cleanup service: a security audit (AI-generated code carries measurably more vulnerabilities), a re-architecture for scale, test coverage, and a clean production handover. Book a free strategy session and we'll scope your store's real exposure.",
       },
     ],
     copy: {
@@ -692,7 +692,7 @@ export const caseStudies: CaseStudy[] = [
       techTitle: "Why we built and fixed it this way.",
       ctaTitle: "Was your store built with AI or no-code?",
       ctaBody:
-        "AI-generated code carries measurably more vulnerabilities. We'll run this exact audit on your store — security, scalability, and a clean production handover. Book a free architecture workshop to scope it.",
+        "AI-generated code carries measurably more vulnerabilities. We'll run this exact audit on your store — security, scalability, and a clean production handover. Book a free strategy session to scope it.",
     },
   },
 ];

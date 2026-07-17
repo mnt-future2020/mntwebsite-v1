@@ -70,7 +70,7 @@ const config: ServiceConfig = {
   ],
   cta: {
     title: "Tired of systems that don't talk to each other?",
-    body: "Book a free architecture workshop — we'll map your stack and show you the single-source-of-truth design that ends the manual work.",
+    body: "Book a free strategy session — we'll map your stack and show you the single-source-of-truth design that ends the manual work.",
   },
 };
 

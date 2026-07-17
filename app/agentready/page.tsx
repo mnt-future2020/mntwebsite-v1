@@ -103,7 +103,7 @@ export default function AgentReadyPage() {
 
       <CTASection
         title="agentready finds the gaps. We build the fixes."
-        body="Bring your report to a free architecture workshop — a senior consultant maps every finding to a concrete fix plan: feeds, schema, UCP/MCP integration, the lot."
+        body="Bring your report to a free strategy session — a senior consultant maps every finding to a concrete fix plan: feeds, schema, UCP/MCP integration, the lot."
       />
     </>
   );

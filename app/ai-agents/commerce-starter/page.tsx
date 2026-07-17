@@ -72,7 +72,7 @@ const config: ServiceConfig = {
   ],
   cta: {
     title: "Convert more of the traffic you're already paying for.",
-    body: "Book a free workshop and we'll show you where AI search, recommendations, and an assistant would lift your conversion — with a plan to measure it.",
+    body: "Book a free strategy session and we'll show you where AI search, recommendations, and an assistant would lift your conversion — with a plan to measure it.",
   },
 };
 

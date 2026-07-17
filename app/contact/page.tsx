@@ -7,9 +7,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/contact", {
-    title: "Contact MnT Future — Book a Free Architecture Workshop",
+    title: "Contact MnT Future — Book a Free Strategy Session",
     description:
-      "Book a free architecture workshop or agent-readiness audit with a senior MnT Future consultant. AI-native, agent-ready commerce for US D2C and marketplace brands.",
+      "Book a free strategy session or agent-readiness audit with a senior MnT Future consultant. AI-native, agent-ready commerce for US D2C and marketplace brands.",
   });
 }
 
@@ -27,7 +27,7 @@ export default function Contact() {
               Tell us what you&apos;re building.
             </h1>
             <p className="mt-[18px] max-w-[480px] text-base leading-[1.65] text-slatey">
-              A free architecture workshop with a senior consultant — we sketch how we&apos;d build
+              A free strategy session with a senior consultant — we sketch how we&apos;d build
               it: data model, APIs, and a scalability plan. Or get a free agent-readiness audit of
               your store.
             </p>

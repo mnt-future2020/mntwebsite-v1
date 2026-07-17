@@ -72,7 +72,7 @@ const config: ServiceConfig = {
   ],
   cta: {
     title: "Put an AI workforce to work in your business.",
-    body: "Book a free workshop and we'll identify the highest-ROI agent to build first — and how we'd measure the work it completes.",
+    body: "Book a free strategy session and we'll identify the highest-ROI agent to build first — and how we'd measure the work it completes.",
   },
 };
 
