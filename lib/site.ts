@@ -12,7 +12,7 @@ export const site = {
   description:
     "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
   social: {
-    instagram: "https://www.instagram.com/mntfuture",
+    instagram: "https://www.instagram.com/mnt_future",
     linkedin: "https://www.linkedin.com/company/mntfuture",
     facebook: "https://www.facebook.com/mntfuture",
   },
