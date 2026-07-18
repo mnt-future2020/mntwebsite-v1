@@ -34,9 +34,14 @@ const verticals = [
     title: "Commerce platform development",
     desc: "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
     href: "/commerce",
-    image: "/images/vertical-commerce.jpg",
-    alt: "Commerce platform development",
-    items: ["Headless & marketplaces", "Integrations & orchestration", "B2B / wholesale", "Managed & compliant"],
+    icon: "store" as const,
+    gradient: "from-brand-700 to-brand-900",
+    items: [
+      { label: "Headless & marketplaces", href: "/commerce/headless-marketplace" },
+      { label: "Integrations & orchestration", href: "/commerce/integrations" },
+      { label: "B2B / wholesale", href: "/commerce/b2b-wholesale" },
+      { label: "Managed & compliant", href: "/commerce/managed-compliance" },
+    ],
     cta: "Explore commerce platforms",
   },
   {
@@ -44,9 +49,14 @@ const verticals = [
     title: "AI & agents for commerce",
     desc: "AI search, recommendations & assistants, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup for MVPs that broke at scale.",
     href: "/ai-agents",
-    image: "/images/vertical-ai.jpg",
-    alt: "AI and agents for commerce",
-    items: ["AI search & recommendations", "Agent-ready commerce", "Embedded AI agents", "AI cleanup"],
+    icon: "ai" as const,
+    gradient: "from-[#3E51B6] to-[#2A367A]",
+    items: [
+      { label: "AI search & recommendations", href: "/ai-agents/commerce-starter" },
+      { label: "Agent-ready commerce", href: "/ai-agents/agent-ready-commerce" },
+      { label: "Embedded AI agents", href: "/ai-agents/embedded-agents" },
+      { label: "AI cleanup", href: "/ai-agents/ai-cleanup" },
+    ],
     cta: "Explore AI & agents",
   },
 ];
@@ -175,44 +185,60 @@ export default function Home() {
         <div className="mt-[52px] grid gap-[26px] lg:grid-cols-2">
           {verticals.map((v, i) => (
             <Reveal key={v.kicker} delay={i * 100}>
-              <Link
-                href={v.href}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.25)]"
-              >
-                <div className="relative h-[210px] overflow-hidden">
-                  <Image
-                    src={v.image}
-                    alt={v.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.25)]">
+                {/* Gradient feature header instead of a stock photo */}
+                <Link href={v.href} className={`relative block bg-gradient-to-br ${v.gradient} p-7`}>
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+                      backgroundSize: "36px 36px",
+                    }}
                   />
-                  <span className="absolute right-3.5 top-3.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-brand-700 shadow-[0_2px_8px_rgba(14,27,46,0.15)]">
-                    4 services
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">
+                  <div className="pointer-events-none absolute -right-10 -top-14 h-[180px] w-[180px] rounded-full bg-white/10 blur-[60px]" />
+                  <div className="relative flex items-start justify-between">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.15] text-white ring-1 ring-white/20">
+                      <Icon name={v.icon} className="h-6 w-6" />
+                    </span>
+                    <span className="rounded-full bg-white/[0.15] px-3 py-1 text-[11.5px] font-semibold text-white ring-1 ring-white/20">
+                      4 services
+                    </span>
+                  </div>
+                  <div className="relative mt-6 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-white/70">
                     {v.kicker}
                   </div>
-                  <h3 className="mt-2.5 font-display text-2xl font-bold text-ink">{v.title}</h3>
-                  <p className="mt-[11px] text-[15px] leading-relaxed text-slatey">{v.desc}</p>
-                  <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2.5 sm:grid-cols-2">
+                  <h3 className="relative mt-1.5 font-display text-2xl font-bold text-white">
+                    {v.title}
+                  </h3>
+                </Link>
+
+                <div className="flex flex-1 flex-col p-7">
+                  <p className="text-[15px] leading-relaxed text-slatey">{v.desc}</p>
+                  <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     {v.items.map((it) => (
-                      <span key={it} className="flex items-center gap-2 text-[13.5px] font-medium text-slate-700">
-                        <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700">
-                          <Icon name="check" className="h-2.5 w-2.5" />
-                        </span>
-                        {it}
-                      </span>
+                      <Link
+                        key={it.label}
+                        href={it.href}
+                        className="group/item flex items-center justify-between gap-2 rounded-[10px] border border-slate-200 bg-white px-3.5 py-2.5 text-[13.5px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:bg-brand-50/40 hover:text-brand-700"
+                      >
+                        {it.label}
+                        <Icon
+                          name="arrow"
+                          className="h-3.5 w-3.5 shrink-0 opacity-30 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100"
+                        />
+                      </Link>
                     ))}
                   </div>
-                  <span className="mt-auto inline-flex items-center gap-[7px] pt-[22px] text-sm font-semibold text-brand-700">
+                  <Link
+                    href={v.href}
+                    className="mt-auto inline-flex items-center gap-[7px] pt-6 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+                  >
                     {v.cta}
                     <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </Reveal>
           ))}
         </div>
