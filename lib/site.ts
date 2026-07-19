@@ -68,7 +68,7 @@ export const companyNav = {
   label: "Company",
   children: [
     { label: "About MnT Future", href: "/about", desc: "Who we are and how we work" },
-    { label: "Security & Compliance", href: "/security-compliance", desc: "ADA · PCI DSS v4.0.1 · US sales-tax · SOC 2" },
+    { label: "Security & Compliance", href: "/security-compliance", desc: "ADA · PCI DSS v4.0.1 · US sales-tax · SOC 2-aligned" },
     { label: "Open Source", href: "/open-source", desc: "agentready & our agentic-commerce tooling — MIT-licensed" },
     { label: "Blog", href: "/blog", desc: "Guides on AI-native & agent-ready commerce" },
     { label: "Contact", href: "/contact", desc: "Book a free strategy session" },

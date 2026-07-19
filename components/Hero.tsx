@@ -2,13 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Icon from "./Icon";
 
-const trustBadges = ["Agent-ready", "ADA / WCAG", "PCI DSS v4.0.1", "SOC 2", "US sales-tax"];
-
-const avatars = [
-  { initials: "VP", bg: "bg-brand-700" },
-  { initials: "FO", bg: "bg-brand-900" },
-  { initials: "CO", bg: "bg-brand-500" },
-];
+const trustBadges = ["Agent-ready", "ADA / WCAG", "PCI DSS v4.0.1", "SOC 2-aligned", "US sales-tax"];
 
 export default function Hero() {
   return (
@@ -56,24 +50,7 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="mt-[34px] flex items-center gap-3.5">
-            <div className="flex">
-              {avatars.map((a, i) => (
-                <span
-                  key={a.initials}
-                  className={`flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 border-white text-[11px] font-bold text-white ${a.bg} ${i > 0 ? "-ml-[9px]" : ""}`}
-                >
-                  {a.initials}
-                </span>
-              ))}
-            </div>
-            <span className="text-[13.5px] text-slatey">
-              Trusted by <strong className="font-semibold text-ink">US commerce founders</strong>{" "}
-              &amp; product teams
-            </span>
-          </div>
-
-          <div className="mt-[26px] flex flex-wrap gap-x-6 gap-y-3 border-t border-slate-200 pt-5">
+          <div className="mt-[34px] flex flex-wrap gap-x-6 gap-y-3 border-t border-slate-200 pt-5">
             {trustBadges.map((b) => (
               <span
                 key={b}
@@ -122,8 +99,8 @@ export default function Hero() {
               </svg>
             </span>
             <span className="text-[12.5px] leading-[1.4] text-slate-700">
-              <strong className="block font-display text-[15px] text-ink">+24%</strong>
-              conversion lift, Q1
+              <strong className="block font-display text-[15px] text-ink">Agent-ready</strong>
+              ACP · UCP · MCP
             </span>
           </div>
 

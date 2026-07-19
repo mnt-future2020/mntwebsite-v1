@@ -445,7 +445,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "wcag-compliance",
-    title: "WCAG 2.1 AA",
+    title: "WCAG 2.2 AA",
     tagline:
       "We ran an accessibility audit on our own site and fixed every failure in the design system — no overlay widget. Seven failing checks to zero, measured with axe-core.",
     type: "Internal audit · Dogfooded by MnT Future",
@@ -457,7 +457,7 @@ export const caseStudies: CaseStudy[] = [
     liveLabel: "The site itself is the proof",
     dateISO: "2026-07-09",
     summary:
-      "Most US accessibility lawsuits target ecommerce, and the overlay-widget shortcut has been publicly discredited — so we proved the honest workflow on our own site first. An axe-core baseline (WCAG 2.1 A + AA) across nine key pages of mntfuture.com found 7 failing nodes, all traced to four root causes. We fixed them at the design-token level in July 2026 and re-scanned: zero violations, brand intact, no overlay.",
+      "Most US accessibility lawsuits target ecommerce, and the overlay-widget shortcut has been publicly discredited — so we proved the honest workflow on our own site first. An axe-core baseline (WCAG 2.2 A + AA) across nine key pages of mntfuture.com found 7 failing nodes, all traced to four root causes. We fixed them at the design-token level in July 2026 and re-scanned: zero violations, brand intact, no overlay.",
     facts: [
       { value: "7 → 0", label: "Failing axe nodes after remediation" },
       { value: "9", label: "Key pages scanned — all now violation-free" },
@@ -466,14 +466,14 @@ export const caseStudies: CaseStudy[] = [
     ],
     scope: [
       { label: "Role", value: "Accessibility audit + remediation" },
-      { label: "Standard", value: "WCAG 2.1 A + AA (axe-core)" },
+      { label: "Standard", value: "WCAG 2.2 A + AA (axe-core)" },
       { label: "Delivered", value: "Token fixes · a11y-safe 3rd-party embeds" },
       { label: "Status", value: "0 violations across scanned pages" },
     ],
     problem:
       "Accessibility is now a commerce-specific legal risk: the large majority of US ADA website lawsuits target ecommerce, and the FTC's action against overlay vendors ended the 'install a widget' era — courts and plaintiffs treat overlays as evidence of neglect, not compliance. The honest fix lives in the design system itself. Before selling that workflow to clients, we held ourselves to it: audit our own site, fix the real tokens, publish the real numbers.",
     approach: [
-      { no: "01", title: "Baseline, honestly", desc: "axe-core against nine key pages — home, both vertical hubs, service pages, work, contact, blog — scoped to WCAG 2.1 A and AA rules. Result: 7 failing nodes across 5 pages." },
+      { no: "01", title: "Baseline, honestly", desc: "axe-core against nine key pages — home, both vertical hubs, service pages, work, contact, blog — scoped to WCAG 2.2 A and AA rules. Result: 7 failing nodes across 5 pages." },
       { no: "02", title: "Trace to root causes", desc: "Every failure mapped to four causes — two contrast failures in shared components, one in a global button token, and a third-party iframe with a machine-generated title." },
       { no: "03", title: "Fix the system, not the page", desc: "Contrast fixed by moving tokens within the existing brand palette (brand → brand-700); the third-party embed wrapped with a guard that enforces an accessible name." },
       { no: "04", title: "Re-scan and keep scanning", desc: "Same scanner, same rules: zero violations on all nine pages. The scan is repeatable on any deploy — the same workflow we run for client stores." },
@@ -514,23 +514,23 @@ export const caseStudies: CaseStudy[] = [
       { icon: "check", title: "Honest scope", desc: "Automated rules catch the measurable layer. Keyboard-flow and screen-reader review is the manual layer we run on client engagements." },
     ],
     techDecisions: [
-      { tech: "axe-core (WCAG 2.1 A/AA)", used: "The audit engine, run in a real browser against each page.", advantage: "The same rule set plaintiffs' auditors use — deterministic, repeatable, and mapped rule-by-rule to WCAG success criteria." },
+      { tech: "axe-core (WCAG 2.2 A/AA)", used: "The audit engine, run in a real browser against each page.", advantage: "The same rule set plaintiffs' auditors use — deterministic, repeatable, and mapped rule-by-rule to WCAG success criteria." },
       { tech: "Design-token remediation", used: "Contrast fixes made in the shared Tailwind tokens, not per-page overrides.", advantage: "One change fixes every instance sitewide — including pages that don't exist yet." },
       { tech: "In-palette color steps", used: "brand → brand-700 and slate-400 → slate-500 from the existing scale.", advantage: "Passes AA without inventing new colors — the brand system stays coherent." },
       { tech: "MutationObserver guard", used: "Enforces a descriptive title on the third-party Clutch iframe.", advantage: "Vendor scripts can overwrite attributes at any time; the guard makes the accessible name stick without forking their code." },
     ],
     stack: [
-      { group: "Audit", items: ["axe-core 4", "WCAG 2.1 A + AA"] },
+      { group: "Audit", items: ["axe-core 4", "WCAG 2.2 A + AA"] },
       { group: "Remediation", items: ["Tailwind design tokens", "React components"] },
       { group: "Guards", items: ["MutationObserver", "Repeatable scan script"] },
       { group: "Site", items: ["Next.js App Router", "TypeScript"] },
     ],
-    metaTitle: "WCAG 2.1 AA on Our Own Site — No Overlay | MnT Future",
+    metaTitle: "WCAG 2.2 AA on Our Own Site — No Overlay | MnT Future",
     metaDescription:
       "MnT Future audited its own site with axe-core and fixed every WCAG AA failure at the design-token level — 7 failing checks to 0 across 9 pages, no overlay widget.",
     resultsTitle: "What did zero violations actually take?",
     resultsIntro:
-      "In July 2026, an axe-core scan (WCAG 2.1 A + AA) of mntfuture.com found 7 failing nodes across 5 of 9 key pages. Every failure traced to four root causes. We fixed them in the design system — two tokens, one text color, one iframe guard — and re-scanned: zero violations on all nine pages, with the brand palette intact.",
+      "In July 2026, an axe-core scan (WCAG 2.2 A + AA) of mntfuture.com found 7 failing nodes across 5 of 9 key pages. Every failure traced to four root causes. We fixed them in the design system — two tokens, one text color, one iframe guard — and re-scanned: zero violations on all nine pages, with the brand palette intact.",
     results: [
       { metric: "Failing axe nodes", before: "7", after: "0" },
       { metric: "Pages with violations", before: "5 of 9", after: "0 of 9" },

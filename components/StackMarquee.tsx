@@ -17,7 +17,7 @@ const stack = [
   "Tailwind CSS",
   "ADA / WCAG",
   "PCI DSS",
-  "SOC 2",
+  "SOC 2-aligned",
   "ACP",
   "MCP",
   "AEO",

@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from "react";
 
 // Animates the numeric part of a value (e.g. "100%", "5+", "2") when scrolled into view.
 // Non-numeric values (e.g. "India + Global") render as-is.
+//
+// The final value is the SSR/no-JS default — the count-up never leaves a bare "0"
+// on the page. Only stats that load BELOW the fold animate (from 0 → target as
+// they scroll in); a stat already on screen at load just shows its real value,
+// with no target→0→target flicker.
 export default function Counter({
   value,
   duration = 1400,
@@ -20,24 +25,34 @@ export default function Counter({
   const target = match ? parseInt(match[2].replace(/,/g, ""), 10) : 0;
   const suffix = match ? match[3] : "";
 
-  const [display, setDisplay] = useState(0);
+  // `null` means "not animating — show the real target". A number is a live
+  // animation frame. Starting at null keeps SSR and the first client render equal
+  // to `target`, so there's no hydration mismatch and never a "0" fallback.
+  const [display, setDisplay] = useState<number | null>(null);
 
   // Depend ONLY on stable primitives — never on the freshly-created `match` array,
   // otherwise the effect tears down and restarts the animation on every frame.
   useEffect(() => {
     if (!isNumeric) return;
     const el = ref.current;
-    if (!el) return;
+    if (!el || startedRef.current) return;
 
-    // Respect reduced-motion: jump straight to the final value.
+    // Respect reduced-motion and environments without IO: keep the final value.
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setDisplay(target);
-      return;
-    }
+    if (reduce || typeof IntersectionObserver === "undefined") return;
+
+    // Already visible at load? Don't animate — the count-up would only flash the
+    // value to 0 and back. Only stats below the fold get the reveal animation.
+    const rect = el.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (rect.top < viewportH && rect.bottom > 0) return;
+
+    // Below the fold and off-screen: reset to 0 (invisible to the user) and count
+    // up when it scrolls into view.
+    setDisplay(0);
 
     let raf = 0;
     const run = (startTs: number) => {
@@ -70,10 +85,11 @@ export default function Counter({
 
   if (!isNumeric) return <span ref={ref}>{value}</span>;
 
+  const shown = display === null ? target : display;
   return (
     <span ref={ref}>
       {prefix}
-      {display}
+      {shown}
       {suffix}
     </span>
   );

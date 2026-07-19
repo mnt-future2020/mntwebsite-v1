@@ -9,7 +9,6 @@ import CTASection from "@/components/CTASection";
 import StackMarquee from "@/components/StackMarquee";
 import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
-import Testimonials from "@/components/Testimonials";
 import FAQ, { QA } from "@/components/FAQ";
 import { caseStudies } from "@/lib/caseStudies";
 
@@ -376,8 +375,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Testimonials />
 
       {/* FAQ */}
       <section className="border-t border-line bg-mist py-24">

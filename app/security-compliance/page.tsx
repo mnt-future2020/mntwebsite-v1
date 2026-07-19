@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
     title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT Future",
     description:
-      "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2, and CCPA/CPRA privacy.",
+      "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2-aligned controls, and CCPA/CPRA privacy.",
   });
 }
 
@@ -35,9 +35,9 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
     tags: ["Economic nexus", "Avalara / Anrok", "Multi-state"],
   },
   {
-    name: "SOC 2",
+    name: "SOC 2-aligned",
     icon: "gauge",
-    desc: "Security, availability, and confidentiality controls — designed for the audit and validated continuously in CI/CD.",
+    desc: "Security, availability, and confidentiality controls engineered to the SOC 2 trust criteria and validated continuously in CI/CD. We build to these principles for your store; SOC 2 itself is an audit of the organization that holds it.",
     tags: ["Trust criteria", "Monitoring", "Evidence"],
   },
   {
@@ -184,7 +184,7 @@ export default function SecurityCompliance() {
 
       <CTASection
         title="Have a compliance requirement? Let's map it before you build."
-        body="Bring your regulatory surface — ADA, PCI DSS, sales-tax, SOC 2 — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
+        body="Bring your regulatory surface — ADA, PCI DSS, sales-tax, SOC 2-aligned controls — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
         primary={{ label: "Book a strategy session", href: "/strategy-session" }}
         secondary={{ label: "Explore what we build", href: "/" }}
       />

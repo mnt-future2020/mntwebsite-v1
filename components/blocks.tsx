@@ -118,7 +118,7 @@ export function Process({
     steps ?? [
       { title: "Discovery", desc: "We map the workflow, the constraints, and the compliance surface before a line of code." },
       { title: "Build", desc: "Senior engineers ship in two-week sprints. You see working software, not status decks." },
-      { title: "Certify", desc: "Security and compliance are tested as we go — ADA/WCAG, PCI DSS, SOC 2 — never bolted on at the end." },
+      { title: "Certify", desc: "Security and compliance are tested as we go — ADA/WCAG, PCI DSS, SOC 2 controls — never bolted on at the end." },
       { title: "Scale", desc: "We harden, instrument, and hand over — or stay on as your embedded product team." },
     ];
   return (
