@@ -75,7 +75,7 @@ function legacyKind(stage?: string | null): "OPEN" | "WON" | "LOST" {
   if (stage === "LOST") return "LOST";
   return "OPEN";
 }
-// The authoritative open/won/lost for a deal — stageRef.kind, falling back to
+// The authoritative open/won/lost for a deal: stageRef.kind, falling back to
 // the legacy enum for any deal not yet mapped onto a pipeline stage.
 export function dealKind(d: DealLike): "OPEN" | "WON" | "LOST" {
   return (d.stageRef?.kind as "OPEN" | "WON" | "LOST") || legacyKind(d.stage);

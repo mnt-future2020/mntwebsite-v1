@@ -9,7 +9,7 @@ export const HR = {
 };
 
 // Leave types that carry a balance, mapped to their Employee balance column.
-// UNPAID (loss of pay) is intentionally absent — it has no balance.
+// UNPAID (loss of pay) is intentionally absent: it has no balance.
 export const LEAVE_TYPES = [
   { kind: "PAID", label: "Earned / Paid", field: "paidLeaveBalance" },
   { kind: "CASUAL", label: "Casual", field: "casualBalance" },
@@ -39,7 +39,7 @@ export function inr(n?: number | null) {
 
 export function fmtDate(d?: Date | string | null) {
   if (!d) return "—";
-  // Date-only values are stored at UTC midnight — format in UTC so the stored
+  // Date-only values are stored at UTC midnight: format in UTC so the stored
   // calendar day shows correctly regardless of the viewer's timezone.
   return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 }
@@ -93,7 +93,7 @@ export function computePayslip(p: PayslipInput) {
 // Split a monthly gross salary into Basic / HRA / Special Allowance using the
 // company's configurable percentages (stored in OrgSetting, editable in HR
 // settings). Allowance is the balancing figure so the parts always sum to the
-// exact gross — no rounding drift.
+// exact gross: no rounding drift.
 export type SalarySplit = { basicPct: number; hraPctOfBasic: number };
 export const DEFAULT_SALARY_SPLIT: SalarySplit = { basicPct: 50, hraPctOfBasic: 50 };
 

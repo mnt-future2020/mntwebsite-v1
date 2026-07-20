@@ -31,7 +31,7 @@ export default async function ConfirmPage(
     <NewsletterResult
       icon="check"
       title="You're subscribed! 🎉"
-      body="Thanks for confirming. You'll get occasional, practical notes from MnT Future — and never spam."
+      body="Thanks for confirming. You'll get occasional, practical notes from MnT Future, and never spam."
     />
   ) : (
     <NewsletterResult

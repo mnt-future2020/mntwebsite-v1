@@ -68,12 +68,12 @@ function LeadCard({ report }: { report: Report }) {
     <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
       <h3 className="text-lg font-bold text-navy">Want the engineer-grade fix plan?</h3>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
-        We&apos;ll send a prioritized remediation plan for every finding — mapped to your
+        We&apos;ll send a prioritized remediation plan for every finding: mapped to your
         platform, with effort estimates. Free, from the MnT Future engineering team.
       </p>
       {state === "sent" ? (
         <p className="mt-4 text-sm font-semibold text-emerald-600">
-          ✓ On its way — check your inbox within one business day.
+          ✓ On its way: check your inbox within one business day.
         </p>
       ) : (
         <form onSubmit={submit} className="mt-4 flex flex-wrap gap-3">
@@ -114,7 +114,7 @@ function ReportPanel({ report }: { report: Report }) {
         </div>
         <div>
           <h2 className="text-2xl font-extrabold text-navy">
-            {report.score}/100 —{" "}
+            {report.score}/100:{" "}
             {fixCount === 0
               ? "agent-ready"
               : `${fixCount} fix${fixCount === 1 ? "" : "es"} to become fully agent-ready`}
@@ -137,7 +137,7 @@ function ReportPanel({ report }: { report: Report }) {
                 <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${pct}%` }} />
               </div>
               <span className="text-right tabular-nums text-slate-500">
-                {scored ? `${scored.earned}/${scored.max}` : "—"}
+                {scored ? `${scored.earned}/${scored.max}` : "n/a"}
               </span>
             </div>
           );
@@ -214,7 +214,7 @@ function ReportPanel({ report }: { report: Report }) {
         <div className="rounded-2xl border border-slate-200 bg-deep p-7 text-white">
           <h3 className="text-lg font-bold">Or talk to the team that built this</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/70">
-            Bring this report to a free strategy session — a senior consultant maps every
+            Bring this report to a free strategy session: a senior consultant maps every
             finding to a concrete fix plan for your platform.
           </p>
           <a
@@ -261,10 +261,10 @@ export default function AgentReadyScanner() {
         body: JSON.stringify({ url: url.trim() }),
       });
       const data = (await res.json()) as { report?: Report; error?: string };
-      if (!res.ok || !data.report) setError(data.error ?? "Scan failed — please try again.");
+      if (!res.ok || !data.report) setError(data.error ?? "Scan failed: please try again.");
       else setReport(data.report);
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error: please try again.");
     } finally {
       setScanning(false);
     }

@@ -9,23 +9,23 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/about", {
-    title: "About MnT Future — AI-Native Commerce Engineering",
+    title: "About MnT Future: AI-Native Commerce Engineering",
     description:
-      "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team — land small, expand big.",
+      "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands. A senior team: land small, expand big.",
   });
 }
 
 const aboutPoints = [
-  "AI-native by default — search, recommendations, assistants and agents built into the product, gated behind evaluations.",
-  "Agent-ready before your competitors — ACP, Google UCP, and a Retail MCP server for the emerging agentic channel.",
-  "Land small, expand big — start with a productized pilot, grow into a dedicated pod, expand into a full platform build.",
+  "AI-native by default: search, recommendations, assistants and agents built into the product, gated behind evaluations.",
+  "Agent-ready before your competitors: ACP, Google UCP, and a Retail MCP server for the emerging agentic channel.",
+  "Land small, expand big: start with a productized pilot, grow into a dedicated pod, expand into a full platform build.",
 ];
 
 const values = [
   { icon: "compass" as const, title: "Depth over breadth", desc: "We chose two verticals and went deep. Specialism is how we ship better, faster, and more compliant software than generalists." },
-  { icon: "shield" as const, title: "Honesty over hype", desc: "Realistic timelines, honest budgets, and a recommendation that's right for your stage — even when it's not the biggest contract." },
-  { icon: "users" as const, title: "Senior by default", desc: "Your software is written by engineers who've shipped regulated, high-traffic systems — not juniors learning on your budget." },
-  { icon: "bolt" as const, title: "Outcomes over output", desc: "We measure success in launched products, passed audits, and revenue moved — not hours billed or tickets closed." },
+  { icon: "shield" as const, title: "Honesty over hype", desc: "Realistic timelines, honest budgets, and a recommendation that's right for your stage: even when it's not the biggest contract." },
+  { icon: "users" as const, title: "Senior by default", desc: "Your software is written by engineers who've shipped regulated, high-traffic systems, not juniors learning on your budget." },
+  { icon: "bolt" as const, title: "Outcomes over output", desc: "We measure success in launched products, passed audits, and revenue moved, not hours billed or tickets closed." },
 ];
 
 export default function About() {
@@ -43,7 +43,7 @@ export default function About() {
             </h1>
             <p className="mt-5 max-w-[660px] text-[17px] leading-[1.65] text-slatey">
               MnT Future (Magizh NexGen Technologies) builds AI-native, agent-ready commerce
-              platforms for US D2C and marketplace brands — headless &amp; marketplace builds,
+              platforms for US D2C and marketplace brands: headless &amp; marketplace builds,
               integrations, B2B, and AI agents that sell in the new agentic channels.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function About() {
             </h2>
             <p className="mt-3.5 text-[15.5px] leading-[1.7] text-slatey">
               No juniors learning on your budget. We architect, build, and operate revenue-critical
-              commerce — with ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax compliance
+              commerce, with ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax compliance
               engineered in from day one.
             </p>
             <div className="mt-[30px] flex flex-col gap-4">

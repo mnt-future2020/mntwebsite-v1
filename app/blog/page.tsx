@@ -10,9 +10,9 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/blog", {
-    title: "Blog — AI-Native, Agent-Ready Commerce Insights | MnT Future",
+    title: "Blog: AI-Native, Agent-Ready Commerce Insights | MnT Future",
     description:
-      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance — from the senior engineers at MnT Future.",
+      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance: from the senior engineers at MnT Future.",
   });
 }
 
@@ -31,7 +31,7 @@ export default async function BlogIndex() {
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
             Practical guides on AI-native commerce, agent-ready selling, headless builds,
-            and US commerce compliance — written by the people who ship it.
+            and US commerce compliance: written by the people who ship it.
           </p>
         </div>
       </section>
@@ -40,7 +40,7 @@ export default async function BlogIndex() {
         {posts.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-slate-200 bg-soft px-6 py-20 text-center">
             <h2 className="font-display text-xl font-bold text-ink">No articles published yet</h2>
-            <p className="mt-2 text-slatey">New guides are on the way — check back soon.</p>
+            <p className="mt-2 text-slatey">New guides are on the way: check back soon.</p>
           </div>
         ) : (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">

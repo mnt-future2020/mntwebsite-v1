@@ -13,7 +13,7 @@ const ACTION_URL = "https://github.com/MnT-Future/vibecheck#github-action";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source/vibecheck", {
-    title: "vibecheck — is your AI-built store secure & production-ready? | MnT Future",
+    title: "vibecheck: is your AI-built store secure & production-ready? | MnT Future",
     description:
       "Open-source scanner for AI-generated commerce codebases: 26 checks across secrets, injection, access control, commerce-logic tampering, dependency CVEs and more. Deterministic, private, MIT. npx @mntglobal/vibecheck.",
   });
@@ -55,11 +55,11 @@ const TERMINAL_LINES: { text: string; cls: string }[] = [
 
 const CHECK_AREAS = [
   { icon: "shield" as const, title: "Secrets & credentials", desc: "Hardcoded provider keys, committed .env files, private keys & DB URIs, secrets shipped to the browser via NEXT_PUBLIC_ vars." },
-  { icon: "code" as const, title: "Injection & RCE", desc: "eval / new Function from input, string-built SQL, command injection, prototype pollution — the classic AI-slop footguns." },
+  { icon: "code" as const, title: "Injection & RCE", desc: "eval / new Function from input, string-built SQL, command injection, prototype pollution: the classic AI-slop footguns." },
   { icon: "lock" as const, title: "Access control", desc: "Sensitive routes with no authentication, permissive CORS with credentials, hardcoded / default admin tokens." },
-  { icon: "wallet" as const, title: "Commerce logic — the wedge", desc: "Checkout that trusts a client-sent price, unvalidated quantity (buy −5, get a refund), coupons applied without server validation. No generic scanner checks this." },
+  { icon: "wallet" as const, title: "Commerce logic: the wedge", desc: "Checkout that trusts a client-sent price, unvalidated quantity (buy −5, get a refund), coupons applied without server validation. No generic scanner checks this." },
   { icon: "globe" as const, title: "Web exposure", desc: "Unsanitized dangerouslySetInnerHTML / innerHTML, SSRF on user-supplied URLs, path traversal into the filesystem." },
-  { icon: "bolt" as const, title: "Performance & scale", desc: "Synchronous I/O on the request path, re-reading the whole database per request, N+1 queries — demos fine, dies at real traffic." },
+  { icon: "bolt" as const, title: "Performance & scale", desc: "Synchronous I/O on the request path, re-reading the whole database per request, N+1 queries: demos fine, dies at real traffic." },
   { icon: "layers" as const, title: "Dependencies", desc: "Known-vulnerable npm packages via the OSV database (with the fixed version), missing helmet / CSP security headers." },
   { icon: "gauge" as const, title: "Production hardening", desc: "No rate limiting, internal errors leaked to clients, secrets written to logs, no test suite." },
 ];
@@ -68,20 +68,20 @@ const OUTPUTS = [
   { icon: "code" as const, title: "Terminal & JSON", desc: "A graded report with evidence and fixes, or machine-readable JSON for your own tooling." },
   { icon: "shield" as const, title: "SARIF → code scanning", desc: "Upload to GitHub's Security tab and see every finding annotated inline on the exact line." },
   { icon: "github" as const, title: "GitHub Action", desc: "One line in your workflow: posts a PR summary comment, uploads SARIF, fails the check below a grade." },
-  { icon: "image" as const, title: "Shareable report card", desc: "A self-contained HTML card of the grade and findings — great in a screenshot or a Slack message." },
+  { icon: "image" as const, title: "Shareable report card", desc: "A self-contained HTML card of the grade and findings: great in a screenshot or a Slack message." },
 ];
 
 const TRUST = [
-  { icon: "lock" as const, text: "Deterministic — no AI, no API key. Same code = same grade." },
+  { icon: "lock" as const, text: "Deterministic: no AI, no API key. Same code = same grade." },
   { icon: "shield" as const, text: "Your code never leaves your machine." },
-  { icon: "eye" as const, text: "Open source (MIT) — audit every check on GitHub." },
+  { icon: "eye" as const, text: "Open source (MIT): audit every check on GitHub." },
 ];
 
 const FLAGS = [
   { flag: "--experimental", desc: "Also run flow-tier checks and look up dependency CVEs (OSV)." },
   { flag: "--html report.html", desc: "Write a self-contained, shareable HTML report card." },
-  { flag: "--ci --min-grade B", desc: "Exit non-zero below the grade — gate your pipeline." },
-  { flag: "--sarif out.sarif", desc: "SARIF 2.1.0 — upload to GitHub's code-scanning tab." },
+  { flag: "--ci --min-grade B", desc: "Exit non-zero below the grade: gate your pipeline." },
+  { flag: "--sarif out.sarif", desc: "SARIF 2.1.0: upload to GitHub's code-scanning tab." },
   { flag: "--md", desc: "Markdown summary, ideal for a PR comment." },
   { flag: "--json", desc: "Machine-readable JSON to stdout for your own tooling." },
   { flag: "--offline", desc: "Skip the one network call (the CVE lookup) entirely." },
@@ -120,8 +120,8 @@ export default function VibecheckPage() {
                   <span className="text-brand-300">vulnerabilities</span> too?
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
-                  vibecheck reads an AI-built store the way a security reviewer would —
-                  deterministically, in seconds — and grades it. Hardcoded keys, unauthenticated
+                  vibecheck reads an AI-built store the way a security reviewer would:
+                  deterministically, in seconds, and grades it. Hardcoded keys, unauthenticated
                   admin routes, checkout that trusts client prices. <strong className="text-white">26 checks</strong>,
                   a letter grade, the exact <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-sm">file:line</code> and the fix.
                 </p>
@@ -186,7 +186,7 @@ export default function VibecheckPage() {
               26 checks. 8 categories. <span className="text-brand">One honest grade.</span>
             </>
           }
-          subtitle="The same AI that wrote your store shipped the bug — so asking it to grade its own work isn't trustworthy. vibecheck is the independent, commerce-tuned second opinion, tuned for the failure modes AI codegen actually ships."
+          subtitle="The same AI that wrote your store shipped the bug, so asking it to grade its own work isn't trustworthy. vibecheck is the independent, commerce-tuned second opinion, tuned for the failure modes AI codegen actually ships."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {CHECK_AREAS.map((area, i) => (
@@ -225,7 +225,7 @@ export default function VibecheckPage() {
             title={
               <>
                 From <span className="text-red-300">F 40</span> to{" "}
-                <span className="text-emerald-300">A 94</span> — with the receipts.
+                <span className="text-emerald-300">A 94</span>, with the receipts.
               </>
             }
             subtitle="vibecheck was born from our AI Cleanup Lab, where a deliberately vibe-coded store went from 5/5 live exploits landing to 0/5 after a rebuild. Every finding quotes your actual code, so it's reproducible by anyone with npx."
@@ -248,7 +248,7 @@ export default function VibecheckPage() {
                 <ul className="mt-4 space-y-2 text-sm text-white/70">
                   <li>Secrets in env vars, never returned to clients</li>
                   <li>Admin routes behind a bearer-token check</li>
-                  <li>Quantity validated as an integer, 1–99</li>
+                  <li>Quantity validated as an integer, 1 to 99</li>
                   <li>Safe substring search, HTML-escaped output</li>
                 </ul>
               </div>
@@ -267,7 +267,7 @@ export default function VibecheckPage() {
                 One command. <span className="text-brand">No install, no config.</span>
               </>
             }
-            subtitle="vibecheck runs straight from npx on any machine with Node 20+. It reads your source locally — nothing is uploaded, nothing is stored."
+            subtitle="vibecheck runs straight from npx on any machine with Node 20+. It reads your source locally: nothing is uploaded, nothing is stored."
           />
           <div className="mx-auto mt-12 max-w-3xl space-y-5">
             <Reveal>
@@ -279,7 +279,7 @@ export default function VibecheckPage() {
                   <h3 className="font-bold text-navy">Scan a folder on your machine</h3>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  Point it at any project directory — no install step, no sign-up.
+                  Point it at any project directory: no install step, no sign-up.
                 </p>
                 <pre className="mt-4 overflow-x-auto rounded-xl bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
                   npx @mntglobal/vibecheck ./your-store
@@ -356,7 +356,7 @@ npx @mntglobal/vibecheck .`}</pre>
               Run it anywhere. <span className="text-brand">Fail the PR that regresses.</span>
             </>
           }
-          subtitle="One deterministic engine, every surface — from a quick local scan to a gated pull request with findings annotated inline."
+          subtitle="One deterministic engine, every surface: from a quick local scan to a gated pull request with findings annotated inline."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {OUTPUTS.map((out, i) => (
@@ -380,7 +380,7 @@ npx @mntglobal/vibecheck .`}</pre>
   with:
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">
-              Posts a PR comment, uploads to code scanning, gates on grade —{" "}
+              Posts a PR comment, uploads to code scanning, gates on grade:{" "}
               <a href={ACTION_URL} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
                 Action docs
               </a>
@@ -391,12 +391,12 @@ npx @mntglobal/vibecheck .`}</pre>
 
       <CTASection
         title="vibecheck finds the holes. We close them."
-        body="Run the scan, then bring the report to a free strategy session — a senior consultant maps every finding to a concrete fix: auth, validation, secrets, the load pathology, the lot. That's our AI Cleanup service."
+        body="Run the scan, then bring the report to a free strategy session: a senior consultant maps every finding to a concrete fix: auth, validation, secrets, the load pathology, the lot. That's our AI Cleanup service."
       />
 
       <section className="container-mnt pb-20 text-center">
         <p className="text-sm text-slate-500">
-          Part of MnT Future&apos;s open-source program —{" "}
+          Part of MnT Future&apos;s open-source program:{" "}
           <Link href="/open-source" className="font-semibold text-brand hover:underline">
             see all our agentic-commerce tooling
           </Link>

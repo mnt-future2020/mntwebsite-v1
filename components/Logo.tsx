@@ -16,7 +16,7 @@ export default function Logo({
       href="/"
       aria-label="MnT Future, home"
       className={`inline-flex items-center ${className}`}
-      // Same-route clicks don't re-navigate, so the router never scrolls —
+      // Same-route clicks don't re-navigate, so the router never scrolls:
       // take the user to the top ourselves when they're already home.
       onClick={() => {
         if (window.location.pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,7 +25,7 @@ export default function Logo({
       <Image
         src={src}
         alt="MnT Future"
-        // Intrinsic size of mnt-logo.png. The white variant is 2784×538 — a
+        // Intrinsic size of mnt-logo.png. The white variant is 2784×538: a
         // 0.09% aspect difference, invisible under h-9 w-auto.
         width={2828}
         height={546}

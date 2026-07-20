@@ -25,7 +25,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
         return;
       }
       setState("done");
-      setMsg(data.message || "Subscribed — see you in the next issue.");
+      setMsg(data.message || "Subscribed: see you in the next issue.");
       setEmail("");
     } catch {
       setState("error");

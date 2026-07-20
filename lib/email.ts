@@ -1,14 +1,14 @@
 import { Resend } from "resend";
 import { site } from "@/lib/site";
 
-// Resend client — only created when an API key is present. Without a key the
+// Resend client: only created when an API key is present. Without a key the
 // app still works end-to-end (subscribers save, admin loads); sending is a
 // no-op that reports back as "skipped" so the UI can tell the user.
 const apiKey = process.env.RESEND_API_KEY;
 const resend = apiKey ? new Resend(apiKey) : null;
 
 export const FROM = process.env.NEWSLETTER_FROM || `MnT Future <onboarding@resend.dev>`;
-// Subscriber replies are routed here — should be a real, monitored mailbox.
+// Subscriber replies are routed here: should be a real, monitored mailbox.
 export const REPLY_TO = process.env.NEWSLETTER_REPLY_TO || `info@${site.domain}`;
 
 export function emailReady(): boolean {
@@ -160,7 +160,7 @@ export async function sendCampaign(
 
 // ─── Opt-in invite (re-permission) ──────────────────────────────────────────
 // For imported contacts: a one-time "would you like our newsletter?" email.
-// Only those who click confirm become SUBSCRIBED — keeps the list consented.
+// Only those who click confirm become SUBSCRIBED: keeps the list consented.
 export async function sendInvites(
   recipients: Recipient[]
 ): Promise<{ sent: number; failed: number; skipped?: boolean; error?: string }> {
@@ -177,7 +177,7 @@ export async function sendInvites(
     const messages = chunk.map((r) => {
       const cUrl = confirmUrl(r.token);
       const inner = `<h1 style="font-size:20px;margin:0 0 12px">Would you like updates from MnT Future?</h1>
-        <p style="margin:0 0 16px">You're receiving this because you're a contact of MnT Future. If you'd like occasional, practical notes on AI-native, agent-ready commerce, confirm below. If not, just ignore this email — you won't hear from us again.</p>
+        <p style="margin:0 0 16px">You're receiving this because you're a contact of MnT Future. If you'd like occasional, practical notes on AI-native, agent-ready commerce, confirm below. If not, just ignore this email: you won't hear from us again.</p>
         <p style="margin:0 0 24px"><a href="${cUrl}" style="display:inline-block;background:#0E66C2;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600">Yes, subscribe me</a></p>
         <p style="margin:0;font-size:13px;color:#64748b">Or paste this link:<br><a href="${cUrl}" style="color:#0E66C2">${cUrl}</a></p>`;
       return {

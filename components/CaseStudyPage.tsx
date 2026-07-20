@@ -68,7 +68,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
 
-      {/* HERO — split: story + product mockup */}
+      {/* HERO: split: story + product mockup */}
       <section className="relative overflow-hidden bg-deep text-white">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-25" />
         <div className="pointer-events-none absolute -left-40 top-10 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[130px]" />
@@ -163,7 +163,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
       </section>
 
-      {/* RESULTS — the honest before → after proof */}
+      {/* RESULTS: the honest before → after proof */}
       {cs.results && cs.results.length > 0 && (
         <section className="relative overflow-hidden bg-deep py-16 text-white sm:py-20">
           <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-20" />
@@ -265,7 +265,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
       </section>
 
-      {/* TECH DECISIONS — why each technology, and the advantage */}
+      {/* TECH DECISIONS: why each technology, and the advantage */}
       <section className="container-mnt py-16 sm:py-20">
         <SectionHeading
           eyebrow="Tech decisions"
@@ -313,14 +313,14 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         {cs.liveUrl && (
           <div className="mt-12 text-center">
             <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-              See it live — {cs.liveLabel || cs.liveUrl} <Icon name="arrow" className="h-4 w-4 -rotate-45" />
+              See it live: {cs.liveLabel || cs.liveUrl} <Icon name="arrow" className="h-4 w-4 -rotate-45" />
             </a>
           </div>
         )}
         </div>
       </section>
 
-      {/* FAQ — real buyer questions; emitted as FAQPage JSON-LD above */}
+      {/* FAQ: real buyer questions; emitted as FAQPage JSON-LD above */}
       {cs.faq && cs.faq.length > 0 && (
         <section className="container-mnt py-16 sm:py-20">
           <SectionHeading eyebrow="FAQ" title="The questions buyers ask about this build." />
@@ -334,7 +334,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         title={cs.copy?.ctaTitle || "Have a platform like this in mind?"}
         body={
           cs.copy?.ctaBody ||
-          "This is the kind of platform we specialise in. Tell us your idea — we'll show you how we'd architect it."
+          "This is the kind of platform we specialise in. Tell us your idea: we'll show you how we'd architect it."
         }
       />
     </>

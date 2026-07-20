@@ -29,7 +29,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>MnT Future — AI-Native, Agent-Ready Commerce Insights</title>
+    <title>MnT Future: AI-Native, Agent-Ready Commerce Insights</title>
     <link>${site.url}/blog</link>
     <description>Guides on AI-native commerce, agent-ready selling, headless builds and US commerce compliance from MnT Future.</description>
     <language>en</language>

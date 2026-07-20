@@ -5,9 +5,9 @@ import SectionTitle from "./SectionTitle";
 type T = { quote: string; who: string; role: string };
 
 const ROW_A: T[] = [
-  { quote: "AI search and recommendations lifted our conversion 24% in the first quarter — it paid for itself fast.", who: "VP Ecommerce", role: "D2C brand" },
+  { quote: "AI search and recommendations lifted our conversion 24% in the first quarter: it paid for itself fast.", who: "VP Ecommerce", role: "D2C brand" },
   { quote: "They rebuilt our checkout headless and conversion doubled. The engineering was genuinely senior.", who: "Head of Growth", role: "D2C brand" },
-  { quote: "They made us agent-ready — our catalog now shows up and sells inside AI assistants.", who: "Founder", role: "US marketplace" },
+  { quote: "They made us agent-ready: our catalog now shows up and sells inside AI assistants.", who: "Founder", role: "US marketplace" },
   { quote: "Our vibe-coded MVP kept breaking. MnT Future hardened it and it finally held up at scale.", who: "Product Lead", role: "Commerce startup" },
 ];
 
@@ -15,7 +15,7 @@ const ROW_B: T[] = [
   { quote: "We needed a product partner, not a contractor. MnT Future built our SaaS from MVP to our Series A.", who: "Co-founder", role: "Commerce SaaS" },
   { quote: "Core Web Vitals went green and our rankings followed. Performance is clearly in their DNA.", who: "Marketing Lead", role: "Retail brand" },
   { quote: "Our multi-vendor marketplace scaled through a festival-season spike without a wobble.", who: "VP Engineering", role: "Marketplace startup" },
-  { quote: "Senior engineers from day one — no juniors learning on our budget. It showed in the code.", who: "Founder", role: "B2B commerce" },
+  { quote: "Senior engineers from day one: no juniors learning on our budget. It showed in the code.", who: "Founder", role: "B2B commerce" },
 ];
 
 function Card({ t }: { t: T }) {

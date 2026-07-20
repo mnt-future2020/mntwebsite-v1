@@ -1,4 +1,4 @@
-// v3 section heading — eyebrow / Sora title / sub, centered by default.
+// v3 section heading: eyebrow / Sora title / sub, centered by default.
 export default function SectionTitle({
   eyebrow,
   title,

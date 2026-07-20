@@ -30,7 +30,7 @@ export type HubConfig = {
   audiences: { icon: IconName; title: string; desc: string }[];
   stats: { value: string; label: string }[];
   addOns?: { icon: IconName; title: string; desc: string }[];
-  /** A deliberately subordinate offering — rendered as a slim band below the
+  /** A deliberately subordinate offering: rendered as a slim band below the
       flagship services grid, not as an equal card in it. */
   crossSell?: { logoSlug?: string; kicker: string; title: string; desc: string; href: string; cta: string };
   faq: QA[];
@@ -215,7 +215,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
             <SectionTitle
               eyebrow="FAQ"
               title="Questions buyers ask us first"
-              sub="Short, direct answers — the same ones we give on a discovery call."
+              sub="Short, direct answers: the same ones we give on a discovery call."
               className="mb-11"
             />
           </Reveal>
@@ -229,7 +229,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
             <SectionTitle
               eyebrow="Add-ons"
               title="Bundle these onto any build"
-              sub="Attach to a platform build — sold as part of the engagement, not standalone."
+              sub="Attach to a platform build: sold as part of the engagement, not standalone."
             />
           </Reveal>
           <div className="mt-[52px] grid gap-[22px] sm:grid-cols-2 lg:grid-cols-4">

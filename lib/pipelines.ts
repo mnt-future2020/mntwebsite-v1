@@ -31,7 +31,7 @@ function findDefault() {
 }
 
 // Return the default pipeline, creating it (with default stages) the first time.
-// Safe to call on every request — it only writes when nothing exists yet.
+// Safe to call on every request: it only writes when nothing exists yet.
 export async function ensureDefaultPipeline(): Promise<NonNullable<PipelineWithStages>> {
   const existing = await findDefault();
   if (existing) return existing;

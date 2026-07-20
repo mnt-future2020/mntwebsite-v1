@@ -7,9 +7,9 @@ import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
 export const metadata: Metadata = {
-  title: { absolute: "Our Work — Case Studies | MnT Future" },
+  title: { absolute: "Our Work: Case Studies | MnT Future" },
   description:
-    "Platforms MnT Future has designed and built — real, live products engineered end to end for US D2C and marketplace brands.",
+    "Platforms MnT Future has designed and built: real, live products engineered end to end for US D2C and marketplace brands.",
   alternates: { canonical: "/work" },
 };
 
@@ -80,7 +80,7 @@ export default function WorkIndex() {
               <div className="relative min-h-[280px] border-t border-slate-200 bg-slate-100 lg:min-h-[380px] lg:border-l lg:border-t-0">
                 <Image
                   src={featured.heroShot}
-                  alt={`${featured.title} — product screenshot`}
+                  alt={`${featured.title}: product screenshot`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover object-left-top"
@@ -103,7 +103,7 @@ export default function WorkIndex() {
                 <div className="relative aspect-[16/8] overflow-hidden border-b border-slate-200 bg-slate-100">
                   <Image
                     src={c.cover}
-                    alt={`${c.title} — ${c.tagline}`}
+                    alt={`${c.title}: ${c.tagline}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
@@ -129,7 +129,7 @@ export default function WorkIndex() {
             <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
               <h2 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h2>
               <p className="mx-auto mt-3 max-w-[360px] text-[14.5px] leading-[1.6] text-slatey">
-                Book a free strategy session — we&apos;ll show you exactly how we&apos;d build
+                Book a free strategy session: we&apos;ll show you exactly how we&apos;d build
                 it: database design, APIs, scalability plan.
               </p>
               <div className="mt-[22px]">

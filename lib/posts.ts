@@ -12,7 +12,7 @@ export function readingMinutes(html: string) {
 
 // Server-side sanitizer for rich-text (TipTap) post content. Post bodies are
 // admin-authored but rendered with dangerouslySetInnerHTML on the public blog,
-// so we strip anything executable before storing — defense-in-depth against a
+// so we strip anything executable before storing: defense-in-depth against a
 // malicious/compromised admin or a non-editor client. This is a pragmatic,
 // self-contained pass (no jsdom): it removes the practical stored-XSS vectors
 // for the limited tag set the editor emits. For untrusted/anonymous HTML, swap

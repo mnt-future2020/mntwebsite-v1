@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-// PWA manifest — lets employees install the workspace to their home screen and
+// PWA manifest: lets employees install the workspace to their home screen and
 // run it as a standalone app. Next.js serves this at /manifest.webmanifest and
 // auto-links it from <head>.
 export default function manifest(): MetadataRoute.Manifest {
@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "MnT Future Workspace",
     short_name: "MnT Future",
     description:
-      "MnT Future employee & admin workspace — attendance, leave, payslips, projects and more.",
+      "MnT Future employee & admin workspace: attendance, leave, payslips, projects and more.",
     start_url: "/portal",
     scope: "/",
     display: "standalone",

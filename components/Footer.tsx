@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-[18px] max-w-[300px] text-[13.5px] leading-[1.65] text-white/60">
-              MnT Future — we build AI-native, agent-ready commerce platforms for US D2C &amp;
+              MnT Future: we build AI-native, agent-ready commerce platforms for US D2C &amp;
               marketplace brands.
             </p>
 

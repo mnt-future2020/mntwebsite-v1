@@ -12,9 +12,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/shopify", {
-    title: "Shopify Store Development — Official Shopify Partner | MnT Future",
+    title: "Shopify Store Development: Official Shopify Partner | MnT Future",
     description:
-      "Official Shopify Partner builds: fast, conversion-ready Shopify e-commerce stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds — and a designed upgrade path to a custom AI-native platform.",
+      "Official Shopify Partner builds: fast, conversion-ready Shopify e-commerce stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds, and a designed upgrade path to a custom AI-native platform.",
   });
 }
 
@@ -30,22 +30,22 @@ const services = [
   {
     no: "01",
     title: "Store design & build",
-    desc: "Conversion-first Shopify stores — theme engineering, not template mush. Fast, accessible, and on-brand from day one.",
+    desc: "Conversion-first Shopify stores: theme engineering, not template mush. Fast, accessible, and on-brand from day one.",
   },
   {
     no: "02",
     title: "Apps, integrations & migrations",
-    desc: "ERP, 3PL, email, and analytics connected properly — and clean replatforms onto Shopify without losing SEO or order history.",
+    desc: "ERP, 3PL, email, and analytics connected properly, and clean replatforms onto Shopify without losing SEO or order history.",
   },
   {
     no: "03",
     title: "AI & agent-ready on Shopify",
-    desc: "AI search and recommendations, structured product feeds, and agentic-checkout readiness — the AI-native layer, on Shopify.",
+    desc: "AI search and recommendations, structured product feeds, and agentic-checkout readiness: the AI-native layer, on Shopify.",
   },
   {
     no: "04",
     title: "CRO & ongoing growth",
-    desc: "A/B testing, Core Web Vitals, and ADA-minded accessibility on a retainer — lift revenue from the traffic you already have.",
+    desc: "A/B testing, Core Web Vitals, and ADA-minded accessibility on a retainer: lift revenue from the traffic you already have.",
   },
 ];
 
@@ -61,19 +61,19 @@ const customRight = [
   "Checkout, pricing, or workflows no template allows",
   "Deep ERP, OMS, PIM, and 3PL orchestration",
   "AI search, assistants, and agents at the platform core",
-  "You want to own the platform — not rent its ceiling",
+  "You want to own the platform, not rent its ceiling",
 ];
 
 const path = [
   {
     no: "01",
     title: "Launch on Shopify",
-    desc: "An official-partner build: store, theme, apps, analytics, and accessibility — live in weeks, selling from day one.",
+    desc: "An official-partner build: store, theme, apps, analytics, and accessibility. Live in weeks, selling from day one.",
   },
   {
     no: "02",
     title: "Make it sell harder",
-    desc: "AI search and recommendations, agent-ready product feeds, CRO sprints — the growth layer, without replatforming.",
+    desc: "AI search and recommendations, agent-ready product feeds, CRO sprints: the growth layer, without replatforming.",
   },
   {
     no: "03",
@@ -85,27 +85,27 @@ const path = [
 const faq = [
   {
     q: "Do you build Shopify stores?",
-    a: "Yes — MnT Future is an official Shopify Partner. We design and build conversion-ready Shopify stores, handle apps, integrations, and migrations, and add the AI layer: search, recommendations, and agent-ready product feeds.",
+    a: "Yes, MnT Future is an official Shopify Partner. We design and build conversion-ready Shopify stores, handle apps, integrations, and migrations, and add the AI layer: search, recommendations, and agent-ready product feeds.",
   },
   {
-    q: "Shopify or a custom platform — which should we choose?",
-    a: "Shopify when speed matters: standard D2C catalog, lean team, launch in weeks. Custom when scale demands: complex catalogs, marketplaces, B2B logic, unique checkout, deep integrations, and AI at the core. We build both, so our recommendation is an architecture decision, not a sales pitch — that's what the free strategy session settles.",
+    q: "Shopify or a custom platform: which should we choose?",
+    a: "Shopify when speed matters: standard D2C catalog, lean team, launch in weeks. Custom when scale demands: complex catalogs, marketplaces, B2B logic, unique checkout, deep integrations, and AI at the core. We build both, so our recommendation is an architecture decision, not a sales pitch: that's what the free strategy session settles.",
   },
   {
     q: "Can a Shopify store be AI-native and agent-ready?",
-    a: "Substantially, yes. Shopify already participates in the agent ecosystem — stores expose a storefront MCP endpoint, publish Google UCP manifests, and can sell through ChatGPT via the Agentic Commerce Protocol. We layer on AI search and recommendations and clean, structured product data so agents can actually find and trust your catalog. The deepest agent workflows — custom ops agents, platform-level AI with approval gates — need platform control, which is where our custom AI-native builds come in.",
+    a: "Substantially, yes. Shopify already participates in the agent ecosystem: stores expose a storefront MCP endpoint, publish Google UCP manifests, and can sell through ChatGPT via the Agentic Commerce Protocol. We layer on AI search and recommendations and clean, structured product data so agents can actually find and trust your catalog. The deepest agent workflows: custom ops agents, platform-level AI with approval gates: need platform control, which is where our custom AI-native builds come in.",
   },
   {
     q: "What is Hydrogen, and when do you use it?",
-    a: "Hydrogen is Shopify's official React framework for building fully custom, headless storefronts, deployed on Oxygen, Shopify's edge hosting. We use it when a brand wants app-grade UX, custom pages, and logic beyond what themes allow — while keeping Shopify's checkout, admin, and infrastructure underneath. It's the natural middle step between a theme store and a fully custom platform.",
+    a: "Hydrogen is Shopify's official React framework for building fully custom, headless storefronts, deployed on Oxygen, Shopify's edge hosting. We use it when a brand wants app-grade UX, custom pages, and logic beyond what themes allow: while keeping Shopify's checkout, admin, and infrastructure underneath. It's the natural middle step between a theme store and a fully custom platform.",
   },
   {
     q: "Can we start on Shopify and move to a custom platform later?",
-    a: "That's the designed path, not an afterthought. Theme store, Hydrogen headless storefront, custom AI-native platform — each step carries forward. Because the same senior team builds all three, graduating is a planned migration — catalog, customers, SEO, and integrations carried over — not a re-platform trauma with a new agency.",
+    a: "That's the designed path, not an afterthought. Theme store, Hydrogen headless storefront, custom AI-native platform: each step carries forward. Because the same senior team builds all three, graduating is a planned migration: catalog, customers, SEO, and integrations carried over, not a re-platform trauma with a new agency.",
   },
   {
     q: "What does a Shopify build include?",
-    a: "Store architecture and theme or Hydrogen build, app selection and integrations, payments and shipping setup, analytics, ADA-minded accessibility, and launch support — typically live in weeks. AI search, agent-ready feeds, and CRO are available as add-ons or a growth retainer.",
+    a: "Store architecture and theme or Hydrogen build, app selection and integrations, payments and shipping setup, analytics, ADA-minded accessibility, and launch support: typically live in weeks. AI search, agent-ready feeds, and CRO are available as add-ons or a growth retainer.",
   },
 ];
 
@@ -153,7 +153,7 @@ export default function ShopifyBuilds() {
               Shopify stores, built by platform engineers.
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
-              When speed matters, we launch fast, conversion-ready Shopify stores — designed, built,
+              When speed matters, we launch fast, conversion-ready Shopify stores: designed, built,
               and made AI-ready by the same senior team that engineers custom AI-native commerce
               platforms. Start where your stage demands. Never outgrow your team.
             </p>
@@ -175,7 +175,7 @@ export default function ShopifyBuilds() {
           <SectionTitle
             eyebrow="What we build on Shopify"
             title="A partner build, not a template drop."
-            sub="Everything a serious store needs at launch — and the growth layer that keeps earning after it."
+            sub="Everything a serious store needs at launch, and the growth layer that keeps earning after it."
           />
         </Reveal>
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
@@ -198,19 +198,19 @@ export default function ShopifyBuilds() {
                 Advanced Shopify
               </div>
               <h3 className="mt-3 font-display text-[24px] font-bold text-ink">
-                Hydrogen storefronts — headless, without leaving Shopify.
+                Hydrogen storefronts: headless, without leaving Shopify.
               </h3>
               <p className="mt-3 text-[14.5px] leading-[1.65] text-slatey">
                 When a theme becomes the ceiling but the platform isn&apos;t, we build with{" "}
-                <strong className="font-semibold text-ink">Hydrogen</strong> — Shopify&apos;s React
+                <strong className="font-semibold text-ink">Hydrogen</strong>: Shopify&apos;s React
                 framework for fully custom storefronts, deployed on Oxygen, Shopify&apos;s edge
-                hosting. App-grade UX, custom pages and logic, sub-second performance — with
+                hosting. App-grade UX, custom pages and logic, sub-second performance: with
                 Shopify&apos;s checkout, admin, and infrastructure still underneath.
               </p>
             </div>
             <div className="flex flex-col justify-center gap-3 border-t border-slate-200 p-8 sm:p-10 lg:border-l lg:border-t-0">
               {[
-                "Hydrogen + Oxygen — Shopify's own React stack",
+                "Hydrogen + Oxygen: Shopify's own React stack",
                 "Fully custom storefront UX, no theme limits",
                 "Shopify checkout & admin underneath",
                 "The natural step before going fully custom",
@@ -225,14 +225,14 @@ export default function ShopifyBuilds() {
         </Reveal>
       </section>
 
-      {/* SHOPIFY VS CUSTOM — the positioning centerpiece */}
+      {/* SHOPIFY VS CUSTOM: the positioning centerpiece */}
       <section className="border-y border-line bg-mist py-24">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
           <Reveal>
             <SectionTitle
               eyebrow="An honest recommendation"
               title="Shopify when speed matters. Custom when scale demands."
-              sub="We build both — so which one we recommend is an architecture decision, not a sales pitch. This is roughly how we call it in a strategy session:"
+              sub="We build both, so which one we recommend is an architecture decision, not a sales pitch. This is roughly how we call it in a strategy session:"
             />
           </Reveal>
           <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-2">
@@ -251,7 +251,7 @@ export default function ShopifyBuilds() {
                   ))}
                 </div>
                 <p className="mt-auto pt-6 text-[13.5px] leading-relaxed text-slate-500">
-                  Live in weeks, managed infrastructure, and an ecosystem of proven apps — the
+                  Live in weeks, managed infrastructure, and an ecosystem of proven apps: the
                   pragmatic start for most D2C brands.
                 </p>
               </div>
@@ -273,7 +273,7 @@ export default function ShopifyBuilds() {
                   ))}
                 </div>
                 <p className="mt-auto pt-6 text-[13.5px] leading-relaxed text-slate-500">
-                  If you can spec it, we can build it — search, agents, checkout, integrations,
+                  If you can spec it, we can build it: search, agents, checkout, integrations,
                   compliance. Custom removes the ceiling entirely.
                 </p>
               </div>
@@ -288,7 +288,7 @@ export default function ShopifyBuilds() {
           <SectionTitle
             eyebrow="Land small, expand big"
             title="Start on Shopify. Graduate to custom. Same team."
-            sub="Most agencies sell you one or the other. We engineer the path between them — so choosing Shopify today never costs you the platform you'll need tomorrow."
+            sub="Most agencies sell you one or the other. We engineer the path between them, so choosing Shopify today never costs you the platform you'll need tomorrow."
           />
         </Reveal>
         <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-3">
@@ -333,7 +333,7 @@ export default function ShopifyBuilds() {
       <div className="pt-24">
         <CTASection
           title="Not sure if it's Shopify or custom? That's the session."
-          body="A free architecture session with a senior consultant — we look at your catalog, integrations, and roadmap, and tell you honestly which build fits your stage."
+          body="A free architecture session with a senior consultant: we look at your catalog, integrations, and roadmap, and tell you honestly which build fits your stage."
         />
       </div>
     </>

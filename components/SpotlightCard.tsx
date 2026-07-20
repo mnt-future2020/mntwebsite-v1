@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRef } from "react";
 
-// Card wrapper with a cursor-follow radial spotlight. Lightweight — updates two CSS vars on move.
+// Card wrapper with a cursor-follow radial spotlight. Lightweight: updates two CSS vars on move.
 export default function SpotlightCard({
   children,
   className = "",

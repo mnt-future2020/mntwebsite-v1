@@ -113,7 +113,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
         </div>
       </section>
 
-      {/* INTRO — answer-first for AEO */}
+      {/* INTRO: answer-first for AEO */}
       <section className="container-mnt py-16 sm:py-24">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
@@ -174,7 +174,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
           <SectionHeading
             eyebrow="How we work"
             title="Discovery → Build → Certify → Scale"
-            subtitle="A senior-led delivery model built for revenue-critical commerce — predictable and transparent."
+            subtitle="A senior-led delivery model built for revenue-critical commerce: predictable and transparent."
           />
           <div className="mt-14">
             <Process />

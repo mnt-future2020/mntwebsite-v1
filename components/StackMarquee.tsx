@@ -1,6 +1,6 @@
 import Marquee from "./Marquee";
 
-// Tech stack + compliance standards — v3 text pills.
+// Tech stack + compliance standards: v3 text pills.
 const stack = [
   "Next.js",
   "React",

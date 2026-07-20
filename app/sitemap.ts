@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Exclude noindex posts — listing a page in the sitemap while its own meta
+  // Exclude noindex posts: listing a page in the sitemap while its own meta
   // says noindex sends Google a mixed signal.
   const posts = (await getPublishedPosts()).filter((p) => !p.noindex);
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({

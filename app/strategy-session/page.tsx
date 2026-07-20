@@ -11,9 +11,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/strategy-session", {
-    title: "Free Strategy Session — Commerce Tech Consulting | MnT Future",
+    title: "Free Strategy Session: Commerce Tech Consulting | MnT Future",
     description:
-      "A free 45-minute consulting session with a senior commerce consultant: bring your problem, get the solution that fits your business — and keep the written recommendation brief.",
+      "A free 45-minute consulting session with a senior commerce consultant: bring your problem, get the solution that fits your business, and keep the written recommendation brief.",
   });
 }
 
@@ -28,30 +28,30 @@ const steps = [
   {
     no: "01",
     title: "Tell us the problem",
-    desc: "The form takes two minutes — your store, your stack, and what's breaking or what's next. A senior consultant reads it before the call, so we start at the real question.",
+    desc: "The form takes two minutes: your store, your stack, and what's breaking or what's next. A senior consultant reads it before the call, so we start at the real question.",
   },
   {
     no: "02",
     title: "We work it live",
-    desc: "45 minutes on a shared whiteboard: data model, APIs, integrations, and where AI and agents would actually lift revenue — the way we'd genuinely build it.",
+    desc: "45 minutes on a shared whiteboard: data model, APIs, integrations, and where AI and agents would actually lift revenue: the way we'd genuinely build it.",
   },
   {
     no: "03",
     title: "You keep the plan",
-    desc: "After the session you get a written recommendation brief — the diagnosis, the solution that fits your business, and what to do first. Yours, whether you hire us or not.",
+    desc: "After the session you get a written recommendation brief: the diagnosis, the solution that fits your business, and what to do first. Yours, whether you hire us or not.",
   },
   {
     no: "04",
     title: "Decide with clarity",
-    desc: "If it's a fit, most clients start with a small productized pilot — not a big contract. If Shopify or your current stack is enough, we'll say exactly that.",
+    desc: "If it's a fit, most clients start with a small productized pilot, not a big contract. If Shopify or your current stack is enough, we'll say exactly that.",
   },
 ];
 
 const deliverables = [
-  "A clear diagnosis of your problem — what's holding your commerce back, and what it's costing you",
-  "The solution that fits your business — matched to your stage, your stack, and your budget",
-  "Where AI can grow your revenue — the opportunities worth taking, in plain language",
-  "A straight recommendation and what to do first — Shopify, Hydrogen, or custom, with honest effort framing",
+  "A clear diagnosis of your problem: what's holding your commerce back, and what it's costing you",
+  "The solution that fits your business: matched to your stage, your stack, and your budget",
+  "Where AI can grow your revenue: the opportunities worth taking, in plain language",
+  "A straight recommendation and what to do first: Shopify, Hydrogen, or custom, with honest effort framing",
   "The brief is yours to keep, even if we never work together",
 ];
 
@@ -59,49 +59,49 @@ const audiences = [
   {
     icon: "store" as const,
     title: "D2C brands outgrowing their stack",
-    desc: "Template limits, slow pages, integration duct tape — you can feel the ceiling but want the plan before committing to a rebuild.",
+    desc: "Template limits, slow pages, integration duct tape: you can feel the ceiling but want the plan before committing to a rebuild.",
   },
   {
     icon: "grid" as const,
     title: "Marketplace & B2B builders",
-    desc: "Multi-vendor mechanics, account pricing, RFQ flows — architecture decisions that are expensive to get wrong the first time.",
+    desc: "Multi-vendor mechanics, account pricing, RFQ flows: architecture decisions that are expensive to get wrong the first time.",
   },
   {
     icon: "code" as const,
     title: "Founders with an MVP that broke",
-    desc: "A vibe-coded or agency-built MVP that's cracking under real traffic — you need a grown-up read on what to keep and what to replace.",
+    desc: "A vibe-coded or agency-built MVP that's cracking under real traffic: you need a grown-up read on what to keep and what to replace.",
   },
   {
     icon: "network" as const,
     title: "Brands going agent-ready",
-    desc: "AI agents are becoming a sales channel. You want to know what it takes for your store to be discovered — and bought from — by them.",
+    desc: "AI agents are becoming a sales channel. You want to know what it takes for your store to be discovered, and bought from: by them.",
   },
 ];
 
 const faq = [
   {
     q: "Is the strategy session really free?",
-    a: "Yes — no invoice, no obligation, no credit card. We invest the hour because a working session is the best possible demonstration of how we think and build. The written brief you keep is real consulting output, free.",
+    a: "Yes, no invoice, no obligation, no credit card. We invest the hour because a working session is the best possible demonstration of how we think and build. The written brief you keep is real consulting output, free.",
   },
   {
     q: "Is this a sales call?",
-    a: "You talk to a senior consultant who would actually architect your build — not a sales rep with a slide deck. The session is spent on your problem, and the recommendation is honest even when it's 'don't build custom yet' or 'Shopify is enough for your stage.'",
+    a: "You talk to a senior consultant who would actually architect your build, not a sales rep with a slide deck. The session is spent on your problem, and the recommendation is honest even when it's 'don't build custom yet' or 'Shopify is enough for your stage.'",
   },
   {
     q: "What should we prepare?",
-    a: "Just context: your store or product, your current stack, the bottleneck or goal, and any numbers you're comfortable sharing (traffic, orders, conversion). Links help. Nothing formal — we'll ask the right questions.",
+    a: "Just context: your store or product, your current stack, the bottleneck or goal, and any numbers you're comfortable sharing (traffic, orders, conversion). Links help. Nothing formal: we'll ask the right questions.",
   },
   {
     q: "Who should join from our side?",
-    a: "Whoever owns the decision and whoever owns the tech — typically a founder or product lead, plus an engineer if you have one. It works fine with just a founder too.",
+    a: "Whoever owns the decision and whoever owns the tech: typically a founder or product lead, plus an engineer if you have one. It works fine with just a founder too.",
   },
   {
     q: "Do we need an NDA?",
-    a: "Happy to sign one before the session if you'd like — just mention it in the form and we'll handle it before the call.",
+    a: "Happy to sign one before the session if you'd like: just mention it in the form and we'll handle it before the call.",
   },
   {
     q: "What happens after the session?",
-    a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
+    a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot: AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a Shopify build: that proves ROI in weeks before anything bigger.",
   },
 ];
 
@@ -118,7 +118,7 @@ const faqSchema = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: "Commerce technology consulting — free strategy session",
+  serviceType: "Commerce technology consulting: free strategy session",
   provider: { "@type": "Organization", name: site.name, legalName: site.legalName },
   areaServed: ["United States"],
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -146,7 +146,7 @@ export default function StrategySession() {
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
               A free 45-minute working session with a senior commerce consultant. We dig into your
-              store, your stack, and your bottleneck, sketch the solution live — and you keep the
+              store, your stack, and your bottleneck, sketch the solution live, and you keep the
               written plan whether you hire us or not.
             </p>
             <div className="mt-8 flex flex-wrap gap-3.5">
@@ -182,7 +182,7 @@ export default function StrategySession() {
           <SectionTitle
             eyebrow="How the session works"
             title="A working session, not a pitch."
-            sub="One hour of real consulting with a defined shape — no surprises."
+            sub="One hour of real consulting with a defined shape: no surprises."
           />
         </Reveal>
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
@@ -205,8 +205,8 @@ export default function StrategySession() {
             <SectionTitle
               align="left"
               eyebrow="What you leave with"
-              title="Consulting output you keep — not meeting notes."
-              sub="The session ends with a written recommendation brief — your problem, the solution that fits, and what to do first. It's the reason the session is worth your hour even if you never hire us."
+              title="Consulting output you keep, not meeting notes."
+              sub="The session ends with a written recommendation brief: your problem, the solution that fits, and what to do first. It's the reason the session is worth your hour even if you never hire us."
             />
             <Link
               href="/work"
@@ -271,7 +271,7 @@ export default function StrategySession() {
               </span>
               <span className="mt-1 block text-[13.5px] leading-relaxed text-slatey">
                 We assess your store&apos;s data, feeds, and AI-channel visibility and send you the
-                findings — no call required. Ask for it in the form below.
+                findings: no call required. Ask for it in the form below.
               </span>
             </span>
             <a
@@ -311,8 +311,8 @@ export default function StrategySession() {
               Two minutes now. A plan by next week.
             </h2>
             <p className="mt-4 text-[16px] leading-[1.65] text-slatey">
-              Tell us what you&apos;re building and what&apos;s in the way. A senior consultant — the
-              one who&apos;d run your session — replies within one business day to schedule it.
+              Tell us what you&apos;re building and what&apos;s in the way. A senior consultant: the
+              one who&apos;d run your session: replies within one business day to schedule it.
             </p>
             <div className="mt-8 flex flex-col gap-4">
               <a

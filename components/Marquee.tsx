@@ -1,6 +1,6 @@
 import * as React from "react";
 
-// Infinite horizontal marquee — pure CSS transform, pauses on hover, reduced-motion safe.
+// Infinite horizontal marquee: pure CSS transform, pauses on hover, reduced-motion safe.
 export default function Marquee({
   children,
   reverse = false,

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // Animates the numeric part of a value (e.g. "100%", "5+", "2") when scrolled into view.
 // Non-numeric values (e.g. "India + Global") render as-is.
 //
-// The final value is the SSR/no-JS default — the count-up never leaves a bare "0"
+// The final value is the SSR/no-JS default: the count-up never leaves a bare "0"
 // on the page. Only stats that load BELOW the fold animate (from 0 → target as
 // they scroll in); a stat already on screen at load just shows its real value,
 // with no target→0→target flicker.
@@ -25,12 +25,12 @@ export default function Counter({
   const target = match ? parseInt(match[2].replace(/,/g, ""), 10) : 0;
   const suffix = match ? match[3] : "";
 
-  // `null` means "not animating — show the real target". A number is a live
+  // `null` means "not animating: show the real target". A number is a live
   // animation frame. Starting at null keeps SSR and the first client render equal
   // to `target`, so there's no hydration mismatch and never a "0" fallback.
   const [display, setDisplay] = useState<number | null>(null);
 
-  // Depend ONLY on stable primitives — never on the freshly-created `match` array,
+  // Depend ONLY on stable primitives: never on the freshly-created `match` array,
   // otherwise the effect tears down and restarts the animation on every frame.
   useEffect(() => {
     if (!isNumeric) return;
@@ -44,7 +44,7 @@ export default function Counter({
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || typeof IntersectionObserver === "undefined") return;
 
-    // Already visible at load? Don't animate — the count-up would only flash the
+    // Already visible at load? Don't animate: the count-up would only flash the
     // value to 0 and back. Only stats below the fold get the reveal animation.
     const rect = el.getBoundingClientRect();
     const viewportH = window.innerHeight || document.documentElement.clientHeight || 0;

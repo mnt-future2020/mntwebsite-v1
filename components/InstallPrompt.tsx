@@ -50,7 +50,7 @@ export default function InstallPrompt() {
     );
   }
 
-  // iOS — no programmatic prompt; guide the user.
+  // iOS: no programmatic prompt; guide the user.
   if (isIos) {
     return (
       <div className="mt-4">

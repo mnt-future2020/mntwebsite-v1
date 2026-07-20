@@ -15,7 +15,7 @@ const partners: {
   { name: "AWS", designation: "Official Partner", img: "/images/partners/aws.svg", imgClass: "h-8" },
   { name: "Google Cloud", designation: "Official Partner", img: "/images/partners/google-cloud.svg", imgClass: "h-9" },
   { name: "Shopify", designation: "Official Partner", slug: "shopify" },
-  // Baked hex predates OpenAI's rebrand — their mark is black now.
+  // Baked hex predates OpenAI's rebrand: their mark is black now.
   { name: "OpenAI", designation: "Official Partner", slug: "openai", color: "#0A0A0A" },
   { name: "NVIDIA", designation: "Developer Program Member", slug: "nvidia" },
 ];

@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source/agentready", {
-    title: "Free Agent-Readiness Scan — is your store visible to AI agents? | MnT Future",
+    title: "Free Agent-Readiness Scan: is your store visible to AI agents? | MnT Future",
     description:
       "Scan any store free: 29 checks across structured data, agent access, feeds and ACP · Google UCP · MCP discovery. Letter grade + prioritized fixes in seconds. No email needed for the score.",
   });
@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "agentready — store agent-readiness scanner",
+  name: "agentready: store agent-readiness scanner",
   applicationCategory: "DeveloperApplication",
   description:
     "Free scan that grades any e-commerce store's readiness for AI shopping agents: 29 checks incl. ACP, Google UCP and MCP protocol discovery.",
@@ -29,8 +29,8 @@ const softwareSchema = {
 };
 
 const TRUST_POINTS = [
-  { icon: "shield" as const, text: "~15 polite requests, static analysis — what agents actually see" },
-  { icon: "eye" as const, text: "Open source (MIT) — audit every check on GitHub" },
+  { icon: "shield" as const, text: "~15 polite requests, static analysis: what agents actually see" },
+  { icon: "eye" as const, text: "Open source (MIT): audit every check on GitHub" },
   { icon: "bolt" as const, text: "No email needed for the score" },
 ];
 
@@ -67,7 +67,7 @@ export default function AgentReadyPage() {
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
                 ChatGPT discovers products from feeds. Google&apos;s AI Mode transacts over UCP.
                 Shopify ships MCP endpoints. Find out in seconds how your store looks to the
-                agents — 29 checks, a letter grade, and exactly what to fix.
+                agents: 29 checks, a letter grade, and exactly what to fix.
               </p>
             </div>
           </Reveal>
@@ -94,7 +94,7 @@ export default function AgentReadyPage() {
           <code className="rounded bg-slate-100 px-2 py-1 font-mono text-[13px] text-navy">
             npx @mntglobal/agentready your-store.com
           </code>{" "}
-          · Same engine, open source —{" "}
+          · Same engine, open source:{" "}
           <Link href="/open-source" className="font-semibold text-brand hover:underline">
             about our OSS program
           </Link>
@@ -103,7 +103,7 @@ export default function AgentReadyPage() {
 
       <CTASection
         title="agentready finds the gaps. We build the fixes."
-        body="Bring your report to a free strategy session — a senior consultant maps every finding to a concrete fix plan: feeds, schema, UCP/MCP integration, the lot."
+        body="Bring your report to a free strategy session: a senior consultant maps every finding to a concrete fix plan: feeds, schema, UCP/MCP integration, the lot."
       />
     </>
   );

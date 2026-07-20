@@ -12,7 +12,7 @@ const GITHUB_ORG = "https://github.com/MnT-Future";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
-    title: "Open Source — agentic & AI-native commerce tooling | MnT Future",
+    title: "Open Source: agentic & AI-native commerce tooling | MnT Future",
     description:
       "MnT Future's open-source program for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
   });
@@ -51,7 +51,7 @@ const TOOLS: Tool[] = [
     when: "October 2026",
     icon: "store",
     tagline: "Expose your catalog to AI agents, securely.",
-    desc: "Open-source Retail MCP server kit — catalog, inventory and pricing for AI agents. Headless engines first; Shopify already ships its own.",
+    desc: "Open-source Retail MCP server kit: catalog, inventory and pricing for AI agents. Headless engines first; Shopify already ships its own.",
     maps: "Embedded Agents",
   },
   {
@@ -69,7 +69,7 @@ const VALUES = [
   {
     icon: "eye" as const,
     title: "Prove it, don't claim it",
-    desc: "The agentic-commerce protocols are months old and full of bold claims. We publish working, inspectable tools instead — run them yourself, no marketing required.",
+    desc: "The agentic-commerce protocols are months old and full of bold claims. We publish working, inspectable tools instead: run them yourself, no marketing required.",
   },
   {
     icon: "check" as const,
@@ -84,18 +84,18 @@ const VALUES = [
   {
     icon: "network" as const,
     title: "Maps to real work",
-    desc: "Every tool ladders into a service we actually deliver for clients. No orphan repos, no abandonware — each one earns its place.",
+    desc: "Every tool ladders into a service we actually deliver for clients. No orphan repos, no abandonware: each one earns its place.",
   },
 ];
 
 const FAQ_ITEMS: QA[] = [
   {
     q: "Are the tools really free?",
-    a: "Yes — MIT-licensed, forever. The CLIs are free, agentready's hosted scan is free, and no email is needed for a score. Our business is the engineering behind the fixes, not the tools.",
+    a: "Yes, MIT-licensed, forever. The CLIs are free, agentready's hosted scan is free, and no email is needed for a score. Our business is the engineering behind the fixes, not the tools.",
   },
   {
     q: "Do you see my code or my store's data?",
-    a: "vibecheck's CLI scans your code entirely on your machine — nothing reaches us. agentready's CLI fetches your store directly from your machine. Only agentready's web scanner has our server fetch your public pages to compute the score shown to you; we keep your email and grade only if you request the fix plan.",
+    a: "vibecheck's CLI scans your code entirely on your machine: nothing reaches us. agentready's CLI fetches your store directly from your machine. Only agentready's web scanner has our server fetch your public pages to compute the score shown to you; we keep your email and grade only if you request the fix plan.",
   },
   {
     q: "Can anyone change the code?",
@@ -103,7 +103,7 @@ const FAQ_ITEMS: QA[] = [
   },
   {
     q: "Why open-source this instead of selling it?",
-    a: "The agentic-commerce and AI-codegen waves are new and full of bold claims. Publishing working, inspectable tools is how we prove we're practitioners — and teams who discover gaps with our tools often ask us to fix them. Honest exchange.",
+    a: "The agentic-commerce and AI-codegen waves are new and full of bold claims. Publishing working, inspectable tools is how we prove we're practitioners, and teams who discover gaps with our tools often ask us to fix them. Honest exchange.",
   },
 ];
 
@@ -171,7 +171,7 @@ export default function OpenSourcePage() {
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
                   Anyone can claim &ldquo;agent-ready&rdquo; or &ldquo;secure.&rdquo; We publish the
-                  tools that prove it — MIT-licensed, with honest limitations in every README and
+                  tools that prove it: MIT-licensed, with honest limitations in every README and
                   benchmarks you can reproduce. <strong className="text-white">Two are live</strong>,
                   two are on the way.
                 </p>
@@ -242,7 +242,7 @@ export default function OpenSourcePage() {
               Four tools. <span className="text-brand">One honest program.</span>
             </>
           }
-          subtitle="Each maps to a real problem we fix for clients — and each ships with the MnT Future repo standard: a 30-second quickstart, honest limitations, and tests you can run."
+          subtitle="Each maps to a real problem we fix for clients, and each ships with the MnT Future repo standard: a 30-second quickstart, honest limitations, and tests you can run."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {TOOLS.map((tool, i) => {
@@ -322,7 +322,7 @@ export default function OpenSourcePage() {
                 Senior by default. <span className="text-brand-300">Honesty over hype.</span>
               </>
             }
-            subtitle="The same standard runs through every repo — so a tool of ours reads like our engineering, not a demo."
+            subtitle="The same standard runs through every repo, so a tool of ours reads like our engineering, not a demo."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((value, i) => (
@@ -357,7 +357,7 @@ export default function OpenSourcePage() {
 
       <CTASection
         title="Our tools find the gaps. We build the fixes."
-        body="Run any of them, then bring the report to a free strategy session — a senior consultant maps every finding to a concrete fix plan for your platform."
+        body="Run any of them, then bring the report to a free strategy session: a senior consultant maps every finding to a concrete fix plan for your platform."
       />
     </>
   );

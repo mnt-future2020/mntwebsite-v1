@@ -2,7 +2,7 @@ import { site, commerceNav, aiNav } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 import { caseStudies } from "@/lib/caseStudies";
 
-// Builders for /llms.txt and /llms-full.txt — the LLM-facing equivalents of
+// Builders for /llms.txt and /llms-full.txt: the LLM-facing equivalents of
 // sitemap.xml. llms.txt is a curated Markdown index of the site; llms-full.txt
 // inlines the actual content (services, case studies, full blog posts) so an AI
 // can ingest everything in one fetch. Both auto-update as blog posts publish.
@@ -32,11 +32,11 @@ export async function buildLlmsTxt(): Promise<string> {
   const posts = (await getPublishedPosts()).filter((p) => !p.noindex);
   const out: string[] = [];
 
-  out.push(`# ${site.name} — ${site.legalName}`);
+  out.push(`# ${site.name}: ${site.legalName}`);
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
-  out.push(`${site.tagline}. Focused on US D2C & marketplace brands — commerce platforms + AI agents. Contact: ${site.email}`);
+  out.push(`${site.tagline}. Focused on US D2C & marketplace brands: commerce platforms + AI agents. Contact: ${site.email}`);
   out.push("");
 
   out.push(`## Commerce Platforms`);
@@ -50,7 +50,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
 
   out.push(`## Company`);
-  out.push(`- [Book a free strategy session](${abs("/strategy-session")}): Free 45-minute commerce tech consulting session — bring the problem, leave with a written architecture brief.`);
+  out.push(`- [Book a free strategy session](${abs("/strategy-session")}): Free 45-minute commerce tech consulting session: bring the problem, leave with a written architecture brief.`);
   out.push(`- [About MnT Future](${abs("/about")}): Who we are and how we work.`);
   out.push(`- [Security & Compliance](${abs("/security-compliance")}): ADA/WCAG · PCI DSS v4.0.1 · US sales-tax · SOC 2-aligned.`);
   out.push(`- [Contact](${abs("/contact")}): Book a free strategy session or agent-readiness audit.`);
@@ -79,7 +79,7 @@ export async function buildLlmsFullTxt(): Promise<string> {
   const posts = (await getPublishedPosts()).filter((p) => !p.noindex);
   const out: string[] = [];
 
-  out.push(`# ${site.name} — ${site.legalName}: full content for LLMs`);
+  out.push(`# ${site.name}: ${site.legalName}: full content for LLMs`);
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
@@ -90,20 +90,20 @@ export async function buildLlmsFullTxt(): Promise<string> {
   out.push("");
   out.push(`## Services`);
   out.push("");
-  out.push(`### Commerce Platforms — ${abs(commerceNav.href)}`);
+  out.push(`### Commerce Platforms: ${abs(commerceNav.href)}`);
   for (const c of commerceNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
   out.push("");
-  out.push(`### AI & Agents — ${abs(aiNav.href)}`);
+  out.push(`### AI & Agents: ${abs(aiNav.href)}`);
   for (const c of aiNav.children) out.push(`- **${c.label}** (${abs(c.href)}): ${c.desc}`);
   out.push("");
 
   if (caseStudies.length) {
     out.push(`---`);
     out.push("");
-    out.push(`## Work — case studies`);
+    out.push(`## Work: case studies`);
     out.push("");
     for (const cs of caseStudies) {
-      out.push(`### ${cs.title} — ${cs.tagline}`);
+      out.push(`### ${cs.title}: ${cs.tagline}`);
       out.push(`URL: ${abs(`/work/${cs.slug}`)}${cs.liveUrl ? ` · Live: ${cs.liveUrl}` : ""} · ${cs.category}`);
       out.push("");
       out.push(cs.summary);

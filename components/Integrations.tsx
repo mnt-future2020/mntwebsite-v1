@@ -25,7 +25,7 @@ export default function Integrations() {
         <SectionHeading
           eyebrow="Integrations"
           title="We plug into the tools you already run on."
-          subtitle="Payments, commerce, cloud and data platforms — connected cleanly into your build, not bolted on."
+          subtitle="Payments, commerce, cloud and data platforms: connected cleanly into your build, not bolted on."
         />
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {integrations.map((item, i) => (
@@ -41,7 +41,7 @@ export default function Integrations() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-slatey">
-          …and many more — ERP, OMS, PIM &amp; CDP, 3PL/logistics, tax engines, and the agentic protocols (ACP, UCP, MCP).
+          …and many more: ERP, OMS, PIM &amp; CDP, 3PL/logistics, tax engines, and the agentic protocols (ACP, UCP, MCP).
         </p>
       </div>
     </section>

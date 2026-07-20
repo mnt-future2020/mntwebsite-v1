@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-// The App Router scrolls the changed segment into view, not the window top —
+// The App Router scrolls the changed segment into view, not the window top:
 // with the announcement bar and header above <main>, link navigations land
-// 26–55px down the page. Reset to the true top ourselves, but never on
+// 26 to 55px down the page. Reset to the true top ourselves, but never on
 // back/forward, where the router restores the previous scroll position.
 export default function ScrollReset() {
   const pathname = usePathname();

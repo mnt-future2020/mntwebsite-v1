@@ -27,7 +27,7 @@ export async function getRolePerms(role: string): Promise<string[]> {
   return DEFAULT_PERMS[role] || [];
 }
 
-// Every role in the system — built-in roles (always present, even without a DB
+// Every role in the system: built-in roles (always present, even without a DB
 // row) merged with any custom roles stored in RoleAccess. Used by the roles
 // matrix and the employee role picker.
 export async function listRoles(): Promise<RoleRecord[]> {
@@ -59,7 +59,7 @@ export async function listRoles(): Promise<RoleRecord[]> {
       };
     }
   } catch {
-    /* DB optional — return the built-in roles only */
+    /* DB optional: return the built-in roles only */
   }
 
   // System roles first (canonical order), then custom roles alphabetically.

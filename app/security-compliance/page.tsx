@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
     title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT Future",
     description:
-      "US commerce compliance engineered into the architecture — ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2-aligned controls, and CCPA/CPRA privacy.",
+      "US commerce compliance engineered into the architecture: ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2-aligned controls, and CCPA/CPRA privacy.",
   });
 }
 
@@ -25,13 +25,13 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
   {
     name: "PCI DSS v4.0.1",
     icon: "lock",
-    desc: "Payment flows architected so card data stays out of scope — tokenised, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
+    desc: "Payment flows architected so card data stays out of scope: tokenised, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
     tags: ["Tokenisation", "Scope reduction", "Continuous controls"],
   },
   {
     name: "Sales-tax & nexus",
     icon: "records",
-    desc: "Multi-state US sales-tax and economic-nexus handled through Avalara / Anrok — accurate calculation and filing readiness.",
+    desc: "Multi-state US sales-tax and economic-nexus handled through Avalara / Anrok: accurate calculation and filing readiness.",
     tags: ["Economic nexus", "Avalara / Anrok", "Multi-state"],
   },
   {
@@ -43,7 +43,7 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
   {
     name: "US data privacy",
     icon: "globe",
-    desc: "CCPA / CPRA consent, data-subject rights, and retention handling for US consumer data — engineered in, not bolted on.",
+    desc: "CCPA / CPRA consent, data-subject rights, and retention handling for US consumer data: engineered in, not bolted on.",
     tags: ["CCPA / CPRA", "Consent", "DSAR"],
   },
   {
@@ -55,10 +55,10 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
 ];
 
 const principles = [
-  "Threat-model first — we map the data, the risks, and the regulatory surface before we design the system.",
-  "Least privilege everywhere — role-based access, scoped tokens, and audited service-to-service calls.",
+  "Threat-model first: we map the data, the risks, and the regulatory surface before we design the system.",
+  "Least privilege everywhere: role-based access, scoped tokens, and audited service-to-service calls.",
   "Encryption in transit and at rest, with key management and rotation handled as infrastructure.",
-  "Continuous compliance — controls validated every sprint in CI/CD, not assembled before an audit.",
+  "Continuous compliance: controls validated every sprint in CI/CD, not assembled before an audit.",
   "Observability and audit logging built in, so you can prove what happened, when, and to whom.",
 ];
 
@@ -79,7 +79,7 @@ export default function SecurityCompliance() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
               For a US store, accessibility, payment security, and sales-tax are liabilities the day
-              you launch. The safest systems are the ones where compliance was a design decision — not
+              you launch. The safest systems are the ones where compliance was a design decision: not
               a last-minute patch. Here&apos;s how MnT Future builds it in.
             </p>
             <div className="mt-9">
@@ -95,7 +95,7 @@ export default function SecurityCompliance() {
       <section className="container-mnt py-20 sm:py-28">
         <SectionHeading
           eyebrow="Frameworks we engineer to"
-          title="The standards that protect your users — and your business."
+          title="The standards that protect your users, and your business."
           subtitle="We don't just claim compliance. We build to these frameworks and validate them as we ship."
         />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -156,7 +156,7 @@ export default function SecurityCompliance() {
               <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce platforms</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
                 Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenised
-                payments, and WCAG-conformant, secure checkout — with US sales-tax handled, without
+                payments, and WCAG-conformant, secure checkout, with US sales-tax handled, without
                 slowing the store down.
               </p>
               <Link href="/commerce" className="link-arrow mt-6">
@@ -171,7 +171,7 @@ export default function SecurityCompliance() {
               </div>
               <h3 className="mt-5 font-display text-xl font-bold text-ink">AI &amp; agents</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
-                AI ships with guardrails — evaluation gates, human-in-the-loop oversight, and accurate
+                AI ships with guardrails: evaluation gates, human-in-the-loop oversight, and accurate
                 real-time data so agents transact correctly and safely in AI channels.
               </p>
               <Link href="/ai-agents" className="link-arrow mt-6">
@@ -184,7 +184,7 @@ export default function SecurityCompliance() {
 
       <CTASection
         title="Have a compliance requirement? Let's map it before you build."
-        body="Bring your regulatory surface — ADA, PCI DSS, sales-tax, SOC 2-aligned controls — and we'll walk you through how we'd architect it. No jargon, no scare tactics."
+        body="Bring your regulatory surface: ADA, PCI DSS, sales-tax, SOC 2-aligned controls, and we'll walk you through how we'd architect it. No jargon, no scare tactics."
         primary={{ label: "Book a strategy session", href: "/strategy-session" }}
         secondary={{ label: "Explore what we build", href: "/" }}
       />

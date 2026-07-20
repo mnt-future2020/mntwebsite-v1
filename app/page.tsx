@@ -14,9 +14,9 @@ import { caseStudies } from "@/lib/caseStudies";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
-    title: "MnT Future — AI-Native, Agent-Ready Commerce Platforms for US Brands",
+    title: "MnT Future: AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless builds, integrations, B2B, and AI agents.",
+      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: headless builds, integrations, B2B, and AI agents.",
   });
 }
 
@@ -31,7 +31,7 @@ const verticals = [
   {
     kicker: "Commerce Platforms",
     title: "Commerce platform development",
-    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
+    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce, with ADA, PCI DSS & US sales-tax handled.",
     href: "/commerce",
     icon: "store" as const,
     gradient: "from-brand-700 to-brand-900",
@@ -64,22 +64,22 @@ const whyMnt = [
   {
     icon: "ai" as const,
     title: "AI-native by default",
-    desc: "AI search, recommendations, assistants, and agents — built into the product where they lift revenue and gated behind evaluations. Not a bolted-on chatbot.",
+    desc: "AI search, recommendations, assistants, and agents: built into the product where they lift revenue and gated behind evaluations. Not a bolted-on chatbot.",
   },
   {
     icon: "network" as const,
     title: "Agent-ready before your competitors",
-    desc: "ACP, Google UCP, and a Retail MCP server make your store discoverable and buyable by AI shopping agents — an emerging $900B–$1T channel.",
+    desc: "ACP, Google UCP, and a Retail MCP server make your store discoverable and buyable by AI shopping agents: an emerging $900B to $1T channel.",
   },
   {
     icon: "shield" as const,
     title: "US compliance engineered in",
-    desc: "ADA/WCAG accessibility, PCI DSS v4.0.1, and multi-state sales-tax handled from day one — the obligations that start the moment a US store goes live.",
+    desc: "ADA/WCAG accessibility, PCI DSS v4.0.1, and multi-state sales-tax handled from day one: the obligations that start the moment a US store goes live.",
   },
   {
     icon: "compass" as const,
     title: "Land small, expand big",
-    desc: "Start with a productized pilot that proves ROI in weeks, grow into a dedicated pod, and expand into a full platform build — senior engineers the whole way.",
+    desc: "Start with a productized pilot that proves ROI in weeks, grow into a dedicated pod, and expand into a full platform build: senior engineers the whole way.",
   },
 ];
 
@@ -87,21 +87,21 @@ const engagement = [
   {
     no: "01",
     title: "Land",
-    desc: "A productized paid pilot that proves ROI in weeks — AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a fast Shopify store build. Small scope, fast proof.",
+    desc: "A productized paid pilot that proves ROI in weeks: AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a fast Shopify store build. Small scope, fast proof.",
     points: ["Fixed, focused scope", "Live in weeks", "Clear, measured outcome"],
     featured: false,
   },
   {
     no: "02",
     title: "Grow",
-    desc: "A dedicated senior pod working as your embedded product team on a monthly retainer — flexing scope sprint to sprint.",
+    desc: "A dedicated senior pod working as your embedded product team on a monthly retainer: flexing scope sprint to sprint.",
     points: ["Senior engineers", "Sprint flexibility", "Scales up or down"],
     featured: true,
   },
   {
     no: "03",
     title: "Expand",
-    desc: "A full platform build — headless, marketplace, or B2B — engineered to scale, plus custom AI agents and a managed SLA.",
+    desc: "A full platform build (headless, marketplace, or B2B) engineered to scale, plus custom AI agents and a managed SLA.",
     points: ["Full platform builds", "AI agents & automation", "Managed & compliant"],
     featured: false,
   },
@@ -110,11 +110,11 @@ const engagement = [
 const homeFaq: QA[] = [
   {
     q: "What is agent-ready commerce?",
-    a: "Agent-ready commerce means AI shopping agents — like those in ChatGPT and Google — can discover your products, trust your price and inventory data, and complete a purchase. MnT Future makes your store agent-ready with structured product feeds, real-time sync, and the ACP, UCP, and MCP integrations agents use to buy.",
+    a: "Agent-ready commerce means AI shopping agents, like those in ChatGPT and Google: can discover your products, trust your price and inventory data, and complete a purchase. MnT Future makes your store agent-ready with structured product feeds, real-time sync, and the ACP, UCP, and MCP integrations agents use to buy.",
   },
   {
     q: "What does MnT Future build?",
-    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and automation, B2B/wholesale, and managed commerce with US compliance — plus AI search, custom AI agents, and agent-readiness.",
+    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and automation, B2B/wholesale, and managed commerce with US compliance, plus AI search, custom AI agents, and agent-readiness.",
   },
   {
     q: "What is the Agentic Commerce Protocol (ACP)?",
@@ -122,15 +122,15 @@ const homeFaq: QA[] = [
   },
   {
     q: "Do you only work with US brands?",
-    a: "Yes. MnT Future focuses on US D2C and marketplace brands, where our compliance depth — ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax — and our agentic-commerce work are sharpest.",
+    a: "Yes. MnT Future focuses on US D2C and marketplace brands, where our compliance depth: ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax, and our agentic-commerce work are sharpest.",
   },
   {
     q: "Do you build Shopify stores, or only custom platforms?",
-    a: "Both. As an official Shopify Partner we launch fast, conversion-ready Shopify stores when speed matters. Our flagship is custom AI-native commerce — if you can spec it, we can build it — and because the same team builds both, Shopify clients graduate to a custom platform when scale demands, without a re-platform trauma.",
+    a: "Both. As an official Shopify Partner we launch fast, conversion-ready Shopify stores when speed matters. Our flagship is custom AI-native commerce: if you can spec it, we can build it, and because the same team builds both, Shopify clients graduate to a custom platform when scale demands, without a re-platform trauma.",
   },
   {
     q: "How do we get started?",
-    a: "Start with a free strategy session or a free agent-readiness audit. We sketch how we'd build it, or assess your AI-channel readiness, and give you a clear next step — no obligation.",
+    a: "Start with a free strategy session or a free agent-readiness audit. We sketch how we'd build it, or assess your AI-channel readiness, and give you a clear next step: no obligation.",
   },
 ];
 
@@ -177,8 +177,8 @@ export default function Home() {
         <Reveal>
           <SectionTitle
             eyebrow="Two sides, one platform"
-            title="Commerce platforms — and the AI that sells them."
-            sub="We build the platform, then make it AI-native and agent-ready. Start on either side — most brands do both."
+            title="Commerce platforms, and the AI that sells them."
+            sub="We build the platform, then make it AI-native and agent-ready. Start on either side: most brands do both."
           />
         </Reveal>
         <div className="mt-[52px] grid gap-[26px] lg:grid-cols-2">
@@ -249,7 +249,7 @@ export default function Home() {
           <Reveal>
             <SectionTitle
               eyebrow="Why MnT Future"
-              title="The reasons founders pick us — and stay."
+              title="The reasons founders pick us, and stay."
               sub="Specialist depth, compliance built into the architecture, AI where it counts, and the speed of a senior team."
             />
           </Reveal>
@@ -335,7 +335,7 @@ export default function Home() {
                 <div className="relative aspect-[16/8] overflow-hidden border-b border-slate-200 bg-slate-100">
                   <Image
                     src={featured.cover}
-                    alt={`${featured.title} — ${featured.tagline}`}
+                    alt={`${featured.title}: ${featured.tagline}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
@@ -358,7 +358,7 @@ export default function Home() {
               <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
                 <h3 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h3>
                 <p className="mx-auto mt-3 max-w-[360px] text-[14.5px] leading-relaxed text-slatey">
-                  Book a free strategy session — we&apos;ll show you exactly how we&apos;d build
+                  Book a free strategy session: we&apos;ll show you exactly how we&apos;d build
                   it: database design, APIs, scalability plan.
                 </p>
                 <div className="mt-[22px]">

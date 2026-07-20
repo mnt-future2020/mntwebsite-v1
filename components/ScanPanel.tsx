@@ -166,7 +166,7 @@ export default function ScanPanel({
                 : geo === "reading"
                 ? "Reading your location…"
                 : geo === "denied"
-                ? "Location blocked — allow access"
+                ? "Location blocked: allow access"
                 : geo === "error"
                 ? "Can't read GPS"
                 : "Location not read yet"}
@@ -259,7 +259,7 @@ export default function ScanPanel({
       </div>
 
       <p className="mt-4 text-center text-[11px] text-slate-400">
-        Office hours {workStart}–{workEnd} · works within {radius}m of the office (no QR needed)
+        Office hours {workStart} to {workEnd} · works within {radius}m of the office (no QR needed)
       </p>
     </div>
   );

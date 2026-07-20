@@ -1,4 +1,4 @@
-// Auto-generated brand-icon data (extracted from simple-icons). Inline SVG paths —
+// Auto-generated brand-icon data (extracted from simple-icons). Inline SVG paths:
 // no runtime dependency, no network requests, cannot 404.
 export type BrandIcon = { title: string; hex: string; path: string };
 

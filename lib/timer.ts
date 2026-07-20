@@ -1,9 +1,9 @@
 // Helpers for the start/stop task timer. A "running" timer is just a TimeEntry
-// row with startedAt set and endedAt still null — see app/api/portal/time/{start,stop,active}.
+// row with startedAt set and endedAt still null: see app/api/portal/time/{start,stop,active}.
 
 // UTC-midnight of the IST calendar day that `d` falls on. Stored as TimeEntry.date
 // so a timer entry renders on the same day as manual entries (which use the same
-// representation), regardless of the viewer's timezone — and so a timer started
+// representation), regardless of the viewer's timezone, and so a timer started
 // just before IST midnight is filed under the correct day.
 export function istDayDate(d: Date): Date {
   const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(d); // YYYY-MM-DD

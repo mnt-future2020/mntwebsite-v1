@@ -57,7 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  // schema.org has a dedicated `legalName` — the entity belongs there, not
+  // schema.org has a dedicated `legalName`: the entity belongs there, not
   // bracketed into the brand name.
   name: site.name,
   legalName: site.legalName,
@@ -106,7 +106,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
   return (
     // data-scroll-behavior: Next 16 only suppresses CSS smooth-scroll during
-    // its route-change scroll resets when this attribute is present — without
+    // its route-change scroll resets when this attribute is present: without
     // it, navigations fail to land at the top of the new page.
     <html lang="en" data-scroll-behavior="smooth">
       <head>
@@ -116,12 +116,12 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
           rel="stylesheet"
         />
-        {/* Raw tag, not metadata alternates.types — pages that return their own
+        {/* Raw tag, not metadata alternates.types: pages that return their own
             `alternates` (via resolveMetadata) would override the layout's. */}
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="MnT Future — Blog"
+          title="MnT Future: Blog"
           href="/feed.xml"
         />
         {settings.gscVerification && (
@@ -145,7 +145,7 @@ export default async function RootLayout({
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
-        {/* next/script, not raw <script> — React never executes raw inline
+        {/* next/script, not raw <script>: React never executes raw inline
             scripts on client renders, and Script also survives client-side
             navigations. */}
         {settings.gaMeasurementId && (

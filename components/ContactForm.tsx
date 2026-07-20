@@ -17,14 +17,14 @@ const NEED_OPTIONS = [
 ];
 
 const STAGE_OPTIONS = [
-  "No store yet — starting fresh",
+  "No store yet: starting fresh",
   "On Shopify / a template platform",
   "On a custom / headless platform",
   "Running a marketplace or B2B channel",
   "MVP built, struggling at scale",
 ];
 
-const BUDGET_OPTIONS = ["Not sure yet", "Under $25k", "$25k–$75k", "$75k–$200k", "$200k+"];
+const BUDGET_OPTIONS = ["Not sure yet", "Under $25k", "$25k to $75k", "$75k to $200k", "$200k+"];
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -60,7 +60,7 @@ export default function ContactForm() {
           company: form.company,
           vertical: form.need,
           budget: form.budget,
-          // The lead table has no column for stage — carry it in the message
+          // The lead table has no column for stage: carry it in the message
           // as a labelled first line so the team sees it with the enquiry.
           message: `Where they are today: ${form.stage}\n\n${form.message}`,
         }),
@@ -84,7 +84,7 @@ export default function ContactForm() {
           <Icon name="check" className="h-[30px] w-[30px]" />
         </span>
         <h3 className="mt-5 font-display text-[23px] font-bold text-ink">
-          Thanks — we&apos;ll be in touch.
+          Thanks: we&apos;ll be in touch.
         </h3>
         <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-slatey">
           A senior consultant will reply within one business day to schedule your strategy session.
@@ -124,7 +124,7 @@ export default function ContactForm() {
         <input
           value={form.company}
           onChange={(e) => update("company", e.target.value)}
-          placeholder="yourstore.com — helps us prep before the call"
+          placeholder="yourstore.com: helps us prep before the call"
           className={fieldClass}
         />
       </label>
@@ -170,13 +170,13 @@ export default function ContactForm() {
       </label>
 
       <label className={labelClass}>
-        What&apos;s the problem — or what are you building?
+        What&apos;s the problem, or what are you building?
         <textarea
           required
           rows={5}
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
-          placeholder="The bottleneck, the goal, the stack — whatever a senior consultant should read before your session…"
+          placeholder="The bottleneck, the goal, the stack: whatever a senior consultant should read before your session…"
           className={`${fieldClass} resize-y`}
         />
       </label>
@@ -204,7 +204,7 @@ export default function ContactForm() {
           </>
         )}
       </button>
-      {/* slate-500, not 400 — 12px text on white needs ≥4.5:1 contrast (WCAG AA) */}
+      {/* slate-500, not 400: 12px text on white needs ≥4.5:1 contrast (WCAG AA) */}
       <p className="text-xs text-slate-500">
         By submitting you agree to be contacted about your enquiry. We never share your details.
       </p>

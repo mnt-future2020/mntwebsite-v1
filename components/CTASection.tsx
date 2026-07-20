@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 
 export default function CTASection({
   title = "Tell us what you're building. We'll show you how we'd build it.",
-  body = "A free strategy session with a senior consultant — data model, APIs, and a scalability plan. Or a free agent-readiness audit of your store.",
+  body = "A free strategy session with a senior consultant: data model, APIs, and a scalability plan. Or a free agent-readiness audit of your store.",
   primary = { label: "Book a free strategy session", href: "/strategy-session" },
   secondary = { label: "See our work", href: "/work" },
 }: {

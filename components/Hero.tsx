@@ -26,11 +26,11 @@ export default function Hero() {
                 <path d="M2 7 Q 100 1 198 6" stroke="#7BB9F8" strokeWidth="3.5" strokeLinecap="round" />
               </svg>
             </span>{" "}
-            — and the agents now driving sales.
+           , and the agents now driving sales.
           </h1>
           <p className="mt-[22px] max-w-[540px] text-lg leading-[1.65] text-slatey">
             MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace brands
-            — headless &amp; marketplace builds, integrations, B2B, and AI agents that sell in the
+           : headless &amp; marketplace builds, integrations, B2B, and AI agents that sell in the
             new agentic channels. Land small, expand big.
           </p>
 
@@ -109,7 +109,7 @@ export default function Hero() {
               <Icon name="check" className="h-5 w-5" />
             </span>
             <span className="text-[14.5px] leading-[1.45] text-slate-700">
-              AI-native and agent-ready — built to sell to people and to AI.
+              AI-native and agent-ready: built to sell to people and to AI.
             </span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-// Pure permission constants & helpers — NO prisma import here, so this file is
+// Pure permission constants & helpers: NO prisma import here, so this file is
 // safe to use in middleware (edge) and client components. DB lookups live in
 // lib/permissions-db.ts.
 
@@ -19,7 +19,7 @@ export const SECTIONS: Section[] = [
   { key: "projects.clients", label: "Clients", path: "/admin/projects/clients", group: "Projects" },
   { key: "projects.billing", label: "Invoices & billing", path: "/admin/projects/invoices", group: "Projects" },
   // CRM
-  { key: "crm", label: "CRM — pipeline, contacts, companies", path: "/admin/crm", group: "CRM" },
+  { key: "crm", label: "CRM: pipeline, contacts, companies", path: "/admin/crm", group: "CRM" },
   // Human resources
   { key: "hr.overview", label: "HR overview", path: "/admin/hr", group: "Human resources" },
   { key: "hr.employees", label: "Employees", path: "/admin/hr/employees", group: "Human resources" },
@@ -36,7 +36,7 @@ export const ALL_KEYS = SECTIONS.map((s) => s.key);
 
 // Built-in roles. ADMIN is always all-access and not editable; the rest ship with
 // sensible defaults (below) and stay editable. Custom roles are created at runtime
-// and live in the RoleAccess table — these four can never be renamed or deleted.
+// and live in the RoleAccess table: these four can never be renamed or deleted.
 export const SYSTEM_ROLES: { key: string; label: string }[] = [
   { key: "ADMIN", label: "Admin" },
   { key: "HR", label: "HR" },

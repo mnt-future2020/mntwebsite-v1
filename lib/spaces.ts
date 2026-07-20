@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 
 // DigitalOcean Spaces (S3-compatible) storage for screenshots, employee docs and
 // blog images. Config is read from the SiteSetting row (set in Site settings)
-// first, then falls back to SPACES_* env vars — configurable without redeploying.
+// first, then falls back to SPACES_* env vars: configurable without redeploying.
 type SpacesCfg = { region: string; bucket: string; key: string; secret: string; endpoint: string };
 
 async function loadConfig(): Promise<SpacesCfg> {
@@ -21,7 +21,7 @@ async function loadConfig(): Promise<SpacesCfg> {
       select: { spacesRegion: true, spacesBucket: true, spacesKey: true, spacesSecret: true, spacesEndpoint: true },
     });
   } catch {
-    /* DB optional — fall back to env */
+    /* DB optional: fall back to env */
   }
   const region = row?.spacesRegion || process.env.SPACES_REGION || "";
   const bucket = row?.spacesBucket || process.env.SPACES_BUCKET || "";
@@ -56,7 +56,7 @@ export async function putObject(objectKey: string, body: Buffer, contentType = "
   );
 }
 
-// Store a screenshot (private — only reachable via a presigned URL).
+// Store a screenshot (private: only reachable via a presigned URL).
 export async function putScreenshot(objectKey: string, body: Buffer, contentType = "image/jpeg") {
   await putObject(objectKey, body, contentType);
 }
@@ -70,7 +70,7 @@ function publicUrl(c: SpacesCfg, key: string): string {
   }
 }
 
-// CDN URL for a public object — DO Spaces edge cache, much faster for large
+// CDN URL for a public object: DO Spaces edge cache, much faster for large
 // downloads than the origin. Requires the Space's CDN to be enabled.
 export async function cdnUrl(key: string): Promise<string> {
   const c = await loadConfig();
