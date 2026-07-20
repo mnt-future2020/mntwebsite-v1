@@ -25,13 +25,13 @@ export default function Hero() {
               >
                 <path d="M2 7 Q 100 1 198 6" stroke="#7BB9F8" strokeWidth="3.5" strokeLinecap="round" />
               </svg>
-            </span>{" "}
-           , and the agents now driving sales.
+            </span>
+            , and for the agents now driving sales.
           </h1>
           <p className="mt-[22px] max-w-[540px] text-lg leading-[1.65] text-slatey">
-            MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace brands
-           : headless &amp; marketplace builds, integrations, B2B, and AI agents that sell in the
-            new agentic channels. Land small, expand big.
+            MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace
+            brands: headless &amp; marketplace builds, integrations, B2B, and AI agents that sell
+            in the new agentic channels. Land small, expand big.
           </p>
 
           <div className="mt-[34px] flex flex-wrap gap-3.5">

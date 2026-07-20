@@ -78,19 +78,17 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <article>
-        <header className="relative overflow-hidden bg-deep text-white">
-          <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-40" />
-          <div className="pointer-events-none absolute -left-40 -top-24 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[120px]" />
-          <div className="container-mnt relative py-14 sm:py-16">
-            <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} />
+        <header className="border-b border-line bg-gradient-to-b from-mist to-white">
+          <div className="container-mnt relative py-12 sm:py-14">
+            <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} tone="light" />
             <div className="mt-6 max-w-3xl">
               {post.category && (
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-300">{post.category}</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{post.category}</span>
               )}
-              <h1 className="mt-3 font-display text-[2.1rem] font-extrabold leading-[1.12] tracking-tight sm:text-[2.8rem]">
+              <h1 className="mt-3 font-display text-[2.1rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.8rem]">
                 {post.title}
               </h1>
-              <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/60">
+              <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
                 <span>{post.author}</span>
                 <span>·</span>
                 <span>{formatDate(post.publishedAt)}</span>

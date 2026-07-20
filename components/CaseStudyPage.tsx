@@ -2,20 +2,22 @@ import Link from "next/link";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
 import CTASection from "./CTASection";
-import SpotlightCard from "./SpotlightCard";
 import FAQ from "./FAQ";
-import { SectionHeading, CheckList, Breadcrumbs } from "./blocks";
+import SectionTitle from "./SectionTitle";
+import { CheckList, Breadcrumbs } from "./blocks";
 import { site } from "@/lib/site";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string; url?: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-2xl">
-      <div className="flex items-center gap-2 bg-navy-800 px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-        <span className="ml-3 rounded bg-white/10 px-2 py-0.5 text-[11px] text-white/55">{url}</span>
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_-24px_rgba(14,27,46,0.25)]">
+      <div className="flex items-center gap-1.5 border-b border-slate-100 bg-slate-50 px-3.5 py-[11px]">
+        <span className="h-[9px] w-[9px] rounded-full bg-red-300" />
+        <span className="h-[9px] w-[9px] rounded-full bg-amber-200" />
+        <span className="h-[9px] w-[9px] rounded-full bg-green-300" />
+        <span className="ml-2.5 rounded-md border border-slate-200 bg-white px-3 py-1 font-mono text-[11.5px] text-slate-400">
+          {url}
+        </span>
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="block w-full" />
@@ -39,15 +41,6 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
     author: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
     publisher: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
   };
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-      { "@type": "ListItem", position: 2, name: "Work", item: `${site.url}/work` },
-      { "@type": "ListItem", position: 3, name: cs.title, item: `${site.url}/work/${cs.slug}` },
-    ],
-  };
   const faqSchema = cs.faq?.length
     ? {
         "@context": "https://schema.org",
@@ -63,38 +56,55 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
 
-      {/* HERO: split: story + product mockup */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-25" />
-        <div className="pointer-events-none absolute -left-40 top-10 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[130px]" />
-        <div className="container-mnt relative grid items-center gap-12 pb-16 pt-10 sm:pt-12 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
+      {/* HERO: story + product mockup */}
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
           <div className="animate-fade-up">
-            <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: cs.title }]} />
-            <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]">
-              <span className="rounded-full bg-brand/20 px-3 py-1 text-brand-200">{cs.type}</span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-white/70">{cs.category}</span>
+            <Breadcrumbs
+              trail={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: cs.title }]}
+              tone="light"
+            />
+            <div className="mt-7 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
+              <span className="rounded-full bg-brand-50 px-3 py-1 text-brand-700">{cs.type}</span>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">{cs.category}</span>
             </div>
-            <h1 className="mt-5 font-display text-[3rem] font-extrabold leading-[1] tracking-tight sm:text-[4rem]">
+            <h1 className="mt-5 font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[58px]">
               {cs.title}
             </h1>
-            <p className="mt-4 max-w-md text-lg leading-relaxed text-white/70">{cs.tagline}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="mt-4 max-w-md text-[17px] leading-[1.65] text-slatey">{cs.tagline}</p>
+            <div className="mt-8 flex flex-wrap gap-3.5">
               {cs.liveUrl && (
-                <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                  {cs.liveLabel || "Visit live site"} <Icon name="arrow" className="h-4 w-4 -rotate-45" />
+                <a
+                  href={cs.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
+                >
+                  {cs.liveLabel || "Visit live site"}
+                  <Icon name="arrow" className="h-4 w-4 -rotate-45" />
                 </a>
               )}
-              <Link href="/contact" className="btn-outline-light">Start a project</Link>
+              <Link
+                href="/strategy-session"
+                className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-7 py-3.5 text-[15px] font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+              >
+                Start a project
+              </Link>
             </div>
           </div>
           <Reveal delay={120}>
             <div className="relative">
-              <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-brand/10 blur-2xl" />
+              <div
+                className="pointer-events-none absolute -right-6 -top-6 h-[160px] w-[160px] opacity-70"
+                style={{
+                  backgroundImage: "radial-gradient(circle, #A9D2FB 1.5px, transparent 1.5px)",
+                  backgroundSize: "16px 16px",
+                }}
+              />
               <div className="relative">
                 <BrowserFrame src={cs.heroShot} alt={`${cs.title} product`} url={cs.frameUrl || "lobbi.in"} />
               </div>
@@ -104,11 +114,11 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* SCOPE STRIP */}
-      <section className="border-b border-slate-100 bg-white">
-        <div className="container-mnt grid grid-cols-2 gap-x-6 gap-y-6 py-8 lg:grid-cols-4">
+      <section className="border-b border-line">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-x-6 gap-y-6 px-5 py-8 sm:px-7 lg:grid-cols-4">
           {cs.scope.map((s) => (
             <div key={s.label}>
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-700">{s.label}</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{s.label}</div>
               <div className="mt-1.5 text-sm font-medium leading-snug text-ink">{s.value}</div>
             </div>
           ))}
@@ -116,18 +126,18 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* OVERVIEW */}
-      <section className="container-mnt py-16 sm:py-20">
+      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <Reveal>
-            <span className="eyebrow">Overview</span>
-            <p className="mt-5 text-xl leading-relaxed text-ink">{cs.summary}</p>
+            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Overview</div>
+            <p className="mt-4 text-[19px] leading-[1.65] text-ink">{cs.summary}</p>
           </Reveal>
           <Reveal delay={100}>
             <div className="grid grid-cols-2 gap-4">
               {cs.facts.map((f) => (
-                <div key={f.label} className="rounded-2xl border border-slate-100 bg-soft p-5">
-                  <div className="font-display text-2xl font-extrabold text-ink">{f.value}</div>
-                  <div className="mt-1 text-xs leading-snug text-slatey">{f.label}</div>
+                <div key={f.label} className="rounded-[14px] border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                  <div className="font-display text-2xl font-bold text-ink">{f.value}</div>
+                  <div className="mt-1 text-xs leading-snug text-slate-500">{f.label}</div>
                 </div>
               ))}
             </div>
@@ -136,26 +146,28 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* CHALLENGE */}
-      <section className="bg-soft py-16 sm:py-20">
-        <div className="container-mnt grid items-start gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <section className="border-y border-line bg-mist py-16 lg:py-20">
+        <div className="mx-auto grid max-w-[1200px] items-start gap-10 px-5 sm:px-7 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
-            <SectionHeading align="left" eyebrow="The challenge" title={cs.copy?.challengeTitle || "The problem behind the build."} />
+            <SectionTitle align="left" eyebrow="The challenge" title={cs.copy?.challengeTitle || "The problem behind the build."} />
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-lg leading-relaxed text-slatey">{cs.problem}</p>
+            <p className="text-[16.5px] leading-[1.7] text-slatey">{cs.problem}</p>
           </Reveal>
         </div>
       </section>
 
       {/* APPROACH */}
-      <section className="container-mnt py-16 sm:py-20">
-        <SectionHeading eyebrow="How we built it" title="A senior-led path from idea to live." />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+        <Reveal>
+          <SectionTitle eyebrow="How we built it" title="A senior-led path from idea to live." />
+        </Reveal>
+        <div className="mt-[52px] grid gap-[22px] sm:grid-cols-2 lg:grid-cols-4">
           {cs.approach.map((a, i) => (
             <Reveal key={a.no} delay={i * 70}>
-              <div className="h-full rounded-3xl border border-slate-100 bg-white p-6 shadow-card">
-                <div className="font-display text-3xl font-extrabold text-brand-200">{a.no}</div>
-                <h3 className="mt-3 text-base font-bold text-ink">{a.title}</h3>
+              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                <div className="font-display text-[13px] font-bold text-brand-700">{a.no}</div>
+                <h3 className="mt-3 font-display text-base font-bold text-ink">{a.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slatey">{a.desc}</p>
               </div>
             </Reveal>
@@ -165,28 +177,25 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* RESULTS: the honest before → after proof */}
       {cs.results && cs.results.length > 0 && (
-        <section className="relative overflow-hidden bg-deep py-16 text-white sm:py-20">
-          <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:56px_56px] opacity-20" />
-          <div className="pointer-events-none absolute -right-40 top-0 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[130px]" />
-          <div className="container-mnt relative">
+        <section className="border-y border-line bg-mist py-16 lg:py-24">
+          <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
             <Reveal>
-              <span className="eyebrow-dark">Results</span>
-              <h2 className="mt-5 max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-                {cs.resultsTitle || "What did the build change?"}
-              </h2>
-              {cs.resultsIntro && (
-                <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/75">{cs.resultsIntro}</p>
-              )}
+              <SectionTitle
+                align="left"
+                eyebrow="Results"
+                title={cs.resultsTitle || "What did the build change?"}
+                sub={cs.resultsIntro}
+              />
             </Reveal>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {cs.results.map((r, i) => (
                 <Reveal key={r.metric} delay={i * 70}>
-                  <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
-                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-200">{r.metric}</div>
-                    <div className="mt-4 text-sm text-white/55">{r.before}</div>
+                  <div className="h-full rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                    <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{r.metric}</div>
+                    <div className="mt-4 text-sm text-slate-500">{r.before}</div>
                     <div className="mt-1.5 flex items-start gap-2">
-                      <Icon name="arrow" className="mt-1.5 h-4 w-4 shrink-0 rotate-90 text-brand-300 sm:rotate-0" />
-                      <div className="font-display text-lg font-bold leading-snug text-white">{r.after}</div>
+                      <Icon name="arrow" className="mt-1.5 h-4 w-4 shrink-0 rotate-90 text-brand-700 sm:rotate-0" />
+                      <div className="font-display text-lg font-bold leading-snug text-ink">{r.after}</div>
                     </div>
                   </div>
                 </Reveal>
@@ -197,113 +206,124 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       )}
 
       {/* WHAT WE BUILT */}
-      <section className="bg-soft py-16 sm:py-20">
-        <div className="container-mnt">
-          <SectionHeading eyebrow="What we built" title={cs.copy?.buildTitle || "What we shipped."} />
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {cs.build.map((b, i) => (
-              <Reveal key={b.audience} delay={i * 100}>
-                <div className="h-full rounded-3xl border border-slate-100 bg-white p-8 shadow-card">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-white">
-                      <Icon name={b.icon} className="h-6 w-6" />
-                    </span>
-                    <h3 className="font-display text-xl font-bold text-ink">{b.audience}</h3>
-                  </div>
-                  <div className="mt-6">
-                    <CheckList items={b.points} />
-                  </div>
+      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+        <Reveal>
+          <SectionTitle eyebrow="What we built" title={cs.copy?.buildTitle || "What we shipped."} />
+        </Reveal>
+        <div className="mt-[52px] grid gap-[22px] lg:grid-cols-2">
+          {cs.build.map((b, i) => (
+            <Reveal key={b.audience} delay={i * 100}>
+              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                    <Icon name={b.icon} className="h-6 w-6" />
+                  </span>
+                  <h3 className="font-display text-xl font-bold text-ink">{b.audience}</h3>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+                <div className="mt-6">
+                  <CheckList items={b.points} />
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       {/* PRODUCT GALLERY */}
-      <section className="container-mnt py-16 sm:py-20">
-        <SectionHeading eyebrow="Inside the product" title="What we shipped, on screen." />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {cs.productShots.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
-              <div className="group h-full overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-cardhover">
-                <div className="img-zoom relative aspect-[16/10] overflow-hidden bg-soft">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.src} alt={p.title} className="h-full w-full object-cover" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-bold text-ink">{p.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slatey">{p.desc}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ENGINEERING HIGHLIGHTS */}
-      <section className="bg-soft py-16 sm:py-20">
-        <div className="container-mnt">
-          <SectionHeading
-            eyebrow="Engineering highlights"
-            title="Where the hard problems were."
-            subtitle={cs.copy?.highlightsSubtitle}
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cs.highlights.map((h, i) => (
-              <Reveal key={h.title} delay={i * 60}>
-                <SpotlightCard className="card card-hover group h-full">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
-                    <Icon name={h.icon} className="h-6 w-6" />
+      <section className="border-y border-line bg-mist py-16 lg:py-24">
+        <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
+          <Reveal>
+            <SectionTitle eyebrow="Inside the product" title="What we shipped, on screen." />
+          </Reveal>
+          <div className="mt-[52px] grid gap-[22px] lg:grid-cols-3">
+            {cs.productShots.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="group h-full overflow-hidden rounded-[14px] border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-1 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.22)]">
+                  <div className="img-zoom relative aspect-[16/10] overflow-hidden bg-slate-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.src} alt={p.title} className="h-full w-full object-cover" />
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-ink">{h.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-slatey">{h.desc}</p>
-                </SpotlightCard>
+                  <div className="p-6">
+                    <h3 className="font-display text-base font-bold text-ink">{p.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slatey">{p.desc}</p>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TECH DECISIONS: why each technology, and the advantage */}
-      <section className="container-mnt py-16 sm:py-20">
-        <SectionHeading
-          eyebrow="Tech decisions"
-          title={cs.copy?.techTitle || "Why we chose each piece."}
-          subtitle="Every technology earned its place by solving a specific problem better than the alternatives."
-        />
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          {cs.techDecisions.map((t, i) => (
-            <Reveal key={t.tech} delay={i * 50}>
-              <div className="h-full rounded-2xl border border-slate-100 bg-white p-6 shadow-card">
-                <div className="flex items-center gap-2.5">
-                  <span className="h-2 w-2 rounded-full bg-brand" />
-                  <h3 className="font-display text-base font-bold text-ink">{t.tech}</h3>
+      {/* ENGINEERING HIGHLIGHTS */}
+      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+        <Reveal>
+          <SectionTitle
+            eyebrow="Engineering highlights"
+            title="Where the hard problems were."
+            sub={cs.copy?.highlightsSubtitle}
+          />
+        </Reveal>
+        <div className="mt-[52px] grid gap-[22px] md:grid-cols-2 lg:grid-cols-3">
+          {cs.highlights.map((h, i) => (
+            <Reveal key={h.title} delay={i * 60}>
+              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
+                <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                  <Icon name={h.icon} className="h-[23px] w-[23px]" />
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-slatey">
-                  <span className="font-semibold text-ink">Used for: </span>{t.used}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-slatey">
-                  <span className="font-semibold text-brand-700">Advantage: </span>{t.advantage}
-                </p>
+                <h3 className="mt-[18px] font-display text-[18px] font-bold text-ink">{h.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{h.desc}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
+      {/* TECH DECISIONS */}
+      <section className="border-y border-line bg-mist py-16 lg:py-24">
+        <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
+          <Reveal>
+            <SectionTitle
+              eyebrow="Tech decisions"
+              title={cs.copy?.techTitle || "Why we chose each piece."}
+              sub="Every technology earned its place by solving a specific problem better than the alternatives."
+            />
+          </Reveal>
+          <div className="mt-[52px] grid gap-[18px] lg:grid-cols-2">
+            {cs.techDecisions.map((t, i) => (
+              <Reveal key={t.tech} delay={i * 50}>
+                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-brand-500" />
+                    <h3 className="font-display text-base font-bold text-ink">{t.tech}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-slatey">
+                    <span className="font-semibold text-ink">Used for: </span>
+                    {t.used}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-slatey">
+                    <span className="font-semibold text-brand-700">Advantage: </span>
+                    {t.advantage}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TECH STACK */}
-      <section className="bg-soft py-16 sm:py-20">
-        <div className="container-mnt">
-        <SectionHeading eyebrow="Tech stack" title="What it's built on." />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+        <Reveal>
+          <SectionTitle eyebrow="Tech stack" title="What it's built on." />
+        </Reveal>
+        <div className="mt-10 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
           {cs.stack.map((s) => (
-            <div key={s.group} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-card">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-700">{s.group}</div>
+            <div key={s.group} className="rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+              <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{s.group}</div>
               <ul className="mt-4 space-y-2">
                 {s.items.map((it) => (
-                  <li key={it} className="flex items-center gap-2 text-sm text-ink">
-                    <Icon name="check" className="h-4 w-4 text-brand" /> {it}
+                  <li key={it} className="flex items-center gap-2 text-sm text-slate-700">
+                    <Icon name="check" className="h-3.5 w-3.5 text-brand-700" /> {it}
                   </li>
                 ))}
               </ul>
@@ -312,31 +332,40 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
         {cs.liveUrl && (
           <div className="mt-12 text-center">
-            <a href={cs.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-              See it live: {cs.liveLabel || cs.liveUrl} <Icon name="arrow" className="h-4 w-4 -rotate-45" />
+            <a
+              href={cs.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+            >
+              See it live: {cs.liveLabel || cs.liveUrl}
+              <Icon name="arrow" className="h-4 w-4 -rotate-45" />
             </a>
           </div>
         )}
-        </div>
       </section>
 
-      {/* FAQ: real buyer questions; emitted as FAQPage JSON-LD above */}
+      {/* FAQ */}
       {cs.faq && cs.faq.length > 0 && (
-        <section className="container-mnt py-16 sm:py-20">
-          <SectionHeading eyebrow="FAQ" title="The questions buyers ask about this build." />
-          <div className="mt-12">
+        <section className="border-t border-line bg-mist py-24">
+          <div className="mx-auto max-w-[860px] px-5 sm:px-7">
+            <Reveal>
+              <SectionTitle eyebrow="FAQ" title="The questions buyers ask about this build." className="mb-11" />
+            </Reveal>
             <FAQ items={cs.faq} />
           </div>
         </section>
       )}
 
-      <CTASection
-        title={cs.copy?.ctaTitle || "Have a platform like this in mind?"}
-        body={
-          cs.copy?.ctaBody ||
-          "This is the kind of platform we specialise in. Tell us your idea: we'll show you how we'd architect it."
-        }
-      />
+      <div className="pt-24">
+        <CTASection
+          title={cs.copy?.ctaTitle || "Have a platform like this in mind?"}
+          body={
+            cs.copy?.ctaBody ||
+            "This is the kind of platform we specialise in. Tell us your idea: we'll show you how we'd architect it."
+          }
+        />
+      </div>
     </>
   );
 }

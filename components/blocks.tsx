@@ -126,10 +126,10 @@ export function Process({
       {data.map((s, i) => (
         <Reveal key={s.title} delay={i * 70}>
           <div
-            className={`relative h-full rounded-3xl border p-6 ${
+            className={`relative h-full rounded-[14px] border p-6 ${
               tone === "dark"
                 ? "border-white/10 bg-white/[0.03]"
-                : "border-slate-100 bg-soft"
+                : "border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.04)]"
             }`}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand font-display text-sm font-bold text-white">
@@ -153,7 +153,7 @@ export function CheckList({ items, tone = "light" }: { items: string[]; tone?: "
     <ul className="space-y-3">
       {items.map((it) => (
         <li key={it} className="flex items-start gap-3">
-          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700">
             <Icon name="check" className="h-3 w-3" />
           </span>
           <span className={`text-[15px] leading-relaxed ${tone === "dark" ? "text-white/75" : "text-slatey"}`}>

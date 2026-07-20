@@ -66,18 +66,15 @@ export default function SecurityCompliance() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-50" />
-        <div className="pointer-events-none absolute -right-32 -top-24 h-[28rem] w-[28rem] rounded-full bg-brand/25 blur-[120px]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-navy" />
-        <div className="container-mnt relative pb-20 pt-10 sm:pb-24 sm:pt-14">
-          <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Security & Compliance" }]} />
-          <div className="mt-8 max-w-3xl animate-fade-up">
-            <span className="eyebrow-dark">Security &amp; compliance</span>
-            <h1 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-[3.4rem]">
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+        <div className="container-mnt relative pb-[72px] pt-10 sm:pt-12">
+          <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Security & Compliance" }]} tone="light" />
+          <div className="mt-9 max-w-3xl animate-fade-up">
+            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Security &amp; compliance</div>
+            <h1 className="mt-[18px] font-display text-[2.4rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[3.2rem]">
               Compliance isn&apos;t a checkbox. It&apos;s architecture.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slatey">
               For a US store, accessibility, payment security, and sales-tax are liabilities the day
               you launch. The safest systems are the ones where compliance was a design decision: not
               a last-minute patch. Here&apos;s how MnT Future builds it in.

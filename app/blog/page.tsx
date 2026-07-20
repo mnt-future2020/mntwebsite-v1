@@ -21,15 +21,13 @@ export default async function BlogIndex() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:54px_54px] opacity-40" />
-        <div className="pointer-events-none absolute -left-40 -top-24 h-[26rem] w-[26rem] rounded-full bg-brand/20 blur-[120px]" />
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
         <div className="container-mnt relative py-16 sm:py-20">
-          <span className="eyebrow-dark">Insights</span>
-          <h1 className="mt-6 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
+          <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Insights</div>
+          <h1 className="mt-5 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
             Engineering insights for US commerce founders.
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
             Practical guides on AI-native commerce, agent-ready selling, headless builds,
             and US commerce compliance: written by the people who ship it.
           </p>

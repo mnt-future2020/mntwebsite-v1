@@ -43,28 +43,26 @@ export default function AgentReadyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="relative overflow-hidden bg-deep pb-20 text-white sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
-        <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />
-        <div className="container-mnt relative pt-16 sm:pt-20">
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white pb-20 sm:pb-24">
+        <div className="container-mnt relative pt-10 sm:pt-12">
           <Breadcrumbs
             trail={[
               { label: "Home", href: "/" },
               { label: "Open Source", href: "/open-source" },
               { label: "Free scan" },
             ]}
+            tone="light"
           />
           <Reveal>
             <div className="mx-auto mt-10 max-w-3xl text-center">
-              <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
+              <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                 Free agent-readiness scan
               </div>
-              <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] sm:text-5xl">
-                Is your store <span className="text-brand-300">invisible</span> to AI shopping
+              <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
+                Is your store <span className="text-brand-700">invisible</span> to AI shopping
                 agents?
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slatey">
                 ChatGPT discovers products from feeds. Google&apos;s AI Mode transacts over UCP.
                 Shopify ships MCP endpoints. Find out in seconds how your store looks to the
                 agents: 29 checks, a letter grade, and exactly what to fix.
@@ -77,10 +75,10 @@ export default function AgentReadyPage() {
             </div>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/55">
+            <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slatey">
               {TRUST_POINTS.map((point) => (
                 <span key={point.text} className="inline-flex items-center gap-2">
-                  <Icon name={point.icon} className="h-4 w-4 text-brand-300" /> {point.text}
+                  <Icon name={point.icon} className="h-4 w-4 text-brand-700" /> {point.text}
                 </span>
               ))}
             </div>

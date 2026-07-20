@@ -97,40 +97,38 @@ export default function VibecheckPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
-        <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />
-        <div className="container-mnt relative py-16 sm:py-24">
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+        <div className="container-mnt relative py-12 sm:py-16">
           <Breadcrumbs
             trail={[
               { label: "Home", href: "/" },
               { label: "Open Source", href: "/open-source" },
               { label: "vibecheck" },
             ]}
+            tone="light"
           />
           <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <div>
-                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
-                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" /> Open source · Live on npm
+                <div className="inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" /> Open source · Live on npm
                 </div>
-                <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] sm:text-5xl">
+                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
                   Your AI wrote the code. Did it ship the{" "}
-                  <span className="text-brand-300">vulnerabilities</span> too?
+                  <span className="text-brand-700">vulnerabilities</span> too?
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
                   vibecheck reads an AI-built store the way a security reviewer would:
                   deterministically, in seconds, and grades it. Hardcoded keys, unauthenticated
-                  admin routes, checkout that trusts client prices. <strong className="text-white">26 checks</strong>,
-                  a letter grade, the exact <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-sm">file:line</code> and the fix.
+                  admin routes, checkout that trusts client prices. <strong className="text-ink">26 checks</strong>,
+                  a letter grade, the exact <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-ink">file:line</code> and the fix.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href={GITHUB_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition hover:bg-brand-600"
+                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
                   >
                     <Icon name="github" className="h-4 w-4" /> View on GitHub
                   </a>
@@ -138,12 +136,12 @@ export default function VibecheckPage() {
                     href={NPM_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-semibold text-white/85 transition hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
                   >
                     <Icon name="download" className="h-4 w-4" /> View on npm
                   </a>
                 </div>
-                <code className="mt-6 block w-fit rounded-xl bg-black/30 px-4 py-3 font-mono text-sm text-brand-200">
+                <code className="mt-6 block w-fit rounded-xl bg-ink px-4 py-3 font-mono text-sm text-brand-200">
                   npx @mntglobal/vibecheck ./your-store
                 </code>
               </div>
@@ -166,10 +164,10 @@ export default function VibecheckPage() {
             </Reveal>
           </div>
           <Reveal delay={0.15}>
-            <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/55">
+            <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slatey">
               {TRUST.map((point) => (
                 <span key={point.text} className="inline-flex items-center gap-2">
-                  <Icon name={point.icon} className="h-4 w-4 text-brand-300" /> {point.text}
+                  <Icon name={point.icon} className="h-4 w-4 text-brand-700" /> {point.text}
                 </span>
               ))}
             </div>
@@ -217,24 +215,23 @@ export default function VibecheckPage() {
       </section>
 
       {/* Prove it broken → prove it fixed */}
-      <section className="bg-deep">
+      <section className="border-y border-line bg-mist">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
-            tone="dark"
             eyebrow="Prove it"
             title={
               <>
-                From <span className="text-red-300">F 40</span> to{" "}
-                <span className="text-emerald-300">A 94</span>, with the receipts.
+                From <span className="text-red-600">F 40</span> to{" "}
+                <span className="text-emerald-600">A 94</span>, with the receipts.
               </>
             }
             subtitle="vibecheck was born from our AI Cleanup Lab, where a deliberately vibe-coded store went from 5/5 live exploits landing to 0/5 after a rebuild. Every finding quotes your actual code, so it's reproducible by anyone with npx."
           />
           <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
             <Reveal>
-              <div className="rounded-2xl border border-red-400/20 bg-red-500/5 p-7">
-                <div className="font-mono text-sm font-bold text-red-300">before · F 40/100</div>
-                <ul className="mt-4 space-y-2 text-sm text-white/70">
+              <div className="rounded-[14px] border border-red-200 bg-red-50 p-7">
+                <div className="font-mono text-sm font-bold text-red-600">before · F 40/100</div>
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
                   <li>Live Stripe key hardcoded in the source</li>
                   <li>/admin/orders leaks emails + card digits, no auth</li>
                   <li>Checkout accepts a negative quantity</li>
@@ -243,9 +240,9 @@ export default function VibecheckPage() {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/5 p-7">
-                <div className="font-mono text-sm font-bold text-emerald-300">after · A 94/100</div>
-                <ul className="mt-4 space-y-2 text-sm text-white/70">
+              <div className="rounded-[14px] border border-emerald-200 bg-emerald-50 p-7">
+                <div className="font-mono text-sm font-bold text-emerald-600">after · A 94/100</div>
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
                   <li>Secrets in env vars, never returned to clients</li>
                   <li>Admin routes behind a bearer-token check</li>
                   <li>Quantity validated as an integer, 1 to 99</li>

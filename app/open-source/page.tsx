@@ -153,32 +153,29 @@ export default function OpenSourcePage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-40" />
-        <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-700/25 blur-3xl" />
-        <div className="container-mnt relative py-16 sm:py-24">
-          <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Open Source" }]} />
+      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+        <div className="container-mnt relative py-12 sm:py-16">
+          <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Open Source" }]} tone="light" />
           <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
+                <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                   Open source
                 </div>
-                <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] sm:text-5xl">
+                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
                   We open-source our{" "}
-                  <span className="text-brand-300">agentic-commerce</span> tooling.
+                  <span className="text-brand-700">agentic-commerce</span> tooling.
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70">
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
                   Anyone can claim &ldquo;agent-ready&rdquo; or &ldquo;secure.&rdquo; We publish the
                   tools that prove it: MIT-licensed, with honest limitations in every README and
-                  benchmarks you can reproduce. <strong className="text-white">Two are live</strong>,
+                  benchmarks you can reproduce. <strong className="text-ink">Two are live</strong>,
                   two are on the way.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href="#tools"
-                    className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition hover:bg-brand-600"
+                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
                   >
                     Browse the tools <Icon name="arrow" className="h-4 w-4" />
                   </a>
@@ -186,12 +183,12 @@ export default function OpenSourcePage() {
                     href={GITHUB_ORG}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-semibold text-white/85 transition hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
                   >
                     <Icon name="github" className="h-4 w-4" /> GitHub org
                   </a>
                 </div>
-                <p className="mt-5 text-sm text-white/60">
+                <p className="mt-5 text-sm text-slate-500">
                   MIT-licensed · deterministic · reproducible benchmarks
                 </p>
               </div>
@@ -312,14 +309,13 @@ export default function OpenSourcePage() {
       </section>
 
       {/* How we build in the open */}
-      <section className="bg-deep">
+      <section className="border-y border-line bg-mist">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
-            tone="dark"
             eyebrow="How we build in the open"
             title={
               <>
-                Senior by default. <span className="text-brand-300">Honesty over hype.</span>
+                Senior by default. <span className="text-brand-700">Honesty over hype.</span>
               </>
             }
             subtitle="The same standard runs through every repo, so a tool of ours reads like our engineering, not a demo."
@@ -327,12 +323,12 @@ export default function OpenSourcePage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((value, i) => (
               <Reveal key={value.title} delay={i * 0.05}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-brand-300">
+                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
                     <Icon name={value.icon} className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-4 text-lg font-bold text-white">{value.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/65">{value.desc}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold text-ink">{value.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slatey">{value.desc}</p>
                 </div>
               </Reveal>
             ))}
