@@ -46,8 +46,8 @@ const config: Config = {
         line: "#E8EDF3",
       },
       fontFamily: {
-        sans: ['"Source Sans 3"', "system-ui", "-apple-system", '"Segoe UI"', "Roboto", "sans-serif"],
-        display: ["Sora", '"Source Sans 3"', "system-ui", "sans-serif"],
+        sans: ["var(--font-source-sans)", "system-ui", "-apple-system", '"Segoe UI"', "Roboto", "sans-serif"],
+        display: ["var(--font-sora)", "var(--font-source-sans)", "system-ui", "sans-serif"],
       },
       borderRadius: {
         "4xl": "2rem",

@@ -1,11 +1,26 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Sora, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import PWARegister from "@/components/PWARegister";
 import ScrollReset from "@/components/ScrollReset";
 import { site } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings";
+
+// Self-hosted via next/font: no render-blocking Google Fonts request, no FOUT.
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap",
+});
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-source-sans",
+  display: "swap",
+});
 
 // PWA: status-bar tint + viewport.
 export const viewport: Viewport = {
@@ -108,14 +123,8 @@ export default async function RootLayout({
     // data-scroll-behavior: Next 16 only suppresses CSS smooth-scroll during
     // its route-change scroll resets when this attribute is present: without
     // it, navigations fail to land at the top of the new page.
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${sora.variable} ${sourceSans.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
-          rel="stylesheet"
-        />
         {/* Raw tag, not metadata alternates.types: pages that return their own
             `alternates` (via resolveMetadata) would override the layout's. */}
         <link

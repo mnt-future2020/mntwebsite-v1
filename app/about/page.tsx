@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
+import ClutchWidget from "@/components/ClutchWidget";
+import { site } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -108,6 +110,55 @@ export default function About() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* FOUNDER */}
+      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+        <Reveal>
+          <SectionTitle
+            eyebrow="Who you'll work with"
+            title="Founder-led, end to end."
+            sub="No account managers in the middle. The person in your strategy session is the person accountable for your build."
+          />
+        </Reveal>
+        <Reveal delay={100}>
+          <div className="mx-auto mt-[52px] flex max-w-[720px] flex-col items-center gap-6 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:flex-row sm:text-left">
+            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-[#3E51B6] font-display text-3xl font-bold text-white">
+              U
+            </span>
+            <div className="flex-1">
+              <h3 className="font-display text-[22px] font-bold text-ink">Udhayaseelan</h3>
+              <div className="mt-0.5 text-[13.5px] font-semibold text-brand-700">
+                Founder, MnT Future (Magizh NexGen Technologies)
+              </div>
+              <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">
+                Runs every engagement personally, from the first strategy session to the last
+                deploy, with a senior engineering team behind him.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
+                <a
+                  href={site.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                >
+                  <Icon name="linkedin" className="h-4 w-4" /> LinkedIn
+                </a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                >
+                  <Icon name="mail" className="h-4 w-4" /> {site.email}
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={160}>
+          <div className="mt-8 flex justify-center">
+            <ClutchWidget className="w-fit rounded-2xl border border-slate-200 bg-white px-4 py-2.5 shadow-[0_1px_3px_rgba(14,27,46,0.05)]" />
+          </div>
+        </Reveal>
       </section>
 
       <Partners />
