@@ -43,7 +43,7 @@ export default function About() {
               A senior engineering team for the agentic-commerce era.
             </h1>
             <p className="mt-5 max-w-[660px] text-[17px] leading-[1.65] text-slatey">
-              MnT Future (Magizh NexGen Technologies) builds AI-native, agent-ready commerce
+              MnT Future builds AI-native, agent-ready commerce
               platforms for US D2C and marketplace brands: headless &amp; marketplace builds,
               integrations, B2B, and AI agents that sell in the new agentic channels.
             </p>
@@ -126,7 +126,7 @@ export default function About() {
               photo: "/images/founder.jpg",
               alt: "Udhayaseelan Renganathan, founder and CEO of MnT Future",
               name: "Udhayaseelan Renganathan",
-              role: "Founder & CEO, MnT Future (Magizh NexGen Technologies)",
+              role: "Founder & CEO, MnT Future",
               bio: "Leads MnT Future end to end and stays accountable for every build the team ships.",
               linkedin: "https://www.linkedin.com/in/udhayaseelan-renganathan/",
               email: "udhay@mntfuture.com",

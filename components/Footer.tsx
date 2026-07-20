@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/[0.12] pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/50">
-            © {new Date().getFullYear()} Magizh NexGen Technologies. All rights reserved.
+            © {new Date().getFullYear()} MnT Future. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-[22px] gap-y-2 text-xs text-white/50">
             <a href={`mailto:${site.email}`} className="transition-colors hover:text-white">

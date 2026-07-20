@@ -32,7 +32,7 @@ export async function buildLlmsTxt(): Promise<string> {
   const posts = (await getPublishedPosts()).filter((p) => !p.noindex);
   const out: string[] = [];
 
-  out.push(`# ${site.name}: ${site.legalName}`);
+  out.push(`# ${site.name}`);
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
@@ -79,7 +79,7 @@ export async function buildLlmsFullTxt(): Promise<string> {
   const posts = (await getPublishedPosts()).filter((p) => !p.noindex);
   const out: string[] = [];
 
-  out.push(`# ${site.name}: ${site.legalName}: full content for LLMs`);
+  out.push(`# ${site.name}: full content for LLMs`);
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
