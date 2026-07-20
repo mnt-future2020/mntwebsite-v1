@@ -28,6 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
       "agentic commerce ACP",
       "headless commerce development",
       "ecommerce development company",
+      "e-commerce development",
+      "e-commerce platform development",
       "US D2C commerce agency",
       "Magizh NexGen Technologies",
     ],

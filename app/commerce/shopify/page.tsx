@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/shopify", {
     title: "Shopify Store Development — Official Shopify Partner | MnT Future",
     description:
-      "Official Shopify Partner builds: fast, conversion-ready Shopify stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds — and a designed upgrade path to a custom AI-native platform.",
+      "Official Shopify Partner builds: fast, conversion-ready Shopify e-commerce stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds — and a designed upgrade path to a custom AI-native platform.",
   });
 }
 

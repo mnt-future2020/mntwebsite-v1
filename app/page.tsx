@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
     title: "MnT Future — AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless & marketplace builds, integrations, B2B, and AI agents.",
+      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands — headless builds, integrations, B2B, and AI agents.",
   });
 }
 

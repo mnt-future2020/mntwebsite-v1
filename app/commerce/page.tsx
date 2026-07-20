@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce", {
     title: "Commerce Platform Development for US Brands | MnT Future",
     description:
-      "Headless & marketplace builds, integrations, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled. Built to scale.",
+      "E-commerce development for US brands: headless & marketplace builds, integrations, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
   });
 }
 
@@ -78,6 +78,7 @@ const config: HubConfig = {
     { q: "Will my systems actually talk to each other?", a: "That's the Integrations & Orchestration service. We connect ERP, OMS, PIM, CDP, payments and 3PL into a single source of truth with automation across systems — so data is accurate everywhere and ops are far less manual." },
     { q: "What about ADA and PCI compliance?", a: "78% of accessibility lawsuits target e-commerce, and PCI DSS v4.0.1 is now mandatory. We build ADA/WCAG and PCI in from the start and can keep them continuously compliant under a managed SLA, along with US sales-tax/economic-nexus." },
     { q: "Do you also build Shopify stores?", a: "Yes — we're an official Shopify Partner. When launching in weeks matters more than custom logic, we build fast, conversion-ready Shopify stores with AI search and agent-ready feeds. And because the same team builds our custom AI-native platforms, you graduate to custom when you outgrow Shopify — a planned migration, not a re-platform trauma." },
+    { q: "Do you do e-commerce development?", a: "Yes — that's exactly what we build. Modern e-commerce is what the industry now calls commerce: headless storefronts, marketplaces, B2B portals, and the integrations behind them. MnT Future engineers AI-native, agent-ready e-commerce platforms for US D2C and marketplace brands — from official-partner Shopify builds to fully custom platforms." },
     { q: "How do we start?", a: "With a free strategy session. We sketch how we'd build it — data model, APIs, scalability — and give you a clear plan. Most engagements start as a small productized pilot and expand into a full build." },
   ],
   cta: {
