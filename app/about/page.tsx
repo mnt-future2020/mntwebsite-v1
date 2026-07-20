@@ -123,11 +123,15 @@ export default function About() {
         </Reveal>
         <Reveal delay={100}>
           <div className="mx-auto mt-[52px] flex max-w-[720px] flex-col items-center gap-6 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:flex-row sm:text-left">
-            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-[#3E51B6] font-display text-3xl font-bold text-white">
-              U
-            </span>
+            <Image
+              src="/images/founder.jpg"
+              alt="Udhayaseelan Renganathan, founder of MnT Future"
+              width={400}
+              height={400}
+              className="h-24 w-24 shrink-0 rounded-full border-2 border-slate-200 object-cover"
+            />
             <div className="flex-1">
-              <h3 className="font-display text-[22px] font-bold text-ink">Udhayaseelan</h3>
+              <h3 className="font-display text-[22px] font-bold text-ink">Udhayaseelan Renganathan</h3>
               <div className="mt-0.5 text-[13.5px] font-semibold text-brand-700">
                 Founder, MnT Future (Magizh NexGen Technologies)
               </div>
@@ -137,7 +141,7 @@ export default function About() {
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
                 <a
-                  href={site.social.linkedin}
+                  href="https://www.linkedin.com/in/udhayaseelan-renganathan/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"

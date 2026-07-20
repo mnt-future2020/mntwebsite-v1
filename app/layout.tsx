@@ -97,6 +97,12 @@ const orgSchema = {
     contactType: "sales",
   },
   sameAs: [site.social.instagram, site.social.linkedin, site.social.facebook],
+  founder: {
+    "@type": "Person",
+    name: "Udhayaseelan Renganathan",
+    jobTitle: "Founder",
+    sameAs: "https://www.linkedin.com/in/udhayaseelan-renganathan/",
+  },
   memberOf: [
     { "@type": "Organization", name: "AWS Partner Network" },
     { "@type": "Organization", name: "Google Cloud Partner Advantage" },
