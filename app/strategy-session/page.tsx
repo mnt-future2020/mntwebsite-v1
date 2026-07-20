@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import SectionTitle from "@/components/SectionTitle";
@@ -311,18 +312,36 @@ export default function StrategySession() {
               Two minutes now. A plan by next week.
             </h2>
             <p className="mt-4 text-[16px] leading-[1.65] text-slatey">
-              Tell us what you&apos;re building and what&apos;s in the way. A senior consultant: the
-              one who&apos;d run your session: replies within one business day to schedule it.
+              Tell us what you&apos;re building and what&apos;s in the way. Syed replies within one
+              business day to schedule your session.
             </p>
+
+            {/* The consultant who actually runs the session */}
+            <div className="mt-8 flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(14,27,46,0.05)]">
+              <Image
+                src="/images/advisor-syed.jpg"
+                alt="Syed Asrar Ahmed, Chief Tech Consultant at MnT Future"
+                width={400}
+                height={400}
+                className="h-16 w-16 shrink-0 rounded-full border-2 border-slate-200 object-cover"
+              />
+              <div>
+                <div className="font-display text-[17px] font-bold text-ink">Syed Asrar Ahmed</div>
+                <div className="text-[13px] font-semibold text-brand-700">
+                  Chief Tech Consultant · runs your session
+                </div>
+              </div>
+            </div>
+
             <div className="mt-8 flex flex-col gap-4">
               <a
-                href={`mailto:${site.email}`}
+                href="mailto:syed@mntfuture.com"
                 className="inline-flex items-center gap-3 text-[15px] font-medium text-slate-700 transition-colors hover:text-brand-700"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-slate-200 bg-white text-brand-700">
                   <Icon name="mail" className="h-[18px] w-[18px]" />
                 </span>
-                {site.email}
+                syed@mntfuture.com
               </a>
               <span className="inline-flex items-center gap-3 text-[15px] font-medium text-slate-700">
                 <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-slate-200 bg-white text-brand-700">

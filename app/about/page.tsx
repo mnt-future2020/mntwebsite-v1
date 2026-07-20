@@ -6,7 +6,6 @@ import CTASection from "@/components/CTASection";
 import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
 import ClutchWidget from "@/components/ClutchWidget";
-import { site } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -125,21 +124,21 @@ export default function About() {
           {[
             {
               photo: "/images/founder.jpg",
-              alt: "Udhayaseelan Renganathan, founder of MnT Future",
+              alt: "Udhayaseelan Renganathan, founder and CEO of MnT Future",
               name: "Udhayaseelan Renganathan",
-              role: "Founder, MnT Future (Magizh NexGen Technologies)",
-              bio: "Runs every engagement personally, from the first strategy session to the last deploy, with a senior engineering team behind him.",
+              role: "Founder & CEO, MnT Future (Magizh NexGen Technologies)",
+              bio: "Leads MnT Future end to end and stays accountable for every build the team ships.",
               linkedin: "https://www.linkedin.com/in/udhayaseelan-renganathan/",
-              email: true,
+              email: "udhay@mntfuture.com",
             },
             {
               photo: "/images/advisor-syed.jpg",
-              alt: "Syed Asrar Ahmed, advisor to MnT Future",
+              alt: "Syed Asrar Ahmed, Chief Tech Consultant at MnT Future",
               name: "Syed Asrar Ahmed",
-              role: "Advisor, MnT Future",
-              bio: "Advises the team on business strategy and growth.",
+              role: "Chief Tech Consultant, Commerce Clients",
+              bio: "Your first call is with him: Syed runs the strategy sessions for our commerce clients, from diagnosis to the recommendation brief.",
               linkedin: "https://www.linkedin.com/in/syed-asrar-ahmed-advisor/",
-              email: false,
+              email: "syed@mntfuture.com",
             },
           ].map((person, i) => (
             <Reveal key={person.name} delay={100 + i * 80}>
@@ -164,14 +163,12 @@ export default function About() {
                     >
                       <Icon name="linkedin" className="h-4 w-4" /> LinkedIn
                     </a>
-                    {person.email && (
-                      <a
-                        href={`mailto:${site.email}`}
-                        className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
-                      >
-                        <Icon name="mail" className="h-4 w-4" /> {site.email}
-                      </a>
-                    )}
+                    <a
+                      href={`mailto:${person.email}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                    >
+                      <Icon name="mail" className="h-4 w-4" /> {person.email}
+                    </a>
                   </div>
                 </div>
               </div>

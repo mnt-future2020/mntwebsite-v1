@@ -100,9 +100,19 @@ const orgSchema = {
   founder: {
     "@type": "Person",
     name: "Udhayaseelan Renganathan",
-    jobTitle: "Founder",
+    jobTitle: "Founder & CEO",
+    email: "udhay@mntfuture.com",
     sameAs: "https://www.linkedin.com/in/udhayaseelan-renganathan/",
   },
+  employee: [
+    {
+      "@type": "Person",
+      name: "Syed Asrar Ahmed",
+      jobTitle: "Chief Tech Consultant",
+      email: "syed@mntfuture.com",
+      sameAs: "https://www.linkedin.com/in/syed-asrar-ahmed-advisor/",
+    },
+  ],
   memberOf: [
     { "@type": "Organization", name: "AWS Partner Network" },
     { "@type": "Organization", name: "Google Cloud Partner Advantage" },
