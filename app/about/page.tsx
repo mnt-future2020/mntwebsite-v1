@@ -121,43 +121,63 @@ export default function About() {
             sub="No account managers in the middle. The person in your strategy session is the person accountable for your build."
           />
         </Reveal>
-        <Reveal delay={100}>
-          <div className="mx-auto mt-[52px] flex max-w-[720px] flex-col items-center gap-6 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:flex-row sm:text-left">
-            <Image
-              src="/images/founder.jpg"
-              alt="Udhayaseelan Renganathan, founder of MnT Future"
-              width={400}
-              height={400}
-              className="h-24 w-24 shrink-0 rounded-full border-2 border-slate-200 object-cover"
-            />
-            <div className="flex-1">
-              <h3 className="font-display text-[22px] font-bold text-ink">Udhayaseelan Renganathan</h3>
-              <div className="mt-0.5 text-[13.5px] font-semibold text-brand-700">
-                Founder, MnT Future (Magizh NexGen Technologies)
+        <div className="mx-auto mt-[52px] grid max-w-[1000px] gap-6 md:grid-cols-2">
+          {[
+            {
+              photo: "/images/founder.jpg",
+              alt: "Udhayaseelan Renganathan, founder of MnT Future",
+              name: "Udhayaseelan Renganathan",
+              role: "Founder, MnT Future (Magizh NexGen Technologies)",
+              bio: "Runs every engagement personally, from the first strategy session to the last deploy, with a senior engineering team behind him.",
+              linkedin: "https://www.linkedin.com/in/udhayaseelan-renganathan/",
+              email: true,
+            },
+            {
+              photo: "/images/advisor-syed.jpg",
+              alt: "Syed Asrar Ahmed, advisor to MnT Future",
+              name: "Syed Asrar Ahmed",
+              role: "Advisor, MnT Future",
+              bio: "Advises the team on business strategy and growth.",
+              linkedin: "https://www.linkedin.com/in/syed-asrar-ahmed-advisor/",
+              email: false,
+            },
+          ].map((person, i) => (
+            <Reveal key={person.name} delay={100 + i * 80}>
+              <div className="flex h-full flex-col items-center gap-5 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_1px_3px_rgba(14,27,46,0.05)]">
+                <Image
+                  src={person.photo}
+                  alt={person.alt}
+                  width={400}
+                  height={400}
+                  className="h-24 w-24 shrink-0 rounded-full border-2 border-slate-200 object-cover"
+                />
+                <div className="flex flex-1 flex-col">
+                  <h3 className="font-display text-[21px] font-bold text-ink">{person.name}</h3>
+                  <div className="mt-0.5 text-[13.5px] font-semibold text-brand-700">{person.role}</div>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{person.bio}</p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-3 pt-1">
+                    <a
+                      href={person.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                    >
+                      <Icon name="linkedin" className="h-4 w-4" /> LinkedIn
+                    </a>
+                    {person.email && (
+                      <a
+                        href={`mailto:${site.email}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                      >
+                        <Icon name="mail" className="h-4 w-4" /> {site.email}
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
-              <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">
-                Runs every engagement personally, from the first strategy session to the last
-                deploy, with a senior engineering team behind him.
-              </p>
-              <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
-                <a
-                  href="https://www.linkedin.com/in/udhayaseelan-renganathan/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
-                >
-                  <Icon name="linkedin" className="h-4 w-4" /> LinkedIn
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
-                >
-                  <Icon name="mail" className="h-4 w-4" /> {site.email}
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
         <Reveal delay={160}>
           <div className="mt-8 flex justify-center">
             <ClutchWidget className="w-fit rounded-2xl border border-slate-200 bg-white px-4 py-2.5 shadow-[0_1px_3px_rgba(14,27,46,0.05)]" />
