@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/embedded-agents", {
-    title: "Embedded AI Agents for Commerce — Support & Ops | MnT Future",
+    title: "Custom AI Agents for Commerce — Support & Ops | MnT Future",
     description:
       "Task-specific AI agents in your platform — support, merchandising, SEO/AEO, and inventory demand. Domain-trained, MCP-connected, human-in-the-loop.",
   });
@@ -17,17 +17,17 @@ const config: ServiceConfig = {
   breadcrumb: [
     { label: "Home", href: "/" },
     { label: "AI & Agents", href: "/ai-agents" },
-    { label: "Embedded AI Agents" },
+    { label: "Custom AI Agents" },
   ],
-  eyebrow: "Embedded AI agents",
+  eyebrow: "Custom AI agents",
   h1: "Your AI workforce, built into your platform.",
   heroSub:
     "Not another chatbot — task-specific agents that do real work. Support, merchandising, SEO/AEO, and inventory & demand agents, domain-trained and connected to your tools via MCP, running 24/7 with human-in-the-loop oversight and evaluation gates.",
   heroImage: images.ai,
   chips: ["Support agent", "Merchandising agent", "Inventory & demand agent", "Human-in-the-loop"],
-  primaryKeyword: "Embedded AI agents for commerce",
+  primaryKeyword: "Custom AI agents for commerce",
   intro: {
-    title: "What are embedded AI agents?",
+    title: "What are custom AI agents?",
     body: (
       <>
         Embedded agents are AI workers built into your commerce platform to complete specific jobs —
@@ -57,10 +57,10 @@ const config: ServiceConfig = {
     "Outcome and hybrid pricing options — you pay for work completed, not seats.",
   ],
   related: [
-    { label: "AI Commerce Starter", href: "/ai-agents/commerce-starter" },
+    { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter" },
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
-    { label: "AI Cleanup", href: "/ai-agents/ai-cleanup" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
+    { label: "AI Cleanup & MVP Rescue", href: "/ai-agents/ai-cleanup" },
   ],
   faq: [
     { q: "How is this different from a chatbot?", a: "A chatbot talks; an agent does. Our agents are task-specific and connected to your tools via MCP, so they complete real work — resolving tickets, updating merchandising, generating content — with oversight, not just answering questions." },

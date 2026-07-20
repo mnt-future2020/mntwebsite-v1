@@ -17,7 +17,7 @@ const config: ServiceConfig = {
   breadcrumb: [
     { label: "Home", href: "/" },
     { label: "AI & Agents", href: "/ai-agents" },
-    { label: "AI Cleanup" },
+    { label: "AI Cleanup & MVP Rescue" },
   ],
   eyebrow: "AI cleanup",
   h1: "Make your AI / no-code MVP production-ready.",
@@ -57,10 +57,10 @@ const config: ServiceConfig = {
     "A low-barrier entry that often expands into a full Commerce Platforms build.",
   ],
   related: [
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace" },
-    { label: "AI Commerce Starter", href: "/ai-agents/commerce-starter" },
-    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace" },
+    { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter" },
+    { label: "Managed Support & Compliance", href: "/commerce/managed-compliance" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
   ],
   faq: [
     { q: "My store works — why does it need cleanup?", a: "\"Works in a demo\" and \"safe at scale\" are different things. AI and no-code builds often hide security holes, fragile data models, and performance cliffs that surface exactly when you get traffic. The audit tells you where you stand." },

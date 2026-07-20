@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents/commerce-starter", {
-    title: "AI Commerce Starter — Search, Recs & Assistant | MnT Future",
+    title: "AI Search & Recommendations for Commerce — AI Shopping Assistant | MnT Future",
     description:
       "AI search, personalized recommendations and a shopping assistant — already built, fitted to your catalog and instrumented for lift. Live in two weeks.",
   });
@@ -17,7 +17,7 @@ const config: ServiceConfig = {
   breadcrumb: [
     { label: "Home", href: "/" },
     { label: "AI & Agents", href: "/ai-agents" },
-    { label: "AI Commerce Starter" },
+    { label: "AI Search & Recommendations" },
   ],
   eyebrow: "AI commerce starter",
   h1: "Turn the traffic you already have into revenue.",
@@ -27,7 +27,7 @@ const config: ServiceConfig = {
   chips: ["Semantic / vector search", "Personalized recs", "Shopping assistant", "Live in two weeks"],
   primaryKeyword: "AI commerce search, recommendations & assistant",
   intro: {
-    title: "What is the AI Commerce Starter?",
+    title: "What is AI Search & Recommendations?",
     body: (
       <>
         It's the AI half of a commerce build, sold as its own two-week phase. Natural-language product
@@ -59,9 +59,9 @@ const config: ServiceConfig = {
   ],
   related: [
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce" },
-    { label: "Embedded AI Agents", href: "/ai-agents/embedded-agents" },
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
+    { label: "Custom AI Agents", href: "/ai-agents/embedded-agents" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
   ],
   faq: [
     { q: "How fast will we see results?", a: "Live in two weeks from a signed scope and access to your catalog. It's quick because we're not building the AI — search, recommendations and the assistant already exist as a product; the two weeks goes on fitting them to your catalog and instrumenting the lift. Because it works on the traffic you already have, the ROI shows up soon after. The clock runs on both sides, though: we need the scope signed and catalog access at kickoff, and change requests get their own scope and timeline." },

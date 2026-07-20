@@ -57,17 +57,17 @@ const config: ServiceConfig = {
     "Ongoing monitoring — the agentic channel is moving fast, and we keep you current as it evolves.",
   ],
   related: [
-    { label: "AI Commerce Starter", href: "/ai-agents/commerce-starter" },
-    { label: "Embedded AI Agents", href: "/ai-agents/embedded-agents" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
-    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance" },
+    { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter" },
+    { label: "Custom AI Agents", href: "/ai-agents/embedded-agents" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
+    { label: "Managed Support & Compliance", href: "/commerce/managed-compliance" },
   ],
   faq: [
     { q: "Is agentic commerce real yet, or is it hype?", a: "It's early but moving fast — OpenAI and Stripe's ACP and Google's UCP are live, and analysts size the agentic channel at $900B–$1T. Getting ready now is an early-mover advantage, not a bet on the far future." },
     { q: "What's the fastest way to find out if we're ready?", a: "The free agent-readiness audit. We assess your data, price/inventory accuracy, and feed quality and show you exactly what's blocking agentic sales — it's our recommended starting point." },
     { q: "What is a Retail MCP server?", a: "MCP (Model Context Protocol) is a standard way for AI agents to access tools and data. A Retail MCP server securely exposes your catalog, pricing and inventory so agents can query and transact reliably." },
     { q: "How is this different from SEO?", a: "SEO gets you ranked for humans; AEO (answer-engine optimization) gets you surfaced and recommended inside AI answers. Agent-ready commerce goes further — it lets agents actually buy, not just cite you." },
-    { q: "Do our systems need to be integrated first?", a: "Accurate real-time data is a prerequisite, so Integrations & Orchestration often pairs with this. If your price/inventory data isn't reliable yet, we fix that as part of getting you agent-ready." },
+    { q: "Do our systems need to be integrated first?", a: "Accurate real-time data is a prerequisite, so Integrations & Automation often pairs with this. If your price/inventory data isn't reliable yet, we fix that as part of getting you agent-ready." },
   ],
   cta: {
     title: "Get agent-ready before your competitors do.",

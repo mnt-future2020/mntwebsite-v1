@@ -61,7 +61,7 @@ const TOOLS: Tool[] = [
     icon: "check",
     tagline: "Test your agentic checkout before a real agent does.",
     desc: "Agentic-checkout conformance suite + a mock shopping agent for your ACP / Google UCP integration.",
-    maps: "Integrations & Orchestration",
+    maps: "Integrations & Automation",
   },
 ];
 

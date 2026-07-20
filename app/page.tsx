@@ -31,13 +31,13 @@ const verticals = [
   {
     kicker: "Commerce Platforms",
     title: "Commerce platform development",
-    desc: "Headless & marketplace builds, integrations & orchestration, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
+    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce — with ADA, PCI DSS & US sales-tax handled.",
     href: "/commerce",
     icon: "store" as const,
     gradient: "from-brand-700 to-brand-900",
     items: [
-      { label: "Headless & marketplaces", href: "/commerce/headless-marketplace" },
-      { label: "Integrations & orchestration", href: "/commerce/integrations" },
+      { label: "Custom platforms", href: "/commerce/headless-marketplace" },
+      { label: "Integrations & automation", href: "/commerce/integrations" },
       { label: "B2B / wholesale", href: "/commerce/b2b-wholesale" },
       { label: "Managed & compliant", href: "/commerce/managed-compliance" },
     ],
@@ -46,14 +46,14 @@ const verticals = [
   {
     kicker: "AI & Agents",
     title: "AI & agents for commerce",
-    desc: "AI search, recommendations & assistants, agent-ready commerce (ACP/UCP/MCP), embedded AI agents, and AI cleanup for MVPs that broke at scale.",
+    desc: "AI search, recommendations & assistants, agent-ready commerce (ACP/UCP/MCP), custom AI agents, and AI cleanup for MVPs that broke at scale.",
     href: "/ai-agents",
     icon: "ai" as const,
     gradient: "from-[#3E51B6] to-[#2A367A]",
     items: [
       { label: "AI search & recommendations", href: "/ai-agents/commerce-starter" },
       { label: "Agent-ready commerce", href: "/ai-agents/agent-ready-commerce" },
-      { label: "Embedded AI agents", href: "/ai-agents/embedded-agents" },
+      { label: "Custom AI agents", href: "/ai-agents/embedded-agents" },
       { label: "AI cleanup", href: "/ai-agents/ai-cleanup" },
     ],
     cta: "Explore AI & agents",
@@ -87,7 +87,7 @@ const engagement = [
   {
     no: "01",
     title: "Land",
-    desc: "A productized paid pilot that proves ROI in weeks — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a fast Shopify store build. Small scope, fast proof.",
+    desc: "A productized paid pilot that proves ROI in weeks — AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a fast Shopify store build. Small scope, fast proof.",
     points: ["Fixed, focused scope", "Live in weeks", "Clear, measured outcome"],
     featured: false,
   },
@@ -101,7 +101,7 @@ const engagement = [
   {
     no: "03",
     title: "Expand",
-    desc: "A full platform build — headless, marketplace, or B2B — engineered to scale, plus embedded AI agents and a managed SLA.",
+    desc: "A full platform build — headless, marketplace, or B2B — engineered to scale, plus custom AI agents and a managed SLA.",
     points: ["Full platform builds", "AI agents & automation", "Managed & compliant"],
     featured: false,
   },
@@ -114,7 +114,7 @@ const homeFaq: QA[] = [
   },
   {
     q: "What does MnT Future build?",
-    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and orchestration, B2B/wholesale, and managed commerce with US compliance — plus AI search, embedded AI agents, and agent-readiness.",
+    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and automation, B2B/wholesale, and managed commerce with US compliance — plus AI search, custom AI agents, and agent-readiness.",
   },
   {
     q: "What is the Agentic Commerce Protocol (ACP)?",

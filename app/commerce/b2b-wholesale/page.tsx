@@ -57,10 +57,10 @@ const config: ServiceConfig = {
     "Bigger average order value and less rep time per order, as buying moves to self-serve.",
   ],
   related: [
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
-    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance" },
-    { label: "Embedded AI Agents", href: "/ai-agents/embedded-agents" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
+    { label: "Managed Support & Compliance", href: "/commerce/managed-compliance" },
+    { label: "Custom AI Agents", href: "/ai-agents/embedded-agents" },
   ],
   faq: [
     { q: "Can you run B2B and D2C on one platform?", a: "Yes. We build hybrid models that serve consumers and business buyers from one platform — shared catalog and inventory, with separate pricing, checkout, and account logic for each." },

@@ -101,7 +101,7 @@ const faq = [
   },
   {
     q: "What happens after the session?",
-    a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Commerce Starter, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
+    a: "You get the recommendation brief in writing. If you want to go further, the usual next step is a small, fixed-scope pilot — AI Search & Recommendations, AI Cleanup, an agent-readiness audit, or a Shopify build — that proves ROI in weeks before anything bigger.",
   },
 ];
 

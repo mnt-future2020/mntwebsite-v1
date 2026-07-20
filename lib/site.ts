@@ -44,10 +44,10 @@ export const commerceNav: NavGroup = {
   href: "/commerce",
   overviewLabel: "Commerce Platforms overview",
   children: [
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace", desc: "Composable storefronts & multi-vendor marketplaces, built to scale" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations", desc: "Connect ERP, OMS, PIM, CDP, payments & 3PL into one stack" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace", desc: "Composable storefronts & multi-vendor marketplaces, built to scale" },
+    { label: "Integrations & Automation", href: "/commerce/integrations", desc: "Connect ERP, OMS, PIM, CDP, payments & 3PL into one stack" },
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale", desc: "Customer pricing, RFQ, bulk ordering — ERP-integrated" },
-    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },
+    { label: "Managed Support & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },
     { label: "Shopify Store Builds", href: "/commerce/shopify", desc: "Official-partner Shopify builds with an upgrade path to custom AI-native" },
   ],
 };
@@ -57,10 +57,10 @@ export const aiNav: NavGroup = {
   href: "/ai-agents",
   overviewLabel: "AI & Agents overview",
   children: [
-    { label: "AI Commerce Starter", href: "/ai-agents/commerce-starter", desc: "AI search, recommendations & a shopping assistant that converts" },
+    { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter", desc: "AI search, recommendations & a shopping assistant that converts" },
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce", desc: "Make your store discoverable & buyable by AI shopping agents" },
-    { label: "Embedded AI Agents", href: "/ai-agents/embedded-agents", desc: "Task-specific AI agents built into your platform" },
-    { label: "AI Cleanup", href: "/ai-agents/ai-cleanup", desc: "Turn a vibe-coded MVP into a production-grade platform" },
+    { label: "Custom AI Agents", href: "/ai-agents/embedded-agents", desc: "Task-specific AI agents built into your platform" },
+    { label: "AI Cleanup & MVP Rescue", href: "/ai-agents/ai-cleanup", desc: "Turn a vibe-coded MVP into a production-grade platform" },
   ],
 };
 

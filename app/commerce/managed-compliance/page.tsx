@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/managed-compliance", {
-    title: "Managed Commerce & Compliance — ADA · PCI · Tax | MnT Future",
+    title: "Managed Support & Compliance — ADA · PCI · Tax | MnT Future",
     description:
       "Support & monitoring on an SLA, plus ADA/WCAG, PCI DSS v4.0.1, and US sales-tax — your live store kept fast, secure, and compliant.",
   });
@@ -17,7 +17,7 @@ const config: ServiceConfig = {
   breadcrumb: [
     { label: "Home", href: "/" },
     { label: "Commerce Platforms", href: "/commerce" },
-    { label: "Managed Commerce & Compliance" },
+    { label: "Managed Support & Compliance" },
   ],
   eyebrow: "Managed commerce & compliance",
   h1: "Keep it running, secure, and compliant — on an SLA.",
@@ -56,8 +56,8 @@ const config: ServiceConfig = {
     "Monitoring, incident response, and hardening on an SLA — predictable, reliable uptime.",
   ],
   related: [
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace" },
-    { label: "Integrations & Orchestration", href: "/commerce/integrations" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace" },
+    { label: "Integrations & Automation", href: "/commerce/integrations" },
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale" },
     { label: "Security & Compliance", href: "/security-compliance" },
   ],

@@ -45,7 +45,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
 
   out.push(`## AI & Agents`);
-  out.push(`- [AI & Agents overview](${abs(aiNav.href)}): AI Commerce Starter, Agent-Ready Commerce, Embedded AI Agents, AI Cleanup.`);
+  out.push(`- [AI & Agents overview](${abs(aiNav.href)}): AI Search & Recommendations, Agent-Ready Commerce, Custom AI Agents, AI Cleanup.`);
   for (const c of aiNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
   out.push("");
 

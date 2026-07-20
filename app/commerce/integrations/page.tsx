@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/integrations", {
-    title: "Commerce Integrations & Orchestration (ERP, OMS, PIM, CDP) | MnT Future",
+    title: "Commerce Integrations & Automation (ERP, OMS, PIM, CDP) | MnT Future",
     description:
       "Connect ERP, OMS, PIM, CDP, payments & 3PL into one commerce stack — orchestration, data pipelines, and automation, one source of truth.",
   });
@@ -17,9 +17,9 @@ const config: ServiceConfig = {
   breadcrumb: [
     { label: "Home", href: "/" },
     { label: "Commerce Platforms", href: "/commerce" },
-    { label: "Integrations & Orchestration" },
+    { label: "Integrations & Automation" },
   ],
-  eyebrow: "Integrations & orchestration",
+  eyebrow: "Integrations & automation",
   h1: "Connect your whole commerce stack so it works as one.",
   heroSub:
     "Your ERP, OMS, PIM, CDP, payments and 3PL should share one source of truth — not fight each other. We integrate and orchestrate your commerce systems so data is accurate everywhere and operations run themselves.",
@@ -56,9 +56,9 @@ const config: ServiceConfig = {
     "Automation across the whole stack — far less manual operations, far fewer errors.",
   ],
   related: [
-    { label: "Headless & Marketplace Builds", href: "/commerce/headless-marketplace" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace" },
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale" },
-    { label: "Managed Commerce & Compliance", href: "/commerce/managed-compliance" },
+    { label: "Managed Support & Compliance", href: "/commerce/managed-compliance" },
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce" },
   ],
   faq: [
@@ -66,7 +66,7 @@ const config: ServiceConfig = {
     { q: "Our data is a mess across tools. Where do we start?", a: "With a data model and a single source of truth. We map what each system owns, resolve conflicts, and build the canonical record everything else syncs to — usually starting with products and inventory." },
     { q: "Real-time or batch sync?", a: "Event-driven and real-time wherever it matters (inventory, orders, pricing), with monitoring and retries so failures are visible and recoverable. Batch only where real-time adds no value." },
     { q: "Does this help with AI and agentic channels?", a: "Directly. Accurate, real-time price and inventory data is the foundation of Agent-Ready Commerce — AI shopping agents can only transact correctly if your feeds are correct." },
-    { q: "Can you keep the integrations running?", a: "Yes — under our Managed Commerce & Compliance SLA we monitor, maintain and evolve integrations as your systems change." },
+    { q: "Can you keep the integrations running?", a: "Yes — under our Managed Support & Compliance SLA we monitor, maintain and evolve integrations as your systems change." },
   ],
   cta: {
     title: "Tired of systems that don't talk to each other?",

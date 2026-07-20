@@ -430,7 +430,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "Can Searchlight run on another site?",
-        a: "Yes — it's config-driven by design: one JSON file sets the site URL, thresholds, fix tiers, brand voice, playbook and neverTouch paths. This is the engine behind MnT Future's Embedded AI Agents service — the same pattern, domain-trained for your stack.",
+        a: "Yes — it's config-driven by design: one JSON file sets the site URL, thresholds, fix tiers, brand voice, playbook and neverTouch paths. This is the engine behind MnT Future's Custom AI Agents service — the same pattern, domain-trained for your stack.",
       },
     ],
     copy: {
@@ -440,7 +440,7 @@ export const caseStudies: CaseStudy[] = [
       techTitle: "Why we chose each piece — and what it buys the agent.",
       ctaTitle: "Want an agent like this embedded in your stack?",
       ctaBody:
-        "Searchlight is the pattern behind our Embedded AI Agents service — domain-trained agents with hard safety gates. Book a free agent-readiness audit and we'll map where one pays off in your commerce stack.",
+        "Searchlight is the pattern behind our Custom AI Agents service — domain-trained agents with hard safety gates. Book a free agent-readiness audit and we'll map where one pays off in your commerce stack.",
     },
   },
   {
@@ -556,7 +556,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         q: "Can you run this on our store?",
-        a: "Yes — this is the exact workflow inside our Managed Commerce & Compliance service: baseline scan, root-cause remediation in your design system, a re-scan you can verify, and the manual review on top. Book a free strategy session and we'll scope your store's ADA exposure.",
+        a: "Yes — this is the exact workflow inside our Managed Support & Compliance service: baseline scan, root-cause remediation in your design system, a re-scan you can verify, and the manual review on top. Book a free strategy session and we'll scope your store's ADA exposure.",
       },
     ],
     copy: {
