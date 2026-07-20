@@ -20,8 +20,12 @@ const IFRAME_TITLE = "Clutch: MnT Future verified client reviews";
 // route change (when the script is already cached and won't auto-run).
 export default function ClutchWidget({ className = "" }: { className?: string }) {
   const boxRef = useRef<HTMLDivElement>(null);
+  // Clutch's script only renders on the live domain — on localhost the box
+  // stays an empty grey shell, so don't mount it outside production.
+  const isProd = process.env.NODE_ENV === "production";
 
   useEffect(() => {
+    if (!isProd) return;
     let cancelled = false;
     let tries = 0;
     const init = () => {
@@ -59,7 +63,10 @@ export default function ClutchWidget({ className = "" }: { className?: string })
       cancelled = true;
       mo.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!isProd) return null;
 
   return (
     <div className={className} ref={boxRef}>
