@@ -6,7 +6,6 @@ import Hero from "@/components/Hero";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
-import StackMarquee from "@/components/StackMarquee";
 import Partners from "@/components/Partners";
 import SectionTitle from "@/components/SectionTitle";
 import Testimonials from "@/components/Testimonials";
@@ -168,7 +167,6 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
-        <StackMarquee className="mt-11 pb-11" />
       </section>
 
       <Partners />

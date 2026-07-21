@@ -3,7 +3,6 @@ import Icon, { IconName } from "./Icon";
 import Reveal from "./Reveal";
 import FAQ, { QA } from "./FAQ";
 import CTASection from "./CTASection";
-import StackMarquee from "./StackMarquee";
 import SectionTitle from "./SectionTitle";
 import { Process, Breadcrumbs } from "./blocks";
 import { site } from "@/lib/site";
@@ -143,13 +142,6 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
         </div>
       </section>
 
-      {/* STACK STRIP */}
-      <section className="border-b border-line pt-12">
-        <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-          The modern, proven stack we build on
-        </p>
-        <StackMarquee className="mt-8 pb-12" />
-      </section>
 
       {/* APPROACH */}
       <section className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 py-24 sm:px-7 lg:grid-cols-2">

@@ -4,7 +4,6 @@ import Reveal from "./Reveal";
 import FAQ, { QA } from "./FAQ";
 import { site } from "@/lib/site";
 import CTASection from "./CTASection";
-import StackMarquee from "./StackMarquee";
 import SectionTitle from "./SectionTitle";
 import BrandLogo from "./BrandLogo";
 import { Breadcrumbs } from "./blocks";
@@ -143,13 +142,6 @@ export default function HubPage({ config }: { config: HubConfig }) {
         )}
       </section>
 
-      {/* STACK STRIP */}
-      <section className="border-y border-line pt-12">
-        <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-          The modern, proven stack we build on
-        </p>
-        <StackMarquee className="mt-8 pb-12" />
-      </section>
 
       {/* DIFFERENTIATOR + STATS */}
       <section className="bg-mist py-24">
