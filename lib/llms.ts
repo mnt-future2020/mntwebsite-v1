@@ -56,6 +56,13 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push(`## AI & Agents`);
   out.push(`- [AI & Agents overview](${abs(aiNav.href)}): AI Search & Recommendations, Agent-Ready Commerce, Custom AI Agents, AI Cleanup.`);
   for (const c of aiNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  const agents: [string, string, string][] = [
+    ["Support Agent", "/ai-agents/support-agent", "Resolves order status, returns & product questions end to end; escalates with context"],
+    ["Merchandising Agent", "/ai-agents/merchandising-agent", "Tunes collections, promotions & placement from live signals; every change human-approved"],
+    ["SEO / AEO Agent", "/ai-agents/seo-aeo-agent", "Keeps the catalog visible in Google & cited in AI answers; drafts reviewed before publish"],
+    ["Inventory & Demand Agent", "/ai-agents/inventory-demand-agent", "Projects stockouts, surfaces unmet demand, drafts restock orders for approval"],
+  ];
+  for (const [label, href, desc] of agents) out.push(`- [${label}](${abs(href)}): ${desc}`);
   out.push("");
 
   out.push(`## Company`);
