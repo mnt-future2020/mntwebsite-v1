@@ -10,7 +10,7 @@ export const site = {
   phone: "+91 00000 00000",
   tagline: "AI-Native, Agent-Ready Commerce Platforms",
   description:
-    "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless & marketplace builds, integrations, B2B, and AI agents that sell in the new agentic channels.",
+    "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents that sell in the new agentic channels.",
   social: {
     instagram: "https://www.instagram.com/mnt_future",
     linkedin: "https://www.linkedin.com/company/mntfuture",

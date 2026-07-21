@@ -31,7 +31,7 @@ export async function GET() {
   <channel>
     <title>MnT Future: AI-Native, Agent-Ready Commerce Insights</title>
     <link>${site.url}/blog</link>
-    <description>Guides on AI-native commerce, agent-ready selling, headless builds and US commerce compliance from MnT Future.</description>
+    <description>Guides on AI-native commerce, agent-ready selling, custom platform builds and US commerce compliance from MnT Future.</description>
     <language>en</language>
 ${items}
   </channel>

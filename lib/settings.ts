@@ -16,7 +16,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   siteName: "MnT Future: AI-Native, Agent-Ready Commerce Platforms",
   titleTemplate: "%s | MnT Future",
   defaultDescription:
-    "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless builds, integrations, B2B, and AI agents.",
+    "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
   defaultOgImage: null,
   gaMeasurementId: null,
   gscVerification: null,

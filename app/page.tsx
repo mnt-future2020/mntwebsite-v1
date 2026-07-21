@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
     title: "MnT Future: AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: headless builds, integrations, B2B, and AI agents.",
+      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
   });
 }
 
@@ -102,7 +102,7 @@ const engagement = [
   {
     no: "03",
     title: "Expand",
-    desc: "A full platform build (headless, marketplace, or B2B) engineered to scale, plus custom AI agents and a managed SLA.",
+    desc: "A full platform build (custom store, marketplace, or B2B) engineered to scale, plus custom AI agents and a managed SLA.",
     points: ["Full platform builds", "AI agents & automation", "Managed & compliant"],
     featured: false,
   },
@@ -115,7 +115,7 @@ const homeFaq: QA[] = [
   },
   {
     q: "What does MnT Future build?",
-    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless and marketplace builds, integrations and automation, B2B/wholesale, and managed commerce with US compliance, plus AI search, custom AI agents, and agent-readiness.",
+    a: "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts and marketplaces, integrations and automation, B2B/wholesale, and managed commerce with US compliance, plus AI search, custom AI agents, and agent-readiness.",
   },
   {
     q: "What is the Agentic Commerce Protocol (ACP)?",

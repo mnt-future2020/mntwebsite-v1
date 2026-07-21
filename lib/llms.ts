@@ -40,7 +40,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
 
   out.push(`## Commerce Platforms`);
-  out.push(`- [Commerce Platforms overview](${abs(commerceNav.href)}): Headless & marketplace builds, integrations, B2B/wholesale, managed commerce & US compliance.`);
+  out.push(`- [Commerce Platforms overview](${abs(commerceNav.href)}): Custom stores & marketplaces, integrations, B2B/wholesale, managed commerce & US compliance.`);
   for (const c of commerceNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
   out.push("");
 

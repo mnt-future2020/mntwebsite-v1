@@ -52,7 +52,7 @@ const config: ServiceConfig = {
   approachPoints: [
     "A single source of truth for products, inventory, pricing and customers across every channel.",
     "Event-driven, real-time sync with monitoring, retries and reconciliation, not brittle nightly batches.",
-    "Composable middleware so you can swap or add systems without a rebuild.",
+    "Middleware built so you can swap or add systems without a rebuild.",
     "Automation across the whole stack: far less manual operations, far fewer errors.",
   ],
   related: [

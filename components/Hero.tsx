@@ -30,7 +30,7 @@ export default function Hero() {
           </h1>
           <p className="mt-[22px] max-w-[540px] text-lg leading-[1.65] text-slatey">
             MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace
-            brands: headless &amp; marketplace builds, integrations, B2B, and AI agents that sell
+            brands: custom storefronts &amp; marketplaces, integrations, B2B, and AI agents that sell
             in the new agentic channels. Land small, expand big.
           </p>
 

@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/blog", {
     title: "Blog: AI-Native, Agent-Ready Commerce Insights | MnT Future",
     description:
-      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), headless builds, and US commerce compliance: from the senior engineers at MnT Future.",
+      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), custom platform builds, and US commerce compliance: from the senior engineers at MnT Future.",
   });
 }
 
@@ -28,7 +28,7 @@ export default async function BlogIndex() {
             Engineering insights for US commerce founders.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
-            Practical guides on AI-native commerce, agent-ready selling, headless builds,
+            Practical guides on AI-native commerce, agent-ready selling, custom platform builds,
             and US commerce compliance: written by the people who ship it.
           </p>
         </div>

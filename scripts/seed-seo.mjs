@@ -10,7 +10,7 @@ const SITE = {
   siteName: "MnT Future: AI-Native, Agent-Ready Commerce Platforms",
   titleTemplate: "%s | MnT Future",
   defaultDescription:
-    "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C and marketplace brands: headless builds, integrations, B2B, and AI agents.",
+    "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
 };
 
 // Per-page SEO: mirrors each page's resolveMetadata(...) base values verbatim
@@ -19,13 +19,13 @@ const PAGES = [
     path: "/",
     title: "MnT Future: AI-Native, Agent-Ready Commerce Platforms for US Brands",
     description:
-      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: headless builds, integrations, B2B, and AI agents.",
+      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
   },
   {
     path: "/commerce",
     title: "Commerce Platform Development for US Brands | MnT Future",
     description:
-      "E-commerce development for US brands: headless & marketplace builds, integrations, B2B/wholesale, and managed commerce, with ADA, PCI DSS & US sales-tax handled.",
+      "E-commerce development for US brands: custom stores & marketplaces, integrations, B2B/wholesale, and managed commerce, with ADA, PCI DSS & US sales-tax handled.",
   },
   {
     path: "/commerce/shopify",

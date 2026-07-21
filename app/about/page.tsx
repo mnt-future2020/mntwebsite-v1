@@ -44,7 +44,7 @@ export default function About() {
             </h1>
             <p className="mt-5 max-w-[660px] text-[17px] leading-[1.65] text-slatey">
               MnT Future builds AI-native, agent-ready commerce
-              platforms for US D2C and marketplace brands: headless &amp; marketplace builds,
+              platforms for US D2C and marketplace brands: custom storefronts &amp; marketplaces,
               integrations, B2B, and AI agents that sell in the new agentic channels.
             </p>
           </div>
