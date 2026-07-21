@@ -39,12 +39,12 @@ const config: ServiceConfig = {
   },
   featuresTitle: "What we manage",
   features: [
-    { icon: "gauge", title: "Support, monitoring & performance (SLA)", desc: "Proactive monitoring, incident response, and performance work on a defined SLA: issues caught before your customers feel them." },
-    { icon: "shield", title: "ADA / WCAG accessibility", desc: "78% of accessibility lawsuits target e-commerce. We bring your store to WCAG conformance and keep it there as it changes." },
-    { icon: "lock", title: "PCI DSS v4.0.1 compliance", desc: "Continuous PCI DSS v4.0.1 support: scoping, controls, and evidence, so card data handling stays compliant, not just at audit time." },
-    { icon: "records", title: "Sales-tax & economic nexus", desc: "Multi-state US sales-tax and economic-nexus handled via Avalara / Anrok integration: calculation, filing readiness, and accuracy." },
-    { icon: "bell", title: "Uptime & incident response", desc: "Alerting, on-call response, and clear runbooks: reliable uptime through launches, sales, and traffic spikes." },
-    { icon: "cloud", title: "Continuous hardening", desc: "Dependency updates, security patching, and performance tuning applied continuously, not deferred until something breaks." },
+    { icon: "gauge", title: "Support, monitoring & performance (SLA)", desc: "Proactive monitoring, incident response, and performance work on a defined SLA: issues caught before your customers feel them.", href: "/commerce/managed-support" },
+    { icon: "shield", title: "ADA / WCAG accessibility", desc: "78% of accessibility lawsuits target e-commerce. We bring your store to WCAG conformance and keep it there as it changes.", href: "/commerce/ada-accessibility" },
+    { icon: "lock", title: "PCI DSS v4.0.1 compliance", desc: "Continuous PCI DSS v4.0.1 support: scoping, controls, and evidence, so card data handling stays compliant, not just at audit time.", href: "/commerce/pci-compliance" },
+    { icon: "records", title: "Sales-tax & economic nexus", desc: "Multi-state US sales-tax and economic-nexus handled via Avalara / Anrok integration: calculation, filing readiness, and accuracy.", href: "/commerce/sales-tax-compliance" },
+    { icon: "bell", title: "Uptime & incident response", desc: "Alerting, on-call response, and clear runbooks: reliable uptime through launches, sales, and traffic spikes.", href: "/commerce/uptime-incident-response" },
+    { icon: "cloud", title: "Continuous hardening", desc: "Dependency updates, security patching, and performance tuning applied continuously, not deferred until something breaks.", href: "/commerce/continuous-hardening" },
   ],
   approachTitle: "Lower risk, reliable uptime: handled.",
   approachSub:

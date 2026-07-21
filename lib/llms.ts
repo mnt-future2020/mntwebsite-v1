@@ -65,6 +65,15 @@ export async function buildLlmsTxt(): Promise<string> {
     ["Self-Serve Buying Portals", "/commerce/buying-portals", "Account hierarchies, roles, purchase approvals, net terms & order history"],
   ];
   for (const [label, href, desc] of b2b) out.push(`- [${label}](${abs(href)}): ${desc}`);
+  const managed: [string, string, string][] = [
+    ["Support, Monitoring & Performance (SLA)", "/commerce/managed-support", "Proactive monitoring, incident response & performance work on defined SLA targets"],
+    ["ADA / WCAG Accessibility", "/commerce/ada-accessibility", "WCAG 2.2 AA audit, fixes in the code & ongoing conformance for US stores"],
+    ["PCI DSS v4.0.1 Compliance", "/commerce/pci-compliance", "Scope reduction by architecture (tokenized payments) plus continuous controls & evidence"],
+    ["Sales-Tax & Economic Nexus", "/commerce/sales-tax-compliance", "Avalara/Anrok integration: accurate calculation, nexus tracking & filing readiness"],
+    ["Uptime & Incident Response", "/commerce/uptime-incident-response", "Alerting, on-call response, runbooks & launch/sale readiness for revenue-critical stores"],
+    ["Continuous Hardening", "/commerce/continuous-hardening", "Dependency updates, security patching & performance tuning on a cadence"],
+  ];
+  for (const [label, href, desc] of managed) out.push(`- [${label}](${abs(href)}): ${desc}`);
   out.push("");
 
   out.push(`## AI & Agents`);
