@@ -58,6 +58,13 @@ export async function buildLlmsTxt(): Promise<string> {
     ["Workflow Automation", "/commerce/workflow-automation", "Order routing, stock updates, fulfillment triggers & alerts, monitored with retries"],
   ];
   for (const [label, href, desc] of integrations) out.push(`- [${label}](${abs(href)}): ${desc}`);
+  const b2b: [string, string, string][] = [
+    ["Customer-Specific Pricing & Catalogs", "/commerce/b2b-pricing", "Negotiated price lists, contract pricing & per-account catalogs, applied automatically"],
+    ["Quote / RFQ Workflows", "/commerce/quote-rfq", "RFQ, negotiation & approvals in the store; accepted quotes convert to orders"],
+    ["Bulk & Repeat Ordering", "/commerce/bulk-ordering", "One-click reorder, saved lists, CSV upload & bulk carts for real B2B order sizes"],
+    ["Self-Serve Buying Portals", "/commerce/buying-portals", "Account hierarchies, roles, purchase approvals, net terms & order history"],
+  ];
+  for (const [label, href, desc] of b2b) out.push(`- [${label}](${abs(href)}): ${desc}`);
   out.push("");
 
   out.push(`## AI & Agents`);
