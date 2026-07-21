@@ -24,7 +24,7 @@ const config: HubConfig = {
   servicesSub:
     "From a headless replatform to a marketplace launch to keeping a live US store secure and compliant: one senior team across the whole platform.",
   services: [
-    { icon: "grid", title: "Custom Commerce Platforms", desc: "Composable, API-driven storefronts, low-risk replatforming, multi-vendor marketplaces, and mobile commerce apps: engineered to scale with your catalog and traffic.", href: "/commerce/headless-marketplace" },
+    { icon: "grid", title: "Custom Commerce Platforms", desc: "D2C brand stores, marketplaces, multi-vendor, B2B, subscription and quick commerce, plus mobile apps: custom-built and engineered to scale.", href: "/commerce/headless-marketplace" },
     { icon: "network", title: "Integrations & Automation", desc: "Connect ERP, OMS, PIM, CDP, payments and 3PL into one connected stack: a single source of truth with automation across every system.", href: "/commerce/integrations" },
     { icon: "building", title: "B2B / Wholesale Commerce", desc: "Customer-specific pricing and catalogs, quote/RFQ workflows, bulk ordering, and ERP-integrated self-serve buying portals for a high-margin channel.", href: "/commerce/b2b-wholesale" },
     { icon: "shield", title: "Managed Support & Compliance", desc: "Support, monitoring and performance on an SLA, plus ADA/WCAG accessibility, PCI DSS v4.0.1, and US sales-tax/economic-nexus, handled continuously.", href: "/commerce/managed-compliance" },

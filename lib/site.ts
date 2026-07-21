@@ -44,7 +44,7 @@ export const commerceNav: NavGroup = {
   href: "/commerce",
   overviewLabel: "Commerce Platforms overview",
   children: [
-    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace", desc: "Composable storefronts & multi-vendor marketplaces, built to scale" },
+    { label: "Custom Commerce Platforms", href: "/commerce/headless-marketplace", desc: "D2C stores, marketplaces, B2B & subscription commerce, built to scale" },
     { label: "Integrations & Automation", href: "/commerce/integrations", desc: "Connect ERP, OMS, PIM, CDP, payments & 3PL into one stack" },
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale", desc: "Customer pricing, RFQ, bulk ordering: ERP-integrated" },
     { label: "Managed Support & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },

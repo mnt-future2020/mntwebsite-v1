@@ -19,7 +19,7 @@ const NEED_OPTIONS = [
 const STAGE_OPTIONS = [
   "No store yet: starting fresh",
   "On Shopify / a template platform",
-  "On a custom / headless platform",
+  "On a custom-built platform",
   "Running a marketplace or B2B channel",
   "MVP built, struggling at scale",
 ];
