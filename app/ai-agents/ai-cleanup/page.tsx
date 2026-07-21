@@ -45,7 +45,7 @@ const config: ServiceConfig = {
     { icon: "check", title: "Test coverage", desc: "Automated tests around the critical paths so future changes don't silently break checkout, payments, or data." },
     { icon: "layers", title: "Scalability re-architecture", desc: "Re-architect the parts that buckle under load: data model, queries, and services, so the platform scales with traffic." },
     { icon: "cloud", title: "Production deployment & handover", desc: "Automated deployments (CI/CD), monitoring, and proper environments. Deployed production-grade and handed over cleanly, fully documented." },
-    { icon: "gauge", title: "Performance tuning", desc: "Fix the slow queries and heavy pages that hurt conversion and Core Web Vitals, and instrument what matters." },
+    { icon: "gauge", title: "Performance tuning", desc: "Fix the slow queries and heavy pages that hurt conversion and your Google speed scores, and instrument what matters." },
   ],
   approachTitle: "From fragile MVP to production-grade.",
   approachSub:

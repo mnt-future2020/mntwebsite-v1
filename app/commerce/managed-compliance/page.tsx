@@ -48,7 +48,7 @@ const config: ServiceConfig = {
   ],
   approachTitle: "Lower risk, reliable uptime: handled.",
   approachSub:
-    "Accessibility lawsuits, PCI scope, and multi-state tax are liabilities the day you go live. We carry them for you.",
+    "Accessibility lawsuits, payment security rules, and multi-state tax are liabilities the day you go live. We carry them for you.",
   approachPoints: [
     "ADA/WCAG conformance that lowers a real and growing legal risk for US e-commerce.",
     "Continuous PCI DSS v4.0.1: controls and evidence maintained, not scrambled before an audit.",

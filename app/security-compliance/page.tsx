@@ -25,8 +25,8 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
   {
     name: "PCI DSS v4.0.1",
     icon: "lock",
-    desc: "Payment flows architected so card data stays out of scope: tokenised, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
-    tags: ["Tokenisation", "Scope reduction", "Continuous controls"],
+    desc: "Payment flows architected so card data stays out of scope: tokenized, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
+    tags: ["Tokenization", "Scope reduction", "Continuous controls"],
   },
   {
     name: "Sales-tax & nexus",
@@ -44,7 +44,7 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
     name: "US data privacy",
     icon: "globe",
     desc: "CCPA / CPRA consent, data-subject rights, and retention handling for US consumer data: engineered in, not bolted on.",
-    tags: ["CCPA / CPRA", "Consent", "DSAR"],
+    tags: ["CCPA / CPRA", "Consent", "Data rights"],
   },
   {
     name: "Agent-ready integrity",
@@ -152,7 +152,7 @@ export default function SecurityCompliance() {
               </div>
               <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce platforms</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
-                Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenised
+                Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenized
                 payments, and WCAG-conformant, secure checkout, with US sales-tax handled, without
                 slowing the store down.
               </p>
@@ -168,7 +168,7 @@ export default function SecurityCompliance() {
               </div>
               <h3 className="mt-5 font-display text-xl font-bold text-ink">AI &amp; agents</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
-                AI ships with guardrails: evaluation gates, human-in-the-loop oversight, and accurate
+                AI ships with guardrails: quality gates, a human approving sensitive actions, and accurate
                 real-time data so agents transact correctly and safely in AI channels.
               </p>
               <Link href="/ai-agents" className="link-arrow mt-6">

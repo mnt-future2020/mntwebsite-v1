@@ -22,7 +22,7 @@ const config: ServiceConfig = {
   eyebrow: "AI search & recommendations",
   h1: "Turn the traffic you already have into revenue.",
   heroSub:
-    "The fastest ROI in AI commerce. Semantic search, personalized recommendations, and a conversational shopping assistant: already built, fitted to your catalog in two weeks, with evaluation gates that prove the lift.",
+    "The fastest ROI in AI commerce. Search that understands meaning, personalized recommendations, and a conversational shopping assistant: already built, fitted to your catalog in two weeks, with evaluation gates that prove the lift.",
   heroImage: images.ai,
   chips: ["AI search that gets intent", "Personalized recommendations", "Shopping assistant", "Live in two weeks"],
   primaryKeyword: "AI commerce search, recommendations & assistant",
@@ -46,7 +46,7 @@ const config: ServiceConfig = {
     { icon: "chat", title: "Conversational shopping assistant", desc: "An AI assistant that answers questions, narrows choices, and guides shoppers to checkout, like your best salesperson, 24/7." },
     { icon: "gauge", title: "Proof of lift, measured", desc: "We measure conversion and revenue before and after every AI change, so you see real lift, not vibes." },
     { icon: "layers", title: "Built on a platform that exists", desc: "The engine, the AI layer and the admin are already built and running: which is why this is two weeks of fitting rather than months of building." },
-    { icon: "records", title: "Merchandising signals", desc: "Search and recommendation data feeds your merchandising decisions, surfacing what to promote and what's being missed." },
+    { icon: "records", title: "Know what to promote next", desc: "Search and recommendation data shows what shoppers want: what to promote, and what they're searching for but not finding." },
   ],
   approachTitle: "AI that pays for itself: measured.",
   approachSub:

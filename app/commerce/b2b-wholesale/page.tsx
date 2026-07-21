@@ -43,7 +43,7 @@ const config: ServiceConfig = {
     { icon: "tag", title: "Customer-specific pricing & catalogs", desc: "Negotiated price lists, contract pricing, and per-account catalogs: the right prices for the right buyers, automatically." },
     { icon: "chat", title: "Quote / RFQ workflows", desc: "Request-for-quote, negotiation, and approval flows that turn a sales conversation into a self-serve order." },
     { icon: "cart", title: "Bulk & repeat ordering", desc: "Fast reordering, saved lists, CSV order upload, and bulk carts built for how businesses actually buy." },
-    { icon: "records", title: "Large-SKU catalogs", desc: "Search, filtering and merchandising engineered to stay fast across tens of thousands of SKUs and variants." },
+    { icon: "records", title: "Large-SKU catalogs", desc: "Search and filtering engineered to stay fast across tens of thousands of SKUs and variants." },
     { icon: "network", title: "ERP & inventory integration", desc: "Real-time pricing, stock, credit and order status synced with your ERP: one source of truth across sales and ops." },
     { icon: "building", title: "Self-serve buying portals", desc: "Account hierarchies, roles, purchase approvals, and net terms: a portal that lets buyers serve themselves." },
   ],

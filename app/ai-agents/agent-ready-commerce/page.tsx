@@ -40,7 +40,7 @@ const config: ServiceConfig = {
   },
   featuresTitle: "What we build",
   features: [
-    { icon: "search", title: "Agent-readiness audit", desc: "A clear assessment of your data, price and inventory accuracy, and feed quality: the wedge that shows exactly what's blocking agentic sales." },
+    { icon: "search", title: "Agent-readiness audit", desc: "A clear assessment of your data, price and inventory accuracy, and feed quality: it shows exactly what's blocking agentic sales." },
     { icon: "records", title: "Structured product-feed optimization", desc: "Clean, complete, structured product data that agents and AI search can parse and trust: the foundation of every agentic sale." },
     { icon: "network", title: "Real-time price & inventory sync", desc: "Agents won't transact on stale data. We keep price and inventory accurate in real time across every channel." },
     { icon: "bolt", title: "ACP + Google UCP integration", desc: "Integrate the Agentic Commerce Protocol (OpenAI + Stripe) and Google's Universal Commerce Protocol so agents can check out." },

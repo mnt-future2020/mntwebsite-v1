@@ -31,7 +31,8 @@ const config: ServiceConfig = {
     body: (
       <>
         Integration connects your systems; orchestration makes them work together as one. We wire your
-        commerce engine to ERP, OMS, PIM, CDP, payment gateways and 3PL/logistics, then build the
+        store to your ERP, order management, product catalog, customer data, payment and shipping
+        systems, then build the
         pipelines and automation that keep inventory, orders, pricing and customer data consistent in
         real time: one connected ecosystem instead of a pile of disconnected tools.
       </>
@@ -39,8 +40,8 @@ const config: ServiceConfig = {
   },
   featuresTitle: "What we connect",
   features: [
-    { icon: "network", title: "ERP, OMS, PIM & CDP integration", desc: "Wire your back office to your storefront: inventory, orders, products and customer data flowing both ways in real time." },
-    { icon: "wallet", title: "Payments & 3PL / logistics", desc: "Gateways, tax engines, and shipping/fulfillment partners integrated cleanly, with reconciliation you can trust." },
+    { icon: "network", title: "ERP & back-office integration", desc: "Wire your back office to your storefront: inventory, orders, products and customer data flowing both ways in real time." },
+    { icon: "wallet", title: "Payments, shipping & logistics", desc: "Gateways, tax engines, and shipping/fulfillment partners integrated cleanly, with reconciliation you can trust." },
     { icon: "layers", title: "A flexible connecting layer", desc: "One layer coordinates all your systems, so you can swap or add any tool without breaking the rest." },
     { icon: "records", title: "Data pipelines & single source of truth", desc: "One canonical record for products, inventory and customers, so every team and channel sees the same numbers." },
     { icon: "bolt", title: "Workflow automation", desc: "Automate the manual handoffs between systems: order routing, stock updates, fulfillment triggers, and alerts." },

@@ -24,7 +24,7 @@ const config: HubConfig = {
   servicesSub:
     "From a platform migration to a marketplace launch to keeping a live US store secure and compliant: one senior team across the whole platform.",
   services: [
-    { icon: "grid", title: "Custom Commerce Platforms", desc: "D2C brand stores, marketplaces, multi-vendor, B2B, subscription and quick commerce, plus mobile apps: custom-built and engineered to scale.", href: "/commerce/headless-marketplace" },
+    { icon: "grid", title: "Custom Commerce Platforms", desc: "D2C brand stores, marketplaces, multi-vendor, subscription and quick commerce, plus mobile apps: custom-built and engineered to scale.", href: "/commerce/headless-marketplace" },
     { icon: "network", title: "Integrations & Automation", desc: "Connect ERP, OMS, PIM, CDP, payments and 3PL into one connected stack: a single source of truth with automation across every system.", href: "/commerce/integrations" },
     { icon: "building", title: "B2B / Wholesale Commerce", desc: "Customer-specific pricing and catalogs, quote/RFQ workflows, bulk ordering, and ERP-integrated self-serve buying portals for a high-margin channel.", href: "/commerce/b2b-wholesale" },
     { icon: "shield", title: "Managed Support & Compliance", desc: "Support, monitoring and performance on an SLA, plus ADA/WCAG accessibility, PCI DSS v4.0.1, and US sales-tax/economic-nexus, handled continuously.", href: "/commerce/managed-compliance" },
@@ -56,7 +56,7 @@ const config: HubConfig = {
   audiencesTitle: "Built for brands serious about scale",
   audiences: [
     { icon: "store", title: "D2C brands", desc: "Outgrown a template? We build the custom platform that protects your margin, your brand, and your page speed." },
-    { icon: "grid", title: "Marketplace founders", desc: "Multi-vendor platforms with onboarding, payouts, commissions, and trust infrastructure: architected to scale supply and demand." },
+    { icon: "grid", title: "Marketplace founders", desc: "Multi-vendor platforms with onboarding, payouts, commissions, and ratings: built to handle more sellers and more buyers." },
     { icon: "building", title: "B2B & wholesale", desc: "Account pricing, quotes, approvals, and ERP integration: a self-serve buying channel for manufacturers and distributors." },
   ],
   stats: [
@@ -74,7 +74,7 @@ const config: HubConfig = {
   faq: [
     { q: "Do you only build for US brands?", a: "Our focus is US D2C and marketplace brands: that's where our compliance depth (ADA, PCI DSS, sales-tax) and agentic-commerce work is sharpest. We build cross-border and international as an add-on when a US brand expands." },
     { q: "A template or a custom platform: which should I choose?", a: "A template is fine until it isn't. Go custom (the industry calls it headless or composable) when you've outgrown the platform: complex catalogs, unique checkout logic, deep integrations, or marketplace mechanics. We'll recommend honestly based on your stage in a free strategy session." },
-    { q: "Can you build a multi-vendor marketplace?", a: "Yes, end to end: vendor onboarding and payouts, commission logic, search and discovery, logistics, and trust/ratings, architected to scale supply and demand from day one." },
+    { q: "Can you build a multi-vendor marketplace?", a: "Yes, end to end: vendor onboarding and payouts, commission logic, search and discovery, logistics, and trust and ratings, built to handle more sellers and more buyers from day one." },
     { q: "Will my systems actually talk to each other?", a: "That's the Integrations & Automation service. We connect ERP, OMS, PIM, CDP, payments and 3PL into a single source of truth with automation across systems, so data is accurate everywhere and ops are far less manual." },
     { q: "What about ADA and PCI compliance?", a: "78% of accessibility lawsuits target e-commerce, and PCI DSS v4.0.1 is now mandatory. We build ADA/WCAG and PCI in from the start and can keep them continuously compliant under a managed SLA, along with US sales-tax/economic-nexus." },
     { q: "Do you also build Shopify stores?", a: "Yes, we're an official Shopify Partner. When launching in weeks matters more than custom logic, we build fast, conversion-ready Shopify stores with AI search and agent-ready feeds. And because the same team builds our custom AI-native platforms, you graduate to custom when you outgrow Shopify: a planned migration, not a re-platform trauma." },

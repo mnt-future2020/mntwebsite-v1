@@ -45,7 +45,7 @@ const services = [
   {
     no: "04",
     title: "CRO & ongoing growth",
-    desc: "A/B testing, Core Web Vitals, and ADA-minded accessibility on a retainer: lift revenue from the traffic you already have.",
+    desc: "A/B testing, page speed, and ADA-minded accessibility on a retainer: lift revenue from the traffic you already have.",
   },
 ];
 
