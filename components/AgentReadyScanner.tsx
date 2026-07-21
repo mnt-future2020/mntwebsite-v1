@@ -280,7 +280,7 @@ export default function AgentReadyScanner() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="your-store.com"
           aria-label="Store URL"
-          className="min-w-0 flex-1 basis-64 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-white placeholder:text-white/40 outline-none backdrop-blur focus:border-brand-300"
+          className="min-w-0 flex-1 basis-64 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-ink shadow-sm placeholder:text-slate-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
         />
         <button
           type="submit"
@@ -291,12 +291,12 @@ export default function AgentReadyScanner() {
         </button>
       </form>
       {scanning && (
-        <p className="mt-5 text-center text-sm text-brand-200">
+        <p className="mt-5 text-center text-sm font-medium text-brand-700">
           <span className="animate-pulse">●</span> {STAGES[stage]}
         </p>
       )}
       {error && (
-        <p className="mx-auto mt-5 max-w-xl rounded-xl border border-red-300/40 bg-red-500/10 px-4 py-3 text-center text-sm text-red-200">
+        <p className="mx-auto mt-5 max-w-xl rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">
           {error}
         </p>
       )}
