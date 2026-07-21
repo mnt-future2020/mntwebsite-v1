@@ -42,6 +42,15 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push(`## Commerce Platforms`);
   out.push(`- [Commerce Platforms overview](${abs(commerceNav.href)}): Custom stores & marketplaces, integrations, B2B/wholesale, managed commerce & US compliance.`);
   for (const c of commerceNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  const models: [string, string, string][] = [
+    ["D2C / Brand Stores", "/commerce/d2c-brand-stores", "Single-seller brand storefronts for fashion, beauty, food & CPG, custom-built and fully owned"],
+    ["Marketplace Platforms", "/commerce/marketplace-platforms", "Multi-seller marketplaces: onboarding, commissions, split payments, search & trust"],
+    ["Multi-Vendor Stores", "/commerce/multi-vendor-stores", "Marketplaces at a focused scale: local vendors, community sellers, single-category platforms"],
+    ["Subscription Commerce", "/commerce/subscription-commerce", "Boxes, meal kits, refills & memberships: auto-billing, pause/skip, failed-payment recovery"],
+    ["Quick Commerce / Hyperlocal", "/commerce/quick-commerce", "Minutes-level delivery: zones, live tracking, real-time stock by location"],
+    ["Mobile Commerce Apps", "/commerce/mobile-commerce-apps", "Native iOS & Android shopping apps (React Native / Flutter) on one shared backend"],
+  ];
+  for (const [label, href, desc] of models) out.push(`- [${label}](${abs(href)}): ${desc}`);
   out.push("");
 
   out.push(`## AI & Agents`);

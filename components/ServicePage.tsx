@@ -20,7 +20,7 @@ export type ServiceConfig = {
   primaryKeyword: string;
   intro: { title: React.ReactNode; body: React.ReactNode };
   featuresTitle: string;
-  features: { icon: IconName; title: string; desc: string }[];
+  features: { icon: IconName; title: string; desc: string; href?: string }[];
   approachTitle: React.ReactNode;
   approachSub?: string;
   approachPoints: string[];
@@ -112,17 +112,33 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
             <SectionTitle eyebrow="What we build" title={config.featuresTitle} />
           </Reveal>
           <div className="mt-[52px] grid gap-[22px] md:grid-cols-2 lg:grid-cols-3">
-            {config.features.map((f, i) => (
-              <Reveal key={f.title} delay={i * 60}>
-                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
+            {config.features.map((f, i) => {
+              const cardClass =
+                "flex h-full flex-col rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]";
+              const body = (
+                <>
                   <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
                     <Icon name={f.icon} className="h-[23px] w-[23px]" />
                   </div>
                   <h3 className="mt-[18px] font-display text-[18px] font-bold text-ink">{f.title}</h3>
                   <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{f.desc}</p>
-                </div>
-              </Reveal>
-            ))}
+                </>
+              );
+              return (
+                <Reveal key={f.title} delay={i * 60}>
+                  {f.href ? (
+                    <Link href={f.href} className={cardClass}>
+                      {body}
+                      <span className="mt-auto inline-flex items-center gap-[7px] pt-4 text-[13.5px] font-semibold text-brand-700">
+                        Explore this <Icon name="arrow" className="h-3.5 w-3.5" />
+                      </span>
+                    </Link>
+                  ) : (
+                    <div className={cardClass}>{body}</div>
+                  )}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
