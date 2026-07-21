@@ -51,6 +51,13 @@ export async function buildLlmsTxt(): Promise<string> {
     ["Mobile Commerce Apps", "/commerce/mobile-commerce-apps", "Native iOS & Android shopping apps (React Native / Flutter) on one shared backend"],
   ];
   for (const [label, href, desc] of models) out.push(`- [${label}](${abs(href)}): ${desc}`);
+  const integrations: [string, string, string][] = [
+    ["ERP & Back-Office Integration", "/commerce/erp-integration", "Two-way, real-time sync between the store and ERP, OMS, PIM & CDP"],
+    ["Payments, Shipping & 3PL", "/commerce/payments-shipping-integration", "Gateways, tax engines (Avalara/Anrok) & logistics wired in, with reconciliation"],
+    ["Data Pipelines & Single Source of Truth", "/commerce/data-pipelines", "One canonical record for products, stock, pricing & customers, feeding channels and agent feeds"],
+    ["Workflow Automation", "/commerce/workflow-automation", "Order routing, stock updates, fulfillment triggers & alerts, monitored with retries"],
+  ];
+  for (const [label, href, desc] of integrations) out.push(`- [${label}](${abs(href)}): ${desc}`);
   out.push("");
 
   out.push(`## AI & Agents`);
