@@ -9,6 +9,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* Light-only design: keeps browser dark modes from force-darkening the page
+     and keeps form controls/scrollbars rendering light. */
+  color-scheme: only light;
+  background-color: #ffffff;
 }
 
 body {

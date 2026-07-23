@@ -27,6 +27,10 @@ export const viewport: Viewport = {
   themeColor: "#2095F1",
   width: "device-width",
   initialScale: 1,
+  // The design is light-only. "only light" is the documented opt-out from
+  // Chrome Android's Auto Dark Theme, which otherwise force-inverts the site
+  // when the phone is in dark mode.
+  colorScheme: "only light",
 };
 
 // Driven by the admin Settings (siteName / titleTemplate / defaultDescription /
