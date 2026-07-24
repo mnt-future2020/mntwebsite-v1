@@ -83,6 +83,23 @@ export default function AgentReadyPage() {
               ))}
             </div>
           </Reveal>
+          <Reveal delay={0.2}>
+            <div className="mt-10 flex justify-center">
+              <a
+                href="https://www.producthunt.com/products/mnt-future-workspace?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-mnt-future-agent-ready"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- Product Hunt serves the badge SVG */}
+                <img
+                  alt="MnT Future Agent Ready - Is your store invisible to AI shopping agents? | Product Hunt"
+                  width={250}
+                  height={54}
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1201493&theme=light&t=1784887498910"
+                />
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
