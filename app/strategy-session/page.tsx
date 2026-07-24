@@ -143,7 +143,7 @@ export default function StrategySession() {
               Free strategy session · Commerce tech consulting
             </div>
             <h1 className="mt-[18px] max-w-[820px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[46px]">
-              Bring your commerce problem. Leave with the plan.
+              Bring your commerce bottleneck. Leave with a plan you can execute.
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
               A free 45-minute working session with a senior commerce consultant. We dig into your
