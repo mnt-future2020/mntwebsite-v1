@@ -147,7 +147,7 @@ export default function StrategySession() {
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
               A free 45-minute working session with a senior commerce consultant. We dig into your
-              store, your stack, and your bottleneck, sketch the solution live, and you keep the
+              store, your stack, and where it's stuck, sketch the solution live, and you keep the
               written plan whether you hire us or not.
             </p>
             <div className="mt-8 flex flex-wrap gap-3.5">
