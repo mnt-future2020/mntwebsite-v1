@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { prisma } from "@/lib/db";
+import { sendLeadEmail, leadRecipients, LEAD_REPLY_TO } from "@/lib/email";
+import { enquiryTeamEmail, enquiryConfirmationEmail } from "@/lib/leadEmails";
 
-// nodemailer + prisma need the Node.js runtime (not the Edge runtime).
+// prisma + the Resend SDK need the Node.js runtime (not the Edge runtime).
 export const runtime = "nodejs";
-
-function escapeHtml(s: string) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 
 export async function POST(req: Request) {
   try {
@@ -29,7 +26,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    // 1) Store the lead in the database (best effort — works even if SMTP isn't set up yet).
+    // 1) Store the lead first: mail is best effort, the record is not.
     let stored = false;
     try {
       await prisma.lead.create({
@@ -48,49 +45,38 @@ export async function POST(req: Request) {
       console.error("Lead store failed:", e);
     }
 
-    // 2) Send the notification email (best effort — only if SMTP is configured).
-    let mailed = false;
-    if (process.env.SMTP_HOST) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: Number(process.env.SMTP_PORT || 587),
-          secure: process.env.SMTP_SECURE === "true",
-          auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-        });
-        const to = process.env.MAIL_TO || "info@mntfuture.com";
-        const from = process.env.MAIL_FROM || `MnT Future <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
-        const rows = [
-          ["Name", name],
-          ["Email", email],
-          ["Company", company || "—"],
-          ["Building", vertical || "—"],
-          ["Budget", budget || "—"],
-        ];
-        await transporter.sendMail({
-          from,
-          to,
-          replyTo: email,
-          subject: `New enquiry — ${vertical || "General"} — ${name}`,
-          text: rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\nMessage:\n${message}`,
-          html: `<div style="font-family:Arial,Helvetica,sans-serif;color:#0E1B2E;max-width:560px">
-            <h2 style="color:#0E66C2;margin:0 0 16px">New project enquiry</h2>
-            <table style="width:100%;border-collapse:collapse;font-size:14px">
-              ${rows.map(([k, v]) => `<tr><td style="padding:6px 0;color:#475569;width:120px">${k}</td><td style="padding:6px 0;font-weight:600">${escapeHtml(v)}</td></tr>`).join("")}
-            </table>
-            <p style="margin:18px 0 6px;color:#475569;font-size:14px">Message</p>
-            <div style="padding:14px;background:#F4F8FD;border-radius:10px;font-size:14px;line-height:1.6;white-space:pre-wrap">${escapeHtml(message)}</div>
-          </div>`,
-        });
-        mailed = true;
-      } catch (e) {
-        console.error("Lead email failed:", e);
-      }
-    }
+    const enquiry = { name, email, company, vertical, budget, message };
 
-    if (!stored && !mailed) {
+    // 2) Tell the team. replyTo is the prospect, so hitting Reply reaches them.
+    const teamMail = enquiryTeamEmail(enquiry);
+    const team = await sendLeadEmail({
+      to: leadRecipients(),
+      subject: teamMail.subject,
+      innerHtml: teamMail.innerHtml,
+      preheader: teamMail.preheader,
+      replyTo: email,
+    });
+    if (!team.sent && !team.skipped) console.error("Lead team mail failed:", team.error);
+
+    // 3) Confirm to the person who booked, so they are not left wondering.
+    const confirmMail = enquiryConfirmationEmail(enquiry);
+    const confirm = await sendLeadEmail({
+      to: email,
+      subject: confirmMail.subject,
+      innerHtml: confirmMail.innerHtml,
+      preheader: confirmMail.preheader,
+      replyTo: LEAD_REPLY_TO,
+    });
+    if (!confirm.sent && !confirm.skipped) console.error("Lead confirmation failed:", confirm.error);
+
+    // Only a total failure is worth showing the visitor: if the lead is stored
+    // the team can still act on it, and if mail went out we have their details.
+    if (!stored && !team.sent) {
       return NextResponse.json(
-        { error: "Something went wrong on our end. Please try again, or email us directly at info@mntfuture.com." },
+        {
+          error:
+            "Something went wrong on our end. Please try again, or email us directly at info@mntfuture.com.",
+        },
         { status: 500 }
       );
     }
@@ -98,7 +84,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
-      { error: "Something went wrong on our end. Please try again, or email us directly at info@mntfuture.com." },
+      {
+        error:
+          "Something went wrong on our end. Please try again, or email us directly at info@mntfuture.com.",
+      },
       { status: 500 }
     );
   }

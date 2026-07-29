@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { prisma } from "@/lib/db";
+import { sendLeadEmail, leadRecipients, LEAD_REPLY_TO } from "@/lib/email";
+import { scanTeamEmail, scanConfirmationEmail } from "@/lib/leadEmails";
 
-// prisma + nodemailer need the Node.js runtime.
+// prisma + the Resend SDK need the Node.js runtime.
 export const runtime = "nodejs";
 
 /** Fix-plan requests from the /agentready scanner — stored as CRM leads (24h follow-up SLA). */
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    const message = `agentready scan: ${storeUrl} scored ${grade} (${score}/100) — requested the engineer fix plan.`;
+    const message = `agentready scan: ${storeUrl} scored ${grade} (${score}/100). Requested the engineer fix plan.`;
 
     try {
       await prisma.lead.create({
@@ -35,28 +36,27 @@ export async function POST(req: Request) {
       console.error("Scan lead store failed:", e);
     }
 
-    if (process.env.SMTP_HOST) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: Number(process.env.SMTP_PORT || 587),
-          secure: process.env.SMTP_SECURE === "true",
-          auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-        });
-        const to = process.env.MAIL_TO || "info@mntfuture.com";
-        const from =
-          process.env.MAIL_FROM || `MnT Future <${process.env.SMTP_USER || "info@mntfuture.com"}>`;
-        await transporter.sendMail({
-          from,
-          to,
-          replyTo: email,
-          subject: `agentready fix-plan request — ${storeUrl} (${grade})`,
-          text: `Email: ${email}\nStore: ${storeUrl}\nGrade: ${grade} (${score}/100)\n\nSource: /agentready scanner — follow up within 24h (OSS lead SLA).`,
-        });
-      } catch (e) {
-        console.error("Scan lead mail failed:", e);
-      }
-    }
+    const scan = { email, storeUrl, grade, score };
+
+    const teamMail = scanTeamEmail(scan);
+    const team = await sendLeadEmail({
+      to: leadRecipients(),
+      subject: teamMail.subject,
+      innerHtml: teamMail.innerHtml,
+      preheader: teamMail.preheader,
+      replyTo: email,
+    });
+    if (!team.sent && !team.skipped) console.error("Scan lead mail failed:", team.error);
+
+    const confirmMail = scanConfirmationEmail(scan);
+    const confirm = await sendLeadEmail({
+      to: email,
+      subject: confirmMail.subject,
+      innerHtml: confirmMail.innerHtml,
+      preheader: confirmMail.preheader,
+      replyTo: LEAD_REPLY_TO,
+    });
+    if (!confirm.sent && !confirm.skipped) console.error("Scan confirmation failed:", confirm.error);
 
     return NextResponse.json({ ok: true });
   } catch {

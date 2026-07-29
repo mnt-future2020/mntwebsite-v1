@@ -77,6 +77,52 @@ export async function sendInternal(
   }
 }
 
+// ─── Lead mail ──────────────────────────────────────────────────────────────
+// Enquiries used to go out over SMTP while everything else went through
+// Resend, so they silently stopped at the unset SMTP_HOST. They now share this
+// path: one configured sender, not two.
+
+// Falls back to the newsletter sender so this works with the keys already in
+// production. Set LEAD_FROM to send enquiry mail from its own address.
+const LEAD_FROM = process.env.LEAD_FROM || FROM;
+
+/** Who gets told about a new enquiry. Comma-separated for more than one. */
+export function leadRecipients(): string[] {
+  const raw = process.env.LEAD_NOTIFY_TO || process.env.MAIL_TO || `info@${site.domain}`;
+  return raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/** Where a prospect's reply lands: must be a real, monitored mailbox. */
+export const LEAD_REPLY_TO =
+  process.env.LEAD_REPLY_TO || process.env.MAIL_TO || `info@${site.domain}`;
+
+export async function sendLeadEmail(opts: {
+  to: string | string[];
+  subject: string;
+  innerHtml: string;
+  /** On team mail this is the prospect, so Reply goes straight back to them. */
+  replyTo: string;
+  preheader?: string;
+}): Promise<{ sent: boolean; skipped?: boolean; error?: string }> {
+  if (!resend) return { sent: false, skipped: true };
+  try {
+    const { error } = await resend.emails.send({
+      from: LEAD_FROM,
+      to: opts.to,
+      replyTo: opts.replyTo,
+      subject: opts.subject,
+      html: wrapEmail(opts.innerHtml, { preheader: opts.preheader }),
+    });
+    if (error) return { sent: false, error: error.message };
+    return { sent: true };
+  } catch (e) {
+    return { sent: false, error: e instanceof Error ? e.message : "send failed" };
+  }
+}
+
 // ─── Double opt-in confirmation ─────────────────────────────────────────────
 export async function sendConfirmation(
   to: string,
