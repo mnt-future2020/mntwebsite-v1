@@ -29,8 +29,10 @@ const partners: {
     href: "https://cloud.google.com/find-a-partner/partner/magizh-nexgen-technologies",
   },
   { name: "Shopify", designation: "Official Partner", slug: "shopify" },
-  // Baked hex predates OpenAI's rebrand: their mark is black now.
-  { name: "OpenAI", designation: "Official Partner", slug: "openai", color: "#0A0A0A" },
+  // Baked hex predates OpenAI's rebrand: their mark is black now. "Select" is
+  // the actual tier we hold in the OpenAI Partner Network, and the badge below
+  // the grid is the issued proof of it.
+  { name: "OpenAI", designation: "Select Partner", slug: "openai", color: "#0A0A0A" },
   { name: "NVIDIA", designation: "Developer Program Member", slug: "nvidia" },
 ];
 
@@ -83,6 +85,21 @@ export default function Partners() {
           </Reveal>
         ))}
       </div>
+
+      {/* The badge OpenAI issues to Select-tier partners, used unmodified as
+          their guidelines require: no recolouring, no cropping to the mark. */}
+      <Reveal delay={360}>
+        <div className="mt-9 flex justify-center px-5">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static SVG mark needs no optimizer */}
+          <img
+            src="/images/partners/openai-select-partner.svg"
+            alt="OpenAI Select Partner"
+            width={375}
+            height={177}
+            className="h-[84px] w-auto"
+          />
+        </div>
+      </Reveal>
     </section>
   );
 }
