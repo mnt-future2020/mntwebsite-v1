@@ -29,11 +29,9 @@ const partners: {
     href: "https://cloud.google.com/find-a-partner/partner/magizh-nexgen-technologies",
   },
   { name: "Shopify", designation: "Official Partner", slug: "shopify" },
-  // Baked hex predates OpenAI's rebrand: their mark is black now. "Select" is
-  // the actual tier we hold in the OpenAI Partner Network, and the badge below
-  // the grid is the issued proof of it.
-  { name: "OpenAI", designation: "Select Partner", slug: "openai", color: "#0A0A0A" },
   { name: "NVIDIA", designation: "Developer Program Member", slug: "nvidia" },
+  // OpenAI is not a card: it has an issued Select-tier badge, which says the
+  // same thing with their own authority. It renders below the grid.
 ];
 
 const cardClass =
@@ -64,7 +62,7 @@ export default function Partners() {
       <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
         Official partners &amp; developer programs
       </p>
-      <div className="mx-auto mt-9 grid max-w-[1200px] grid-cols-2 gap-[14px] px-5 sm:grid-cols-3 sm:px-7 lg:grid-cols-5">
+      <div className="mx-auto mt-9 grid max-w-[1000px] grid-cols-2 gap-[14px] px-5 sm:px-7 lg:grid-cols-4">
         {partners.map((p, i) => (
           <Reveal key={p.name} delay={i * 60}>
             {p.href ? (
