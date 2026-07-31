@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Icon from "./Icon";
+import { useFormToken, honeypotWrapClass } from "./useFormToken";
 
 const fieldClass =
   "rounded-[10px] border border-slate-300 bg-white px-3.5 py-3 text-[14.5px] text-ink placeholder:text-slate-400 outline-none transition-all focus:border-brand-500 focus:ring-[3px] focus:ring-brand-500/15";
@@ -30,6 +31,9 @@ export default function ContactForm() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Anti-spam: single-use token minted on mount, plus a field only a bot fills.
+  const { token, refresh: refreshToken } = useFormToken();
+  const [website, setWebsite] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -63,6 +67,8 @@ export default function ContactForm() {
           // The lead table has no column for stage: carry it in the message
           // as a labelled first line so the team sees it with the enquiry.
           message: `Where they are today: ${form.stage}\n\n${form.message}`,
+          formToken: token,
+          website,
         }),
       });
       if (!res.ok) {
@@ -72,6 +78,8 @@ export default function ContactForm() {
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      // The token is spent on every attempt: take a fresh one so a retry works.
+      void refreshToken();
     } finally {
       setSending(false);
     }
@@ -95,6 +103,25 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-[18px]">
+      {/*
+        Honeypot. Off-screen and out of the tab order, so no person ever sees or
+        reaches it; scripts that fill inputs by name do. Anything typed here
+        marks the submission as a bot server-side. Don't remove or rename it
+        without changing lib/antispam.ts.
+      */}
+      <div className={honeypotWrapClass} aria-hidden="true">
+        <label htmlFor="contact-website">Leave this field empty</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <label className={labelClass}>
           Name

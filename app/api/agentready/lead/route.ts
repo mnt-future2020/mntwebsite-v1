@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { sendLeadEmail, leadRecipients, LEAD_REPLY_TO } from "@/lib/email";
 import { scanTeamEmail, scanConfirmationEmail } from "@/lib/leadEmails";
+import { guardSubmission, RATE_LIMITED_MESSAGE, TOKEN_EXPIRED_MESSAGE } from "@/lib/antispam";
 
 // prisma + the Resend SDK need the Node.js runtime.
 export const runtime = "nodejs";
@@ -17,6 +18,25 @@ export async function POST(req: Request) {
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+    }
+
+    // This endpoint mails the address it is given, so it gets the same gate as
+    // the enquiry form (see lib/antispam.ts).
+    const verdict = guardSubmission(req, {
+      scope: "agentready-lead",
+      token: data.formToken,
+      honeypot: data.website,
+      content: { company: storeUrl },
+    });
+    if (!verdict.ok) {
+      console.warn(`Scan lead blocked (${verdict.reason})`);
+      if (verdict.action === "rate-limited") {
+        return NextResponse.json({ error: RATE_LIMITED_MESSAGE }, { status: 429 });
+      }
+      if (verdict.action === "retry") {
+        return NextResponse.json({ error: TOKEN_EXPIRED_MESSAGE }, { status: 400 });
+      }
+      return NextResponse.json({ ok: true });
     }
 
     const message = `agentready scan: ${storeUrl} scored ${grade} (${score}/100). Requested the engineer fix plan.`;
