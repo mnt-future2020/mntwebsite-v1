@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Report, CheckResult, Category } from "@mntglobal/agentready-core";
 import Icon from "./Icon";
+import { useFormToken, honeypotWrapClass } from "./useFormToken";
 
 // Local copy of the category metadata: client bundles must never import runtime
 // values from agentready-core (it pulls in server-only node: builtins via undici).
@@ -42,13 +43,16 @@ const STATUS_ICON: Record<CheckResult["status"], { char: string; cls: string }> 
 function LeadCard({ report }: { report: Report }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "busy" | "sent">("idle");
+  // Anti-spam: see lib/antispam.ts. This endpoint mails the address it is given.
+  const { token, refresh: refreshToken } = useFormToken();
+  const [website, setWebsite] = useState("");
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim() || state === "busy") return;
     setState("busy");
     try {
-      await fetch("/api/agentready/lead", {
+      const res = await fetch("/api/agentready/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -56,10 +60,19 @@ function LeadCard({ report }: { report: Report }) {
           storeUrl: report.targetUrl,
           grade: report.grade,
           score: report.score,
+          formToken: token,
+          website,
         }),
       });
+      if (!res.ok) {
+        // The token is spent per attempt: refresh so a retry can succeed.
+        void refreshToken();
+        setState("idle");
+        return;
+      }
       setState("sent");
     } catch {
+      void refreshToken();
       setState("idle");
     }
   }
@@ -77,6 +90,19 @@ function LeadCard({ report }: { report: Report }) {
         </p>
       ) : (
         <form onSubmit={submit} className="mt-4 flex flex-wrap gap-3">
+          {/* Honeypot: off-screen and out of the tab order. See ContactForm. */}
+          <div className={honeypotWrapClass} aria-hidden="true">
+            <label htmlFor="scan-website">Leave this field empty</label>
+            <input
+              id="scan-website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
           <input
             type="email"
             required

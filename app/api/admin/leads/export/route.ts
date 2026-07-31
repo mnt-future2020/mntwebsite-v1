@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { BLOCKED_LEAD_SOURCE } from "@/lib/antispam";
 
 export const runtime = "nodejs";
 
@@ -13,7 +14,11 @@ function cell(v: unknown) {
 
 export async function GET() {
   try {
-    const leads = await prisma.lead.findMany({ orderBy: { createdAt: "desc" } });
+    // Held submissions stay out of the export: they're a review queue, not leads.
+    const leads = await prisma.lead.findMany({
+      where: { NOT: { source: BLOCKED_LEAD_SOURCE } },
+      orderBy: { createdAt: "desc" },
+    });
     const header = ["Date", "Name", "Email", "Company", "Vertical", "Budget", "Status", "Message"];
     const rows = leads.map((l) =>
       [

@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { sendLeadEmail, leadRecipients, LEAD_REPLY_TO } from "@/lib/email";
 import { enquiryTeamEmail, enquiryConfirmationEmail } from "@/lib/leadEmails";
+import {
+  guardSubmission,
+  rateLimit,
+  RATE_LIMITED_MESSAGE,
+  TOKEN_EXPIRED_MESSAGE,
+  BLOCKED_LEAD_SOURCE,
+} from "@/lib/antispam";
 
 // prisma + the Resend SDK need the Node.js runtime (not the Edge runtime).
 export const runtime = "nodejs";
@@ -16,6 +23,8 @@ export async function POST(req: Request) {
     const budget = (data.budget || "").toString().trim();
     const message = (data.message || "").toString().trim();
 
+    // Shape first, so a visitor who forgot a field gets a straight answer and
+    // still has an unspent token to retry with.
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Add your name, email and a short message so we can reach you." },
@@ -24,6 +33,53 @@ export async function POST(req: Request) {
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+    }
+
+    // Spam gate. It runs before the mailer so a bot can never make us send —
+    // not to the team, and not to the harvested address it puts in the payload.
+    const verdict = guardSubmission(req, {
+      scope: "contact",
+      token: data.formToken,
+      honeypot: data.website,
+      content: { name, company, message },
+    });
+    if (!verdict.ok) {
+      console.warn(`Contact submission blocked (${verdict.reason})`);
+
+      if (verdict.action === "rate-limited") {
+        return NextResponse.json({ error: RATE_LIMITED_MESSAGE }, { status: 429 });
+      }
+      if (verdict.action === "retry") {
+        return NextResponse.json({ error: TOKEN_EXPIRED_MESSAGE }, { status: 400 });
+      }
+
+      // Nothing about the words looked automated, so this may be a real person
+      // our own plumbing failed. Keep it out of the inbox but hold it in the
+      // admin's review queue rather than losing the enquiry. The cap keeps a
+      // bot that learns to write proper sentences from filling that queue:
+      // beyond it we're plainly under attack, not losing the odd lead.
+      if (verdict.couldBeHuman && rateLimit("contact:hold", 20, 60 * 60 * 1000)) {
+        try {
+          await prisma.lead.create({
+            data: {
+              name,
+              email,
+              company: company || null,
+              vertical: vertical || null,
+              budget: budget || null,
+              message,
+              source: BLOCKED_LEAD_SOURCE,
+              status: "LOST",
+              notes: `Held by the spam filter: ${verdict.reason}`,
+            },
+          });
+        } catch (e) {
+          console.error("Held lead store failed:", e);
+        }
+      }
+
+      // Answer as if it worked: a bot that sees an error just tunes around it.
+      return NextResponse.json({ ok: true });
     }
 
     // 1) Store the lead first: mail is best effort, the record is not.

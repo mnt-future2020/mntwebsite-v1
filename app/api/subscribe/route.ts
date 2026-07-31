@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { newToken, isValidEmail } from "@/lib/subscribers";
 import { sendConfirmation } from "@/lib/email";
+import { guardSubmission, RATE_LIMITED_MESSAGE, TOKEN_EXPIRED_MESSAGE } from "@/lib/antispam";
 
 // Prisma + Resend need the Node.js runtime.
 export const runtime = "nodejs";
@@ -15,6 +16,25 @@ export async function POST(req: Request) {
 
     if (!email || !isValidEmail(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+    }
+
+    // Same gate as the enquiry form: a confirmation mail goes to whatever
+    // address is posted here, so an open endpoint is a mail relay.
+    const verdict = guardSubmission(req, {
+      scope: "subscribe",
+      token: data.formToken,
+      honeypot: data.website,
+      content: { name: name || undefined },
+    });
+    if (!verdict.ok) {
+      console.warn(`Subscribe blocked (${verdict.reason})`);
+      if (verdict.action === "rate-limited") {
+        return NextResponse.json({ error: RATE_LIMITED_MESSAGE }, { status: 429 });
+      }
+      if (verdict.action === "retry") {
+        return NextResponse.json({ error: TOKEN_EXPIRED_MESSAGE }, { status: 400 });
+      }
+      return NextResponse.json({ ok: true, message: "Almost there — check your inbox to confirm." });
     }
 
     const existing = await prisma.subscriber.findUnique({ where: { email } });

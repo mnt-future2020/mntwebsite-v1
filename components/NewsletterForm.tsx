@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Icon from "./Icon";
+import { useFormToken, honeypotWrapClass } from "./useFormToken";
 
 export default function NewsletterForm({ source = "footer" }: { source?: string }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState("");
+  // Anti-spam: see lib/antispam.ts. Confirmation mail goes to whatever address
+  // is posted, so this endpoint needs the same gate as the enquiry form.
+  const { token, refresh: refreshToken } = useFormToken();
+  const [website, setWebsite] = useState("");
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -16,12 +21,13 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, formToken: token, website }),
       });
       const data = await res.json();
       if (!res.ok) {
         setState("error");
         setMsg(data.error || "Something went wrong.");
+        void refreshToken();
         return;
       }
       setState("done");
@@ -30,6 +36,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
     } catch {
       setState("error");
       setMsg("Network error. Please try again.");
+      void refreshToken();
     }
   }
 
@@ -44,6 +51,19 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
 
   return (
     <form onSubmit={submit} noValidate>
+      {/* Honeypot: off-screen and out of the tab order. See ContactForm. */}
+      <div className={honeypotWrapClass} aria-hidden="true">
+        <label htmlFor="newsletter-website">Leave this field empty</label>
+        <input
+          id="newsletter-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <div className="flex gap-2">
         <input
           type="email"
