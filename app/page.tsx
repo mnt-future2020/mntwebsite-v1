@@ -4,13 +4,11 @@ import Image from "next/image";
 import { resolveMetadata } from "@/lib/seo";
 import Hero from "@/components/Hero";
 import Icon from "@/components/Icon";
-import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import Partners from "@/components/Partners";
-import SectionTitle from "@/components/SectionTitle";
-import Testimonials from "@/components/Testimonials";
 import FAQ, { QA } from "@/components/FAQ";
 import { caseStudies } from "@/lib/caseStudies";
+import { SectionHead, RuleLabel, BpButton, PAGE } from "@/components/blueprint";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
@@ -148,6 +146,10 @@ const faqSchema = {
   })),
 };
 
+const receipts = caseStudies.flatMap((cs) =>
+  cs.facts.map((f) => ({ ...f, title: cs.title, slug: cs.slug }))
+);
+
 export default function Home() {
   const featured = caseStudies[0];
   return (
@@ -156,249 +158,310 @@ export default function Home() {
 
       <Hero />
 
-      {/* PROOF BAR + STACK */}
-      <section className="border-b border-line pt-14">
-        <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-          Trusted to engineer revenue-critical commerce for US brands
-        </p>
-        <div className="mx-auto mt-9 grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 sm:px-7 lg:grid-cols-4">
-          {proofStats.map((s, i) => (
-            <Reveal key={s.value}>
-              <div className={`px-5 text-center ${i > 0 ? "border-l border-line" : ""}`}>
-                <div className="font-display text-[26px] font-bold text-ink">{s.value}</div>
-                <div className="mt-1.5 text-[13.5px] leading-normal text-slate-500">{s.label}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <Partners />
-
-      {/* THE PLATFORM AND ITS AI LAYER */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
-        <Reveal>
-          <SectionTitle
-            eyebrow="What we build"
-            title="Commerce platforms, with the AI layer built in."
-            sub="The platform is the product. Search, agent-readiness and agents ship as part of it, and two of them also work on the store you already run."
-          />
-        </Reveal>
-        <div className="mt-[52px] grid gap-[26px] lg:grid-cols-2">
-          {verticals.map((v, i) => (
-            <Reveal key={v.kicker} delay={i * 100}>
-              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.25)]">
-                {/* Gradient feature header instead of a stock photo */}
-                <Link href={v.href} className={`relative block bg-gradient-to-br ${v.gradient} p-7`}>
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                      backgroundSize: "36px 36px",
-                    }}
-                  />
-                  <div className="pointer-events-none absolute -right-10 -top-14 h-[180px] w-[180px] rounded-full bg-white/10 blur-[60px]" />
-                  <div className="relative flex items-start justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.15] text-white ring-1 ring-white/20">
-                      <Icon name={v.icon} className="h-6 w-6" />
-                    </span>
-                    <span className="rounded-full bg-white/[0.15] px-3 py-1 text-[11.5px] font-semibold text-white ring-1 ring-white/20">
-                      {v.count}
-                    </span>
-                  </div>
-                  <div className="relative mt-6 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-white/70">
-                    {v.kicker}
-                  </div>
-                  <h3 className="relative mt-1.5 font-display text-2xl font-bold text-white">
-                    {v.title}
-                  </h3>
-                </Link>
-
-                <div className="flex flex-1 flex-col p-7">
-                  <p className="text-[15px] leading-relaxed text-slatey">{v.desc}</p>
-                  <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {v.items.map((it) => (
-                      <Link
-                        key={it.label}
-                        href={it.href}
-                        className="group/item flex items-center justify-between gap-2 rounded-[10px] border border-slate-200 bg-white px-3.5 py-2.5 text-[13.5px] font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:bg-brand-50/40 hover:text-brand-700"
-                      >
-                        {it.label}
-                        <Icon
-                          name="arrow"
-                          className="h-3.5 w-3.5 shrink-0 opacity-30 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100"
-                        />
-                      </Link>
-                    ))}
-                  </div>
-                  <Link
-                    href={v.href}
-                    className="mt-auto inline-flex items-center gap-[7px] pt-6 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
-                  >
-                    {v.cta}
-                    <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+      {/* PROOF BAR */}
+      <section className="border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-10 lg:py-[60px]`}>
+          <RuleLabel>Trusted to engineer revenue-critical commerce for US brands</RuleLabel>
+          <div className="mt-[30px] grid border-l border-t border-bp-edge sm:grid-cols-2 lg:grid-cols-4">
+            {proofStats.map((s) => (
+              <div
+                key={s.value}
+                className="border-b border-r border-bp-edge bg-white px-6 py-7 transition-colors hover:bg-[#FAFCFF]"
+              >
+                <span className="block h-[2px] w-6 bg-brand-500" />
+                <div className="mt-5 font-display text-[23px] font-bold tracking-[-0.028em] text-bp-ink lg:text-[31px]">
+                  {s.value}
                 </div>
+                <div className="mt-[11px] text-[13.5px] leading-[1.6] text-bp-soft">{s.label}</div>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* WHY MNT */}
-      <section className="border-y border-line bg-mist py-24">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
-          <Reveal>
-            <SectionTitle
-              eyebrow="Why MnT Future"
-              title="The reasons founders pick us, and stay."
-              sub="Specialist depth, compliance built into the architecture, AI where it counts, and the speed of a senior team."
-            />
-          </Reveal>
-          <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
-            {whyMnt.map((f, i) => (
-              <Reveal key={f.title} delay={i * 70}>
-                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
-                  <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
-                    <Icon name={f.icon} className="h-[23px] w-[23px]" />
-                  </div>
-                  <h3 className="mt-[18px] font-display text-[19px] font-bold text-ink">{f.title}</h3>
-                  <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{f.desc}</p>
-                </div>
-              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ENGAGEMENT MODELS */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
-        <Reveal>
-          <SectionTitle eyebrow="Engagement models" title="Work with us the way your stage demands." />
-        </Reveal>
-        <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-3">
-          {engagement.map((m, i) => (
-            <Reveal key={m.title} delay={i * 80}>
+      <Partners />
+
+      {/* 01 WHAT WE BUILD */}
+      <section id="build" className="scroll-mt-24 border-b border-bp-line">
+        <div className={`${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead
+            no="01"
+            eyebrow="What we build"
+            title="Commerce platforms, with the AI layer built in."
+            sub="The platform is the product. Search, agent-readiness and agents ship as part of it, and two of them also work on the store you already run."
+          />
+          <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-2">
+            {verticals.map((v) => (
               <div
-                className={`relative flex h-full flex-col rounded-[14px] bg-white p-[30px] ${
-                  m.featured
-                    ? "border-2 border-brand-500 shadow-[0_20px_44px_-18px_rgba(32,149,241,0.3)]"
-                    : "border border-slate-200 shadow-[0_1px_3px_rgba(14,27,46,0.04)]"
+                key={v.kicker}
+                className="flex flex-col border-b border-r border-bp-line bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
+              >
+                <div
+                  className="relative overflow-hidden border-b border-bp-line p-7 lg:p-9"
+                  style={{
+                    background: "linear-gradient(135deg,rgba(32,149,241,0.07),rgba(62,81,182,0.045))",
+                  }}
+                >
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right,rgba(11,21,36,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,21,36,0.035) 1px,transparent 1px)",
+                      backgroundSize: "34px 34px",
+                    }}
+                    aria-hidden="true"
+                  />
+                  <div className="pointer-events-none absolute -bottom-12 -right-9 text-brand-500/10" aria-hidden="true">
+                    <Icon name={v.icon} className="h-[200px] w-[200px]" />
+                  </div>
+                  <div className="relative flex items-start justify-between gap-4">
+                    <span className="flex h-12 w-12 items-center justify-center border border-[#DCE6F2] bg-white text-brand-700">
+                      <Icon name={v.icon} className="h-6 w-6" />
+                    </span>
+                    <span className="border border-[#DCE6F2] bg-white px-[11px] py-1.5 font-mono text-[11px] tracking-[0.08em] text-bp-mute">
+                      {v.count}
+                    </span>
+                  </div>
+                  <div className="relative mt-[30px] font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+                    {v.kicker}
+                  </div>
+                  <h3 className="relative mt-3 font-display text-[22px] font-bold leading-[1.14] tracking-[-0.028em] text-bp-ink lg:text-[29px]">
+                    {v.title}
+                  </h3>
+                </div>
+
+                <div className="flex flex-1 flex-col p-7 lg:p-9">
+                  <p className="m-0 text-[15.5px] leading-[1.72] text-bp-mute">{v.desc}</p>
+                  <div className="mt-7 border-t border-bp-hair">
+                    {v.items.map((it, n) => (
+                      <Link
+                        key={it.href}
+                        href={it.href}
+                        className="group flex items-center gap-3.5 border-b border-bp-hair px-0.5 py-[15px] text-[14.8px] font-semibold text-bp-body transition-all duration-200 hover:pl-2.5 hover:text-brand-700"
+                      >
+                        <span className="font-mono text-[11px] font-medium text-[#9AA9BE]">
+                          {String(n + 1).padStart(2, "0")}
+                        </span>
+                        <span className="flex-1">{it.label}</span>
+                        <Icon name="arrow" className="h-3.5 w-3.5 shrink-0 opacity-40" />
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href={v.href}
+                    className="mt-auto inline-flex items-center gap-2.5 pt-7 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                  >
+                    {v.cta}
+                    <Icon name="arrow" className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 02 WHY */}
+      <section id="why" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead
+            no="02"
+            eyebrow="Why MnT Future"
+            title="The reasons founders pick us, and stay."
+            sub="Specialist depth, compliance built into the architecture, AI where it counts, and the speed of a senior team."
+          />
+          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 lg:grid-cols-2">
+            {whyMnt.map((f, i) => (
+              <div
+                key={f.title}
+                className="border-b border-r border-bp-edge bg-white p-7 shadow-[inset_3px_0_0_transparent] transition-shadow duration-200 hover:shadow-[inset_3px_0_0_#2095F1] lg:p-10"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="flex h-[46px] w-[46px] items-center justify-center bg-brand-500/[0.07] text-brand-700">
+                    <Icon name={f.icon} className="h-[23px] w-[23px]" />
+                  </span>
+                  <span className="font-display text-[26px] font-extrabold tracking-[-0.04em] text-[#EAF0F7]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-6 font-display text-[20.5px] font-bold tracking-[-0.022em] text-bp-ink">
+                  {f.title}
+                </h3>
+                <p className="mt-3 text-[15px] leading-[1.72] text-bp-mute">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 03 ENGAGEMENT */}
+      <section id="engage" className="scroll-mt-24 border-b border-bp-line">
+        <div className={`${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead no="03" eyebrow="Engagement models" title="Work with us the way your stage demands." />
+          <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-3">
+            {engagement.map((m) => (
+              <div
+                key={m.title}
+                className={`relative flex flex-col border-b border-r border-bp-line p-7 lg:p-10 ${
+                  m.featured ? "bg-[#F7FAFE]" : "bg-white"
                 }`}
               >
-                {m.featured && (
-                  <span className="absolute right-5 top-5 rounded-full bg-brand-700 px-3 py-[5px] text-[11px] font-semibold tracking-[0.04em] text-white">
-                    MOST POPULAR
+                {m.featured && <span className="absolute inset-x-0 -top-px h-[3px] bg-brand-500" />}
+                <div className="flex min-h-[26px] items-center justify-between gap-4">
+                  <span className="inline-flex items-center gap-2.5 font-mono text-[12.5px] font-semibold tracking-[0.14em] text-brand-700">
+                    <span className="h-px w-5 bg-brand-500" />
+                    {m.no}
                   </span>
-                )}
-                <div className="font-display text-[13px] font-bold text-brand-700">{m.no}</div>
-                <h3 className="mt-3.5 font-display text-2xl font-bold text-ink">{m.title}</h3>
-                <p className="mt-[11px] text-[14.5px] leading-[1.65] text-slatey">{m.desc}</p>
-                <div className="mt-[22px] flex flex-col gap-2.5">
+                  {m.featured && (
+                    <span className="bg-bp-ink px-2.5 py-[5px] font-mono text-[10px] font-semibold tracking-[0.12em] text-white">
+                      MOST POPULAR
+                    </span>
+                  )}
+                </div>
+                <h3 className="mt-5 font-display text-[25px] font-bold tracking-[-0.03em] text-bp-ink lg:text-[31px]">
+                  {m.title}
+                </h3>
+                <p className="mt-4 text-[15px] leading-[1.72] text-bp-mute">{m.desc}</p>
+                <div className="mt-7 border-t border-bp-line">
                   {m.points.map((p) => (
-                    <span key={p} className="flex items-center gap-[9px] text-[13.5px] font-medium text-slate-700">
-                      <Icon name="check" className="h-3.5 w-3.5 shrink-0 text-brand-700" />
+                    <span
+                      key={p}
+                      className="flex items-center gap-3 border-b border-bp-line px-0.5 py-3.5 text-[14px] font-medium text-[#334458]"
+                    >
+                      <Icon name="check" className="h-3.5 w-3.5 shrink-0 text-brand-500" />
                       {p}
                     </span>
                   ))}
                 </div>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* SELECTED WORK */}
-      <section className="border-y border-line bg-mist py-24">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <SectionTitle
-                align="left"
-                eyebrow="Selected work"
-                title="Real platforms, shipped."
-                sub="Live products we've designed and engineered end to end."
-              />
-              <Link
-                href="/work"
-                className="inline-flex shrink-0 items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-[22px] py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
-              >
-                See all work
-                <Icon name="arrow" className="h-[15px] w-[15px]" />
-              </Link>
-            </div>
-          </Reveal>
-          <div className="mt-11 grid gap-[22px] lg:grid-cols-2">
-            <Reveal>
-              <Link
-                href={`/work/${featured.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:-translate-y-1 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.22)]"
-              >
-                <div className="relative aspect-[16/8] overflow-hidden border-b border-slate-200 bg-slate-100">
-                  <Image
-                    src={featured.cover}
-                    alt={`${featured.title}: ${featured.tagline}`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-[26px]">
-                  <div className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-700">
-                    {featured.type}
-                  </div>
-                  <h3 className="mt-2.5 font-display text-[23px] font-bold text-ink">{featured.title}</h3>
-                  <p className="mt-[9px] text-[14.5px] leading-relaxed text-slatey">{featured.tagline}</p>
-                  <span className="mt-auto inline-flex items-center gap-[7px] pt-[18px] text-sm font-semibold text-brand-700">
-                    Read the case study
-                    <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-            <Reveal delay={100}>
-              <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
-                <h3 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h3>
-                <p className="mx-auto mt-3 max-w-[360px] text-[14.5px] leading-relaxed text-slatey">
-                  Book a free strategy session: we&apos;ll show you exactly how we&apos;d build
-                  it: database design, APIs, scalability plan.
-                </p>
-                <div className="mt-[22px]">
-                  <Link
-                    href="/strategy-session"
-                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
-                  >
-                    Book a strategy session
-                    <Icon name="arrow" className="h-[15px] w-[15px]" />
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <Testimonials />
+      {/* 04 SELECTED WORK */}
+      <section id="work" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead
+            no="04"
+            eyebrow="Selected work"
+            title="Real platforms, shipped."
+            sub="Live products we've designed and engineered end to end."
+            aside={
+              <Link
+                href="/work"
+                className="inline-flex shrink-0 items-center gap-2.5 border border-[#D8E1EC] bg-white px-6 py-4 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:border-brand-500 hover:text-brand-700"
+              >
+                See all work
+                <Icon name="arrow" className="h-3.5 w-3.5" />
+              </Link>
+            }
+          />
+          <div className="mt-11 grid border border-bp-line bg-white lg:mt-16 lg:grid-cols-2">
+            <Link href={`/work/${featured.slug}`} className="group relative block overflow-hidden">
+              <span className="absolute left-5 top-5 z-10 inline-flex items-center gap-2.5 bg-white/95 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-bp-ink">
+                01 — Case study
+              </span>
+              <Image
+                src={featured.cover}
+                alt={`${featured.title}: ${featured.tagline}`}
+                width={900}
+                height={560}
+                className="h-full min-h-[280px] w-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+            </Link>
+            <div className="flex flex-col justify-center border-t border-bp-line p-7 lg:border-l lg:border-t-0 lg:p-12">
+              <div className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-brand-700">
+                {featured.type}
+              </div>
+              <h3 className="mt-4 font-display text-[30px] font-bold tracking-[-0.035em] text-bp-ink lg:text-[38px]">
+                {featured.title}
+              </h3>
+              <p className="mt-4 max-w-[46ch] text-[15.5px] leading-[1.7] text-bp-mute">
+                {featured.tagline}
+              </p>
+              <Link
+                href={`/work/${featured.slug}`}
+                className="mt-7 inline-flex items-center gap-2.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+              >
+                Read the case study
+                <Icon name="arrow" className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
 
-      {/* FAQ */}
-      <section className="border-t border-line bg-mist py-24">
-        <div className="mx-auto max-w-[860px] px-5 sm:px-7">
-          <Reveal>
-            <SectionTitle
-              eyebrow="FAQ"
-              title="Questions buyers ask us first"
-              sub="Short, direct answers on agent-ready commerce, ACP, and how we work."
-              className="mb-11"
-            />
-          </Reveal>
-          <FAQ items={homeFaq} />
+          <div className="mt-6 flex flex-col items-start justify-between gap-6 border border-dashed border-[#C9D6E5] bg-white p-8 lg:flex-row lg:items-center lg:p-10">
+            <div>
+              <h3 className="font-display text-[22px] font-bold tracking-[-0.02em] text-bp-ink">
+                Your platform here next?
+              </h3>
+              <p className="mt-2.5 max-w-[52ch] text-[15px] leading-[1.65] text-bp-mute">
+                Book a free strategy session: we&apos;ll show you exactly how we&apos;d build it:
+                database design, APIs, scalability plan.
+              </p>
+            </div>
+            <BpButton href="/strategy-session" className="shrink-0">
+              Book a strategy session
+            </BpButton>
+          </div>
         </div>
       </section>
 
-      <div className="pt-24">
-        <CTASection />
-      </div>
+      {/* 05 RECEIPTS */}
+      <section id="receipts" className="relative overflow-hidden border-b border-bp-ink bg-bp-ink">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.55]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right,rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.035) 1px,transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+          aria-hidden="true"
+        />
+        <div className={`relative ${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead
+            no="05"
+            tone="dark"
+            eyebrow="Receipts, not testimonials"
+            title="Numbers from builds you can inspect."
+            sub="No invented quotes. Every stat below comes from a public case study, so you can judge the work itself."
+          />
+          <div className="mt-11 grid border-l border-t border-white/10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+            {receipts.slice(0, 8).map((r) => (
+              <Link
+                key={r.slug + r.label}
+                href={`/work/${r.slug}`}
+                className="group border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.03]"
+              >
+                <div className="font-display text-[26px] font-bold tracking-[-0.03em] text-white lg:text-[30px]">
+                  {r.value}
+                </div>
+                <div className="mt-2.5 text-[13.5px] leading-[1.55] text-white/55">{r.label}</div>
+                <div className="mt-7 border-t border-white/10 pt-4 font-mono text-[11.5px] tracking-[0.06em] text-brand-300 transition-colors group-hover:text-brand-200">
+                  {r.title} case study →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 06 FAQ */}
+      <section id="faq" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-20 lg:py-[140px]`}>
+          <SectionHead
+            no="06"
+            eyebrow="FAQ"
+            title="Questions buyers ask us first."
+            sub="Short, direct answers on agent-ready commerce, ACP, and how we work."
+          />
+          <div className="mx-auto mt-11 max-w-[900px] lg:mt-16">
+            <FAQ items={homeFaq} />
+          </div>
+        </div>
+      </section>
+
+      <CTASection />
     </>
   );
 }

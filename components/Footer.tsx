@@ -3,84 +3,101 @@ import Logo from "./Logo";
 import Icon from "./Icon";
 import NewsletterForm from "./NewsletterForm";
 import { site, footerNav } from "@/lib/site";
+import { PAGE } from "./blueprint";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink">
-      <div className="mx-auto max-w-[1200px] px-5 pb-8 pt-[60px] sm:px-7">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div>
-            <Logo variant="light" />
-            <p className="mt-[18px] max-w-[300px] text-[13.5px] leading-[1.65] text-white/60">
-              MnT Future: we build AI-native, agent-ready commerce platforms for US D2C &amp;
-              marketplace brands.
-            </p>
+    <footer className="relative bg-[#070E19]">
+      <div className={`${PAGE} grid gap-9 pb-8 pt-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-[54px] lg:pt-[82px]`}>
+        <div className="min-w-[230px]">
+          <Logo variant="light" />
+          <p className="mt-5 max-w-[32ch] text-[14px] leading-[1.7] text-[#7E90A8]">
+            MnT Future: we build AI-native, agent-ready commerce platforms for US D2C &amp;
+            marketplace brands.
+          </p>
 
-            {/* id: the signup lives only here, so pages that offer it link
-                down to this block rather than to a /newsletter page. */}
-            <div id="newsletter" className="mt-[26px] max-w-[320px] scroll-mt-24">
-              <div className="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-brand-300">
-                Newsletter
-              </div>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-white/60">
-                Occasional, practical notes on AI-native, agent-ready commerce. No spam.
-              </p>
-              <div className="mt-3">
-                <NewsletterForm source="footer" />
-              </div>
+          {/* id: the signup lives only here, so pages that offer it link
+              down to this block rather than to a /newsletter page. */}
+          <div id="newsletter" className="mt-[30px] max-w-[330px] scroll-mt-24">
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
+              Newsletter
             </div>
-
-            <div className="mt-[22px] flex gap-2.5">
-              {[
-                { href: site.social.linkedin, label: "LinkedIn", icon: "linkedin" as const },
-                { href: site.social.instagram, label: "Instagram", icon: "instagram" as const },
-                { href: site.social.facebook, label: "Facebook", icon: "facebook" as const },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition-all duration-200 hover:border-brand-500 hover:bg-brand-500 hover:text-white"
-                  aria-label={s.label}
-                >
-                  <Icon name={s.icon} className="h-[18px] w-[18px]" />
-                </a>
-              ))}
+            <p className="mt-3 text-[13.5px] leading-[1.65] text-[#7E90A8]">
+              Occasional, practical notes on AI-native, agent-ready commerce. No spam.
+            </p>
+            <div className="mt-3.5">
+              <NewsletterForm source="footer" />
             </div>
           </div>
 
-          {footerNav.map((col) => (
-            <div key={col.title}>
-              <div className="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-brand-300">
-                {col.title}
-              </div>
-              <ul className="mt-4 space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className="text-[13.5px] text-white/65 transition-colors hover:text-white"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="mt-[26px] flex gap-2.5">
+            {[
+              { href: site.social.linkedin, label: "LinkedIn", icon: "linkedin" as const },
+              { href: site.social.instagram, label: "Instagram", icon: "instagram" as const },
+              { href: site.social.facebook, label: "Facebook", icon: "facebook" as const },
+            ].map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-[38px] w-[38px] items-center justify-center border border-[#1E2A3A] text-[#7E90A8] transition-colors hover:border-brand-500 hover:bg-brand-500/15 hover:text-white"
+                aria-label={s.label}
+              >
+                <Icon name={s.icon} className="h-[17px] w-[17px]" />
+              </a>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/[0.12] pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/50">
-            © {new Date().getFullYear()} MnT Future. All rights reserved.
-          </p>
-          <div className="flex flex-wrap items-center gap-x-[22px] gap-y-2 text-xs text-white/50">
-            <a href={`mailto:${site.email}`} className="transition-colors hover:text-white">
-              {site.email}
-            </a>
-            <span>{site.domain}</span>
+        {footerNav.map((col) => (
+          <div key={col.title}>
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
+              {col.title}
+            </div>
+            <ul className="mt-[18px] space-y-[11px]">
+              {col.links.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-[13.8px] text-[#8497AF] transition-colors hover:text-white"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+        ))}
+      </div>
+
+      <div
+        className={`${PAGE} flex flex-wrap items-center justify-between gap-3.5 border-t border-[#16202E] pb-10 pt-5`}
+      >
+        <p className="m-0 font-mono text-[11.5px] text-[#5F7189]">
+          © {new Date().getFullYear()} MnT Future. All rights reserved.
+        </p>
+        <div className="flex flex-wrap items-center gap-[22px] font-mono text-[11.5px] text-[#5F7189]">
+          <a href={`mailto:${site.email}`} className="transition-colors hover:text-white">
+            {site.email}
+          </a>
+          <span>{site.domain}</span>
+          <a
+            href="#top"
+            className="inline-flex items-center gap-2 border border-[#1E2A3A] px-3 py-[7px] tracking-[0.12em] text-[#7E90A8] transition-colors hover:border-brand-500 hover:text-white"
+          >
+            TOP
+            <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 19V5M6 11l6-6 6 6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* Wordmark watermark: the sign-off, cropped by the viewport. */}
+      <div className="pointer-events-none overflow-hidden px-[18px] pb-8 sm:px-8 lg:px-14" aria-hidden="true">
+        <div className="mx-auto max-w-[1440px] whitespace-nowrap font-display text-[52px] font-extrabold leading-[0.78] tracking-[-0.062em] text-[#0C1725] sm:text-[13.4vw]">
+          MnT Future
         </div>
       </div>
     </footer>

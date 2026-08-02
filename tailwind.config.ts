@@ -44,10 +44,26 @@ const config: Config = {
         // v3 design surfaces: tinted section background + hairline border
         mist: "#F5F9FD",
         line: "#E8EDF3",
+        // Blueprint: the technical redesign layer. Square corners, hairline
+        // grids, mono labels. Kept as its own scale so v3 pages are untouched.
+        bp: {
+          ink: "#0B1524", // headings and dark bands
+          body: "#24344A", // body copy
+          mute: "#4E5F76", // secondary copy
+          soft: "#6C7D93", // labels
+          faint: "#8394AA", // meta
+          ghost: "#E7EDF5", // the giant section numerals
+          wash: "#F4F7FB", // alternating section background
+          tint: "#FAFCFE", // frame chrome
+          line: "#E4EAF2", // section borders
+          hair: "#EDF1F7", // inner cell borders
+          edge: "#DDE5EF", // stronger card borders
+        },
       },
       fontFamily: {
         sans: ["var(--font-source-sans)", "system-ui", "-apple-system", '"Segoe UI"', "Roboto", "sans-serif"],
         display: ["var(--font-sora)", "var(--font-source-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-plex-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       borderRadius: {
         "4xl": "2rem",
@@ -75,10 +91,41 @@ const config: Config = {
           "0%,100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        // Blueprint motion.
+        "rise-in": {
+          from: { opacity: "0", transform: "translateY(18px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        "word-in": {
+          from: { opacity: "0", transform: "translateY(0.38em) rotateX(58deg) scale(0.97)", filter: "blur(10px)" },
+          to: { opacity: "1", transform: "none", filter: "none" },
+        },
+        "pop-q": {
+          "0%": { opacity: "0", transform: "scale(0.2) rotate(-16deg)" },
+          "55%": { opacity: "1", transform: "scale(1.26) rotate(4deg)" },
+          "100%": { opacity: "1", transform: "none" },
+        },
+        "ring-out": {
+          "0%": { opacity: "0.55", transform: "scale(0.5)" },
+          "100%": { opacity: "0", transform: "scale(2.4)" },
+        },
+        "draw-rule": { from: { transform: "scaleX(0)" }, to: { transform: "scaleX(1)" } },
+        "live-pulse": {
+          "0%,100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: ".35", transform: "scale(.72)" },
+        },
+        caret: { "0%,49%": { opacity: "1" }, "50%,100%": { opacity: "0" } },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out both",
         float: "float 6s ease-in-out infinite",
+        "rise-in": "rise-in 0.7s cubic-bezier(.22,1,.36,1) both",
+        "word-in": "word-in 0.75s cubic-bezier(.22,1,.36,1) both",
+        "pop-q": "pop-q 0.65s cubic-bezier(.34,1.56,.64,1) both",
+        "ring-out": "ring-out 0.8s ease-out both",
+        "draw-rule": "draw-rule 0.8s cubic-bezier(.22,1,.36,1) both",
+        "live-pulse": "live-pulse 1.6s ease-in-out infinite",
+        caret: "caret 1s step-end infinite",
       },
     },
   },

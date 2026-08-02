@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Sora, Source_Sans_3 } from "next/font/google";
+import { Sora, Source_Sans_3, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import PWARegister from "@/components/PWARegister";
@@ -19,6 +19,13 @@ const sourceSans = Source_Sans_3({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-source-sans",
+  display: "swap",
+});
+// Blueprint labels, eyebrows and buttons.
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -144,7 +151,11 @@ export default async function RootLayout({
     // data-scroll-behavior: Next 16 only suppresses CSS smooth-scroll during
     // its route-change scroll resets when this attribute is present: without
     // it, navigations fail to land at the top of the new page.
-    <html lang="en" data-scroll-behavior="smooth" className={`${sora.variable} ${sourceSans.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${sora.variable} ${sourceSans.variable} ${plexMono.variable}`}
+    >
       <head>
         {/* Raw tag, not metadata alternates.types: pages that return their own
             `alternates` (via resolveMetadata) would override the layout's. */}
