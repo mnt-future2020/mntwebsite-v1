@@ -2,7 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Icon from "./Icon";
 
-const trustBadges = ["Agent-ready", "ADA / WCAG", "PCI DSS v4.0.1", "SOC 2-aligned", "US sales-tax"];
+// Phrased as what we perform, not what we warrant, and labelled "What we build
+// to" rather than sat behind shield icons: a seal-shaped icon over-claims even
+// when the words behave. See the compliance-language rules in the sales docs.
+const buildStandards = [
+  "Built to WCAG 2.2 AA",
+  "PCI DSS v4.0.1 scope minimised",
+  "Sales-tax engine integrated",
+  "SOC 2-aligned controls",
+];
 
 export default function Hero() {
   return (
@@ -10,12 +18,18 @@ export default function Hero() {
       <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-16 pt-16 sm:px-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-[88px]">
         <div className="animate-fade-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#C9E0F7] bg-brand-50 px-3.5 py-1.5 text-[12.5px] font-semibold tracking-[0.04em] text-brand-700">
-            AI-NATIVE, AGENT-READY COMMERCE
+            COMMERCE PLATFORMS · US BRANDS
           </div>
-          <h1 className="mt-[26px] font-display text-[38px] font-extrabold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[46px] lg:text-[54px]">
-            We build commerce platforms{" "}
+          {/*
+            Opens on their gap, not on our capability, and asks rather than
+            boasts: the category question is the one move that cannot be argued
+            with, and "ahead of your competitors" is the one that invites a buyer
+            to fact-check everything else. Plain sentence first, acronyms second.
+          */}
+          <h1 className="mt-[26px] font-display text-[32px] font-extrabold leading-[1.12] tracking-[-0.025em] text-ink sm:text-[40px] lg:text-[46px]">
+            Shoppers are starting to buy inside AI assistants. Can they{" "}
             <span className="relative whitespace-nowrap text-brand-700">
-              ready for AI
+              buy from you
               <svg
                 className="absolute -bottom-2 left-0 h-2.5 w-full"
                 viewBox="0 0 200 10"
@@ -26,40 +40,54 @@ export default function Hero() {
                 <path d="M2 7 Q 100 1 198 6" stroke="#7BB9F8" strokeWidth="3.5" strokeLinecap="round" />
               </svg>
             </span>
-            , and for the agents now driving sales.
+            ?
           </h1>
-          <p className="mt-[22px] max-w-[540px] text-lg leading-[1.65] text-slatey">
-            MnT Future engineers AI-native, agent-ready commerce for US D2C and marketplace
-            brands: custom storefronts &amp; marketplaces, integrations, B2B, and AI agents that sell
-            in the new agentic channels. Land small, expand big.
+          <p className="mt-[22px] max-w-[560px] text-lg leading-[1.65] text-slatey">
+            For an AI agent to sell your product, it has to read your catalogue, trust your stock
+            and price, and finish a checkout on its own. That is what ACP, Google UCP and Retail MCP
+            make possible. We build the commerce platforms that can do it: custom storefronts,
+            marketplaces, B2B, and the AI agents that sell on them.
           </p>
 
+          {/*
+            The scan leads, the call follows. Trust is the weakest card we hold,
+            and the scan is the one asset that demonstrates the work instead of
+            claiming it: it asks a stranger for a URL, not an hour of their diary.
+          */}
           <div className="mt-[34px] flex flex-wrap gap-3.5">
             <Link
-              href="/strategy-session"
+              href="/open-source/agentready"
               className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15.5px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
             >
-              Book a free strategy session
+              Run the free scan
               <Icon name="arrow" className="h-4 w-4" />
             </Link>
             <Link
-              href="/commerce"
+              href="/strategy-session"
               className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-7 py-3.5 text-[15.5px] font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
             >
-              See what we build
+              Book a strategy session
             </Link>
           </div>
 
-          <div className="mt-[34px] flex flex-wrap gap-x-6 gap-y-3 border-t border-slate-200 pt-5">
-            {trustBadges.map((b) => (
-              <span
-                key={b}
-                className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-slatey"
-              >
-                <Icon name="shield" className="h-[15px] w-[15px] text-brand-700" />
-                {b}
-              </span>
-            ))}
+          {/* The "we'll tell you if you don't need us" line: cheaper than a case
+              study and more convincing than one, so it belongs on the first screen. */}
+          <p className="mt-4 max-w-[500px] text-[13.5px] leading-relaxed text-slate-500">
+            29 checks, a letter grade in seconds, no email needed for the score. If your store is
+            already in good shape, the report will say so.
+          </p>
+
+          <div className="mt-[30px] border-t border-slate-200 pt-5">
+            <div className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+              What we build to
+            </div>
+            <div className="mt-2.5 flex flex-wrap gap-x-5 gap-y-2">
+              {buildStandards.map((b) => (
+                <span key={b} className="text-[13px] font-medium text-slatey">
+                  {b}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
