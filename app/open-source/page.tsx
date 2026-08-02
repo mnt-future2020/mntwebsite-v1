@@ -302,9 +302,9 @@ export default function OpenSourcePage() {
             github.com/MnT-Future
           </a>{" "}
           · or{" "}
-          <Link href="/newsletter" className="font-semibold text-brand hover:underline">
+          <a href="#newsletter" className="font-semibold text-brand hover:underline">
             get release notes by email
-          </Link>
+          </a>
         </p>
       </section>
 

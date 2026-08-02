@@ -16,7 +16,9 @@ export default function Footer() {
               marketplace brands.
             </p>
 
-            <div className="mt-[26px] max-w-[320px]">
+            {/* id: the signup lives only here, so pages that offer it link
+                down to this block rather than to a /newsletter page. */}
+            <div id="newsletter" className="mt-[26px] max-w-[320px] scroll-mt-24">
               <div className="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-brand-300">
                 Newsletter
               </div>
