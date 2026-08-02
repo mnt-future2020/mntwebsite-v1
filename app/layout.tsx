@@ -121,6 +121,7 @@ const orgSchema = {
     { "@type": "Organization", name: "AWS Partner Network" },
     { "@type": "Organization", name: "Google Cloud Partner Advantage" },
     { "@type": "Organization", name: "Shopify Partners" },
+    { "@type": "Organization", name: "Claude Partner Network" },
     { "@type": "Organization", name: "NVIDIA Developer Program" },
   ],
 };

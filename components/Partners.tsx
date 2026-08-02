@@ -29,6 +29,10 @@ const partners: {
     href: "https://cloud.google.com/find-a-partner/partner/magizh-nexgen-technologies",
   },
   { name: "Shopify", designation: "Official Partner", slug: "shopify" },
+  // Named exactly as Anthropic names it. The programme is the "Claude Partner
+  // Network" — not an "Anthropic Partner Network" — and the bare word "partner"
+  // reads as a tier in this vocabulary, so the programme name carries the claim.
+  { name: "Anthropic", designation: "Claude Partner Network", slug: "anthropic" },
   { name: "NVIDIA", designation: "Developer Program Member", slug: "nvidia" },
   // OpenAI is not a card: it has an issued Select-tier badge, which says the
   // same thing with their own authority. It renders below the grid.
@@ -62,7 +66,9 @@ export default function Partners() {
       <p className="px-5 text-center text-[12.5px] font-semibold uppercase tracking-[0.14em] text-slate-500">
         Official partners &amp; developer programs
       </p>
-      <div className="mx-auto mt-9 grid max-w-[1000px] grid-cols-2 gap-[14px] px-5 sm:px-7 lg:grid-cols-4">
+      {/* Five programmes: a 5-track row keeps them on one line instead of
+          orphaning the last card. Widened to match. */}
+      <div className="mx-auto mt-9 grid max-w-[1120px] grid-cols-2 gap-[14px] px-5 sm:px-7 lg:grid-cols-5">
         {partners.map((p, i) => (
           <Reveal key={p.name} delay={i * 60}>
             {p.href ? (

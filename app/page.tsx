@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const proofStats = [
   { value: "AI-native", label: "Search, recs, assistants & agents built in" },
   { value: "Agent-ready", label: "ACP · Google UCP · Retail MCP" },
-  { value: "US-ready", label: "Built to ADA · PCI scope minimised · sales-tax engine in" },
+  { value: "US-ready", label: "Built to ADA/WCAG · PCI scope minimised · sales-tax engine" },
   { value: "100%", label: "Senior-engineer delivery" },
 ];
 
