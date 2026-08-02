@@ -186,7 +186,10 @@ export const caseStudies: CaseStudy[] = [
     title: "LOBBI",
     tagline:
       "A two-sided marketplace with an embedded AI booking agent: three apps, real-time inventory and split payments, engineered end to end.",
-    type: "Platform · Built by MnT Future",
+    // Our own asset, not a client engagement: the ownership interest is disclosed
+    // here and in the first line of the summary. A buyer who finds the corporate
+    // link before we say it concludes we passed it off as a client win.
+    type: "Our own platform · MnT Future holds an ownership interest",
     category: "Two-sided marketplace · AI booking agent",
     cover: "/work/lobbi-cover-v2.png",
     heroShot: "/work/lobbi-owner.webp",
@@ -194,7 +197,7 @@ export const caseStudies: CaseStudy[] = [
     liveLabel: "Visit lobbi.in",
     frameUrl: "lobbi.in",
     summary:
-      "LOBBI is a live two-sided marketplace: players discover and book sports venues, owners run slots, pricing and payouts. MnT Future designed and engineered all of it: a player app, a venue-owner app, a web app, a real-time FastAPI backend with marketplace payments, and an embedded AI booking agent in WhatsApp. It's the same architecture a US marketplace needs: real-time inventory, split payouts, and an AI agent that transacts safely.",
+      "This one is ours: we built LOBBI, and MnT Future holds an ownership interest in it through a separate company. We say that first because the engineering is worth reading about either way. LOBBI is a live two-sided marketplace: players discover and book sports venues, owners run slots, pricing and payouts. MnT Future designed and engineered all of it: a player app, a venue-owner app, a web app, a real-time FastAPI backend with marketplace payments, and an embedded AI booking agent in WhatsApp. It's the same architecture a US marketplace needs: real-time inventory, split payouts, and an AI agent that transacts safely.",
     facts: [
       { value: "3", label: "Apps shipped (2 native + web)" },
       { value: "Real-time", label: "Live slot availability" },
@@ -493,7 +496,7 @@ export const caseStudies: CaseStudy[] = [
         audience: "The fixes",
         icon: "shield",
         points: [
-          "Global .btn-primary token: white on #2095F1 was 3.16:1 → brand-700 #0E66C2, 5.7:1: one token, every CTA passes",
+          "Global .btn-primary token: white on #2095F1 was 3.16:1 → brand-700 #0E66C2, 5.7:1: one token, every CTA clears the 4.5:1 AA threshold",
           "Footer Subscribe button: rendered on every page: same root cause, same fix",
           "Form microcopy: slate-400 on white was 2.56:1 → slate-500, 4.76:1",
           "Clutch reviews iframe: script kept overwriting the title with a handshake string → a MutationObserver enforces a descriptive name",
@@ -516,7 +519,7 @@ export const caseStudies: CaseStudy[] = [
     techDecisions: [
       { tech: "axe-core (WCAG 2.2 A/AA)", used: "The audit engine, run in a real browser against each page.", advantage: "The same rule set plaintiffs' auditors use: deterministic, repeatable, and mapped rule-by-rule to WCAG success criteria." },
       { tech: "Design-token remediation", used: "Contrast fixes made in the shared Tailwind tokens, not per-page overrides.", advantage: "One change fixes every instance sitewide: including pages that don't exist yet." },
-      { tech: "In-palette color steps", used: "brand → brand-700 and slate-400 → slate-500 from the existing scale.", advantage: "Passes AA without inventing new colors: the brand system stays coherent." },
+      { tech: "In-palette color steps", used: "brand → brand-700 and slate-400 → slate-500 from the existing scale.", advantage: "Clears the AA contrast threshold without inventing new colors: the brand system stays coherent." },
       { tech: "MutationObserver guard", used: "Enforces a descriptive title on the third-party Clutch iframe.", advantage: "Vendor scripts can overwrite attributes at any time; the guard makes the accessible name stick without forking their code." },
     ],
     stack: [

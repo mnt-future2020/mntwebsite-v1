@@ -37,7 +37,7 @@ const config: HubConfig = {
         <br className="hidden sm:block" /> They're agents.
       </>
     ),
-    sub: "AI shopping agents are becoming a $900B to $1T channel, and most stores can't transact in it. We get you selling in AI channels before your competitors, while AI lifts conversion on the store you already run.",
+    sub: "AI shopping agents are becoming a $900B to $1T channel, and most stores can't transact in it. We get you selling in AI channels, while AI lifts conversion on the store you already run.",
     points: [
       "AI search converts ~4× better than keyword search; AI personalization lifts revenue ~40%.",
       "Agent-ready commerce via ACP, Google UCP, and a Retail MCP server: transact correctly in AI channels.",
@@ -65,7 +65,7 @@ const config: HubConfig = {
     { q: "How do you keep AI reliable?", a: "Every deployment ships with quality gates that measure the AI's answers, and a human approves anything customer-facing. We instrument lift so you can see the impact, not just take it on faith." },
   ],
   cta: {
-    title: "Get AI-native and agent-ready: before your competitors.",
+    title: "Get AI-native and agent-ready. Start with the free scan.",
     body: "Book a free agent-readiness audit. We'll assess your data, feeds, and AI-channel visibility, and show you the fastest path to more revenue.",
   },
 };

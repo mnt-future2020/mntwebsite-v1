@@ -22,7 +22,7 @@ const config: HubConfig = {
   heroImage: images.commerce,
   servicesTitle: "Four ways we build and run your commerce",
   servicesSub:
-    "From a platform migration to a marketplace launch to keeping a live US store secure and compliant: one senior team across the whole platform.",
+    "From a platform migration to a marketplace launch to keeping a live US store secure and audit-ready: one senior team across the whole platform.",
   services: [
     { icon: "grid", title: "Custom Commerce Platforms", desc: "D2C brand stores, marketplaces, multi-vendor, subscription and quick commerce, plus mobile apps: custom-built and engineered to scale.", href: "/commerce/headless-marketplace" },
     { icon: "network", title: "Integrations & Automation", desc: "Connect ERP, OMS, PIM, CDP, payments and 3PL into one connected stack: a single source of truth with automation across every system.", href: "/commerce/integrations" },
@@ -45,7 +45,7 @@ const config: HubConfig = {
         <br className="hidden sm:block" /> not one you re-platform every year.
       </>
     ),
-    sub: "Templates break at scale, integrations drift, and US compliance is a liability the day you launch. We engineer commerce as a system: connected, compliant, and built to scale from day one.",
+    sub: "Templates break at scale, integrations drift, and US compliance is a liability the day you launch. We engineer commerce as a system: connected, secure, and built to scale from day one.",
     points: [
       "Architecture that scales through peak traffic without another rebuild.",
       "One connected stack: ERP, OMS, PIM, CDP, payments and 3PL talking to each other, accurate everywhere.",
@@ -76,7 +76,7 @@ const config: HubConfig = {
     { q: "A template or a custom platform: which should I choose?", a: "A template is fine until it isn't. Go custom (the industry calls it headless or composable) when you've outgrown the platform: complex catalogs, unique checkout logic, deep integrations, or marketplace mechanics. We'll recommend honestly based on your stage in a free strategy session." },
     { q: "Can you build a multi-vendor marketplace?", a: "Yes, end to end: vendor onboarding and payouts, commission logic, search and discovery, logistics, and trust and ratings, built to handle more sellers and more buyers from day one." },
     { q: "Will my systems actually talk to each other?", a: "That's the Integrations & Automation service. We connect ERP, OMS, PIM, CDP, payments and 3PL into a single source of truth with automation across systems, so data is accurate everywhere and ops are far less manual." },
-    { q: "What about ADA and PCI compliance?", a: "78% of accessibility lawsuits target e-commerce, and PCI DSS v4.0.1 is now mandatory. We build ADA/WCAG and PCI in from the start and can keep them continuously compliant under a managed SLA, along with US sales-tax/economic-nexus." },
+    { q: "What about ADA and PCI compliance?", a: "78% of accessibility lawsuits target e-commerce, and PCI DSS v4.0.1 is now mandatory. We build to ADA/WCAG from the start, architect to minimise PCI scope, and keep the controls and evidence current under a managed SLA, along with the US sales-tax/economic-nexus engine." },
     { q: "Do you also build Shopify stores?", a: "Yes, we're an official Shopify Partner. When launching in weeks matters more than custom logic, we build fast, conversion-ready Shopify stores with AI search and agent-ready feeds. And because the same team builds our custom AI-native platforms, you graduate to custom when you outgrow Shopify: a planned migration, not a re-platform trauma." },
     { q: "Do you do e-commerce development?", a: "Yes, that's exactly what we build. Modern e-commerce is what the industry now calls commerce: custom storefronts, marketplaces, B2B portals, and the integrations behind them. MnT Future engineers AI-native, agent-ready e-commerce platforms for US D2C and marketplace brands: from official-partner Shopify builds to fully custom platforms." },
     { q: "How do we start?", a: "With a free strategy session. We sketch how we'd build it: data model, APIs, scalability, and give you a clear plan. Most engagements start as a small productized pilot and expand into a full build." },

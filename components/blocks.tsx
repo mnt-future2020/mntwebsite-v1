@@ -87,7 +87,7 @@ export function Stat({
   tone?: "light" | "dark";
 }) {
   // Values wrap at different line counts across a row ("100%" is one line,
-  // "US-compliant" is two), which pushed each label to its own height. Spanning
+  // "Agent-ready" is two), which pushed each label to its own height. Spanning
   // the parent's two rows as a subgrid sizes the value track to the tallest in
   // the row, so every label starts on the same line, and a row of short values
   // stays tight instead of reserving space it doesn't need.
@@ -118,7 +118,7 @@ export function Process({
     steps ?? [
       { title: "Discovery", desc: "We map the workflow, the constraints, and the compliance surface before a line of code." },
       { title: "Build", desc: "Senior engineers ship in two-week sprints. You see working software, not status decks." },
-      { title: "Certify", desc: "Security and compliance are tested as we go (ADA/WCAG, PCI DSS, SOC 2 controls), never bolted on at the end." },
+      { title: "Verify", desc: "Security and compliance are tested as we go (ADA/WCAG, PCI DSS, SOC 2 controls), never bolted on at the end." },
       { title: "Scale", desc: "We harden, instrument, and hand over, or stay on as your embedded product team." },
     ];
   return (

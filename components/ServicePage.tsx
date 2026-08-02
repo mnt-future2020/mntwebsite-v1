@@ -176,7 +176,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
           <Reveal>
             <SectionTitle
               eyebrow="How we work"
-              title="Discovery → Build → Certify → Scale"
+              title="Discovery → Build → Verify → Scale"
               sub="A senior-led delivery model built for revenue-critical commerce: predictable and transparent."
             />
           </Reveal>

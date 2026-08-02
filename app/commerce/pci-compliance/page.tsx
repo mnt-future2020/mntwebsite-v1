@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/pci-compliance", {
     title: "PCI DSS v4.0.1 Compliance for E-Commerce | MnT Future",
     description:
-      "Continuous PCI DSS v4.0.1 support: payment flows architected so card data stays out of scope, plus the controls and evidence that keep you compliant.",
+      "Continuous PCI DSS v4.0.1 support: payment flows architected so card data stays out of scope, plus the controls and evidence your assessor will ask for.",
   });
 }
 
@@ -39,7 +39,7 @@ const config: ServiceConfig = {
       </>
     ),
   },
-  featuresTitle: "How we keep card handling compliant.",
+  featuresTitle: "How we keep card handling out of scope.",
   features: [
     { icon: "lock", title: "Scope reduction by architecture", desc: "Payment flows built so card data never touches your systems: tokenized and gateway-handled, which shrinks what you must prove." },
     { icon: "records", title: "Scoping & gap assessment", desc: "What's in scope today, what shouldn't be, and the gap between your controls and v4.0.1: mapped honestly." },
@@ -67,7 +67,7 @@ const config: ServiceConfig = {
     { q: "Do you make us PCI compliant?", a: "We provide continuous PCI DSS v4.0.1 support: reducing and maintaining scope, implementing controls, and keeping evidence current. The exact responsibilities depend on your payment architecture, which we'll map with you before promising anything." },
     { q: "What changed with v4.0.1?", a: "It's the version of the standard now mandatory for card payments, with stronger expectations around continuous validation rather than point-in-time checks. That's exactly the model we run: controls that hold all year, not just at assessment." },
     { q: "What does 'out of scope' actually mean?", a: "That card data never enters your systems: the shopper's card goes straight to the gateway, tokenized, and your platform only ever holds the token. Less scope means less to secure, less to prove, and less that can go wrong." },
-    { q: "We already passed a questionnaire. Why continuous?", a: "Because the store keeps changing after the questionnaire: new code, new dependencies, new integrations. Continuous controls and evidence mean next year's assessment finds you already compliant instead of discovering drift." },
+    { q: "We already passed a questionnaire. Why continuous?", a: "Because the store keeps changing after the questionnaire: new code, new dependencies, new integrations. Continuous controls and evidence mean next year's assessment finds your controls current instead of discovering drift." },
     { q: "How do we start?", a: "With a free strategy session: we map your payment flows and current scope, show you where scope can shrink, and what continuous support would cover for your setup." },
   ],
   cta: {

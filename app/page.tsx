@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const proofStats = [
   { value: "AI-native", label: "Search, recs, assistants & agents built in" },
   { value: "Agent-ready", label: "ACP · Google UCP · Retail MCP" },
-  { value: "US-compliant", label: "ADA · PCI DSS · sales-tax handled" },
+  { value: "US-ready", label: "Built to ADA · PCI scope minimised · sales-tax engine in" },
   { value: "100%", label: "Senior-engineer delivery" },
 ];
 
@@ -31,7 +31,7 @@ const verticals = [
   {
     kicker: "Commerce Platforms",
     title: "Commerce platform development",
-    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce, with ADA, PCI DSS & US sales-tax handled.",
+    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce, built to ADA/WCAG with PCI scope minimised and the sales-tax engine integrated.",
     href: "/commerce",
     icon: "store" as const,
     gradient: "from-brand-700 to-brand-900",
@@ -39,7 +39,7 @@ const verticals = [
       { label: "Custom platforms", href: "/commerce/headless-marketplace" },
       { label: "Integrations & automation", href: "/commerce/integrations" },
       { label: "B2B / wholesale", href: "/commerce/b2b-wholesale" },
-      { label: "Managed & compliant", href: "/commerce/managed-compliance" },
+      { label: "Managed & maintained", href: "/commerce/managed-compliance" },
     ],
     cta: "Explore commerce platforms",
   },
@@ -68,13 +68,13 @@ const whyMnt = [
   },
   {
     icon: "network" as const,
-    title: "Agent-ready before your competitors",
-    desc: "ACP, Google UCP, and a Retail MCP server make your store discoverable and buyable by AI shopping agents: an emerging $900B to $1T channel.",
+    title: "Ready for the agent channel",
+    desc: "ACP, Google UCP, and a Retail MCP server make your store discoverable and buyable by AI shopping agents: an emerging $900B to $1T channel. Do you know whether anyone in your category is transactable inside an AI assistant yet? The free scan answers that.",
   },
   {
     icon: "shield" as const,
     title: "US compliance engineered in",
-    desc: "ADA/WCAG accessibility, PCI DSS v4.0.1, and multi-state sales-tax handled from day one: the obligations that start the moment a US store goes live.",
+    desc: "Built to ADA/WCAG, architected to minimise PCI DSS v4.0.1 scope, and the multi-state sales-tax engine integrated from day one: the obligations that start the moment a US store goes live.",
   },
   {
     icon: "compass" as const,
@@ -102,7 +102,7 @@ const engagement = [
     no: "03",
     title: "Expand",
     desc: "A full platform build (custom store, marketplace, or B2B) engineered to scale, plus custom AI agents and a managed SLA.",
-    points: ["Full platform builds", "AI agents & automation", "Managed & compliant"],
+    points: ["Full platform builds", "AI agents & automation", "Managed & maintained"],
     featured: false,
   },
 ];

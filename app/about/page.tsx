@@ -18,15 +18,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const aboutPoints = [
   "AI-native by default: search, recommendations, assistants and agents built into the product, gated behind evaluations.",
-  "Agent-ready before your competitors: ACP, Google UCP, and a Retail MCP server for the emerging agentic channel.",
+  "Agent-ready commerce: ACP, Google UCP, and a Retail MCP server for the emerging agentic channel.",
   "Land small, expand big: start with a productized pilot, grow into a dedicated pod, expand into a full platform build.",
 ];
 
 const values = [
-  { icon: "compass" as const, title: "Depth over breadth", desc: "We chose two verticals and went deep. Specialism is how we ship better, faster, and more compliant software than generalists." },
+  { icon: "compass" as const, title: "Depth over breadth", desc: "We chose two verticals and went deep. Specialism is how we ship better, faster software, and know the US compliance surface before we hit it." },
   { icon: "shield" as const, title: "Honesty over hype", desc: "Realistic timelines, honest budgets, and a recommendation that's right for your stage: even when it's not the biggest contract." },
   { icon: "users" as const, title: "Senior by default", desc: "Your software is written by engineers who've shipped regulated, high-traffic systems, not juniors learning on your budget." },
-  { icon: "bolt" as const, title: "Outcomes over output", desc: "We measure success in launched products, passed audits, and revenue moved, not hours billed or tickets closed." },
+  { icon: "bolt" as const, title: "Outcomes over output", desc: "We measure success in launched products, clean audit findings, and revenue moved, not hours billed or tickets closed." },
 ];
 
 export default function About() {

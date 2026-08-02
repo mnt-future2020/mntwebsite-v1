@@ -9,9 +9,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
-    title: "ADA, PCI DSS & US Sales-Tax Compliant Commerce | MnT Future",
+    title: "ADA, PCI DSS & US Sales-Tax, Built In | MnT Future",
     description:
-      "US commerce compliance engineered into the architecture: ADA/WCAG accessibility, PCI DSS v4.0.1, sales-tax/economic-nexus, SOC 2-aligned controls, and CCPA/CPRA privacy.",
+      "US commerce compliance engineered into the architecture: built to ADA/WCAG, architected to minimise PCI DSS v4.0.1 scope, sales-tax engine integrated, SOC 2-aligned controls, and CCPA/CPRA privacy.",
   });
 }
 
@@ -19,13 +19,13 @@ const frameworks: { name: string; icon: IconName; desc: string; tags: string[] }
   {
     name: "ADA / WCAG",
     icon: "shield",
-    desc: "Roughly 78% of accessibility lawsuits target e-commerce. We build to WCAG 2.2 AA and keep your store conformant as it changes.",
+    desc: "Roughly 78% of accessibility lawsuits target e-commerce. We build to WCAG 2.2 AA and keep testing as the store changes, with the record to show for it.",
     tags: ["WCAG 2.2 AA", "Screen readers", "Keyboard nav"],
   },
   {
     name: "PCI DSS v4.0.1",
     icon: "lock",
-    desc: "Payment flows architected so card data stays out of scope: tokenized, gateway-handled, and continuously compliant with PCI DSS v4.0.1.",
+    desc: "Payment flows architected so card data stays out of scope: tokenized, gateway-handled, with PCI DSS v4.0.1 controls and evidence kept current. Your QSA validates; we minimise what they have to look at.",
     tags: ["Tokenization", "Scope reduction", "Continuous controls"],
   },
   {
@@ -153,8 +153,8 @@ export default function SecurityCompliance() {
               <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce platforms</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slatey">
                 Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenized
-                payments, and WCAG-conformant, secure checkout, with US sales-tax handled, without
-                slowing the store down.
+                payments, and a secure checkout built to WCAG 2.2 AA, with the US sales-tax engine
+                integrated, without slowing the store down.
               </p>
               <Link href="/commerce" className="link-arrow mt-6">
                 Commerce platform development <Icon name="arrow" className="h-4 w-4" />

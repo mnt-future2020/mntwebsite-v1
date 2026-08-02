@@ -70,7 +70,7 @@ const config: ServiceConfig = {
     { q: "Do our systems need to be integrated first?", a: "Accurate real-time data is a prerequisite, so Integrations & Automation often pairs with this. If your price/inventory data isn't reliable yet, we fix that as part of getting you agent-ready." },
   ],
   cta: {
-    title: "Get agent-ready before your competitors do.",
+    title: "Find out where your category actually stands.",
     body: "Start with a free agent-readiness audit: we'll assess your data and feeds and map the fastest path into AI shopping channels.",
   },
 };

@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/managed-compliance", {
     title: "Managed Support & Compliance: ADA · PCI · Tax | MnT Future",
     description:
-      "Support & monitoring on an SLA, plus ADA/WCAG, PCI DSS v4.0.1, and US sales-tax: your live store kept fast, secure, and compliant.",
+      "Support & monitoring on an SLA, plus ADA/WCAG, PCI DSS v4.0.1, and US sales-tax: your live store kept fast, secure, and audit-ready.",
   });
 }
 
@@ -20,7 +20,7 @@ const config: ServiceConfig = {
     { label: "Managed Support & Compliance" },
   ],
   eyebrow: "Managed support & compliance",
-  h1: "Keep it running, secure, and compliant: on an SLA.",
+  h1: "Keep it running, secure, and audit-ready: on an SLA.",
   heroSub:
     "A live US store carries real legal and security risk. We keep yours fast and online while handling ADA/WCAG accessibility, PCI DSS v4.0.1, and multi-state sales-tax: continuously, under a clear SLA.",
   heroImage: images.dev,
@@ -40,8 +40,8 @@ const config: ServiceConfig = {
   featuresTitle: "What we manage",
   features: [
     { icon: "gauge", title: "Support, monitoring & performance (SLA)", desc: "Proactive monitoring, incident response, and performance work on a defined SLA: issues caught before your customers feel them.", href: "/commerce/managed-support" },
-    { icon: "shield", title: "ADA / WCAG accessibility", desc: "78% of accessibility lawsuits target e-commerce. We bring your store to WCAG conformance and keep it there as it changes.", href: "/commerce/ada-accessibility" },
-    { icon: "lock", title: "PCI DSS v4.0.1 compliance", desc: "Continuous PCI DSS v4.0.1 support: scoping, controls, and evidence, so card data handling stays compliant, not just at audit time.", href: "/commerce/pci-compliance" },
+    { icon: "shield", title: "ADA / WCAG accessibility", desc: "78% of accessibility lawsuits target e-commerce. We build to WCAG 2.2 AA and keep testing as the store changes.", href: "/commerce/ada-accessibility" },
+    { icon: "lock", title: "PCI DSS v4.0.1 compliance", desc: "Continuous PCI DSS v4.0.1 support: scoping, controls, and evidence, so your card-data scope stays minimised and the evidence current, not just at audit time.", href: "/commerce/pci-compliance" },
     { icon: "records", title: "Sales-tax & economic nexus", desc: "Multi-state US sales-tax and economic-nexus handled via Avalara / Anrok integration: calculation, filing readiness, and accuracy.", href: "/commerce/sales-tax-compliance" },
     { icon: "bell", title: "Uptime & incident response", desc: "Alerting, on-call response, and clear runbooks: reliable uptime through launches, sales, and traffic spikes.", href: "/commerce/uptime-incident-response" },
     { icon: "cloud", title: "Continuous hardening", desc: "Dependency updates, security patching, and performance tuning applied continuously, not deferred until something breaks.", href: "/commerce/continuous-hardening" },
@@ -50,7 +50,7 @@ const config: ServiceConfig = {
   approachSub:
     "Accessibility lawsuits, payment security rules, and multi-state tax are liabilities the day you go live. We carry them for you.",
   approachPoints: [
-    "ADA/WCAG conformance that lowers a real and growing legal risk for US e-commerce.",
+    "ADA/WCAG work that lowers a real and growing legal risk for US e-commerce.",
     "Continuous PCI DSS v4.0.1: controls and evidence maintained, not scrambled before an audit.",
     "Multi-state sales-tax and economic-nexus handled through Avalara / Anrok.",
     "Monitoring, incident response, and hardening on an SLA: predictable, reliable uptime.",
@@ -69,7 +69,7 @@ const config: ServiceConfig = {
     { q: "What does the SLA cover?", a: "Response and resolution targets for incidents, monitoring and alerting, performance budgets, and a maintenance cadence: all defined up front so expectations are clear." },
   ],
   cta: {
-    title: "Keep your store fast, secure, and compliant.",
+    title: "Keep your store fast, secure, and audit-ready.",
     body: "Book a free strategy session and we'll audit your uptime, accessibility, PCI scope, and sales-tax setup, and show you what a managed SLA would cover.",
   },
 };
