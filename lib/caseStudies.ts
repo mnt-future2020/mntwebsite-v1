@@ -5,6 +5,12 @@ export type CaseStudy = {
   title: string;
   tagline: string;
   type: string; // honest label, e.g. "Platform · Built by MnT Future"
+  /**
+   * Which section of /work this belongs in. Explicit rather than inferred from
+   * `type`, because the whole point of the grouping is that a visitor can never
+   * mistake something we own for something a client paid us to build.
+   */
+  group: "client" | "own" | "lab";
   category: string;
   cover: string; // OG / social + card image
   heroShot: string; // product mockup shown in the hero
@@ -64,6 +70,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "A fashion boutique selling online and over the counter, on one stock pool. Web store, admin, in-store POS and supplier purchasing in a single Laravel platform.",
     type: "Client platform · India · Fashion D2C + in-store POS",
+    group: "client",
     category: "Fashion D2C · Web store + POS + procurement",
     cover: "/work/lia-cover.png",
     heroShot: "/work/lia-storefront.png",
@@ -254,6 +261,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "Fresh meat and seafood delivered on an own fleet, on a platform that knows a whole fish is not the thing it sells. Storefront, warehouse, processing, delivery and finance in one system.",
     type: "Client platform · India · Quick commerce, own fleet",
+    group: "client",
     category: "Quick commerce · Fresh grocery · Own delivery fleet",
     cover: "/work/leats-cover.png",
     heroShot: "/work/leats-storefront.png",
@@ -460,6 +468,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "A Madurai sweets and bakery brand shipping across India. Next.js 16 storefront and admin, with pack sizes, weight-slab shipping, courier tracking and invoices that generate themselves.",
     type: "Client platform · India · D2C storefront + admin",
+    group: "client",
     category: "D2C · Food & bakery · Pan-India shipping",
     cover: "/work/sntasty-cover.png",
     heroShot: "/work/sntasty-storefront.png",
@@ -644,6 +653,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "The AI-native commerce platform we start client builds from: semantic search, a shopping assistant, and an ops agent that writes its own code and can't run it until you say so.",
     type: "Platform · Built & dogfooded by MnT Future",
+    group: "own",
     category: "AI-native headless commerce",
     cover: "/work/mnt-commerce-cover.png",
     heroShot: "/work/mnt-commerce-copilot-approval.png",
@@ -781,6 +791,7 @@ export const caseStudies: CaseStudy[] = [
     // here and in the first line of the summary. A buyer who finds the corporate
     // link before we say it concludes we passed it off as a client win.
     type: "Our own platform · MnT Future holds an ownership interest",
+    group: "own",
     category: "Two-sided marketplace · AI booking agent",
     cover: "/work/lobbi-cover-v2.png",
     heroShot: "/work/lobbi-owner.webp",
@@ -916,6 +927,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "An autonomous SEO/AEO agent that works like an employee: it watches the site, fixes what it finds, and verifies its own work before anything ships.",
     type: "Internal product · Built & dogfooded by MnT Future",
+    group: "own",
     category: "Autonomous AI agent · SEO/AEO",
     cover: "/work/searchlight-cover-v2.png",
     heroShot: "/work/searchlight-dashboard-v2.png",
@@ -1043,6 +1055,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "We ran an accessibility audit on our own site and fixed every failure in the design system: no overlay widget. Seven failing checks to zero, measured with axe-core.",
     type: "Internal audit · Dogfooded by MnT Future",
+    group: "lab",
     category: "ADA / WCAG compliance · Design tokens",
     cover: "/work/wcag-cover.png",
     heroShot: "/work/wcag-scan.png",
@@ -1169,6 +1182,7 @@ export const caseStudies: CaseStudy[] = [
     tagline:
       "We built a deliberately 'vibe-coded' store, proved it was broken with live exploits and a load test, then rebuilt it hardened: every number measured, before and after.",
     type: "R&D lab · Built by MnT Future",
+    group: "lab",
     category: "AI Cleanup · security & scalability",
     cover: "/work/cleanup-cover.png",
     heroShot: "/work/cleanup-exploits.png",
