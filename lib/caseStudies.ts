@@ -243,6 +243,400 @@ export const caseStudies: CaseStudy[] = [
     metaDescription:
       "How MnT Future built Lia Fashion's commerce platform: a Laravel 12 API serving a web storefront, admin back office and in-store POS on one size-level inventory, with concurrency-safe stock writes, Razorpay reconciliation and Shiprocket fulfilment.",
   },
+  // REQUIRED IMAGES before this goes live (screenshots of leats.in):
+  //   /work/leats-cover.png    1600x1000  storefront home, for the card and OG
+  //   /work/leats-storefront.png ~1440 wide  hero shot
+  //   /work/leats-product.png   ~1440 wide  a cut/weight selection on a product
+  //   /work/leats-checkout.png  ~1440 wide  cart, slot picker or checkout
+  {
+    slug: "leats",
+    title: "Leats",
+    tagline:
+      "Fresh meat and seafood delivered on an own fleet, on a platform that knows a whole fish is not the thing it sells. Storefront, warehouse, processing, delivery and finance in one system.",
+    type: "Client platform · India · Quick commerce, own fleet",
+    category: "Quick commerce · Fresh grocery · Own delivery fleet",
+    cover: "/work/leats-cover.png",
+    heroShot: "/work/leats-storefront.png",
+    liveUrl: "https://leats.in/",
+    liveLabel: "Visit leats.in",
+    frameUrl: "leats.in",
+    dateISO: "2026-07-15",
+    summary:
+      "Leats Food Corporation sells fresh fish, seafood, chicken and mutton and delivers it with its own riders. MnT Future built the platform end to end: the storefront, a warehouse and inventory system, the processing model that turns raw material into sellable cuts, a delivery-partner app with zones and live tracking, plus procurement, finance and POS. The hard part is not the shop. It is that Leats buys a whole fish by weight and sells eleven different cuts of it, so inventory has to be transformed rather than counted, with cost and wastage carried through. Any US business that buys raw and sells processed, from a butcher D2C brand to a meal-kit company, has the same problem.",
+    facts: [
+      { value: "61", label: "Data models across one platform" },
+      { value: "Raw → cuts", label: "Yield tracked with cost and wastage" },
+      { value: "Own fleet", label: "Partner app, zones, live tracking" },
+      { value: "Live", label: "leats.in" },
+    ],
+    scope: [
+      { label: "Role", value: "Architecture + full-stack engineering" },
+      { label: "Platforms", value: "Storefront · Admin · Delivery-partner app · POS" },
+      { label: "Delivered", value: "Storefront · Warehouse & processing · Delivery · Finance" },
+      { label: "Status", value: "Live and delivering" },
+    ],
+    problem:
+      "Most commerce platforms assume the thing you buy is the thing you sell. Fresh food breaks that assumption on day one. Leats buys a whole fish, or a whole goat, by weight and at a price that moves week to week, then cuts it into named products a customer actually orders: fillets, curry cut, biryani cut. Some of the raw material becomes waste. If the system only counts finished products, nobody can answer what a kilo of raw material actually yielded, what the cuts really cost, or whether a supplier's price was worth paying. On top of that, perishables are delivered by Leats' own riders rather than a courier, so the platform also had to know which pincodes are serviceable, what delivery costs there, where the rider is, and who is working today.",
+    approach: [
+      {
+        no: "01",
+        title: "Make raw material its own kind of stock",
+        desc: "Raw material lives in a processing pool measured by weight, carrying a weighted-average purchase price and a total value. It is inventory, but it is not a product anyone can order.",
+      },
+      {
+        no: "02",
+        title: "Model the cut as a transaction, not a guess",
+        desc: "Processing a batch records what went in, what it cost, every finished item that came out, and the wastage. Recipes accumulate from real runs, so the platform learns what a given input typically yields instead of being told.",
+      },
+      {
+        no: "03",
+        title: "Build the fleet into the platform",
+        desc: "Delivery partners get their own authenticated app with assigned deliveries, push notifications and reports. Zones are defined down to the pincode with their own charges, and tracking updates ride a websocket rather than a refresh button.",
+      },
+      {
+        no: "04",
+        title: "Put operations and money in the same system",
+        desc: "Warehouses, stock adjustments, suppliers, purchase orders, bills, expenses, GST invoicing, employees and roles all live alongside the storefront, so the numbers the business runs on come from the same data the shop does.",
+      },
+    ],
+    build: [
+      {
+        audience: "For customers",
+        icon: "cart",
+        points: [
+          "Catalogue of fish, seafood, chicken, mutton, eggs and rice, ordered by cut and by weight",
+          "Serviceability resolved by pincode before checkout, with delivery charges set per zone",
+          "Scheduled delivery windows rather than an open-ended promise",
+          "Coupons with usage tracking, wishlist and cart",
+          "Razorpay checkout, and live order tracking as the rider moves",
+          "Bulk-order and catering enquiries routed as their own workflow",
+        ],
+      },
+      {
+        audience: "For the operations team",
+        icon: "layers",
+        points: [
+          "Processing pools holding raw material by weight at weighted-average cost",
+          "Processing runs that record inputs, outputs, wastage and cost per batch",
+          "Warehouse inventory with stock adjustments and an audit trail",
+          "Suppliers, purchase orders, bills and expense categories in the same back office",
+          "GST rates, invoice settings and an invoice sequence that does not skip",
+          "POS for counter sales, on the same catalogue and stock",
+          "Departments, roles, employees and working hours",
+          "Dashboard and exports over sales, delivery and finance",
+        ],
+      },
+      {
+        audience: "For delivery partners",
+        icon: "pin",
+        points: [
+          "Separate authenticated app for riders, with their own assigned deliveries",
+          "Push notifications through Firebase when work is assigned",
+          "Delivery status and tracking written back in real time over websockets",
+          "Per-partner reports for settlement and performance",
+        ],
+      },
+    ],
+    productShots: [
+      {
+        src: "/work/leats-storefront.png",
+        title: "The storefront",
+        desc: "Fresh categories, ordered the way the customer thinks about them: by fish, by cut, by weight.",
+      },
+      {
+        src: "/work/leats-product.png",
+        title: "Cut and weight",
+        desc: "What a customer picks here is a finished product. Behind it, the platform knows which raw pool it came out of and what it cost.",
+      },
+      {
+        src: "/work/leats-checkout.png",
+        title: "Serviceability and slot",
+        desc: "Pincode decides whether Leats delivers and at what charge, then the customer picks a window rather than being given a promise.",
+      },
+    ],
+    highlights: [
+      {
+        icon: "layers",
+        title: "Inventory that transforms",
+        desc: "A whole fish enters as weight and leaves as named products. The platform records the run rather than inferring it, so yield is a number the business owns.",
+      },
+      {
+        icon: "gauge",
+        title: "Cost and wastage carried through",
+        desc: "Every processing run captures input cost and wastage, so the margin on a cut reflects what the raw material actually cost, not what someone assumed.",
+      },
+      {
+        icon: "pin",
+        title: "The fleet is part of the product",
+        desc: "Riders have their own app, zones are defined to the pincode, and the customer's tracking updates over a socket as the delivery moves.",
+      },
+      {
+        icon: "records",
+        title: "One system, not five",
+        desc: "Storefront, warehouse, processing, delivery, POS, procurement, finance and workforce share a single data model of 61 entities.",
+      },
+    ],
+    techDecisions: [
+      {
+        tech: "Processing pool with weighted-average cost",
+        used: "Raw material is held by weight with a running average purchase price and total value.",
+        advantage: "Purchase prices move constantly in fresh food. A weighted average is the only costing that survives that without re-pricing history every week.",
+      },
+      {
+        tech: "Processing transactions with recorded wastage",
+        used: "Each run stores input quantity and cost, the output items produced, and the wastage percentage and quantity.",
+        advantage: "Yield becomes measured rather than assumed. It is also the only way to tell a bad supplier from a bad week.",
+      },
+      {
+        tech: "Recipes accumulated from real runs",
+        used: "An input-to-output pairing per pool, carrying how many times it has been produced and the total quantity.",
+        advantage: "The system learns the operation's actual patterns instead of asking someone to maintain a bill of materials by hand.",
+      },
+      {
+        tech: "Pincode-level delivery zones with their own charges",
+        used: "Zones carry an explicit pincode list, and charges attach to the zone.",
+        advantage: "Serviceability is answered before the customer has invested in a checkout, and pricing changes are configuration rather than a deploy.",
+      },
+      {
+        tech: "Socket.io for delivery state",
+        used: "Delivery and tracking updates are pushed to the customer and the operations screen.",
+        advantage: "For perishables the customer's real question is when, not whether. Polling answers it late and costs support calls.",
+      },
+      {
+        tech: "Prisma over MongoDB",
+        used: "A single typed schema of 61 models across storefront, operations and finance.",
+        advantage: "A domain this wide drifts fast without one schema to check against. The types are the contract between eight subsystems.",
+      },
+    ],
+    stack: [
+      { group: "Backend", items: ["Node.js", "Express 5", "Prisma", "MongoDB"] },
+      { group: "Real-time & mobile", items: ["Socket.io", "Firebase Cloud Messaging"] },
+      { group: "Payments & storage", items: ["Razorpay", "AWS S3"] },
+      { group: "Documents & jobs", items: ["PDFKit", "Puppeteer", "node-cron", "XLSX"] },
+    ],
+    resultsTitle: "What the platform does today",
+    resultsIntro:
+      "Leats runs its storefront, warehouse, processing, own delivery fleet, POS, procurement and finance on one platform. Raw material is held by weight at weighted-average cost and turned into sellable cuts through recorded runs that capture outputs and wastage. Serviceability is resolved by pincode, delivery is carried out by Leats' own riders on their own app, and customers track it live.",
+    faq: [
+      {
+        q: "Is Leats a food-delivery marketplace like Swiggy?",
+        a: "No. Leats sells its own stock and delivers with its own riders, which is the quick-commerce model rather than the marketplace model. There are no third-party sellers on the platform. Our two-sided marketplace work is LOBBI.",
+      },
+      {
+        q: "What is the processing model, in plain terms?",
+        a: "Leats buys a whole fish or a whole goat by weight. Customers buy fillets or curry cut. The platform holds the raw material in a pool priced at a weighted average, then records each processing run: what went in, what came out, and how much was wasted. That is how the business knows what a cut really costs.",
+      },
+      {
+        q: "This is an Indian business. What applies to a US build?",
+        a: "The transformation and the fleet. Any US operation that buys raw and sells processed has the same inventory problem, whether that is a butcher D2C brand, a seafood subscription or a meal-kit company. Own-fleet dispatch with zones, slots and live tracking transfers as-is. The India-specific parts are GST invoicing and Razorpay, which a US build replaces with a sales-tax engine and Stripe.",
+      },
+      {
+        q: "Did MnT Future build all of it?",
+        a: "Yes. Architecture, the Express and Prisma backend, the storefront, the admin, the delivery-partner app and the integrations. Published here with Leats Food Corporation's permission.",
+      },
+    ],
+    copy: {
+      challengeTitle: "A whole fish is not a product",
+      buildTitle: "What we built",
+      highlightsSubtitle:
+        "The decisions that let a fresh-food business price a cut honestly and deliver it on its own fleet.",
+      techTitle: "Engineering decisions",
+      ctaTitle: "Selling something you have to make first?",
+      ctaBody:
+        "If your stock is transformed, portioned or assembled before it ships, off-the-shelf commerce will fight you. Bring it to a free strategy session and we will map what it actually takes.",
+    },
+    metaTitle: "Leats: Quick-Commerce Platform with Yield Tracking & Own Fleet | MnT Future",
+    metaDescription:
+      "How MnT Future built Leats' fresh-food commerce platform: raw material held at weighted-average cost, processing runs that record outputs and wastage, pincode delivery zones, a delivery-partner app and live tracking, across 61 data models.",
+  },
+  // REQUIRED IMAGES before this goes live (screenshots of sntasty.com):
+  //   /work/sntasty-cover.png    1600x1000  storefront home, for the card and OG
+  //   /work/sntasty-storefront.png ~1440 wide  hero shot
+  //   /work/sntasty-product.png   ~1440 wide  product page with pack-size options
+  //   /work/sntasty-admin.png     ~1440 wide  admin dashboard, or the cart
+  {
+    slug: "sntasty",
+    title: "Sai Nandhini Tasty World",
+    tagline:
+      "A Madurai sweets and bakery brand shipping across India. Next.js 16 storefront and admin, with pack sizes, weight-slab shipping, courier tracking and invoices that generate themselves.",
+    type: "Client platform · India · D2C storefront + admin",
+    category: "D2C · Food & bakery · Pan-India shipping",
+    cover: "/work/sntasty-cover.png",
+    heroShot: "/work/sntasty-storefront.png",
+    liveUrl: "https://sntasty.com/",
+    liveLabel: "Visit sntasty.com",
+    frameUrl: "sntasty.com",
+    dateISO: "2026-04-20",
+    summary:
+      "Sai Nandhini Tasty World bakes brownies, cookies and traditional sweets in Madurai and ships them nationally. MnT Future built the whole platform as one Next.js 16 application: the storefront, checkout, order tracking and a full admin back office covering catalogue, orders, inventory, coupons, shipping rates, CMS and analytics. Of the three client platforms on this page it is the one closest in shape to a US D2C brand, and it is built on the stack we use for US work: Next.js 16, React 19 and TypeScript, server components and route handlers.",
+    facts: [
+      { value: "Next.js 16", label: "React 19, TypeScript, App Router" },
+      { value: "56", label: "API route handlers" },
+      { value: "Weight slabs", label: "Shipping priced by destination" },
+      { value: "Live", label: "sntasty.com" },
+    ],
+    scope: [
+      { label: "Role", value: "Product design + full-stack engineering" },
+      { label: "Platforms", value: "Web storefront · Admin back office" },
+      { label: "Delivered", value: "Storefront · Checkout · Admin · CMS · Analytics" },
+      { label: "Status", value: "Live and shipping" },
+    ],
+    problem:
+      "Food that ships is priced by weight, and weight is where most small D2C stores quietly lose money. A brownie box and a plum cake do not cost the same to send to Chennai as to Delhi, and a flat shipping rate either overcharges the near customer or eats the margin on the far one. Beyond that, the brand needed the ordinary things a real store needs and rarely gets from a template: pack sizes as first-class variants, coupons that hold up, an order lifecycle a customer can follow, invoices that do not have to be made by hand, and a back office the owners could run without calling an engineer for a banner change.",
+    approach: [
+      {
+        no: "01",
+        title: "Price shipping the way couriers actually price it",
+        desc: "Shipping rates are held per destination as weight slabs, with a rate for each slab and an explicit per-half-kilo rate beyond the last one, plus an estimated delivery time. Checkout resolves the real cost rather than approximating it.",
+      },
+      {
+        no: "02",
+        title: "Make the pack size the thing being sold",
+        desc: "Products carry units of measure as variants, so a 250g box and a 1kg box are separate sellable things with their own price and their own stock, not a dropdown that the inventory ignores.",
+      },
+      {
+        no: "03",
+        title: "Automate the paperwork",
+        desc: "An order moving through pending, processing, shipping and delivered sends the customer the right email at each step, and the invoice PDF is generated server-side and attached rather than assembled by a person.",
+      },
+      {
+        no: "04",
+        title: "Give the owners the controls",
+        desc: "Catalogue, hero carousel, CMS pages, coupons, shipping rates, reviews and global settings are all editable in the admin, so the day-to-day running of the shop never needs a deploy.",
+      },
+    ],
+    build: [
+      {
+        audience: "For shoppers",
+        icon: "cart",
+        points: [
+          "Catalogue with categories, subcategories and pack-size variants, each with its own price and stock",
+          "Per-product SEO metadata and Cloudinary image galleries",
+          "Cart and wishlist that survive a refresh, with guest checkout available",
+          "Coupons validated server-side at checkout",
+          "Shipping cost resolved from destination and basket weight before payment",
+          "Razorpay checkout with server-side order creation and signature verification",
+          "Order tracking with courier and AWB, and an email at every status change",
+        ],
+      },
+      {
+        audience: "For the shop owners",
+        icon: "store",
+        points: [
+          "Product master with rich-text descriptions, galleries and featured flags",
+          "Order management across the full lifecycle, with invoice PDFs generated automatically",
+          "Inventory with stock transactions, and low-stock alerts on the dashboard",
+          "Shipping-rate editor: destinations, weight slabs and overflow rate",
+          "Coupon, hero-carousel and CMS-page management",
+          "Sales-trend and revenue analytics built on Mongo aggregation",
+          "Google Places reviews pulled in alongside on-site reviews",
+          "Role separation across customer, staff and admin",
+        ],
+      },
+    ],
+    productShots: [
+      {
+        src: "/work/sntasty-storefront.png",
+        title: "The storefront",
+        desc: "Brownies, cookies, cakes and traditional sweets, presented the way a food brand needs: photography first, with the pack size decided on the product page.",
+      },
+      {
+        src: "/work/sntasty-product.png",
+        title: "Pack sizes as real variants",
+        desc: "Each unit of measure carries its own price and its own stock, so a sold-out 1kg box does not hide the 250g one.",
+      },
+      {
+        src: "/work/sntasty-admin.png",
+        title: "The back office",
+        desc: "Orders, inventory, shipping rates and content in one admin, so running the shop never requires an engineer.",
+      },
+    ],
+    highlights: [
+      {
+        icon: "gauge",
+        title: "Shipping that reflects the courier bill",
+        desc: "Weight slabs per destination with an explicit overflow rate, so a heavy order to a far city is priced correctly instead of averaging the margin away.",
+      },
+      {
+        icon: "tag",
+        title: "Pack size is inventory, not a label",
+        desc: "Units of measure are variants with their own price and stock, which is what stops a food store overselling its most popular box.",
+      },
+      {
+        icon: "records",
+        title: "Invoices and emails without a human",
+        desc: "Status changes trigger the customer email, and the invoice PDF is rendered server-side and sent, so nobody is assembling documents by hand at the end of a busy day.",
+      },
+      {
+        icon: "bolt",
+        title: "The stack we use for US builds",
+        desc: "Next.js 16, React 19 and TypeScript with server components and route handlers, which is the same foundation we put under a US D2C platform.",
+      },
+    ],
+    techDecisions: [
+      {
+        tech: "Weight-slab shipping rates per destination",
+        used: "Each location holds an array of slabs, plus a per-half-kilo rate for anything over the last one and an estimated delivery time.",
+        advantage: "Mirrors how couriers actually bill. It is also the same shape as a US zone-and-weight table, so the model ports without a redesign.",
+      },
+      {
+        tech: "Units of measure as product variants",
+        used: "Pack sizes are stored as variants carrying their own price and stock rather than as a display option.",
+        advantage: "Stock is tracked at the thing customers actually buy. A pack-size dropdown that shares one stock number will oversell the popular size.",
+      },
+      {
+        tech: "One Next.js app for storefront and admin",
+        used: "App Router with server components for the shop and route handlers for the API, admin included.",
+        advantage: "One deploy, one auth model, one type system. For a team this size a separate admin service is cost with no benefit.",
+      },
+      {
+        tech: "Server-side invoice rendering",
+        used: "Puppeteer locally, serverless chromium in production, generating the invoice PDF on order.",
+        advantage: "The document is produced by the same system that owns the order, so it cannot disagree with it.",
+      },
+      {
+        tech: "better-auth with role separation",
+        used: "Email and password plus Google OAuth, with customer, staff and admin roles.",
+        advantage: "Staff can run orders without holding the keys to settings and payouts, which is the separation a small team forgets until it matters.",
+      },
+    ],
+    stack: [
+      { group: "Framework", items: ["Next.js 16", "React 19", "TypeScript", "App Router"] },
+      { group: "Data & auth", items: ["MongoDB", "Mongoose", "better-auth"] },
+      { group: "Payments & media", items: ["Razorpay", "Cloudinary"] },
+      { group: "UI & documents", items: ["Tailwind CSS", "Radix UI", "Recharts", "Puppeteer"] },
+    ],
+    resultsTitle: "What the platform does today",
+    resultsIntro:
+      "Sai Nandhini Tasty World sells nationally from one Next.js application. Pack sizes are tracked as variants with their own stock, shipping is priced from destination and basket weight, orders move through a tracked lifecycle with automated emails and generated invoices, and the owners run catalogue, content, coupons and shipping rates themselves from the admin.",
+    faq: [
+      {
+        q: "Why does weight-slab shipping matter for a food brand?",
+        a: "Because couriers bill by weight and distance, and a flat rate has to be wrong in one direction. Set it low and every distant order loses money; set it high and nearby customers overpay and abandon. Slabs per destination resolve the real cost at checkout.",
+      },
+      {
+        q: "How close is this to a US D2C build?",
+        a: "Close. The stack is the one we use for US work, and the shape is the same: catalogue with variants, coupons, weight-and-destination shipping, courier tracking, invoice automation and an owner-run back office. A US build swaps Razorpay for Stripe and the Indian courier for a US carrier, then adds the sales-tax engine and the ADA and PCI work we do as standard.",
+      },
+      {
+        q: "Did MnT Future build the whole platform?",
+        a: "Yes. Product design, the storefront, the checkout, the admin back office and the integrations. Published here with Sai Nandhini Tasty World's permission.",
+      },
+    ],
+    copy: {
+      challengeTitle: "Food ships by weight",
+      buildTitle: "What we built",
+      highlightsSubtitle:
+        "The decisions that keep a shipping food brand's margin intact and its back office out of a spreadsheet.",
+      techTitle: "Engineering decisions",
+      ctaTitle: "Shipping a physical product nationally?",
+      ctaBody:
+        "If your shipping is a flat rate because the real calculation was too hard to build, that is margin leaking on every order. Bring it to a free strategy session and we will size the fix.",
+    },
+    metaTitle: "Sai Nandhini Tasty World: Next.js 16 D2C Commerce Platform | MnT Future",
+    metaDescription:
+      "How MnT Future built Sai Nandhini Tasty World's D2C platform on Next.js 16 and React 19: pack sizes as stocked variants, weight-slab shipping by destination, Razorpay checkout, courier tracking, automated invoice PDFs and an owner-run admin.",
+  },
   // ─── Our own platforms and products ───────────────────────────────────────
   {
     slug: "mnt-commerce",
