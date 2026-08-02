@@ -23,7 +23,7 @@ const aboutPoints = [
 ];
 
 const values = [
-  { icon: "compass" as const, title: "Depth over breadth", desc: "We chose two verticals and went deep. Specialism is how we ship better, faster software, and know the US compliance surface before we hit it." },
+  { icon: "compass" as const, title: "Depth over breadth", desc: "We build commerce platforms and nothing else. Specialism is how we ship better, faster software, and know the US compliance surface before we hit it." },
   { icon: "shield" as const, title: "Honesty over hype", desc: "Realistic timelines, honest budgets, and a recommendation that's right for your stage: even when it's not the biggest contract." },
   { icon: "users" as const, title: "Senior by default", desc: "Your software is written by engineers who've shipped regulated, high-traffic systems, not juniors learning on your budget." },
   { icon: "bolt" as const, title: "Outcomes over output", desc: "We measure success in launched products, clean audit findings, and revenue moved, not hours billed or tickets closed." },

@@ -27,13 +27,17 @@ const proofStats = [
   { value: "100%", label: "Senior-engineer delivery" },
 ];
 
+// The platform, and the AI layer inside it. Not two businesses: the counts are
+// deliberately uneven and the badges read from `count`, so they cannot drift
+// out of step with the nav again.
 const verticals = [
   {
     kicker: "Commerce Platforms",
     title: "Commerce platform development",
-    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce, built to ADA/WCAG with PCI scope minimised and the sales-tax engine integrated.",
+    desc: "Custom platform & marketplace builds, integrations & automation, B2B/wholesale, and managed commerce, built to ADA/WCAG with PCI scope minimised and the sales-tax engine integrated. Plus AI cleanup when an MVP broke at scale.",
     href: "/commerce",
     icon: "store" as const,
+    count: "6 services",
     gradient: "from-brand-700 to-brand-900",
     items: [
       { label: "Custom platforms", href: "/commerce/headless-marketplace" },
@@ -44,17 +48,17 @@ const verticals = [
     cta: "Explore commerce platforms",
   },
   {
-    kicker: "AI & Agents",
+    kicker: "The AI layer",
     title: "AI & agents for commerce",
-    desc: "AI search, recommendations & assistants, agent-ready commerce (ACP/UCP/MCP), custom AI agents, and AI cleanup for MVPs that broke at scale.",
+    desc: "AI search, recommendations and a shopping assistant, agent-ready commerce (ACP/UCP/MCP), and agents that do real work. Part of every platform we build, and two of the three work on the store you already run.",
     href: "/ai-agents",
     icon: "ai" as const,
+    count: "3 services",
     gradient: "from-[#3E51B6] to-[#2A367A]",
     items: [
       { label: "AI search & recommendations", href: "/ai-agents/commerce-starter" },
       { label: "Agent-ready commerce", href: "/ai-agents/agent-ready-commerce" },
       { label: "Custom AI agents", href: "/ai-agents/embedded-agents" },
-      { label: "AI cleanup", href: "/commerce/ai-cleanup" },
     ],
     cta: "Explore AI & agents",
   },
@@ -171,13 +175,13 @@ export default function Home() {
 
       <Partners />
 
-      {/* TWO VERTICALS */}
+      {/* THE PLATFORM AND ITS AI LAYER */}
       <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
         <Reveal>
           <SectionTitle
-            eyebrow="Two sides, one platform"
-            title="Commerce platforms, and the AI that sells them."
-            sub="We build the platform, then make it AI-native and agent-ready. Start on either side: most brands do both."
+            eyebrow="What we build"
+            title="Commerce platforms, with the AI layer built in."
+            sub="The platform is the product. Search, agent-readiness and agents ship as part of it, and two of them also work on the store you already run."
           />
         </Reveal>
         <div className="mt-[52px] grid gap-[26px] lg:grid-cols-2">
@@ -200,7 +204,7 @@ export default function Home() {
                       <Icon name={v.icon} className="h-6 w-6" />
                     </span>
                     <span className="rounded-full bg-white/[0.15] px-3 py-1 text-[11.5px] font-semibold text-white ring-1 ring-white/20">
-                      4 services
+                      {v.count}
                     </span>
                   </div>
                   <div className="relative mt-6 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-white/70">
