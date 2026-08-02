@@ -39,6 +39,12 @@ const GROUPS = [
 
 export default function WorkIndex() {
   const [featured] = caseStudies;
+  // The CTA belongs under the client group, but that group is empty until a
+  // client entry's screenshots land. Fall back to the first group that has
+  // anything in it so the card never silently disappears.
+  const ctaGroup =
+    (caseStudies.some((c) => c.group === "client") && "client") ||
+    GROUPS.find((g) => caseStudies.some((c) => c.group === g.key))?.key;
   const featuredStack =
     featured.scope.find((s) => s.label === "Stack")?.value.split(" · ") ?? [];
 
@@ -169,7 +175,7 @@ export default function WorkIndex() {
 
               {/* The CTA sits under the client group, where a prospect reading
                   about other people's platforms is most likely to picture theirs. */}
-              {g.key === "client" && (
+              {g.key === ctaGroup && (
                 <Reveal delay={items.length * 80}>
                   <div className="flex h-full flex-col justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-9 text-center">
                     <h3 className="font-display text-[21px] font-bold text-ink">Your platform here next?</h3>

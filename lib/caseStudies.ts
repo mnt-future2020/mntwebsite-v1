@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import type { IconName } from "@/components/Icon";
 
 export type CaseStudy = {
@@ -52,7 +54,7 @@ export type CaseStudy = {
   };
 };
 
-export const caseStudies: CaseStudy[] = [
+const ALL_CASE_STUDIES: CaseStudy[] = [
   // ─── Client platforms ─────────────────────────────────────────────────────
   // Real client engagements, published with the client's permission. Labelled
   // by geography in `type`: a US buyer who works out for themselves that the
@@ -1304,6 +1306,29 @@ export const caseStudies: CaseStudy[] = [
     },
   },
 ];
+
+/**
+ * A case study is only published once its cover image exists on disk.
+ *
+ * Writing the copy and getting the client's screenshots are separate jobs that
+ * finish at different times, and a card with a broken image on a marketing site
+ * is worse than no card. This gate means an entry can be merged the moment the
+ * words are right: it stays hidden until the image lands, then appears on the
+ * next build with no code change. Missing entries are logged at build time so a
+ * forgotten screenshot is noisy rather than silent.
+ *
+ * Every importer of this module is a server component. If a client component
+ * ever imports it the build will fail on `node:fs`, which is the correct and
+ * loud way to find out.
+ */
+const published = (c: CaseStudy) =>
+  existsSync(join(process.cwd(), "public", c.cover.replace(/^\//, "")));
+
+export const caseStudies: CaseStudy[] = ALL_CASE_STUDIES.filter((c) => {
+  if (published(c)) return true;
+  console.warn(`[caseStudies] "${c.slug}" hidden: ${c.cover} is missing from public/`);
+  return false;
+});
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((c) => c.slug === slug);
