@@ -153,7 +153,7 @@ export default function OpenSourcePage() {
       />
 
       {/* Hero */}
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="container-mnt relative py-12 sm:py-16">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Open Source" }]} tone="light" />
           <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
@@ -162,20 +162,20 @@ export default function OpenSourcePage() {
                 <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                   Open source
                 </div>
-                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
+                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
                   We open-source our{" "}
                   <span className="text-brand-700">agentic-commerce</span> tooling.
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-bp-mute">
                   Anyone can claim &ldquo;agent-ready&rdquo; or &ldquo;secure.&rdquo; We publish the
                   tools that prove it: MIT-licensed, with honest limitations in every README and
-                  benchmarks you can reproduce. <strong className="text-ink">Two are live</strong>,
+                  benchmarks you can reproduce. <strong className="text-bp-ink">Two are live</strong>,
                   two are on the way.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href="#tools"
-                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
+                    className="inline-flex items-center gap-2 bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
                   >
                     Browse the tools <Icon name="arrow" className="h-4 w-4" />
                   </a>
@@ -183,18 +183,18 @@ export default function OpenSourcePage() {
                     href={GITHUB_ORG}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+                    className="inline-flex items-center gap-2 border border-[#D8E1EC] bg-white px-6 py-3 font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
                   >
                     <Icon name="github" className="h-4 w-4" /> GitHub org
                   </a>
                 </div>
-                <p className="mt-5 text-sm text-slate-500">
+                <p className="mt-5 text-sm text-bp-faint">
                   MIT-licensed · deterministic · reproducible benchmarks
                 </p>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="rounded-3xl border border-white/10 bg-[#050f1f] p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+              <div className="border border-white/10 bg-[#050f1f] p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
                 <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-200">
                   The toolkit
                 </div>
@@ -247,8 +247,8 @@ export default function OpenSourcePage() {
               <>
                 <div className="flex items-center justify-between">
                   <span
-                    className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                      tool.status === "live" ? "bg-brand-50 text-brand" : "bg-slate-100 text-slate-500"
+                    className={`inline-flex h-11 w-11 items-center justify-center ${
+                      tool.status === "live" ? "bg-brand-50 text-brand" : "bg-slate-100 text-bp-faint"
                     }`}
                   >
                     <Icon name={tool.icon} className="h-5 w-5" />
@@ -258,17 +258,17 @@ export default function OpenSourcePage() {
                       <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
                     </span>
                   ) : (
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-bp-faint">
                       {tool.when}
                     </span>
                   )}
                 </div>
                 <h3 className="mt-4 font-mono text-xl font-bold text-navy">{tool.name}</h3>
-                <p className="mt-1 text-sm font-medium text-slate-500">{tool.tagline}</p>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{tool.desc}</p>
-                <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                <p className="mt-1 text-sm font-medium text-bp-faint">{tool.tagline}</p>
+                <p className="mt-3 text-sm leading-relaxed text-bp-mute">{tool.desc}</p>
+                <div className="mt-5 flex items-center justify-between border-t border-bp-hair pt-4">
                   <span className="text-xs text-slate-400">
-                    Feeds <span className="font-semibold text-slate-600">{tool.maps}</span>
+                    Feeds <span className="font-semibold text-bp-mute">{tool.maps}</span>
                   </span>
                   {tool.status === "live" && (
                     <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
@@ -283,12 +283,12 @@ export default function OpenSourcePage() {
                 {tool.status === "live" ? (
                   <Link
                     href={tool.href}
-                    className="group block h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    className="group block h-full border border-bp-edge bg-white p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     {inner}
                   </Link>
                 ) : (
-                  <div className="h-full rounded-2xl border border-dashed border-slate-300 bg-white p-7">
+                  <div className="h-full border border-dashed border-[#D8E1EC] bg-white p-7">
                     {inner}
                   </div>
                 )}
@@ -296,7 +296,7 @@ export default function OpenSourcePage() {
             );
           })}
         </div>
-        <p className="mt-10 text-center text-sm text-slate-500">
+        <p className="mt-10 text-center text-sm text-bp-faint">
           Follow along:{" "}
           <a href={GITHUB_ORG} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
             github.com/MnT-Future
@@ -309,7 +309,7 @@ export default function OpenSourcePage() {
       </section>
 
       {/* How we build in the open */}
-      <section className="border-y border-line bg-mist">
+      <section className="border-y border-bp-line bg-bp-wash">
         <div className="container-mnt py-20 sm:py-24">
           <SectionHeading
             eyebrow="How we build in the open"
@@ -323,12 +323,12 @@ export default function OpenSourcePage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((value, i) => (
               <Reveal key={value.title} delay={i * 0.05}>
-                <div className="h-full rounded-[14px] border border-slate-200 bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                <div className="h-full border border-bp-edge bg-white p-6 shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+                  <span className="inline-flex h-11 w-11 items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
                     <Icon name={value.icon} className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-4 font-display text-lg font-bold text-ink">{value.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slatey">{value.desc}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold text-bp-ink">{value.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-bp-mute">{value.desc}</p>
                 </div>
               </Reveal>
             ))}

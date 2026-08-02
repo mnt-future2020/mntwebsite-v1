@@ -66,15 +66,15 @@ export default function SecurityCompliance() {
   return (
     <>
       {/* HERO */}
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="container-mnt relative pb-[72px] pt-10 sm:pt-12">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Security & Compliance" }]} tone="light" />
           <div className="mt-9 max-w-3xl animate-fade-up">
             <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Security &amp; compliance</div>
-            <h1 className="mt-[18px] font-display text-[2.4rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[3.2rem]">
+            <h1 className="mt-[18px] font-display text-[2.4rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-bp-ink sm:text-[3.2rem]">
               Compliance isn&apos;t a checkbox. It&apos;s architecture.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slatey">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-bp-mute">
               For a US store, accessibility, payment security, and sales-tax are liabilities the day
               you launch. The safest systems are the ones where compliance was a design decision: not
               a last-minute patch. Here&apos;s how MnT Future builds it in.
@@ -100,15 +100,15 @@ export default function SecurityCompliance() {
             <Reveal key={f.name} delay={i * 60}>
               <SpotlightCard className="card card-hover group h-full">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
+                  <div className="flex h-12 w-12 items-center justify-center bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
                     <Icon name={f.icon} className="h-6 w-6" />
                   </div>
-                  <span className="font-display text-lg font-extrabold text-ink">{f.name}</span>
+                  <span className="font-display text-lg font-extrabold text-bp-ink">{f.name}</span>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-slatey">{f.desc}</p>
+                <p className="mt-5 text-[15px] leading-relaxed text-bp-mute">{f.desc}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {f.tags.map((t) => (
-                    <span key={t} className="rounded-full bg-soft px-3 py-1 text-xs font-medium text-slatey">
+                    <span key={t} className="rounded-full bg-bp-wash px-3 py-1 text-xs font-medium text-bp-mute">
                       {t}
                     </span>
                   ))}
@@ -120,7 +120,7 @@ export default function SecurityCompliance() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="bg-soft py-20 sm:py-28">
+      <section className="bg-bp-wash py-20 sm:py-28">
         <div className="container-mnt grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
             <SectionHeading
@@ -131,7 +131,7 @@ export default function SecurityCompliance() {
             />
           </Reveal>
           <Reveal delay={120}>
-            <div className="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-card sm:p-10">
+            <div className="border border-bp-hair bg-white p-8 shadow-card sm:p-10">
               <CheckList items={principles} />
             </div>
           </Reveal>
@@ -146,12 +146,12 @@ export default function SecurityCompliance() {
         />
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           <Reveal>
-            <div className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-card sm:p-10">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
+            <div className="flex h-full flex-col border border-bp-hair bg-white p-8 shadow-card sm:p-10">
+              <div className="flex h-12 w-12 items-center justify-center bg-brand text-white">
                 <Icon name="store" className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-xl font-bold text-ink">Commerce platforms</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-slatey">
+              <h3 className="mt-5 font-display text-xl font-bold text-bp-ink">Commerce platforms</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-bp-mute">
                 Customer and payment data stay protected through PCI DSS v4.0.1 architecture, tokenized
                 payments, and a secure checkout built to WCAG 2.2 AA, with the US sales-tax engine
                 integrated, without slowing the store down.
@@ -162,12 +162,12 @@ export default function SecurityCompliance() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <div className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-card sm:p-10">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
+            <div className="flex h-full flex-col border border-bp-hair bg-white p-8 shadow-card sm:p-10">
+              <div className="flex h-12 w-12 items-center justify-center bg-brand text-white">
                 <Icon name="ai" className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-xl font-bold text-ink">AI &amp; agents</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-slatey">
+              <h3 className="mt-5 font-display text-xl font-bold text-bp-ink">AI &amp; agents</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-bp-mute">
                 AI ships with guardrails: quality gates, a human approving sensitive actions, and accurate
                 real-time data so agents transact correctly and safely in AI channels.
               </p>

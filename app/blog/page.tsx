@@ -21,13 +21,13 @@ export default async function BlogIndex() {
 
   return (
     <>
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="container-mnt relative py-16 sm:py-20">
           <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Insights</div>
-          <h1 className="mt-5 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
+          <h1 className="mt-5 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
             Engineering insights for US commerce founders.
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-bp-mute">
             Practical guides on AI-native commerce, agent-ready selling, custom platform builds,
             and US commerce compliance: written by the people who ship it.
           </p>
@@ -36,9 +36,9 @@ export default async function BlogIndex() {
 
       <section className="container-mnt py-16 sm:py-20">
         {posts.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-slate-200 bg-soft px-6 py-20 text-center">
-            <h2 className="font-display text-xl font-bold text-ink">No articles published yet</h2>
-            <p className="mt-2 text-slatey">New guides are on the way: check back soon.</p>
+          <div className="border border-dashed border-bp-edge bg-bp-wash px-6 py-20 text-center">
+            <h2 className="font-display text-xl font-bold text-bp-ink">No articles published yet</h2>
+            <p className="mt-2 text-bp-mute">New guides are on the way: check back soon.</p>
           </div>
         ) : (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,7 +46,7 @@ export default async function BlogIndex() {
               <Link
                 key={p.id}
                 href={`/blog/${p.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-100 hover:shadow-cardhover"
+                className="group flex flex-col overflow-hidden border border-bp-hair bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-100 hover:shadow-cardhover"
               >
                 <div className="img-zoom relative h-44 overflow-hidden bg-deep">
                   {p.coverImage ? (
@@ -62,8 +62,8 @@ export default async function BlogIndex() {
                   {p.category && (
                     <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-700">{p.category}</span>
                   )}
-                  <h2 className="mt-2 text-lg font-bold leading-snug text-ink">{p.title}</h2>
-                  {p.excerpt && <p className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-slatey">{p.excerpt}</p>}
+                  <h2 className="mt-2 text-lg font-bold leading-snug text-bp-ink">{p.title}</h2>
+                  {p.excerpt && <p className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-bp-mute">{p.excerpt}</p>}
                   <div className="mt-auto flex items-center gap-2 pt-5 text-xs text-slate-400">
                     <span>{formatDate(p.publishedAt)}</span>
                     <span>·</span>

@@ -121,28 +121,38 @@ export function Process({
       { title: "Verify", desc: "Security and compliance are tested as we go (ADA/WCAG, PCI DSS, SOC 2 controls), never bolted on at the end." },
       { title: "Scale", desc: "We harden, instrument, and hand over, or stay on as your embedded product team." },
     ];
+  const dark = tone === "dark";
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      className={`grid border-l border-t sm:grid-cols-2 lg:grid-cols-4 ${
+        dark ? "border-white/10" : "border-bp-edge"
+      }`}
+    >
       {data.map((s, i) => (
-        <Reveal key={s.title} delay={i * 70}>
-          <div
-            className={`relative h-full rounded-[14px] border p-6 ${
-              tone === "dark"
-                ? "border-white/10 bg-white/[0.03]"
-                : "border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.04)]"
+        <div
+          key={s.title}
+          data-stagger
+          className={`border-b border-r p-7 ${
+            dark ? "border-white/10 bg-white/[0.03]" : "border-bp-edge bg-white"
+          }`}
+        >
+          <div className="flex items-center justify-between gap-4">
+            <span className="font-mono text-[11px] tracking-[0.14em] text-brand-500">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="h-px flex-1 bg-current opacity-[0.08]" />
+          </div>
+          <h3
+            className={`mt-5 font-display text-[18px] font-bold tracking-[-0.022em] ${
+              dark ? "text-white" : "text-bp-ink"
             }`}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand font-display text-sm font-bold text-white">
-              {String(i + 1).padStart(2, "0")}
-            </div>
-            <h3 className={`mt-4 text-base font-bold ${tone === "dark" ? "text-white" : "text-ink"}`}>
-              {s.title}
-            </h3>
-            <p className={`mt-2 text-sm leading-relaxed ${tone === "dark" ? "text-white/65" : "text-slatey"}`}>
-              {s.desc}
-            </p>
-          </div>
-        </Reveal>
+            {s.title}
+          </h3>
+          <p className={`mt-3 text-[14.5px] leading-[1.7] ${dark ? "text-white/65" : "text-bp-mute"}`}>
+            {s.desc}
+          </p>
+        </div>
       ))}
     </div>
   );
@@ -172,8 +182,8 @@ export function Breadcrumbs({
   trail: { label: string; href?: string }[];
   tone?: "dark" | "light";
 }) {
-  const base = tone === "dark" ? "text-white/55" : "text-slate-500";
-  const current = tone === "dark" ? "text-white/80" : "text-ink";
+  const base = tone === "dark" ? "text-white/50" : "text-bp-faint";
+  const current = tone === "dark" ? "text-white/80" : "text-bp-ink";
   const hover = tone === "dark" ? "hover:text-white" : "hover:text-brand-700";
   const schema = {
     "@context": "https://schema.org",
@@ -186,7 +196,10 @@ export function Breadcrumbs({
     })),
   };
   return (
-    <nav aria-label="Breadcrumb" className={`text-sm ${base}`}>
+    <nav
+      aria-label="Breadcrumb"
+      className={`font-mono text-[11.5px] uppercase tracking-[0.12em] ${base}`}
+    >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <ol className="flex flex-wrap items-center gap-1.5">
         {trail.map((t, i) => (

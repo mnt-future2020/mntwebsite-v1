@@ -132,7 +132,7 @@ export default function StrategySession() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       {/* HERO */}
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-10 sm:px-7 lg:pt-12">
           <Breadcrumbs
             trail={[{ label: "Home", href: "/" }, { label: "Book a strategy session" }]}
@@ -142,10 +142,10 @@ export default function StrategySession() {
             <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
               Free strategy session · Commerce tech consulting
             </div>
-            <h1 className="mt-[18px] max-w-[820px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[46px]">
+            <h1 className="mt-[18px] max-w-[820px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-bp-ink sm:text-[46px]">
               Bring your commerce bottleneck. Leave with a plan you can execute.
             </h1>
-            <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
+            <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-bp-mute">
               A free 45-minute working session with a senior commerce consultant. We dig into your
               store, your stack, and where it's stuck, sketch the solution live, and you keep the
               written plan whether you hire us or not.
@@ -153,21 +153,21 @@ export default function StrategySession() {
             <div className="mt-8 flex flex-wrap gap-3.5">
               <a
                 href="#book"
-                className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15.5px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
+                className="inline-flex items-center gap-2 bg-brand-700 px-7 py-3.5 text-[15.5px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(14,102,194,0.5)] transition-colors hover:bg-brand-800"
               >
                 Book my strategy session
                 <Icon name="arrow" className="h-4 w-4" />
               </a>
               <a
                 href="#how"
-                className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-7 py-3.5 text-[15.5px] font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+                className="inline-flex items-center gap-2 border border-[#D8E1EC] bg-white px-7 py-3.5 text-[15.5px] font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
               >
                 How it works
               </a>
             </div>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
               {chips.map((c) => (
-                <span key={c} className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-slatey">
+                <span key={c} className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-bp-mute">
                   <Icon name="check" className="h-[15px] w-[15px] text-brand-700" />
                   {c}
                 </span>
@@ -189,10 +189,10 @@ export default function StrategySession() {
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 70}>
-              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_16px_36px_-16px_rgba(14,102,194,0.22)]">
+              <div className="h-full border border-bp-edge bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_16px_36px_-16px_rgba(14,102,194,0.22)]">
                 <div className="font-display text-[13px] font-bold text-brand-700">{s.no}</div>
-                <h3 className="mt-3.5 font-display text-[21px] font-bold text-ink">{s.title}</h3>
-                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{s.desc}</p>
+                <h3 className="mt-3.5 font-display text-[21px] font-bold text-bp-ink">{s.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-bp-mute">{s.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -200,7 +200,7 @@ export default function StrategySession() {
       </section>
 
       {/* WHAT YOU LEAVE WITH */}
-      <section className="border-y border-line bg-mist py-24">
+      <section className="border-y border-bp-line bg-bp-wash py-24">
         <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 sm:px-7 lg:grid-cols-2">
           <Reveal>
             <SectionTitle
@@ -218,7 +218,7 @@ export default function StrategySession() {
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:p-10">
+            <div className="border border-bp-edge bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.05)] sm:p-10">
               <div className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                 The recommendation brief
               </div>
@@ -249,12 +249,12 @@ export default function StrategySession() {
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
           {audiences.map((a, i) => (
             <Reveal key={a.title} delay={i * 70}>
-              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
-                <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+              <div className="h-full border border-bp-edge bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]">
+                <div className="flex h-[46px] w-[46px] items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
                   <Icon name={a.icon} className="h-[23px] w-[23px]" />
                 </div>
-                <h3 className="mt-[18px] font-display text-[19px] font-bold text-ink">{a.title}</h3>
-                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{a.desc}</p>
+                <h3 className="mt-[18px] font-display text-[19px] font-bold text-bp-ink">{a.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-bp-mute">{a.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -262,15 +262,15 @@ export default function StrategySession() {
 
         {/* Async alternative */}
         <Reveal delay={280}>
-          <div className="mt-[22px] flex flex-col gap-4 rounded-[14px] border border-slate-200 bg-slate-50 px-7 py-6 sm:flex-row sm:items-center">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-brand-700">
+          <div className="mt-[22px] flex flex-col gap-4 border border-bp-edge bg-slate-50 px-7 py-6 sm:flex-row sm:items-center">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-bp-edge bg-white text-brand-700">
               <Icon name="search" className="h-5 w-5" />
             </span>
             <span className="flex-1">
-              <span className="block font-display text-[17px] font-bold text-ink">
+              <span className="block font-display text-[17px] font-bold text-bp-ink">
                 Prefer async? Get a free agent-readiness audit instead.
               </span>
-              <span className="mt-1 block text-[13.5px] leading-relaxed text-slatey">
+              <span className="mt-1 block text-[13.5px] leading-relaxed text-bp-mute">
                 We assess your store&apos;s data, feeds, and AI-channel visibility and send you the
                 findings: no call required. Ask for it in the form below.
               </span>
@@ -287,7 +287,7 @@ export default function StrategySession() {
       </section>
 
       {/* FAQ */}
-      <section className="border-t border-line bg-mist py-24">
+      <section className="border-t border-bp-line bg-bp-wash py-24">
         <div className="mx-auto max-w-[860px] px-5 sm:px-7">
           <Reveal>
             <SectionTitle
@@ -302,31 +302,31 @@ export default function StrategySession() {
       </section>
 
       {/* BOOKING */}
-      <section id="book" className="scroll-mt-24 border-t border-line bg-gradient-to-b from-white to-mist">
+      <section id="book" className="scroll-mt-24 border-t border-bp-line bg-gradient-to-b from-white to-mist">
         <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-24 sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
               Book your strategy session
             </div>
-            <h2 className="mt-4 font-display text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[38px]">
+            <h2 className="mt-4 font-display text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-bp-ink sm:text-[38px]">
               Two minutes now. A plan by next week.
             </h2>
-            <p className="mt-4 text-[16px] leading-[1.65] text-slatey">
+            <p className="mt-4 text-[16px] leading-[1.65] text-bp-mute">
               Tell us what you&apos;re building and what&apos;s in the way. Syed replies within one
               business day to schedule your session.
             </p>
 
             {/* The consultant who actually runs the session */}
-            <div className="mt-8 flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(14,27,46,0.05)]">
+            <div className="mt-8 flex items-center gap-4 border border-bp-edge bg-white p-5 shadow-[0_1px_3px_rgba(14,27,46,0.05)]">
               <Image
                 src="/images/advisor-syed.jpg"
                 alt="Syed Asrar Ahmed, Chief Tech Consultant at MnT Future"
                 width={400}
                 height={400}
-                className="h-16 w-16 shrink-0 rounded-full border-2 border-slate-200 object-cover"
+                className="h-16 w-16 shrink-0 rounded-full border-2 border-bp-edge object-cover"
               />
               <div>
-                <div className="font-display text-[17px] font-bold text-ink">Syed Asrar Ahmed</div>
+                <div className="font-display text-[17px] font-bold text-bp-ink">Syed Asrar Ahmed</div>
                 <div className="text-[13px] font-semibold text-brand-700">
                   Chief Tech Consultant · runs your session
                 </div>
@@ -338,20 +338,20 @@ export default function StrategySession() {
                 href="mailto:syed@mntfuture.com"
                 className="inline-flex items-center gap-3 text-[15px] font-medium text-slate-700 transition-colors hover:text-brand-700"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-slate-200 bg-white text-brand-700">
+                <span className="flex h-10 w-10 items-center justify-center border border-bp-edge bg-white text-brand-700">
                   <Icon name="mail" className="h-[18px] w-[18px]" />
                 </span>
                 syed@mntfuture.com
               </a>
               <span className="inline-flex items-center gap-3 text-[15px] font-medium text-slate-700">
-                <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-slate-200 bg-white text-brand-700">
+                <span className="flex h-10 w-10 items-center justify-center border border-bp-edge bg-white text-brand-700">
                   <Icon name="clock" className="h-[18px] w-[18px]" />
                 </span>
                 Reply within one business day
               </span>
             </div>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_50px_-28px_rgba(14,27,46,0.18)] sm:p-9">
+          <div className="border border-bp-edge bg-white p-6 shadow-[0_20px_50px_-28px_rgba(14,27,46,0.18)] sm:p-9">
             <ContactForm />
           </div>
         </div>
