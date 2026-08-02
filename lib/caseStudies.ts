@@ -62,9 +62,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
   // The summary names what carries over to a US build instead of hiding it.
   //
   // REQUIRED IMAGES before this goes live (screenshots of liafashion.in):
-  //   /work/lia-cover.png      1600x1000  storefront home, for the card and OG
-  //   /work/lia-storefront.png  ~1440 wide  hero shot
-  //   /work/lia-product.png     ~1440 wide  product page with colour + size picker
+  //   /work/lia-cover.webp      1600x1000  storefront home, for the card and OG
+  //   /work/lia-storefront.webp  ~1440 wide  hero shot
+  //   /work/lia-product.webp     ~1440 wide  product page with colour + size picker
   //   /work/lia-checkout.png    ~1440 wide  cart or checkout
   {
     slug: "lia-fashion",
@@ -74,8 +74,8 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     type: "Client platform · India · Fashion D2C + in-store POS",
     group: "client",
     category: "Fashion D2C · Web store + POS + procurement",
-    cover: "/work/lia-cover.png",
-    heroShot: "/work/lia-storefront.png",
+    cover: "/work/lia-cover.webp",
+    heroShot: "/work/lia-storefront.webp",
     liveUrl: "https://www.liafashion.in/",
     liveLabel: "Visit liafashion.in",
     frameUrl: "liafashion.in",
@@ -147,20 +147,19 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     productShots: [
       {
-        src: "/work/lia-storefront.png",
+        src: "/work/lia-storefront.webp",
         title: "The storefront",
         desc: "The catalogue customers browse. Colour variants carry their own imagery, and availability is resolved per size rather than per product.",
       },
       {
-        src: "/work/lia-product.png",
+        src: "/work/lia-product.webp",
         title: "Colour and size, priced separately",
         desc: "Picking a colour swaps the gallery; picking a size resolves stock and price. The size is what the rest of the system tracks.",
       },
-      {
-        src: "/work/lia-checkout.png",
-        title: "Checkout",
-        desc: "Coupons, tax and shipping rules resolve server-side, then Razorpay takes the payment against an order the API created.",
-      },
+      // A checkout shot needs a populated cart, which we would have to create
+      // on the client's live store. Add it back once we have the screenshot:
+      // "Checkout" — coupons, tax and shipping resolve server-side, then
+      // Razorpay takes the payment against an order the API created.
     ],
     highlights: [
       {
@@ -253,10 +252,10 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       "How MnT Future built Lia Fashion's commerce platform: a Laravel 12 API serving a web storefront, admin back office and in-store POS on one size-level inventory, with concurrency-safe stock writes, Razorpay reconciliation and Shiprocket fulfilment.",
   },
   // REQUIRED IMAGES before this goes live (screenshots of leats.in):
-  //   /work/leats-cover.png    1600x1000  storefront home, for the card and OG
-  //   /work/leats-storefront.png ~1440 wide  hero shot
-  //   /work/leats-product.png   ~1440 wide  a cut/weight selection on a product
-  //   /work/leats-checkout.png  ~1440 wide  cart, slot picker or checkout
+  //   /work/leats-cover.webp    1600x1000  storefront home, for the card and OG
+  //   /work/leats-storefront.webp ~1440 wide  hero shot
+  //   /work/leats-product.webp   ~1440 wide  a cut/weight selection on a product
+  //   /work/leats-checkout.webp  ~1440 wide  cart, slot picker or checkout
   {
     slug: "leats",
     title: "Leats",
@@ -265,8 +264,8 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     type: "Client platform · India · Quick commerce, own fleet",
     group: "client",
     category: "Quick commerce · Fresh grocery · Own delivery fleet",
-    cover: "/work/leats-cover.png",
-    heroShot: "/work/leats-storefront.png",
+    cover: "/work/leats-cover.webp",
+    heroShot: "/work/leats-storefront.webp",
     liveUrl: "https://leats.in/",
     liveLabel: "Visit leats.in",
     frameUrl: "leats.in",
@@ -349,19 +348,19 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     productShots: [
       {
-        src: "/work/leats-storefront.png",
+        src: "/work/leats-storefront.webp",
         title: "The storefront",
         desc: "Fresh categories, ordered the way the customer thinks about them: by fish, by cut, by weight.",
       },
       {
-        src: "/work/leats-product.png",
+        src: "/work/leats-product.webp",
         title: "Cut and weight",
         desc: "What a customer picks here is a finished product. Behind it, the platform knows which raw pool it came out of and what it cost.",
       },
       {
-        src: "/work/leats-checkout.png",
-        title: "Serviceability and slot",
-        desc: "Pincode decides whether Leats delivers and at what charge, then the customer picks a window rather than being given a promise.",
+        src: "/work/leats-checkout.webp",
+        title: "Serviceability before anything else",
+        desc: "A pincode decides whether Leats delivers to an address at all. The zone it resolves is what the delivery charge and the slots offered at checkout are read from.",
       },
     ],
     highlights: [
@@ -460,9 +459,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       "How MnT Future built Leats' fresh-food commerce platform: raw material held at weighted-average cost, processing runs that record outputs and wastage, pincode delivery zones, a delivery-partner app and live tracking, across 61 data models.",
   },
   // REQUIRED IMAGES before this goes live (screenshots of sntasty.com):
-  //   /work/sntasty-cover.png    1600x1000  storefront home, for the card and OG
-  //   /work/sntasty-storefront.png ~1440 wide  hero shot
-  //   /work/sntasty-product.png   ~1440 wide  product page with pack-size options
+  //   /work/sntasty-cover.webp    1600x1000  storefront home, for the card and OG
+  //   /work/sntasty-storefront.webp ~1440 wide  hero shot
+  //   /work/sntasty-product.webp   ~1440 wide  product page with pack-size options
   //   /work/sntasty-admin.png     ~1440 wide  admin dashboard, or the cart
   {
     slug: "sntasty",
@@ -472,8 +471,8 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     type: "Client platform · India · D2C storefront + admin",
     group: "client",
     category: "D2C · Food & bakery · Pan-India shipping",
-    cover: "/work/sntasty-cover.png",
-    heroShot: "/work/sntasty-storefront.png",
+    cover: "/work/sntasty-cover.webp",
+    heroShot: "/work/sntasty-storefront.webp",
     liveUrl: "https://sntasty.com/",
     liveLabel: "Visit sntasty.com",
     frameUrl: "sntasty.com",
@@ -547,20 +546,19 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     productShots: [
       {
-        src: "/work/sntasty-storefront.png",
+        src: "/work/sntasty-storefront.webp",
         title: "The storefront",
         desc: "Brownies, cookies, cakes and traditional sweets, presented the way a food brand needs: photography first, with the pack size decided on the product page.",
       },
       {
-        src: "/work/sntasty-product.png",
+        src: "/work/sntasty-product.webp",
         title: "Pack sizes as real variants",
         desc: "Each unit of measure carries its own price and its own stock, so a sold-out 1kg box does not hide the 250g one.",
       },
-      {
-        src: "/work/sntasty-admin.png",
-        title: "The back office",
-        desc: "Orders, inventory, shipping rates and content in one admin, so running the shop never requires an engineer.",
-      },
+      // The back-office shot is behind the admin login, so it has to come from
+      // the client. Add it back once we have it: "The back office" — orders,
+      // inventory, shipping rates and content in one admin, so running the
+      // shop never requires an engineer.
     ],
     highlights: [
       {
