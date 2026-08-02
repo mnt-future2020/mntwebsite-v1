@@ -62,63 +62,12 @@ export default function WorkIndex() {
         </div>
       </section>
 
-      {/* FEATURED CASE STUDY */}
-      <section className="mx-auto max-w-[1200px] px-5 pt-[72px] sm:px-7">
-        <Reveal>
-          <Link
-            href={`/work/${featured.slug}`}
-            className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.22)]"
-          >
-            <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="p-8 sm:p-11">
-                <div className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-700">
-                  {featured.type}
-                </div>
-                <h2 className="mt-3.5 font-display text-[28px] font-extrabold text-ink sm:text-[32px]">
-                  {featured.title}
-                </h2>
-                <p className="mt-3.5 text-[15.5px] leading-[1.7] text-slatey">{featured.tagline}</p>
-                <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  {featured.facts.map((f) => (
-                    <div key={f.label} className="border-l-[3px] border-brand-200 pl-3.5">
-                      <div className="font-display text-[23px] font-bold text-ink">{f.value}</div>
-                      <div className="mt-1 text-[12.5px] leading-normal text-slate-500">{f.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-7 flex flex-wrap gap-2.5">
-                  {featuredStack.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12.5px] font-semibold text-slatey"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-                <span className="mt-7 inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700">
-                  Read the case study
-                  <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </div>
-              <div className="relative min-h-[280px] border-t border-slate-200 bg-slate-100 lg:min-h-[380px] lg:border-l lg:border-t-0">
-                <Image
-                  src={featured.heroShot}
-                  alt={`${featured.title}: product screenshot`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover object-left-top"
-                />
-              </div>
-            </div>
-          </Link>
-        </Reveal>
-      </section>
 
       {/* GROUPED CASE STUDIES */}
       {GROUPS.map((g) => {
-        // The featured card above is already showing the first entry, so it is
-        // not repeated inside its own group.
+        // The featured card is rendered inside its own group, below the heading,
+        // not above it. Floating it above the headings made the first client
+        // platform read as if it were not a client platform.
         const items = caseStudies.filter((c) => c.group === g.key && c.slug !== featured.slug);
         if (!items.length) return null;
 
@@ -133,7 +82,61 @@ export default function WorkIndex() {
               </p>
             </Reveal>
 
-            <div className="mt-9 grid gap-[22px] md:grid-cols-2">
+            {g.key === featured.group && (
+              <div className="mt-9">
+            <Reveal>
+              <Link
+                href={`/work/${featured.slug}`}
+                className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(14,27,46,0.05)] transition-all duration-[250ms] hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.22)]"
+              >
+                <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+                  <div className="p-8 sm:p-11">
+                    <div className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-700">
+                      {featured.type}
+                    </div>
+                    <h2 className="mt-3.5 font-display text-[28px] font-extrabold text-ink sm:text-[32px]">
+                      {featured.title}
+                    </h2>
+                    <p className="mt-3.5 text-[15.5px] leading-[1.7] text-slatey">{featured.tagline}</p>
+                    <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                      {featured.facts.map((f) => (
+                        <div key={f.label} className="border-l-[3px] border-brand-200 pl-3.5">
+                          <div className="font-display text-[23px] font-bold text-ink">{f.value}</div>
+                          <div className="mt-1 text-[12.5px] leading-normal text-slate-500">{f.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-7 flex flex-wrap gap-2.5">
+                      {featuredStack.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12.5px] font-semibold text-slatey"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="mt-7 inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700">
+                      Read the case study
+                      <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                  <div className="relative min-h-[280px] border-t border-slate-200 bg-slate-100 lg:min-h-[380px] lg:border-l lg:border-t-0">
+                    <Image
+                      src={featured.heroShot}
+                      alt={`${featured.title}: product screenshot`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className="object-cover object-left-top"
+                    />
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+              </div>
+            )}
+
+            <div className="mt-[22px] grid gap-[22px] md:grid-cols-2">
               {items.map((c, i) => (
                 <Reveal key={c.slug} delay={i * 80}>
                   <Link
