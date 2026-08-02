@@ -23,13 +23,16 @@ export default function AgentScan() {
     }
     // Runs on a loop: ticks up through the checks, holds the finished state,
     // then clears and starts over, so the hero is never sitting still.
+    //
+    // The step counter lives here rather than being read back from state:
+    // scheduling the next tick from inside a state updater lets React's double
+    // invocation queue two timers per tick, which compounds into a runaway.
+    let step = 0;
     let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
-      setDone((prev) => {
-        const next = prev >= STEPS.length + 1 ? 0 : prev + 1;
-        timer = setTimeout(tick, next === 0 ? 900 : next >= STEPS.length ? 2000 : 1350);
-        return next;
-      });
+      step = step >= STEPS.length + 1 ? 0 : step + 1;
+      setDone(step);
+      timer = setTimeout(tick, step === 0 ? 900 : step >= STEPS.length ? 2000 : 1350);
     };
     timer = setTimeout(tick, 1400);
     return () => clearTimeout(timer);
