@@ -47,6 +47,203 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
+  // ─── Client platforms ─────────────────────────────────────────────────────
+  // Real client engagements, published with the client's permission. Labelled
+  // by geography in `type`: a US buyer who works out for themselves that the
+  // portfolio is Indian has drawn the wrong conclusion from the right fact.
+  // The summary names what carries over to a US build instead of hiding it.
+  //
+  // REQUIRED IMAGES before this goes live (screenshots of liafashion.in):
+  //   /work/lia-cover.png      1600x1000  storefront home, for the card and OG
+  //   /work/lia-storefront.png  ~1440 wide  hero shot
+  //   /work/lia-product.png     ~1440 wide  product page with colour + size picker
+  //   /work/lia-checkout.png    ~1440 wide  cart or checkout
+  {
+    slug: "lia-fashion",
+    title: "Lia Fashion",
+    tagline:
+      "A fashion boutique selling online and over the counter, on one stock pool. Web store, admin, in-store POS and supplier purchasing in a single Laravel platform.",
+    type: "Client platform · India · Fashion D2C + in-store POS",
+    category: "Fashion D2C · Web store + POS + procurement",
+    cover: "/work/lia-cover.png",
+    heroShot: "/work/lia-storefront.png",
+    liveUrl: "https://www.liafashion.in/",
+    liveLabel: "Visit liafashion.in",
+    frameUrl: "liafashion.in",
+    dateISO: "2026-06-30",
+    summary:
+      "Lia Fashion sells clothing on the web and from a physical counter. MnT Future built the platform behind both: a Laravel 12 REST API with a customer storefront, a full admin back office, an in-store POS, and supplier purchasing. The part that matters is that all of it reads and writes one inventory. A size sold at the till and a size sold online decrement the same row, under a lock, so the two channels cannot oversell each other. That is the same problem a US brand has the day it opens a retail door or a pop-up, and the same problem a marketplace has across fulfilment locations.",
+    facts: [
+      { value: "1 stock pool", label: "Web store and in-store POS" },
+      { value: "154", label: "API endpoints across 25 admin modules" },
+      { value: "Colour × size", label: "Stock and price held per variant" },
+      { value: "Live", label: "liafashion.in" },
+    ],
+    scope: [
+      { label: "Role", value: "Architecture + full-stack engineering" },
+      { label: "Platforms", value: "Web storefront · Admin · In-store POS" },
+      { label: "Delivered", value: "REST API · Admin back office · POS · Integrations" },
+      { label: "Status", value: "Live and selling" },
+    ],
+    problem:
+      "A boutique that sells in two places has one hard problem and a lot of easy ones. The hard one is that there is a single physical garment, in a single size, and two tills that can sell it. Run the shop floor on one system and the website on another and you oversell: the customer pays, and someone has to make an apology call. Everything else follows from that. Stock has to be tracked per colour and per size rather than per product, because a medium selling out is not the product selling out. Payments have to be reconciled rather than assumed, because a payment that succeeds at the gateway and fails to come back leaves an order in limbo. And the people running the shop needed the whole thing, including what they buy from suppliers, in one back office rather than three.",
+    approach: [
+      {
+        no: "01",
+        title: "Model stock at the size, not the product",
+        desc: "Every product carries its sizes as structured data with stock and price on each one, and colour variants carry their own imagery. Nothing in the system talks about a product being in stock, only a specific size of it.",
+      },
+      {
+        no: "02",
+        title: "Make the two channels share one write path",
+        desc: "The POS does not get its own inventory logic. A counter sale and a web order call the same stock decrement, inside a database transaction that locks the product row until the sale commits, so two simultaneous sales of the last item cannot both succeed.",
+      },
+      {
+        no: "03",
+        title: "Treat payment as something to verify, not assume",
+        desc: "Razorpay orders are created server-side, signatures verified, and webhooks handled. On top of that a scheduled command re-checks payments still sitting pending and reconciles them against the gateway, so a dropped callback becomes a resolved order instead of a support ticket.",
+      },
+      {
+        no: "04",
+        title: "Put the back office in one place",
+        desc: "Orders, catalogue, coupons, banners, offers, shipping rules, reports, invoice settings, POS and supplier purchasing all live in the same admin, on the same auth, against the same data.",
+      },
+    ],
+    build: [
+      {
+        audience: "For shoppers",
+        icon: "cart",
+        points: [
+          "Catalogue with colour variants, each carrying its own gallery, and stock and price held per size",
+          "Registration by email OTP, or Google sign-in, with saved addresses and profile",
+          "Cart that applies bulk pricing on the total quantity of a line, not per add-to-cart, so splitting an order does not change the price",
+          "Coupon validation, tax and shipping rules applied at checkout",
+          "Razorpay checkout with server-side order creation and signature verification",
+          "Order tracking, with fulfilment raised automatically once payment clears",
+        ],
+      },
+      {
+        audience: "For the store team",
+        icon: "store",
+        points: [
+          "In-store POS for counter sales, with its own invoice numbering and walk-in customer records",
+          "POS sales decrement the same size-level stock as the website, under a row lock, so the channels cannot oversell each other",
+          "Catalogue, category, coupon, banner and offer management with Cloudinary-hosted media",
+          "Order and transaction management, with pending payments reconcilable on demand",
+          "Supplier records and purchase entries, so incoming stock is captured where the outgoing stock lives",
+          "Reports exported as PDF or CSV, plus a dashboard over sales and orders",
+          "Company, invoice and payment-gateway settings editable without a deploy",
+        ],
+      },
+    ],
+    productShots: [
+      {
+        src: "/work/lia-storefront.png",
+        title: "The storefront",
+        desc: "The catalogue customers browse. Colour variants carry their own imagery, and availability is resolved per size rather than per product.",
+      },
+      {
+        src: "/work/lia-product.png",
+        title: "Colour and size, priced separately",
+        desc: "Picking a colour swaps the gallery; picking a size resolves stock and price. The size is what the rest of the system tracks.",
+      },
+      {
+        src: "/work/lia-checkout.png",
+        title: "Checkout",
+        desc: "Coupons, tax and shipping rules resolve server-side, then Razorpay takes the payment against an order the API created.",
+      },
+    ],
+    highlights: [
+      {
+        icon: "layers",
+        title: "One inventory, two channels",
+        desc: "The website and the shop counter write to the same size-level stock. There is no nightly sync to go wrong, because there is nothing to sync.",
+      },
+      {
+        icon: "lock",
+        title: "The last item can only sell once",
+        desc: "Stock decrements run inside a transaction that locks the product row, so two concurrent sales cannot both read the same stock and overwrite each other.",
+      },
+      {
+        icon: "gauge",
+        title: "Payments get reconciled, not assumed",
+        desc: "A command re-checks pending Razorpay payments against the gateway and resolves them, so a dropped webhook does not leave a paying customer without an order.",
+      },
+      {
+        icon: "records",
+        title: "Buying and selling in one back office",
+        desc: "Supplier records and purchase entries sit beside the catalogue and orders, so what comes in and what goes out are the same system.",
+      },
+    ],
+    techDecisions: [
+      {
+        tech: "Sizes as structured data on the product",
+        used: "Stock and price are held per size, and the API resolves availability at that level.",
+        advantage: "A medium selling out does not hide the product. Apparel lives or dies on this, and bolting it on later means rewriting every stock path.",
+      },
+      {
+        tech: "lockForUpdate inside the sale transaction",
+        used: "The product row is locked while stock is decremented, for POS and web alike.",
+        advantage: "Two tills selling the last item at the same moment cannot both succeed. Without the lock both reads see the same stock and the second write silently restores it.",
+      },
+      {
+        tech: "Scheduled payment reconciliation",
+        used: "An artisan command verifies pending payments against Razorpay, individually or in bulk.",
+        advantage: "Gateway callbacks fail. This turns a class of silent revenue loss into a job that runs, which is unglamorous and worth more than most features.",
+      },
+      {
+        tech: "Shiprocket raised on payment, not on order",
+        used: "Fulfilment is created once money has actually cleared.",
+        advantage: "Nothing ships against an unpaid order, and the shop team never has to check twice before packing.",
+      },
+      {
+        tech: "Laravel Sanctum with OTP and Google sign-in",
+        used: "Bearer tokens for the API, email-OTP registration, and Google OAuth alongside it.",
+        advantage: "One token model covers storefront, admin and POS, so a permission is enforced in one place rather than three.",
+      },
+    ],
+    stack: [
+      { group: "Backend", items: ["Laravel 12", "PHP 8.2", "MySQL", "Sanctum"] },
+      { group: "Payments & fulfilment", items: ["Razorpay", "Shiprocket"] },
+      { group: "Media & documents", items: ["Cloudinary", "DomPDF"] },
+      { group: "Frontend & build", items: ["React", "Vite", "Tailwind CSS"] },
+    ],
+    resultsTitle: "What the platform does today",
+    resultsIntro:
+      "Lia Fashion runs its website and its shop counter on one system. Stock is held per colour and size and decremented under a lock, so the two channels cannot oversell each other. Payments are verified and reconciled rather than assumed, fulfilment is raised only once money clears, and supplier purchasing sits in the same back office as the catalogue and the orders.",
+    faq: [
+      {
+        q: "Is Lia Fashion a multi-vendor marketplace?",
+        a: "No. It is a single-brand fashion business selling its own stock, online and over the counter. The vendor records in the platform are suppliers it buys stock from, not sellers on a marketplace. Our two-sided marketplace work is LOBBI, which is a separate story.",
+      },
+      {
+        q: "Why does one stock pool matter so much?",
+        a: "Because a garment in a given size exists once. If the website and the shop floor keep separate counts, the first busy Saturday produces an oversell, a refund and an apology. Sharing one write path removes the failure instead of monitoring for it.",
+      },
+      {
+        q: "This is an Indian brand. How does it apply to a US build?",
+        a: "The engineering transfers directly: variant-level inventory, one stock pool across channels, concurrency-safe stock writes, and payment reconciliation. The US-specific layer differs, so a US build swaps Razorpay for Stripe, Shiprocket for a US carrier integration, and adds the sales-tax engine and the ADA and PCI work we do as standard.",
+      },
+      {
+        q: "Did MnT Future build the whole thing?",
+        a: "Yes. Architecture, the Laravel API, the admin back office, the POS, and the payment and fulfilment integrations. Published here with Lia Fashion's permission.",
+      },
+    ],
+    copy: {
+      challengeTitle: "One garment, two tills",
+      buildTitle: "What we built",
+      highlightsSubtitle:
+        "The decisions that keep a two-channel shop honest about what it actually has in stock.",
+      techTitle: "Engineering decisions",
+      ctaTitle: "Selling in more than one place?",
+      ctaBody:
+        "If your store and your retail, wholesale or pop-up channels keep separate stock, that is a rebuild worth scoping properly. Bring it to a free strategy session and we will map it.",
+    },
+    metaTitle: "Lia Fashion: Web Store + In-Store POS on One Stock Pool | MnT Future",
+    metaDescription:
+      "How MnT Future built Lia Fashion's commerce platform: a Laravel 12 API serving a web storefront, admin back office and in-store POS on one size-level inventory, with concurrency-safe stock writes, Razorpay reconciliation and Shiprocket fulfilment.",
+  },
+  // ─── Our own platforms and products ───────────────────────────────────────
   {
     slug: "mnt-commerce",
     title: "MnT Commerce",

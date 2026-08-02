@@ -9,7 +9,7 @@ import CTASection from "@/components/CTASection";
 export const metadata: Metadata = {
   title: { absolute: "Our Work: Case Studies | MnT Future" },
   description:
-    "Platforms MnT Future has designed and built: real, live products engineered end to end for US D2C and marketplace brands.",
+    "Platforms MnT Future has designed and built: live client commerce platforms, our own products, and the labs behind them, engineered end to end.",
   alternates: { canonical: "/work" },
 };
 

@@ -122,7 +122,7 @@ const homeFaq: QA[] = [
   },
   {
     q: "Do you only work with US brands?",
-    a: "Yes. MnT Future focuses on US D2C and marketplace brands, where our compliance depth: ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax, and our agentic-commerce work are sharpest.",
+    a: "Our focus is US D2C and marketplace brands, where our compliance depth: ADA/WCAG, PCI DSS v4.0.1, and multi-state sales-tax, and our agentic-commerce work are sharpest. We have also built and shipped commerce platforms for clients elsewhere, and you can see those on our work page.",
   },
   {
     q: "Do you build Shopify stores, or only custom platforms?",
