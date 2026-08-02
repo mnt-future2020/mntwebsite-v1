@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-16 pt-16 sm:px-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-[88px]">
         <div className="animate-fade-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#C9E0F7] bg-brand-50 px-3.5 py-1.5 text-[12.5px] font-semibold tracking-[0.04em] text-brand-700">
-            COMMERCE PLATFORMS · US BRANDS
+            CUSTOM COMMERCE PLATFORMS · US BRANDS
           </div>
           {/*
             Opens on their gap, not on our capability, and asks rather than
@@ -42,11 +42,17 @@ export default function Hero() {
             </span>
             ?
           </h1>
+          {/*
+            The headline is the hook (their gap). This is the converter: what we
+            build and who builds it. Urgency without "but who are you?" answered
+            is how a deal stalls politely — so the platform work and the
+            senior-only delivery come before the protocol names, not after.
+          */}
           <p className="mt-[22px] max-w-[560px] text-lg leading-[1.65] text-slatey">
-            For an AI agent to sell your product, it has to read your catalogue, trust your stock
-            and price, and finish a checkout on its own. That is what ACP, Google UCP and Retail MCP
-            make possible. We build the commerce platforms that can do it: custom storefronts,
-            marketplaces, B2B, and the AI agents that sell on them.
+            We engineer custom commerce platforms for US brands: storefronts, marketplaces, B2B, and
+            the integrations behind them. Senior engineers end to end, no juniors on client work.
+            And built so an AI agent can read your catalogue, trust your stock and price, and finish
+            a checkout on its own: what ACP, Google UCP and Retail MCP make possible.
           </p>
 
           {/*
