@@ -49,9 +49,15 @@ export const commerceNav: NavGroup = {
     { label: "B2B / Wholesale Commerce", href: "/commerce/b2b-wholesale", desc: "Customer pricing, RFQ, bulk ordering: ERP-integrated" },
     { label: "Managed Support & Compliance", href: "/commerce/managed-compliance", desc: "SLA support + ADA, PCI DSS & US sales-tax handled" },
     { label: "Shopify Store Builds", href: "/commerce/shopify", desc: "Official-partner Shopify builds with an upgrade path to custom AI-native" },
+    // Filed here, not under AI: this rescues a store that was built with AI
+    // tools. It is refactor and hardening work, not an AI capability we add.
+    { label: "AI Cleanup & MVP Rescue", href: "/commerce/ai-cleanup", desc: "Turn a vibe-coded MVP into a production-grade platform" },
   ],
 };
 
+// The AI layer of the platform, not a second service line. It has no top-level
+// nav entry: it is reached from the commerce hub, where it reads as how the
+// builds are made rather than as a separate business.
 export const aiNav: NavGroup = {
   label: "AI & Agents",
   href: "/ai-agents",
@@ -60,7 +66,6 @@ export const aiNav: NavGroup = {
     { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter", desc: "AI search, recommendations & a shopping assistant that converts" },
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce", desc: "Make your store discoverable & buyable by AI shopping agents" },
     { label: "Custom AI Agents", href: "/ai-agents/embedded-agents", desc: "Task-specific AI agents built into your platform" },
-    { label: "AI Cleanup & MVP Rescue", href: "/ai-agents/ai-cleanup", desc: "Turn a vibe-coded MVP into a production-grade platform" },
   ],
 };
 

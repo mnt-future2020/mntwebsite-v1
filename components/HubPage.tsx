@@ -32,6 +32,17 @@ export type HubConfig = {
   /** A deliberately subordinate offering: rendered as a slim band below the
       flagship services grid, not as an equal card in it. */
   crossSell?: { logoSlug?: string; kicker: string; title: string; desc: string; href: string; cta: string };
+  /** A capability that runs through every build rather than sitting beside it.
+      Rendered as its own band under the services grid, so it reads as part of
+      the platform and not as a second thing the company sells. */
+  layer?: {
+    eyebrow: string;
+    title: React.ReactNode;
+    sub: string;
+    href: string;
+    cta: string;
+    items: { icon: IconName; title: string; desc: string; href: string }[];
+  };
   faq: QA[];
   cta: { title: string; body: string };
 };
@@ -142,6 +153,51 @@ export default function HubPage({ config }: { config: HubConfig }) {
         )}
       </section>
 
+      {/* LAYER: a capability that runs through the builds above */}
+      {config.layer && (
+        <section id="ai" className="border-y border-line bg-mist py-24">
+          <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
+            <Reveal>
+              <SectionTitle
+                eyebrow={config.layer.eyebrow}
+                title={config.layer.title}
+                sub={config.layer.sub}
+              />
+            </Reveal>
+            <div className="mt-[52px] grid gap-[22px] md:grid-cols-2 lg:grid-cols-3">
+              {config.layer.items.map((s, i) => (
+                <Reveal key={s.title} delay={i * 70}>
+                  <Link
+                    href={s.href}
+                    className="group flex h-full flex-col rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)]"
+                  >
+                    <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700">
+                      <Icon name={s.icon} className="h-[23px] w-[23px]" />
+                    </div>
+                    <h3 className="mt-[18px] font-display text-[18px] font-bold text-ink">{s.title}</h3>
+                    <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{s.desc}</p>
+                    <span className="mt-auto inline-flex items-center gap-[7px] pt-4 text-[13.5px] font-semibold text-brand-700">
+                      Explore this
+                      <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal delay={240}>
+              <div className="mt-9 flex justify-center">
+                <Link
+                  href={config.layer.href}
+                  className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+                >
+                  {config.layer.cta}
+                  <Icon name="arrow" className="h-[15px] w-[15px]" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* DIFFERENTIATOR + STATS */}
       <section className="bg-mist py-24">

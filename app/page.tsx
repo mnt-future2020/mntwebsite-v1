@@ -54,7 +54,7 @@ const verticals = [
       { label: "AI search & recommendations", href: "/ai-agents/commerce-starter" },
       { label: "Agent-ready commerce", href: "/ai-agents/agent-ready-commerce" },
       { label: "Custom AI agents", href: "/ai-agents/embedded-agents" },
-      { label: "AI cleanup", href: "/ai-agents/ai-cleanup" },
+      { label: "AI cleanup", href: "/commerce/ai-cleanup" },
     ],
     cta: "Explore AI & agents",
   },

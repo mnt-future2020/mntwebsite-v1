@@ -37,6 +37,21 @@ const config: HubConfig = {
     href: "/commerce/shopify",
     cta: "Shopify Store Builds",
   },
+  // AI is not a second thing we sell: it is how these platforms are built, and
+  // the pieces of it you can buy without a rebuild. It sits under the builds
+  // for that reason, rather than in its own top-level menu.
+  layer: {
+    eyebrow: "The AI layer",
+    title: "AI-native means built in, not bolted on.",
+    sub: "Search, recommendations and agents ship as part of the platform. Two of them also work on the store you already run, so you can start there.",
+    href: "/ai-agents",
+    cta: "See the whole AI & agents story",
+    items: [
+      { icon: "spark", title: "AI Search & Recommendations", desc: "Search that understands what shoppers mean, personalized recommendations, and a shopping assistant. Usually the first two weeks of a build.", href: "/ai-agents/commerce-starter" },
+      { icon: "network", title: "Agent-Ready Commerce", desc: "Make your store discoverable and buyable by AI shopping agents: ACP, Google UCP, a Retail MCP server, and AEO visibility. Works on any store.", href: "/ai-agents/agent-ready-commerce" },
+      { icon: "chat", title: "Custom AI Agents", desc: "Agents that each do one job well: support, merchandising, SEO, inventory. Connected to your real tools, with a human approving what matters.", href: "/ai-agents/embedded-agents" },
+    ],
+  },
   diff: {
     eyebrow: "Why it matters",
     title: (

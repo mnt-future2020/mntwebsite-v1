@@ -77,7 +77,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
 
   out.push(`## AI & Agents`);
-  out.push(`- [AI & Agents overview](${abs(aiNav.href)}): AI Search & Recommendations, Agent-Ready Commerce, Custom AI Agents, AI Cleanup.`);
+  out.push(`- [AI & Agents overview](${abs(aiNav.href)}): the AI layer of every platform we build. AI Search & Recommendations, Agent-Ready Commerce, Custom AI Agents.`);
   for (const c of aiNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
   const agents: [string, string, string][] = [
     ["Support Agent", "/ai-agents/support-agent", "Resolves order status, returns & product questions end to end; escalates with context"],

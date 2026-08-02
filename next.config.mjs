@@ -24,6 +24,9 @@ const nextConfig = {
       { source: "/ecommerce-development/mobile-app", destination: "/commerce/headless-marketplace", permanent: true },
       { source: "/ecommerce-development/saas", destination: "/commerce/headless-marketplace", permanent: true },
       { source: "/ecommerce-development/b2b", destination: "/commerce/b2b-wholesale", permanent: true },
+      // AI Cleanup is refactor work on a store built with AI tools, not an AI
+      // capability, so it moved under commerce.
+      { source: "/ai-agents/ai-cleanup", destination: "/commerce/ai-cleanup", permanent: true },
     ];
   },
 };

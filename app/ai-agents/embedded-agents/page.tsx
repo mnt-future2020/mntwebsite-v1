@@ -61,7 +61,7 @@ const config: ServiceConfig = {
     { label: "AI Search & Recommendations", href: "/ai-agents/commerce-starter" },
     { label: "Agent-Ready Commerce", href: "/ai-agents/agent-ready-commerce" },
     { label: "Integrations & Automation", href: "/commerce/integrations" },
-    { label: "AI Cleanup & MVP Rescue", href: "/ai-agents/ai-cleanup" },
+    { label: "AI Cleanup & MVP Rescue", href: "/commerce/ai-cleanup" },
   ],
   faq: [
     { q: "How is this different from a chatbot?", a: "A chatbot talks; an agent does. Our agents are task-specific and connected to your tools via MCP, so they complete real work: resolving tickets, updating merchandising, generating content, with oversight, not just answering questions." },

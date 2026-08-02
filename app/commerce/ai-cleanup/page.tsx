@@ -4,7 +4,7 @@ import { images } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return resolveMetadata("/ai-agents/ai-cleanup", {
+  return resolveMetadata("/commerce/ai-cleanup", {
     title: "AI Cleanup: Make Your Vibe-Coded MVP Production-Grade | MnT Future",
     description:
       "Turn an AI or no-code MVP into a secure, scalable, production-grade store: security audit, refactor, hardening, tests, and production deploy.",
@@ -12,11 +12,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const config: ServiceConfig = {
-  slug: "/ai-agents/ai-cleanup",
-  parent: { label: "AI & Agents", href: "/ai-agents" },
+  slug: "/commerce/ai-cleanup",
+  parent: { label: "Commerce Platforms", href: "/commerce" },
   breadcrumb: [
     { label: "Home", href: "/" },
-    { label: "AI & Agents", href: "/ai-agents" },
+    { label: "Commerce Platforms", href: "/commerce" },
     { label: "AI Cleanup & MVP Rescue" },
   ],
   eyebrow: "AI cleanup & MVP rescue",

@@ -61,7 +61,7 @@ const config: ServiceConfig = {
     { label: "Managed Support & Compliance", href: "/commerce/managed-compliance" },
     { label: "Uptime & Incident Response", href: "/commerce/uptime-incident-response" },
     { label: "PCI DSS Compliance", href: "/commerce/pci-compliance" },
-    { label: "AI Cleanup & MVP Rescue", href: "/ai-agents/ai-cleanup" },
+    { label: "AI Cleanup & MVP Rescue", href: "/commerce/ai-cleanup" },
   ],
   faq: [
     { q: "Why not just update when something breaks?", a: "Because by then it's an incident: a breach, an outage, or a giant risky migration. Small regular updates are cheap and boring; deferred ones compound into exactly the 2am emergency this service exists to prevent." },

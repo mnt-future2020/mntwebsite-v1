@@ -8,9 +8,12 @@ import BrandLogo from "./BrandLogo";
 import AnnouncementBar from "./AnnouncementBar";
 import { commerceNav, aiNav } from "@/lib/site";
 
+// One services door, not two. AI is the layer these platforms are built with,
+// so it lives inside the commerce hub rather than beside it: a second top-level
+// entry told visitors AI was a separate thing to buy, which is the opposite of
+// what "AI-native" claims.
 const navLinks = [
   { label: "Commerce", href: "/commerce" },
-  { label: "AI & Agents", href: "/ai-agents" },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
 ];
@@ -83,29 +86,48 @@ export default function Header() {
       {/* Mobile menu */}
       {open && (
         <div className="fixed inset-x-0 top-[72px] z-40 h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-white px-5 py-6 lg:hidden">
-          {[commerceNav, aiNav].map((group) => (
-            <div key={group.label} className="border-b border-slate-100 py-2">
-              <Link
-                href={group.href}
-                onClick={() => setOpen(false)}
-                className="block py-2 text-base font-semibold text-ink"
-              >
-                {group.label}
-              </Link>
-              <div className="space-y-1 pb-3">
-                {group.children.map((c) => (
-                  <Link
-                    key={c.label}
-                    href={c.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2 text-sm text-slatey hover:bg-slate-50"
-                  >
-                    {c.label}
-                  </Link>
-                ))}
-              </div>
+          {/* One group. The AI services are a labelled subsection inside it,
+              matching the desktop nav and the commerce hub. */}
+          <div className="border-b border-slate-100 py-2">
+            <Link
+              href={commerceNav.href}
+              onClick={() => setOpen(false)}
+              className="block py-2 text-base font-semibold text-ink"
+            >
+              {commerceNav.label}
+            </Link>
+            <div className="space-y-1 pb-3">
+              {commerceNav.children.map((c) => (
+                <Link
+                  key={c.label}
+                  href={c.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-3 py-2 text-sm text-slatey hover:bg-slate-50"
+                >
+                  {c.label}
+                </Link>
+              ))}
             </div>
-          ))}
+            <Link
+              href={aiNav.href}
+              onClick={() => setOpen(false)}
+              className="mt-1 block px-3 pb-1 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700"
+            >
+              {aiNav.label}
+            </Link>
+            <div className="space-y-1 pb-3">
+              {aiNav.children.map((c) => (
+                <Link
+                  key={c.label}
+                  href={c.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-3 py-2 text-sm text-slatey hover:bg-slate-50"
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link href="/work" onClick={() => setOpen(false)} className="block border-b border-slate-100 py-4 text-base font-semibold text-ink">
             Work
           </Link>

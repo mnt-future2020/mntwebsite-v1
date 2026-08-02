@@ -17,17 +17,16 @@ const config: HubConfig = {
   eyebrow: "AI & agents",
   h1: "Make your commerce AI-native and agent-ready.",
   heroSub:
-    "AI where it earns its place: search and recommendations that convert the traffic you already have, agents that do real work 24/7, and a store that AI shopping agents can discover and buy from. Plus AI cleanup to make a vibe-coded MVP production-grade.",
-  heroChips: ["AI search & recommendations", "Agent-ready (ACP · UCP · MCP)", "Custom AI agents", "AI cleanup"],
+    "AI where it earns its place: search and recommendations that convert the traffic you already have, agents that do real work 24/7, and a store that AI shopping agents can discover and buy from. This is the AI layer of the platforms we build, and the parts of it you can buy on their own.",
+  heroChips: ["AI search & recommendations", "Agent-ready (ACP · UCP · MCP)", "Custom AI agents", "Built into every platform"],
   heroImage: images.ai,
-  servicesTitle: "Four ways AI drives your commerce",
+  servicesTitle: "Three ways AI drives your commerce",
   servicesSub:
-    "Start by converting more of your existing traffic, then get discoverable and buyable in AI channels, put agents to work, and harden what you've already built.",
+    "Start by converting more of your existing traffic, then get discoverable and buyable in AI channels, then put agents to work.",
   services: [
     { icon: "spark", title: "AI Search & Recommendations", desc: "Search that understands what shoppers mean, personalized recommendations, and a shopping assistant: turn the traffic you already have into revenue.", href: "/ai-agents/commerce-starter" },
     { icon: "network", title: "Agent-Ready Commerce", desc: "Make your store discoverable and buyable by AI shopping agents: ACP (OpenAI+Stripe), Google UCP, a Retail MCP server, and AEO visibility.", href: "/ai-agents/agent-ready-commerce" },
     { icon: "chat", title: "Custom AI Agents", desc: "AI agents that each do one job well (support, SEO, merchandising, inventory), trained on your business, connected to your tools, with a human approving the important actions.", href: "/ai-agents/embedded-agents" },
-    { icon: "code", title: "AI Cleanup & MVP Rescue", desc: "Turn a vibe-coded or no-code MVP into a production-grade platform: security audit, refactor, hardening, and scalable re-architecture.", href: "/ai-agents/ai-cleanup" },
   ],
   diff: {
     eyebrow: "Why now",
