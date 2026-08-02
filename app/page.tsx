@@ -9,6 +9,7 @@ import Partners from "@/components/Partners";
 import FAQ, { QA } from "@/components/FAQ";
 import { caseStudies } from "@/lib/caseStudies";
 import { SectionHead, RuleLabel, BpButton, PAGE } from "@/components/blueprint";
+import BlueprintMotion from "@/components/BlueprintMotion";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
@@ -146,6 +147,10 @@ const faqSchema = {
   })),
 };
 
+// Cursor spotlight, driven by --mx/--my/--spot from BlueprintMotion.
+const SPOT =
+  "radial-gradient(190px circle at var(--mx,50%) var(--my,0%),rgba(32,149,241,calc(0.05 * var(--spot,0))),transparent 72%)";
+
 const receipts = caseStudies.flatMap((cs) =>
   cs.facts.map((f) => ({ ...f, title: cs.title, slug: cs.slug }))
 );
@@ -156,20 +161,23 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
+      <BlueprintMotion />
+
       <Hero />
 
       {/* PROOF BAR */}
-      <section className="border-b border-bp-line bg-bp-wash">
+      <section data-reveal className="border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-10 lg:py-[60px]`}>
           <RuleLabel>Trusted to engineer revenue-critical commerce for US brands</RuleLabel>
           <div className="mt-[30px] grid border-l border-t border-bp-edge sm:grid-cols-2 lg:grid-cols-4">
             {proofStats.map((s) => (
               <div
                 key={s.value}
+                data-stagger
                 className="border-b border-r border-bp-edge bg-white px-6 py-7 transition-colors hover:bg-[#FAFCFF]"
               >
                 <span className="block h-[2px] w-6 bg-brand-500" />
-                <div className="mt-5 font-display text-[23px] font-bold tracking-[-0.028em] text-bp-ink lg:text-[31px]">
+                <div data-decode={s.value} className="mt-5 font-display text-[23px] font-bold tracking-[-0.028em] text-bp-ink lg:text-[31px]">
                   {s.value}
                 </div>
                 <div className="mt-[11px] text-[13.5px] leading-[1.6] text-bp-soft">{s.label}</div>
@@ -182,7 +190,7 @@ export default function Home() {
       <Partners />
 
       {/* 01 WHAT WE BUILD */}
-      <section id="build" className="scroll-mt-24 border-b border-bp-line">
+      <section id="build" data-reveal className="scroll-mt-24 border-b border-bp-line">
         <div className={`${PAGE} py-20 lg:py-[140px]`}>
           <SectionHead
             no="01"
@@ -194,6 +202,9 @@ export default function Home() {
             {verticals.map((v) => (
               <div
                 key={v.kicker}
+                data-stagger
+                data-spot
+                style={{ backgroundImage: SPOT }}
                 className="flex flex-col border-b border-r border-bp-line bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
               >
                 <div
@@ -262,7 +273,7 @@ export default function Home() {
       </section>
 
       {/* 02 WHY */}
-      <section id="why" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+      <section id="why" data-reveal className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[140px]`}>
           <SectionHead
             no="02"
@@ -274,6 +285,9 @@ export default function Home() {
             {whyMnt.map((f, i) => (
               <div
                 key={f.title}
+                data-stagger
+                data-spot
+                style={{ backgroundImage: SPOT }}
                 className="border-b border-r border-bp-edge bg-white p-7 shadow-[inset_3px_0_0_transparent] transition-shadow duration-200 hover:shadow-[inset_3px_0_0_#2095F1] lg:p-10"
               >
                 <div className="flex items-center justify-between gap-4">
@@ -295,13 +309,16 @@ export default function Home() {
       </section>
 
       {/* 03 ENGAGEMENT */}
-      <section id="engage" className="scroll-mt-24 border-b border-bp-line">
+      <section id="engage" data-reveal className="scroll-mt-24 border-b border-bp-line">
         <div className={`${PAGE} py-20 lg:py-[140px]`}>
           <SectionHead no="03" eyebrow="Engagement models" title="Work with us the way your stage demands." />
           <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-3">
             {engagement.map((m) => (
               <div
                 key={m.title}
+                data-stagger
+                data-spot
+                style={{ backgroundImage: SPOT }}
                 className={`relative flex flex-col border-b border-r border-bp-line p-7 lg:p-10 ${
                   m.featured ? "bg-[#F7FAFE]" : "bg-white"
                 }`}
@@ -340,7 +357,7 @@ export default function Home() {
       </section>
 
       {/* 04 SELECTED WORK */}
-      <section id="work" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+      <section id="work" data-reveal className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[140px]`}>
           <SectionHead
             no="04"
@@ -408,7 +425,7 @@ export default function Home() {
       </section>
 
       {/* 05 RECEIPTS */}
-      <section id="receipts" className="relative overflow-hidden border-b border-bp-ink bg-bp-ink">
+      <section id="receipts" data-reveal className="relative overflow-hidden border-b border-bp-ink bg-bp-ink">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.55]"
           style={{
@@ -430,6 +447,7 @@ export default function Home() {
             {receipts.slice(0, 8).map((r) => (
               <Link
                 key={r.slug + r.label}
+                data-stagger
                 href={`/work/${r.slug}`}
                 className="group border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.03]"
               >
@@ -447,7 +465,7 @@ export default function Home() {
       </section>
 
       {/* 06 FAQ */}
-      <section id="faq" className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
+      <section id="faq" data-reveal className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[140px]`}>
           <SectionHead
             no="06"

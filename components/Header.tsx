@@ -41,13 +41,19 @@ export default function Header() {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full border-b border-bp-line bg-white/90 backdrop-blur-md">
+      <header
+        id="mnt-header"
+        className="sticky top-0 z-50 w-full border-b border-bp-line bg-white/90 backdrop-blur-md transition-shadow duration-300"
+      >
         <div
           className="absolute bottom-[-1px] left-0 h-[2px] bg-brand-500 transition-[width] duration-100 ease-linear"
           style={{ width: `${progress}%` }}
           aria-hidden="true"
         />
-        <div className="mx-auto flex h-[78px] max-w-[1440px] items-center gap-7 px-[18px] sm:px-8 lg:px-14">
+        <div
+          id="mnt-headbar"
+          className="mx-auto flex h-[78px] max-w-[1440px] items-center gap-7 px-[18px] transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)] sm:px-8 lg:px-14"
+        >
           <div className="flex flex-1 items-center">
             <Logo />
           </div>

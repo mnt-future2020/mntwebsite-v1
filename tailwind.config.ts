@@ -115,6 +115,8 @@ const config: Config = {
           "50%": { opacity: ".35", transform: "scale(.72)" },
         },
         caret: { "0%,49%": { opacity: "1" }, "50%,100%": { opacity: "0" } },
+        "shine-sweep": { from: { backgroundPosition: "135% 0" }, to: { backgroundPosition: "-35% 0" } },
+        "grid-drift": { from: { backgroundPosition: "0 0" }, to: { backgroundPosition: "48px 48px" } },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out both",
@@ -126,6 +128,8 @@ const config: Config = {
         "draw-rule": "draw-rule 0.8s cubic-bezier(.22,1,.36,1) both",
         "live-pulse": "live-pulse 1.6s ease-in-out infinite",
         caret: "caret 1s step-end infinite",
+        "shine-sweep": "shine-sweep 1.4s ease-in-out both",
+        "grid-drift": "grid-drift 34s linear infinite",
       },
     },
   },

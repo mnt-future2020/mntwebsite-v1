@@ -70,10 +70,32 @@ export default function Hero() {
             className="relative inline-block animate-word-in"
             style={{ transformOrigin: "50% 100%", animationDelay: "820ms" }}
           >
-            <span className="text-brand-700">buy from you</span>
+            {/* The phrase decodes into place, then a light sweeps across it. */}
+            <span
+              id="mnt-final"
+              className="animate-shine-sweep bg-clip-text text-brand-700 [-webkit-text-fill-color:transparent]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(105deg,#0E66C2 42%,#66B7F8 50%,#0E66C2 58%)",
+                backgroundSize: "240% 100%",
+                backgroundPosition: "135% 0",
+                animationDelay: "2.95s",
+              }}
+            >
+              buy from you
+            </span>
+            <span
+              id="mnt-decode"
+              aria-hidden="true"
+              className="absolute left-0 top-0 whitespace-nowrap text-brand-700"
+            />
             <span
               className="absolute inset-x-0 bottom-[0.015em] h-[0.045em] origin-left animate-draw-rule bg-brand-500"
               style={{ animationDelay: "2.05s" }}
+            />
+            <span
+              className="absolute -right-[0.02em] bottom-[0.015em] h-[0.13em] w-[0.075em] origin-bottom animate-draw-rule bg-brand-500"
+              style={{ animationDelay: "2.6s", animationDuration: "0.3s" }}
             />
           </span>
           <span
@@ -114,8 +136,8 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="relative animate-rise-in [animation-delay:280ms]">
-          <div className="relative border border-[#D3DDE9] bg-white shadow-[0_44px_90px_-46px_rgba(11,21,36,0.42)]">
+        <div className="relative animate-rise-in [animation-delay:280ms]" style={{ perspective: "1100px" }}>
+          <div id="mnt-frame" className="relative border border-[#D3DDE9] bg-white shadow-[0_44px_90px_-46px_rgba(11,21,36,0.42)] will-change-transform">
             {/* Registration marks: the blueprint tell. */}
             <span className="absolute -left-1 -top-1 h-[9px] w-[9px] border-l border-t border-brand-500" />
             <span className="absolute -right-1 -top-1 h-[9px] w-[9px] border-r border-t border-brand-500" />

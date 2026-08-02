@@ -24,7 +24,7 @@ export default function CTASection({
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 animate-grid-drift"
         style={{
           backgroundImage:
             "linear-gradient(to right,rgba(255,255,255,0.045) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.045) 1px,transparent 1px)",
