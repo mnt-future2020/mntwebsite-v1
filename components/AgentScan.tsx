@@ -21,8 +21,18 @@ export default function AgentScan() {
       setDone(STEPS.length);
       return;
     }
-    const timers = STEPS.map((_, i) => setTimeout(() => setDone(i + 1), 900 + i * 700));
-    return () => timers.forEach(clearTimeout);
+    // Runs on a loop: ticks up through the checks, holds the finished state,
+    // then clears and starts over, so the hero is never sitting still.
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      setDone((prev) => {
+        const next = prev >= STEPS.length + 1 ? 0 : prev + 1;
+        timer = setTimeout(tick, next === 0 ? 900 : next >= STEPS.length ? 2000 : 1350);
+        return next;
+      });
+    };
+    timer = setTimeout(tick, 1400);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -74,7 +84,7 @@ export default function AgentScan() {
       <div className="mt-3.5 h-[2px] bg-bp-hair">
         <div
           className="h-[2px] bg-brand-500 transition-[width] duration-500 ease-out"
-          style={{ width: `${(done / STEPS.length) * 100}%` }}
+          style={{ width: `${Math.min(done, STEPS.length) * (100 / STEPS.length)}%` }}
         />
       </div>
     </div>

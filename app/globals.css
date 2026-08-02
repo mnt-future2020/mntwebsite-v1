@@ -7,6 +7,10 @@
   --navy: #081a33;
 }
 
+/* Receipts belts: translate a duplicated track by half its width. */
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes mq-reverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
 html {
   scroll-behavior: smooth;
   /* Light-only design: keeps browser dark modes from force-darkening the page

@@ -6,7 +6,9 @@ import Hero from "@/components/Hero";
 import Icon from "@/components/Icon";
 import CTASection from "@/components/CTASection";
 import Partners from "@/components/Partners";
-import FAQ, { QA } from "@/components/FAQ";
+import { QA } from "@/components/FAQ";
+import BlueprintFaq from "@/components/BlueprintFaq";
+import ReceiptsMarquee from "@/components/ReceiptsMarquee";
 import { caseStudies } from "@/lib/caseStudies";
 import { SectionHead, RuleLabel, BpButton, PAGE } from "@/components/blueprint";
 import BlueprintMotion from "@/components/BlueprintMotion";
@@ -435,7 +437,12 @@ export default function Home() {
           }}
           aria-hidden="true"
         />
-        <div className={`relative ${PAGE} py-20 lg:py-[140px]`}>
+        <div
+          className="pointer-events-none absolute -left-[140px] -top-[200px] h-[620px] w-[620px]"
+          style={{ background: "radial-gradient(circle,rgba(32,149,241,0.2),transparent 64%)" }}
+          aria-hidden="true"
+        />
+        <div className={`relative ${PAGE} pt-20 lg:pt-[140px]`}>
           <SectionHead
             no="05"
             tone="dark"
@@ -443,39 +450,29 @@ export default function Home() {
             title="Numbers from builds you can inspect."
             sub="No invented quotes. Every stat below comes from a public case study, so you can judge the work itself."
           />
-          <div className="mt-11 grid border-l border-t border-white/10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-            {receipts.slice(0, 8).map((r) => (
-              <Link
-                key={r.slug + r.label}
-                data-stagger
-                href={`/work/${r.slug}`}
-                className="group border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.03]"
-              >
-                <div className="font-display text-[26px] font-bold tracking-[-0.03em] text-white lg:text-[30px]">
-                  {r.value}
-                </div>
-                <div className="mt-2.5 text-[13.5px] leading-[1.55] text-white/55">{r.label}</div>
-                <div className="mt-7 border-t border-white/10 pt-4 font-mono text-[11.5px] tracking-[0.06em] text-brand-300 transition-colors group-hover:text-brand-200">
-                  {r.title} case study →
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
+        <ReceiptsMarquee receipts={receipts} />
       </section>
 
       {/* 06 FAQ */}
       <section id="faq" data-reveal className="scroll-mt-24 border-b border-bp-line bg-bp-wash">
-        <div className={`${PAGE} py-20 lg:py-[140px]`}>
-          <SectionHead
-            no="06"
-            eyebrow="FAQ"
-            title="Questions buyers ask us first."
-            sub="Short, direct answers on agent-ready commerce, ACP, and how we work."
-          />
-          <div className="mx-auto mt-11 max-w-[900px] lg:mt-16">
-            <FAQ items={homeFaq} />
-          </div>
+        <div className="mx-auto max-w-[1080px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[140px]">
+          <RuleLabel
+            right={
+              <span className="whitespace-nowrap font-mono text-[11px] tracking-[0.16em] text-bp-faint/70">
+                06 / 06
+              </span>
+            }
+          >
+            06 — FAQ
+          </RuleLabel>
+          <h2 className="mt-6 font-display text-[32px] font-bold leading-[1.04] tracking-[-0.038em] text-bp-ink lg:text-[52px]">
+            Questions buyers ask us first
+          </h2>
+          <p className="mt-5 max-w-[62ch] text-[17.5px] leading-[1.7] text-bp-mute">
+            Short, direct answers on agent-ready commerce, ACP, and how we work.
+          </p>
+          <BlueprintFaq items={homeFaq} />
         </div>
       </section>
 
