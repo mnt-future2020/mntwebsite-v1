@@ -27,6 +27,10 @@ const nextConfig = {
       // AI Cleanup is refactor work on a store built with AI tools, not an AI
       // capability, so it moved under commerce.
       { source: "/ai-agents/ai-cleanup", destination: "/commerce/ai-cleanup", permanent: true },
+      // Healthcare was a vertical we no longer serve. The page is gone, so the
+      // old URL was 404ing: send it home rather than to a commerce page it has
+      // nothing to do with.
+      { source: "/healthcare-software-development", destination: "/", permanent: true },
     ];
   },
 };

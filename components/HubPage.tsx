@@ -29,9 +29,9 @@ export type HubConfig = {
   audiences: { icon: IconName; title: string; desc: string }[];
   stats: { value: string; label: string }[];
   addOns?: { icon: IconName; title: string; desc: string }[];
-  /** A deliberately subordinate offering: rendered as a slim band below the
-      flagship services grid, not as an equal card in it. */
-  crossSell?: { logoSlug?: string; kicker: string; title: string; desc: string; href: string; cta: string };
+  /** Smaller ways in that graduate into a full build. Rendered as slim bands
+      below the flagship services grid, never as equal cards in it. */
+  crossSell?: { logoSlug?: string; icon?: IconName; kicker: string; title: string; desc: string; href: string; cta: string }[];
   /** A capability that runs through every build rather than sitting beside it.
       Rendered as its own band under the services grid, so it reads as part of
       the platform and not as a second thing the company sells. */
@@ -122,35 +122,37 @@ export default function HubPage({ config }: { config: HubConfig }) {
           ))}
         </div>
 
-        {config.crossSell && (
-          <Reveal delay={280}>
+        {config.crossSell?.map((x, i) => (
+          <Reveal key={x.href} delay={280 + i * 60}>
             <Link
-              href={config.crossSell.href}
+              href={x.href}
               className="group mt-[22px] flex flex-col gap-4 rounded-[14px] border border-slate-200 bg-slate-50 px-7 py-6 transition-all duration-[250ms] hover:border-brand-200 hover:bg-white hover:shadow-[0_14px_34px_-16px_rgba(14,102,194,0.2)] sm:flex-row sm:items-center"
             >
-              {config.crossSell.logoSlug && (
+              {(x.logoSlug || x.icon) && (
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white">
-                  <BrandLogo slug={config.crossSell.logoSlug} className="h-6 w-6" />
+                  {x.logoSlug ? (
+                    <BrandLogo slug={x.logoSlug} className="h-6 w-6" />
+                  ) : (
+                    <Icon name={x.icon!} className="h-[22px] w-[22px] text-brand-700" />
+                  )}
                 </span>
               )}
               <span className="flex-1">
                 <span className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-                  {config.crossSell.kicker}
+                  {x.kicker}
                 </span>
                 <span className="mt-1 block font-display text-[17px] font-bold text-ink">
-                  {config.crossSell.title}
+                  {x.title}
                 </span>
-                <span className="mt-1 block text-[13.5px] leading-relaxed text-slatey">
-                  {config.crossSell.desc}
-                </span>
+                <span className="mt-1 block text-[13.5px] leading-relaxed text-slatey">{x.desc}</span>
               </span>
               <span className="inline-flex shrink-0 items-center gap-[7px] text-sm font-semibold text-brand-700">
-                {config.crossSell.cta}
+                {x.cta}
                 <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
           </Reveal>
-        )}
+        ))}
       </section>
 
       {/* LAYER: a capability that runs through the builds above */}

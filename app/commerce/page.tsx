@@ -29,14 +29,26 @@ const config: HubConfig = {
     { icon: "building", title: "B2B / Wholesale Commerce", desc: "Customer-specific pricing and catalogs, quote/RFQ workflows, bulk ordering, and ERP-integrated self-serve buying portals for a high-margin channel.", href: "/commerce/b2b-wholesale" },
     { icon: "shield", title: "Managed Support & Compliance", desc: "Support, monitoring and performance on an SLA, plus ADA/WCAG accessibility, PCI DSS v4.0.1, and US sales-tax/economic-nexus, handled continuously.", href: "/commerce/managed-compliance" },
   ],
-  crossSell: {
-    logoSlug: "shopify",
-    kicker: "Also · Official Shopify Partner",
-    title: "Need speed over custom logic right now? We build Shopify stores too.",
-    desc: "Fast, conversion-ready Shopify builds with AI add-ons, and a designed upgrade path to a custom AI-native platform when you outgrow it. Same team, no re-platform trauma.",
-    href: "/commerce/shopify",
-    cta: "Shopify Store Builds",
-  },
+  // Two smaller ways in. Both graduate into a full build with the same team,
+  // which is why they sit under the flagship grid rather than inside it.
+  crossSell: [
+    {
+      logoSlug: "shopify",
+      kicker: "Also · Official Shopify Partner",
+      title: "Need speed over custom logic right now? We build Shopify stores too.",
+      desc: "Fast, conversion-ready Shopify builds with AI add-ons, and a designed upgrade path to a custom AI-native platform when you outgrow it. Same team, no re-platform trauma.",
+      href: "/commerce/shopify",
+      cta: "Shopify Store Builds",
+    },
+    {
+      icon: "code" as const,
+      kicker: "Also · AI cleanup & MVP rescue",
+      title: "Shipped fast with AI or no-code, and it broke at scale?",
+      desc: "Security audit, refactor, hardening and a re-architecture that holds under real traffic. A low-barrier way to see our engineering before committing to a full build.",
+      href: "/commerce/ai-cleanup",
+      cta: "AI Cleanup & MVP Rescue",
+    },
+  ],
   // AI is not a second thing we sell: it is how these platforms are built, and
   // the pieces of it you can buy without a rebuild. It sits under the builds
   // for that reason, rather than in its own top-level menu.
