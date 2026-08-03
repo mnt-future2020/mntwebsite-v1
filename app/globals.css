@@ -30,7 +30,7 @@ body {
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
   }
   .btn-primary {
     /* brand-700 (not brand) — white 14px text needs ≥4.5:1 (WCAG AA); #2095F1 is 3.16:1, #0E66C2 is 5.7:1 */
@@ -69,10 +69,10 @@ body {
     @apply text-lg leading-relaxed text-slatey;
   }
   .card {
-    @apply rounded-3xl border border-slate-100 bg-white p-7 shadow-card transition-all duration-300;
+    @apply border border-bp-hair bg-white p-7 shadow-card transition-all duration-300;
   }
   .card-hover:hover {
-    @apply -translate-y-1 border-brand-100 shadow-cardhover;
+    @apply -translate-y-1 border-brand-200 shadow-cardhover;
   }
   .link-arrow {
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800;

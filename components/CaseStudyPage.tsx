@@ -17,7 +17,7 @@ function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string
         <span className="h-[9px] w-[9px] rounded-full bg-red-300" />
         <span className="h-[9px] w-[9px] rounded-full bg-amber-200" />
         <span className="h-[9px] w-[9px] rounded-full bg-green-300" />
-        <span className="ml-2.5 rounded-md border border-bp-edge bg-white px-3 py-1 font-mono text-[11.5px] text-slate-400">
+        <span className="ml-2.5 border border-bp-edge bg-white px-3 py-1 font-mono text-[11.5px] text-slate-400">
           {url}
         </span>
       </div>
@@ -67,15 +67,15 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* HERO: story + product mockup */}
       <section data-reveal className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
           <div className="animate-fade-up">
             <Breadcrumbs
               trail={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: cs.title }]}
               tone="light"
             />
             <div className="mt-7 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
-              <span className="rounded-full bg-brand-50 px-3 py-1 text-brand-700">{cs.type}</span>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-bp-mute">{cs.category}</span>
+              <span className="border border-brand-200 bg-brand-50 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-brand-700">{cs.type}</span>
+              <span className="border border-bp-edge bg-bp-wash px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-bp-mute">{cs.category}</span>
             </div>
             <h1 className="mt-5 font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.02em] text-bp-ink sm:text-[58px]">
               {cs.title}
@@ -120,7 +120,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* SCOPE STRIP */}
       <section data-reveal className="border-b border-bp-line">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-x-6 gap-y-6 px-5 py-8 sm:px-7 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-6 gap-y-6 px-5 py-8 sm:px-7 lg:grid-cols-4">
           {cs.scope.map((s) => (
             <div key={s.label}>
               <div className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{s.label}</div>
@@ -152,7 +152,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* CHALLENGE */}
       <section data-reveal className="border-y border-bp-line bg-bp-wash py-20 lg:py-[110px]">
-        <div className="mx-auto grid max-w-[1200px] items-start gap-10 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
             <SectionTitle align="left" eyebrow="The challenge" title={cs.copy?.challengeTitle || "The problem behind the build."} />
           </Reveal>

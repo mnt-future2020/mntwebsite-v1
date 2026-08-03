@@ -10,7 +10,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
   const [msg, setMsg] = useState("");
   // Anti-spam: see lib/antispam.ts. Confirmation mail goes to whatever address
   // is posted, so this endpoint needs the same gate as the enquiry form.
-  const { token, refresh: refreshToken } = useFormToken();
+  const { token, refresh: refreshToken } = useFormToken({ lazy: true });
   const [website, setWebsite] = useState("");
 
   async function submit(e: React.FormEvent) {
@@ -70,14 +70,15 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => { if (!token) void refreshToken(); }}
           placeholder="you@company.com"
           aria-label="Email address"
-          className="min-w-0 flex-1 rounded-[9px] border border-white/25 bg-white/[0.08] px-[13px] py-2.5 text-[13.5px] text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-500"
+          className="min-w-0 flex-1 border border-[#1E2A3A] bg-bp-ink px-[13px] py-2.5 text-[13.5px] text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-500"
         />
         <button
           type="submit"
           disabled={state === "loading"}
-          className="rounded-[9px] bg-brand-500 px-[18px] py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:bg-brand-400 disabled:opacity-60"
+          className="bg-brand-500 px-[18px] py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:bg-brand-400 disabled:opacity-60"
         >
           {state === "loading" ? "…" : "Subscribe"}
         </button>

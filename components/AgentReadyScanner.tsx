@@ -78,7 +78,7 @@ function LeadCard({ report }: { report: Report }) {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+    <div className="border border-bp-edge bg-white p-7 shadow-sm">
       <h3 className="text-lg font-bold text-navy">Want the engineer-grade fix plan?</h3>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
         We&apos;ll send a prioritized remediation plan for every finding: mapped to your
@@ -131,10 +131,10 @@ function ReportPanel({ report }: { report: Report }) {
   const byCategory = new Map(report.categories.map((c) => [c.category, c]));
 
   return (
-    <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+    <div className="mt-10 border border-bp-edge bg-white p-6 shadow-sm sm:p-10">
       <div className="flex flex-wrap items-center gap-6">
         <div
-          className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl text-4xl font-extrabold text-white ${tone.bg}`}
+          className={`flex h-24 w-24 shrink-0 items-center justify-center text-4xl font-extrabold text-white ${tone.bg}`}
         >
           {report.grade}
         </div>
@@ -184,7 +184,7 @@ function ReportPanel({ report }: { report: Report }) {
         </div>
       )}
 
-      <details className="mt-8 rounded-2xl bg-slate-50 p-5">
+      <details className="mt-8 bg-slate-50 p-5">
         <summary className="cursor-pointer text-sm font-semibold text-navy">
           All {report.results.length} checks (with evidence)
         </summary>
@@ -230,14 +230,14 @@ function ReportPanel({ report }: { report: Report }) {
         </div>
       </details>
 
-      <div className="mt-6 rounded-2xl bg-slate-50 p-5 text-xs leading-relaxed text-slate-500">
+      <div className="mt-6 bg-slate-50 p-5 text-xs leading-relaxed text-slate-500">
         <span className="font-semibold text-slate-600">Honest limitations:</span>{" "}
         {report.limitations.join(" ")}
       </div>
 
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         <LeadCard report={report} />
-        <div className="rounded-2xl border border-slate-200 bg-deep p-7 text-white">
+        <div className="border border-bp-edge bg-deep p-7 text-white">
           <h3 className="text-lg font-bold">Or talk to the team that built this</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/70">
             Bring this report to a free strategy session: a senior consultant maps every
@@ -306,7 +306,7 @@ export default function AgentReadyScanner() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="your-store.com"
           aria-label="Store URL"
-          className="min-w-0 flex-1 basis-64 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-ink shadow-sm placeholder:text-slate-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+          className="min-w-0 flex-1 basis-64 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-bp-ink shadow-sm placeholder:text-slate-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
         />
         <button
           type="submit"
@@ -322,7 +322,7 @@ export default function AgentReadyScanner() {
         </p>
       )}
       {error && (
-        <p className="mx-auto mt-5 max-w-xl rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">
+        <p className="mx-auto mt-5 max-w-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">
           {error}
         </p>
       )}

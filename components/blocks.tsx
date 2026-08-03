@@ -70,7 +70,7 @@ export function ServiceCard({
 }) {
   const inner = (
     <>
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
+      <div className="flex h-12 w-12 items-center justify-center bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
         <Icon name={icon} className="h-6 w-6" />
       </div>
       <h3 className="mt-5 text-lg font-bold text-ink">{title}</h3>
@@ -181,7 +181,7 @@ export function CheckList({ items, tone = "light" }: { items: string[]; tone?: "
     <ul className="space-y-3">
       {items.map((it) => (
         <li key={it} className="flex items-start gap-3">
-          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700">
+          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center bg-brand-50 text-brand-700">
             <Icon name="check" className="h-3 w-3" />
           </span>
           <span className={`text-[15px] leading-relaxed ${tone === "dark" ? "text-white/75" : "text-slatey"}`}>

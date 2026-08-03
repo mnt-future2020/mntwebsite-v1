@@ -43,8 +43,8 @@ export default function AgentReadyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white pb-20 sm:pb-24">
-        <div className="container-mnt relative pt-10 sm:pt-12">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white pb-20 sm:pb-24">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative pt-10 sm:pt-12">
           <Breadcrumbs
             trail={[
               { label: "Home", href: "/" },
@@ -55,14 +55,14 @@ export default function AgentReadyPage() {
           />
           <Reveal>
             <div className="mx-auto mt-10 max-w-3xl text-center">
-              <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+              <div className="flex items-center gap-4"><span className="h-px w-[38px] shrink-0 bg-brand-500" /><span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
                 Free agent-readiness scan
-              </div>
-              <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
+              </span></div>
+              <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
                 Is your store <span className="text-brand-700">invisible</span> to AI shopping
                 agents?
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slatey">
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-bp-mute">
                 ChatGPT discovers products from feeds. Google&apos;s AI Mode transacts over UCP.
                 Shopify ships MCP endpoints. Find out in seconds how your store looks to the
                 agents: 29 checks, a letter grade, and exactly what to fix.
@@ -75,7 +75,7 @@ export default function AgentReadyPage() {
             </div>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slatey">
+            <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-bp-mute">
               {TRUST_POINTS.map((point) => (
                 <span key={point.text} className="inline-flex items-center gap-2">
                   <Icon name={point.icon} className="h-4 w-4 text-brand-700" /> {point.text}
@@ -103,7 +103,7 @@ export default function AgentReadyPage() {
         </div>
       </section>
 
-      <section className="container-mnt py-14">
+      <section className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-14">
         <p className="text-center text-sm text-slate-500">
           Prefer the terminal?{" "}
           <code className="rounded bg-slate-100 px-2 py-1 font-mono text-[13px] text-navy">

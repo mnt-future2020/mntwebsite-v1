@@ -97,8 +97,8 @@ export default function VibecheckPage() {
       />
 
       {/* Hero */}
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
-        <div className="container-mnt relative py-12 sm:py-16">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative py-12 sm:py-16">
           <Breadcrumbs
             trail={[
               { label: "Home", href: "/" },
@@ -113,22 +113,22 @@ export default function VibecheckPage() {
                 <div className="inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" /> Open source · Live on npm
                 </div>
-                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl">
+                <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
                   Your AI wrote the code. Did it ship the{" "}
                   <span className="text-brand-700">vulnerabilities</span> too?
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-slatey">
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-bp-mute">
                   vibecheck reads an AI-built store the way a security reviewer would:
                   deterministically, in seconds, and grades it. Hardcoded keys, unauthenticated
-                  admin routes, checkout that trusts client prices. <strong className="text-ink">26 checks</strong>,
-                  a letter grade, the exact <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-ink">file:line</code> and the fix.
+                  admin routes, checkout that trusts client prices. <strong className="text-bp-ink">26 checks</strong>,
+                  a letter grade, the exact <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-bp-ink">file:line</code> and the fix.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href={GITHUB_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
+                    className="inline-flex items-center gap-2 bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800"
                   >
                     <Icon name="github" className="h-4 w-4" /> View on GitHub
                   </a>
@@ -136,18 +136,18 @@ export default function VibecheckPage() {
                     href={NPM_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+                    className="inline-flex items-center gap-2 border border-slate-300 bg-white px-6 py-3 font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
                   >
                     <Icon name="download" className="h-4 w-4" /> View on npm
                   </a>
                 </div>
-                <code className="mt-6 block w-fit rounded-xl bg-ink px-4 py-3 font-mono text-sm text-brand-200">
+                <code className="mt-6 block w-fit bg-ink px-4 py-3 font-mono text-sm text-brand-200">
                   npx @mntglobal/vibecheck ./your-store
                 </code>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="rounded-3xl border border-white/10 bg-[#050f1f] p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+              <div className="border border-white/10 bg-[#050f1f] p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
                 <div className="mb-4 flex gap-1.5">
                   <span className="h-3 w-3 rounded-full bg-white/15" />
                   <span className="h-3 w-3 rounded-full bg-white/15" />
@@ -164,7 +164,7 @@ export default function VibecheckPage() {
             </Reveal>
           </div>
           <Reveal delay={0.15}>
-            <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slatey">
+            <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-bp-mute">
               {TRUST.map((point) => (
                 <span key={point.text} className="inline-flex items-center gap-2">
                   <Icon name={point.icon} className="h-4 w-4 text-brand-700" /> {point.text}
@@ -176,7 +176,7 @@ export default function VibecheckPage() {
       </section>
 
       {/* What it checks */}
-      <section className="container-mnt py-20 sm:py-24">
+      <section className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
         <SectionHeading
           eyebrow="What it checks"
           title={
@@ -189,8 +189,8 @@ export default function VibecheckPage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {CHECK_AREAS.map((area, i) => (
             <Reveal key={area.title} delay={i * 0.04}>
-              <div className="h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
+              <div className="h-full border border-bp-edge bg-white p-7 shadow-sm">
+                <span className="inline-flex h-11 w-11 items-center justify-center bg-brand-50 text-brand">
                   <Icon name={area.icon} className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 text-lg font-bold text-navy">{area.title}</h3>
@@ -215,8 +215,8 @@ export default function VibecheckPage() {
       </section>
 
       {/* Prove it broken → prove it fixed */}
-      <section className="border-y border-line bg-mist">
-        <div className="container-mnt py-20 sm:py-24">
+      <section className="border-y border-bp-line bg-bp-wash">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
           <SectionHeading
             eyebrow="Prove it"
             title={
@@ -229,7 +229,7 @@ export default function VibecheckPage() {
           />
           <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
             <Reveal>
-              <div className="rounded-[14px] border border-red-200 bg-red-50 p-7">
+              <div className="border border-red-200 bg-red-50 p-7">
                 <div className="font-mono text-sm font-bold text-red-600">before · F 40/100</div>
                 <ul className="mt-4 space-y-2 text-sm text-slate-700">
                   <li>Live Stripe key hardcoded in the source</li>
@@ -240,7 +240,7 @@ export default function VibecheckPage() {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="rounded-[14px] border border-emerald-200 bg-emerald-50 p-7">
+              <div className="border border-emerald-200 bg-emerald-50 p-7">
                 <div className="font-mono text-sm font-bold text-emerald-600">after · A 94/100</div>
                 <ul className="mt-4 space-y-2 text-sm text-slate-700">
                   <li>Secrets in env vars, never returned to clients</li>
@@ -256,7 +256,7 @@ export default function VibecheckPage() {
 
       {/* Get started */}
       <section className="bg-slate-50">
-        <div className="container-mnt py-20 sm:py-24">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
           <SectionHeading
             eyebrow="Get started"
             title={
@@ -268,7 +268,7 @@ export default function VibecheckPage() {
           />
           <div className="mx-auto mt-12 max-w-3xl space-y-5">
             <Reveal>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+              <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
                     1
@@ -278,13 +278,13 @@ export default function VibecheckPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Point it at any project directory: no install step, no sign-up.
                 </p>
-                <pre className="mt-4 overflow-x-auto rounded-xl bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
+                <pre className="mt-4 overflow-x-auto bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
                   npx @mntglobal/vibecheck ./your-store
                 </pre>
               </div>
             </Reveal>
             <Reveal delay={0.06}>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+              <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
                     2
@@ -295,13 +295,13 @@ export default function VibecheckPage() {
                   vibecheck reads local source, not a URL. Clone the repo first, then scan the
                   folder.
                 </p>
-                <pre className="mt-4 overflow-x-auto rounded-xl bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">{`git clone https://github.com/you/store.git
+                <pre className="mt-4 overflow-x-auto bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">{`git clone https://github.com/you/store.git
 cd store
 npx @mntglobal/vibecheck .`}</pre>
               </div>
             </Reveal>
             <Reveal delay={0.12}>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+              <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
                     3
@@ -311,13 +311,13 @@ npx @mntglobal/vibecheck .`}</pre>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Add a flag for flow-tier checks, a shareable card, or a CI gate.
                 </p>
-                <div className="mt-4 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200">
+                <div className="mt-4 divide-y divide-slate-100 overflow-hidden border border-bp-edge">
                   {FLAGS.map((f) => (
                     <div
                       key={f.flag}
                       className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4"
                     >
-                      <code className="w-fit flex-none rounded-md bg-deep px-2 py-1 font-mono text-xs text-brand-200">
+                      <code className="w-fit flex-none bg-deep px-2 py-1 font-mono text-xs text-brand-200">
                         {f.flag}
                       </code>
                       <span className="text-sm leading-relaxed text-slate-600">{f.desc}</span>
@@ -345,7 +345,7 @@ npx @mntglobal/vibecheck .`}</pre>
       </section>
 
       {/* Outputs */}
-      <section className="container-mnt py-20 sm:py-24">
+      <section className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
         <SectionHeading
           eyebrow="Fits your workflow"
           title={
@@ -358,8 +358,8 @@ npx @mntglobal/vibecheck .`}</pre>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {OUTPUTS.map((out, i) => (
             <Reveal key={out.title} delay={i * 0.05}>
-              <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand">
+              <div className="h-full border border-bp-edge bg-white p-6 shadow-sm">
+                <span className="inline-flex h-10 w-10 items-center justify-center bg-brand-50 text-brand">
                   <Icon name={out.icon} className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-bold text-navy">{out.title}</h3>
@@ -369,11 +369,11 @@ npx @mntglobal/vibecheck .`}</pre>
           ))}
         </div>
         <Reveal delay={0.1}>
-          <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-slate-50 p-6">
+          <div className="mx-auto mt-10 max-w-2xl bg-slate-50 p-6">
             <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
               .github/workflows/vibecheck.yml
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-xl bg-deep px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Future/vibecheck@v0.1.1
+            <pre className="mt-3 overflow-x-auto bg-deep px-4 py-4 font-mono text-xs leading-relaxed text-brand-200">{`- uses: MnT-Future/vibecheck@v0.1.1
   with:
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">
@@ -391,7 +391,7 @@ npx @mntglobal/vibecheck .`}</pre>
         body="Run the scan, then bring the report to a free strategy session: a senior consultant maps every finding to a concrete fix: auth, validation, secrets, the load pathology, the lot. That's our AI Cleanup service."
       />
 
-      <section className="container-mnt pb-20 text-center">
+      <section className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 pb-20 text-center">
         <p className="text-sm text-slate-500">
           Part of MnT Future&apos;s open-source program:{" "}
           <Link href="/open-source" className="font-semibold text-brand hover:underline">

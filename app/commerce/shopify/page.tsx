@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import BlueprintFaq from "@/components/BlueprintFaq";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import SectionTitle from "@/components/SectionTitle";
 import BrandLogo from "@/components/BrandLogo";
-import FAQ from "@/components/FAQ";
 import { Breadcrumbs } from "@/components/blocks";
 import { site } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
@@ -134,8 +134,8 @@ export default function ShopifyBuilds() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       {/* HERO */}
-      <section className="border-b border-line bg-gradient-to-b from-mist to-white">
-        <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-10 sm:px-7 lg:pt-12">
+      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
+        <div className="mx-auto max-w-[1440px] px-[18px] pb-14 pt-10 sm:px-8 lg:px-14 lg:pb-20">
           <Breadcrumbs
             trail={[
               { label: "Home", href: "/" },
@@ -145,21 +145,21 @@ export default function ShopifyBuilds() {
             tone="light"
           />
           <div className="mt-9 animate-fade-up">
-            <div className="flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+            <div className="flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
               <BrandLogo slug="shopify" className="h-[18px] w-[18px]" />
               Official Shopify Partner
             </div>
-            <h1 className="mt-[18px] max-w-[760px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[46px]">
+            <h1 className="mt-[18px] max-w-[760px] font-display text-[40px] font-bold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[56px] lg:text-[68px]">
               Shopify stores, built by platform engineers.
             </h1>
-            <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-slatey">
+            <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-bp-mute">
               When speed matters, we launch fast, conversion-ready Shopify stores: designed, built,
               and made AI-ready by the same senior team that engineers custom AI-native commerce
               platforms. Start where your stage demands. Never outgrow your team.
             </p>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
               {chips.map((c) => (
-                <span key={c} className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-slatey">
+                <span key={c} className="inline-flex items-center gap-[7px] text-[13px] font-semibold text-bp-mute">
                   <Icon name="check" className="h-[15px] w-[15px] text-brand-700" />
                   {c}
                 </span>
@@ -170,7 +170,7 @@ export default function ShopifyBuilds() {
       </section>
 
       {/* WHAT WE BUILD ON SHOPIFY */}
-      <section className="mx-auto max-w-[1200px] px-5 pb-24 pt-[72px] sm:px-7">
+      <section className="mx-auto max-w-[1440px] px-5 pb-24 pt-[72px] sm:px-7">
         <Reveal>
           <SectionTitle
             eyebrow="What we build on Shopify"
@@ -181,10 +181,10 @@ export default function ShopifyBuilds() {
         <div className="mt-[52px] grid gap-[22px] md:grid-cols-2">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 70}>
-              <div className="h-full rounded-[14px] border border-slate-200 bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_16px_36px_-16px_rgba(14,102,194,0.22)]">
+              <div className="h-full border border-bp-edge bg-white p-8 shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:border-brand-200 hover:shadow-[0_16px_36px_-16px_rgba(14,102,194,0.22)]">
                 <div className="font-display text-[13px] font-bold text-brand-700">{s.no}</div>
-                <h3 className="mt-3.5 font-display text-[21px] font-bold text-ink">{s.title}</h3>
-                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-slatey">{s.desc}</p>
+                <h3 className="mt-3.5 font-display text-[21px] font-bold text-bp-ink">{s.title}</h3>
+                <p className="mt-2.5 text-[14.5px] leading-[1.65] text-bp-mute">{s.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -192,23 +192,23 @@ export default function ShopifyBuilds() {
 
         {/* ADVANCED: HYDROGEN */}
         <Reveal delay={280}>
-          <div className="mt-[22px] grid overflow-hidden rounded-[14px] border border-slate-200 bg-gradient-to-br from-slate-50 to-brand-50/60 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-[22px] grid overflow-hidden border border-bp-edge bg-gradient-to-br from-slate-50 to-brand-50/60 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="p-8 sm:p-10">
               <div className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-700">
                 Advanced Shopify
               </div>
-              <h3 className="mt-3 font-display text-[24px] font-bold text-ink">
+              <h3 className="mt-3 font-display text-[24px] font-bold text-bp-ink">
                 Hydrogen storefronts: headless, without leaving Shopify.
               </h3>
-              <p className="mt-3 text-[14.5px] leading-[1.65] text-slatey">
+              <p className="mt-3 text-[14.5px] leading-[1.65] text-bp-mute">
                 When a theme becomes the ceiling but the platform isn&apos;t, we build with{" "}
-                <strong className="font-semibold text-ink">Hydrogen</strong>: Shopify&apos;s React
+                <strong className="font-semibold text-bp-ink">Hydrogen</strong>: Shopify&apos;s React
                 framework for fully custom storefronts, deployed on Oxygen, Shopify&apos;s edge
                 hosting. App-grade UX, custom pages and logic, sub-second performance: with
                 Shopify&apos;s checkout, admin, and infrastructure still underneath.
               </p>
             </div>
-            <div className="flex flex-col justify-center gap-3 border-t border-slate-200 p-8 sm:p-10 lg:border-l lg:border-t-0">
+            <div className="flex flex-col justify-center gap-3 border-t border-bp-edge p-8 sm:p-10 lg:border-l lg:border-t-0">
               {[
                 "Hydrogen + Oxygen: Shopify's own React stack",
                 "Fully custom storefront UX, no theme limits",
@@ -226,8 +226,8 @@ export default function ShopifyBuilds() {
       </section>
 
       {/* SHOPIFY VS CUSTOM: the positioning centerpiece */}
-      <section className="border-y border-line bg-mist py-24">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-7">
+      <section className="border-y border-bp-line bg-bp-wash py-24">
+        <div className="mx-auto max-w-[1440px] px-[18px] sm:px-8 lg:px-14">
           <Reveal>
             <SectionTitle
               eyebrow="An honest recommendation"
@@ -237,10 +237,10 @@ export default function ShopifyBuilds() {
           </Reveal>
           <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-2">
             <Reveal>
-              <div className="flex h-full flex-col rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+              <div className="flex h-full flex-col border border-bp-edge bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
                 <div className="flex items-center gap-2.5">
                   <BrandLogo slug="shopify" className="h-6 w-6" />
-                  <h3 className="font-display text-2xl font-bold text-ink">Shopify is right when</h3>
+                  <h3 className="font-display text-2xl font-bold text-bp-ink">Shopify is right when</h3>
                 </div>
                 <div className="mt-[22px] flex flex-col gap-3">
                   {shopifyRight.map((p) => (
@@ -257,11 +257,11 @@ export default function ShopifyBuilds() {
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <div className="relative flex h-full flex-col rounded-[14px] border-2 border-brand-500 bg-white p-[30px] shadow-[0_20px_44px_-18px_rgba(32,149,241,0.3)]">
-                <span className="absolute right-5 top-5 rounded-full bg-brand-700 px-3 py-[5px] text-[11px] font-semibold tracking-[0.04em] text-white">
+              <div className="relative flex h-full flex-col border-2 border-brand-500 bg-white p-[30px] shadow-[0_20px_44px_-18px_rgba(32,149,241,0.3)]">
+                <span className="absolute right-5 top-5 bg-brand-700 px-3 py-[5px] text-[11px] font-semibold tracking-[0.04em] text-white">
                   OUR FLAGSHIP
                 </span>
-                <h3 className="font-display text-2xl font-bold text-ink">
+                <h3 className="font-display text-2xl font-bold text-bp-ink">
                   Custom AI-native is right when
                 </h3>
                 <div className="mt-[22px] flex flex-col gap-3">
@@ -283,7 +283,7 @@ export default function ShopifyBuilds() {
       </section>
 
       {/* THE UPGRADE PATH */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+      <section className="mx-auto max-w-[1440px] px-5 py-24 sm:px-7">
         <Reveal>
           <SectionTitle
             eyebrow="Land small, expand big"
@@ -294,10 +294,10 @@ export default function ShopifyBuilds() {
         <div className="mt-[52px] grid items-stretch gap-[22px] lg:grid-cols-3">
           {path.map((m, i) => (
             <Reveal key={m.title} delay={i * 80}>
-              <div className="flex h-full flex-col rounded-[14px] border border-slate-200 bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
+              <div className="flex h-full flex-col border border-bp-edge bg-white p-[30px] shadow-[0_1px_3px_rgba(14,27,46,0.04)]">
                 <div className="font-display text-[13px] font-bold text-brand-700">{m.no}</div>
-                <h3 className="mt-3.5 font-display text-2xl font-bold text-ink">{m.title}</h3>
-                <p className="mt-[11px] text-[14.5px] leading-[1.65] text-slatey">{m.desc}</p>
+                <h3 className="mt-3.5 font-display text-2xl font-bold text-bp-ink">{m.title}</h3>
+                <p className="mt-[11px] text-[14.5px] leading-[1.65] text-bp-mute">{m.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -316,7 +316,7 @@ export default function ShopifyBuilds() {
       </section>
 
       {/* FAQ */}
-      <section className="border-t border-line bg-mist py-24">
+      <section className="border-t border-bp-line bg-bp-wash py-24">
         <div className="mx-auto max-w-[860px] px-5 sm:px-7">
           <Reveal>
             <SectionTitle
@@ -326,7 +326,7 @@ export default function ShopifyBuilds() {
               className="mb-11"
             />
           </Reveal>
-          <FAQ items={faq} />
+          <BlueprintFaq items={faq} />
         </div>
       </section>
 

@@ -78,14 +78,14 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <article>
-        <header className="border-b border-line bg-gradient-to-b from-mist to-white">
-          <div className="container-mnt relative py-12 sm:py-14">
+        <header className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
+          <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative py-12 sm:py-14">
             <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} tone="light" />
             <div className="mt-6 max-w-3xl">
               {post.category && (
                 <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">{post.category}</span>
               )}
-              <h1 className="mt-3 font-display text-[2.1rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.8rem]">
+              <h1 className="mt-3 font-display text-[2.1rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-bp-ink sm:text-[2.8rem]">
                 {post.title}
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
@@ -99,17 +99,17 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
           </div>
         </header>
 
-        <div className="container-mnt py-12 sm:py-16">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-12 sm:py-16">
           {post.coverImage && (
             /* eslint-disable-next-line @next/next/no-img-element */
-            (<img src={post.coverImage} alt={post.title} className="mx-auto mb-10 max-h-[460px] w-full max-w-4xl rounded-3xl object-cover" />)
+            (<img src={post.coverImage} alt={post.title} className="mx-auto mb-10 max-h-[460px] w-full max-w-4xl object-cover" />)
           )}
           <div
             className="prose prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:tracking-tight prose-a:text-brand-700 prose-img:rounded-2xl"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
 
-          <div className="mx-auto mt-12 max-w-3xl border-t border-slate-100 pt-8">
+          <div className="mx-auto mt-12 max-w-3xl border-t border-bp-hair pt-8">
             <Link href="/blog" className="link-arrow">
               <Icon name="arrow" className="h-4 w-4 rotate-180" /> Back to all articles
             </Link>

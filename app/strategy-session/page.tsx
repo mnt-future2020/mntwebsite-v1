@@ -206,7 +206,7 @@ export default function StrategySession() {
 
       {/* WHAT YOU LEAVE WITH */}
       <section data-reveal className="border-y border-bp-line bg-bp-wash py-24">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-2">
           <Reveal>
             <SectionTitle
               align="left"
@@ -308,7 +308,7 @@ export default function StrategySession() {
 
       {/* BOOKING */}
       <section id="book" className="scroll-mt-24 border-t border-bp-line bg-gradient-to-b from-white to-mist">
-        <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-24 sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <div className="flex items-center gap-4">
                 <span className="h-px w-[38px] shrink-0 bg-brand-500" />

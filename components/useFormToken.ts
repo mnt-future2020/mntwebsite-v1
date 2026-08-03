@@ -8,8 +8,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * The token is minted when the form mounts and is valid exactly once, so a
  * failed submit must take a fresh one before the visitor retries — call
  * `refresh()` on any error path. See lib/antispam.ts for what it defends.
+ *
+ * `lazy` defers minting until the caller asks, via refresh(). The footer
+ * newsletter uses it: that form is on every page, and minting per page view
+ * spent a visitor's whole rate-limit budget on pages they only read. Forms
+ * that are the point of their page stay eager, so the token is ready to post.
  */
-export function useFormToken() {
+export function useFormToken({ lazy = false }: { lazy?: boolean } = {}) {
   const [token, setToken] = useState<string | null>(null);
   const inFlight = useRef(false);
 
@@ -39,8 +44,9 @@ export function useFormToken() {
   }, []);
 
   useEffect(() => {
+    if (lazy) return;
     void load();
-  }, [load]);
+  }, [load, lazy]);
 
   return { token, refresh: load };
 }

@@ -216,7 +216,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
               <div className="mt-9 flex justify-center">
                 <Link
                   href={config.layer.href}
-                  className="inline-flex items-center gap-2 rounded-[10px] border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
+                  className="inline-flex items-center gap-2 border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
                 >
                   {config.layer.cta}
                   <Icon name="arrow" className="h-[15px] w-[15px]" />
@@ -265,7 +265,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
       </section>
 
       {/* WHO WE SERVE */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+      <section className="mx-auto max-w-[1440px] px-5 py-24 sm:px-7">
         <Reveal>
           <SectionHead no="02" total="04" eyebrow="Who we serve" title={config.audiencesTitle} />
         </Reveal>
@@ -295,7 +295,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
       </section>
 
       {config.addOns && config.addOns.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+        <section className="mx-auto max-w-[1440px] px-5 py-24 sm:px-7">
           <Reveal>
             <SectionHead no="04" total="04" eyebrow="Add-ons" title="Bundle these onto any build" />
           </Reveal>
