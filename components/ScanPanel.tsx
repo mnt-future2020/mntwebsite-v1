@@ -109,8 +109,8 @@ export default function ScanPanel({
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white shadow-glow">
           <Icon name="compass" className="h-6 w-6" />
         </div>
-        <h1 className="mt-3 text-xl font-bold text-ink">Attendance</h1>
-        <p className="text-sm text-slatey">
+        <h1 className="mt-3 text-xl font-bold text-bp-ink">Attendance</h1>
+        <p className="text-sm text-bp-mute">
           {name}
           {code ? ` · ${code}` : ""}
         </p>
@@ -146,7 +146,7 @@ export default function ScanPanel({
                 >
                   {done ? "✓" : i + 1}
                 </span>
-                <span className="mt-1 text-[10px] text-slatey">{s.label}</span>
+                <span className="mt-1 text-[10px] text-bp-mute">{s.label}</span>
               </div>
             );
           })}
@@ -160,7 +160,7 @@ export default function ScanPanel({
                 geo === "ok" ? "bg-green-500" : geo === "reading" ? "bg-amber-400" : "bg-red-400"
               }`}
             />
-            <span className="text-slatey">
+            <span className="text-bp-mute">
               {geo === "ok" && coords
                 ? `Location ready (±${Math.round(coords.acc)}m)`
                 : geo === "reading"
@@ -182,14 +182,14 @@ export default function ScanPanel({
           </div>
         ) : pending ? (
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center">
-            <p className="text-sm text-slatey">
-              Confirm <span className="font-semibold text-ink">{LABEL[pending]}</span> now?
+            <p className="text-sm text-bp-mute">
+              Confirm <span className="font-semibold text-bp-ink">{LABEL[pending]}</span> now?
             </p>
             <div className="mt-3 flex gap-3">
               <button
                 onClick={() => setPending(null)}
                 disabled={busy}
-                className="flex-1 rounded-xl border border-slate-200 bg-white py-3 text-sm font-semibold text-slatey disabled:opacity-70"
+                className="flex-1 rounded-xl border border-slate-200 bg-white py-3 text-sm font-semibold text-bp-mute disabled:opacity-70"
               >
                 Cancel
               </button>
@@ -214,7 +214,7 @@ export default function ScanPanel({
                 disabled={busy || geo === "reading"}
                 className={
                   a === "BREAK_START"
-                    ? "inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white py-4 text-base font-semibold text-ink hover:bg-slate-50 disabled:opacity-70"
+                    ? "inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white py-4 text-base font-semibold text-bp-ink hover:bg-slate-50 disabled:opacity-70"
                     : "btn-primary w-full justify-center py-4 text-base disabled:opacity-70"
                 }
               >
@@ -249,8 +249,8 @@ export default function ScanPanel({
             <ul className="space-y-1.5">
               {punches.map((p, i) => (
                 <li key={i} className="flex items-center justify-between text-sm">
-                  <span className="text-slatey">{LABEL[p.type]}</span>
-                  <span className="font-medium text-ink">{p.time}</span>
+                  <span className="text-bp-mute">{LABEL[p.type]}</span>
+                  <span className="font-medium text-bp-ink">{p.time}</span>
                 </li>
               ))}
             </ul>

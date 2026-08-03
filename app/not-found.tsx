@@ -19,10 +19,10 @@ export default function NotFound() {
         <span className="font-display text-[5rem] font-extrabold leading-none tracking-tight text-brand-200 sm:text-[7rem]">
           404
         </span>
-        <h1 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.02em] text-ink sm:text-4xl">
+        <h1 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.02em] text-bp-ink sm:text-4xl">
           This page took a wrong turn.
         </h1>
-        <p className="mt-4 max-w-md text-lg leading-[1.65] text-slatey">
+        <p className="mt-4 max-w-md text-lg leading-[1.65] text-bp-mute">
           The link may be broken, or the page may have moved. Here&apos;s where most people head next.
         </p>
 

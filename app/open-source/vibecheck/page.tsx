@@ -107,10 +107,10 @@ export default function VibecheckPage() {
             ]}
             tone="light"
           />
-          <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
+          <div className="mt-8 grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2">
             <Reveal>
               <div>
-                <div className="inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
+                <div className="inline-flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" /> Open source · Live on npm
                 </div>
                 <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
@@ -194,7 +194,7 @@ export default function VibecheckPage() {
                   <Icon name={area.icon} className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 text-lg font-bold text-navy">{area.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{area.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-bp-mute">{area.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -275,7 +275,7 @@ export default function VibecheckPage() {
                   </span>
                   <h3 className="font-bold text-navy">Scan a folder on your machine</h3>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-bp-mute">
                   Point it at any project directory: no install step, no sign-up.
                 </p>
                 <pre className="mt-4 overflow-x-auto bg-deep px-4 py-3 font-mono text-xs leading-relaxed text-brand-200">
@@ -291,7 +291,7 @@ export default function VibecheckPage() {
                   </span>
                   <h3 className="font-bold text-navy">Scan any GitHub repo</h3>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-bp-mute">
                   vibecheck reads local source, not a URL. Clone the repo first, then scan the
                   folder.
                 </p>
@@ -308,7 +308,7 @@ npx @mntglobal/vibecheck .`}</pre>
                   </span>
                   <h3 className="font-bold text-navy">Go deeper, or share the result</h3>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-bp-mute">
                   Add a flag for flow-tier checks, a shareable card, or a CI gate.
                 </p>
                 <div className="mt-4 divide-y divide-slate-100 overflow-hidden border border-bp-edge">
@@ -320,7 +320,7 @@ npx @mntglobal/vibecheck .`}</pre>
                       <code className="w-fit flex-none bg-deep px-2 py-1 font-mono text-xs text-brand-200">
                         {f.flag}
                       </code>
-                      <span className="text-sm leading-relaxed text-slate-600">{f.desc}</span>
+                      <span className="text-sm leading-relaxed text-bp-mute">{f.desc}</span>
                     </div>
                   ))}
                 </div>
@@ -363,7 +363,7 @@ npx @mntglobal/vibecheck .`}</pre>
                   <Icon name={out.icon} className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-bold text-navy">{out.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{out.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-bp-mute">{out.desc}</p>
               </div>
             </Reveal>
           ))}

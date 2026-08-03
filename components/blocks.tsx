@@ -73,8 +73,8 @@ export function ServiceCard({
       <div className="flex h-12 w-12 items-center justify-center bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand group-hover:text-white">
         <Icon name={icon} className="h-6 w-6" />
       </div>
-      <h3 className="mt-5 text-lg font-bold text-ink">{title}</h3>
-      <p className="mt-2 text-[15px] leading-relaxed text-slatey">{desc}</p>
+      <h3 className="mt-5 text-lg font-bold text-bp-ink">{title}</h3>
+      <p className="mt-2 text-[15px] leading-relaxed text-bp-mute">{desc}</p>
       {href && (
         <span className="link-arrow mt-4">
           Learn more <Icon name="arrow" className="h-4 w-4" />
@@ -113,12 +113,12 @@ export function Stat({
     <div className="row-span-2 grid grid-rows-subgrid gap-y-2">
       <div
         className={`font-display text-4xl font-extrabold tracking-tight sm:text-5xl ${
-          tone === "dark" ? "text-white" : "text-ink"
+          tone === "dark" ? "text-white" : "text-bp-ink"
         }`}
       >
         <Counter value={value} />
       </div>
-      <div className={`text-sm ${tone === "dark" ? "text-white/60" : "text-slatey"}`}>
+      <div className={`text-sm ${tone === "dark" ? "text-white/60" : "text-bp-mute"}`}>
         {label}
       </div>
     </div>
@@ -184,7 +184,7 @@ export function CheckList({ items, tone = "light" }: { items: string[]; tone?: "
           <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center bg-brand-50 text-brand-700">
             <Icon name="check" className="h-3 w-3" />
           </span>
-          <span className={`text-[15px] leading-relaxed ${tone === "dark" ? "text-white/75" : "text-slatey"}`}>
+          <span className={`text-[15px] leading-relaxed ${tone === "dark" ? "text-white/75" : "text-bp-mute"}`}>
             {it}
           </span>
         </li>

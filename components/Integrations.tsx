@@ -40,7 +40,7 @@ export default function Integrations() {
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm text-slatey">
+        <p className="mt-8 text-center text-sm text-bp-mute">
           …and many more: ERP, OMS, PIM &amp; CDP, 3PL/logistics, tax engines, and the agentic protocols (ACP, UCP, MCP).
         </p>
       </div>

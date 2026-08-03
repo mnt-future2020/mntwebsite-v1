@@ -105,7 +105,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
             (<img src={post.coverImage} alt={post.title} className="mx-auto mb-10 max-h-[460px] w-full max-w-4xl object-cover" />)
           )}
           <div
-            className="prose prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:tracking-tight prose-a:text-brand-700 prose-img:rounded-2xl"
+            className="prose prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:tracking-tight prose-a:text-brand-700 prose-pre:rounded-none prose-img:rounded-none"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
 

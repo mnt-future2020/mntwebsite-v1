@@ -66,7 +66,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
 
       {/* HERO: story + product mockup */}
-      <section data-reveal className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
+      <section data-reveal className="relative overflow-hidden border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
           <div className="animate-fade-up">
             <Breadcrumbs

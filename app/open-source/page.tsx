@@ -159,7 +159,7 @@ export default function OpenSourcePage() {
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative py-14 lg:py-20">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Open Source" }]} tone="light" />
-          <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
+          <div className="mt-8 grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2">
             <Reveal>
               <div>
                 <div className="flex items-center gap-4">
@@ -208,7 +208,7 @@ export default function OpenSourcePage() {
                   {TOOLS.map((tool) => (
                     <li key={tool.name} className="flex items-center gap-3 py-3">
                       <span
-                        className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                        className={`inline-flex h-9 w-9 shrink-0 items-center justify-center ${
                           tool.status === "live" ? "bg-brand/15 text-brand-300" : "bg-white/5 text-white/40"
                         }`}
                       >

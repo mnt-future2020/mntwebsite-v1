@@ -17,7 +17,7 @@ export default function FAQ({ items }: { items: QA[] }) {
           >
             <button
               onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-display text-base font-semibold text-ink"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-display text-base font-semibold text-bp-ink"
               aria-expanded={isOpen}
             >
               {item.q}
@@ -31,7 +31,7 @@ export default function FAQ({ items }: { items: QA[] }) {
               }`}
             >
               <div className="overflow-hidden">
-                <p className="px-6 pb-[22px] text-[14.5px] leading-[1.7] text-slatey">{item.a}</p>
+                <p className="px-6 pb-[22px] text-[14.5px] leading-[1.7] text-bp-mute">{item.a}</p>
               </div>
             </div>
           </div>

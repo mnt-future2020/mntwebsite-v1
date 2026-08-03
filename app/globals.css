@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  @apply bg-white text-ink font-sans antialiased;
+  @apply bg-white text-bp-body font-sans antialiased;
   text-rendering: optimizeLegibility;
 }
 

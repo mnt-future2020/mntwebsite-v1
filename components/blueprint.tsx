@@ -20,7 +20,7 @@ export function RuleLabel({
   return (
     <div className="flex items-center gap-4">
       <span
-        className={`whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] ${
+        className={`font-mono text-[11.5px] uppercase tracking-[0.2em] sm:whitespace-nowrap ${
           tone === "dark" ? "text-white/55" : "text-bp-soft"
         }`}
       >

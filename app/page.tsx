@@ -207,7 +207,7 @@ export default function Home() {
                 data-stagger
                 data-spot
                 style={{ backgroundImage: SPOT }}
-                className="flex flex-col border-b border-r border-bp-line bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
+                className="relative flex flex-col overflow-hidden border-b border-r border-bp-line bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
               >
                 <div
                   className="relative overflow-hidden border-b border-bp-line p-7 lg:p-9"

@@ -5,7 +5,7 @@ import Icon from "./Icon";
 import { useFormToken, honeypotWrapClass } from "./useFormToken";
 
 const fieldClass =
-  "rounded-[10px] border border-slate-300 bg-white px-3.5 py-3 text-[14.5px] text-ink placeholder:text-slate-400 outline-none transition-all focus:border-brand-500 focus:ring-[3px] focus:ring-brand-500/15";
+  "border border-slate-300 bg-white px-3.5 py-3 text-[14.5px] text-bp-ink placeholder:text-slate-400 outline-none transition-all focus:border-brand-500 focus:ring-[3px] focus:ring-brand-500/15";
 
 const labelClass = "flex flex-col gap-[7px] text-[13px] font-semibold text-slate-700";
 
@@ -91,10 +91,10 @@ export default function ContactForm() {
         <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <Icon name="check" className="h-[30px] w-[30px]" />
         </span>
-        <h3 className="mt-5 font-display text-[23px] font-bold text-ink">
+        <h3 className="mt-5 font-display text-[23px] font-bold text-bp-ink">
           Thanks: we&apos;ll be in touch.
         </h3>
-        <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-slatey">
+        <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-bp-mute">
           A senior consultant will reply within one business day to schedule your strategy session.
         </p>
       </div>
@@ -209,7 +209,7 @@ export default function ContactForm() {
       </label>
 
       {error && (
-        <div className="rounded-[10px] border border-red-200 bg-red-50 px-3.5 py-[11px] text-[13.5px] text-red-700">
+        <div className="border border-red-200 bg-red-50 px-3.5 py-[11px] text-[13.5px] text-red-700">
           {error}
         </div>
       )}
@@ -217,7 +217,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={sending}
-        className="inline-flex items-center justify-center gap-[9px] rounded-[10px] bg-brand-700 px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex items-center justify-center gap-[9px] bg-brand-700 px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {sending ? (
           <>

@@ -39,8 +39,8 @@ export default async function ScanPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
         <div className="w-full max-w-sm rounded-3xl border border-slate-200 bg-white p-8 text-center">
-          <h1 className="text-lg font-bold text-ink">Attendance scan</h1>
-          <p className="mt-2 text-sm text-slatey">
+          <h1 className="text-lg font-bold text-bp-ink">Attendance scan</h1>
+          <p className="mt-2 text-sm text-bp-mute">
             You're signed in as the super-admin, which has no employee profile. Sign in with an
             employee account to punch in.
           </p>
@@ -60,7 +60,7 @@ export default async function ScanPage() {
       <Link
         href="/portal"
         aria-label="Back to portal"
-        className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-medium text-slatey shadow-sm backdrop-blur transition-colors hover:text-ink"
+        className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-medium text-bp-mute shadow-sm backdrop-blur transition-colors hover:text-bp-ink"
       >
         <span aria-hidden="true">←</span> Portal
       </Link>
