@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
 import Link from "next/link";
 import Image from "next/image";
 import { getPublishedPosts } from "@/lib/blog";
@@ -21,9 +22,10 @@ export default async function BlogIndex() {
 
   return (
     <>
+      <BlueprintMotion />
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="container-mnt relative py-16 sm:py-20">
-          <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Insights</div>
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative py-16 sm:py-20">
+          <div className="flex items-center gap-4"><span className="h-px w-[38px] shrink-0 bg-brand-500" /><span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">Insights</span></div>
           <h1 className="mt-5 max-w-2xl font-display text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
             Engineering insights for US commerce founders.
           </h1>
@@ -34,7 +36,7 @@ export default async function BlogIndex() {
         </div>
       </section>
 
-      <section className="container-mnt py-16 sm:py-20">
+      <section data-reveal className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-16 sm:py-20">
         {posts.length === 0 ? (
           <div className="border border-dashed border-bp-edge bg-bp-wash px-6 py-20 text-center">
             <h2 className="font-display text-xl font-bold text-bp-ink">No articles published yet</h2>

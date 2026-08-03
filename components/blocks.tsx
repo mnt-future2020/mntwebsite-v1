@@ -19,17 +19,35 @@ export function SectionHeading({
   tone?: "light" | "dark";
 }) {
   return (
-    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      {eyebrow && <span className={tone === "dark" ? "eyebrow-dark" : "eyebrow"}>{eyebrow}</span>}
+    <div className={align === "center" ? "mx-auto max-w-[760px] text-center" : "max-w-[70ch]"}>
+      {eyebrow && (
+        <div className={`flex items-center gap-4 ${align === "center" ? "justify-center" : ""}`}>
+          {align !== "center" && <span className="h-px w-[38px] shrink-0 bg-brand-500" />}
+          <span
+            className={`whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] ${
+              tone === "dark" ? "text-brand-300" : "text-brand-700"
+            }`}
+          >
+            {eyebrow}
+          </span>
+          {align !== "center" && (
+            <span className={`h-px flex-1 ${tone === "dark" ? "bg-white/12" : "bg-bp-line"}`} />
+          )}
+        </div>
+      )}
       <h2
-        className={`mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-[2.5rem] sm:leading-[1.12] ${
-          tone === "dark" ? "text-white" : "text-ink"
+        className={`mt-5 font-display text-[30px] font-bold leading-[1.04] tracking-[-0.038em] sm:text-[42px] ${
+          tone === "dark" ? "text-white" : "text-bp-ink"
         }`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-5 text-lg leading-relaxed ${tone === "dark" ? "text-white/70" : "text-slatey"}`}>
+        <p
+          className={`mt-5 max-w-[62ch] text-[17px] leading-[1.7] ${
+            tone === "dark" ? "text-white/70" : "text-bp-mute"
+          }`}
+        >
           {subtitle}
         </p>
       )}

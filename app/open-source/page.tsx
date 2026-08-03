@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
+import BlueprintFaq from "@/components/BlueprintFaq";
+import { type QA } from "@/components/FAQ";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
-import FAQ, { type QA } from "@/components/FAQ";
 import Icon, { type IconName } from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import { Breadcrumbs, SectionHeading } from "@/components/blocks";
@@ -141,6 +143,7 @@ const itemListSchema = {
 export default function OpenSourcePage() {
   return (
     <>
+      <BlueprintMotion />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -154,14 +157,17 @@ export default function OpenSourcePage() {
 
       {/* Hero */}
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="container-mnt relative py-12 sm:py-16">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative py-14 lg:py-20">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Open Source" }]} tone="light" />
           <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <div>
-                <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-                  Open source
-                </div>
+                <div className="flex items-center gap-4">
+                    <span className="h-px w-[38px] shrink-0 bg-brand-500" />
+                    <span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
+                      Open source
+                    </span>
+                  </div>
                 <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-bp-ink sm:text-5xl">
                   We open-source our{" "}
                   <span className="text-brand-700">agentic-commerce</span> tooling.
@@ -231,7 +237,7 @@ export default function OpenSourcePage() {
       </section>
 
       {/* The tools */}
-      <section id="tools" className="container-mnt scroll-mt-24 py-20 sm:py-24">
+      <section id="tools" className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 scroll-mt-24 py-20 sm:py-24">
         <SectionHeading
           eyebrow="The tools"
           title={
@@ -309,8 +315,8 @@ export default function OpenSourcePage() {
       </section>
 
       {/* How we build in the open */}
-      <section className="border-y border-bp-line bg-bp-wash">
-        <div className="container-mnt py-20 sm:py-24">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
           <SectionHeading
             eyebrow="How we build in the open"
             title={
@@ -337,7 +343,7 @@ export default function OpenSourcePage() {
       </section>
 
       {/* FAQ */}
-      <section className="container-mnt py-20 sm:py-24">
+      <section data-reveal className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 sm:py-24">
         <SectionHeading
           eyebrow="FAQ"
           title={
@@ -347,7 +353,7 @@ export default function OpenSourcePage() {
           }
         />
         <div className="mt-10">
-          <FAQ items={FAQ_ITEMS} />
+          <BlueprintFaq items={FAQ_ITEMS} />
         </div>
       </section>
 

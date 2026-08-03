@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
 import ContactForm from "@/components/ContactForm";
 import Icon from "@/components/Icon";
 import { Breadcrumbs } from "@/components/blocks";
@@ -16,13 +17,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Contact() {
   return (
     <section className="bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-      <div className="mx-auto max-w-[1200px] px-5 pb-24 pt-10 sm:px-7">
+      <div className="mx-auto max-w-[1440px] px-5 pb-24 pt-10 sm:px-7">
         <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Contact" }]} tone="light" />
         <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="animate-fade-up">
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              Start a project
-            </div>
+            <div className="flex items-center gap-4">
+                <span className="h-px w-[38px] shrink-0 bg-brand-500" />
+                <span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
+                  Start a project
+                </span>
+              </div>
             <h1 className="mt-[18px] font-display text-[34px] font-extrabold leading-[1.14] tracking-[-0.02em] text-bp-ink sm:text-[42px]">
               Tell us what you&apos;re building.
             </h1>

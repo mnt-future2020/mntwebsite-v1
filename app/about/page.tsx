@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
 import Image from "next/image";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
@@ -32,14 +33,18 @@ const values = [
 export default function About() {
   return (
     <>
+      <BlueprintMotion />
       {/* HERO */}
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-[72px] sm:px-7 lg:pt-[88px]">
+        <div className="mx-auto max-w-[1440px] px-[18px] pb-14 pt-10 sm:px-8 lg:px-14 lg:pb-20 lg:pt-14">
           <div className="animate-fade-up">
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              About MnT Future
-            </div>
-            <h1 className="mt-[18px] max-w-[860px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-bp-ink sm:text-[46px]">
+            <div className="flex items-center gap-4">
+                <span className="h-px w-[38px] shrink-0 bg-brand-500" />
+                <span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
+                  About MnT Future
+                </span>
+              </div>
+            <h1 className="mt-[18px] max-w-[860px] font-display text-[40px] font-bold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[56px] lg:text-[72px]">
               A senior engineering team for the agentic-commerce era.
             </h1>
             <p className="mt-5 max-w-[660px] text-[17px] leading-[1.65] text-bp-mute">
@@ -52,7 +57,7 @@ export default function About() {
       </section>
 
       {/* TEAM */}
-      <section className="mx-auto max-w-[1200px] px-5 py-[72px] sm:px-7 lg:py-24">
+      <section className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
             <div className="overflow-hidden border border-bp-edge shadow-[0_20px_50px_-24px_rgba(14,27,46,0.2)]">
@@ -90,7 +95,7 @@ export default function About() {
       </section>
 
       {/* VALUES */}
-      <section className="border-y border-bp-line bg-bp-wash py-24">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash py-24">
         <div className="mx-auto max-w-[1440px] px-[18px] sm:px-8 lg:px-14">
           <Reveal>
             <SectionTitle eyebrow="What we value" title="The principles we hire and build by." />
@@ -112,7 +117,7 @@ export default function About() {
       </section>
 
       {/* FOUNDER */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+      <section className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle
             eyebrow="Who you'll work with"

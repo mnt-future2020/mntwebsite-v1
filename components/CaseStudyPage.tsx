@@ -4,6 +4,8 @@ import Reveal from "./Reveal";
 import CTASection from "./CTASection";
 import FAQ from "./FAQ";
 import SectionTitle from "./SectionTitle";
+import BlueprintMotion from "./BlueprintMotion";
+import BlueprintFaq from "./BlueprintFaq";
 import { CheckList, Breadcrumbs } from "./blocks";
 import { site } from "@/lib/site";
 import type { CaseStudy } from "@/lib/caseStudies";
@@ -60,8 +62,11 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
 
+      <BlueprintMotion />
+
+
       {/* HERO: story + product mockup */}
-      <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
+      <section data-reveal className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
           <div className="animate-fade-up">
             <Breadcrumbs
@@ -114,7 +119,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* SCOPE STRIP */}
-      <section className="border-b border-bp-line">
+      <section data-reveal className="border-b border-bp-line">
         <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-x-6 gap-y-6 px-5 py-8 sm:px-7 lg:grid-cols-4">
           {cs.scope.map((s) => (
             <div key={s.label}>
@@ -126,10 +131,10 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* OVERVIEW */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-20">
+      <section data-reveal className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[110px]">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <Reveal>
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Overview</div>
+            <div className="flex items-center gap-4"><span className="h-px w-[38px] shrink-0 bg-brand-500" /><span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">Overview</span></div>
             <p className="mt-4 text-[19px] leading-[1.65] text-bp-ink">{cs.summary}</p>
           </Reveal>
           <Reveal delay={100}>
@@ -146,8 +151,8 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* CHALLENGE */}
-      <section className="border-y border-bp-line bg-bp-wash py-16 lg:py-20">
-        <div className="mx-auto grid max-w-[1200px] items-start gap-10 px-5 sm:px-7 lg:grid-cols-[0.8fr_1.2fr]">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash py-20 lg:py-[110px]">
+        <div className="mx-auto grid max-w-[1200px] items-start gap-10 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
             <SectionTitle align="left" eyebrow="The challenge" title={cs.copy?.challengeTitle || "The problem behind the build."} />
           </Reveal>
@@ -158,7 +163,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* APPROACH */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+      <section data-reveal className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle eyebrow="How we built it" title="A senior-led path from idea to live." />
         </Reveal>
@@ -177,7 +182,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
       {/* RESULTS: the honest before → after proof */}
       {cs.results && cs.results.length > 0 && (
-        <section className="border-y border-bp-line bg-bp-wash py-16 lg:py-24">
+        <section data-reveal className="border-y border-bp-line bg-bp-wash py-20 lg:py-[120px]">
           <div className="mx-auto max-w-[1440px] px-[18px] sm:px-8 lg:px-14">
             <Reveal>
               <SectionTitle
@@ -206,7 +211,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       )}
 
       {/* WHAT WE BUILT */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+      <section data-reveal className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle eyebrow="What we built" title={cs.copy?.buildTitle || "What we shipped."} />
         </Reveal>
@@ -230,7 +235,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* PRODUCT GALLERY */}
-      <section className="border-y border-bp-line bg-bp-wash py-16 lg:py-24">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash py-20 lg:py-[120px]">
         <div className="mx-auto max-w-[1440px] px-[18px] sm:px-8 lg:px-14">
           <Reveal>
             <SectionTitle eyebrow="Inside the product" title="What we shipped, on screen." />
@@ -255,7 +260,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* ENGINEERING HIGHLIGHTS */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+      <section data-reveal className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle
             eyebrow="Engineering highlights"
@@ -279,7 +284,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* TECH DECISIONS */}
-      <section className="border-y border-bp-line bg-bp-wash py-16 lg:py-24">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash py-20 lg:py-[120px]">
         <div className="mx-auto max-w-[1440px] px-[18px] sm:px-8 lg:px-14">
           <Reveal>
             <SectionTitle
@@ -312,7 +317,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </section>
 
       {/* TECH STACK */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-7 lg:py-24">
+      <section data-reveal className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle eyebrow="Tech stack" title="What it's built on." />
         </Reveal>
@@ -348,11 +353,11 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       {/* FAQ */}
       {cs.faq && cs.faq.length > 0 && (
         <section className="border-t border-bp-line bg-bp-wash py-24">
-          <div className="mx-auto max-w-[860px] px-5 sm:px-7">
+          <div className="mx-auto max-w-[860px] px-[18px] sm:px-8 lg:px-14">
             <Reveal>
               <SectionTitle eyebrow="FAQ" title="The questions buyers ask about this build." className="mb-11" />
             </Reveal>
-            <FAQ items={cs.faq} />
+            <BlueprintFaq items={cs.faq} />
           </div>
         </section>
       )}

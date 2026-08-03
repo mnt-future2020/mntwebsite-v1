@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
 import Link from "next/link";
 import Icon, { IconName } from "@/components/Icon";
 import Reveal from "@/components/Reveal";
@@ -65,12 +66,13 @@ const principles = [
 export default function SecurityCompliance() {
   return (
     <>
+      <BlueprintMotion />
       {/* HERO */}
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="container-mnt relative pb-[72px] pt-10 sm:pt-12">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 relative pb-[72px] pt-10 sm:pt-12">
           <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Security & Compliance" }]} tone="light" />
           <div className="mt-9 max-w-3xl animate-fade-up">
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">Security &amp; compliance</div>
+            <div className="flex items-center gap-4"><span className="h-px w-[38px] shrink-0 bg-brand-500" /><span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">Security &amp; compliance</span></div>
             <h1 className="mt-[18px] font-display text-[2.4rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-bp-ink sm:text-[3.2rem]">
               Compliance isn&apos;t a checkbox. It&apos;s architecture.
             </h1>
@@ -80,7 +82,7 @@ export default function SecurityCompliance() {
               a last-minute patch. Here&apos;s how MnT Future builds it in.
             </p>
             <div className="mt-9">
-              <Link href="/contact" className="btn-primary">
+              <Link href="/contact" className="inline-flex items-center gap-2.5 bg-bp-ink px-7 py-4 font-mono text-[13px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700">
                 Talk to a senior consultant <Icon name="arrow" className="h-4 w-4" />
               </Link>
             </div>
@@ -89,7 +91,7 @@ export default function SecurityCompliance() {
       </section>
 
       {/* FRAMEWORKS */}
-      <section className="container-mnt py-20 sm:py-28">
+      <section data-reveal className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 lg:py-[120px]">
         <SectionHeading
           eyebrow="Frameworks we engineer to"
           title="The standards that protect your users, and your business."
@@ -120,8 +122,8 @@ export default function SecurityCompliance() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="bg-bp-wash py-20 sm:py-28">
-        <div className="container-mnt grid items-center gap-14 lg:grid-cols-2">
+      <section className="bg-bp-wash py-20 lg:py-[120px]">
+        <div className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
             <SectionHeading
               align="left"
@@ -139,7 +141,7 @@ export default function SecurityCompliance() {
       </section>
 
       {/* BY VERTICAL */}
-      <section className="container-mnt py-20 sm:py-28">
+      <section data-reveal className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 py-20 lg:py-[120px]">
         <SectionHeading
           eyebrow="By vertical"
           title="Different surface, same discipline."

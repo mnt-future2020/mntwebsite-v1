@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import BlueprintMotion from "@/components/BlueprintMotion";
+import BlueprintFaq from "@/components/BlueprintFaq";
 import Link from "next/link";
 import Image from "next/image";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import SectionTitle from "@/components/SectionTitle";
 import ContactForm from "@/components/ContactForm";
-import FAQ from "@/components/FAQ";
 import { Breadcrumbs } from "@/components/blocks";
 import { site } from "@/lib/site";
 import { resolveMetadata } from "@/lib/seo";
@@ -128,21 +129,25 @@ const serviceSchema = {
 export default function StrategySession() {
   return (
     <>
+      <BlueprintMotion />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       {/* HERO */}
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
-        <div className="mx-auto max-w-[1200px] px-5 pb-[72px] pt-10 sm:px-7 lg:pt-12">
+        <div className="mx-auto max-w-[1440px] px-[18px] pb-14 pt-10 sm:px-8 lg:px-14 lg:pb-20">
           <Breadcrumbs
             trail={[{ label: "Home", href: "/" }, { label: "Book a strategy session" }]}
             tone="light"
           />
           <div className="mt-9 animate-fade-up">
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              Free strategy session · Commerce tech consulting
-            </div>
-            <h1 className="mt-[18px] max-w-[820px] font-display text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-bp-ink sm:text-[46px]">
+            <div className="flex items-center gap-4">
+                <span className="h-px w-[38px] shrink-0 bg-brand-500" />
+                <span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
+                  Free strategy session · Commerce tech consulting
+                </span>
+              </div>
+            <h1 className="mt-[18px] max-w-[820px] font-display text-[40px] font-bold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[56px] lg:text-[72px]">
               Bring your commerce bottleneck. Leave with a plan you can execute.
             </h1>
             <p className="mt-5 max-w-[640px] text-[17px] leading-[1.65] text-bp-mute">
@@ -178,7 +183,7 @@ export default function StrategySession() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="mx-auto max-w-[1200px] scroll-mt-24 px-5 pb-24 pt-[72px] sm:px-7">
+      <section id="how" className="mx-auto max-w-[1440px] scroll-mt-24 px-5 pb-24 pt-[72px] sm:px-7">
         <Reveal>
           <SectionTitle
             eyebrow="How the session works"
@@ -200,8 +205,8 @@ export default function StrategySession() {
       </section>
 
       {/* WHAT YOU LEAVE WITH */}
-      <section className="border-y border-bp-line bg-bp-wash py-24">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 sm:px-7 lg:grid-cols-2">
+      <section data-reveal className="border-y border-bp-line bg-bp-wash py-24">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-[18px] sm:px-8 lg:px-14 lg:grid-cols-2">
           <Reveal>
             <SectionTitle
               align="left"
@@ -238,7 +243,7 @@ export default function StrategySession() {
       </section>
 
       {/* WHO IT'S FOR */}
-      <section className="mx-auto max-w-[1200px] px-5 py-24 sm:px-7">
+      <section className="mx-auto max-w-[1440px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[120px]">
         <Reveal>
           <SectionTitle
             eyebrow="Who it's for"
@@ -288,7 +293,7 @@ export default function StrategySession() {
 
       {/* FAQ */}
       <section className="border-t border-bp-line bg-bp-wash py-24">
-        <div className="mx-auto max-w-[860px] px-5 sm:px-7">
+        <div className="mx-auto max-w-[860px] px-[18px] sm:px-8 lg:px-14">
           <Reveal>
             <SectionTitle
               eyebrow="FAQ"
@@ -297,7 +302,7 @@ export default function StrategySession() {
               className="mb-11"
             />
           </Reveal>
-          <FAQ items={faq} />
+          <BlueprintFaq items={faq} />
         </div>
       </section>
 
@@ -305,9 +310,12 @@ export default function StrategySession() {
       <section id="book" className="scroll-mt-24 border-t border-bp-line bg-gradient-to-b from-white to-mist">
         <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-24 sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
-            <div className="text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700">
-              Book your strategy session
-            </div>
+            <div className="flex items-center gap-4">
+                <span className="h-px w-[38px] shrink-0 bg-brand-500" />
+                <span className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-700">
+                  Book your strategy session
+                </span>
+              </div>
             <h2 className="mt-4 font-display text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-bp-ink sm:text-[38px]">
               Two minutes now. A plan by next week.
             </h2>
