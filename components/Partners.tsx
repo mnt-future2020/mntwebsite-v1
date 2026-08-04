@@ -79,9 +79,11 @@ function Card({ p }: { p: (typeof partners)[number] }) {
   );
 }
 
+// Same gradient as the ratings band, so the two trust strips on a page read as
+// one family rather than as two different blues.
 export default function Partners() {
   return (
-    <section className="border-b border-bp-line bg-gradient-to-r from-brand-800 to-brand-900">
+    <section className="border-b border-bp-line bg-gradient-to-r from-[#0F529C] to-[#0B2E5C]">
       <div className={`${PAGE} pb-[30px] pt-11 lg:pb-9 lg:pt-[62px]`}>
         <RuleLabel tone="dark">Official partners &amp; developer programs</RuleLabel>
       </div>
