@@ -36,6 +36,9 @@ export type ServiceConfig = {
 };
 
 export default function ServicePage({ config }: { config: ServiceConfig }) {
+  // Every in-page link has to stay inside the region the page belongs to. The
+  // slug already says which that is, so nothing has to be passed in.
+  const base = config.slug.startsWith("/in/") ? "/in" : "";
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -93,7 +96,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
           </p>
 
           <div className="mt-9 flex animate-rise-in flex-wrap gap-3 [animation-delay:200ms]">
-            <BpButton href="/strategy-session">Book a strategy session</BpButton>
+            <BpButton href={`${base}/strategy-session`}>Book a strategy session</BpButton>
             <BpButton href={config.parent.href} variant="outline">
               Back to {config.parent.label}
             </BpButton>

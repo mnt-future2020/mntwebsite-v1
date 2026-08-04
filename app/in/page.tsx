@@ -351,7 +351,7 @@ export default function IndiaHome() {
             {clientWork.map((c) => (
               <Link
                 key={c.slug}
-                href={`/work/${c.slug}`}
+                href={`/in/work/${c.slug}`}
                 data-stagger
                 className="group flex flex-col border-b border-r border-bp-line bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
               >
