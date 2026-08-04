@@ -9,6 +9,7 @@ import { Breadcrumbs } from "@/components/blocks";
 import { SectionHead, RuleLabel, BpButton, MakerMark, PAGE } from "@/components/blueprint";
 import { INDIA_CLIENTS, CLIENTS_WITH_BUILD, CLIENTS_LISTED } from "@/lib/indiaClients";
 import { caseStudies } from "@/lib/caseStudies";
+import { CLIENT_DETAILS } from "@/lib/indiaClientDetails";
 import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -261,15 +262,26 @@ export default function ClientProjects() {
 
                 <div className="mt-auto pt-7">
                   <MakerMark group="client" detail="Live" className="border-t border-bp-hair pt-4" />
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-4 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
-                  >
-                    Visit {c.host}
-                    <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
-                  </a>
+                  <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
+                    {CLIENT_DETAILS[c.slug] && (
+                      <Link
+                        href={`/in/work/clients/${c.slug}`}
+                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                      >
+                        Read the case study
+                        <Icon name="arrow" className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 py-1.5 font-mono text-[12px] tracking-[0.06em] text-bp-faint transition-colors hover:text-bp-ink"
+                    >
+                      {c.host}
+                      <Icon name="arrow" className="h-3 w-3 -rotate-45" />
+                    </a>
+                  </div>
                 </div>
                 </div>
               </div>
@@ -337,8 +349,8 @@ export default function ClientProjects() {
             no="04"
             total="04"
             eyebrow="What they share"
-            title="The client can change it without calling us."
-            sub="Across every one of these, the same decision: content lives in a database with an admin behind it. A brochure site saves a week at the start and costs the client a phone call every time a price changes."
+            title="We don't build websites. We build the system the business runs on."
+            sub="The site customers see is the front of it. Behind it sits the part the team lives in: prices, bookings, orders, enquiries, stock, staff. Changed by them, on the day they decide, not by us on a support ticket."
             tone="dark"
           />
           <div className="mt-11 grid border-l border-t border-white/10 lg:mt-16 sm:grid-cols-2 lg:grid-cols-4">

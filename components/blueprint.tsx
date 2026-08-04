@@ -110,17 +110,19 @@ export function SectionHead({
         {no}
       </div>
       <div className="min-w-[300px] flex-1">
+        {/* The eyebrow wraps on a phone. Held on one line it pushed the counter
+            past the viewport as soon as an eyebrow ran past a few words. */}
         <div className="flex items-center gap-4">
           <span
-            className={`whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] ${
+            className={`font-mono text-[11.5px] uppercase tracking-[0.2em] sm:whitespace-nowrap ${
               dark ? "text-brand-300" : "text-brand-700"
             }`}
           >
             {eyebrow}
           </span>
-          <span className={`h-px flex-1 ${dark ? "bg-white/12" : "bg-bp-line"}`} />
+          <span className={`h-px min-w-3 flex-1 ${dark ? "bg-white/12" : "bg-bp-line"}`} />
           <span
-            className={`whitespace-nowrap font-mono text-[11px] tracking-[0.16em] ${
+            className={`shrink-0 whitespace-nowrap font-mono text-[11px] tracking-[0.16em] ${
               dark ? "text-white/30" : "text-bp-faint/70"
             }`}
           >
