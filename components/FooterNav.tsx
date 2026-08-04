@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { footerNavFor, regionFromPath } from "@/lib/regions";
+import { scrollTopIfSameRoute } from "@/lib/sameRouteScroll";
 
 // Split out of Footer so only the region-dependent part needs the client
 // bundle: the rest of the footer stays server-rendered.
@@ -22,6 +23,7 @@ export default function FooterNav() {
               <li key={l.href}>
                 <Link
                   href={l.href}
+                  onClick={() => scrollTopIfSameRoute(l.href)}
                   className="block py-1 text-[13.8px] text-[#8497AF] transition-colors hover:text-white"
                 >
                   {l.label}

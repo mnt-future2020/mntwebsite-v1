@@ -10,6 +10,7 @@ import AnnouncementBar from "./AnnouncementBar";
 import RegionSwitch from "./RegionSwitch";
 import NavMenu from "./NavMenu";
 import { REGIONS, regionFromPath } from "@/lib/regions";
+import { scrollTopIfSameRoute } from "@/lib/sameRouteScroll";
 
 // The nav is region-derived, not hardcoded: the URL prefix already says which
 // market a visitor is in, so reading it here keeps the two navs from drifting
@@ -71,6 +72,7 @@ export default function Header() {
                 <Link
                   key={l.href}
                   href={l.href}
+                  onClick={() => scrollTopIfSameRoute(l.href)}
                   className="relative whitespace-nowrap px-4 pb-3 pt-2.5 font-mono text-[12.5px] uppercase tracking-[0.1em] text-bp-mute transition-colors hover:text-bp-ink"
                 >
                   {l.label}
@@ -120,7 +122,10 @@ export default function Header() {
               <div key={g.href}>
                 <Link
                   href={g.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    scrollTopIfSameRoute(g.href);
+                  }}
                   className={`block py-4 font-display text-[17px] font-semibold text-bp-ink ${
                     i === 0 ? "border-b border-bp-hair" : ""
                   }`}
@@ -132,7 +137,10 @@ export default function Header() {
                     <Link
                       key={c.href}
                       href={c.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        scrollTopIfSameRoute(c.href);
+                      }}
                       className="block px-3 py-2.5 text-sm text-bp-mute"
                     >
                       {c.label}
@@ -153,7 +161,10 @@ export default function Header() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    scrollTopIfSameRoute(l.href);
+                  }}
                   className="block border-b border-bp-hair py-4 font-display text-[17px] font-semibold text-bp-ink"
                 >
                   {l.label}

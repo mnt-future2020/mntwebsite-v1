@@ -4,6 +4,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
 import type { NavGroup } from "@/lib/site";
+import { scrollTopIfSameRoute } from "@/lib/sameRouteScroll";
 
 /**
  * Desktop nav with the children exposed.
@@ -74,6 +75,7 @@ export default function NavMenu({ group }: { group: NavGroup }) {
     >
       <Link
         href={group.href}
+        onClick={() => scrollTopIfSameRoute(group.href)}
         aria-expanded={open}
         aria-controls={id}
         className="relative flex items-center gap-1.5 whitespace-nowrap px-4 pb-3 pt-2.5 font-mono text-[12.5px] uppercase tracking-[0.1em] text-bp-mute transition-colors hover:text-bp-ink"
@@ -102,7 +104,10 @@ export default function NavMenu({ group }: { group: NavGroup }) {
               <Link
                 key={c.href}
                 href={c.href}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  scrollTopIfSameRoute(c.href);
+                }}
                 className="group border-b border-r border-bp-hair p-4 transition-colors last:border-r-0 hover:bg-bp-tint"
               >
                 <span className="flex items-center gap-2 font-display text-[14.5px] font-bold leading-[1.25] tracking-[-0.02em] text-bp-ink">
@@ -120,7 +125,10 @@ export default function NavMenu({ group }: { group: NavGroup }) {
           </div>
           <Link
             href={group.href}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              scrollTopIfSameRoute(group.href);
+            }}
             className="flex items-center justify-between gap-3 bg-bp-tint px-4 py-3 font-mono text-[11.5px] uppercase tracking-[0.12em] text-brand-700 transition-colors hover:bg-brand-500/[0.07]"
           >
             {group.overviewLabel}
