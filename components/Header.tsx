@@ -8,6 +8,7 @@ import Icon from "./Icon";
 import BrandLogo from "./BrandLogo";
 import AnnouncementBar from "./AnnouncementBar";
 import RegionSwitch from "./RegionSwitch";
+import NavMenu from "./NavMenu";
 import { REGIONS, regionFromPath } from "@/lib/regions";
 
 // The nav is region-derived, not hardcoded: the URL prefix already says which
@@ -58,17 +59,24 @@ export default function Header() {
             <Logo />
           </div>
 
+          {/* Entries that have children get a panel; the rest stay plain links.
+              Reaching a leaf service used to cost two page loads because the
+              child list existed only in the data. */}
           <nav className="hidden items-center gap-0.5 lg:flex">
-            {cfg.navLinks.map((l) => (
-              <Link
-                key={l.label}
-                href={l.href}
-                className="relative whitespace-nowrap px-4 pb-3 pt-2.5 font-mono text-[12.5px] uppercase tracking-[0.1em] text-bp-mute transition-colors hover:text-bp-ink"
-              >
-                {l.label}
-                <span className="absolute inset-x-4 bottom-1 h-[1.5px] bg-transparent transition-colors" />
-              </Link>
-            ))}
+            {cfg.navLinks.map((l) => {
+              const group = cfg.groups.find((g) => g.href === l.href);
+              return group ? (
+                <NavMenu key={l.href} group={group} />
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="relative whitespace-nowrap px-4 pb-3 pt-2.5 font-mono text-[12.5px] uppercase tracking-[0.1em] text-bp-mute transition-colors hover:text-bp-ink"
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden flex-1 items-center justify-end gap-3 lg:flex">

@@ -10,6 +10,7 @@ import { SectionHead, RuleLabel, BpButton, MakerMark, PAGE } from "@/components/
 import { INDIA_CLIENTS, CLIENTS_WITH_BUILD, CLIENTS_LISTED } from "@/lib/indiaClients";
 import { caseStudies } from "@/lib/caseStudies";
 import { CLIENT_DETAILS } from "@/lib/indiaClientDetails";
+import ClientFilter from "@/components/ClientFilter";
 import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -97,11 +98,22 @@ export default function ClientProjects() {
               All our work
             </BpButton>
           </div>
+
+          {/* Jump straight to the industry nearest yours. Without it, finding
+              the two travel projects means scrolling past all seventeen others. */}
+          <div className="mt-9 border-t border-bp-hair pt-7">
+            <ClientFilter
+              items={[
+                ...STUDIES.map((c) => ({ slug: c.slug, industry: "Ecommerce" })),
+                ...INDIA_CLIENTS.map((c) => ({ slug: c.slug, industry: c.industry })),
+              ]}
+            />
+          </div>
         </div>
       </section>
 
       {/* 01 WRITTEN UP IN FULL */}
-      <section data-reveal className="border-b border-bp-line bg-white">
+      <section data-reveal data-filter-section className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
             no="01"
@@ -116,6 +128,7 @@ export default function ClientProjects() {
                 key={c.slug}
                 data-stagger
                 data-spot
+                data-industry="Ecommerce"
                 style={{ backgroundImage: SPOT }}
                 className="flex flex-col border-b border-r border-bp-edge bg-white"
               >
@@ -174,7 +187,7 @@ export default function ClientProjects() {
       </section>
 
       {/* 02 THE BUILDS */}
-      <section data-reveal className="border-b border-bp-line bg-bp-wash">
+      <section data-reveal data-filter-section className="border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
             no="02"
@@ -189,6 +202,7 @@ export default function ClientProjects() {
                 key={c.host}
                 data-stagger
                 data-spot
+                data-industry={c.industry}
                 style={{ backgroundImage: SPOT }}
                 className="flex flex-col border-b border-r border-bp-edge bg-white"
               >
@@ -290,8 +304,8 @@ export default function ClientProjects() {
         </div>
       </section>
 
-      {/* 02 ALSO BUILT */}
-      <section data-reveal className="border-b border-bp-line bg-white">
+      {/* 03 ALSO BUILT */}
+      <section data-reveal data-filter-section className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
             no="03"
@@ -309,6 +323,7 @@ export default function ClientProjects() {
                 rel="noopener noreferrer"
                 data-stagger
                 data-spot
+                data-industry={c.industry}
                 style={{ backgroundImage: SPOT }}
                 className="group flex flex-col border-b border-r border-bp-edge bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
               >
