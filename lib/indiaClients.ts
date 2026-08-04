@@ -20,11 +20,14 @@ export type ClientProject = {
   build?: string[];
   /** Verified from the project's own manifest. */
   stack?: string[];
+  /** Screenshot of the live site, captured at 1440 and downsampled to 1600x1000. */
+  shot: string;
 };
 
 export const INDIA_CLIENTS: ClientProject[] = [
   {
     name: "Blufacade",
+    shot: "/clients/blufacade.webp",
     host: "blufacade.com",
     url: "https://www.blufacade.com/",
     sector: "Facade systems: ACP, structural glazing, aluminium",
@@ -38,6 +41,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "The Print Emporium",
+    shot: "/clients/print-emporium.webp",
     host: "theprintemporium.in",
     url: "https://www.theprintemporium.in/",
     sector: "Custom printing: business cards, flyers, banners",
@@ -51,6 +55,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "VSV Unite",
+    shot: "/clients/vsv-unite.webp",
     host: "vsvunite.com",
     url: "https://www.vsvunite.com/",
     sector: "Network marketing platform: binary and PV earning model",
@@ -64,6 +69,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Solar Power House",
+    shot: "/clients/solar-power-house.webp",
     host: "solarpowerhouses.in",
     url: "https://solarpowerhouses.in/",
     sector: "Solar energy systems for homes and businesses",
@@ -76,6 +82,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Career HQ",
+    shot: "/clients/career-hq.webp",
     host: "careerhq.in",
     url: "https://careerhq.in/",
     sector: "International education: university and course discovery",
@@ -89,6 +96,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "JCSS Global",
+    shot: "/clients/jcss-global.webp",
     host: "jcssglobal.com",
     url: "https://www.jcssglobal.com/",
     sector: "Accounting, tax and advisory services",
@@ -100,6 +108,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Elegant Care Services",
+    shot: "/clients/elegant-care.webp",
     host: "elegantcareservices.com.au",
     url: "https://elegantcareservices.com.au/",
     sector: "NDIS disability support: supported independent living and respite",
@@ -114,6 +123,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "RG Golden Palace",
+    shot: "/clients/rg-golden-palace.webp",
     host: "rggoldenpalace.com",
     url: "https://rggoldenpalace.com/",
     sector: "Wedding venue, Singampunari, Sivagangai",
@@ -127,6 +137,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Perfect Pest Control",
+    shot: "/clients/perfect-pest-control.webp",
     host: "perfectpestcontrol.services",
     url: "https://www.perfectpestcontrol.services/",
     sector: "Pest control: anti-termite, rodent and bed bug treatment",
@@ -140,6 +151,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Sri Jaidev Tours & Travels",
+    shot: "/clients/sri-jaidev-travels.webp",
     host: "srijaidevtravels.com",
     url: "https://srijaidevtravels.com/",
     sector: "Travel services, Madurai: one-way, round trip and packages",
@@ -153,6 +165,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Vinushree Tours & Travels",
+    shot: "/clients/vinushree-travels.webp",
     host: "vinushreetravels.com",
     url: "https://www.vinushreetravels.com/",
     sector: "Travel services, Madurai: one-way, round trip and packages",
@@ -166,6 +179,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
   },
   {
     name: "Filigree Solutions",
+    shot: "/clients/filigree-solutions.webp",
     host: "filigreesolutions.com",
     url: "https://filigreesolutions.com/",
     sector: "CAD, CAE, structural analysis and engineering simulation",
@@ -181,24 +195,28 @@ export const INDIA_CLIENTS: ClientProject[] = [
   // about how they were built. Better a short entry than an invented one.
   {
     name: "Santhosh Ambulance Service",
+    shot: "/clients/santhosh-ambulance.webp",
     host: "santhoshambulance.com",
     url: "https://santhoshambulance.com/",
     sector: "Ambulance and emergency transport",
   },
   {
     name: "Dheera Technologies",
+    shot: "/clients/dheera-technologies.webp",
     host: "dheeratechnologies.com",
     url: "https://dheeratechnologies.com/",
     sector: "Technology services",
   },
   {
     name: "We Believe Logistics",
+    shot: "/clients/we-believe-logistics.webp",
     host: "webelievelogistics.org",
     url: "https://webelievelogistics.org/",
     sector: "Logistics and freight",
   },
   {
     name: "Syarikat Logam Mahaajaya",
+    shot: "/clients/mahaajaya.webp",
     host: "mahaajaya.com",
     url: "https://mahaajaya.com/",
     sector: "Metals and industrial supply",

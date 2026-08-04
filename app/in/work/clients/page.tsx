@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { resolveMetadata } from "@/lib/seo";
 import Icon from "@/components/Icon";
 import CTASection from "@/components/CTASection";
@@ -110,8 +111,35 @@ export default function ClientProjects() {
                 data-stagger
                 data-spot
                 style={{ backgroundImage: SPOT }}
-                className="flex flex-col border-b border-r border-bp-edge bg-white p-7 lg:p-9"
+                className="flex flex-col border-b border-r border-bp-edge bg-white"
               >
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${c.name}: open the live site`}
+                  className="group block border-b border-bp-edge"
+                >
+                  <span className="flex items-center gap-1.5 border-b border-bp-hair bg-bp-tint px-3.5 py-[9px]">
+                    <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
+                    <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
+                    <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
+                    <span className="ml-2 truncate border border-[#E9EEF5] bg-white px-2.5 py-1 font-mono text-[11px] sm:text-[10.5px] text-bp-faint">
+                      {c.host}
+                    </span>
+                  </span>
+                  <span className="relative block aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={c.shot}
+                      alt={`${c.name} website`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </span>
+                </a>
+
+                <div className="flex flex-1 flex-col p-7 lg:p-9">
                 <div className="flex items-center justify-between gap-4">
                   <span className="font-mono text-[11px] tracking-[0.14em] text-brand-500">
                     {String(i + 1).padStart(2, "0")}
@@ -161,9 +189,10 @@ export default function ClientProjects() {
                     rel="noopener noreferrer"
                     className="group mt-4 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
                   >
-                    {c.host}
+                    Visit {c.host}
                     <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
                   </a>
+                </div>
                 </div>
               </div>
             ))}
@@ -191,8 +220,18 @@ export default function ClientProjects() {
                 data-stagger
                 data-spot
                 style={{ backgroundImage: SPOT }}
-                className="group flex flex-col border-b border-r border-bp-edge bg-white p-7 transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
+                className="group flex flex-col border-b border-r border-bp-edge bg-white transition-shadow duration-250 hover:shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)]"
               >
+                <span className="relative block aspect-[16/10] overflow-hidden border-b border-bp-edge bg-slate-100">
+                  <Image
+                    src={c.shot}
+                    alt={`${c.name} website`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </span>
+                <span className="flex flex-1 flex-col p-7">
                 {c.region && (
                   <span className="mb-3 whitespace-nowrap font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.12em] text-bp-faint">
                     {c.region}
@@ -205,6 +244,7 @@ export default function ClientProjects() {
                 <span className="mt-6 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
                   {c.host}
                   <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
+                </span>
                 </span>
               </a>
             ))}
