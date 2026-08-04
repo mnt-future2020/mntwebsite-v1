@@ -66,7 +66,9 @@ export default async function BlogIndex() {
                   )}
                   <h2 className="mt-2 text-lg font-bold leading-snug text-bp-ink">{p.title}</h2>
                   {p.excerpt && <p className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-bp-mute">{p.excerpt}</p>}
-                  <div className="mt-auto flex items-center gap-2 pt-5 text-xs text-slate-400">
+                  <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-5 text-xs text-slate-400">
+                    <span className="font-medium text-slate-500">{p.author}</span>
+                    <span>·</span>
                     <span>{formatDate(p.publishedAt)}</span>
                     <span>·</span>
                     <span>{p.readingMins} min read</span>

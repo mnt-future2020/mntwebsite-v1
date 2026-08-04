@@ -20,12 +20,14 @@ const POSTS = [
     // Source: "MnT Content Pack — 2026-08-04 — AI Search, Recommendations &
     // Shopping Assistants" (Google Drive content-pack folder)
     slug: "product-page-ai-visibility",
+    date: "2026-08-04",
     title: "AI Assistants Read Your Product Pages Worst — And That's the Page That Sells",
     excerpt:
       "Adobe's 2026 data scores US retail product pages at 66% machine-readable — the lowest of any page type. What to fix on your PDP, in order.",
     category: "AI Search & Recommendations",
     tags: ["AI Search", "Product Data", "Structured Data", "Ecommerce"],
-    author: "MnT Future Team",
+    author: "CEO Udhayaseelan",
+    coverImage: "/blog/blog-product-page-ai-visibility.png",
     metaTitle: "AI Reads Your Product Pages Worst. Here's the Fix. | MnT Future",
     metaDescription:
       "Adobe's 2026 data scores US retail product pages at 66% machine-readable — the lowest of any page type. What to fix on your PDP, in order.",
@@ -89,38 +91,34 @@ const POSTS = [
 
 async function main() {
   for (const p of POSTS) {
+    // The source doc's own date drives publishedAt, so the blog index (ordered
+    // publishedAt desc) always leads with the newest pack, whatever order the
+    // posts happen to get imported in.
+    const publishedAt = p.date ? new Date(`${p.date}T00:00:00Z`) : new Date();
+    const fields = {
+      title: p.title,
+      excerpt: p.excerpt,
+      contentHtml: p.contentHtml,
+      coverImage: p.coverImage || null,
+      ogImage: p.coverImage || null,
+      category: p.category,
+      tags: p.tags,
+      author: p.author,
+      metaTitle: p.metaTitle,
+      metaDescription: p.metaDescription,
+      keywords: p.keywords,
+      readingMins: readingMinutes(p.contentHtml),
+      status: "PUBLISHED",
+      publishedAt,
+    };
     const post = await prisma.post.upsert({
       where: { slug: p.slug },
-      update: {
-        title: p.title,
-        excerpt: p.excerpt,
-        contentHtml: p.contentHtml,
-        category: p.category,
-        tags: p.tags,
-        author: p.author,
-        metaTitle: p.metaTitle,
-        metaDescription: p.metaDescription,
-        keywords: p.keywords,
-        readingMins: readingMinutes(p.contentHtml),
-        status: "PUBLISHED",
-      },
-      create: {
-        slug: p.slug,
-        title: p.title,
-        excerpt: p.excerpt,
-        contentHtml: p.contentHtml,
-        category: p.category,
-        tags: p.tags,
-        author: p.author,
-        metaTitle: p.metaTitle,
-        metaDescription: p.metaDescription,
-        keywords: p.keywords,
-        readingMins: readingMinutes(p.contentHtml),
-        status: "PUBLISHED",
-        publishedAt: new Date(),
-      },
+      update: fields,
+      create: { slug: p.slug, ...fields },
     });
-    console.log(`✓ ${post.status === "PUBLISHED" ? "Published" : "Saved"}: /blog/${post.slug} — "${post.title}"`);
+    console.log(
+      `✓ Published /blog/${post.slug} — "${post.title}" (${post.author}, ${publishedAt.toISOString().slice(0, 10)})`
+    );
   }
 }
 

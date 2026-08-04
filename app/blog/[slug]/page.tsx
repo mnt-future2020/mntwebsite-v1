@@ -46,6 +46,10 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
   if (!post) notFound();
 
   const url = `${site.url}/blog/${post.slug}`;
+  // Bylines are either a named person (e.g. "CEO Udhayaseelan") or the company
+  // itself — type the schema accordingly rather than always claiming Organization.
+  const authorName = post.author || "MnT Future";
+  const authorIsOrg = /\b(team|mnt future)\b/i.test(authorName);
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -54,7 +58,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     image: post.coverImage ? [post.coverImage] : undefined,
     datePublished: post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined,
     dateModified: new Date(post.updatedAt).toISOString(),
-    author: { "@type": "Organization", name: post.author || "MnT Future" },
+    author: { "@type": authorIsOrg ? "Organization" : "Person", name: authorName },
     publisher: {
       "@type": "Organization",
       name: site.name,
@@ -89,9 +93,13 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                 {post.title}
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
-                <span>{post.author}</span>
+                <span className="font-semibold text-slate-600">{authorName}</span>
                 <span>·</span>
-                <span>{formatDate(post.publishedAt)}</span>
+                {post.publishedAt ? (
+                  <time dateTime={new Date(post.publishedAt).toISOString()}>{formatDate(post.publishedAt)}</time>
+                ) : (
+                  <span>{formatDate(post.publishedAt)}</span>
+                )}
                 <span>·</span>
                 <span>{post.readingMins} min read</span>
               </div>
