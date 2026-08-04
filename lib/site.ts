@@ -9,8 +9,12 @@ export const site = {
   email: "info@mntfuture.com",
   phone: "+91 00000 00000",
   tagline: "AI-Native, Agent-Ready Commerce Platforms",
+  // Used by the Organization schema and llms.txt, both of which are served on
+  // the India tree too, so it has to describe the company rather than only the
+  // US line. The US pages still lead with agent-ready commerce in their own
+  // metadata; this is the entity-level description.
   description:
-    "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents that sell in the new agentic channels.",
+    "MnT Future builds commerce platforms and AI systems. In the United States: AI-native, agent-ready commerce for D2C and marketplace brands. In India: ecommerce platforms with GST built in, AI agents and automation delivered by embedded senior engineers, and three products we host and customise.",
   social: {
     instagram: "https://www.instagram.com/mnt_future",
     linkedin: "https://www.linkedin.com/company/mntfuture",

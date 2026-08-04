@@ -100,8 +100,21 @@ const orgSchema = {
     "Answer Engine Optimization (AEO)",
     "PCI DSS",
     "ADA/WCAG accessibility",
+    // India: the entity has to describe both markets, or the /in tree carries
+    // a knowledge graph that only ever mentions US commerce.
+    "Ecommerce platform development",
+    "Forward Deployed Engineering",
+    "India GST commerce",
+    "Retrieval-augmented generation (RAG)",
+    "WhatsApp Business API",
   ],
-  areaServed: { "@type": "Country", name: "United States" },
+  // Both markets. The Organization is one entity serving two countries, and
+  // declaring only the US left the India tree describing itself as a US
+  // business, which is the opposite of the signal those pages need.
+  areaServed: [
+    { "@type": "Country", name: "United States" },
+    { "@type": "Country", name: "India" },
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     email: site.email,
