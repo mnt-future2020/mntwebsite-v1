@@ -15,6 +15,164 @@ const SITE = {
 
 // Per-page SEO: mirrors each page's resolveMetadata(...) base values verbatim
 const PAGES = [
+  // India (/in). Extracted from the rendered pages rather than retyped, so a
+  // seed can never quietly disagree with what the site actually serves.
+  {
+    path: "/in",
+    title:
+      "MnT Future India: Ecommerce Platforms, AI Systems & Products",
+    description:
+      "MnT Future builds ecommerce platforms with GST built in, AI agents and automation that reach production, and ready products for Indian businesses: MnT AI Desk, MnT AI CRM and MnT Commerce India.",
+  },
+  {
+    path: "/in/ecommerce",
+    title:
+      "Ecommerce Development Company in India: Custom Platforms | MnT Future",
+    description:
+      "Custom ecommerce platforms for Indian businesses: D2C storefronts, marketplaces, B2B and wholesale, with GST invoicing, UPI and Indian payment gateways handled natively. Built by senior engineers.",
+  },
+  {
+    path: "/in/ecommerce/platform-development",
+    title:
+      "Ecommerce platform development in India | MnT Future India",
+    description:
+      "A platform built for how your business actually sells, running on infrastructure you own. GST decided per order, Indian payment gateways integrated properly, and no percentage of every sale going elsewhere.",
+  },
+  {
+    path: "/in/ecommerce/d2c-storefront",
+    title:
+      "D2C storefront development for Indian brands | MnT Future India",
+    description:
+      "Sell straight to your customers on a storefront you own, with your customer data, your margins, and no marketplace taking a cut and keeping the relationship.",
+  },
+  {
+    path: "/in/ecommerce/marketplace",
+    title:
+      "Marketplace platform development in India | MnT Future India",
+    description:
+      "Many sellers on one platform: onboarding, catalogue control, commission, split payouts and settlement. The parts that make a marketplace hard, built properly rather than approximated.",
+  },
+  {
+    path: "/in/ecommerce/b2b-wholesale",
+    title:
+      "B2B and wholesale ecommerce platforms | MnT Future India",
+    description:
+      "Customer-specific pricing, quotes and RFQ, bulk ordering, credit terms and approval flows, connected to the ERP you already run. Built for buyers who order the same forty items every month.",
+  },
+  {
+    path: "/in/ecommerce/integrations",
+    title:
+      "Ecommerce integrations and automation | MnT Future India",
+    description:
+      "Tally or your ERP, warehouse, courier, payment gateway and accounting, joined into one flow. So an order is entered once, and nobody spends their morning copying data between two systems.",
+  },
+  {
+    path: "/in/ecommerce/managed-support",
+    title:
+      "Managed ecommerce support and maintenance | MnT Future India",
+    description:
+      "We run and maintain the platform against an agreed SLA: monitoring, updates, security patching, and a person who answers when checkout breaks at 9pm on a Saturday.",
+  },
+  {
+    path: "/in/ai",
+    title:
+      "AI Consultation, Automation, Agents & Custom Applications | MnT Future India",
+    description:
+      "AI work that reaches production: consultation, automation, agent development and complete custom AI applications. Delivered by senior engineers embedded in your team, using our Discover to Optimize method.",
+  },
+  {
+    path: "/in/ai/consultation",
+    title:
+      "AI consultation for Indian businesses | MnT Future India",
+    description:
+      "What is genuinely worth doing with AI in your business, whether your data can support it, and what reaching production would actually cost. It ends with a costed path, not a maturity score.",
+  },
+  {
+    path: "/in/ai/automation",
+    title:
+      "AI automation for business workflows | MnT Future India",
+    description:
+      "The work your team repeats every single day, automated: document handling, data entry, classification, routing and reporting. With a person still in the loop wherever being wrong is expensive.",
+  },
+  {
+    path: "/in/ai/agent-development",
+    title:
+      "AI agent development for enterprises | MnT Future India",
+    description:
+      "Agents that do work inside your systems rather than only answer questions, with clear limits on what they may act on alone and a complete record of everything they did.",
+  },
+  {
+    path: "/in/ai/custom-applications",
+    title:
+      "Custom AI application development | MnT Future India",
+    description:
+      "A complete application built for your business with AI inside it, from nothing. For when the shape of your problem means no ready product fits, and bending one to fit would cost more than building right.",
+  },
+  {
+    path: "/in/ai/forward-deployed-engineering",
+    title:
+      "Forward Deployed Engineering: AI That Reaches Production | MnT Future",
+    description:
+      "Senior engineers embedded in your team and your environment, building your AI system and staying until it runs in production. Our documented method: Discover, Design, Build, Deploy, Optimize.",
+  },
+  {
+    path: "/in/products",
+    title:
+      "Products: AI Desk, AI CRM & Commerce India | MnT Future",
+    description:
+      "Three applications we host, brand and customise for you: a support desk with AI, a WhatsApp CRM with automation and AI, and an ecommerce platform with GST built in. Self-hosted, you own them.",
+  },
+  {
+    path: "/in/products/ai-desk",
+    title:
+      "MnT AI Desk: Support Desk Software for Indian Businesses | MnT Future",
+    description:
+      "A support desk that puts WhatsApp, Instagram, Facebook, email and website chat in one inbox, with AI answering the repeat questions. Self-hosted, unlimited agents, no per-seat licence.",
+  },
+  {
+    path: "/in/products/ai-crm",
+    title:
+      "MnT AI CRM: WhatsApp CRM with Automation & AI for Indian Businesses | MnT Future",
+    description:
+      "Run your whole WhatsApp business from one screen: one official number for the entire team, a sales pipeline, broadcasts on approved templates, no-code automation and an AI reply assistant. Self-hosted.",
+  },
+  {
+    path: "/in/products/commerce-india",
+    title:
+      "MnT Commerce India: Ecommerce Platform with GST Built In | MnT Future",
+    description:
+      "Your own ecommerce platform with India GST handled natively: CGST/SGST vs IGST by place of supply, per-HSN slabs, gapless invoice numbering, automatic credit notes. Self-hosted, no commission on orders.",
+  },
+  {
+    path: "/in/work",
+    title:
+      "Our Work: Platforms Built in India | MnT Future",
+    description:
+      "Live commerce platforms MnT Future designed and engineered for clients in India, plus the products and labs we build and run ourselves.",
+  },
+  {
+    path: "/in/about",
+    title:
+      "About MnT Future: Ecommerce & AI Engineering in India",
+    description:
+      "MnT Future builds ecommerce platforms and AI systems for Indian businesses. Senior engineers only, a documented delivery method, and software you own rather than rent.",
+  },
+  {
+    path: "/in/contact",
+    title:
+      "Contact MnT Future India: Ecommerce & AI Engineering",
+    description:
+      "Talk to MnT Future about an ecommerce platform, AI work, or one of our products. A senior consultant reads every enquiry.",
+  },
+  {
+    path: "/in/strategy-session",
+    title:
+      "Book a Strategy Session: Ecommerce & AI Consulting | MnT Future India",
+    description:
+      "A 45 minute session with a senior consultant. Bring your ecommerce bottleneck or the AI pilot that stalled, and leave with a plan you can execute. No obligation.",
+  },
+
+  // United States (root)
   {
     path: "/",
     title: "MnT Future: AI-Native, Agent-Ready Commerce Platforms for US Brands",
