@@ -63,7 +63,7 @@ export default function IndiaWork() {
             </span>
             <span className="min-w-3 flex-1" />
             <span className="hidden whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] text-[#A6B3C4] sm:inline">
-              {caseStudies.length} platforms
+              All live
             </span>
           </div>
           <h1 className="mt-8 max-w-[16ch] animate-rise-in font-display text-[42px] font-bold leading-[0.98] tracking-[-0.05em] text-bp-ink sm:text-[60px] lg:text-[80px]">
@@ -86,7 +86,7 @@ export default function IndiaWork() {
                 Client projects
               </div>
               <h2 className="mt-5 max-w-[18ch] font-display text-[28px] font-bold leading-[1.08] tracking-[-0.036em] text-white lg:text-[38px]">
-                {INDIA_CLIENTS.length + caseStudies.filter((c) => c.group === "client").length} client platforms, all of them live.
+                Client platforms, every one of them live.
               </h2>
               <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.7] text-white/65">
                 Commerce platforms, facade, printing, solar, education, accounting, disability

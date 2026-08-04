@@ -45,7 +45,7 @@ export default function ClientFilter({ items }: { items: FilterItem[] }) {
       <span className="mr-1 font-mono text-[11px] uppercase tracking-[0.16em] text-bp-faint">
         Filter
       </span>
-      {[["all", items.length] as const, ...groups].map(([key, count]) => (
+      {[["all", items.length] as const, ...groups].map(([key]) => (
         <button
           key={key}
           type="button"
@@ -57,8 +57,7 @@ export default function ClientFilter({ items }: { items: FilterItem[] }) {
               : "border-[#D8E1EC] bg-white text-bp-mute hover:border-brand-500 hover:bg-brand-500/[0.07] hover:text-bp-ink"
           }`}
         >
-          {key === "all" ? "All" : key}
-          <span className={active === key ? "text-white/50" : "text-bp-faint"}>{count}</span>
+          {key === "all" ? "All industries" : key}
         </button>
       ))}
     </div>

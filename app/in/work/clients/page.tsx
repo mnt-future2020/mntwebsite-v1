@@ -105,11 +105,11 @@ export default function ClientProjects() {
             </span>
             <span className="min-w-3 flex-1" />
             <span className="hidden whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] text-[#A6B3C4] sm:inline">
-              {TOTAL} live sites
+              All live
             </span>
           </div>
           <h1 className="mt-8 max-w-[16ch] animate-rise-in font-display text-[40px] font-bold leading-[0.98] tracking-[-0.05em] text-bp-ink sm:text-[58px] lg:text-[78px]">
-            {TOTAL} client platforms, all of them live.
+            Client platforms, every one of them live.
           </h1>
           <p className="mt-6 max-w-[62ch] animate-rise-in text-[18.5px] leading-[1.68] text-bp-mute [animation-delay:120ms]">
             Commerce platforms, facade systems, printing, solar, education, accounting, disability
@@ -149,7 +149,7 @@ export default function ClientProjects() {
             no="01"
             total="04"
             eyebrow="Written up in full"
-            title="Four commerce platforms, written up in full."
+            title="The commerce platforms, written up in full."
             sub="The ones that take orders and money online, where the client let us publish how they were built. Same client work as everything below, just with a case study behind it."
           />
           <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2 lg:grid-cols-4">

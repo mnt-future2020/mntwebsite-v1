@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const proofStats = [
-  { value: "3 platforms", label: "Live client platforms, built end to end" },
+  { value: "Live", label: "Client platforms running in production today" },
   { value: "GST-native", label: "Invoicing, gapless serials, credit notes" },
   { value: "5 stages", label: "Discover · Design · Build · Deploy · Optimize" },
   { value: "100%", label: "Senior-engineer delivery" },
@@ -345,7 +345,7 @@ export default function IndiaHome() {
             total="05"
             eyebrow="Selected work"
             title="Platforms running in India right now."
-            sub="Every one of these was designed and engineered here, end to end, and every one is live and trading. Published with the client's permission. Three of nineteen shown here."
+            sub="Every one of these was designed and engineered here, end to end, and every one is live and trading. Published with the client's permission."
           />
           <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-2">
             {clientWork.map((c) => (
