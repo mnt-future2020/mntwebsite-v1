@@ -110,7 +110,7 @@ export default function SecurityCompliance() {
                 <p className="mt-5 text-[15px] leading-relaxed text-bp-mute">{f.desc}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {f.tags.map((t) => (
-                    <span key={t} className="border border-bp-edge bg-bp-wash px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.08em] text-bp-mute">
+                    <span key={t} className="border border-bp-edge bg-bp-wash px-3 py-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.08em] text-bp-mute">
                       {t}
                     </span>
                   ))}

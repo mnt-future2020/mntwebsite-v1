@@ -78,25 +78,17 @@ export default function IndiaHero() {
                         animationDelay: `${(start + i) * WORD_MS}ms`,
                       }}
                     >
-                      {/* The marker is drawn per word rather than per phrase.
-                          One bar across the whole phrase becomes a single
-                          rectangle the moment the phrase wraps, which on a
-                          narrow screen covers the empty end of the first line.
-                          Per word, the bars butt together on a line and break
-                          cleanly at the end of one. */}
+                      {/* The rule is drawn per word rather than per phrase.
+                          A phrase-wide rule becomes one long line the moment
+                          the phrase wraps, running across the empty end of a
+                          line. Per word, the rules butt together on a line and
+                          break cleanly at the end of one. */}
                       {seg.hl && (
-                        <>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-x-0 bottom-[0.05em] top-[0.16em] -z-10 origin-left animate-draw-rule bg-brand-500/[0.13]"
-                            style={{ animationDelay: `${(start + i) * WORD_MS + 300}ms` }}
-                          />
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-x-0 bottom-[0.04em] h-[0.032em] origin-left animate-draw-rule bg-brand-500"
-                            style={{ animationDelay: `${(start + i) * WORD_MS + 420}ms` }}
-                          />
-                        </>
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-x-0 bottom-[0.04em] h-[0.032em] origin-left animate-draw-rule bg-brand-500"
+                          style={{ animationDelay: `${(start + i) * WORD_MS + 320}ms` }}
+                        />
                       )}
                       {/* Non-breaking, because an inline-block collapses a
                           trailing ordinary space and words would run together. */}

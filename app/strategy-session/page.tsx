@@ -216,7 +216,7 @@ export default function StrategySession() {
             />
             <Link
               href="/work"
-              className="mt-8 inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+              className="mt-8 inline-flex items-center gap-[7px] py-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
             >
               See the kind of platforms it leads to
               <Icon name="arrow" className="h-3.5 w-3.5" />
@@ -282,7 +282,7 @@ export default function StrategySession() {
             </span>
             <a
               href="#book"
-              className="inline-flex shrink-0 items-center gap-[7px] text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+              className="inline-flex shrink-0 items-center gap-[7px] py-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
             >
               Request the audit
               <Icon name="arrow" className="h-3.5 w-3.5" />

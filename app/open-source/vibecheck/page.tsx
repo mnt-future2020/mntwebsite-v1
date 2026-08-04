@@ -201,13 +201,13 @@ export default function VibecheckPage() {
         </div>
         <Reveal delay={0.1}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500">
-            <a href={GITHUB_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
+            <a href={GITHUB_URL} className="inline-flex items-center gap-1.5 py-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
               <Icon name="github" className="h-4 w-4" /> MnT-Future/vibecheck
             </a>
-            <a href={NPM_URL} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
+            <a href={NPM_URL} className="inline-flex items-center gap-1.5 py-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
               <Icon name="download" className="h-4 w-4" /> npx @mntglobal/vibecheck
             </a>
-            <a href={`${GITHUB_URL}/blob/main/docs/rules.md`} className="inline-flex items-center gap-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
+            <a href={`${GITHUB_URL}/blob/main/docs/rules.md`} className="inline-flex items-center gap-1.5 py-1.5 hover:text-navy" target="_blank" rel="noopener noreferrer">
               <Icon name="link" className="h-4 w-4" /> Full rules reference
             </a>
           </div>

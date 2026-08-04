@@ -219,7 +219,7 @@ export default function OpenSourcePage() {
                         <div className="truncate text-xs text-white/60">{tool.tagline}</div>
                       </div>
                       <span
-                        className={`ml-auto shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+                        className={`ml-auto shrink-0 rounded-full px-2.5 py-1 text-[11px] sm:text-[10px] font-semibold ${
                           tool.status === "live"
                             ? "bg-emerald-500/15 text-emerald-300"
                             : "bg-white/5 text-white/45"

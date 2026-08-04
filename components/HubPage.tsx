@@ -110,7 +110,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
           <div className="mt-10 grid border-l border-t border-bp-hair sm:grid-cols-2 lg:grid-cols-4">
             {config.heroChips.map((c, i) => (
               <div key={c} className="flex items-baseline gap-3 border-b border-r border-bp-hair px-5 py-4">
-                <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.12em] text-brand-500">
+                <span className="font-mono text-[11px] sm:text-[11px] tracking-[0.12em] text-brand-500">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="font-mono text-[12.5px] leading-[1.5] text-[#334458]">{c}</span>
@@ -170,7 +170,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
                 </span>
                 <span className="mt-1 block text-[13.5px] leading-relaxed text-bp-mute">{x.desc}</span>
               </span>
-              <span className="inline-flex shrink-0 items-center gap-[7px] text-sm font-semibold text-brand-700">
+              <span className="inline-flex shrink-0 items-center gap-[7px] py-1.5 text-sm font-semibold text-brand-700">
                 {x.cta}
                 <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -244,7 +244,7 @@ export default function HubPage({ config }: { config: HubConfig }) {
             </div>
             <Link
               href="/security-compliance"
-              className="mt-8 inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+              className="mt-8 inline-flex items-center gap-[7px] py-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
             >
               How we engineer compliance <Icon name="arrow" className="h-3.5 w-3.5" />
             </Link>

@@ -306,7 +306,7 @@ export default function ShopifyBuilds() {
           <div className="mt-8 text-center">
             <Link
               href="/commerce"
-              className="inline-flex items-center gap-[7px] text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
+              className="inline-flex items-center gap-[7px] py-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800"
             >
               Explore our custom commerce platforms
               <Icon name="arrow" className="h-3.5 w-3.5" />

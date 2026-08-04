@@ -75,7 +75,7 @@ body {
     @apply -translate-y-1 border-brand-200 shadow-cardhover;
   }
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800;
+    @apply inline-flex items-center gap-1.5 py-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800;
   }
 }
 

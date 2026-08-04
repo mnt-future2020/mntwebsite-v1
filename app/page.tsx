@@ -406,7 +406,7 @@ export default function Home() {
               />
               <Link
                 href={`/work/${featured.slug}`}
-                className="mt-7 inline-flex items-center gap-2.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                className="mt-7 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
               >
                 Read the case study
                 <Icon name="arrow" className="h-3.5 w-3.5" />
