@@ -31,9 +31,22 @@ export const site = {
  * they can, and it is the kind of claim that quietly goes stale.
  */
 export const ratings: { source: string; score: number; href?: string }[] = [
-  { source: "Clutch", score: 5, href: "https://clutch.co/profile/mnt-future" },
-  { source: "Google", score: 5 },
-  { source: "JustDial", score: 4.7 },
+  // No URL yet. The profile slug was a guess and Clutch sits behind a bot
+  // challenge, so it could not be checked. An unlinked score beats a link that
+  // 404s in front of a prospect.
+  { source: "Clutch", score: 5 },
+  {
+    source: "Google",
+    score: 5,
+    // Google's own share link. It resolves to the knowledge panel for
+    // kgmid /g/11vstv5lh2, which is Magizh NexGen Technologies.
+    href: "https://share.google/U7MNFzBStvbcD2AvD",
+  },
+  {
+    source: "JustDial",
+    score: 4.7,
+    href: "https://www.justdial.com/Madurai/Magizh-Nexgen-Technologies-Uchaparamedu-Main-Road-Iyer-Bungalow/0452PX452-X452-240518212603-C4Z6_BZDET",
+  },
 ];
 
 // Centralised, professionally curated photography (Unsplash CDN, hot-linked via next/image).
