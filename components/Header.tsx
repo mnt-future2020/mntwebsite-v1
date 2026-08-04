@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import Icon from "./Icon";
 import BrandLogo from "./BrandLogo";
 import AnnouncementBar from "./AnnouncementBar";
+import RatingsRibbon from "./RatingsRibbon";
 import RegionSwitch from "./RegionSwitch";
 import NavMenu from "./NavMenu";
 import { REGIONS, regionFromPath } from "@/lib/regions";
@@ -173,6 +174,9 @@ export default function Header() {
           </div>
         )}
       </header>
+      {/* Under the header rather than above it: the announcement strip already
+          owns the very top, and two stacked bars there read as clutter. */}
+      <RatingsRibbon />
     </>
   );
 }

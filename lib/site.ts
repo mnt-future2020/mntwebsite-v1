@@ -22,6 +22,20 @@ export const site = {
   },
 };
 
+/**
+ * Client ratings, shown in the ribbon under the header.
+ *
+ * `href` is the profile the score came from. Fill it in and the entry becomes a
+ * link a visitor can check; leave it out and the score renders as plain text
+ * rather than as a dead link. A rating nobody can verify is worth less than one
+ * they can, and it is the kind of claim that quietly goes stale.
+ */
+export const ratings: { source: string; score: number; href?: string }[] = [
+  { source: "Clutch", score: 5, href: "https://clutch.co/profile/mnt-future" },
+  { source: "Google", score: 5 },
+  { source: "JustDial", score: 4.7 },
+];
+
 // Centralised, professionally curated photography (Unsplash CDN, hot-linked via next/image).
 const u = (id: string, w = 1400) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
