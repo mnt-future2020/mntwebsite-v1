@@ -11,6 +11,7 @@ import BlueprintFaq from "@/components/BlueprintFaq";
 import { caseStudies } from "@/lib/caseStudies";
 import { SectionHead, BpButton, MakerMark, PAGE } from "@/components/blueprint";
 import BlueprintMotion from "@/components/BlueprintMotion";
+import RatingsRibbon from "@/components/RatingsRibbon";
 import { inEcommerceNav, inAiNav, inProductsNav } from "@/lib/regions";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -390,6 +391,10 @@ export default function IndiaHome() {
           </div>
         </div>
       </section>
+
+      {/* Ratings sit here, straight after the work: a score lands hardest on
+          somebody who has just finished looking at what we built. */}
+      <RatingsRibbon />
 
       {/* 05 FAQ */}
       <section data-reveal className="border-b border-bp-line bg-white">

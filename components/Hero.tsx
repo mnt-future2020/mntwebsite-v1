@@ -1,4 +1,5 @@
 import PlatformPlan from "./PlatformPlan";
+import RatingsRibbon from "./RatingsRibbon";
 import { BpButton, PAGE } from "./blueprint";
 
 // Each word rises in on its own delay, so the sentence assembles rather than
@@ -132,6 +133,8 @@ export default function Hero() {
             29 checks, a letter grade in seconds, no email needed for the score. If your store is
             already in good shape, the report will say so.
           </p>
+
+          <RatingsRibbon variant="inline" />
         </div>
 
         <div className="relative animate-rise-in [animation-delay:280ms]" style={{ perspective: "1100px" }}>

@@ -1,4 +1,5 @@
 import DeliveryPlan from "./DeliveryPlan";
+import RatingsRibbon from "./RatingsRibbon";
 import { BpButton, PAGE } from "./blueprint";
 
 // The India hero.
@@ -151,6 +152,8 @@ export default function IndiaHero() {
             Three live client platforms, our own products, and a documented delivery method. Judge
             us on what runs, not on a logo wall.
           </p>
+
+          <RatingsRibbon variant="inline" />
         </div>
 
         <div className="relative animate-rise-in [animation-delay:280ms]" style={{ perspective: "1100px" }}>
