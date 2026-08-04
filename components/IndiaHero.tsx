@@ -7,8 +7,19 @@ import { BpButton, PAGE } from "./blueprint";
 // is worried about. An Indian buyer is worried about something else: the last
 // thing they bought either never went live or is rented from somebody else.
 // So this opens on what actually runs, and who owns it.
-const LEAD = ["We", "build", "the", "ecommerce", "platforms", "and", "AI", "systems"];
-const TAIL = ["Indian", "businesses"];
+// The headline is built from segments rather than a flat word list, so the two
+// things we sell can carry a marker highlight that wipes in behind them once
+// their words have landed. The closing phrase keeps the stronger treatment (a
+// decode, an underline and a light sweep) so it still reads as the finish.
+const SEGMENTS: { text: string; hl?: boolean }[] = [
+  { text: "We build the" },
+  { text: "ecommerce platforms", hl: true },
+  { text: "and" },
+  { text: "AI systems", hl: true },
+  { text: "Indian businesses" },
+];
+
+const WORD_MS = 55;
 
 const STANDARDS = [
   "GST invoicing, gapless serials",
@@ -50,21 +61,53 @@ export default function IndiaHero() {
           className="mt-8 max-w-[17ch] font-display text-[40px] font-bold leading-[0.96] tracking-[-0.05em] text-bp-ink sm:text-[60px] lg:text-[86px]"
           style={{ perspective: "900px" }}
         >
-          {[...LEAD, ...TAIL].map((w, i) => (
-            <span
-              key={w + i}
-              className="inline-block animate-word-in"
-              style={{
-                transformOrigin: "50% 100%",
-                animationDelay: `${i < LEAD.length ? i * 55 : 640 + (i - LEAD.length) * 55}ms`,
-              }}
-            >
-              {/* Non-breaking, because an inline-block collapses a trailing
-                  ordinary space and every word would run into the next. */}
-              {w}
-              {" "}
-            </span>
-          ))}
+          {(() => {
+            let n = 0; // running word index, so the stagger never restarts
+            return SEGMENTS.map((seg) => {
+              const words = seg.text.split(" ");
+              const start = n;
+              n += words.length;
+              return (
+                <span key={seg.text} className={seg.hl ? "text-brand-700" : undefined}>
+                  {words.map((w, i) => (
+                    <span
+                      key={w + i}
+                      className="relative inline-block animate-word-in"
+                      style={{
+                        transformOrigin: "50% 100%",
+                        animationDelay: `${(start + i) * WORD_MS}ms`,
+                      }}
+                    >
+                      {/* The marker is drawn per word rather than per phrase.
+                          One bar across the whole phrase becomes a single
+                          rectangle the moment the phrase wraps, which on a
+                          narrow screen covers the empty end of the first line.
+                          Per word, the bars butt together on a line and break
+                          cleanly at the end of one. */}
+                      {seg.hl && (
+                        <>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-x-0 bottom-[0.05em] top-[0.16em] -z-10 origin-left animate-draw-rule bg-brand-500/[0.13]"
+                            style={{ animationDelay: `${(start + i) * WORD_MS + 300}ms` }}
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-x-0 bottom-[0.04em] h-[0.032em] origin-left animate-draw-rule bg-brand-500"
+                            style={{ animationDelay: `${(start + i) * WORD_MS + 420}ms` }}
+                          />
+                        </>
+                      )}
+                      {/* Non-breaking, because an inline-block collapses a
+                          trailing ordinary space and words would run together. */}
+                      {w}
+                      {"\u00A0"}
+                    </span>
+                  ))}
+                </span>
+              );
+            });
+          })()}
           <span
             className="relative inline-block animate-word-in"
             style={{ transformOrigin: "50% 100%", animationDelay: "820ms" }}
@@ -143,7 +186,7 @@ export default function IndiaHero() {
               key={label}
               className="flex items-baseline gap-3 border-b border-r border-bp-hair px-5 py-4"
             >
-              <span className="font-mono text-[10.5px] tracking-[0.12em] text-brand-500">
+              <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.12em] text-brand-500">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="font-mono text-[12.5px] leading-[1.5] text-[#334458]">{label}</span>

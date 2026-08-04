@@ -219,15 +219,15 @@ export function Breadcrumbs({
       className={`font-mono text-[11.5px] uppercase tracking-[0.12em] ${base}`}
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <ol className="flex flex-wrap items-center gap-1.5">
+      <ol className="flex flex-wrap items-center gap-x-1.5">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-1.5">
             {t.href ? (
-              <Link href={t.href} className={hover}>
+              <Link href={t.href} className={`inline-block py-1 ${hover}`}>
                 {t.label}
               </Link>
             ) : (
-              <span className={current}>{t.label}</span>
+              <span className={`inline-block py-1 ${current}`}>{t.label}</span>
             )}
             {i < trail.length - 1 && <span className="opacity-50">/</span>}
           </li>

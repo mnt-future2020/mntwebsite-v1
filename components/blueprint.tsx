@@ -60,7 +60,7 @@ export function MakerMark({
   return (
     <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 ${className}`}>
       <span
-        className={`font-mono text-[10px] uppercase tracking-[0.2em] ${
+        className={`font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.2em] ${
           dark ? "text-white/85" : "text-bp-ink"
         }`}
       >
@@ -69,7 +69,7 @@ export function MakerMark({
       <span className={`h-px min-w-4 flex-1 ${dark ? "bg-white/15" : "bg-bp-edge"}`} />
       {detail && (
         <span
-          className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
+          className={`font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] ${
             dark ? "text-white/45" : "text-bp-faint"
           }`}
         >

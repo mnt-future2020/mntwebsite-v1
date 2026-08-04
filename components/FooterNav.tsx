@@ -17,12 +17,12 @@ export default function FooterNav() {
           <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
             {col.title}
           </div>
-          <ul className="mt-[18px] space-y-[11px]">
+          <ul className="mt-[14px] space-y-[3px]">
             {col.links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="text-[13.8px] text-[#8497AF] transition-colors hover:text-white"
+                  className="block py-1 text-[13.8px] text-[#8497AF] transition-colors hover:text-white"
                 >
                   {l.label}
                 </Link>

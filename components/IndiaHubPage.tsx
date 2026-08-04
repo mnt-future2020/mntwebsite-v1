@@ -125,7 +125,7 @@ export default function IndiaHubPage({ config: c }: { config: IndiaHubConfig }) 
                   {s.title}
                 </h3>
                 <p className="mt-3 flex-1 text-[14.5px] leading-[1.7] text-bp-mute">{s.desc}</p>
-                <span className="mt-6 inline-flex items-center gap-2.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
+                <span className="mt-6 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
                   Learn more
                   <Icon name="arrow" className="h-3.5 w-3.5" />
                 </span>

@@ -73,14 +73,14 @@ export default function DeliveryPlan() {
 
       <div className="flex items-center gap-3 border-b border-bp-line bg-bp-tint px-4 py-3 sm:px-[22px]">
         <div className="min-w-0 flex-1">
-          <div className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
+          <div className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
             What we build
           </div>
           <div className="mt-1 font-mono text-[11px] tracking-[0.1em] text-bp-faint">
             And how it reaches production
           </div>
         </div>
-        <span className="shrink-0 border border-[#DCE6F2] bg-white px-2.5 py-1 font-mono text-[10px] tracking-[0.1em] text-bp-mute">
+        <span className="shrink-0 border border-[#DCE6F2] bg-white px-2.5 py-1 font-mono text-[11px] sm:text-[10px] tracking-[0.1em] text-bp-mute">
           3 lines
         </span>
       </div>
@@ -94,12 +94,12 @@ export default function DeliveryPlan() {
                   {l.draw}
                 </svg>
               </span>
-              <span className="font-mono text-[10px] tracking-[0.14em] text-bp-ghost">{l.no}</span>
+              <span className="font-mono text-[11px] sm:text-[10px] tracking-[0.14em] text-bp-ghost">{l.no}</span>
             </div>
             <div className="mt-3 font-display text-[13.5px] font-bold leading-[1.2] tracking-[-0.015em] text-bp-ink">
               {l.name}
             </div>
-            <div className="mt-1 font-mono text-[9.5px] leading-[1.45] tracking-[0.04em] text-bp-faint">
+            <div className="mt-1 font-mono text-[11px] sm:text-[9.5px] leading-[1.45] tracking-[0.04em] text-bp-faint">
               {l.note}
             </div>
           </div>
@@ -108,11 +108,11 @@ export default function DeliveryPlan() {
 
       <div className="flex items-center gap-2.5 border-b border-bp-hair bg-bp-tint px-4 py-2.5 sm:px-[22px]">
         <span className="h-[5px] w-[5px] shrink-0 bg-brand-500" aria-hidden="true" />
-        <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-brand-700">
+        <span className="font-mono text-[11px] sm:text-[9.5px] uppercase tracking-[0.16em] text-brand-700">
           Forward Deployed Engineering
         </span>
         <span className="h-px min-w-3 flex-1 bg-brand-400/40" />
-        <span className="whitespace-nowrap font-mono text-[9.5px] uppercase tracking-[0.16em] text-bp-faint">
+        <span className="whitespace-nowrap font-mono text-[11px] sm:text-[9.5px] uppercase tracking-[0.16em] text-bp-faint">
           5 stages
         </span>
       </div>
@@ -120,11 +120,11 @@ export default function DeliveryPlan() {
       <DeliveryScan />
 
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-bp-line bg-bp-tint px-4 py-3.5 sm:px-[22px]">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bp-ink">
+        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.2em] text-bp-ink">
           Built by MnT Future
         </span>
         <span className="h-px min-w-4 flex-1 bg-bp-edge" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-bp-faint">
+        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-bp-faint">
           Senior engineers, embedded
         </span>
       </div>

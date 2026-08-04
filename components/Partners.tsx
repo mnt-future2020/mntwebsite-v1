@@ -59,7 +59,7 @@ function Card({ p }: { p: (typeof partners)[number] }) {
         )}
       </span>
       <span className="mt-[15px] font-display text-[15px] font-bold text-white">{p.name}</span>
-      <span className="mt-1.5 whitespace-nowrap font-mono text-[10.5px] uppercase tracking-[0.1em] text-white/55">
+      <span className="mt-1.5 whitespace-nowrap font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.1em] text-white/55">
         {p.designation}
       </span>
     </>

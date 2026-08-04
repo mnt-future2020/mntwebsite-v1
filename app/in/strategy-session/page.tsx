@@ -107,7 +107,7 @@ export default function IndiaStrategySession() {
               <div className="mt-9 grid border-l border-t border-bp-hair sm:grid-cols-2">
                 {chips.map((chip, i) => (
                   <div key={chip} className="flex items-baseline gap-3 border-b border-r border-bp-hair px-5 py-4">
-                    <span className="font-mono text-[10.5px] tracking-[0.12em] text-brand-500">
+                    <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.12em] text-brand-500">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="font-mono text-[12.5px] leading-[1.5] text-[#334458]">{chip}</span>

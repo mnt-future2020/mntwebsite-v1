@@ -81,8 +81,8 @@ export default function CaseStudyPage({ cs, region = "us" }: { cs: CaseStudy; re
               tone="light"
             />
             <div className="mt-7 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
-              <span className="border border-brand-200 bg-brand-50 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-brand-700">{cs.type}</span>
-              <span className="border border-bp-edge bg-bp-wash px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-bp-mute">{cs.category}</span>
+              <span className="border border-brand-200 bg-brand-50 px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.08em] text-brand-700">{cs.type}</span>
+              <span className="border border-bp-edge bg-bp-wash px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.08em] text-bp-mute">{cs.category}</span>
             </div>
             <h1 className="mt-5 font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.02em] text-bp-ink sm:text-[58px]">
               {cs.title}

@@ -42,10 +42,10 @@ export default function AgentScan() {
     <div className="border-t border-bp-line bg-white p-4 sm:p-[22px]">
       <div className="flex items-center gap-2.5">
         <span className="h-[7px] w-[7px] animate-live-pulse rounded-full bg-[#0E9F6E]" />
-        <span className="flex-1 font-mono text-[10.5px] uppercase tracking-[0.2em] text-[#5F7189]">
+        <span className="flex-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-[#5F7189]">
           Agent-ready
         </span>
-        <span className="font-mono text-[10.5px] tracking-[0.14em] text-brand-700">
+        <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.14em] text-brand-700">
           {done >= STEPS.length ? "checkout" : "scanning"}
           <span className="animate-caret">_</span>
         </span>
@@ -61,7 +61,7 @@ export default function AgentScan() {
               style={{ opacity: complete ? 1 : 0.45 }}
             >
               <span
-                className={`flex h-[21px] w-[21px] shrink-0 items-center justify-center border font-mono text-[9.5px] transition-all duration-300 ${
+                className={`flex h-[21px] w-[21px] shrink-0 items-center justify-center border font-mono text-[11px] sm:text-[9.5px] transition-all duration-300 ${
                   complete
                     ? "border-[#0E9F6E] bg-[#0E9F6E] text-white"
                     : "border-brand-200 bg-white text-brand-700"
@@ -76,7 +76,7 @@ export default function AgentScan() {
               >
                 {s.label}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#9AA9BE]">
+              <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.1em] text-[#9AA9BE]">
                 {s.tag}
               </span>
             </div>

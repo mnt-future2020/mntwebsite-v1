@@ -265,7 +265,7 @@ export default function ProductsHub() {
             <table className="w-full min-w-[720px] border-collapse border-l border-t border-bp-edge bg-white text-left">
               <thead>
                 <tr>
-                  <th className="border-b border-r border-bp-edge px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.16em] text-bp-faint" />
+                  <th className="border-b border-r border-bp-edge px-5 py-4 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.16em] text-bp-faint" />
                   {["MnT AI Desk", "MnT AI CRM", "MnT Commerce India"].map((h) => (
                     <th
                       key={h}

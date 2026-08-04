@@ -377,7 +377,7 @@ export default function IndiaHome() {
                     detail={c.scope.find((s) => s.label === "Status")?.value}
                     className="mt-6 border-t border-bp-hair pt-4"
                   />
-                  <span className="mt-auto inline-flex items-center gap-2.5 pt-7 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
+                  <span className="mt-auto inline-flex items-center gap-2.5 pb-1.5 pt-7 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
                     Read the case study
                     <Icon name="arrow" className="h-3.5 w-3.5" />
                   </span>

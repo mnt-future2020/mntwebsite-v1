@@ -108,7 +108,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
                 key={c}
                 className="flex items-baseline gap-3 border-b border-r border-bp-hair px-5 py-4"
               >
-                <span className="font-mono text-[10.5px] tracking-[0.12em] text-brand-500">
+                <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.12em] text-brand-500">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="font-mono text-[12.5px] leading-[1.5] text-[#334458]">{c}</span>
@@ -209,7 +209,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
           </div>
           <Link
             href="/security-compliance"
-            className="mt-9 inline-flex items-center gap-2.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+            className="mt-9 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
           >
             How we engineer compliance
             <Icon name="arrow" className="h-3.5 w-3.5" />

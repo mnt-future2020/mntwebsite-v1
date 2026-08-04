@@ -146,7 +146,7 @@ export default function ScanPanel({
                 >
                   {done ? "✓" : i + 1}
                 </span>
-                <span className="mt-1 text-[10px] text-bp-mute">{s.label}</span>
+                <span className="mt-1 text-[11px] sm:text-[10px] text-bp-mute">{s.label}</span>
               </div>
             );
           })}

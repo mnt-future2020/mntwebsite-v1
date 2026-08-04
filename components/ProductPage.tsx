@@ -111,7 +111,7 @@ export default function ProductPage({ config: c }: { config: ProductConfig }) {
               {c.heroSub}
             </p>
             <div className="animate-rise-in border-l-2 border-brand-500 bg-bp-tint px-6 py-5 [animation-delay:200ms]">
-              <div className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
+              <div className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
                 Who it is for
               </div>
               <p className="m-0 mt-2.5 text-[15px] leading-[1.65] text-bp-body">{c.forWho}</p>
@@ -121,7 +121,7 @@ export default function ProductPage({ config: c }: { config: ProductConfig }) {
           <div className="mt-9 grid animate-rise-in border-l border-t border-bp-hair [animation-delay:280ms] sm:grid-cols-2 lg:grid-cols-4">
             {c.chips.map((chip, i) => (
               <div key={chip} className="flex items-baseline gap-3 border-b border-r border-bp-hair px-5 py-4">
-                <span className="font-mono text-[10.5px] tracking-[0.12em] text-brand-500">
+                <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.12em] text-brand-500">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="font-mono text-[12.5px] leading-[1.5] text-[#334458]">{chip}</span>

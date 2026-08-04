@@ -151,8 +151,8 @@ export default function Header() {
                   {l.label}
                 </Link>
               ))}
-            <div className="mt-6">
-              <RegionSwitch />
+            <div className="mt-7">
+              <RegionSwitch variant="menu" onNavigate={() => setOpen(false)} />
             </div>
             <Link
               href={cfg.cta.href}

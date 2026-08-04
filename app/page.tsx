@@ -332,7 +332,7 @@ export default function Home() {
                     {m.no}
                   </span>
                   {m.featured && (
-                    <span className="bg-bp-ink px-2.5 py-[5px] font-mono text-[10px] font-semibold tracking-[0.12em] text-white">
+                    <span className="bg-bp-ink px-2.5 py-[5px] font-mono text-[11px] sm:text-[10px] font-semibold tracking-[0.12em] text-white">
                       MOST POPULAR
                     </span>
                   )}

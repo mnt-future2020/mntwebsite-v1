@@ -65,7 +65,7 @@ export default function IndiaContact() {
                         <Icon name={w.icon} className="h-[17px] w-[17px]" />
                       </span>
                       <span className="flex-1">
-                        <span className="block font-mono text-[10.5px] uppercase tracking-[0.16em] text-bp-faint">
+                        <span className="block font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.16em] text-bp-faint">
                           {w.label}
                         </span>
                         <span className="mt-1 block text-[15px] text-bp-body transition-colors group-hover:text-brand-700">

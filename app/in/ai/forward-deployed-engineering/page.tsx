@@ -242,7 +242,7 @@ export default function FdePage() {
               pieces of engineering. Forward Deployed Engineering is how we do the second one.
             </p>
             <div className="animate-rise-in border-l-2 border-brand-500 bg-bp-tint px-6 py-5 [animation-delay:200ms]">
-              <div className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
+              <div className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-brand-700">
                 In one sentence
               </div>
               <p className="m-0 mt-2.5 text-[15px] leading-[1.65] text-bp-body">
@@ -346,7 +346,7 @@ export default function FdePage() {
                 </h3>
                 <p className="mt-3 text-[14px] leading-[1.65] text-white/60">{s.what}</p>
                 <div className="mt-5 border-t border-white/10 pt-4">
-                  <div className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-brand-300">
+                  <div className="font-mono text-[11px] sm:text-[9.5px] uppercase tracking-[0.16em] text-brand-300">
                     You get
                   </div>
                   <p className="mt-2 text-[13.5px] leading-[1.6] text-white/75">{s.get}</p>
@@ -398,7 +398,7 @@ export default function FdePage() {
                 <div className="flex items-center justify-between gap-4">
                   <span className="font-mono text-[11px] tracking-[0.14em] text-brand-500">{m.no}</span>
                   <span className="h-px flex-1 bg-bp-hair" />
-                  <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.12em] text-bp-faint">
+                  <span className="whitespace-nowrap font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.12em] text-bp-faint">
                     {m.shape}
                   </span>
                 </div>
