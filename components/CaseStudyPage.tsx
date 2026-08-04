@@ -28,7 +28,13 @@ function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string
   );
 }
 
-export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
+/**
+ * `region` only moves the breadcrumb and the CTAs. The study itself is the same
+ * proof in both markets, so it is not worth two copies: what would be wrong is
+ * sending an India visitor into the US tree and flipping the nav under them.
+ */
+export default function CaseStudyPage({ cs, region = "us" }: { cs: CaseStudy; region?: "us" | "in" }) {
+  const b = region === "in" ? "/in" : "";
   // Article (not bare CreativeWork): named creator + dates = the entity clarity
   // answer engines reward when deciding what to cite.
   const schema = {
@@ -71,7 +77,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 pb-16 pt-10 sm:px-7 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:pt-12">
           <div className="animate-fade-up">
             <Breadcrumbs
-              trail={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: cs.title }]}
+              trail={[{ label: "Home", href: b || "/" }, { label: "Work", href: `${b}/work` }, { label: cs.title }]}
               tone="light"
             />
             <div className="mt-7 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
@@ -100,7 +106,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
                 </a>
               )}
               <Link
-                href="/strategy-session"
+                href={`${b}/strategy-session`}
                 className="inline-flex items-center gap-2 border border-[#D8E1EC] bg-white px-7 py-3.5 text-[15px] font-semibold text-bp-ink transition-colors hover:border-brand-300 hover:text-brand-700"
               >
                 Start a project

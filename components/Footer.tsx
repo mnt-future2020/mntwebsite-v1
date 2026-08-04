@@ -2,7 +2,8 @@ import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import NewsletterForm from "./NewsletterForm";
-import { site, footerNav } from "@/lib/site";
+import { site } from "@/lib/site";
+import FooterNav from "./FooterNav";
 import { PAGE } from "./blueprint";
 
 export default function Footer() {
@@ -50,25 +51,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {footerNav.map((col) => (
-          <div key={col.title}>
-            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
-              {col.title}
-            </div>
-            <ul className="mt-[18px] space-y-[11px]">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="text-[13.8px] text-[#8497AF] transition-colors hover:text-white"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <FooterNav />
       </div>
 
       <div

@@ -2,23 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import BrandLogo from "./BrandLogo";
 import AnnouncementBar from "./AnnouncementBar";
-import { commerceNav, aiNav } from "@/lib/site";
+import RegionSwitch from "./RegionSwitch";
+import { REGIONS, regionFromPath } from "@/lib/regions";
 
-// One services door, not two. AI is the layer these platforms are built with,
-// so it lives inside the commerce hub rather than beside it: a second top-level
-// entry told visitors AI was a separate thing to buy, which is the opposite of
-// what "AI-native" claims.
-const navLinks = [
-  { label: "Commerce", href: "/commerce" },
-  { label: "Work", href: "/work" },
-  { label: "About", href: "/about" },
-];
-
+// The nav is region-derived, not hardcoded: the URL prefix already says which
+// market a visitor is in, so reading it here keeps the two navs from drifting
+// apart. In the US, AI lives inside the commerce hub rather than beside it,
+// because a second top-level entry read as though AI were a separate thing to
+// buy. In India it is a separate thing to buy, so there it is top level.
 export default function Header() {
+  const pathname = usePathname() || "/";
+  const region = regionFromPath(pathname);
+  const cfg = REGIONS[region];
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -59,7 +59,7 @@ export default function Header() {
           </div>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
-            {navLinks.map((l) => (
+            {cfg.navLinks.map((l) => (
               <Link
                 key={l.label}
                 href={l.href}
@@ -72,6 +72,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden flex-1 items-center justify-end gap-3 lg:flex">
+            <RegionSwitch />
             <Link
               href="/open-source"
               aria-label="Open Source"
@@ -81,10 +82,10 @@ export default function Header() {
               <span className="hidden xl:inline">Open Source</span>
             </Link>
             <Link
-              href="/strategy-session"
+              href={cfg.cta.href}
               className="inline-flex items-center gap-2.5 whitespace-nowrap bg-bp-ink px-[22px] py-3.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700"
             >
-              Book a strategy session
+              {cfg.cta.label}
               <Icon name="arrow" className="h-3.5 w-3.5 shrink-0" />
             </Link>
           </div>
@@ -104,66 +105,61 @@ export default function Header() {
         {/* Mobile menu */}
         {open && (
           <div className="fixed inset-x-0 top-[78px] z-40 h-[calc(100dvh-78px)] overflow-y-auto border-t border-bp-line bg-white px-[18px] py-5 sm:px-8 lg:hidden">
-            {/* One group. The AI services are a labelled subsection inside it,
-                matching the desktop nav and the commerce hub. */}
-            <Link
-              href={commerceNav.href}
-              onClick={() => setOpen(false)}
-              className="block border-b border-bp-hair py-4 font-display text-[17px] font-semibold text-bp-ink"
-            >
-              {commerceNav.label}
-            </Link>
-            <div className="py-1">
-              {commerceNav.children.map((c) => (
+            {/* Built from the region's groups so the two markets can never
+                drift apart here. In the US that is one group with AI as a
+                labelled subsection; in India it is three. */}
+            {cfg.groups.map((g, i) => (
+              <div key={g.href}>
                 <Link
-                  key={c.label}
-                  href={c.href}
+                  href={g.href}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm text-bp-mute"
+                  className={`block py-4 font-display text-[17px] font-semibold text-bp-ink ${
+                    i === 0 ? "border-b border-bp-hair" : ""
+                  }`}
                 >
-                  {c.label}
+                  {g.label}
                 </Link>
-              ))}
-            </div>
-            <Link
-              href={aiNav.href}
-              onClick={() => setOpen(false)}
-              className="mt-1 block px-3 pb-1 font-mono text-[11.5px] uppercase tracking-[0.12em] text-brand-700"
-            >
-              {aiNav.label}
-            </Link>
-            <div className="border-b border-bp-hair pb-3">
-              {aiNav.children.map((c) => (
-                <Link
-                  key={c.label}
-                  href={c.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm text-bp-mute"
-                >
-                  {c.label}
-                </Link>
-              ))}
-            </div>
-            {[
-              { label: "Work", href: "/work" },
-              { label: "About", href: "/about" },
-              { label: "Open Source", href: "/open-source" },
-            ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block border-b border-bp-hair py-4 font-display text-[17px] font-semibold text-bp-ink"
-              >
-                {l.label}
-              </Link>
+                <div className={i === cfg.groups.length - 1 ? "border-b border-bp-hair pb-3" : "py-1"}>
+                  {g.children.map((c) => (
+                    <Link
+                      key={c.href}
+                      href={c.href}
+                      onClick={() => setOpen(false)}
+                      className="block px-3 py-2.5 text-sm text-bp-mute"
+                    >
+                      {c.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
+            {[
+              ...cfg.navLinks.filter((l) => !cfg.groups.some((g) => g.href === l.href)),
+              { label: "About", href: `${cfg.base}/about` },
+              { label: "Open Source", href: "/open-source" },
+            ]
+              // "About" is already a top-level nav item in the US, so it would
+              // otherwise appear twice on that region's menu.
+              .filter((l, i, all) => all.findIndex((x) => x.href === l.href) === i)
+              .map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block border-b border-bp-hair py-4 font-display text-[17px] font-semibold text-bp-ink"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            <div className="mt-6">
+              <RegionSwitch />
+            </div>
             <Link
-              href="/strategy-session"
+              href={cfg.cta.href}
               onClick={() => setOpen(false)}
-              className="mt-6 flex w-full items-center justify-center gap-2.5 bg-bp-ink px-5 py-4 font-mono text-[13px] font-semibold tracking-[0.06em] text-white"
+              className="mt-4 flex w-full items-center justify-center gap-2.5 bg-bp-ink px-5 py-4 font-mono text-[13px] font-semibold tracking-[0.06em] text-white"
             >
-              Book a strategy session
+              {cfg.cta.label}
               <Icon name="arrow" className="h-4 w-4" />
             </Link>
           </div>

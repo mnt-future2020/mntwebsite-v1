@@ -30,7 +30,9 @@ export type ServiceConfig = {
   approachPoints: string[];
   related: { label: string; href: string }[];
   faq: QA[];
-  cta: { title: string; body: string };
+  cta: { title: string; body: string; primary?: { label: string; href: string }; secondary?: { label: string; href: string } };
+  /** Defaults to the US, which is where most of these pages sell. */
+  areaServed?: string[];
 };
 
 export default function ServicePage({ config }: { config: ServiceConfig }) {
@@ -48,7 +50,7 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
     "@type": "Service",
     serviceType: config.primaryKeyword,
     provider: { "@type": "Organization", name: site.name, legalName: site.legalName },
-    areaServed: ["United States"],
+    areaServed: config.areaServed ?? ["United States"],
   };
 
   return (
@@ -258,7 +260,12 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
         </div>
       </section>
 
-      <CTASection title={config.cta.title} body={config.cta.body} />
+      <CTASection
+        title={config.cta.title}
+        body={config.cta.body}
+        {...(config.cta.primary ? { primary: config.cta.primary } : {})}
+        {...(config.cta.secondary ? { secondary: config.cta.secondary } : {})}
+      />
     </>
   );
 }
