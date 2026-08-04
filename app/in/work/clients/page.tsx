@@ -152,7 +152,7 @@ export default function ClientProjects() {
             title="The commerce platforms, written up in full."
             sub="The ones that take orders and money online, where the client let us publish how they were built. Same client work as everything below, just with a case study behind it."
           />
-          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-11 grid border-l border-t border-bp-edge sm:grid-cols-2 lg:mt-16">
             {COMMERCE.map((c) => (
               <div
                 key={c.key}
@@ -168,20 +168,22 @@ export default function ClientProjects() {
                       src={c.img}
                       alt={`${c.name}: ${c.sector}`}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, 50vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
-                    <span className="absolute left-4 top-4 bg-white/95 px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.12em] text-bp-ink">
+                    {/* Bottom left, not top left: at card width the badge sat
+                        over the client's own logo on three of the four. */}
+                    <span className="absolute bottom-4 left-4 bg-white/95 px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.12em] text-bp-ink shadow-[0_2px_10px_-4px_rgba(11,21,36,0.35)]">
                       Case study
                     </span>
                   </span>
                 </Link>
-                <div className="flex flex-1 flex-col p-7 lg:p-8">
-                  <h3 className="font-display text-[21px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink">
+                <div className="flex flex-1 flex-col p-7 lg:p-9">
+                  <h3 className="font-display text-[23px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink lg:text-[26px]">
                     {c.name}
                   </h3>
-                  <p className="mt-2.5 text-[13.5px] leading-[1.6] text-bp-mute">{c.sector}</p>
-                  <p className="mt-4 flex-1 text-[14px] leading-[1.7] text-bp-mute">{c.blurb}</p>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.6] text-bp-mute">{c.sector}</p>
+                  <p className="mt-4 flex-1 text-[15px] leading-[1.72] text-bp-mute">{c.blurb}</p>
                   <div className="mt-6 pt-1">
                     <MakerMark
                       group="client"
@@ -191,7 +193,7 @@ export default function ClientProjects() {
                     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
                       <Link
                         href={c.href}
-                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
                       >
                         Read the case study
                         <Icon name="arrow" className="h-3.5 w-3.5" />
