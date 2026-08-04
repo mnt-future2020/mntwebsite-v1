@@ -8,6 +8,7 @@ import BlueprintMotion from "@/components/BlueprintMotion";
 import { Breadcrumbs } from "@/components/blocks";
 import { SectionHead, RuleLabel, BpButton, MakerMark, PAGE } from "@/components/blueprint";
 import { INDIA_CLIENTS, CLIENTS_WITH_BUILD, CLIENTS_LISTED } from "@/lib/indiaClients";
+import { caseStudies } from "@/lib/caseStudies";
 import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,19 +22,23 @@ export async function generateMetadata(): Promise<Metadata> {
 const SPOT =
   "radial-gradient(190px circle at var(--mx,50%) var(--my,0%),rgba(32,149,241,calc(0.05 * var(--spot,0))),transparent 72%)";
 
+// The three commerce platforms written up in full are client work like the
+// rest, so they lead this page rather than sitting behind a separate link.
+// They keep the extra route to their case study; nothing else changes.
+const STUDIES = caseStudies.filter((c) => c.group === "client");
+const TOTAL = STUDIES.length + INDIA_CLIENTS.length;
+
 // Every project is a real, live site, so the page is an ItemList of them rather
 // than a marketing claim about how many we have done.
 const schema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "Client projects by MnT Future",
-  numberOfItems: INDIA_CLIENTS.length,
-  itemListElement: INDIA_CLIENTS.map((c, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    name: c.name,
-    url: c.url,
-  })),
+  numberOfItems: TOTAL,
+  itemListElement: [
+    ...STUDIES.map((c) => ({ name: c.title, url: c.liveUrl || `${site.url}/in/work/${c.slug}` })),
+    ...INDIA_CLIENTS.map((c) => ({ name: c.name, url: c.url })),
+  ].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, url: c.url })),
 };
 
 export default function ClientProjects() {
@@ -68,17 +73,17 @@ export default function ClientProjects() {
             </span>
             <span className="min-w-3 flex-1" />
             <span className="hidden whitespace-nowrap font-mono text-[11.5px] uppercase tracking-[0.2em] text-[#A6B3C4] sm:inline">
-              {INDIA_CLIENTS.length} live sites
+              {TOTAL} live sites
             </span>
           </div>
           <h1 className="mt-8 max-w-[16ch] animate-rise-in font-display text-[40px] font-bold leading-[0.98] tracking-[-0.05em] text-bp-ink sm:text-[58px] lg:text-[78px]">
-            {INDIA_CLIENTS.length} client platforms, all of them live.
+            {TOTAL} client platforms, all of them live.
           </h1>
           <p className="mt-6 max-w-[62ch] animate-rise-in text-[18.5px] leading-[1.68] text-bp-mute [animation-delay:120ms]">
-            Facade systems, printing, solar, education, accounting, disability care, events, pest
-            control, travel, engineering, logistics. Different industries, same approach: a real
-            application with a database and an admin behind it, not a brochure somebody has to call
-            us to change.
+            Commerce platforms, facade systems, printing, solar, education, accounting, disability
+            care, events, pest control, travel, engineering and logistics. Different industries,
+            same approach: a real application with a database and an admin behind it, not a
+            brochure somebody has to call us to change.
           </p>
           <p className="mt-5 max-w-[58ch] animate-rise-in text-[14.5px] leading-[1.65] text-bp-faint [animation-delay:180ms]">
             Every capability listed on this page was checked against the project&apos;s own code
@@ -88,18 +93,91 @@ export default function ClientProjects() {
           <div className="mt-9 flex flex-wrap gap-3">
             <BpButton href="/in/strategy-session">Start a project</BpButton>
             <BpButton href="/in/work" variant="outline">
-              Case studies
+              All our work
             </BpButton>
           </div>
         </div>
       </section>
 
-      {/* 01 THE BUILDS */}
-      <section data-reveal className="border-b border-bp-line bg-bp-wash">
+      {/* 01 WRITTEN UP IN FULL */}
+      <section data-reveal className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
             no="01"
-            total="03"
+            total="04"
+            eyebrow="Written up in full"
+            title="Three of them with the whole story."
+            sub="Commerce platforms where the client let us publish the architecture and the numbers. Same client work as everything below, just with a case study behind it."
+          />
+          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 lg:grid-cols-3">
+            {STUDIES.map((c) => (
+              <div
+                key={c.slug}
+                data-stagger
+                data-spot
+                style={{ backgroundImage: SPOT }}
+                className="flex flex-col border-b border-r border-bp-edge bg-white"
+              >
+                <Link href={`/in/work/${c.slug}`} className="group block border-b border-bp-edge">
+                  <span className="relative block aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={c.cover}
+                      alt={`${c.title}: ${c.tagline}`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                    <span className="absolute left-4 top-4 bg-white/95 px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.12em] text-bp-ink">
+                      Case study
+                    </span>
+                  </span>
+                </Link>
+                <div className="flex flex-1 flex-col p-7 lg:p-8">
+                  <h3 className="font-display text-[23px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.6] text-bp-mute">{c.category}</p>
+                  <p className="mt-4 flex-1 text-[14.5px] leading-[1.7] text-bp-mute">{c.tagline}</p>
+                  <div className="mt-6 pt-1">
+                    <MakerMark
+                      group="client"
+                      detail={c.scope.find((x) => x.label === "Status")?.value}
+                      className="border-t border-bp-hair pt-4"
+                    />
+                    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
+                      <Link
+                        href={`/in/work/${c.slug}`}
+                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                      >
+                        Read the case study
+                        <Icon name="arrow" className="h-3.5 w-3.5" />
+                      </Link>
+                      {c.liveUrl && (
+                        <a
+                          href={c.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 py-1.5 font-mono text-[12px] tracking-[0.06em] text-bp-faint transition-colors hover:text-bp-ink"
+                        >
+                          {c.liveLabel?.replace(/^Visit\s+/, "") || "Live site"}
+                          <Icon name="arrow" className="h-3 w-3 -rotate-45" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 02 THE BUILDS */}
+      <section data-reveal className="border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-20 lg:py-[110px]`}>
+          <SectionHead
+            no="02"
+            total="04"
             eyebrow="Custom builds"
             title="Applications, not brochure sites."
             sub="Each of these has a database, an admin the client actually uses, and the parts their business needs: payments where money changes hands, uploads where there are galleries, member accounts where there are members."
@@ -204,8 +282,8 @@ export default function ClientProjects() {
       <section data-reveal className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
-            no="02"
-            total="03"
+            no="03"
+            total="04"
             eyebrow="Also built"
             title="Live, and listed without embellishment."
             sub="These are ours too. We do not have the codebase in front of us to describe what is behind them, so rather than guess, here is the client and the link."
@@ -256,8 +334,8 @@ export default function ClientProjects() {
       <section data-reveal className="border-b border-bp-line bg-bp-ink">
         <div className={`${PAGE} py-20 lg:py-[110px]`}>
           <SectionHead
-            no="03"
-            total="03"
+            no="04"
+            total="04"
             eyebrow="What they share"
             title="The client can change it without calling us."
             sub="Across every one of these, the same decision: content lives in a database with an admin behind it. A brochure site saves a week at the start and costs the client a phone call every time a price changes."
@@ -285,12 +363,13 @@ export default function ClientProjects() {
           <div className="mt-12 border-t border-white/10 pt-8">
             <RuleLabel tone="dark">Deeper stories</RuleLabel>
             <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.7] text-white/55">
-              The commerce platforms we have written up in full, with the architecture and the
-              numbers, are on the case studies page.
+              The three at the top of this page have a full write-up behind them: the
+              architecture, the decisions and the numbers. The rest of our work, including the
+              platforms we build and run ourselves, is on the work page.
             </p>
             <div className="mt-6 flex flex-wrap gap-2.5">
               {[
-                { label: "Case studies", href: "/in/work" },
+                { label: "All our work", href: "/in/work" },
                 { label: "Ecommerce platforms", href: "/in/ecommerce" },
                 { label: "Our products", href: "/in/products" },
               ].map((r) => (
@@ -311,7 +390,7 @@ export default function ClientProjects() {
         title="Your business, on something you can actually run."
         body={`Tell us what your team needs to change without calling a developer. A senior consultant will map it, and tell you honestly when a smaller build would do. Or email us at ${site.email}.`}
         primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
-        secondary={{ label: "Case studies", href: "/in/work" }}
+        secondary={{ label: "All our work", href: "/in/work" }}
       />
     </>
   );

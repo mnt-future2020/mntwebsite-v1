@@ -86,12 +86,12 @@ export default function IndiaWork() {
                 Client projects
               </div>
               <h2 className="mt-5 max-w-[18ch] font-display text-[28px] font-bold leading-[1.08] tracking-[-0.036em] text-white lg:text-[38px]">
-                {INDIA_CLIENTS.length} more client platforms, all of them live.
+                {INDIA_CLIENTS.length + caseStudies.filter((c) => c.group === "client").length} client platforms, all of them live.
               </h2>
               <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.7] text-white/65">
-                Facade, printing, solar, education, accounting, disability care, events, pest
-                control, travel, engineering and logistics. Custom builds with a database and an
-                admin behind them, not brochure sites.
+                Commerce platforms, facade, printing, solar, education, accounting, disability
+                care, events, pest control, travel, engineering and logistics. Every client
+                project in one place, the three written up in full included.
               </p>
             </div>
             <div className="lg:justify-self-end">
@@ -99,7 +99,7 @@ export default function IndiaWork() {
                 href="/in/work/clients"
                 className="group inline-flex h-14 items-center bg-white pl-7 font-mono text-[13px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:bg-brand-300"
               >
-                See all client projects
+                View all client projects
                 <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-bp-ink/15">
                   <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>

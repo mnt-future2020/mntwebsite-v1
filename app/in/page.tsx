@@ -345,7 +345,7 @@ export default function IndiaHome() {
             total="05"
             eyebrow="Selected work"
             title="Platforms running in India right now."
-            sub="Every one of these was designed and engineered here, end to end, and every one is live and trading. Published with the client's permission."
+            sub="Every one of these was designed and engineered here, end to end, and every one is live and trading. Published with the client's permission. Three of nineteen shown here."
           />
           <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-2">
             {clientWork.map((c) => (
@@ -386,10 +386,7 @@ export default function IndiaHome() {
             ))}
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <BpButton href="/in/work/clients">See all client projects</BpButton>
-            <BpButton href="/in/work" variant="outline">
-              Case studies
-            </BpButton>
+            <BpButton href="/in/work/clients">View all client projects</BpButton>
           </div>
         </div>
       </section>
