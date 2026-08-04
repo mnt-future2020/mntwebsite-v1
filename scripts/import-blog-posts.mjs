@@ -49,28 +49,61 @@ export function toPostFields(p) {
   };
 }
 
+// --build is what the deploy runs. It differs from a manual run in two ways, both
+// deliberate:
+//   * new posts only — a deploy must never overwrite a post someone has since
+//     edited in /admin, so existing slugs are left alone.
+//   * never fails the deploy — if the database is unreachable, shipping the site
+//     still matters more than publishing; the post can be synced afterwards.
+// A manual run (no flag) upserts everything and exits non-zero on failure, which
+// is what you want when you are deliberately re-syncing.
+const BUILD_MODE = process.argv.includes("--build");
+
 async function main() {
   const posts = JSON.parse(await fs.readFile(path.join(ROOT, "content", "blog-posts.json"), "utf8"));
+
+  let created = 0;
+  let updated = 0;
+  let skipped = 0;
+
   for (const p of posts) {
     const fields = toPostFields(p);
-    const post = await prisma.post.upsert({
-      where: { slug: p.slug },
-      update: fields,
-      create: { slug: p.slug, ...fields },
-    });
-    console.log(
-      `✓ Published /blog/${post.slug} — "${post.title}" (${post.author}, ${fields.publishedAt
-        .toISOString()
-        .slice(0, 10)})`
-    );
+    const date = fields.publishedAt.toISOString().slice(0, 10);
+
+    if (BUILD_MODE) {
+      const existing = await prisma.post.findUnique({ where: { slug: p.slug }, select: { id: true } });
+      if (existing) {
+        skipped++;
+        continue;
+      }
+      await prisma.post.create({ data: { slug: p.slug, ...fields } });
+      created++;
+      console.log(`✓ Published /blog/${p.slug} — "${p.title}" (${fields.author}, ${date})`);
+      continue;
+    }
+
+    const before = await prisma.post.findUnique({ where: { slug: p.slug }, select: { id: true } });
+    await prisma.post.upsert({ where: { slug: p.slug }, update: fields, create: { slug: p.slug, ...fields } });
+    before ? updated++ : created++;
+    console.log(`✓ ${before ? "Updated" : "Published"} /blog/${p.slug} — "${p.title}" (${fields.author}, ${date})`);
   }
-  console.log(`\n${posts.length} post(s) synced.`);
+
+  const parts = [`${created} new`];
+  if (!BUILD_MODE) parts.push(`${updated} updated`);
+  if (skipped) parts.push(`${skipped} already live`);
+  console.log(`\nblog sync: ${parts.join(", ")} (of ${posts.length} in content/blog-posts.json)`);
+}
+
+if (BUILD_MODE && !process.env.DATABASE_URL) {
+  // Not an error: local/CI builds legitimately have no database.
+  console.log("blog sync: no DATABASE_URL, skipping (site build continues)");
+  process.exit(0);
 }
 
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {
-    console.error(e);
+    console.error(BUILD_MODE ? `blog sync failed (deploy continues): ${e.message}` : e);
     await prisma.$disconnect();
-    process.exit(1);
+    process.exit(BUILD_MODE ? 0 : 1);
   });

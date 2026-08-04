@@ -46,13 +46,16 @@ Facebook, publishing notes) are for social channels, not the site.
      when the doc has a date.
    - `author: "CEO Udhayaseelan"` — the standing byline for these posts.
    - `coverImage:` the PNG from step 6 (also used as `ogImage`).
-8. **Publish.** Two routes, both idempotent (upsert keyed on slug):
-   - **From the deployed app** (preferred — it already holds `DATABASE_URL`, so
-     no production credential ever has to reach a laptop or an agent session).
-     Deploy first, then:
-     `curl "https://mntfuture.com/api/cron/sync-blog?secret=$CRON_SECRET"`
-     Returns `{count, synced:[{slug,title,publishedAt}]}`.
-   - **Locally**, if `.env` has the production `DATABASE_URL`: `npm run import:blog`.
+8. **Publishing is automatic.** The deploy's build command ends with
+   `node scripts/import-blog-posts.mjs --build`, which inserts any post in
+   `content/blog-posts.json` that isn't in the database yet. So pushing to `main`
+   *is* publishing — there's nothing to trigger by hand.
+   - `--build` inserts **new slugs only**. It will not overwrite a post that
+     already exists, so edits made in `/admin` are safe from a redeploy.
+   - To force an **update** to an already-published post, use one of:
+     `curl "https://mntfuture.com/api/cron/sync-blog?secret=$CRON_SECRET"` (full
+     upsert, runs in the deployed app), or `npm run import:blog` locally with a
+     production `DATABASE_URL`.
 9. **Append a row to the Drive Topic Log** so tomorrow's pack doesn't repeat the
    angle: `YYYY-MM-DD | Theme | Blog headline | Angle | Primary keyword`.
 10. **Deploy** — follow the **deploy** skill (typecheck, build, push to `main`).
@@ -73,9 +76,10 @@ Facebook, publishing notes) are for social channels, not the site.
   `scripts/assets/blog-thumb-fonts.css`, so no network is required at run time.
 - `next build` ignores type errors (`typescript.ignoreBuildErrors: true`) —
   always run `npx tsc --noEmit` separately.
-- Deploying the content is **not** publishing it. `content/blog-posts.json` only
-  reaches the database when step 8 runs; a green deploy with no sync means the
-  post is still absent from `/blog`. Verify before reporting it live.
-- If neither `DATABASE_URL` nor `CRON_SECRET` is available, commit the JSON +
-  thumbnail and say plainly that publishing still needs step 8 — don't report it
-  as published.
+- **Always confirm the post is actually live** — `curl` its URL for a 200 and
+  check it's the first card on `/blog`. A green deploy is good evidence but not
+  proof: if the build ran without `DATABASE_URL`, the sync step logs
+  `blog sync: no DATABASE_URL, skipping` and the deploy still succeeds with
+  nothing published. Never report a post as live without the 200.
+- If it isn't live after the deploy, check the DigitalOcean build log for that
+  `blog sync:` line — it says whether the step ran, skipped, or failed.
