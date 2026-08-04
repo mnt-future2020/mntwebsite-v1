@@ -88,9 +88,12 @@ export default function RatingsRibbon({ variant = "band" }: { variant?: "band" |
     );
   });
 
+  // The inline line is desktop only. On a phone the hero is already tall and
+  // this pushes the CTAs further from the fold; the band after the work still
+  // carries the ratings there.
   if (!dark) {
     return (
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-bp-hair pt-5">
+      <div className="hidden flex-wrap items-center gap-x-6 gap-y-1 border-t border-bp-hair pt-5 sm:flex">
         <span className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-bp-faint">
           Client rated
         </span>
