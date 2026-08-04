@@ -91,7 +91,7 @@ export default function RatingsRibbon({ variant = "band" }: { variant?: "band" |
   if (!dark) {
     return (
       <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-bp-hair pt-5">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-bp-faint">
+        <span className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-bp-faint">
           Client rated
         </span>
         {items}
@@ -105,7 +105,7 @@ export default function RatingsRibbon({ variant = "band" }: { variant?: "band" |
         className={`${PAGE} flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-7 lg:justify-between lg:gap-x-12 lg:py-8`}
       >
         <div className="text-center lg:text-left">
-          <div className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-brand-300">
+          <div className="font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-brand-300">
             What our clients say
           </div>
           <p className="mt-2 max-w-[34ch] font-display text-[19px] font-bold leading-[1.2] tracking-[-0.028em] text-white lg:text-[23px]">
