@@ -49,7 +49,7 @@ export const INDIA_CLIENTS: ClientProject[] = [
     name: "The Print Emporium",
     shot: "/clients/print-emporium.webp",
     slug: "print-emporium",
-    industry: "Retail & print",
+    industry: "Ecommerce",
     host: "theprintemporium.in",
     url: "https://www.theprintemporium.in/",
     sector: "Custom printing: business cards, flyers, banners",

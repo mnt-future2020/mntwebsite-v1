@@ -101,8 +101,12 @@ export function SectionHead({
   const dark = tone === "dark";
   return (
     <div className="flex flex-wrap items-start gap-6 lg:gap-[72px]">
+      {/* Fixed width and tabular figures. As auto-width text the numeral was
+          81px for "01" and 100px for "04", so every section title on a page
+          started at a slightly different x. On a design built out of hairline
+          grids that reads as sloppy without anyone being able to name why. */}
       <div
-        className={`font-display text-[46px] font-extrabold leading-[0.8] tracking-[-0.05em] lg:text-[74px] ${
+        className={`w-[62px] shrink-0 font-display text-[46px] font-extrabold leading-[0.8] tracking-[-0.05em] tabular-nums lg:w-[104px] lg:text-[74px] ${
           dark ? "text-white/[0.07]" : "text-bp-ghost"
         }`}
         aria-hidden="true"

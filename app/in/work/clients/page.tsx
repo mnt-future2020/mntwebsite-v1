@@ -30,6 +30,36 @@ const SPOT =
 const STUDIES = caseStudies.filter((c) => c.group === "client");
 const TOTAL = STUDIES.length + INDIA_CLIENTS.length;
 
+// Print Emporium takes orders and payment online, which makes it a commerce
+// platform like the other three rather than a printer with a website. It has a
+// write-up of its own, so it belongs in this section and not below it.
+const COMMERCE = [
+  ...STUDIES.map((c) => ({
+    key: c.slug,
+    name: c.title,
+    sector: c.category,
+    blurb: c.tagline,
+    img: c.cover,
+    href: `/in/work/${c.slug}`,
+    status: c.scope.find((x) => x.label === "Status")?.value,
+    live: c.liveUrl,
+    liveLabel: c.liveLabel?.replace(/^Visit\s+/, ""),
+  })),
+  ...INDIA_CLIENTS.filter((c) => c.slug === "print-emporium").map((c) => ({
+    key: c.slug,
+    name: c.name,
+    sector: c.sector,
+    blurb: CLIENT_DETAILS[c.slug].headline,
+    img: c.shot,
+    href: `/in/work/clients/${c.slug}`,
+    status: "Live and selling",
+    live: c.url,
+    liveLabel: c.host,
+  })),
+];
+// ...and therefore not again in the grid below.
+const BUILDS = CLIENTS_WITH_BUILD.filter((c) => c.slug !== "print-emporium");
+
 // Every project is a real, live site, so the page is an ItemList of them rather
 // than a marketing claim about how many we have done.
 const schema = {
@@ -119,26 +149,26 @@ export default function ClientProjects() {
             no="01"
             total="04"
             eyebrow="Written up in full"
-            title="Three of them with the whole story."
-            sub="Commerce platforms where the client let us publish the architecture and the numbers. Same client work as everything below, just with a case study behind it."
+            title="Four commerce platforms, written up in full."
+            sub="The ones that take orders and money online, where the client let us publish how they were built. Same client work as everything below, just with a case study behind it."
           />
-          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 lg:grid-cols-3">
-            {STUDIES.map((c) => (
+          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+            {COMMERCE.map((c) => (
               <div
-                key={c.slug}
+                key={c.key}
                 data-stagger
                 data-spot
                 data-industry="Ecommerce"
                 style={{ backgroundImage: SPOT }}
                 className="flex flex-col border-b border-r border-bp-edge bg-white"
               >
-                <Link href={`/in/work/${c.slug}`} className="group block border-b border-bp-edge">
+                <Link href={c.href} className="group block border-b border-bp-edge">
                   <span className="relative block aspect-[16/10] overflow-hidden bg-slate-100">
                     <Image
-                      src={c.cover}
-                      alt={`${c.title}: ${c.tagline}`}
+                      src={c.img}
+                      alt={`${c.name}: ${c.sector}`}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     <span className="absolute left-4 top-4 bg-white/95 px-3 py-1.5 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.12em] text-bp-ink">
@@ -147,33 +177,33 @@ export default function ClientProjects() {
                   </span>
                 </Link>
                 <div className="flex flex-1 flex-col p-7 lg:p-8">
-                  <h3 className="font-display text-[23px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink">
-                    {c.title}
+                  <h3 className="font-display text-[21px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink">
+                    {c.name}
                   </h3>
-                  <p className="mt-2.5 text-[14.5px] leading-[1.6] text-bp-mute">{c.category}</p>
-                  <p className="mt-4 flex-1 text-[14.5px] leading-[1.7] text-bp-mute">{c.tagline}</p>
+                  <p className="mt-2.5 text-[13.5px] leading-[1.6] text-bp-mute">{c.sector}</p>
+                  <p className="mt-4 flex-1 text-[14px] leading-[1.7] text-bp-mute">{c.blurb}</p>
                   <div className="mt-6 pt-1">
                     <MakerMark
                       group="client"
-                      detail={c.scope.find((x) => x.label === "Status")?.value}
+                      detail={c.status}
                       className="border-t border-bp-hair pt-4"
                     />
                     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
                       <Link
-                        href={`/in/work/${c.slug}`}
-                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
+                        href={c.href}
+                        className="group inline-flex items-center gap-2.5 py-1.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
                       >
                         Read the case study
                         <Icon name="arrow" className="h-3.5 w-3.5" />
                       </Link>
-                      {c.liveUrl && (
+                      {c.live && (
                         <a
-                          href={c.liveUrl}
+                          href={c.live}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 py-1.5 font-mono text-[12px] tracking-[0.06em] text-bp-faint transition-colors hover:text-bp-ink"
                         >
-                          {c.liveLabel?.replace(/^Visit\s+/, "") || "Live site"}
+                          {c.liveLabel || "Live site"}
                           <Icon name="arrow" className="h-3 w-3 -rotate-45" />
                         </a>
                       )}
@@ -197,7 +227,7 @@ export default function ClientProjects() {
             sub="Each of these has a database, an admin the client actually uses, and the parts their business needs: payments where money changes hands, uploads where there are galleries, member accounts where there are members."
           />
           <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2">
-            {CLIENTS_WITH_BUILD.map((c, i) => (
+            {BUILDS.map((c, i) => (
               <div
                 key={c.host}
                 data-stagger
