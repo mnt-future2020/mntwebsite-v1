@@ -1,7 +1,5 @@
-import Image from "next/image";
-import AgentScan from "./AgentScan";
+import PlatformPlan from "./PlatformPlan";
 import { BpButton, PAGE } from "./blueprint";
-import { images } from "@/lib/site";
 
 // Each word rises in on its own delay, so the sentence assembles rather than
 // fading in as a block.
@@ -137,52 +135,7 @@ export default function Hero() {
         </div>
 
         <div className="relative animate-rise-in [animation-delay:280ms]" style={{ perspective: "1100px" }}>
-          <div id="mnt-frame" className="relative border border-[#D3DDE9] bg-white shadow-[0_44px_90px_-46px_rgba(11,21,36,0.42)] will-change-transform">
-            {/* Registration marks: the blueprint tell. */}
-            <span className="absolute -left-1 -top-1 h-[9px] w-[9px] border-l border-t border-brand-500" />
-            <span className="absolute -right-1 -top-1 h-[9px] w-[9px] border-r border-t border-brand-500" />
-            <span className="absolute -bottom-1 -left-1 h-[9px] w-[9px] border-b border-l border-brand-500" />
-            <span className="absolute -bottom-1 -right-1 h-[9px] w-[9px] border-b border-r border-brand-500" />
-            <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-brand-500 to-transparent" />
-
-            <div className="flex items-center gap-2 border-b border-bp-line bg-bp-tint px-4 py-3">
-              <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
-              <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
-              <span className="h-[7px] w-[7px] rounded-full bg-[#DCE3EC]" />
-              <span className="ml-2.5 flex-1 border border-[#E9EEF5] bg-white px-3 py-1.5 font-mono text-[11.5px] text-bp-faint">
-                mntfuture.com
-              </span>
-            </div>
-
-            <div className="relative overflow-hidden">
-              <Image
-                src={images.hero}
-                alt="AI-native commerce platform"
-                width={900}
-                height={300}
-                className="block h-[118px] w-full object-cover grayscale contrast-[1.06] brightness-[1.04] lg:h-[152px]"
-              />
-              <div
-                className="absolute inset-0 mix-blend-multiply"
-                style={{
-                  background: "linear-gradient(120deg,rgba(32,149,241,0.5),rgba(11,21,36,0.42))",
-                }}
-              />
-            </div>
-
-            <AgentScan />
-
-            <div className="flex items-center gap-3.5 border-t border-bp-line bg-bp-tint px-4 py-4 sm:px-[22px]">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-brand-500/[0.07] text-brand-700">
-                <svg viewBox="0 0 24 24" className="h-[17px] w-[17px]" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12.5l4.2 4.2L19 7" />
-                </svg>
-              </span>
-              <span className="text-[14px] leading-[1.5] text-[#334458]">
-                AI-native and agent-ready: built to sell to people and to AI.
-              </span>
-            </div>
-          </div>
+          <PlatformPlan />
           <div
             className="mx-auto h-7 w-[88%]"
             style={{

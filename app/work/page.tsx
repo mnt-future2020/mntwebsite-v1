@@ -5,7 +5,7 @@ import { caseStudies } from "@/lib/caseStudies";
 import Icon from "@/components/Icon";
 import CTASection from "@/components/CTASection";
 import BlueprintMotion from "@/components/BlueprintMotion";
-import { SectionHead, BpButton, PAGE } from "@/components/blueprint";
+import { SectionHead, BpButton, MakerMark, PAGE } from "@/components/blueprint";
 
 export const metadata: Metadata = {
   title: { absolute: "Our Work: Case Studies | MnT Future" },
@@ -127,6 +127,11 @@ export default function WorkIndex() {
                         {c.title}
                       </h3>
                       <p className="mt-3 text-[14.5px] leading-[1.7] text-bp-mute">{c.tagline}</p>
+                      <MakerMark
+                        group={c.group}
+                        detail={c.scope.find((s) => s.label === "Status")?.value}
+                        className="mt-6 border-t border-bp-hair pt-4"
+                      />
                       <span className="mt-auto inline-flex items-center gap-2.5 pt-7 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
                         Read the case study
                         <Icon name="arrow" className="h-3.5 w-3.5" />

@@ -10,7 +10,7 @@ import { QA } from "@/components/FAQ";
 import BlueprintFaq from "@/components/BlueprintFaq";
 import ReceiptsMarquee from "@/components/ReceiptsMarquee";
 import { caseStudies } from "@/lib/caseStudies";
-import { SectionHead, RuleLabel, BpButton, PAGE } from "@/components/blueprint";
+import { SectionHead, RuleLabel, BpButton, MakerMark, PAGE } from "@/components/blueprint";
 import BlueprintMotion from "@/components/BlueprintMotion";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -379,7 +379,7 @@ export default function Home() {
           <div className="mt-11 grid border border-bp-line bg-white lg:mt-16 lg:grid-cols-2">
             <Link href={`/work/${featured.slug}`} className="group relative block overflow-hidden">
               <span className="absolute left-5 top-5 z-10 inline-flex items-center gap-2.5 bg-white/95 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-bp-ink">
-                01 — Case study
+                01 · Case study
               </span>
               <Image
                 src={featured.cover}
@@ -399,6 +399,11 @@ export default function Home() {
               <p className="mt-4 max-w-[46ch] text-[15.5px] leading-[1.7] text-bp-mute">
                 {featured.tagline}
               </p>
+              <MakerMark
+                group={featured.group}
+                detail={featured.scope.find((s) => s.label === "Status")?.value}
+                className="mt-7 max-w-[46ch] border-t border-bp-hair pt-4"
+              />
               <Link
                 href={`/work/${featured.slug}`}
                 className="mt-7 inline-flex items-center gap-2.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all hover:gap-4"
@@ -464,7 +469,7 @@ export default function Home() {
               </span>
             }
           >
-            06 — FAQ
+            06 · FAQ
           </RuleLabel>
           <h2 className="mt-6 font-display text-[32px] font-bold leading-[1.04] tracking-[-0.038em] text-bp-ink lg:text-[52px]">
             Questions buyers ask us first

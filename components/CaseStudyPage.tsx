@@ -7,6 +7,7 @@ import SectionTitle from "./SectionTitle";
 import BlueprintMotion from "./BlueprintMotion";
 import BlueprintFaq from "./BlueprintFaq";
 import { CheckList, Breadcrumbs } from "./blocks";
+import { MakerMark } from "./blueprint";
 import { site } from "@/lib/site";
 import type { CaseStudy } from "@/lib/caseStudies";
 
@@ -81,6 +82,11 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
               {cs.title}
             </h1>
             <p className="mt-4 max-w-md text-[17px] leading-[1.65] text-bp-mute">{cs.tagline}</p>
+            <MakerMark
+              group={cs.group}
+              detail={cs.scope.find((s) => s.label === "Status")?.value}
+              className="mt-7 max-w-md border-t border-bp-line pt-4"
+            />
             <div className="mt-8 flex flex-wrap gap-3.5">
               {cs.liveUrl && (
                 <a

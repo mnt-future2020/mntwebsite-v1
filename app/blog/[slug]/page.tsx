@@ -93,7 +93,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                 {post.title}
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
-                <span className="font-semibold text-slate-600">{authorName}</span>
+                <span className="font-semibold text-bp-mute">{authorName}</span>
                 <span>·</span>
                 {post.publishedAt ? (
                   <time dateTime={new Date(post.publishedAt).toISOString()}>{formatDate(post.publishedAt)}</time>

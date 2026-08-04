@@ -32,6 +32,54 @@ export function RuleLabel({
   );
 }
 
+/**
+ * The plate a builder leaves on the thing they built.
+ *
+ * Deliberately smaller than the client's name above it: the inversion is what
+ * says somebody else owns this platform and we are the ones who made it. The
+ * wording tracks `group` so an internal build can never read as client work.
+ */
+export function MakerMark({
+  group,
+  detail,
+  tone = "light",
+  className = "",
+}: {
+  group: "client" | "own" | "lab";
+  detail?: string;
+  tone?: "light" | "dark";
+  className?: string;
+}) {
+  const label =
+    group === "client"
+      ? "Built by MnT Future"
+      : group === "own"
+        ? "Built and run by MnT Future"
+        : "MnT Future R&D";
+  const dark = tone === "dark";
+  return (
+    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 ${className}`}>
+      <span
+        className={`font-mono text-[10px] uppercase tracking-[0.2em] ${
+          dark ? "text-white/85" : "text-bp-ink"
+        }`}
+      >
+        {label}
+      </span>
+      <span className={`h-px min-w-4 flex-1 ${dark ? "bg-white/15" : "bg-bp-edge"}`} />
+      {detail && (
+        <span
+          className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
+            dark ? "text-white/45" : "text-bp-faint"
+          }`}
+        >
+          {detail}
+        </span>
+      )}
+    </div>
+  );
+}
+
 /** Numbered section header: ghost numeral, mono eyebrow, display title. */
 export function SectionHead({
   no,
