@@ -346,7 +346,7 @@ export default function ClientProjects() {
             title="Live, and listed without embellishment."
             sub="These are ours too. We do not have the codebase in front of us to describe what is behind them, so rather than guess, here is the client and the link."
           />
-          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-11 grid border-l border-t border-bp-edge sm:grid-cols-2 lg:mt-16">
             {CLIENTS_LISTED.map((c) => (
               <a
                 key={c.host}
@@ -364,21 +364,21 @@ export default function ClientProjects() {
                     src={c.shot}
                     alt={`${c.name} website`}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </span>
-                <span className="flex flex-1 flex-col p-7">
+                <span className="flex flex-1 flex-col p-7 lg:p-9">
                 {c.region && (
                   <span className="mb-3 whitespace-nowrap font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.12em] text-bp-faint">
                     {c.region}
                   </span>
                 )}
-                <h3 className="font-display text-[19px] font-bold leading-[1.18] tracking-[-0.026em] text-bp-ink">
+                <h3 className="font-display text-[23px] font-bold leading-[1.16] tracking-[-0.028em] text-bp-ink lg:text-[26px]">
                   {c.name}
                 </h3>
-                <p className="mt-2.5 flex-1 text-[14px] leading-[1.6] text-bp-mute">{c.sector}</p>
-                <span className="mt-6 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
+                <p className="mt-3 flex-1 text-[15px] leading-[1.7] text-bp-mute">{c.sector}</p>
+                <span className="mt-6 inline-flex items-center gap-2.5 py-1.5 font-mono text-[12.5px] font-semibold tracking-[0.06em] text-brand-700 transition-all group-hover:gap-4">
                   {c.host}
                   <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
                 </span>
