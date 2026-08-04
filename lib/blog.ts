@@ -4,7 +4,10 @@ export async function getPublishedPosts() {
   try {
     return await prisma.post.findMany({
       where: { status: "PUBLISHED" },
-      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+      // nulls: "last" matters — Postgres sorts DESC as NULLS FIRST, so a post
+      // with no publishedAt would otherwise outrank every dated post and take
+      // over the top of the blog index.
+      orderBy: [{ publishedAt: { sort: "desc", nulls: "last" } }, { createdAt: "desc" }],
     });
   } catch {
     return [];
