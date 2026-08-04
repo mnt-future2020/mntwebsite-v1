@@ -385,9 +385,10 @@ export default function IndiaHome() {
               </Link>
             ))}
           </div>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
+            <BpButton href="/in/work/clients">See all client projects</BpButton>
             <BpButton href="/in/work" variant="outline">
-              See all work
+              Case studies
             </BpButton>
           </div>
         </div>

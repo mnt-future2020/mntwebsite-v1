@@ -7,6 +7,7 @@ import CTASection from "@/components/CTASection";
 import BlueprintMotion from "@/components/BlueprintMotion";
 import { Breadcrumbs } from "@/components/blocks";
 import { SectionHead, BpButton, MakerMark, PAGE } from "@/components/blueprint";
+import { INDIA_CLIENTS } from "@/lib/indiaClients";
 import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -72,6 +73,39 @@ export default function IndiaWork() {
             Live products we designed and engineered end to end, all of them built here in India.
             Judge our engineering on what we ship, not on a logo wall.
           </p>
+        </div>
+      </section>
+
+      {/* The client list comes before the written-up studies: it is the bigger
+          number and the faster answer to "have you built anything like mine". */}
+      <section data-reveal className="border-b border-bp-line bg-bp-ink">
+        <div className={`${PAGE} py-14 lg:py-[76px]`}>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+            <div>
+              <div className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-brand-300">
+                Client projects
+              </div>
+              <h2 className="mt-5 max-w-[18ch] font-display text-[28px] font-bold leading-[1.08] tracking-[-0.036em] text-white lg:text-[38px]">
+                {INDIA_CLIENTS.length} more client platforms, all of them live.
+              </h2>
+              <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.7] text-white/65">
+                Facade, printing, solar, education, accounting, disability care, events, pest
+                control, travel, engineering and logistics. Custom builds with a database and an
+                admin behind them, not brochure sites.
+              </p>
+            </div>
+            <div className="lg:justify-self-end">
+              <Link
+                href="/in/work/clients"
+                className="group inline-flex h-14 items-center bg-white pl-7 font-mono text-[13px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:bg-brand-300"
+              >
+                See all client projects
+                <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-bp-ink/15">
+                  <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
