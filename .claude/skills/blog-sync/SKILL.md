@@ -16,9 +16,10 @@ Facebook, publishing notes) are for social channels, not the site.
 
 1. **List the folder** — `mcp__Google-Drive__search_files` with
    `parentId = '1UcwlBt7UYbhUCmTLv7GlKwrqFuWITxSv'`. Compare `modifiedTime`
-   against what's already in `scripts/import-blog-posts.mjs`.
-2. **Read the Topic Log** (`MnT Content — Topic Log (do not delete)`) to see
-   which angles are already published; skip anything already covered.
+   against what's already in `content/blog-posts.json`.
+2. **Read `content/topic-log.md`** to see which angles are already published;
+   skip anything already covered. This file lives in the repo, not Drive —
+   see the gotcha below on why.
 3. **Read the pack doc** and pull from section 1: SEO Title, Meta Description,
    Slug, Primary/Secondary Keywords, the `#` headline, and the body.
 4. **Convert the body to HTML** — `#`/`##`/`###` → `<h1 is the post title, so h2>/<h3>`,
@@ -56,8 +57,9 @@ Facebook, publishing notes) are for social channels, not the site.
      `curl "https://mntfuture.com/api/cron/sync-blog?secret=$CRON_SECRET"` (full
      upsert, runs in the deployed app), or `npm run import:blog` locally with a
      production `DATABASE_URL`.
-9. **Append a row to the Drive Topic Log** so tomorrow's pack doesn't repeat the
-   angle: `YYYY-MM-DD | Theme | Blog headline | Angle | Primary keyword`.
+9. **Append a row to `content/topic-log.md`** so tomorrow's pack doesn't repeat
+   the angle: `YYYY-MM-DD | Theme | Blog headline | Angle | Primary keyword`.
+   Commit it in the same commit as the `blog-posts.json` change.
 10. **Deploy** — follow the **deploy** skill (typecheck, build, push to `main`).
 
 ## Conventions that must hold
@@ -83,3 +85,13 @@ Facebook, publishing notes) are for social channels, not the site.
   nothing published. Never report a post as live without the 200.
 - If it isn't live after the deploy, check the DigitalOcean build log for that
   `blog sync:` line — it says whether the step ran, skipped, or failed.
+- **The Topic Log lives in `content/topic-log.md`, not a Google Doc.** It used
+  to be a Doc in the Drive folder, but the Drive connector can only *create*
+  files, not edit an existing one's content — every run that needed to log a
+  new angle had to create a fresh "Topic Log" doc instead of appending, which
+  produced silent duplicates. One duplicate got an entry logged for a pack
+  that was never actually published, so the real "skip if already logged"
+  rule quietly blocked a real post from ever going live. Keeping the log as a
+  tracked file fixes this: appending is a normal Edit, and the history is a
+  normal git diff. Ignore any "MnT Content — Topic Log (do not delete)" Google
+  Docs still sitting in the Drive folder — they're stale and superseded.
