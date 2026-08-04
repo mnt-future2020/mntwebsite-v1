@@ -40,14 +40,19 @@ Facebook, publishing notes) are for social channels, not the site.
    Writes `public/blog/blog-<slug>.png` (1600×800). Keep the headline to two
    short lines — line 1 must stay under ~1350px, i.e. roughly 36 characters.
    Kicker is usually `AI COMMERCE` or `AGENTIC COMMERCE`.
-7. **Add an entry to `scripts/import-blog-posts.mjs`** (`POSTS` array) with:
+7. **Add an entry to `content/blog-posts.json`** with:
    - `date:` the doc's own **Date:** field — this drives `publishedAt`, which is
      what makes the newest post sort first on `/blog`. Never leave it to "now"
      when the doc has a date.
    - `author: "CEO Udhayaseelan"` — the standing byline for these posts.
    - `coverImage:` the PNG from step 6 (also used as `ogImage`).
-8. **Publish**: `npm run import:blog` (needs the production `DATABASE_URL` in
-   `.env`; the upsert is keyed on slug, so re-running is safe).
+8. **Publish.** Two routes, both idempotent (upsert keyed on slug):
+   - **From the deployed app** (preferred — it already holds `DATABASE_URL`, so
+     no production credential ever has to reach a laptop or an agent session).
+     Deploy first, then:
+     `curl "https://mntfuture.com/api/cron/sync-blog?secret=$CRON_SECRET"`
+     Returns `{count, synced:[{slug,title,publishedAt}]}`.
+   - **Locally**, if `.env` has the production `DATABASE_URL`: `npm run import:blog`.
 9. **Append a row to the Drive Topic Log** so tomorrow's pack doesn't repeat the
    angle: `YYYY-MM-DD | Theme | Blog headline | Angle | Primary keyword`.
 10. **Deploy** — follow the **deploy** skill (typecheck, build, push to `main`).
@@ -68,6 +73,9 @@ Facebook, publishing notes) are for social channels, not the site.
   `scripts/assets/blog-thumb-fonts.css`, so no network is required at run time.
 - `next build` ignores type errors (`typescript.ignoreBuildErrors: true`) —
   always run `npx tsc --noEmit` separately.
-- If there is no production `DATABASE_URL` in the environment, the post can't go
-  live from here. Commit the script + thumbnail, then say plainly that publishing
-  still needs a run against the prod DB — don't report it as published.
+- Deploying the content is **not** publishing it. `content/blog-posts.json` only
+  reaches the database when step 8 runs; a green deploy with no sync means the
+  post is still absent from `/blog`. Verify before reporting it live.
+- If neither `DATABASE_URL` nor `CRON_SECRET` is available, commit the JSON +
+  thumbnail and say plainly that publishing still needs step 8 — don't report it
+  as published.
