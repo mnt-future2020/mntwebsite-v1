@@ -14,9 +14,12 @@ const config: IndiaHubConfig = {
   slug: "/in/ai",
   eyebrow: "AI",
   aside: "4 services",
+  // The plain name of the category, nothing else. A visitor landing here from
+  // search wants to know what is sold before they want a promise; the hero
+  // paragraph two lines down is where the promise belongs.
   h1: (
     <>
-      AI your team <span className="text-brand-700">actually ends up using</span>.
+      AI <span className="text-brand-700">Services</span>
     </>
   ),
   heroSub:

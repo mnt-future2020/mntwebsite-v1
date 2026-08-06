@@ -32,10 +32,17 @@ const proofStats = [
 // Three lines, deliberately different in kind: a build service, an engineering
 // practice, and shipping products. Saying that out loud stops a visitor
 // wondering whether AI Agent Development and MnT AI CRM are the same purchase.
+//
+// The card title is the plain name of the thing and nothing else. It used to be
+// a sentence — "AI that reaches production", "Applications ready to brand" —
+// and a visitor scanning the homepage for what we sell had to read and decode
+// before they could tell. The eyebrow above it now carries how you buy it,
+// which is the part that actually differs between the three; the paragraph
+// underneath still does the explaining.
 const verticals = [
   {
-    kicker: "Ecommerce",
-    title: "Ecommerce platform development",
+    kicker: "We build it for you",
+    title: "Ecommerce Services",
     desc: "Your own platform rather than a rented one. Storefronts, marketplaces and B2B, with GST invoicing, UPI and Indian payment gateways handled properly instead of bolted on with plugins.",
     href: inEcommerceNav.href,
     icon: "store" as const,
@@ -44,8 +51,8 @@ const verticals = [
     cta: "Explore ecommerce",
   },
   {
-    kicker: "AI",
-    title: "AI your team actually ends up using",
+    kicker: "We build it with your team",
+    title: "AI Services",
     desc: "Advice on what is worth doing, work automated, agents that do real jobs, and complete applications. Built by senior engineers sitting inside your team, who stay until it is running every day: not a consultant who hands you a report and leaves.",
     href: inAiNav.href,
     icon: "ai" as const,
@@ -54,8 +61,8 @@ const verticals = [
     cta: "Explore AI",
   },
   {
-    kicker: "Products",
-    title: "Ready-made software, put in your name",
+    kicker: "Ready to use, in your name",
+    title: "Our Products",
     desc: "Three applications we set up under your name, on your servers: a customer support desk, a WhatsApp CRM, and an online store with GST built in. Ready in weeks instead of a year, and yours to keep.",
     href: inProductsNav.href,
     icon: "grid" as const,

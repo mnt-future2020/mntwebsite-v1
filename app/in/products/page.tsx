@@ -139,8 +139,10 @@ export default function ProductsHub() {
               3 applications
             </span>
           </div>
+          {/* Says what the page is, in the words a visitor would use to ask
+              for it. The paragraph underneath does the selling. */}
           <h1 className="mt-8 max-w-[17ch] animate-rise-in font-display text-[40px] font-bold leading-[0.98] tracking-[-0.05em] text-bp-ink sm:text-[58px] lg:text-[78px]">
-            Software that already works, made yours.
+            Our <span className="text-brand-700">Products</span>
           </h1>
           <p className="mt-6 max-w-[62ch] animate-rise-in text-[18.5px] leading-[1.68] text-bp-mute [animation-delay:120ms]">
             Three applications we deploy on your infrastructure, brand as yours, connect to the
