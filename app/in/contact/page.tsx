@@ -70,10 +70,40 @@ const IN_FAQS = [
   },
 ];
 
+// Phone and WhatsApp come first when they exist: an Indian buyer's first move
+// is a call or a message, and a form is the channel they use when there is no
+// other one. Both render only when the number is set in lib/site.ts, so the
+// page never shows a dead link or a placeholder number.
 const ways = [
+  ...(site.phone
+    ? [
+        {
+          icon: "phone" as const,
+          label: "Call us",
+          value: site.phone,
+          href: `tel:${site.phone.replace(/[^\d+]/g, "")}`,
+        },
+      ]
+    : []),
+  ...(site.whatsapp
+    ? [
+        {
+          icon: "chat" as const,
+          label: "WhatsApp",
+          value: "Message us, we reply the same day",
+          href: `https://wa.me/${site.whatsapp}`,
+        },
+      ]
+    : []),
   { icon: "mail" as const, label: "Email", value: site.email, href: `mailto:${site.email}` },
   { icon: "calendar" as const, label: "Strategy session", value: "45 minutes, no obligation", href: "/in/strategy-session" },
   { icon: "grid" as const, label: "Products", value: "AI Desk, AI CRM, Commerce India", href: "/in/products" },
+  {
+    icon: "pin" as const,
+    label: "Where we are",
+    value: `${site.city}, ${site.state}: clients across India`,
+    href: "/in/about",
+  },
 ];
 
 export default function IndiaContact() {

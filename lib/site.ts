@@ -7,7 +7,23 @@ export const site = {
   domain: "mntfuture.com",
   url: "https://mntfuture.com",
   email: "info@mntfuture.com",
-  phone: "+91 00000 00000",
+  /**
+   * Direct contact channels for the India tree.
+   *
+   * An Indian buyer's first move is a call or a WhatsApp message, not a form —
+   * and the India pages currently offer neither, on a site that sells a
+   * WhatsApp CRM. Every surface that shows these renders them only when they
+   * are set, so filling in a real number here turns them on everywhere at
+   * once. `phone` was previously "+91 00000 00000", which is worse than
+   * nothing: a placeholder that reaches a prospect reads as an abandoned site.
+   */
+  phone: null as string | null,
+  /** Digits only, country code included, e.g. "919876543210". */
+  whatsapp: null as string | null,
+  /** Where the company actually is. Indian buyers weigh this. */
+  city: "Madurai",
+  state: "Tamil Nadu",
+  country: "India",
   tagline: "AI-Native, Agent-Ready Commerce Platforms",
   // Used by the Organization schema and llms.txt, both of which are served on
   // the India tree too, so it has to describe the company rather than only the

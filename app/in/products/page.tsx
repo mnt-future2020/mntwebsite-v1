@@ -265,7 +265,17 @@ export default function ProductsHub() {
             <table className="w-full min-w-[720px] border-collapse border-l border-t border-bp-edge bg-white text-left">
               <thead>
                 <tr>
-                  <th className="border-b border-r border-bp-edge px-5 py-4 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.16em] text-bp-faint" />
+                  {/* The corner cell of a comparison table reads as blank to
+                      the eye but is still a header a screen reader announces,
+                      so it gets a name rather than nothing (axe
+                      `empty-table-header`). Visually hidden, not aria-hidden:
+                      the row header column needs to be labelled. */}
+                  <th
+                    scope="col"
+                    className="border-b border-r border-bp-edge px-5 py-4 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.16em] text-bp-faint"
+                  >
+                    <span className="sr-only">What you are comparing</span>
+                  </th>
                   {["MnT AI Desk", "MnT AI CRM", "MnT Commerce India"].map((h) => (
                     <th
                       key={h}

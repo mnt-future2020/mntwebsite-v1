@@ -4,6 +4,7 @@ import Icon from "./Icon";
 import NewsletterForm from "./NewsletterForm";
 import { site } from "@/lib/site";
 import FooterNav from "./FooterNav";
+import FooterBlurb from "./FooterBlurb";
 import { PAGE } from "./blueprint";
 
 export default function Footer() {
@@ -12,10 +13,10 @@ export default function Footer() {
       <div className={`${PAGE} grid gap-9 pb-8 pt-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-[54px] lg:pt-[82px]`}>
         <div className="min-w-[230px]">
           <Logo variant="light" />
-          <p className="mt-5 max-w-[32ch] text-[14px] leading-[1.7] text-[#7E90A8]">
-            MnT Future: we build AI-native, agent-ready commerce platforms for US D2C &amp;
-            marketplace brands.
-          </p>
+          <FooterBlurb
+            field="footerBlurb"
+            className="mt-5 max-w-[34ch] text-[14px] leading-[1.7] text-[#7E90A8]"
+          />
 
           {/* id: the signup lives only here, so pages that offer it link
               down to this block rather than to a /newsletter page. */}
@@ -23,9 +24,10 @@ export default function Footer() {
             <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
               Newsletter
             </div>
-            <p className="mt-3 text-[13.5px] leading-[1.65] text-[#7E90A8]">
-              Occasional, practical notes on AI-native, agent-ready commerce. No spam.
-            </p>
+            <FooterBlurb
+              field="newsletterBlurb"
+              className="mt-3 text-[13.5px] leading-[1.65] text-[#7E90A8]"
+            />
             <div className="mt-3.5">
               <NewsletterForm source="footer" />
             </div>

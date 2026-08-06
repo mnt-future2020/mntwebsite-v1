@@ -1,34 +1,95 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Icon from "./Icon";
 import { useFormToken } from "./useFormToken";
 import Honeypot from "./Honeypot";
+import { regionFromPath } from "@/lib/regions";
 
 const fieldClass =
   "border border-slate-300 bg-white px-3.5 py-3 text-[14.5px] text-bp-ink placeholder:text-slate-400 outline-none transition-all focus:border-brand-500 focus:ring-[3px] focus:ring-brand-500/15";
 
 const labelClass = "flex flex-col gap-[7px] text-[13px] font-semibold text-slate-700";
 
-const NEED_OPTIONS = [
-  "Commerce platform build",
-  "Shopify store build",
-  "AI & agents / agent-ready",
-  "AI cleanup / MVP rescue",
-  "Something else / not sure yet",
-];
-
-const STAGE_OPTIONS = [
-  "No store yet: starting fresh",
-  "On Shopify / a template platform",
-  "On a custom-built platform",
-  "Running a marketplace or B2B channel",
-  "MVP built, struggling at scale",
-];
-
-const BUDGET_OPTIONS = ["Not sure yet", "Under $25k", "$25k to $75k", "$75k to $200k", "$200k+"];
+/**
+ * The form is asked in the buyer's own terms, per region.
+ *
+ * /in/contact was rendering the US form: an Indian buyer was being asked to
+ * price the work in dollars, against brackets that start at $25,000 — about
+ * ₹21 lakh, which is above the whole budget of most of the businesses this
+ * tree is written for — and to pick from service options ("Shopify store
+ * build", "AI cleanup / MVP rescue") that are not the lines India sells.
+ * Nothing about that form said "this is for you", and a budget question a
+ * visitor cannot honestly answer is where they abandon.
+ *
+ * The values are free text in the DB (Lead.vertical / Lead.budget), so the two
+ * sets can differ without a migration.
+ */
+const COPY = {
+  us: {
+    need: [
+      "Commerce platform build",
+      "Shopify store build",
+      "AI & agents / agent-ready",
+      "AI cleanup / MVP rescue",
+      "Something else / not sure yet",
+    ],
+    stage: [
+      "No store yet: starting fresh",
+      "On Shopify / a template platform",
+      "On a custom-built platform",
+      "Running a marketplace or B2B channel",
+      "MVP built, struggling at scale",
+    ],
+    budgetLabel: "Indicative budget",
+    budget: ["Not sure yet", "Under $25k", "$25k to $75k", "$75k to $200k", "$200k+"],
+    submit: "Book my free strategy session",
+    companyPlaceholder: "yourstore.com: helps us prep before the call",
+    messagePlaceholder:
+      "The bottleneck, the goal, the stack: whatever a senior consultant should read before your session…",
+  },
+  in: {
+    need: [
+      "Ecommerce platform build",
+      "One of your products: AI Desk, AI CRM, Commerce India",
+      "AI consultation or automation",
+      "AI agent or a custom AI application",
+      "Support for a platform I already have",
+      "Something else / not sure yet",
+    ],
+    stage: [
+      "Nothing built yet: starting fresh",
+      "On Shopify, WooCommerce or another rented platform",
+      "On a platform built for us already",
+      "Selling mainly on marketplaces (Amazon, Flipkart, Meesho)",
+      "Built something already, struggling at scale",
+    ],
+    budgetLabel: "Indicative budget (₹)",
+    // Rupee brackets, sized for the Indian mid-market this tree sells to.
+    // Adjust these if they do not match where your deals actually land — they
+    // are a filter for us, not a price list for the buyer.
+    budget: [
+      "Not sure yet",
+      "Under ₹5 lakh",
+      "₹5 lakh to ₹15 lakh",
+      "₹15 lakh to ₹40 lakh",
+      "₹40 lakh+",
+      "Monthly retainer, for embedded engineering",
+    ],
+    // Not "book a session": plenty of enquiries here are a question, and
+    // making the only button a 45-minute commitment loses the ones that are.
+    submit: "Send my enquiry",
+    companyPlaceholder: "yoursite.com: we will look at it before replying",
+    messagePlaceholder:
+      "What you sell, what you run on today, and the thing that is blocking you…",
+  },
+} as const;
 
 export default function ContactForm() {
+  const region = regionFromPath(usePathname() || "/");
+  const copy = COPY[region];
+
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,9 +100,9 @@ export default function ContactForm() {
     name: "",
     email: "",
     company: "",
-    need: NEED_OPTIONS[0],
-    stage: STAGE_OPTIONS[0],
-    budget: BUDGET_OPTIONS[0],
+    need: copy.need[0],
+    stage: copy.stage[0],
+    budget: copy.budget[0],
     message: "",
   });
 
@@ -70,6 +131,8 @@ export default function ContactForm() {
           message: `Where they are today: ${form.stage}\n\n${form.message}`,
           formToken: token,
           website,
+          // So the team can tell an India enquiry from a US one at a glance.
+          source: region === "in" ? "contact-form-in" : "contact-form",
         }),
       });
       if (!res.ok) {
@@ -96,7 +159,9 @@ export default function ContactForm() {
           Thanks: we&apos;ll be in touch.
         </h3>
         <p className="mx-auto mt-3 max-w-[340px] text-[14.5px] leading-[1.65] text-bp-mute">
-          A senior consultant will reply within one business day to schedule your strategy session.
+{region === "in"
+            ? "A senior consultant reads every enquiry and replies within one working day, usually the same day."
+            : "A senior consultant will reply within one business day to schedule your strategy session."}
         </p>
       </div>
     );
@@ -135,7 +200,7 @@ export default function ContactForm() {
         <input
           value={form.company}
           onChange={(e) => update("company", e.target.value)}
-          placeholder="yourstore.com: helps us prep before the call"
+          placeholder={copy.companyPlaceholder}
           className={fieldClass}
         />
       </label>
@@ -148,7 +213,7 @@ export default function ContactForm() {
             onChange={(e) => update("need", e.target.value)}
             className={fieldClass}
           >
-            {NEED_OPTIONS.map((o) => (
+            {copy.need.map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
@@ -160,7 +225,7 @@ export default function ContactForm() {
             onChange={(e) => update("stage", e.target.value)}
             className={fieldClass}
           >
-            {STAGE_OPTIONS.map((o) => (
+            {copy.stage.map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
@@ -168,13 +233,13 @@ export default function ContactForm() {
       </div>
 
       <label className={labelClass}>
-        Indicative budget
+        {copy.budgetLabel}
         <select
           value={form.budget}
           onChange={(e) => update("budget", e.target.value)}
           className={fieldClass}
         >
-          {BUDGET_OPTIONS.map((o) => (
+          {copy.budget.map((o) => (
             <option key={o}>{o}</option>
           ))}
         </select>
@@ -187,7 +252,7 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
-          placeholder="The bottleneck, the goal, the stack: whatever a senior consultant should read before your session…"
+          placeholder={copy.messagePlaceholder}
           className={`${fieldClass} resize-y`}
         />
       </label>
@@ -210,7 +275,7 @@ export default function ContactForm() {
           </>
         ) : (
           <>
-            Book my free strategy session
+            {copy.submit}
             <Icon name="arrow" className="h-4 w-4" />
           </>
         )}

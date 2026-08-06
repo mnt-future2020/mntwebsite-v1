@@ -139,6 +139,16 @@ export type RegionConfig = {
   groups: NavGroup[];
   cta: { label: string; href: string };
   announcement: string;
+  /**
+   * What the footer says the company does. This used to be one hardcoded US
+   * sentence — "we build AI-native, agent-ready commerce platforms for US D2C
+   * and marketplace brands" — printed at the bottom of all 25 India pages. An
+   * Indian visitor who read to the end of /in was told, in the company's own
+   * words, that it builds for somebody else.
+   */
+  footerBlurb: string;
+  /** The newsletter pitch, for the same reason: the topics differ by market. */
+  newsletterBlurb: string;
 };
 
 export const REGIONS: Record<Region, RegionConfig> = {
@@ -157,6 +167,10 @@ export const REGIONS: Record<Region, RegionConfig> = {
     groups: [commerceNav, aiNav],
     cta: { label: "Book a strategy session", href: "/strategy-session" },
     announcement: "Now shipping: ACP · Google UCP · Retail MCP integrations",
+    footerBlurb:
+      "MnT Future: we build AI-native, agent-ready commerce platforms for US D2C & marketplace brands.",
+    newsletterBlurb:
+      "Occasional, practical notes on AI-native, agent-ready commerce. No spam.",
   },
   in: {
     key: "in",
@@ -174,6 +188,10 @@ export const REGIONS: Record<Region, RegionConfig> = {
     groups: [inEcommerceNav, inAiNav, inProductsNav],
     cta: { label: "Book a strategy session", href: "/in/strategy-session" },
     announcement: "New: MnT AI Desk · MnT AI CRM · MnT Commerce India",
+    footerBlurb:
+      "MnT Future: we build ecommerce platforms with GST built in, and AI systems that reach production, for Indian businesses.",
+    newsletterBlurb:
+      "Occasional, practical notes on ecommerce platforms and AI that reaches production. No spam.",
   },
 };
 

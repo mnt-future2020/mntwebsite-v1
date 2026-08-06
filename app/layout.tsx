@@ -115,10 +115,20 @@ const orgSchema = {
     { "@type": "Country", name: "United States" },
     { "@type": "Country", name: "India" },
   ],
+  // City and state only: enough for the India tree to read as a real company
+  // in a real place, without publishing a street address we have not verified.
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.city,
+    addressRegion: site.state,
+    addressCountry: "IN",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     email: site.email,
     contactType: "sales",
+    ...(site.phone ? { telephone: site.phone } : {}),
+    availableLanguage: ["en", "ta"],
   },
   sameAs: [site.social.instagram, site.social.linkedin, site.social.facebook],
   founder: {
