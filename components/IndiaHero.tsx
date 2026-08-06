@@ -135,10 +135,10 @@ export default function IndiaHero() {
       >
         <div className="animate-rise-in [animation-delay:120ms]">
           <p className="m-0 max-w-[56ch] text-[18.5px] leading-[1.68] text-bp-mute">
-            Ecommerce platforms with GST built in, AI agents and automation that reach production
-            rather than stalling at the pilot, and ready applications we brand and customise for
-            you. Senior engineers embedded in your team, from the first discovery call to the day
-            it goes live and after.
+            Online stores with GST built in, AI and automation that your team actually ends up
+            using instead of stopping after the demo, and ready-made software we put in your name.
+            Senior engineers sitting inside your team, from the first call to the day it goes live
+            and after.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">

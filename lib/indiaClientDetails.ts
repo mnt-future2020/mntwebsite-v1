@@ -251,7 +251,7 @@ export const CLIENT_DETAILS: Record<string, ClientDetail> = {
       { title: "Sell packages", desc: "Tour packages built and priced in the admin." },
       { title: "Catch every enquiry", desc: "Bookings into one queue, emailed as they arrive." },
     ],
-    note: "Built on the same platform as Sri Jaidev, branded and configured separately. Two businesses, one codebase we maintain, which is why the second one cost less than the first.",
+    note: "Built on the same platform as Sri Jaidev, branded and set up separately. Two businesses, one set of software we maintain, which is why the second one cost less than the first.",
   },
 
   "filigree-solutions": {

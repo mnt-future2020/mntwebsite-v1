@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/ai", {
     title: "AI Consultation, Automation & Agents | MnT Future India",
     description:
-      "AI that reaches production: consultation, automation, agent development and custom AI applications, delivered by senior engineers embedded in your team.",
+      "AI your team actually ends up using: advice, automation, agents and custom applications, built by senior engineers who sit inside your team.",
   });
 }
 
@@ -16,11 +16,11 @@ const config: IndiaHubConfig = {
   aside: "4 services",
   h1: (
     <>
-      AI that reaches <span className="text-brand-700">production</span>.
+      AI your team <span className="text-brand-700">actually ends up using</span>.
     </>
   ),
   heroSub:
-    "Four things you can buy, and one way we deliver all of them. Whether you need advice on what is worth doing, a workflow automated, an agent that does real work, or an entire application built around AI, the same senior engineers embed in your team and stay until it runs.",
+    "Four things you can buy, and one way we deliver all of them. Whether you need advice on what is worth doing, a daily task automated, an agent that does real work, or a whole application built around AI, the same senior engineers sit inside your team and stay until it is running.",
 
   servicesTitle: "Four ways in, depending on where you are.",
   servicesSub:
@@ -29,7 +29,7 @@ const config: IndiaHubConfig = {
     {
       icon: "compass",
       title: "AI Consultation",
-      desc: "What is genuinely worth doing with AI in your business, whether your data can support it, and what reaching production would cost. Ends in a costed path, not a maturity score.",
+      desc: "What is genuinely worth doing with AI in your business, whether your data can support it, and what getting it working would cost. Ends in a costed plan, not a scorecard.",
       href: "/in/ai/consultation",
     },
     {
@@ -54,8 +54,8 @@ const config: IndiaHubConfig = {
 
   feature: {
     kicker: "How we deliver",
-    title: "Your pilot works in the demo. Ours goes live.",
-    body: "Most enterprise AI work in India stops at a proof of concept that impressed a room and then went nowhere. Forward Deployed Engineering is our answer: a senior engineer works inside your team and your environment, builds the system, and stays until it runs in production. It is not consulting, because we write the code. It is not staff augmentation, because we own the outcome. Our method is Discover, Design, Build, Deploy, Optimize, and it is the same one our founder is writing a handbook on.",
+    title: "Most AI stops after the demo. Ours goes to work.",
+    body: "Most AI work in India stops at a trial that impressed a room and then went nowhere. Our answer is simple: a senior engineer sits inside your team, works on your systems, builds the thing, and stays until it is running every day. It is not consulting, because we write the code ourselves. It is not hiring a temporary body, because we answer for whether it works. We call it Forward Deployed Engineering, we follow the same five steps every time, and our founder is writing the handbook on it.",
     href: "/in/ai/forward-deployed-engineering",
     cta: "How we deliver",
   },
@@ -64,18 +64,18 @@ const config: IndiaHubConfig = {
   why: [
     {
       icon: "users",
-      title: "Embedded, not handed over",
-      desc: "Our engineers sit in your repository, your standups and your environment. Your team learns the system as it is built, which is the difference between a handover and a handoff.",
+      title: "Our engineers sit in your team",
+      desc: "They are in your daily meetings and working on your systems, not building something in a corner and posting it over. Your team learns how it works while it is being built, so nobody is stranded when we finish.",
     },
     {
       icon: "gauge",
-      title: "Evaluation before go-live",
-      desc: "We agree what working means in stage two and test against it before anything reaches a customer. Skipping this is the single most common reason an AI system quietly stops being trusted.",
+      title: "We agree what \"working\" means, then prove it",
+      desc: "We write down what a good answer looks like in step two, and test against it before a single customer sees it. Skipping this is the most common reason a team quietly stops trusting an AI system.",
     },
     {
       icon: "shield",
       title: "Your data can stay yours",
-      desc: "Where governance requires it we run smaller models on your own infrastructure and design for that constraint from the start, rather than discovering it at deployment.",
+      desc: "Where your rules say the data cannot leave, we run smaller models on your own servers and design for that from day one, rather than finding out at the end.",
     },
     {
       icon: "wallet",
@@ -99,7 +99,7 @@ const config: IndiaHubConfig = {
     },
     {
       q: "How long before we see something working?",
-      a: "A discovery sprint is one to two weeks and ends with a costed path. After that, most first useful deployments land in six to twelve weeks depending on how much integration is involved. Anyone promising you production AI in two weeks is describing a demo.",
+      a: "The first study takes one to two weeks and ends with a costed plan. After that, most first useful versions go live in six to twelve weeks, depending on how much has to connect to your existing systems. Anyone promising you a working AI system in two weeks is describing a demo.",
     },
     {
       q: "What if our data is a mess?",
@@ -114,8 +114,8 @@ const config: IndiaHubConfig = {
   ],
 
   cta: {
-    title: "Bring the pilot that stalled.",
-    body: "Tell us what you built, where it stopped, and what it was supposed to do. A senior consultant will tell you what reaching production would actually take, and whether it is worth taking. No obligation.",
+    title: "Bring the AI project that stopped halfway.",
+    body: "Tell us what you built, where it stopped, and what it was supposed to do. A senior consultant will tell you what it would really take to get it working, and whether it is worth doing at all. No obligation.",
   },
 };
 

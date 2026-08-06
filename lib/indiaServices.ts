@@ -242,7 +242,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     chips: ["Tally & ERP", "Warehouse & courier", "Payments & reconciliation", "No double entry"],
     primaryKeyword: "Ecommerce integration services",
     intro: {
-      title: "Somebody in your office is a human API.",
+      title: "Somebody in your office is retyping the same data all day.",
       body: "In most growing businesses there is one person whose job is retyping orders from one system into another, reconciling payouts by hand, and updating stock in two places. That is not a staffing problem. It is an integration that was never built, and it caps how much you can sell.",
     },
     featuresTitle: "What we connect",
@@ -325,15 +325,15 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     eyebrow: "AI consultation",
     h1: "AI consultation for Indian businesses",
     heroSub:
-      "What is genuinely worth doing with AI in your business, whether your data can support it, and what reaching production would actually cost. It ends with a costed path, not a maturity score.",
+      "What is genuinely worth doing with AI in your business, whether your data can support it, and what getting it working would actually cost. It ends with a costed plan, not a scorecard.",
     metaDescription:
-      "What is genuinely worth doing with AI in your business, whether your data can support it, and what production would cost. Ends with a costed path, not a score.",
+      "What is genuinely worth doing with AI in your business, whether your data supports it, and what getting it working costs. Ends with a costed plan, not a score.",
     heroImage: images.ai,
-    chips: ["Costed path to production", "Data readiness assessed", "Honest no when it is no", "1 to 2 weeks"],
+    chips: ["A costed plan, not a deck", "We check your data first", "An honest no when it is no", "1 to 2 weeks"],
     primaryKeyword: "AI consulting services India",
     intro: {
       title: "Most AI advice is a document nobody can act on.",
-      body: "You can buy a strategy deck, a maturity assessment and a roadmap from any consultancy in the country. What none of them tell you is whether your data will actually support the thing they recommended, and what it costs to run it in production. That is the part we do, because we are the people who would then build it.",
+      body: "You can buy a strategy deck, an assessment and a roadmap from any consultancy in the country. What none of them tell you is whether your data will actually support the thing they recommended, and what it costs to keep it running once it is live. That is the part we do, because we are the people who would then build it.",
     },
     featuresTitle: "What a consultation covers",
     features: [
@@ -360,7 +360,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Do we have to build it with you?", a: "No. The document is yours and it is written to be usable by anyone. Plenty of clients take it to their own team." },
       { q: "How long does it take?", a: "One to two weeks for most engagements. Longer if the data is spread across many systems, and we will tell you that before starting rather than halfway through." },
     ],
-    cta: { title: "Start with the problem, not the technology.", body: "Tell us what is slow, expensive or error-prone in your business today. A senior consultant will tell you whether AI is the right tool for it, and what it would take to reach production if it is.", ...CTA_IN },
+    cta: { title: "Start with the problem, not the technology.", body: "Tell us what is slow, expensive or full of mistakes in your business today. A senior consultant will tell you whether AI is the right tool for it, and what it would take to get it working if it is.", ...CTA_IN },
   },
 
   automation: {
@@ -431,7 +431,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { icon: "lock", title: "Permissions with a boundary", desc: "Each agent gets the narrowest access that lets it do its job. What it may read, what it may change, and what it must ask about, defined explicitly." },
       { icon: "records", title: "An audit trail that holds up", desc: "Every action logged with what it saw, what it decided and why. When somebody asks what happened on the fourteenth, there is an answer." },
       { icon: "users", title: "Approval where it matters", desc: "Actions above a threshold you set wait for a person. The threshold moves as the agent earns trust, rather than being all or nothing on day one." },
-      { icon: "gauge", title: "Evaluated before it goes live", desc: "Tested against real scenarios including the awkward ones, with results you see before it touches production. This is the step almost everyone skips." },
+      { icon: "gauge", title: "Tested before it goes live", desc: "Run against real situations including the awkward ones, with results you see before a single customer does. This is the step almost everyone skips." },
       { icon: "network", title: "Connected to real systems", desc: "Your ERP, CRM, database and internal tools. An agent that cannot reach your systems is a demo." },
       { icon: "eye", title: "Watched after launch", desc: "Monitoring on what it does, how often it escalates and what it costs to run, so drift shows up as a chart rather than a complaint." },
     ],
@@ -439,14 +439,14 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     approachPoints: [
       "We start with the narrowest useful version. An agent that does one thing reliably beats one that does six things unpredictably.",
       "Every agent is deterministic where it can be. Not everything needs a model, and the parts that do not are cheaper and more reliable without one.",
-      "Read-only first, in production, alongside your team. It earns write access by being right.",
+      "It starts by only reading and suggesting, working alongside your team. It earns the right to change things by being right.",
       "Evaluation is written before the agent is, so working is a number rather than an opinion.",
       "Cost is designed in: model choice, caching and limits, visible from the first week rather than at the first invoice.",
     ],
     related: aiRelated.filter((r) => !r.href.endsWith("agent-development")),
     faq: [
       { q: "What is the difference between an agent and a chatbot?", a: "A chatbot answers. An agent takes actions in your systems: updating a record, creating an order, sending a message, escalating a case. That makes it more useful and considerably more dangerous, which is why permissions and audit matter as much as the model." },
-      { q: "How do we stop it doing something stupid?", a: "Narrow permissions, approval thresholds you control, evaluation before go-live, and read-only operation in production until it has proved itself. Every action is logged and reversible." },
+      { q: "How do we stop it doing something stupid?", a: "It can only touch what you allow, anything above a limit you set needs a human to approve, it is tested before it goes live, and it starts out only able to read and suggest until it has proved itself. Every action is recorded and can be undone." },
       { q: "Can it work with our existing systems?", a: "That is usually most of the project. We integrate with your ERP, CRM, databases and internal tools, and the difficulty is almost always there rather than in the model." },
       { q: "What does it cost to run?", a: "It depends on volume and model choice, and we size it during design rather than surprising you. Caching, smaller models for simple steps and hard limits are all part of the build." },
     ],
@@ -491,9 +491,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     related: aiRelated.filter((r) => !r.href.endsWith("custom-applications")),
     faq: [
       { q: "How is this different from buying MnT AI Desk or AI CRM?", a: "Those start from software that already works, so they are fast and comparatively cheap and cover a common shape of problem. Custom starts from your workflow, so it fits exactly, takes longer and costs more. We will tell you honestly which one your problem is." },
-      { q: "How long does a custom application take?", a: "Typically twelve to twenty-four weeks for a first production version, depending on how much integration is involved. Discovery gives you a real number before you commit to the build." },
+      { q: "How long does a custom application take?", a: "Usually twelve to twenty-four weeks for a first working version, depending on how much has to connect to the systems you already run. The first study gives you a real number before you commit to the build." },
       { q: "Do we own it?", a: "Yes, entirely. Source, data and infrastructure. You can maintain it in-house, extend it, or hand it to another firm." },
-      { q: "Can we start smaller?", a: "Yes, and we prefer it. The thinnest version that solves one real workflow, in production, then extended. It gets value earlier and it means the expensive decisions are made with real usage rather than assumptions." },
+      { q: "Can we start smaller?", a: "Yes, and we prefer it. The smallest version that solves one real job, live and being used, then built on. You see value earlier, and the expensive decisions get made from real use rather than guesses." },
     ],
     cta: { title: "Describe the workflow nothing off the shelf handles.", body: "The thing your business does that every product you have evaluated gets almost right. A senior consultant will tell you whether that is a custom build or a configuration problem, honestly.", ...CTA_IN },
   },

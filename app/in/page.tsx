@@ -18,12 +18,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in", {
     title: "Ecommerce Platforms & AI Systems | MnT Future India",
     description:
-      "MnT Future builds ecommerce platforms with GST built in, AI that reaches production, and three ready products: MnT AI Desk, MnT AI CRM and Commerce India.",
+      "MnT Future builds online stores with GST built in, AI your team actually uses, and three ready products: MnT AI Desk, MnT AI CRM and Commerce India.",
   });
 }
 
 const proofStats = [
-  { value: "Live", label: "Client platforms running in production today" },
+  { value: "Live", label: "Client platforms running their businesses today" },
   { value: "GST-native", label: "Invoicing, gapless serials, credit notes" },
   { value: "5 stages", label: "Discover · Design · Build · Deploy · Optimize" },
   { value: "100%", label: "Senior-engineer delivery" },
@@ -45,8 +45,8 @@ const verticals = [
   },
   {
     kicker: "AI",
-    title: "AI that reaches production",
-    desc: "Consultation, automation, agents and complete custom applications. Delivered by senior engineers embedded in your team who stay until the system runs in production, not by a consultant who hands over a report.",
+    title: "AI your team actually ends up using",
+    desc: "Advice on what is worth doing, work automated, agents that do real jobs, and complete applications. Built by senior engineers sitting inside your team, who stay until it is running every day: not a consultant who hands you a report and leaves.",
     href: inAiNav.href,
     icon: "ai" as const,
     count: "4 services",
@@ -55,8 +55,8 @@ const verticals = [
   },
   {
     kicker: "Products",
-    title: "Applications ready to brand",
-    desc: "Three applications we host, brand and customise for you: a support desk, a WhatsApp CRM with automation and AI, and an ecommerce platform with GST built in. Weeks, not a year, and you own what you get.",
+    title: "Ready-made software, put in your name",
+    desc: "Three applications we set up under your name, on your servers: a customer support desk, a WhatsApp CRM, and an online store with GST built in. Ready in weeks instead of a year, and yours to keep.",
     href: inProductsNav.href,
     icon: "grid" as const,
     count: "3 products",
@@ -69,7 +69,7 @@ const stages = [
   {
     no: "01",
     title: "Discover",
-    desc: "We look at your data, your use case and what production would actually take. You get a costed path, not a proposal full of maybes.",
+    desc: "We look at your data, the job you want done, and what it would really take to get it working. You get a costed plan, not a proposal full of maybes.",
   },
   {
     no: "02",
@@ -84,20 +84,20 @@ const stages = [
   {
     no: "04",
     title: "Deploy",
-    desc: "Live, monitored, and on your own servers or private cloud where your data governance needs it. This is the stage most AI projects never reach.",
+    desc: "Switched on, watched, and on your own servers if your data has to stay with you. This is the step most AI projects never get to.",
   },
   {
     no: "05",
     title: "Optimize",
-    desc: "Evaluated against the checks from stage two, tuned for cost, and watched for drift. We stay until it runs without us.",
+    desc: "Measured against the checks we agreed in step two, tuned so it does not cost more than it should, and watched in case it slips. We stay until it runs without us.",
   },
 ];
 
 const whyMnt = [
   {
     icon: "users" as const,
-    title: "Embedded, not handed over",
-    desc: "Our engineers work inside your team and your environment. The difference from a consultancy is that we own the outcome, and the difference from a contractor is that we ship a working system rather than billing hours.",
+    title: "Our engineers sit in your team",
+    desc: "They work alongside your people, on your systems, not from a distance. A consultancy gives you advice and leaves; a contractor bills you for hours. We stay responsible for whether the thing works.",
   },
   {
     icon: "compass" as const,
@@ -112,22 +112,22 @@ const whyMnt = [
   {
     icon: "bolt" as const,
     title: "Senior engineers only",
-    desc: "No juniors on client work. Embedded engineering only works when the person embedded has shipped this before, so that is the only kind of person we send.",
+    desc: "No juniors on client work. Putting an engineer inside your team only works if that person has built this kind of thing before, so that is the only kind of person we send.",
   },
 ];
 
 const homeFaq: QA[] = [
   {
     q: "What does MnT Future do in India?",
-    a: "Three things. We build custom ecommerce platforms with GST, UPI and Indian payment gateways handled natively. We deliver AI work that reaches production: consultation, automation, agents, and complete custom applications. And we offer three ready products we brand and customise for you: MnT AI Desk, MnT AI CRM and MnT Commerce India.",
+    a: "Three things. We build custom ecommerce platforms with GST, UPI and Indian payment gateways handled properly. We do AI work that ends up actually being used: advice, automation, agents, and complete applications. And we have three ready products we set up under your name: MnT AI Desk, MnT AI CRM and MnT Commerce India.",
   },
   {
     q: "What is Forward Deployed Engineering?",
-    a: "A senior engineer works inside your team and your environment, designing and building your system and staying until it runs in production. It is not consulting, because we write and own the code. It is not staff augmentation, because we own the outcome rather than billing hours. Our method is Discover, Design, Build, Deploy, Optimize.",
+    a: "A senior engineer sits inside your team and works on your systems, designing and building the thing and staying until it is running every day. It is not consulting, because we write the code ourselves. It is not hiring a temporary body, because we answer for whether it works, not for hours billed. Our five steps are Discover, Design, Build, Deploy, Optimize.",
   },
   {
     q: "Why do most AI projects never go live?",
-    a: "Because getting a model to answer well in a demo and getting a system to run reliably in production are different problems. Production needs evaluation, monitoring, cost control, security review and integration with systems that already exist. That deployment work is what we do, and it is why we stay past the build.",
+    a: "Because making AI answer well in a demo and making it work reliably every day are two different jobs. The second one needs testing, monitoring, cost control, a security check, and joining it to the systems you already run. That is the part we do, and it is why we stay after the build.",
   },
   {
     q: "Are your products open source?",
@@ -139,7 +139,7 @@ const homeFaq: QA[] = [
   },
   {
     q: "How do we start?",
-    a: "Book a strategy session and tell us the bottleneck. For AI work the usual first step is a short discovery: we assess your data, the use case, and what reaching production would take, and you get a costed path before committing to a build.",
+    a: "Book a strategy session and tell us what is stuck. For AI work the usual first step is a short study: we look at your data, the job you want done, and what it would take to get it running, and you get a costed plan before committing to a build.",
   },
 ];
 
@@ -278,8 +278,8 @@ export default function IndiaHome() {
             no="02"
             total="05"
             eyebrow="How we deliver"
-            title="A method that ends in production."
-            sub="Most AI work in India stops at a pilot that impressed a room and then went nowhere. Getting a demo to answer well and getting a system to run reliably are different problems, and the second one is the job. This is how we do it."
+            title="A way of working that ends with it running."
+            sub="Most AI work in India stops at a trial that impressed a room full of people and then went nowhere. Making a demo answer well and making something your team can rely on every day are two different jobs, and the second one is the job. This is how we do it."
           />
           <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 sm:grid-cols-2 lg:grid-cols-5">
             {stages.map((s) => (
@@ -409,7 +409,7 @@ export default function IndiaHome() {
 
       <CTASection
         title="Tell us the bottleneck. Leave with a plan you can execute."
-        body="A senior consultant, not a salesperson. Bring the problem you have not been able to solve and we will map how we would build it: the data model, the systems it has to touch, and what reaching production would take."
+        body="A senior consultant, not a salesperson. Bring the problem you have not been able to solve and we will map out how we would build it: how the information is organised, what it has to connect to, and what it would take to get it running."
         primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
         secondary={{ label: "See our work", href: "/in/work" }}
       />

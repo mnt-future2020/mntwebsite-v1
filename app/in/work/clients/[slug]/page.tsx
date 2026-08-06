@@ -236,7 +236,7 @@ export default async function ClientCase(props: { params: Promise<{ slug: string
             no="03"
             total="04"
             eyebrow="What is actually in there"
-            title={`${d.modules.length} modules, read off the codebase.`}
+            title={`${d.modules.length} working parts, counted from the software itself.`}
             sub="Not a claim about what a site like this usually has. This is the list of sections and routes that exist in this project, which is the difference between a portfolio and an inventory."
             tone="dark"
           />

@@ -31,7 +31,7 @@ const values = [
   {
     icon: "users" as const,
     title: "Senior by default",
-    desc: "No juniors on client work. Embedded engineering only works when the person embedded has shipped this before, and platforms only survive their second year when a senior built the first one.",
+    desc: "No juniors on client work. Putting an engineer inside your team only works if that person has built this kind of thing before, and platforms only survive their second year when a senior built the first one.",
   },
   {
     icon: "gauge" as const,
@@ -136,7 +136,7 @@ export default function IndiaAbout() {
             <div>
               <p className="m-0 max-w-[62ch] text-[17px] leading-[1.75] text-white/70">
                 In India we build ecommerce platforms and deliver AI work through Forward Deployed
-                Engineering, with senior engineers embedded in the client&apos;s team. In the United
+                Engineering, with senior engineers sitting inside the client&apos;s team. In the United
                 States we build commerce platforms ready for the AI shopping agents now starting to
                 drive sales. Same engineers, same standards, different problems worth solving in
                 each market.

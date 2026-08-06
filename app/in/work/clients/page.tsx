@@ -346,7 +346,7 @@ export default function ClientProjects() {
             total="04"
             eyebrow="Also built"
             title="Live, and listed without embellishment."
-            sub="These are ours too. We do not have the codebase in front of us to describe what is behind them, so rather than guess, here is the client and the link."
+            sub="These are ours too. We do not have the software in front of us to describe what is behind them, so rather than guess, here is the client and the link."
           />
           <div className="mt-11 grid border-l border-t border-bp-edge sm:grid-cols-2 lg:mt-16">
             {CLIENTS_LISTED.map((c) => (

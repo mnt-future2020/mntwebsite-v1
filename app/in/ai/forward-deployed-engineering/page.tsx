@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/ai/forward-deployed-engineering", {
     title: "Forward Deployed Engineering for AI | MnT Future India",
     description:
-      "Senior engineers embedded in your team, building your AI system and staying until it runs in production. Our method: Discover, Design, Build, Deploy, Optimize.",
+      "Senior engineers who sit inside your team, build your AI system and stay until it runs every day. Five steps: Discover, Design, Build, Deploy, Optimize.",
   });
 }
 
@@ -47,12 +47,12 @@ const versus = [
     who: "Staff augmentation and body shops",
     weakness:
       "They bill hours. They own nothing. Direction has to come from you, and when the contract ends the knowledge walks out with the person.",
-    us: "We ship a working production system and stay until it runs without us.",
+    us: "We hand over something that works, and stay until it runs without us.",
   },
   {
     who: "AI consultancies and advisory firms",
     weakness:
-      "Strategy decks, maturity assessments, roadmaps. Genuinely useful documents that do not, by themselves, put anything into production.",
+      "Strategy decks, assessments, roadmaps. Genuinely useful documents that do not, on their own, get anything working.",
     us: "We write and own the code, in your environment, against the plan we agreed.",
   },
   {
@@ -67,8 +67,8 @@ const stages = [
   {
     no: "01",
     title: "Discover",
-    what: "We look at the data you actually have rather than the data you wish you had, the business problem behind the AI request, and what standing this up in production would genuinely involve.",
-    get: "A costed path to production, with the parts that will be hard named out loud.",
+    what: "We look at the data you actually have rather than the data you wish you had, the business problem behind the AI request, and what getting this working would genuinely involve.",
+    get: "A costed plan to get it running, with the hard parts named out loud.",
   },
   {
     no: "02",
@@ -85,7 +85,7 @@ const stages = [
   {
     no: "04",
     title: "Deploy",
-    what: "Into production, with monitoring, alerting, access control and cost visibility. On your own servers or private cloud where data governance requires it. This is the stage most AI projects never reach.",
+    what: "Switched on for real, with monitoring, alerts, control over who can use it, and a clear view of what it costs to run. On your own servers where your data has to stay with you. This is the step most AI projects never get to.",
     get: "A system running against real users and real data, that somebody is watching.",
   },
   {
@@ -97,12 +97,12 @@ const stages = [
 ];
 
 const builds = [
-  { icon: "search" as const, title: "RAG over your own data", desc: "Retrieval across your documents, tickets, contracts or catalogue, with answers traceable to the source they came from rather than asserted." },
+  { icon: "search" as const, title: "Answers out of your own documents", desc: "It searches your files, tickets, contracts or catalogue and answers from them, and every answer shows which document it came from instead of just sounding confident." },
   { icon: "ai" as const, title: "Custom AI agents", desc: "Agents that do real work inside your systems, with clear limits on what they may act on alone and a record of everything they did." },
   { icon: "bolt" as const, title: "Workflow automation", desc: "The work your team repeats every day, automated where the failure cost is understood and a person stays in the loop where it is not." },
   { icon: "gauge" as const, title: "Evaluation frameworks", desc: "The part almost everyone skips. Tests that catch hallucination and regression before your customers do, run on every change." },
   { icon: "network" as const, title: "Integration with what exists", desc: "Your ERP, CRM, data warehouse and internal tools. Most of the difficulty in enterprise AI is here, not in the model." },
-  { icon: "shield" as const, title: "On-premise deployment", desc: "Where your data cannot leave your environment, we run smaller models on your own infrastructure and design around that constraint from the start." },
+  { icon: "shield" as const, title: "Runs on your own servers", desc: "Where your data is not allowed to leave your building, we run smaller models on your own machines and design around that from day one." },
 ];
 
 const models = [
@@ -110,17 +110,17 @@ const models = [
     no: "01",
     title: "Discovery sprint",
     shape: "One to two weeks, fixed fee",
-    desc: "Stage one on its own. We assess your data, the use case and what production would take, and you get a costed path. Paid, because a free assessment is worth what you pay for it and because it starts the relationship honestly.",
+    desc: "Step one on its own. We look at your data, the job you want done and what it would take to get it working, and you get a costed plan. Paid, because a free assessment is worth what you pay for it, and because it starts the relationship honestly.",
   },
   {
     no: "02",
-    title: "Embedded engineer",
+    title: "An engineer inside your team",
     shape: "Monthly, ongoing",
     desc: "One or more senior engineers working inside your team as part of it: your standups, your repository, your environment. The core offering, and the one that suits an organisation with several things to build.",
   },
   {
     no: "03",
-    title: "Discovery to production",
+    title: "From first look to fully running",
     shape: "Fixed scope, milestone billed",
     desc: "All five stages on one scoped use case, priced and billed against milestones. Suits an organisation that wants one thing done properly and wants to know the number in advance.",
   },
@@ -129,7 +129,7 @@ const models = [
 const forWho = {
   yes: [
     "You have data, and a real business problem behind the AI request.",
-    "You ran a pilot or a proof of concept, it impressed a room, and then it stopped.",
+    "You ran a trial, it impressed a room full of people, and then it stopped.",
     "You have budget and someone senior who wants this to actually ship.",
     "Your data governance means some of this has to run inside your own environment.",
   ],
@@ -143,15 +143,15 @@ const forWho = {
 const faq: QA[] = [
   {
     q: "What is a Forward Deployed Engineer?",
-    a: "A senior engineer who works inside your team and your environment rather than from a vendor's office, and who stays with the system until it runs in production. The role exists because the hard part of enterprise AI is not model access, which everyone has, but deployment: integration, evaluation, monitoring, security and cost. It is a role firms like Palantir, OpenAI and Databricks staff heavily, and it is only now becoming known in India.",
+    a: "A senior engineer who works inside your team and on your systems rather than from a vendor's office, and who stays until the thing is running every day. The role exists because the hard part of AI is not getting access to a model, which everyone has now, but everything after that: joining it to your existing systems, testing it, watching it, securing it and controlling what it costs. Firms like Palantir, OpenAI and Databricks staff this role heavily. It is only now becoming known in India.",
   },
   {
     q: "How is this different from hiring contractors?",
-    a: "Ownership of the outcome. A contractor bills for time and takes direction from you; if the project fails they still get paid and they leave. We are accountable for the system working in production, we bring the method rather than waiting for yours, and we do not consider the engagement finished until it runs.",
+    a: "Who carries the risk. A contractor bills for time and waits for your instructions; if the project fails they still get paid and they leave. We answer for whether the thing actually works, we bring our own way of working rather than waiting for yours, and we do not call the job finished until it is running.",
   },
   {
-    q: "Why do so many AI pilots never reach production?",
-    a: "Because a demo and a production system are different pieces of engineering. A demo needs a model that answers well on chosen examples. Production needs evaluation that catches wrong answers, monitoring, access control, cost management, and integration with systems built long before anyone said the word AI. Teams that have never shipped one underestimate that gap, and the pilot quietly stalls.",
+    q: "Why do so many AI projects never go live?",
+    a: "Because a demo and a system your team relies on every day are two different pieces of work. A demo needs to answer well on examples somebody chose. The real thing needs testing that catches wrong answers, monitoring, control over who can use it, a handle on running cost, and connections to systems built long before anyone said the word AI. Teams that have never done it underestimate that gap, and the project quietly stops.",
   },
   {
     q: "Do our engineers work with yours?",
@@ -163,7 +163,7 @@ const faq: QA[] = [
   },
   {
     q: "How do we start?",
-    a: "A discovery sprint. One to two weeks, fixed fee, and at the end you have a costed path to production and a clear view of whether the thing is worth building at all. If the honest answer is that it is not, we will say so, and that is a cheaper way to find out than a six month build.",
+    a: "A short study. One to two weeks, fixed fee, and at the end you have a costed plan and a clear view of whether the thing is worth building at all. If the honest answer is that it is not, we will say so, and that is a cheaper way to find out than a six month build.",
   },
   {
     q: "You mentioned a handbook. Is it published?",
@@ -230,7 +230,7 @@ export default function FdePage() {
           </div>
 
           <h1 className="mt-8 max-w-[18ch] animate-rise-in font-display text-[38px] font-bold leading-[0.99] tracking-[-0.048em] text-bp-ink sm:text-[54px] lg:text-[74px]">
-            Your AI pilot works in the demo. Ours{" "}
+            Most AI stops after the demo. Ours{" "}
             <span className="text-brand-700">goes live</span>.
           </h1>
 
@@ -247,7 +247,7 @@ export default function FdePage() {
               </div>
               <p className="m-0 mt-2.5 text-[15px] leading-[1.65] text-bp-body">
                 A senior engineer works inside your team and your environment, builds your system,
-                and stays until it runs in production.
+                and stays until it is running every day.
               </p>
             </div>
           </div>
@@ -268,7 +268,7 @@ export default function FdePage() {
             no="01"
             total="06"
             eyebrow="What it is"
-            title="Embedded, and accountable for whether it works."
+            title="We sit in your team, and we answer for whether it works."
             sub="The word is new in India, so it is worth being precise. Here is what it is not, because each of these is something you have probably already been sold once."
           />
           <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 lg:grid-cols-3">
@@ -503,7 +503,7 @@ export default function FdePage() {
 
       <CTASection
         title="Start with a discovery sprint."
-        body="One to two weeks, fixed fee. We assess your data, the use case and what production would actually take, and you leave with a costed path. If the honest answer is that it is not worth building, we will tell you that instead, which is a cheap way to find out."
+        body="One to two weeks, fixed fee. We look at your data, the job you want done and what it would really take to get it working, and you leave with a costed plan. If the honest answer is that it is not worth building, we will tell you that instead, which is a cheap way to find out."
         primary={{ label: "Book a discovery sprint", href: "/in/strategy-session" }}
         secondary={{ label: "See our work", href: "/in/work" }}
       />

@@ -46,7 +46,7 @@ export type ServiceConfig = {
 const INDIA_PROCESS = [
   {
     title: "Discover",
-    desc: "We map how your business actually sells, what your data looks like, and what reaching production would take. You get a costed path, not a proposal full of maybes.",
+    desc: "We map how your business actually sells, what your data looks like, and what it would take to get this working. You get a costed plan, not a proposal full of maybes.",
   },
   {
     title: "Design",

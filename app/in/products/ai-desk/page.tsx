@@ -138,7 +138,7 @@ const config: ProductConfig = {
 
   origin: {
     title: "We do not rebuild what already works.",
-    body: "The inbox underneath MnT AI Desk is Chatwoot, a mature open-source support platform with tens of thousands of production deployments behind it. We did not write it and we will not pretend we did. Rebuilding a battle-tested omnichannel inbox from scratch would take a year and be worse. What you pay us for is everything that makes it yours: the deployment, your branding and domain, integration with the systems you already run, the AI layer we build ourselves on your content, the evaluation that proves it works, and somebody to call when it breaks.",
+    body: "The inbox underneath MnT AI Desk is Chatwoot, a well-established open-source support platform already running in tens of thousands of businesses. We did not write it and we will not pretend we did. Rebuilding something that proven from scratch would take a year and end up worse. What you pay us for is everything that makes it yours: setting it up, your branding and your own web address, connecting it to the systems you already run, the AI layer we build ourselves on your content, the testing that proves it works, and somebody to call when it breaks.",
     note: "The AI in AI Desk is genuinely ours. Chatwoot's own AI assistant sits under a commercial licence we do not ship, so we build the AI layer with the Claude Agent SDK on top of the open-source core. That is the part with our name on it.",
   },
 

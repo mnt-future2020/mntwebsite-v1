@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/strategy-session", {
     title: "Book a Strategy Session: Ecommerce & AI | MnT Future India",
     description:
-      "A 45-minute session with a senior consultant. Bring your ecommerce bottleneck or the AI pilot that stalled, and leave with a plan you can execute.",
+      "45 minutes with a senior consultant. Bring what is stuck in your online business, or the AI project that stopped halfway, and leave with a plan you can act on.",
   });
 }
 
@@ -44,7 +44,7 @@ const steps = [
 
 const bring = [
   "An ecommerce platform that is costing you a percentage of every order and limiting how you sell.",
-  "An AI pilot that impressed a room and then stopped, and nobody can say exactly why.",
+  "An AI project that impressed a room and then stopped, and nobody can say exactly why.",
   "WhatsApp enquiries that arrive faster than your team can answer, with follow-ups getting missed.",
   "A workflow somebody repeats forty times a day that everyone agrees should be automated.",
   "A GST or invoicing setup you suspect would not survive an audit.",
@@ -66,7 +66,7 @@ const faq: QA[] = [
   },
   {
     q: "What happens afterwards?",
-    a: "You get the written plan. If you want to go further, the usual next step for AI work is a discovery sprint, which is one to two weeks and ends with a costed path to production. For a platform build it is a scoping exercise. Neither is automatic.",
+    a: "You get the written plan. If you want to go further, the usual next step for AI work is a short study, one to two weeks, ending with a costed plan. For a platform build it is a scoping exercise. Neither happens automatically.",
   },
 ];
 

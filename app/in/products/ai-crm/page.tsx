@@ -149,7 +149,7 @@ const config: ProductConfig = {
   origin: {
     title: "Started from working software, made yours.",
     body: "MnT AI CRM is built on an open-source WhatsApp CRM released under the MIT licence. We audited it, hardened it, and built our layer on top: your branding, your automations, your integrations, the AI assistant tuned on your content, and the Meta application handled for you. Starting from working software is why you get this in weeks rather than in the year it would take to build the same thing from nothing.",
-    note: "Being straight about maturity: the upstream project is young, released in 2026. We will not claim years of production behind it. What we will claim is that we have read the code, tested it, and stand behind what we deploy with a support contract.",
+    note: "Being straight about how new it is: the project we build on was released in 2026. We will not claim it has years of real-world use behind it. What we will claim is that we have read the code, tested it, and stand behind what we set up for you with a support contract.",
   },
 
   faq: [
