@@ -46,13 +46,23 @@ const config: Config = {
         line: "#E8EDF3",
         // Blueprint: the technical redesign layer. Square corners, hairline
         // grids, mono labels. Kept as its own scale so v3 pages are untouched.
+        // The two lightest text greys were set by eye and land below AA at the
+        // sizes they are actually used at (`soft` 4.21:1, `faint` 3.10:1 on
+        // white — and `faint` is used at 9.5–11px, where there is no large-text
+        // exemption). Both are darkened until they clear 4.5:1 against `wash`
+        // #F4F7FB, the darkest surface either of them sits on, which means they
+        // also clear it on `tint` and on white.
+        //
+        // `ghost` stays as it is. It is not text anyone reads: it is the giant
+        // watermark numeral behind a section head, already aria-hidden, and
+        // darkening it to 4.5:1 would turn a background texture into a heading.
         bp: {
           ink: "#0B1524", // headings and dark bands
           body: "#24344A", // body copy
           mute: "#4E5F76", // secondary copy
-          soft: "#6C7D93", // labels
-          faint: "#8394AA", // meta
-          ghost: "#E7EDF5", // the giant section numerals
+          soft: "#627287", // labels — was #6C7D93 (4.21:1 on white)
+          faint: "#647284", // meta — was #8394AA (3.10:1 on white)
+          ghost: "#E7EDF5", // the giant section numerals: decorative, see above
           wash: "#F4F7FB", // alternating section background
           tint: "#FAFCFE", // frame chrome
           line: "#E4EAF2", // section borders

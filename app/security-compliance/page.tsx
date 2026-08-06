@@ -149,7 +149,7 @@ export default function SecurityCompliance() {
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="flex h-full flex-col border border-bp-hair bg-white p-8 shadow-card sm:p-10">
-              <div className="flex h-12 w-12 items-center justify-center bg-brand text-white">
+              <div className="flex h-12 w-12 items-center justify-center bg-brand-700 text-white">
                 <Icon name="store" className="h-6 w-6" />
               </div>
               <h3 className="mt-5 font-display text-xl font-bold text-bp-ink">Commerce platforms</h3>
@@ -165,7 +165,7 @@ export default function SecurityCompliance() {
           </Reveal>
           <Reveal delay={100}>
             <div className="flex h-full flex-col border border-bp-hair bg-white p-8 shadow-card sm:p-10">
-              <div className="flex h-12 w-12 items-center justify-center bg-brand text-white">
+              <div className="flex h-12 w-12 items-center justify-center bg-brand-700 text-white">
                 <Icon name="ai" className="h-6 w-6" />
               </div>
               <h3 className="mt-5 font-display text-xl font-bold text-bp-ink">AI &amp; agents</h3>

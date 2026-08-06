@@ -180,7 +180,7 @@ export default function AgentReadyPage() {
             npx @mntglobal/agentready your-store.com
           </code>{" "}
           · Same engine, open source:{" "}
-          <Link href="/open-source" className="font-semibold text-brand hover:underline">
+          <Link href="/open-source" className="font-semibold text-brand-700 hover:underline">
             about our OSS program
           </Link>
         </p>

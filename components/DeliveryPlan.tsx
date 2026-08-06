@@ -94,7 +94,7 @@ export default function DeliveryPlan() {
                   {l.draw}
                 </svg>
               </span>
-              <span className="font-mono text-[11px] sm:text-[10px] tracking-[0.14em] text-bp-ghost">{l.no}</span>
+              <span data-no={l.no} aria-hidden="true" className="font-mono text-[11px] sm:text-[10px] tracking-[0.14em] text-bp-ghost before:content-[attr(data-no)]" />
             </div>
             <div className="mt-3 font-display text-[13.5px] font-bold leading-[1.2] tracking-[-0.015em] text-bp-ink">
               {l.name}

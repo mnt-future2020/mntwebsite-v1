@@ -42,7 +42,7 @@ export default function AgentScan() {
     <div className="border-t border-bp-line bg-white p-4 sm:p-[22px]">
       <div className="flex items-center gap-2.5">
         <span className="h-[7px] w-[7px] animate-live-pulse rounded-full bg-[#0E9F6E]" />
-        <span className="flex-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-[#5F7189]">
+        <span className="flex-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-bp-soft">
           Agent-ready
         </span>
         <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.14em] text-brand-700">
@@ -55,16 +55,18 @@ export default function AgentScan() {
         {STEPS.map((s, i) => {
           const complete = i < done;
           return (
+            // See DeliveryScan: the 0.45 row wash took the pending label to
+            // 1.8:1, and the loop leaves most rows pending most of the time.
+            // The chip carries the dim now; the label state is colour only.
             <div
               key={s.label}
-              className="flex items-center gap-3 border-b border-bp-hair py-2.5 transition-opacity duration-500"
-              style={{ opacity: complete ? 1 : 0.45 }}
+              className="flex items-center gap-3 border-b border-bp-hair py-2.5"
             >
               <span
                 className={`flex h-[21px] w-[21px] shrink-0 items-center justify-center border font-mono text-[11px] sm:text-[9.5px] transition-all duration-300 ${
                   complete
                     ? "border-[#0E9F6E] bg-[#0E9F6E] text-white"
-                    : "border-brand-200 bg-white text-brand-700"
+                    : "border-brand-200 bg-white text-brand-700 opacity-70"
                 }`}
               >
                 {complete ? <Icon name="check" className="h-[11px] w-[11px]" /> : i + 1}
@@ -76,7 +78,7 @@ export default function AgentScan() {
               >
                 {s.label}
               </span>
-              <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.1em] text-[#9AA9BE]">
+              <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.1em] text-bp-faint">
                 {s.tag}
               </span>
             </div>

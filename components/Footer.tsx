@@ -57,10 +57,10 @@ export default function Footer() {
       <div
         className={`${PAGE} flex flex-wrap items-center justify-between gap-3.5 border-t border-[#16202E] pb-10 pt-5`}
       >
-        <p className="m-0 font-mono text-[11.5px] text-[#5F7189]">
+        <p className="m-0 font-mono text-[11.5px] text-[#71829A]">
           © {new Date().getFullYear()} MnT Future. All rights reserved.
         </p>
-        <div className="flex flex-wrap items-center gap-[22px] font-mono text-[11.5px] text-[#5F7189]">
+        <div className="flex flex-wrap items-center gap-[22px] font-mono text-[11.5px] text-[#71829A]">
           <a href={`mailto:${site.email}`} className="inline-block py-1.5 transition-colors hover:text-white">
             {site.email}
           </a>
@@ -77,11 +77,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Wordmark watermark: the sign-off, cropped by the viewport. */}
+      {/* Wordmark watermark: the sign-off, cropped by the viewport. Drawn as
+          CSS generated content, not a text node — it is decoration a shade off
+          the footer's own background (1.07:1) and was being reported as a
+          contrast failure on every page of the site. Same rendering. */}
       <div className="pointer-events-none overflow-hidden px-[18px] pb-8 sm:px-8 lg:px-14" aria-hidden="true">
-        <div className="mx-auto max-w-[1440px] whitespace-nowrap font-display text-[52px] font-extrabold leading-[0.78] tracking-[-0.062em] text-[#0C1725] sm:text-[13.4vw]">
-          MnT Future
-        </div>
+        <div className='mx-auto max-w-[1440px] whitespace-nowrap font-display text-[52px] font-extrabold leading-[0.78] tracking-[-0.062em] text-[#0C1725] before:content-["MnT_Future"] sm:text-[13.4vw]' />
       </div>
     </footer>
   );

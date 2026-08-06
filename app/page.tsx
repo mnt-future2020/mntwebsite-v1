@@ -252,7 +252,7 @@ export default function Home() {
                         href={it.href}
                         className="group flex items-center gap-3.5 border-b border-bp-hair px-0.5 py-[15px] text-[14.8px] font-semibold text-bp-body transition-all duration-200 hover:pl-2.5 hover:text-brand-700"
                       >
-                        <span className="font-mono text-[11px] font-medium text-[#9AA9BE]">
+                        <span className="font-mono text-[11px] font-medium text-bp-faint">
                           {String(n + 1).padStart(2, "0")}
                         </span>
                         <span className="flex-1">{it.label}</span>
@@ -464,7 +464,7 @@ export default function Home() {
         <div className="mx-auto max-w-[1080px] px-[18px] py-20 sm:px-8 lg:px-14 lg:py-[140px]">
           <RuleLabel
             right={
-              <span className="whitespace-nowrap font-mono text-[11px] tracking-[0.16em] text-bp-faint/70">
+              <span className="whitespace-nowrap font-mono text-[11px] tracking-[0.16em] text-bp-faint">
                 06 / 06
               </span>
             }

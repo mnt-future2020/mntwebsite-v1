@@ -27,7 +27,7 @@ export default function BlueprintFaq({ items }: { items: QA[] }) {
               aria-expanded={isOpen}
               className="flex w-full items-start gap-5 px-5 py-[26px] text-left text-bp-ink transition-colors hover:text-brand-700"
             >
-              <span className="pt-1.5 font-mono text-[11.5px] tracking-[0.1em] text-[#9AA9BE]">
+              <span className="pt-1.5 font-mono text-[11.5px] tracking-[0.1em] text-bp-faint">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="flex-1 font-display text-[17px] font-semibold leading-[1.38] tracking-[-0.02em] lg:text-[20.5px]">

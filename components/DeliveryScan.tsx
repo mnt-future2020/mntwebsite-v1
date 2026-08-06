@@ -39,7 +39,7 @@ export default function DeliveryScan() {
     <div className="border-t border-bp-line bg-white p-4 sm:p-[22px]">
       <div className="flex items-center gap-2.5">
         <span className="h-[7px] w-[7px] animate-live-pulse rounded-full bg-[#0E9F6E]" />
-        <span className="flex-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-[#5F7189]">
+        <span className="flex-1 font-mono text-[11px] sm:text-[10.5px] uppercase tracking-[0.2em] text-bp-soft">
           Delivery
         </span>
         <span className="font-mono text-[11px] sm:text-[10.5px] tracking-[0.14em] text-brand-700">
@@ -52,16 +52,22 @@ export default function DeliveryScan() {
         {STAGES.map((s, i) => {
           const complete = i < done;
           return (
+            // The pending state used to be a 0.45 opacity wash over the whole
+            // row, which took the label to 1.8:1 — unreadable, and it is the
+            // state most rows are in at any moment because the panel loops.
+            // The state is still obvious without it: the chip goes from an
+            // outlined number to a filled green tick, and the label from ink to
+            // grey. Only the chip is dimmed now, and only enough to read as
+            // waiting.
             <div
               key={s.no}
-              className="flex items-center gap-3 border-b border-bp-hair py-2.5 transition-opacity duration-500"
-              style={{ opacity: complete ? 1 : 0.45 }}
+              className="flex items-center gap-3 border-b border-bp-hair py-2.5"
             >
               <span
                 className={`flex h-[21px] w-[21px] shrink-0 items-center justify-center border font-mono text-[11px] sm:text-[9.5px] transition-all duration-300 ${
                   complete
                     ? "border-[#0E9F6E] bg-[#0E9F6E] text-white"
-                    : "border-brand-200 bg-white text-brand-700"
+                    : "border-brand-200 bg-white text-brand-700 opacity-70"
                 }`}
               >
                 {complete ? <Icon name="check" className="h-[11px] w-[11px]" /> : i + 1}
@@ -73,7 +79,7 @@ export default function DeliveryScan() {
               >
                 {s.label}
               </span>
-              <span className="ml-auto hidden truncate font-mono text-[11px] sm:text-[10px] tracking-[0.04em] text-[#9AA9BE] sm:inline">
+              <span className="ml-auto hidden truncate font-mono text-[11px] sm:text-[10px] tracking-[0.04em] text-bp-faint sm:inline">
                 {s.note}
               </span>
             </div>

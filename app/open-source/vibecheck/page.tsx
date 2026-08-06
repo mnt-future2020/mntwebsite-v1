@@ -270,7 +270,7 @@ export default function VibecheckPage() {
             <Reveal>
               <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
                     1
                   </span>
                   <h3 className="font-bold text-navy">Scan a folder on your machine</h3>
@@ -286,7 +286,7 @@ export default function VibecheckPage() {
             <Reveal delay={0.06}>
               <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
                     2
                   </span>
                   <h3 className="font-bold text-navy">Scan any GitHub repo</h3>
@@ -303,7 +303,7 @@ npx @mntglobal/vibecheck .`}</pre>
             <Reveal delay={0.12}>
               <div className="border border-bp-edge bg-white p-6 shadow-sm sm:p-7">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
                     3
                   </span>
                   <h3 className="font-bold text-navy">Go deeper, or share the result</h3>
@@ -332,7 +332,7 @@ npx @mntglobal/vibecheck .`}</pre>
               Full flag reference and the check catalog live on{" "}
               <a
                 href={GITHUB_URL}
-                className="font-semibold text-brand hover:underline"
+                className="font-semibold text-brand-700 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -378,7 +378,7 @@ npx @mntglobal/vibecheck .`}</pre>
     min-grade: B`}</pre>
             <p className="mt-3 text-center text-sm text-slate-500">
               Posts a PR comment, uploads to code scanning, gates on grade:{" "}
-              <a href={ACTION_URL} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
+              <a href={ACTION_URL} className="font-semibold text-brand-700 hover:underline" target="_blank" rel="noopener noreferrer">
                 Action docs
               </a>
             </p>
@@ -394,7 +394,7 @@ npx @mntglobal/vibecheck .`}</pre>
       <section className="mx-auto w-full max-w-[1440px] px-[18px] sm:px-8 lg:px-14 pb-20 text-center">
         <p className="text-sm text-slate-500">
           Part of MnT Future&apos;s open-source program:{" "}
-          <Link href="/open-source" className="font-semibold text-brand hover:underline">
+          <Link href="/open-source" className="font-semibold text-brand-700 hover:underline">
             see all our agentic-commerce tooling
           </Link>
         </p>

@@ -30,7 +30,7 @@ export default function NewsletterResult({
         <p className="mt-4 max-w-md text-lg leading-relaxed text-white/70">{body}</p>
         <Link
           href="/"
-          className="mt-10 inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-600"
+          className="mt-10 inline-flex items-center gap-2 rounded-xl bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-800"
         >
           <Icon name="arrow" className="h-4 w-4" /> Back to home
         </Link>

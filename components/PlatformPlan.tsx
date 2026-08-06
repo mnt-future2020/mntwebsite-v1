@@ -145,7 +145,7 @@ export default function PlatformPlan() {
                 {/* Keyed to the legend below, so the marked subsystems still
                     read as a set when the grid drops to two columns. */}
                 {i < 3 && <span className="h-[5px] w-[5px] bg-brand-500" aria-hidden="true" />}
-                <span className="font-mono text-[11px] sm:text-[10px] tracking-[0.14em] text-bp-ghost">{p.no}</span>
+                <span data-no={p.no} aria-hidden="true" className="font-mono text-[11px] sm:text-[10px] tracking-[0.14em] text-bp-ghost before:content-[attr(data-no)]" />
               </span>
             </div>
             <div className="mt-3 font-display text-[13.5px] font-bold leading-[1.2] tracking-[-0.015em] text-bp-ink">

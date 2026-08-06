@@ -273,7 +273,7 @@ export default function OpenSourcePage() {
                 <p className="mt-1 text-sm font-medium text-bp-faint">{tool.tagline}</p>
                 <p className="mt-3 text-sm leading-relaxed text-bp-mute">{tool.desc}</p>
                 <div className="mt-5 flex items-center justify-between border-t border-bp-hair pt-4">
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-bp-faint">
                     Feeds <span className="font-semibold text-bp-mute">{tool.maps}</span>
                   </span>
                   {tool.status === "live" && (
@@ -304,11 +304,11 @@ export default function OpenSourcePage() {
         </div>
         <p className="mt-10 text-center text-sm text-bp-faint">
           Follow along:{" "}
-          <a href={GITHUB_ORG} className="font-semibold text-brand hover:underline" target="_blank" rel="noopener noreferrer">
+          <a href={GITHUB_ORG} className="font-semibold text-brand-700 hover:underline" target="_blank" rel="noopener noreferrer">
             github.com/MnT-Future
           </a>{" "}
           · or{" "}
-          <a href="#newsletter" className="font-semibold text-brand hover:underline">
+          <a href="#newsletter" className="font-semibold text-brand-700 hover:underline">
             get release notes by email
           </a>
         </p>

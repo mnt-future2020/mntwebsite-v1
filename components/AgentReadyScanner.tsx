@@ -38,7 +38,7 @@ const STATUS_ICON: Record<CheckResult["status"], { char: string; cls: string }> 
   pass: { char: "✓", cls: "text-emerald-600" },
   warn: { char: "⚠", cls: "text-amber-600" },
   fail: { char: "✗", cls: "text-red-600" },
-  info: { char: "○", cls: "text-slate-400" },
+  info: { char: "○", cls: "text-bp-faint" },
 };
 
 function LeadCard({ report }: { report: Report }) {
@@ -104,7 +104,7 @@ function LeadCard({ report }: { report: Report }) {
           <button
             type="submit"
             disabled={state === "busy"}
-            className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
+            className="rounded-full bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-800 disabled:opacity-60"
           >
             Send my fix plan
           </button>
@@ -194,7 +194,7 @@ function ReportPanel({ report }: { report: Report }) {
                       </span>{" "}
                       <span className="font-semibold text-navy">{result.id}</span>{" "}
                       <span className="text-slate-700">{result.title}</span>{" "}
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-bp-faint">
                         ({result.points}/{result.maxPoints})
                       </span>
                       <p className="ml-5 text-slate-600">{result.summary}</p>
@@ -234,7 +234,7 @@ function ReportPanel({ report }: { report: Report }) {
           </p>
           <a
             href="/strategy-session"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-800"
           >
             Book a free strategy session <Icon name="arrow" className="h-4 w-4" />
           </a>
@@ -300,7 +300,7 @@ export default function AgentReadyScanner() {
         <button
           type="submit"
           disabled={scanning}
-          className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-700 px-7 py-3.5 font-semibold text-white transition hover:bg-brand-800 disabled:opacity-60"
         >
           {scanning ? "Scanning…" : "Scan free"} <Icon name="arrow" className="h-4 w-4" />
         </button>

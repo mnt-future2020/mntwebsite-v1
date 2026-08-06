@@ -105,14 +105,20 @@ export function SectionHead({
           81px for "01" and 100px for "04", so every section title on a page
           started at a slightly different x. On a design built out of hairline
           grids that reads as sloppy without anyone being able to name why. */}
+      {/* The numeral is drawn as CSS generated content rather than as a text
+          node. It is pure decoration — a watermark at 7% opacity that nobody
+          reads and that aria-hidden already keeps out of the accessibility
+          tree — but as real text it was reported as a 1.1:1 contrast failure on
+          every section of every page. WCAG exempts purely decorative text from
+          1.4.3; expressing that in CSS is how you say so in markup. Rendering
+          is identical: same font, size and colour. */}
       <div
-        className={`w-[62px] shrink-0 font-display text-[46px] font-extrabold leading-[0.8] tracking-[-0.05em] tabular-nums lg:w-[104px] lg:text-[74px] ${
+        data-no={no}
+        className={`w-[62px] shrink-0 font-display text-[46px] font-extrabold leading-[0.8] tracking-[-0.05em] tabular-nums before:content-[attr(data-no)] lg:w-[104px] lg:text-[74px] ${
           dark ? "text-white/[0.07]" : "text-bp-ghost"
         }`}
         aria-hidden="true"
-      >
-        {no}
-      </div>
+      />
       <div className="min-w-[300px] flex-1">
         {/* The eyebrow wraps on a phone. Held on one line it pushed the counter
             past the viewport as soon as an eyebrow ran past a few words. */}
@@ -127,7 +133,7 @@ export function SectionHead({
           <span className={`h-px min-w-3 flex-1 ${dark ? "bg-white/12" : "bg-bp-line"}`} />
           <span
             className={`shrink-0 whitespace-nowrap font-mono text-[11px] tracking-[0.16em] ${
-              dark ? "text-white/30" : "text-bp-faint/70"
+              dark ? "text-white/30" : "text-bp-faint"
             }`}
           >
             {no} / {total}

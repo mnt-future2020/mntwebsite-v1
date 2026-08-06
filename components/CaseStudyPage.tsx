@@ -21,7 +21,7 @@ function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string
         <span className="h-[9px] w-[9px] rounded-full bg-red-300" />
         <span className="h-[9px] w-[9px] rounded-full bg-amber-200" />
         <span className="h-[9px] w-[9px] rounded-full bg-green-300" />
-        <span className="ml-2.5 border border-bp-edge bg-white px-3 py-1 font-mono text-[11.5px] text-slate-400">
+        <span className="ml-2.5 border border-bp-edge bg-white px-3 py-1 font-mono text-[11.5px] text-bp-faint">
           {url}
         </span>
       </div>
