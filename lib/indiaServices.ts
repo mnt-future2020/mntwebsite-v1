@@ -53,8 +53,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/platform-development",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("Ecommerce Platform Development"),
-    eyebrow: "Ecommerce platform development",
-    h1: "Ecommerce platform development in India",
+    eyebrow: "Your own platform, not rented",
+    h1: "Ecommerce Platform Development",
+    metaTitle: "Ecommerce platform development in India | MnT Future India",
     heroSub:
       "A platform built for how your business actually sells, running on infrastructure you own. GST decided per order, Indian payment gateways integrated properly, and no percentage of every sale going elsewhere.",
     metaDescription:
@@ -99,8 +100,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/d2c-storefront",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("D2C Storefronts"),
-    eyebrow: "D2C storefronts",
-    h1: "D2C storefront development for Indian brands",
+    eyebrow: "Sell direct, keep the customer",
+    h1: "D2C Storefronts",
     heroSub:
       "Sell straight to your customers on a storefront you own, with your customer data, your margins, and no marketplace taking a cut and keeping the relationship.",
     heroImage: images.commerce,
@@ -142,8 +143,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/marketplace",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("Marketplace Platforms"),
-    eyebrow: "Marketplace platforms",
-    h1: "Marketplace platform development in India",
+    eyebrow: "Many sellers, one platform",
+    h1: "Marketplace Platforms",
+    metaTitle: "Marketplace platform development in India | MnT Future India",
     heroSub:
       "Many sellers on one platform: onboarding, catalogue control, commission, split payouts and settlement. The parts that make a marketplace hard, built properly rather than approximated.",
     metaDescription:
@@ -187,8 +189,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/b2b-wholesale",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("B2B & Wholesale"),
-    eyebrow: "B2B & wholesale commerce",
-    h1: "B2B and wholesale ecommerce platforms",
+    eyebrow: "Dealer pricing, quotes, bulk orders",
+    h1: "B2B & Wholesale Commerce",
+    metaTitle: "B2B and wholesale ecommerce platforms | MnT Future India",
     heroSub:
       "Customer-specific pricing, quotes and RFQ, bulk ordering, credit terms and approval flows, connected to the ERP you already run. Built for buyers who order the same forty items every month.",
     metaDescription:
@@ -232,8 +235,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/integrations",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("Integrations & Automation"),
-    eyebrow: "Integrations & automation",
-    h1: "Ecommerce integrations and automation",
+    eyebrow: "Tally, ERP, courier, gateway",
+    h1: "Integrations & Automation",
+    metaTitle: "Ecommerce integrations and automation | MnT Future India",
     heroSub:
       "Tally or your ERP, warehouse, courier, payment gateway and accounting, joined into one flow. So an order is entered once, and nobody spends their morning copying data between two systems.",
     metaDescription:
@@ -277,8 +281,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ecommerce/managed-support",
     parent: ECOM_PARENT,
     breadcrumb: ecomCrumb("Managed Support"),
-    eyebrow: "Managed support",
-    h1: "Managed ecommerce support and maintenance",
+    eyebrow: "We run it, on an agreed SLA",
+    h1: "Managed Support",
+    metaTitle: "Managed ecommerce support and maintenance | MnT Future India",
     heroSub:
       "We run and maintain the platform against an agreed SLA: monitoring, updates, security patching, and a person who answers when checkout breaks at 9pm on a Saturday.",
     metaDescription:
@@ -322,8 +327,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ai/consultation",
     parent: AI_PARENT,
     breadcrumb: aiCrumb("AI Consultation"),
-    eyebrow: "AI consultation",
-    h1: "AI consultation for Indian businesses",
+    eyebrow: "What is worth doing, and the cost",
+    h1: "AI Consultation",
+    metaTitle: "AI consultation for Indian businesses | MnT Future India",
     heroSub:
       "What is genuinely worth doing with AI in your business, whether your data can support it, and what getting it working would actually cost. It ends with a costed plan, not a scorecard.",
     metaDescription:
@@ -368,8 +374,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ai/automation",
     parent: AI_PARENT,
     breadcrumb: aiCrumb("AI Automation"),
-    eyebrow: "AI automation",
-    h1: "AI automation for business workflows",
+    eyebrow: "The work your team repeats daily",
+    h1: "AI Automation",
+    metaTitle: "AI automation for business workflows | MnT Future India",
     heroSub:
       "The work your team repeats every single day, automated: document handling, data entry, classification, routing and reporting. With a person still in the loop wherever being wrong is expensive.",
     metaDescription:
@@ -413,8 +420,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ai/agent-development",
     parent: AI_PARENT,
     breadcrumb: aiCrumb("AI Agent Development"),
-    eyebrow: "AI agent development",
-    h1: "AI agent development for enterprises",
+    eyebrow: "Agents that do work, with limits",
+    h1: "AI Agent Development",
+    metaTitle: "AI agent development for enterprises | MnT Future India",
     heroSub:
       "Agents that do work inside your systems rather than only answer questions, with clear limits on what they may act on alone and a complete record of everything they did.",
     metaDescription:
@@ -458,8 +466,9 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     slug: "/in/ai/custom-applications",
     parent: AI_PARENT,
     breadcrumb: aiCrumb("Customised AI Applications"),
-    eyebrow: "Customised AI applications",
-    h1: "Custom AI application development",
+    eyebrow: "Built for you, from nothing",
+    h1: "Customised AI Applications",
+    metaTitle: "Custom AI application development | MnT Future India",
     heroSub:
       "A complete application built for your business with AI inside it, from nothing. For when the shape of your problem means no ready product fits, and bending one to fit would cost more than building right.",
     metaDescription:

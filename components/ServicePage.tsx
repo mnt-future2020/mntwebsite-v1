@@ -20,6 +20,16 @@ export type ServiceConfig = {
   h1: string;
   heroSub: string;
   /**
+   * Full <title>, when the H1 is not the right string for one.
+   *
+   * These pages used to compose it as `${h1} | MnT Future India`, which tied
+   * the search-result title to the on-page headline. The India H1s are now the
+   * plain name of the service — the same words as the nav item you clicked to
+   * get here — so the keyword phrase a page targets lives here instead of
+   * disappearing along with the old headline.
+   */
+  metaTitle?: string;
+  /**
    * Meta description, when the hero subtitle is the wrong length for one.
    * The hero has a whole column to fill and reads well at 190–210 characters;
    * a search result cuts off around 160, so reusing it verbatim truncated
