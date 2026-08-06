@@ -8,7 +8,7 @@ const config = INDIA_SERVICES.automation;
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata(config.slug, {
     title: `${config.h1} | MnT Future India`,
-    description: config.heroSub,
+    description: config.metaDescription ?? config.heroSub,
   });
 }
 

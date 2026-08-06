@@ -5,14 +5,16 @@ import CTASection from "@/components/CTASection";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import { Breadcrumbs } from "@/components/blocks";
+import BlueprintFaq from "@/components/BlueprintFaq";
+import { SectionHead, PAGE } from "@/components/blueprint";
 import { resolveMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source/agentready", {
-    title: "Free Agent-Readiness Scan: is your store visible to AI agents? | MnT Future",
+    title: "Free Agent-Readiness Scan for Your Store | MnT Future",
     description:
-      "Scan any store free: 29 checks across structured data, agent access, feeds and ACP · Google UCP · MCP discovery. Letter grade + prioritized fixes in seconds. No email needed for the score.",
+      "Scan any store free: 29 checks across structured data, agent access, feeds and ACP, UCP and MCP discovery. A letter grade and prioritized fixes in seconds.",
   });
 }
 
@@ -27,6 +29,72 @@ const softwareSchema = {
   url: `${site.url}/agentready`,
   provider: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url },
 };
+
+// What the 29 checks are grouped into, in the order the report scores them.
+// The page used to be the scanner and almost nothing else — 199 words, which is
+// too thin to rank for the queries it should own, and it left a first-time
+// visitor with no idea what the grade was measuring before they ran it.
+const CATEGORIES = [
+  {
+    name: "Structured data",
+    body: "Product, Offer and Organization markup, and whether price, availability and identifiers are actually present rather than declared empty. An agent that cannot read a price cannot quote you in an answer.",
+  },
+  {
+    name: "Agent access",
+    body: "What robots.txt allows, which AI crawlers are blocked outright, and whether the pages an agent needs are reachable without executing JavaScript it will not run.",
+  },
+  {
+    name: "Product feeds",
+    body: "Whether a machine-readable catalogue exists at all, how complete it is, and whether it is discoverable from where a crawler will look for it.",
+  },
+  {
+    name: "Protocol endpoints",
+    body: "Discovery for the agentic commerce protocols: ACP, Google's UCP and Retail MCP. This is the part almost every store fails today, and the part that decides whether an agent can transact rather than only describe.",
+  },
+  {
+    name: "Machine readability",
+    body: "Server-rendered content, clean canonical URLs, sitemaps that resolve, and llms.txt. The unglamorous plumbing that decides whether a crawl gets your catalogue or your loading spinner.",
+  },
+  {
+    name: "AEO citability",
+    body: "Whether your pages answer questions in a form an answer engine can lift and attribute: specifics, named entities, and claims that stand on their own out of context.",
+  },
+  {
+    name: "Data freshness",
+    body: "How recently the catalogue and its signals changed. Stale stock and stale prices are worse than missing ones, because an agent will confidently quote them.",
+  },
+  {
+    name: "Accessibility",
+    body: "The WCAG failures that also break machine parsing: missing names, unlabelled controls, content only reachable by mouse. Agents and screen readers fail on the same things.",
+  },
+];
+
+const SCAN_FAQS = [
+  {
+    q: "What does the grade actually mean?",
+    a: "It is the share of applicable points earned across 29 deterministic checks, mapped to a letter. It is not an opinion or a model's judgement: run it twice on an unchanged store and you get the same score. Anything the scan could not assess is excluded from the denominator rather than counted as a failure.",
+  },
+  {
+    q: "Will this slow my store down or trip my WAF?",
+    a: "No. The scan makes roughly fifteen polite requests with a declared user agent, obeys robots.txt, and analyses what comes back statically. It never crawls your whole catalogue and never posts anything.",
+  },
+  {
+    q: "Do I have to give you an email?",
+    a: "Not for the score. The grade, the category breakdown and every check with its evidence appear on screen. Email is only for the remediation plan, which is a written document a person puts together.",
+  },
+  {
+    q: "Why does agent-readiness matter now?",
+    a: "Because buying is starting to happen inside assistants rather than only on your site. ChatGPT discovers products from feeds, Google's AI Mode transacts over UCP, and Shopify ships MCP endpoints. A store that is invisible at that layer does not lose ranking, it loses the transaction entirely.",
+  },
+  {
+    q: "Is it open source?",
+    a: "Yes, MIT-licensed. The same engine runs on the command line with npx @mntglobal/agentready your-store.com, so you can read every check, run it in CI, and point it at a staging environment before anything is public.",
+  },
+  {
+    q: "My score is bad. What is the fastest thing to fix?",
+    a: "Almost always structured data and feeds, in that order: they are the cheapest to fix and the most widely consumed. Protocol endpoints matter more but cost more, so they are worth doing once the readable basics are in place.",
+  },
+];
 
 const TRUST_POINTS = [
   { icon: "shield" as const, text: "~15 polite requests, static analysis: what agents actually see" },
@@ -95,6 +163,8 @@ export default function AgentReadyPage() {
                   alt="MnT Future Agent Ready - Is your store invisible to AI shopping agents? | Product Hunt"
                   width={250}
                   height={54}
+                  loading="lazy"
+                  decoding="async"
                   src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1201493&theme=light&t=1784887498910"
                 />
               </a>
@@ -114,6 +184,40 @@ export default function AgentReadyPage() {
             about our OSS program
           </Link>
         </p>
+      </section>
+
+      <section className="border-t border-bp-line bg-white py-20 lg:py-[104px]">
+        <div className={PAGE}>
+          <SectionHead
+            no="01"
+            total="02"
+            eyebrow="What the scan checks"
+            title="29 checks, in eight groups."
+            sub="Every check is deterministic and every one shows its evidence, so you can verify the finding rather than take the grade on trust."
+          />
+          <div className="mt-11 grid border-l border-t border-bp-edge sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+            {CATEGORIES.map((c) => (
+              <div key={c.name} className="border-b border-r border-bp-edge p-7 lg:p-8">
+                <h2 className="font-display text-[18px] font-bold leading-[1.25] tracking-[-0.02em] text-bp-ink">
+                  {c.name}
+                </h2>
+                <p className="mt-3 text-[14.5px] leading-[1.7] text-bp-mute">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-bp-line bg-bp-wash py-20 lg:py-[104px]">
+        <div className={PAGE}>
+          <SectionHead
+            no="02"
+            total="02"
+            eyebrow="Before you scan"
+            title="What people ask about the grade."
+          />
+          <BlueprintFaq items={SCAN_FAQS} />
+        </div>
       </section>
 
       <CTASection

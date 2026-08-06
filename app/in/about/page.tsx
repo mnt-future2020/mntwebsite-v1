@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/about", {
     title: "About MnT Future: Ecommerce & AI Engineering in India",
     description:
-      "MnT Future builds ecommerce platforms and AI systems for Indian businesses. Senior engineers only, a documented delivery method, and software you own rather than rent.",
+      "MnT Future builds ecommerce platforms and AI systems for Indian businesses: senior engineers only, a documented delivery method, and software you own.",
   });
 }
 

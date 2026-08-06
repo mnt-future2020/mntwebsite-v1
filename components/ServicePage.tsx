@@ -19,6 +19,13 @@ export type ServiceConfig = {
   eyebrow: string;
   h1: string;
   heroSub: string;
+  /**
+   * Meta description, when the hero subtitle is the wrong length for one.
+   * The hero has a whole column to fill and reads well at 190–210 characters;
+   * a search result cuts off around 160, so reusing it verbatim truncated
+   * mid-sentence on every India leaf page. Falls back to `heroSub`.
+   */
+  metaDescription?: string;
   heroImage: string;
   chips: string[];
   primaryKeyword: string;

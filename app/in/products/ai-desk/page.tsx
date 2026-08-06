@@ -4,9 +4,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/products/ai-desk", {
-    title: "MnT AI Desk: Support Desk Software for Indian Businesses | MnT Future",
+    title: "MnT AI Desk: Support Desk Software for India | MnT Future",
     description:
-      "A support desk that puts WhatsApp, Instagram, Facebook, email and website chat in one inbox, with AI answering the repeat questions. Self-hosted, unlimited agents, no per-seat licence.",
+      "A support desk that puts WhatsApp, Instagram, Facebook, email and website chat in one inbox, with AI answering the repeat questions. No per-seat licence.",
   });
 }
 

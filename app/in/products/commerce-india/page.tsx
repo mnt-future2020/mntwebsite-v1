@@ -4,9 +4,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/products/commerce-india", {
-    title: "MnT Commerce India: Ecommerce Platform with GST Built In | MnT Future",
+    title: "MnT Commerce India: Ecommerce with GST Built In | MnT Future",
     description:
-      "Your own ecommerce platform with India GST handled natively: CGST/SGST vs IGST by place of supply, per-HSN slabs, gapless invoice numbering, automatic credit notes. Self-hosted, no commission on orders.",
+      "Your own ecommerce platform with India GST handled natively: CGST/SGST vs IGST by place of supply, per-HSN slabs, gapless invoicing. No commission on orders.",
   });
 }
 

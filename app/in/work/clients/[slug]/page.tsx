@@ -29,15 +29,33 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const found = get(slug);
   if (!found) return { title: "Project not found" };
   const { client, detail } = found;
+
+  // The headline is a full sentence — good on the page, far too long in a
+  // <title>, where it pushed every one of these to 83–105 characters and got
+  // cut off mid-clause in results. The industry is the short, honest label.
+  const title = `${client.name}: ${client.industry} | MnT Future`;
+  // Lead with the headline — it is the reason to click — then the two facts
+  // that qualify it. The long `sector` blurb and the stack list are dropped:
+  // between them they pushed these descriptions to 169–240 characters, and both
+  // are on the page for anyone who wants them.
+  const description = `${detail.headline} ${client.name} — ${client.industry}, built by MnT Future in India.`;
+
   return {
-    title: { absolute: `${client.name}: ${detail.headline} | MnT Future` },
-    description: `${client.name} (${client.sector}). ${detail.headline} Built by MnT Future with ${client.stack?.join(", ")}.`,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/in/work/clients/${slug}` },
     openGraph: {
       type: "article",
+      siteName: site.name,
       title: `${client.name} | Built by MnT Future`,
       description: detail.headline,
       url: `/in/work/clients/${slug}`,
+      images: [client.shot],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${client.name} | Built by MnT Future`,
+      description: detail.headline,
       images: [client.shot],
     },
   };
@@ -143,9 +161,10 @@ export default async function ClientCase(props: { params: Promise<{ slug: string
                 <Image
                   src={c.shot}
                   alt={`${c.name} website`}
-                  fill
+                  width={1600}
+                  height={1000}
                   sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover object-top"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
                   priority
                 />
               </div>

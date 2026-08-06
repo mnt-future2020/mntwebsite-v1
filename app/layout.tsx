@@ -170,6 +170,15 @@ export default async function RootLayout({
       className={`${sora.variable} ${sourceSans.variable} ${plexMono.variable}`}
     >
       <head>
+        {/* Warm the TLS handshakes for the three third parties every page can
+            reach, before the scripts that need them are parsed. GA is loaded
+            afterInteractive, so without this its connection is opened cold in
+            the middle of the load; the image host is where the LCP image comes
+            from on the pages that have one. */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://widget.clutch.co" />
         {/* Raw tag, not metadata alternates.types: pages that return their own
             `alternates` (via resolveMetadata) would override the layout's. */}
         <link

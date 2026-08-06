@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Icon from "./Icon";
-import { useFormToken, honeypotWrapClass } from "./useFormToken";
+import { useFormToken } from "./useFormToken";
+import Honeypot from "./Honeypot";
 
 export default function NewsletterForm({ source = "footer" }: { source?: string }) {
   const [email, setEmail] = useState("");
@@ -51,19 +52,7 @@ export default function NewsletterForm({ source = "footer" }: { source?: string 
 
   return (
     <form onSubmit={submit} noValidate>
-      {/* Honeypot: off-screen and out of the tab order. See ContactForm. */}
-      <div className={honeypotWrapClass} aria-hidden="true">
-        <label htmlFor="newsletter-website">Leave this field empty</label>
-        <input
-          id="newsletter-website"
-          name="website"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
+      <Honeypot id="newsletter-website" value={website} onChange={setWebsite} />
       <div className="flex gap-2">
         <input
           type="email"

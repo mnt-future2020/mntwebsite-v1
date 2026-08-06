@@ -4,9 +4,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/ecommerce", {
-    title: "Ecommerce Development Company in India: Custom Platforms | MnT Future",
+    title: "Ecommerce Development Company in India | MnT Future",
     description:
-      "Custom ecommerce platforms for Indian businesses: D2C storefronts, marketplaces, B2B and wholesale, with GST invoicing, UPI and Indian payment gateways handled natively. Built by senior engineers.",
+      "Custom ecommerce platforms for Indian businesses: D2C storefronts, marketplaces, B2B and wholesale, with GST invoicing, UPI and Indian gateways built in.",
   });
 }
 

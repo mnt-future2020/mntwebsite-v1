@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/security-compliance", {
     title: "ADA, PCI DSS & US Sales-Tax, Built In | MnT Future",
     description:
-      "US commerce compliance engineered into the architecture: built to ADA/WCAG, architected to minimise PCI DSS v4.0.1 scope, sales-tax engine integrated, SOC 2-aligned controls, and CCPA/CPRA privacy.",
+      "US commerce compliance engineered into the architecture: ADA/WCAG, minimised PCI DSS v4.0.1 scope, integrated sales tax and SOC 2-aligned controls.",
   });
 }
 

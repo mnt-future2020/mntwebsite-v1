@@ -15,9 +15,9 @@ import BlueprintMotion from "@/components/BlueprintMotion";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/", {
-    title: "MnT Future: AI-Native, Agent-Ready Commerce Platforms for US Brands",
+    title: "AI-Native, Agent-Ready Commerce Platforms | MnT Future",
     description:
-      "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C & marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
+      "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts, marketplaces, integrations, B2B and agents.",
   });
 }
 
@@ -383,7 +383,7 @@ export default function Home() {
               </span>
               <Image
                 src={featured.cover}
-                alt={`${featured.title}: ${featured.tagline}`}
+                alt={`${featured.title}: ${featured.type}`}
                 width={900}
                 height={560}
                 className="h-full min-h-[280px] w-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.02]"

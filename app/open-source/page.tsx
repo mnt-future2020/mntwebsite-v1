@@ -14,9 +14,9 @@ const GITHUB_ORG = "https://github.com/MnT-Future";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source", {
-    title: "Open Source: agentic & AI-native commerce tooling | MnT Future",
+    title: "Open Source: Agentic Commerce Tooling | MnT Future",
     description:
-      "MnT Future's open-source program for agentic & AI-built commerce: agentready (store agent-readiness scanner) and vibecheck (security & production-readiness for AI-built stores) are live and MIT-licensed. retail-mcp and acp-testkit are next.",
+      "MnT Future's open-source tools for agentic and AI-built commerce: agentready scans a store's agent-readiness, vibecheck scans AI-built code. Both MIT.",
   });
 }
 

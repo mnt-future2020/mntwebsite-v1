@@ -50,6 +50,3 @@ export function useFormToken({ lazy = false }: { lazy?: boolean } = {}) {
 
   return { token, refresh: load };
 }
-
-/** Shared styling for the honeypot: off-screen for people, present for bots. */
-export const honeypotWrapClass = "absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden";

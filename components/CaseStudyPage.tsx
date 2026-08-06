@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
 import CTASection from "./CTASection";
@@ -9,9 +10,11 @@ import BlueprintFaq from "./BlueprintFaq";
 import { CheckList, Breadcrumbs } from "./blocks";
 import { MakerMark } from "./blueprint";
 import { site } from "@/lib/site";
+import { imageSize } from "@/lib/imageSize";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string; url?: string }) {
+  const { width, height } = imageSize(src);
   return (
     <div className="overflow-hidden border border-bp-edge bg-white shadow-[0_24px_60px_-24px_rgba(14,27,46,0.25)]">
       <div className="flex items-center gap-1.5 border-b border-bp-hair bg-slate-50 px-3.5 py-[11px]">
@@ -22,8 +25,17 @@ function BrowserFrame({ src, alt, url = "lobbi.in" }: { src: string; alt: string
           {url}
         </span>
       </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="block w-full" />
+      {/* The hero shot is the LCP element on a case study, so it loads eagerly
+          and at priority rather than waiting for the lazy pass. */}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes="(max-width: 1024px) 100vw, 55vw"
+        priority
+        className="block h-auto w-full"
+      />
     </div>
   );
 }
@@ -257,8 +269,14 @@ export default function CaseStudyPage({ cs, region = "us" }: { cs: CaseStudy; re
               <Reveal key={p.title} delay={i * 80}>
                 <div className="group h-full overflow-hidden border border-bp-edge bg-white shadow-[0_1px_3px_rgba(14,27,46,0.04)] transition-all duration-[250ms] hover:-translate-y-1 hover:shadow-[0_20px_44px_-18px_rgba(14,102,194,0.22)]">
                   <div className="img-zoom relative aspect-[16/10] overflow-hidden bg-slate-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.src} alt={p.title} className="h-full w-full object-cover" />
+                    <Image
+                      src={p.src}
+                      alt={p.title}
+                      width={1600}
+                      height={1000}
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="font-display text-base font-bold text-bp-ink">{p.title}</h3>

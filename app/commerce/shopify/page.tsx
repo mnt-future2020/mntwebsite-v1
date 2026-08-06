@@ -12,9 +12,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/shopify", {
-    title: "Shopify Store Development: Official Shopify Partner | MnT Future",
+    title: "Shopify Store Development: Official Partner | MnT Future",
     description:
-      "Official Shopify Partner builds: fast, conversion-ready Shopify e-commerce stores, advanced Hydrogen (React) headless storefronts, AI search, agent-ready feeds, and a designed upgrade path to a custom AI-native platform.",
+      "Official Shopify Partner builds: conversion-ready stores, Hydrogen headless storefronts, AI search and agent-ready feeds, with a path to a custom platform.",
   });
 }
 

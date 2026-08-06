@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/integrations", {
-    title: "Commerce Integrations & Automation (ERP, OMS, PIM, CDP) | MnT Future",
+    title: "Commerce Integrations: ERP, OMS, PIM, CDP | MnT Future",
     description:
       "Connect ERP, OMS, PIM, CDP, payments & 3PL into one commerce stack: orchestration, data pipelines, and automation, one source of truth.",
   });

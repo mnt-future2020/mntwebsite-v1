@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/products", {
     title: "Products: AI Desk, AI CRM & Commerce India | MnT Future",
     description:
-      "Three applications we host, brand and customise for you: a support desk with AI, a WhatsApp CRM with automation and AI, and an ecommerce platform with GST built in. Self-hosted, you own them.",
+      "Three applications we host, brand and customise for you: a support desk with AI, a WhatsApp CRM with automation, and ecommerce with GST built in. You own them.",
   });
 }
 

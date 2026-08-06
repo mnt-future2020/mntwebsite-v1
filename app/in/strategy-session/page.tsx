@@ -11,9 +11,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/strategy-session", {
-    title: "Book a Strategy Session: Ecommerce & AI Consulting | MnT Future India",
+    title: "Book a Strategy Session: Ecommerce & AI | MnT Future India",
     description:
-      "A 45 minute session with a senior consultant. Bring your ecommerce bottleneck or the AI pilot that stalled, and leave with a plan you can execute. No obligation.",
+      "A 45-minute session with a senior consultant. Bring your ecommerce bottleneck or the AI pilot that stalled, and leave with a plan you can execute.",
   });
 }
 

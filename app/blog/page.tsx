@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/blog", {
     title: "Blog: AI-Native, Agent-Ready Commerce Insights | MnT Future",
     description:
-      "Guides and insights on AI-native commerce, agent-ready selling (ACP/UCP/MCP), custom platform builds, and US commerce compliance: from the senior engineers at MnT Future.",
+      "Guides on AI-native commerce, agent-ready selling (ACP/UCP/MCP), custom platform builds and US commerce compliance, from the engineers at MnT Future.",
   });
 }
 
@@ -53,7 +53,19 @@ export default async function BlogIndex() {
                 <div className="img-zoom relative h-44 overflow-hidden bg-deep">
                   {p.coverImage ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={p.coverImage} alt={p.title} className="h-full w-full object-cover" />
+                    /* Covers come from the CMS, so their real size isn't known
+                       at build time. The card is a fixed-height, object-cover
+                       box, so these are the share-card ratio purely to give the
+                       browser a shape to hold before the file arrives. */
+                    <img
+                      src={p.coverImage}
+                      alt={p.title}
+                      width={1200}
+                      height={630}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
                   ) : (
                     <div className="flex h-full items-center justify-center">
                       <Icon name="records" className="h-12 w-12 text-brand-200" />

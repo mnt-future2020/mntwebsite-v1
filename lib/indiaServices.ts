@@ -57,6 +57,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "Ecommerce platform development in India",
     heroSub:
       "A platform built for how your business actually sells, running on infrastructure you own. GST decided per order, Indian payment gateways integrated properly, and no percentage of every sale going elsewhere.",
+    metaDescription:
+      "An ecommerce platform built for how your business sells, on infrastructure you own: GST decided per order, Indian gateways integrated, no cut of every sale.",
     heroImage: images.commerce,
     chips: ["GST in the core", "UPI & Indian gateways", "Courier integrations", "No commission per order"],
     primaryKeyword: "Ecommerce platform development",
@@ -144,6 +146,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "Marketplace platform development in India",
     heroSub:
       "Many sellers on one platform: onboarding, catalogue control, commission, split payouts and settlement. The parts that make a marketplace hard, built properly rather than approximated.",
+    metaDescription:
+      "Many sellers on one platform: seller onboarding, catalogue control, commission, split payouts and settlement — the hard parts built properly, not approximated.",
     heroImage: images.marketplace,
     chips: ["Seller onboarding", "Split payouts", "Commission & settlement", "Catalogue quality control"],
     primaryKeyword: "Marketplace platform development",
@@ -187,6 +191,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "B2B and wholesale ecommerce platforms",
     heroSub:
       "Customer-specific pricing, quotes and RFQ, bulk ordering, credit terms and approval flows, connected to the ERP you already run. Built for buyers who order the same forty items every month.",
+    metaDescription:
+      "Customer-specific pricing, quotes and RFQ, bulk ordering, credit terms and approval flows, connected to the ERP you already run. Built for repeat B2B buyers.",
     heroImage: images.commerce,
     chips: ["Price per customer", "Quotes & RFQ", "Credit terms", "ERP connected"],
     primaryKeyword: "B2B ecommerce platform",
@@ -230,6 +236,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "Ecommerce integrations and automation",
     heroSub:
       "Tally or your ERP, warehouse, courier, payment gateway and accounting, joined into one flow. So an order is entered once, and nobody spends their morning copying data between two systems.",
+    metaDescription:
+      "Tally or your ERP, warehouse, courier, gateway and accounting joined into one flow, so an order is entered once and nobody copies data between two systems.",
     heroImage: images.dev,
     chips: ["Tally & ERP", "Warehouse & courier", "Payments & reconciliation", "No double entry"],
     primaryKeyword: "Ecommerce integration services",
@@ -273,6 +281,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "Managed ecommerce support and maintenance",
     heroSub:
       "We run and maintain the platform against an agreed SLA: monitoring, updates, security patching, and a person who answers when checkout breaks at 9pm on a Saturday.",
+    metaDescription:
+      "We run and maintain your ecommerce platform against an agreed SLA: monitoring, updates, security patching, and a person who answers when checkout breaks.",
     heroImage: images.dev,
     chips: ["Agreed SLA", "Monitoring & alerts", "Security patching", "A named person"],
     primaryKeyword: "Ecommerce maintenance and support",
@@ -316,6 +326,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "AI consultation for Indian businesses",
     heroSub:
       "What is genuinely worth doing with AI in your business, whether your data can support it, and what reaching production would actually cost. It ends with a costed path, not a maturity score.",
+    metaDescription:
+      "What is genuinely worth doing with AI in your business, whether your data can support it, and what production would cost. Ends with a costed path, not a score.",
     heroImage: images.ai,
     chips: ["Costed path to production", "Data readiness assessed", "Honest no when it is no", "1 to 2 weeks"],
     primaryKeyword: "AI consulting services India",
@@ -360,6 +372,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "AI automation for business workflows",
     heroSub:
       "The work your team repeats every single day, automated: document handling, data entry, classification, routing and reporting. With a person still in the loop wherever being wrong is expensive.",
+    metaDescription:
+      "The work your team repeats daily, automated: document handling, data entry, classification, routing and reporting — with a person in the loop where it matters.",
     heroImage: images.ai,
     chips: ["Document processing", "Classification & routing", "Human in the loop", "Measured, not assumed"],
     primaryKeyword: "AI automation services",
@@ -403,6 +417,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "AI agent development for enterprises",
     heroSub:
       "Agents that do work inside your systems rather than only answer questions, with clear limits on what they may act on alone and a complete record of everything they did.",
+    metaDescription:
+      "AI agents that do work inside your systems rather than only answer questions, with clear limits on what they may act on alone and a record of what they did.",
     heroImage: images.ai,
     chips: ["Acts, not just answers", "Bounded permissions", "Full audit trail", "Evaluated before live"],
     primaryKeyword: "AI agent development company",
@@ -446,6 +462,8 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
     h1: "Custom AI application development",
     heroSub:
       "A complete application built for your business with AI inside it, from nothing. For when the shape of your problem means no ready product fits, and bending one to fit would cost more than building right.",
+    metaDescription:
+      "A complete application built for your business with AI inside it, from nothing — for when no ready product fits and bending one to fit would cost more.",
     heroImage: images.dev,
     chips: ["Built from nothing", "AI where it earns its place", "Yours entirely", "Senior engineers end to end"],
     primaryKeyword: "Custom AI application development",

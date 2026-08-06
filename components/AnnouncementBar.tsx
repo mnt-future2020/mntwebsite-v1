@@ -9,11 +9,20 @@ import { REGIONS, regionFromPath } from "@/lib/regions";
 export default function AnnouncementBar() {
   const pathname = usePathname() || "/";
   return (
-    <div className="flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-700 to-brand-900 px-4 py-[9px] text-[13px] font-medium tracking-[0.02em] text-white">
+    // <section> with an accessible name, not a bare <div>: this strip sits
+    // above the sticky <header> and so belonged to no landmark, which is the
+    // axe `region` failure ("all page content should be contained by
+    // landmarks") on every page. A named section is a region landmark, so
+    // screen-reader users can reach or skip it like any other. Nothing visual
+    // changes.
+    <section
+      aria-label="Announcement"
+      className="flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-700 to-brand-900 px-4 py-[9px] text-[13px] font-medium tracking-[0.02em] text-white"
+    >
       <span className="rounded-full bg-white/[0.18] px-2.5 py-0.5 text-[11px] font-bold tracking-[0.06em]">
         NEW
       </span>
       <span className="truncate">{REGIONS[regionFromPath(pathname)].announcement}</span>
-    </div>
+    </section>
   );
 }

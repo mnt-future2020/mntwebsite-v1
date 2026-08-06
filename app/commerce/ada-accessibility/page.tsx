@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/ada-accessibility", {
     title: "ADA / WCAG Accessibility for E-Commerce | MnT Future",
     description:
-      "78% of accessibility lawsuits target e-commerce. We audit your store against WCAG 2.2 AA, fix what fails, and keep checking as it changes: lower risk, more shoppers served.",
+      "78% of accessibility lawsuits target e-commerce. We audit your store against WCAG 2.2 AA, fix what fails, and keep checking as it changes. No overlay widget.",
   });
 }
 

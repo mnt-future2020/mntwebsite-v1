@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
 import { getSeoOverride } from "./settings";
 import { counterpart, regionFromPath } from "./regions";
+import { site } from "./site";
+
+/**
+ * Share card used by every page that does not ship its own.
+ *
+ * The root layout's `openGraph` block does not reach these pages: Next replaces
+ * the parent object wholesale when a page returns its own `openGraph`, it does
+ * not deep-merge the keys. Every page built through `resolveMetadata` therefore
+ * has to restate the defaults, or it ships an og:tag block with no og:image —
+ * which is what an audit found on 66 of the site's pages, i.e. a bare link
+ * preview everywhere they were shared.
+ */
+const DEFAULT_OG_IMAGE = `${site.url}/og-default.png`;
 
 /**
  * hreflang for a path that exists in both markets.
@@ -32,22 +45,27 @@ export async function resolveMetadata(
   const o = await getSeoOverride(path);
   const title = o?.title || base.title;
   const description = o?.description || base.description;
-  const ogImage = o?.ogImage || base.ogImage;
+  const ogImage = o?.ogImage || base.ogImage || DEFAULT_OG_IMAGE;
 
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: path, languages: languages(path) },
+    // type and siteName are restated for the same reason as the image: the
+    // page's object replaces the layout's rather than extending it.
     openGraph: {
+      type: "website",
+      siteName: site.name,
       title,
       description,
       url: path,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: [ogImage],
     },
     twitter: {
+      card: "summary_large_image",
       title,
       description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: [ogImage],
     },
     robots: o?.noindex
       ? { index: false, follow: false }

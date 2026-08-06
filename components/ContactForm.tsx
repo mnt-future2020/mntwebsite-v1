@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Icon from "./Icon";
-import { useFormToken, honeypotWrapClass } from "./useFormToken";
+import { useFormToken } from "./useFormToken";
+import Honeypot from "./Honeypot";
 
 const fieldClass =
   "border border-slate-300 bg-white px-3.5 py-3 text-[14.5px] text-bp-ink placeholder:text-slate-400 outline-none transition-all focus:border-brand-500 focus:ring-[3px] focus:ring-brand-500/15";
@@ -103,24 +104,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-[18px]">
-      {/*
-        Honeypot. Off-screen and out of the tab order, so no person ever sees or
-        reaches it; scripts that fill inputs by name do. Anything typed here
-        marks the submission as a bot server-side. Don't remove or rename it
-        without changing lib/antispam.ts.
-      */}
-      <div className={honeypotWrapClass} aria-hidden="true">
-        <label htmlFor="contact-website">Leave this field empty</label>
-        <input
-          id="contact-website"
-          name="website"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
+      <Honeypot id="contact-website" value={website} onChange={setWebsite} />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className={labelClass}>

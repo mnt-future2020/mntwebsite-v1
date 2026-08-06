@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { Report, CheckResult, Category } from "@mntglobal/agentready-core";
 import Icon from "./Icon";
-import { useFormToken, honeypotWrapClass } from "./useFormToken";
+import { useFormToken } from "./useFormToken";
+import Honeypot from "./Honeypot";
 
 // Local copy of the category metadata: client bundles must never import runtime
 // values from agentready-core (it pulls in server-only node: builtins via undici).
@@ -90,19 +91,7 @@ function LeadCard({ report }: { report: Report }) {
         </p>
       ) : (
         <form onSubmit={submit} className="mt-4 flex flex-wrap gap-3">
-          {/* Honeypot: off-screen and out of the tab order. See ContactForm. */}
-          <div className={honeypotWrapClass} aria-hidden="true">
-            <label htmlFor="scan-website">Leave this field empty</label>
-            <input
-              id="scan-website"
-              name="website"
-              type="text"
-              tabIndex={-1}
-              autoComplete="off"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
+          <Honeypot id="scan-website" value={website} onChange={setWebsite} />
           <input
             type="email"
             required

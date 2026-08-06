@@ -15,8 +15,10 @@ export type SiteSettings = {
 export const DEFAULT_SETTINGS: SiteSettings = {
   siteName: "MnT Future: AI-Native, Agent-Ready Commerce Platforms",
   titleTemplate: "%s | MnT Future",
+  // Kept under 160: this is what a page without its own description ships, and
+  // at 200 characters the old copy was cut off mid-clause in every result.
   defaultDescription:
-    "MnT Future is an e-commerce development company building AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts & marketplaces, integrations, B2B, and AI agents.",
+    "MnT Future builds AI-native, agent-ready commerce platforms for US D2C and marketplace brands: custom storefronts, marketplaces, integrations, B2B and agents.",
   defaultOgImage: null,
   gaMeasurementId: null,
   gscVerification: null,

@@ -57,7 +57,7 @@ export default function Header() {
           className="mx-auto flex h-[78px] max-w-[1440px] items-center gap-7 px-[18px] transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)] sm:px-8 lg:px-14"
         >
           <div className="flex flex-1 items-center">
-            <Logo />
+            <Logo priority />
           </div>
 
           {/* Entries that have children get a panel; the rest stay plain links.

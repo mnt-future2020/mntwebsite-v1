@@ -15,6 +15,11 @@ const partners: {
   slug?: string;
   img?: string;
   imgClass?: string;
+  /** Intrinsic aspect of the SVG, from its viewBox. The height comes from
+   *  `imgClass`, so these only tell the browser the shape of the box to hold
+   *  open while the mark loads. */
+  w?: number;
+  h?: number;
   href?: string;
 }[] = [
   {
@@ -22,6 +27,8 @@ const partners: {
     designation: "Official Partner",
     img: "/images/partners/aws.svg",
     imgClass: "h-8",
+    w: 304,
+    h: 182,
     href: "https://aws.amazon.com/marketplace/seller-profile?id=seller-i3nsn3uyjrugc",
   },
   {
@@ -29,6 +36,8 @@ const partners: {
     designation: "Official Partner",
     img: "/images/partners/google-cloud.svg",
     imgClass: "h-9",
+    w: 34,
+    h: 27,
     href: "https://cloud.google.com/find-a-partner/partner/magizh-nexgen-technologies",
   },
   { name: "Shopify", designation: "Official Partner", slug: "shopify" },
@@ -43,7 +52,20 @@ const partners: {
 const cellClass =
   "flex w-[252px] shrink-0 flex-col items-center justify-center border-r border-white/12 px-6 py-8 text-center transition-colors duration-200 hover:bg-white/[0.06]";
 
-function Card({ p }: { p: (typeof partners)[number] }) {
+function Card({
+  p,
+  decorative = false,
+}: {
+  p: (typeof partners)[number];
+  /**
+   * True for the duplicated half of the belt, which exists only so the loop
+   * can translate by -50% without a visible seam. It renders without the link,
+   * because a copy that is hidden from assistive tech must not contain
+   * focusable elements: a keyboard user would otherwise tab into six anchors a
+   * screen reader has been told are not there (axe `aria-hidden-focus`).
+   */
+  decorative?: boolean;
+}) {
   const inner = (
     <>
       <span className="flex h-10 items-center justify-center">
@@ -52,6 +74,10 @@ function Card({ p }: { p: (typeof partners)[number] }) {
           <img
             src={p.img}
             alt={`${p.name} logo`}
+            width={p.w}
+            height={p.h}
+            loading="lazy"
+            decoding="async"
             className={`w-auto brightness-0 invert ${p.imgClass}`}
           />
         ) : (
@@ -64,7 +90,7 @@ function Card({ p }: { p: (typeof partners)[number] }) {
       </span>
     </>
   );
-  return p.href ? (
+  return p.href && !decorative ? (
     <a
       href={p.href}
       target="_blank"
@@ -105,7 +131,9 @@ export default function Partners() {
               aria-hidden={half === 1 || undefined}
             >
               {[0, 1].map((pass) =>
-                partners.map((p) => <Card key={`${pass}-${p.name}`} p={p} />)
+                partners.map((p) => (
+                  <Card key={`${pass}-${p.name}`} p={p} decorative={half === 1} />
+                ))
               )}
             </div>
           ))}

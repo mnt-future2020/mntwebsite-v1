@@ -15,9 +15,9 @@ import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/work/clients", {
-    title: "Client Projects: Websites & Platforms We Built | MnT Future India",
+    title: "Client Projects We Built in India | MnT Future",
     description:
-      "Live client platforms built by MnT Future: facade, printing, solar, education, accounting, care, events, pest control, travel and engineering. Custom builds with admin panels, databases and payments.",
+      "Live client platforms built by MnT Future across printing, solar, education, accounting, care, travel and engineering — with admin panels and payments.",
   });
 }
 
@@ -167,9 +167,10 @@ export default function ClientProjects() {
                     <Image
                       src={c.img}
                       alt={`${c.name}: ${c.sector}`}
-                      fill
+                      width={1600}
+                      height={1000}
                       sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     {/* Bottom left, not top left: at card width the badge sat
                         over the client's own logo on three of the four. */}
@@ -257,9 +258,10 @@ export default function ClientProjects() {
                     <Image
                       src={c.shot}
                       alt={`${c.name} website`}
-                      fill
+                      width={1600}
+                      height={1000}
                       sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   </span>
                 </a>
@@ -363,9 +365,10 @@ export default function ClientProjects() {
                   <Image
                     src={c.shot}
                     alt={`${c.name} website`}
-                    fill
+                    width={1600}
+                    height={1000}
                     sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </span>
                 <span className="flex flex-1 flex-col p-7 lg:p-9">

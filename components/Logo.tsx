@@ -8,9 +8,17 @@ import { REGIONS, regionFromPath } from "@/lib/regions";
 export default function Logo({
   variant = "dark",
   className = "",
+  priority = false,
 }: {
   variant?: "dark" | "light";
   className?: string;
+  /**
+   * Only the header mark is above the fold. The footer copy was inheriting
+   * `priority` too, which opts an image out of lazy loading and puts it in the
+   * preload queue — so every page fetched a second logo eagerly, competing with
+   * the real LCP element for the first connections.
+   */
+  priority?: boolean;
 }) {
   const src = variant === "light" ? "/mnt-logo-white.png" : "/mnt-logo.png";
   // Home is the home of the region you are standing in. Sending an India
@@ -36,7 +44,8 @@ export default function Logo({
         // 0.09% aspect difference, invisible under h-9 w-auto.
         width={2828}
         height={546}
-        priority
+        priority={priority}
+        loading={priority ? "eager" : "lazy"}
         className="h-9 w-auto sm:h-10"
       />
     </Link>

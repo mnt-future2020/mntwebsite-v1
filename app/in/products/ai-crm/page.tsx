@@ -4,9 +4,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/products/ai-crm", {
-    title: "MnT AI CRM: WhatsApp CRM with Automation & AI for Indian Businesses | MnT Future",
+    title: "MnT AI CRM: WhatsApp CRM with Automation & AI | MnT Future",
     description:
-      "Run your whole WhatsApp business from one screen: one official number for the entire team, a sales pipeline, broadcasts on approved templates, no-code automation and an AI reply assistant. Self-hosted.",
+      "Run your whole WhatsApp business from one screen: one official number for the team, a sales pipeline, broadcasts, no-code automation and an AI reply assistant.",
   });
 }
 

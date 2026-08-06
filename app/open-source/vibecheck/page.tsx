@@ -13,9 +13,9 @@ const ACTION_URL = "https://github.com/MnT-Future/vibecheck#github-action";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/open-source/vibecheck", {
-    title: "vibecheck: is your AI-built store secure & production-ready? | MnT Future",
+    title: "vibecheck: Security Scan for AI-Built Stores | MnT Future",
     description:
-      "Open-source scanner for AI-generated commerce codebases: 26 checks across secrets, injection, access control, commerce-logic tampering, dependency CVEs and more. Deterministic, private, MIT. npx @mntglobal/vibecheck.",
+      "Open-source scanner for AI-generated commerce code: 26 checks across secrets, injection, access control, logic tampering and CVEs. Deterministic, private, MIT.",
   });
 }
 

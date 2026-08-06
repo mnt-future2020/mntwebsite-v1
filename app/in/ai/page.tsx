@@ -4,9 +4,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/ai", {
-    title: "AI Consultation, Automation, Agents & Custom Applications | MnT Future India",
+    title: "AI Consultation, Automation & Agents | MnT Future India",
     description:
-      "AI work that reaches production: consultation, automation, agent development and complete custom AI applications. Delivered by senior engineers embedded in your team, using our Discover to Optimize method.",
+      "AI that reaches production: consultation, automation, agent development and custom AI applications, delivered by senior engineers embedded in your team.",
   });
 }
 

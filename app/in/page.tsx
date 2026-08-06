@@ -16,9 +16,9 @@ import { inEcommerceNav, inAiNav, inProductsNav } from "@/lib/regions";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in", {
-    title: "MnT Future India: Ecommerce Platforms, AI Systems & Products",
+    title: "Ecommerce Platforms & AI Systems | MnT Future India",
     description:
-      "MnT Future builds ecommerce platforms with GST built in, AI agents and automation that reach production, and ready products for Indian businesses: MnT AI Desk, MnT AI CRM and MnT Commerce India.",
+      "MnT Future builds ecommerce platforms with GST built in, AI that reaches production, and three ready products: MnT AI Desk, MnT AI CRM and Commerce India.",
   });
 }
 
@@ -359,10 +359,11 @@ export default function IndiaHome() {
                 <div className="relative aspect-[16/8] overflow-hidden border-b border-bp-line bg-slate-100">
                   <Image
                     src={c.cover}
-                    alt={`${c.title}: ${c.tagline}`}
-                    fill
+                    alt={`${c.title}: ${c.type}`}
+                    width={1600}
+                    height={800}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-7 lg:p-9">

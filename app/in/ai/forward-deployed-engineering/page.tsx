@@ -12,9 +12,9 @@ import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/in/ai/forward-deployed-engineering", {
-    title: "Forward Deployed Engineering: AI That Reaches Production | MnT Future",
+    title: "Forward Deployed Engineering for AI | MnT Future India",
     description:
-      "Senior engineers embedded in your team and your environment, building your AI system and staying until it runs in production. Our documented method: Discover, Design, Build, Deploy, Optimize.",
+      "Senior engineers embedded in your team, building your AI system and staying until it runs in production. Our method: Discover, Design, Build, Deploy, Optimize.",
   });
 }
 

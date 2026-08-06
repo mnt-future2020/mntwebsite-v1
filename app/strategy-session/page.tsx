@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/strategy-session", {
     title: "Free Strategy Session: Commerce Tech Consulting | MnT Future",
     description:
-      "A free 45-minute consulting session with a senior commerce consultant: bring your problem, get the solution that fits your business, and keep the written recommendation brief.",
+      "A free 45-minute session with a senior commerce consultant: bring your problem, get the solution that fits your business, and keep the written brief.",
   });
 }
 

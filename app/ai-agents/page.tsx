@@ -5,9 +5,9 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/ai-agents", {
-    title: "AI & Agents for Commerce: Agent-Ready, Embedded AI | MnT Future",
+    title: "AI & Agents for Commerce | MnT Future",
     description:
-      "AI search & recommendations, agent-ready commerce (ACP/UCP/MCP), and custom AI agents: the AI layer of every commerce platform we build for US D2C & marketplace brands.",
+      "AI search and recommendations, agent-ready commerce (ACP/UCP/MCP) and custom AI agents: the AI layer of every commerce platform we build for US brands.",
   });
 }
 

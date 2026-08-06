@@ -5,7 +5,7 @@ import { resolveMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce/ai-cleanup", {
-    title: "AI Cleanup: Make Your Vibe-Coded MVP Production-Grade | MnT Future",
+    title: "AI Cleanup: Vibe-Coded MVP to Production | MnT Future",
     description:
       "Turn an AI or no-code MVP into a secure, scalable, production-grade store: security audit, refactor, hardening, tests, and production deploy.",
   });

@@ -247,9 +247,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       ctaBody:
         "If your store and your retail, wholesale or pop-up channels keep separate stock, that is a rebuild worth scoping properly. Bring it to a free strategy session and we will map it.",
     },
-    metaTitle: "Lia Fashion: Web Store + In-Store POS on One Stock Pool | MnT Future",
+    metaTitle: "Lia Fashion: Web Store + POS, One Stock Pool | MnT Future",
     metaDescription:
-      "How MnT Future built Lia Fashion's commerce platform: a Laravel 12 API serving a web storefront, admin back office and in-store POS on one size-level inventory, with concurrency-safe stock writes, Razorpay reconciliation and Shiprocket fulfilment.",
+      "How MnT Future built Lia Fashion's platform: one Laravel 12 API behind a web store, an admin back office and an in-store POS, on one size-level inventory.",
   },
   // REQUIRED IMAGES before this goes live (screenshots of leats.in):
   //   /work/leats-cover.webp    1600x1000  storefront home, for the card and OG
@@ -454,9 +454,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       ctaBody:
         "If your stock is transformed, portioned or assembled before it ships, off-the-shelf commerce will fight you. Bring it to a free strategy session and we will map what it actually takes.",
     },
-    metaTitle: "Leats: Quick-Commerce Platform with Yield Tracking & Own Fleet | MnT Future",
+    metaTitle: "Leats: Quick-Commerce Platform, Own Fleet | MnT Future",
     metaDescription:
-      "How MnT Future built Leats' fresh-food commerce platform: raw material held at weighted-average cost, processing runs that record outputs and wastage, pincode delivery zones, a delivery-partner app and live tracking, across 61 data models.",
+      "How MnT Future built Leats' fresh-food platform: weighted-average raw-material costing, processing runs with wastage, pincode zones and an own delivery fleet.",
   },
   // REQUIRED IMAGES before this goes live (screenshots of sntasty.com):
   //   /work/sntasty-cover.webp    1600x1000  storefront home, for the card and OG
@@ -642,9 +642,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       ctaBody:
         "If your shipping is a flat rate because the real calculation was too hard to build, that is margin leaking on every order. Bring it to a free strategy session and we will size the fix.",
     },
-    metaTitle: "Sai Nandhini Tasty World: Next.js 16 D2C Commerce Platform | MnT Future",
+    metaTitle: "Sai Nandhini Tasty World: D2C on Next.js 16 | MnT Future",
     metaDescription:
-      "How MnT Future built Sai Nandhini Tasty World's D2C platform on Next.js 16 and React 19: pack sizes as stocked variants, weight-slab shipping by destination, Razorpay checkout, courier tracking, automated invoice PDFs and an owner-run admin.",
+      "How MnT Future built Sai Nandhini Tasty World's D2C platform on Next.js 16: pack sizes as stocked variants, weight-slab shipping and an owner-run admin.",
   },
   // ─── Our own platforms and products ───────────────────────────────────────
   {
@@ -733,9 +733,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       { group: "Safety", items: ["Read-only executor", "Human approval gates", "Risk tiers", "Approver audit trail"] },
       { group: "Delivery", items: ["TypeScript", "Node 20", "Hand-written migrations", "One-file white-label"] },
     ],
-    metaTitle: "MnT Commerce: AI-Native Commerce Platform | MnT Future Case Study",
+    metaTitle: "MnT Commerce: AI-Native Commerce Platform | MnT Future",
     metaDescription:
-      "The AI-native commerce base MnT Future builds clients on: semantic search, a shopping assistant, and an ops agent that writes real workflow code it can't run until a human approves.",
+      "The AI-native base MnT Future builds clients on: semantic search, a shopping assistant, and an ops agent that can't run its own code until a human approves.",
     resultsTitle: "What happened when we ran the AI against our own store?",
     resultsIntro:
       "Asked in one sentence to create a 10% promotion, the Ops Copilot wrote the engine's own workflow code and stopped. The promotion did not exist in the database until a human clicked Approve, then it did, with the approver's ID recorded against it. Semantic search initially ranked one of three probe queries wrong; the fix was the catalog text, not the retrieval code.",
@@ -883,7 +883,7 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     metaTitle: "LOBBI: Marketplace With an AI Booking Agent | MnT Future",
     metaDescription:
-      "How MnT Future built LOBBI, a live two-sided marketplace: player and owner apps, real-time slot inventory, split payments, and a safe AI booking agent in WhatsApp.",
+      "How MnT Future built LOBBI, a two-sided marketplace: player and owner apps, real-time slot inventory, split payments and an AI booking agent in WhatsApp.",
     resultsTitle: "What did the architecture buy?",
     resultsIntro:
       "LOBBI runs three apps on one shared backend. Two-phase Redis locking makes double bookings impossible under concurrent demand, Cashfree Easy Split moves marketplace money with zero manual reconciliation, and a read-only Claude agent takes bookings in WhatsApp: every action confirmed by a one-time signed link, so the AI never writes to the database.",
@@ -1005,9 +1005,9 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       { group: "Safety", items: ["tsc + build gate", "neverTouch globs", "Tiered auto/verify/escalate"] },
       { group: "Ops", items: ["Git + GitHub", "DigitalOcean CI", "HTML dashboard"] },
     ],
-    metaTitle: "Searchlight: Autonomous SEO/AEO Agent | MnT Future Case Study",
+    metaTitle: "Searchlight: Autonomous SEO & AEO Agent | MnT Future",
     metaDescription:
-      "MnT Future built an autonomous SEO/AEO agent on the Claude Agent SDK and ran it on its own site: open issues cut 20 → 6, every fix gated by the production build.",
+      "MnT Future built an autonomous SEO/AEO agent on the Claude Agent SDK and ran it on its own site: open issues 20 → 6, every fix gated by the build.",
     resultsTitle: "What happened when we pointed it at our own site?",
     resultsIntro:
       "In July 2026, Searchlight's Monitor found 20 open on-page SEO/AEO issues across mntfuture.com. After the first AI-driven fix pass: every change human-reviewed and shipped through normal CI: the same Monitor measured 6 remaining, a 70% reduction. The longest meta description tightened from 197 to 150 characters and the longest title from 72 to 58.",
@@ -1134,7 +1134,7 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     metaTitle: "WCAG 2.2 AA on Our Own Site: No Overlay | MnT Future",
     metaDescription:
-      "MnT Future audited its own site with axe-core and fixed every WCAG AA failure at the design-token level: 7 failing checks to 0 across 9 pages, no overlay widget.",
+      "MnT Future audited its own site with axe-core and fixed every WCAG AA failure in the design tokens: 7 failing checks to 0 across 9 pages, no overlay.",
     resultsTitle: "What did zero violations actually take?",
     resultsIntro:
       "In July 2026, an axe-core scan (WCAG 2.2 A + AA) of mntfuture.com found 7 failing nodes across 5 of 9 key pages. Every failure traced to four root causes. We fixed them in the design system: two tokens, one text color, one iframe guard, and re-scanned: zero violations on all nine pages, with the brand palette intact.",
@@ -1261,7 +1261,7 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     ],
     metaTitle: "AI Cleanup: The Vibe-Coded Store That Broke | MnT Future",
     metaDescription:
-      "MnT Future built a deliberately vibe-coded store, proved it broken (7 findings, 5/5 exploits, ~680 req/s), then rebuilt it: 0 findings, 0 exploits, ~33,000 req/s.",
+      "MnT Future built a deliberately vibe-coded store, proved it broken (7 findings, 5/5 exploits, ~680 req/s), then rebuilt it: 0, 0, ~33,000 req/s.",
     resultsTitle: "What did the re-architecture actually change?",
     resultsIntro:
       "Measured before and after on the same store, same tests (July 2026). Static findings went from 7 (2 critical) to 0. Live exploits went from 5 of 5 landing to 0 of 5. Throughput rose from ~680 to ~33,000 requests per second, and p99 tail latency dropped from ~650ms to ~12ms: driven by removing a synchronous full-database disk read from every request.",

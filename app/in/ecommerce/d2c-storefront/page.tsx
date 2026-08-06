@@ -7,8 +7,10 @@ const config = INDIA_SERVICES["d2c-storefront"];
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata(config.slug, {
-    title: `${config.h1} | MnT Future India`,
-    description: config.heroSub,
+    // Not `${config.h1} | MnT Future India`: that H1 is the longest of the ten
+    // and the composed title ran to 63 characters, past where results truncate.
+    title: "D2C Storefront Development in India | MnT Future",
+    description: config.metaDescription ?? config.heroSub,
   });
 }
 

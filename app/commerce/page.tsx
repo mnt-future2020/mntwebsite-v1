@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return resolveMetadata("/commerce", {
     title: "Commerce Platform Development for US Brands | MnT Future",
     description:
-      "E-commerce development for US brands: custom stores & marketplaces, integrations, B2B/wholesale, and managed commerce, with ADA, PCI DSS & US sales-tax handled.",
+      "E-commerce development for US brands: custom stores and marketplaces, integrations, B2B/wholesale and managed commerce, with ADA, PCI and sales tax handled.",
   });
 }
 

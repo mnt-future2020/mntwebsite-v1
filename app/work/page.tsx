@@ -113,10 +113,11 @@ export default function WorkIndex() {
                     <div className="relative aspect-[16/8] overflow-hidden border-b border-bp-edge bg-slate-100">
                       <Image
                         src={c.cover}
-                        alt={`${c.title}: ${c.tagline}`}
-                        fill
+                        alt={`${c.title}: ${c.type}`}
+                        width={1600}
+                        height={800}
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                     <div className="flex flex-1 flex-col p-7 lg:p-9">
