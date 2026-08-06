@@ -140,9 +140,13 @@ export function Process({
       { title: "Scale", desc: "We harden, instrument, and hand over, or stay on as your embedded product team." },
     ];
   const dark = tone === "dark";
+  // The column count follows the step count: the US model has four stages and
+  // India's has five, and a five-item grid in four columns leaves one cell
+  // stranded on its own row.
+  const cols = data.length === 5 ? "lg:grid-cols-5" : "lg:grid-cols-4";
   return (
     <div
-      className={`grid border-l border-t sm:grid-cols-2 lg:grid-cols-4 ${
+      className={`grid border-l border-t sm:grid-cols-2 ${cols} ${
         dark ? "border-white/10" : "border-bp-edge"
       }`}
     >

@@ -42,10 +42,35 @@ export type ServiceConfig = {
   areaServed?: string[];
 };
 
+/** The five stages, in India's words: GST and on-prem, not ADA and PCI. */
+const INDIA_PROCESS = [
+  {
+    title: "Discover",
+    desc: "We map how your business actually sells, what your data looks like, and what reaching production would take. You get a costed path, not a proposal full of maybes.",
+  },
+  {
+    title: "Design",
+    desc: "Architecture, integrations and the checks we will be judged by. Agreed before anybody writes code, so nobody argues about done later.",
+  },
+  {
+    title: "Build",
+    desc: "Senior engineers writing code inside your environment, in two-week sprints. You watch it get built rather than waiting for a handover.",
+  },
+  {
+    title: "Deploy",
+    desc: "Live and monitored, on your own servers or private cloud where your data governance needs it. This is the stage most projects never reach.",
+  },
+  {
+    title: "Optimize",
+    desc: "Measured against the checks from stage two, tuned for cost, and watched. We stay until it runs without us.",
+  },
+];
+
 export default function ServicePage({ config }: { config: ServiceConfig }) {
   // Every in-page link has to stay inside the region the page belongs to. The
   // slug already says which that is, so nothing has to be passed in.
-  const base = config.slug.startsWith("/in/") ? "/in" : "";
+  const india = config.slug.startsWith("/in/");
+  const base = india ? "/in" : "";
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -227,15 +252,33 @@ export default function ServicePage({ config }: { config: ServiceConfig }) {
       {/* PROCESS */}
       <section data-reveal className="border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
+          {/*
+            The method has a name, and it has to be the same name everywhere.
+
+            These ten India leaf pages were rendering the US delivery model —
+            four steps called "Discovery, build, certify, scale", verified
+            against "ADA/WCAG, PCI DSS, SOC 2 controls" — while /in, /in/ai and
+            the Forward Deployed Engineering page all say the method is
+            Discover, Design, Build, Deploy, Optimize, and while /in sells
+            having a documented method as the thing that separates us ("most
+            firms selling AI services in India have no documented method at
+            all"). A buyer who read the homepage and then clicked a service
+            found a different method and three compliance regimes that do not
+            apply to them.
+          */}
           <SectionHead
             no="03"
             total="03"
             eyebrow="How we work"
-            title="Discovery, build, certify, scale."
-            sub="A senior-led delivery model built for revenue-critical commerce: predictable and transparent."
+            title={india ? "Discover, Design, Build, Deploy, Optimize." : "Discovery, build, certify, scale."}
+            sub={
+              india
+                ? "Forward Deployed Engineering: senior engineers inside your team, on the same five stages every time."
+                : "A senior-led delivery model built for revenue-critical commerce: predictable and transparent."
+            }
           />
           <div className="mt-11 lg:mt-16">
-            <Process />
+            <Process steps={india ? INDIA_PROCESS : undefined} />
           </div>
         </div>
       </section>
