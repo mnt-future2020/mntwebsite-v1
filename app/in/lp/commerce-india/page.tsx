@@ -99,24 +99,24 @@ export default function CommerceIndiaLanding() {
             <div className="flex items-center gap-3">
               <span className="h-px w-[34px] shrink-0 bg-brand-500" />
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
-                MnT Commerce India
+                MnT Commerce India · AI-native
               </span>
             </div>
             <h1 className="mt-6 max-w-[16ch] font-display text-[38px] font-bold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[50px] lg:text-[60px]">
-              Your own store, with GST done <span className="text-brand-700">properly</span>.
+              A store that helps you <span className="text-brand-700">run it</span>.
             </h1>
             <p className="mt-6 max-w-[54ch] text-[18px] leading-[1.65] text-bp-mute">
-              Stop paying a monthly fee plus a cut of every order to rent your own shop. This is a
-              platform you run: India tax in the core, Razorpay and UPI built in, and your customer
-              list in your own database.
+              Your own ecommerce platform with an AI Ops Copilot inside the admin. It watches the
+              shop, drafts the work, and does the safe parts on its own so your team stops doing
+              them. Built for India: GST, Razorpay and UPI handled in the core.
             </p>
 
             <div className="mt-8 grid gap-2.5 sm:grid-cols-2">
               {[
+                "An AI Copilot that runs jobs, not a chatbot",
+                "Recovers carts, chases reviews, keeps feeds live",
+                "GST, Razorpay and UPI in the core",
                 "No commission on your orders",
-                "CGST/SGST or IGST decided per order",
-                "Gapless invoice serials",
-                "Runs on servers you own",
               ].map((p) => (
                 <div key={p} className="flex items-start gap-2.5">
                   <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center bg-brand-500/[0.1] text-brand-700">
@@ -158,6 +158,141 @@ export default function CommerceIndiaLanding() {
         </div>
       </section>
 
+      {/* OPS COPILOT */}
+      <section className="border-b border-bp-line bg-white">
+        <div className={`${PAGE} py-16 lg:py-20`}>
+          <div className="grid gap-11 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+                Ops Copilot
+              </div>
+              <h2 className="mt-5 max-w-[17ch] font-display text-[30px] font-bold leading-[1.06] tracking-[-0.036em] text-bp-ink lg:text-[42px]">
+                The AI is in the back office, where the work is.
+              </h2>
+              <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-bp-mute">
+                Most stores bolt a chatbot onto the storefront. The person actually drowning is the
+                one running the shop: pricing, stock, listings, refunds, follow-ups. So the Copilot
+                lives in your admin. You ask it something, it writes a plan, and it works through
+                the steps.
+              </p>
+              <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-bp-mute">
+                What it may do on its own is a policy you set. Safe work runs unattended. Anything
+                beyond that waits for you, and every action it takes is written to a log you can
+                read afterwards.
+              </p>
+              <div className="mt-8">
+                <Cta label="See the Copilot in a demo" />
+              </div>
+            </div>
+
+            <div className="border border-[#D3DDE9] bg-white shadow-[0_34px_70px_-40px_rgba(11,21,36,0.35)]">
+              <div className="flex items-center justify-between gap-3 border-b border-bp-line bg-bp-tint px-5 py-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-700">
+                  How a job runs
+                </span>
+                <span className="font-mono text-[11px] tracking-[0.1em] text-bp-faint">
+                  Under your policy
+                </span>
+              </div>
+              <div className="divide-y divide-bp-hair">
+                {[
+                  { n: "01", t: "You ask", d: "\u201cWhich products lost stock this week and what should I reorder?\u201d" },
+                  { n: "02", t: "It plans", d: "The job is broken into steps you can read before anything happens." },
+                  { n: "03", t: "Policy decides", d: "Safe steps run on their own. The rest stop and wait for your approval." },
+                  { n: "04", t: "It escalates", d: "When it is not confident, it hands the step to a person instead of guessing." },
+                  { n: "05", t: "Everything is logged", d: "Each action recorded with what it saw and what it changed." },
+                ].map((x) => (
+                  <div key={x.n} className="flex gap-4 px-5 py-4">
+                    <span className="font-mono text-[11px] tracking-[0.14em] text-brand-500">{x.n}</span>
+                    <div>
+                      <div className="font-display text-[15.5px] font-bold tracking-[-0.02em] text-bp-ink">
+                        {x.t}
+                      </div>
+                      <p className="mt-1 text-[13.5px] leading-[1.6] text-bp-mute">{x.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-bp-line bg-bp-tint px-5 py-3.5">
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-bp-ink">
+                  Monthly spend cap
+                </span>
+                <span className="h-px min-w-4 flex-1 bg-bp-edge" />
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-bp-faint">
+                  It cannot run up a bill
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GROW / EASIER */}
+      <section className="border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-16 lg:py-20`}>
+          <div className="grid gap-11 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+                It grows the shop
+              </div>
+              <h3 className="mt-4 font-display text-[24px] font-bold leading-[1.15] tracking-[-0.03em] text-bp-ink lg:text-[30px]">
+                Revenue you are leaving on the table.
+              </h3>
+              <div className="mt-6 border-t border-bp-edge">
+                {[
+                  ["Abandoned carts", "Detected, reminded, and reported as recovered revenue rather than as emails sent."],
+                  ["Reviews", "Collected and moderated in your own admin, so your proof is yours."],
+                  ["Google Shopping feeds", "Generated from your live catalogue, so listings match real stock and prices."],
+                  ["Subscriptions", "Turn a one-off buyer into a repeat one, on a schedule."],
+                  ["Gift cards", "Issued, redeemed across orders, tracked in a ledger that balances."],
+                ].map(([t, d]) => (
+                  <div key={t} className="flex gap-3.5 border-b border-bp-edge py-4">
+                    <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center bg-brand-500/[0.1] text-brand-700">
+                      <Icon name="check" className="h-[11px] w-[11px]" />
+                    </span>
+                    <div>
+                      <div className="font-display text-[15.5px] font-bold tracking-[-0.02em] text-bp-ink">{t}</div>
+                      <p className="mt-1 text-[14px] leading-[1.6] text-bp-mute">{d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+                It makes the day easier
+              </div>
+              <h3 className="mt-4 font-display text-[24px] font-bold leading-[1.15] tracking-[-0.03em] text-bp-ink lg:text-[30px]">
+                Work your team stops doing by hand.
+              </h3>
+              <div className="mt-6 border-t border-bp-edge">
+                {[
+                  ["Automation rules", "If this happens, do that. Set once by your team, running from then on."],
+                  ["A daily digest", "What happened in the shop yesterday, written for you rather than dug out of reports."],
+                  ["Invoices and credit notes", "Generated on the order and on the refund. Nobody types one again."],
+                  ["One admin, not five tabs", "Catalogue, orders, content, suppliers, subscriptions and reviews in one place."],
+                  ["It remembers your store", "The Copilot keeps context, so you are not re-explaining your business every time."],
+                ].map(([t, d]) => (
+                  <div key={t} className="flex gap-3.5 border-b border-bp-edge py-4">
+                    <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center bg-brand-500/[0.1] text-brand-700">
+                      <Icon name="check" className="h-[11px] w-[11px]" />
+                    </span>
+                    <div>
+                      <div className="font-display text-[15.5px] font-bold tracking-[-0.02em] text-bp-ink">{t}</div>
+                      <p className="mt-1 text-[14px] leading-[1.6] text-bp-mute">{d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
       {/* WHAT IT COSTS, IN THEIR NUMBERS */}
       <section className="border-b border-bp-line bg-bp-ink">
         <div className={`${PAGE} py-16 lg:py-20`}>
@@ -181,8 +316,12 @@ export default function CommerceIndiaLanding() {
       <section className="border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-16 lg:py-20`}>
           <h2 className="max-w-[20ch] font-display text-[30px] font-bold leading-[1.08] tracking-[-0.036em] text-bp-ink lg:text-[40px]">
-            What renting your store actually costs.
+            It is not only the money.
           </h2>
+          <p className="mt-5 max-w-[58ch] text-[16.5px] leading-[1.7] text-bp-mute">
+            The percentage is the part you can put a number on. These are the parts you only find
+            out about later.
+          </p>
           <div className="mt-10 overflow-x-auto">
             <table className="w-full min-w-[680px] border-collapse border-l border-t border-bp-edge bg-white text-left">
               <thead>
@@ -251,10 +390,10 @@ export default function CommerceIndiaLanding() {
           <div className="grid gap-11 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
-                The part plugins get wrong
+                And the boring part is handled
               </div>
               <h2 className="mt-5 max-w-[18ch] font-display text-[30px] font-bold leading-[1.06] tracking-[-0.036em] text-bp-ink lg:text-[40px]">
-                Place of supply decides the tax. Every order.
+                GST works without you thinking about it.
               </h2>
               <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-bp-mute">
                 Same state as your registration, it splits into CGST and SGST. Different state, it
