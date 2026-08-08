@@ -147,7 +147,7 @@ export default function LandingLeadForm({
       <input name="company" placeholder="Business name" className={field} autoComplete="organization" />
       {fashion ? (
         <div className="grid gap-3 sm:grid-cols-2">
-          <select name="sells" className={`${field} appearance-none`} defaultValue="">
+          <select name="sells" aria-label="What do you sell?" className={`${field} appearance-none`} defaultValue="">
             <option value="" disabled>What do you sell?</option>
             <option>Sarees</option>
             <option>Women&apos;s fashion</option>
@@ -157,7 +157,7 @@ export default function LandingLeadForm({
             <option>Boutique / designer</option>
             <option>Other</option>
           </select>
-          <select name="channel" className={`${field} appearance-none`} defaultValue="">
+          <select name="channel" aria-label="Where do you sell now?" className={`${field} appearance-none`} defaultValue="">
             <option value="" disabled>Where do you sell now?</option>
             <option>Physical shop</option>
             <option>Instagram</option>
@@ -168,7 +168,7 @@ export default function LandingLeadForm({
           </select>
         </div>
       ) : (
-        <select name="volume" className={`${field} appearance-none`} defaultValue="">
+        <select name="volume" aria-label="Orders a month" className={`${field} appearance-none`} defaultValue="">
           <option value="" disabled>Orders a month</option>
           <option>Under 100</option>
           <option>100 to 1,000</option>

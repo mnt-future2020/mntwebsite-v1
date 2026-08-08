@@ -229,7 +229,7 @@ const FAQS = [
 
 export default function FashionStoreLanding() {
   return (
-    <main className="bg-white text-bp-ink">
+    <div className="bg-white text-bp-ink">
       {/* ------------------------------------------------------------ hero */}
       <section className="relative overflow-hidden border-b border-bp-edge bg-gradient-to-b from-brand-50/70 to-white pb-16 pt-14 text-center sm:pb-20 sm:pt-20">
         <div className={NARROW}>
@@ -444,7 +444,9 @@ export default function FashionStoreLanding() {
             <table className="w-full min-w-[540px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-bp-edge">
-                  <th className="w-[34%] py-4 pr-4 text-[13px] font-bold uppercase tracking-[0.07em] text-bp-faint" />
+                  <th scope="col" className="w-[34%] py-4 pr-4 text-[13px] font-bold uppercase tracking-[0.07em] text-bp-faint">
+                    <span className="sr-only">What is being compared</span>
+                  </th>
                   <th className="py-4 pr-4 text-[13px] font-bold uppercase tracking-[0.07em] text-bp-faint">
                     Instagram only
                   </th>
@@ -638,7 +640,7 @@ export default function FashionStoreLanding() {
           <h2 className="font-display text-[32px] font-extrabold leading-[1.1] tracking-[-0.038em] sm:text-[42px] lg:text-[50px]">
             Your clothes are ready. The shop is not.
           </h2>
-          <p className="mx-auto mt-6 max-w-[560px] text-[17.5px] leading-[1.6] text-white/80 sm:text-[19px]">
+          <p className="mx-auto mt-6 max-w-[560px] text-[17.5px] leading-[1.6] text-white sm:text-[19px]">
             Every day you wait, somebody asks you the price and buys it somewhere else. Let us
             build you the place to send them.
           </p>
@@ -655,11 +657,11 @@ export default function FashionStoreLanding() {
             </a>
           </div>
 
-          <p className="mt-6 text-[14.5px] text-white/60">
+          <p className="mt-6 text-[14.5px] text-white/85">
             MnT Future · Madurai · Free 30 minute call
           </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -140,7 +140,7 @@ export default function CommissionCalculator({ cta = "Book a free demo" }: { cta
             </div>
           ))}
           <div className="flex items-baseline justify-between gap-4 border-t border-white/12 pt-3">
-            <dt className="text-[14px] text-white/40">On sales of</dt>
+            <dt className="text-[14px] text-white/70">On sales of</dt>
             <dd className="font-mono text-[14px] text-white/50">{inr(gmv)}</dd>
           </div>
         </dl>
