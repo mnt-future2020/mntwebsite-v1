@@ -9,6 +9,12 @@ import { INDIA_CLIENTS } from "@/lib/indiaClients";
 /**
  * Ad landing page for MnT Commerce India.
  *
+ * Deliberately NOT the blueprint language the rest of the site uses. That is a
+ * considered B2B idiom of hairline grids, square corners and mono labels, and
+ * it reads as technical. This reader tapped an ad on a phone, so the shapes are
+ * softer, the buttons are pills, and the type carries more weight. The palette
+ * is untouched: same brand blue, same ink.
+ *
  * Centred and written plainly on purpose. The reader is a shop owner who tapped
  * an ad on a phone, not somebody browsing a services site, so every line has to
  * land at a glance and nothing sits off to one side where it gets skipped.
@@ -74,28 +80,31 @@ function Cta({ label = "Book a free demo" }: { label?: string }) {
   return (
     <a
       href="#lead-form"
-      className="group inline-flex h-14 items-center bg-bp-ink pl-7 font-mono text-[13px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700"
+      className="group inline-flex h-[58px] w-full max-w-[340px] items-center justify-center gap-3 rounded-full bg-brand-700 px-8 text-[16px] font-bold text-white shadow-[0_14px_30px_-12px_rgba(14,102,194,0.7)] transition-all hover:-translate-y-0.5 hover:bg-brand-800 sm:w-auto"
     >
       {label}
-      <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-white/20">
-        <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-      </span>
+      <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
     </a>
   );
 }
 
 function Eyebrow({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <div className={`font-mono text-[11px] uppercase tracking-[0.2em] ${dark ? "text-brand-300" : "text-brand-700"}`}>
+    <span
+      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-semibold tracking-[0.01em] ${
+        dark ? "bg-white/10 text-brand-300" : "bg-brand-50 text-brand-700"
+      }`}
+    >
+      <span className={`h-[6px] w-[6px] rounded-full ${dark ? "bg-brand-300" : "bg-brand-500"}`} />
       {children}
-    </div>
+    </span>
   );
 }
 
 function H2({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <h2
-      className={`mx-auto mt-5 max-w-[20ch] font-display text-[30px] font-bold leading-[1.08] tracking-[-0.036em] lg:text-[42px] ${
+      className={`mx-auto mt-5 max-w-[19ch] font-display text-[32px] font-extrabold leading-[1.06] tracking-[-0.038em] lg:text-[46px] ${
         dark ? "text-white" : "text-bp-ink"
       }`}
     >
@@ -106,7 +115,7 @@ function H2({ children, dark = false }: { children: React.ReactNode; dark?: bool
 
 function Sub({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <p className={`mx-auto mt-5 max-w-[56ch] text-[17px] leading-[1.7] ${dark ? "text-white/65" : "text-bp-mute"}`}>
+    <p className={`mx-auto mt-5 max-w-[54ch] text-[17.5px] leading-[1.72] ${dark ? "text-white/65" : "text-bp-mute"}`}>
       {children}
     </p>
   );
@@ -115,11 +124,11 @@ function Sub({ children, dark = false }: { children: React.ReactNode; dark?: boo
 /** Centred block, list left-aligned inside it: centred body text is hard to read. */
 function TickList({ items }: { items: string[][] }) {
   return (
-    <div className="mx-auto mt-7 max-w-[440px] border-t border-bp-edge text-left">
+    <div className="mx-auto mt-7 max-w-[440px] text-left">
       {items.map(([t, d]) => (
-        <div key={t} className="flex gap-3.5 border-b border-bp-edge py-4">
-          <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center bg-brand-500/[0.1] text-brand-700">
-            <Icon name="check" className="h-[11px] w-[11px]" />
+        <div key={t} className="flex gap-3.5 border-b border-bp-hair py-4 last:border-b-0">
+          <span className="mt-1 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand-500/[0.12] text-brand-700">
+            <Icon name="check" className="h-[12px] w-[12px]" />
           </span>
           <div>
             <div className="font-display text-[15.5px] font-bold tracking-[-0.02em] text-bp-ink">{t}</div>
@@ -139,7 +148,7 @@ export default function CommerceIndiaLanding() {
           <Image src="/mnt-logo.png" alt="MnT Future" width={2828} height={546} priority className="h-8 w-auto" />
           <a
             href="#lead-form"
-            className="bg-bp-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700"
+            className="whitespace-nowrap rounded-full bg-brand-700 px-5 py-2.5 text-[14px] font-bold text-white transition-colors hover:bg-brand-800"
           >
             Book a free demo
           </a>
@@ -150,7 +159,7 @@ export default function CommerceIndiaLanding() {
       <section className="border-b border-bp-line bg-gradient-to-b from-[#FBFCFE] via-white to-white">
         <div className={`${PAGE} py-14 text-center lg:py-20`}>
           <Eyebrow>Your own online shop · Built for India</Eyebrow>
-          <h1 className="mx-auto mt-6 max-w-[16ch] font-display text-[38px] font-bold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[52px] lg:text-[64px]">
+          <h1 className="mx-auto mt-6 max-w-[15ch] font-display text-[40px] font-extrabold leading-[1.0] tracking-[-0.045em] text-bp-ink sm:text-[56px] lg:text-[70px]">
             An online shop that helps you <span className="text-brand-700">run it</span>.
           </h1>
           <Sub>
@@ -167,8 +176,8 @@ export default function CommerceIndiaLanding() {
               "No commission on your orders. Ever.",
             ].map((p) => (
               <div key={p} className="flex items-start gap-2.5">
-                <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center bg-brand-500/[0.1] text-brand-700">
-                  <Icon name="check" className="h-[11px] w-[11px]" />
+                <span className="mt-1 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-brand-500/[0.12] text-brand-700">
+                  <Icon name="check" className="h-[12px] w-[12px]" />
                 </span>
                 <span className="text-[15px] leading-[1.5] text-bp-body">{p}</span>
               </div>
@@ -204,7 +213,7 @@ export default function CommerceIndiaLanding() {
             follow-ups. You ask, and it gets on with it.
           </Sub>
 
-          <div className="mx-auto mt-11 max-w-[740px] border border-[#D3DDE9] bg-white text-left shadow-[0_34px_70px_-40px_rgba(11,21,36,0.35)]">
+          <div className="mx-auto mt-11 max-w-[740px] overflow-hidden rounded-3xl border border-bp-hair bg-white text-left shadow-[0_30px_70px_-34px_rgba(11,21,36,0.3)]">
             <div className="flex items-center justify-between gap-3 border-b border-bp-line bg-bp-tint px-5 py-3">
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-700">
                 How it works
@@ -216,7 +225,7 @@ export default function CommerceIndiaLanding() {
             <div className="divide-y divide-bp-hair">
               {HOW_IT_RUNS.map((x) => (
                 <div key={x.n} className="flex gap-4 px-5 py-4 sm:px-7">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-brand-200 bg-brand-50 font-mono text-[12px] text-brand-700">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-700 text-[14px] font-bold text-white">
                     {x.n}
                   </span>
                   <div>
@@ -295,9 +304,9 @@ export default function CommerceIndiaLanding() {
         <div className={`${PAGE} py-16 text-center lg:py-20`}>
           <Eyebrow>And it is not only money</Eyebrow>
           <H2>Four things you find out later.</H2>
-          <div className="mx-auto mt-11 grid max-w-[880px] border-l border-t border-bp-edge text-left sm:grid-cols-2">
+          <div className="mx-auto mt-11 grid max-w-[880px] gap-4 text-left sm:grid-cols-2">
             {NOT_ONLY_MONEY.map(([t, d]) => (
-              <div key={t} className="border-b border-r border-bp-edge p-6 lg:p-7">
+              <div key={t} className="rounded-2xl border border-bp-hair bg-white p-6 shadow-[0_10px_28px_-18px_rgba(11,21,36,0.22)] lg:p-7">
                 <h3 className="font-display text-[17px] font-bold tracking-[-0.022em] text-bp-ink">{t}</h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.65] text-bp-mute">{d}</p>
               </div>
@@ -322,13 +331,13 @@ export default function CommerceIndiaLanding() {
               { t: "Buyer in your state", l: ["CGST", "SGST"], note: "The tax splits into two lines." },
               { t: "Buyer in another state", l: ["IGST"], note: "One line instead of two." },
             ].map((b) => (
-              <div key={b.t} className="border border-bp-edge bg-white p-5">
+              <div key={b.t} className="rounded-2xl border border-bp-hair bg-white p-5 shadow-[0_10px_28px_-18px_rgba(11,21,36,0.25)]">
                 <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-bp-faint">{b.t}</div>
                 <div className="mt-3 space-y-1.5">
                   {b.l.map((x) => (
                     <div
                       key={x}
-                      className="border border-brand-200 bg-brand-50 px-3 py-2.5 text-center font-mono text-[13px] text-brand-700"
+                      className="rounded-xl bg-brand-50 px-3 py-3 text-center text-[14px] font-bold text-brand-700"
                     >
                       {x}
                     </div>
@@ -357,7 +366,7 @@ export default function CommerceIndiaLanding() {
                 href={c.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block border border-white/12 bg-white/[0.03] text-left transition-colors hover:border-white/30"
+                className="group block overflow-hidden rounded-2xl border border-white/12 bg-white/[0.04] text-left transition-all hover:-translate-y-1 hover:border-white/30"
               >
                 <span className="relative block aspect-[16/10] overflow-hidden bg-slate-800">
                   <Image
@@ -382,12 +391,10 @@ export default function CommerceIndiaLanding() {
           <div className="mt-11 flex justify-center">
             <a
               href="#lead-form"
-              className="group inline-flex h-14 items-center bg-white pl-7 font-mono text-[13px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:bg-brand-300"
+              className="group inline-flex h-[58px] w-full max-w-[340px] items-center justify-center gap-3 rounded-full bg-white px-8 text-[16px] font-bold text-bp-ink shadow-[0_14px_30px_-12px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-0.5 sm:w-auto"
             >
               Book a free demo
-              <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-bp-ink/15">
-                <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
+              <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
         </div>
@@ -402,7 +409,7 @@ export default function CommerceIndiaLanding() {
             We share our screen, walk you through the back office, run a real GST bill, and tell
             you what it would take to move your shop across. No cost, and no obligation.
           </Sub>
-          <div className="mx-auto mt-11 max-w-[540px] border border-bp-edge bg-white p-6 text-left shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)] lg:p-8">
+          <div className="mx-auto mt-11 max-w-[540px] rounded-3xl border border-bp-hair bg-white p-6 text-left shadow-[0_30px_66px_-38px_rgba(11,21,36,0.32)] lg:p-8">
             <LandingLeadForm />
           </div>
         </div>
@@ -413,12 +420,12 @@ export default function CommerceIndiaLanding() {
         <div className={`${PAGE} py-16 text-center lg:py-20`}>
           <Eyebrow>Questions</Eyebrow>
           <H2>Things people ask us.</H2>
-          <div className="mx-auto mt-11 max-w-[740px] border-t border-bp-edge text-left">
+          <div className="mx-auto mt-11 max-w-[740px] text-left">
             {FAQ.map((f, i) => (
-              <details key={f.q} className="group border-b border-bp-edge py-5" open={i === 0}>
+              <details key={f.q} className="group mb-3 rounded-2xl border border-bp-hair bg-white px-5 py-4 shadow-[0_8px_24px_-18px_rgba(11,21,36,0.22)]" open={i === 0}>
                 <summary className="flex cursor-pointer list-none items-start gap-4">
-                  <span className="mt-1 font-mono text-[11px] tracking-[0.14em] text-brand-500">
-                    {String(i + 1).padStart(2, "0")}
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-[12.5px] font-bold text-brand-700">
+                    {i + 1}
                   </span>
                   <span className="flex-1 font-display text-[17.5px] font-bold leading-[1.35] tracking-[-0.022em] text-bp-ink">
                     {f.q}

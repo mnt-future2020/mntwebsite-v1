@@ -87,10 +87,8 @@ export default function LandingLeadForm({ id = "lead" }: { id?: string }) {
 
   if (state === "done") {
     return (
-      <div className="border border-brand-200 bg-brand-50 p-8 text-center">
-        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
-          Received
-        </div>
+      <div className="rounded-3xl border border-brand-200 bg-brand-50 p-8 text-center">
+        <div className="text-[13px] font-bold text-brand-700">Received</div>
         <p className="mt-3 font-display text-[22px] font-bold leading-[1.25] tracking-[-0.026em] text-bp-ink">
           Thanks. We will call you back.
         </p>
@@ -103,7 +101,7 @@ export default function LandingLeadForm({ id = "lead" }: { id?: string }) {
   }
 
   const field =
-    "w-full border border-bp-edge bg-white px-4 py-3 text-[15px] text-bp-ink outline-none transition-colors placeholder:text-bp-faint focus:border-brand-500";
+    "w-full rounded-xl border border-bp-edge bg-white px-4 py-3.5 text-[15px] text-bp-ink outline-none transition-colors placeholder:text-bp-faint focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10";
 
   return (
     <form onSubmit={onSubmit} onFocus={() => !token && void refreshToken()} className="space-y-3">
@@ -157,7 +155,7 @@ export default function LandingLeadForm({ id = "lead" }: { id?: string }) {
       />
 
       {error && (
-        <p className="border-l-2 border-red-400 bg-red-50 px-4 py-3 text-[14px] leading-[1.55] text-red-800">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[14px] leading-[1.55] text-red-800">
           {error}
         </p>
       )}
@@ -166,7 +164,7 @@ export default function LandingLeadForm({ id = "lead" }: { id?: string }) {
         type="submit"
         disabled={state === "sending"}
         id={id}
-        className="w-full bg-bp-ink px-6 py-4 font-mono text-[13px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+        className="w-full rounded-full bg-brand-700 px-6 py-4 text-[16px] font-bold text-white shadow-[0_14px_30px_-12px_rgba(14,102,194,0.7)] transition-all hover:-translate-y-0.5 hover:bg-brand-800 disabled:translate-y-0 disabled:opacity-60"
       >
         {state === "sending" ? "Sending…" : "Get a callback"}
       </button>

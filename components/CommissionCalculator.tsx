@@ -37,7 +37,7 @@ function Field({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/50">
+        <label className="text-[13.5px] font-semibold text-white/55">
           {label}
         </label>
         <span className="font-display text-[19px] font-bold tracking-[-0.02em] text-white">
@@ -112,8 +112,8 @@ export default function CommissionCalculator() {
         />
       </div>
 
-      <div className="flex flex-col justify-center border border-white/12 bg-white/[0.04] p-7 lg:p-9">
-        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
+      <div className="flex flex-col justify-center rounded-3xl border border-white/12 bg-white/[0.05] p-7 shadow-[0_30px_70px_-40px_rgba(0,0,0,0.7)] lg:p-9">
+        <div className="text-[13px] font-bold text-brand-300">
           You are paying, a year
         </div>
         <div
@@ -139,21 +139,19 @@ export default function CommissionCalculator() {
           </div>
         </dl>
 
-        <p className="mt-7 border-l-2 border-brand-500 pl-4 text-[14.5px] leading-[1.6] text-white/70">
+        <p className="mt-7 rounded-2xl bg-white/[0.06] p-4 text-[14.5px] leading-[1.6] text-white/75">
           On a platform you own, that number is a server bill. It does not grow when you have a
           good month.
         </p>
 
         <a
           href="#lead-form"
-          className="group mt-7 inline-flex h-14 items-center justify-between bg-white pl-6 font-mono text-[13px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:bg-brand-300"
+          className="group mt-8 inline-flex h-[56px] items-center justify-center gap-3 rounded-full bg-white px-8 text-[16px] font-bold text-bp-ink shadow-[0_14px_30px_-12px_rgba(0,0,0,0.6)] transition-all hover:-translate-y-0.5"
         >
-          Book a demo
-          <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-bp-ink/15">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
-              <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
+          Book a free demo
+          <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </div>
     </div>
