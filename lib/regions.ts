@@ -183,6 +183,7 @@ export const REGIONS: Record<Region, RegionConfig> = {
       { label: "Ecommerce", href: "/in/ecommerce" },
       { label: "AI", href: "/in/ai" },
       { label: "Products", href: "/in/products" },
+      { label: "Industries", href: "/in/industries" },
       { label: "Work", href: "/in/work" },
     ],
     groups: [inEcommerceNav, inAiNav, inProductsNav],
@@ -213,7 +214,7 @@ export function footerNavFor(region: Region) {
         { label: "Open Source", href: "/open-source" },
         ...(region === "us"
           ? [{ label: "Security & Compliance", href: "/security-compliance" }]
-          : []),
+          : [{ label: "Industries", href: "/in/industries" }, { label: "Guides", href: "/in/guides" }]),
         { label: "Blog", href: "/blog" },
         { label: "Contact", href: `${b}/contact` },
       ],

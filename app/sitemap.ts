@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { getPublishedPosts } from "@/lib/blog";
 import { caseStudies } from "@/lib/caseStudies";
+import { INDIA_INDUSTRIES } from "@/lib/indiaIndustries";
+import { INDIA_GUIDES } from "@/lib/indiaGuides";
 
 export const revalidate = 3600;
 
@@ -28,6 +30,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/in/products/ai-desk",
     "/in/products/ai-crm",
     "/in/products/commerce-india",
+    "/in/industries",
+    ...INDIA_INDUSTRIES.map((i) => `/in/industries/${i.slug}`),
+    "/in/guides",
+    ...INDIA_GUIDES.map((g) => `/in/guides/${g.slug}`),
     "/in/work",
     "/in/work/clients",
     "/in/work/clients/blufacade",

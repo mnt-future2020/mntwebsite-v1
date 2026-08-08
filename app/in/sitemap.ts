@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { INDIA_CLIENTS } from "@/lib/indiaClients";
 import { CLIENT_DETAILS } from "@/lib/indiaClientDetails";
+import { INDIA_INDUSTRIES } from "@/lib/indiaIndustries";
+import { INDIA_GUIDES } from "@/lib/indiaGuides";
 
 /**
  * India's own sitemap, served at /in/sitemap.xml.
@@ -34,6 +36,10 @@ const ROUTES = [
   ].map((s) => `/in/ai/${s}`),
   "/in/products",
   ...["ai-desk", "ai-crm", "commerce-india"].map((s) => `/in/products/${s}`),
+  "/in/industries",
+  ...INDIA_INDUSTRIES.map((i) => `/in/industries/${i.slug}`),
+  "/in/guides",
+  ...INDIA_GUIDES.map((g) => `/in/guides/${g.slug}`),
   "/in/work",
   "/in/work/clients",
   // Only the client projects that actually have a detail page. The four we
