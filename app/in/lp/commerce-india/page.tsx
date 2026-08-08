@@ -4,6 +4,7 @@ import Icon from "@/components/Icon";
 import LandingLeadForm from "@/components/LandingLeadForm";
 import { ratings, site } from "@/lib/site";
 import { INDIA_CLIENTS } from "@/lib/indiaClients";
+import CommissionCalculator from "@/components/CommissionCalculator";
 
 /**
  * Ad landing page for MnT Commerce India.
@@ -86,7 +87,7 @@ export default function CommerceIndiaLanding() {
             href="#lead-form"
             className="bg-bp-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.06em] text-white transition-colors hover:bg-brand-700"
           >
-            Get a callback
+            Book a demo
           </a>
         </div>
       </header>
@@ -144,15 +145,34 @@ export default function CommerceIndiaLanding() {
             className="scroll-mt-24 border border-bp-edge bg-white p-6 shadow-[0_34px_66px_-46px_rgba(11,21,36,0.4)] lg:p-8"
           >
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-700">
-              Talk to a senior engineer
+              Book a demo
             </div>
             <p className="mt-2.5 text-[14.5px] leading-[1.6] text-bp-mute">
-              Two minutes. Tell us what you sell and we will tell you what your platform is really
-              costing you a year.
+              Thirty minutes on a screen share. We walk you through the admin, run a real GST
+              invoice, and answer what it would take to move your store across.
             </p>
             <div className="mt-6">
               <LandingLeadForm />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT IT COSTS, IN THEIR NUMBERS */}
+      <section className="border-b border-bp-line bg-bp-ink">
+        <div className={`${PAGE} py-16 lg:py-20`}>
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">
+            Move the sliders
+          </div>
+          <h2 className="mt-5 max-w-[22ch] font-display text-[30px] font-bold leading-[1.06] tracking-[-0.036em] text-white lg:text-[42px]">
+            What is renting your store costing you a year?
+          </h2>
+          <p className="mt-5 max-w-[58ch] text-[16.5px] leading-[1.7] text-white/60">
+            Your numbers, not ours. Nothing here is a claim about your business: it is what you
+            typed in, multiplied out over twelve months.
+          </p>
+          <div className="mt-11">
+            <CommissionCalculator />
           </div>
         </div>
       </section>
@@ -225,6 +245,84 @@ export default function CommerceIndiaLanding() {
         </div>
       </section>
 
+      {/* GST, SHOWN */}
+      <section className="border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-16 lg:py-20`}>
+          <div className="grid gap-11 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+                The part plugins get wrong
+              </div>
+              <h2 className="mt-5 max-w-[18ch] font-display text-[30px] font-bold leading-[1.06] tracking-[-0.036em] text-bp-ink lg:text-[40px]">
+                Place of supply decides the tax. Every order.
+              </h2>
+              <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-bp-mute">
+                Same state as your registration, it splits into CGST and SGST. Different state, it
+                is IGST. The rate comes from the HSN code on the product, not from one setting
+                applied to your whole catalogue. This runs in the platform core, so it applies on
+                every checkout path rather than on the one somebody remembered.
+              </p>
+              <div className="mt-8">
+                <Cta label="See it on a real invoice" />
+              </div>
+            </div>
+
+            <div className="border border-[#D3DDE9] bg-white shadow-[0_34px_70px_-40px_rgba(11,21,36,0.35)]">
+              <div className="flex items-center justify-between gap-3 border-b border-bp-line bg-bp-tint px-5 py-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-700">
+                  Tax decision
+                </span>
+                <span className="font-mono text-[11px] tracking-[0.1em] text-bp-faint">
+                  Per order
+                </span>
+              </div>
+              <div className="p-6 lg:p-7">
+                <div className="border border-bp-edge bg-bp-tint px-4 py-3 text-center font-mono text-[12px] tracking-[0.06em] text-bp-ink">
+                  Place of supply vs your GSTIN state
+                </div>
+                <div className="mx-auto my-3 h-6 w-px bg-bp-edge" aria-hidden="true" />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[
+                    { t: "Same state", l: ["CGST 9%", "SGST 9%"], note: "Intra-state. Split in two." },
+                    { t: "Different state", l: ["IGST 18%"], note: "Inter-state. One line." },
+                  ].map((b) => (
+                    <div key={b.t} className="border border-bp-edge bg-white p-4">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-bp-faint">
+                        {b.t}
+                      </div>
+                      <div className="mt-3 space-y-1.5">
+                        {b.l.map((x) => (
+                          <div
+                            key={x}
+                            className="border border-brand-200 bg-brand-50 px-3 py-2 text-center font-mono text-[12.5px] text-brand-700"
+                          >
+                            {x}
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-3 text-[12.5px] leading-[1.5] text-bp-faint">{b.note}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 border-t border-bp-hair pt-4 text-[12.5px] leading-[1.55] text-bp-faint">
+                  Rates shown are an example. The actual slab comes from the HSN code on each
+                  product, per line.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-bp-line bg-bp-tint px-5 py-3.5">
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-bp-ink">
+                  Then: invoice on a gapless FY serial
+                </span>
+                <span className="h-px min-w-4 flex-1 bg-bp-edge" />
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-bp-faint">
+                  Automatic
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PROOF */}
       <section className="border-b border-bp-line bg-bp-ink">
         <div className={`${PAGE} py-16 lg:py-20`}>
@@ -268,7 +366,7 @@ export default function CommerceIndiaLanding() {
               href="#lead-form"
               className="group inline-flex h-14 items-center bg-white pl-7 font-mono text-[13px] font-semibold tracking-[0.06em] text-bp-ink transition-colors hover:bg-brand-300"
             >
-              Get a callback
+              Book a demo
               <span className="ml-4 flex h-14 w-14 items-center justify-center border-l border-bp-ink/15">
                 <Icon name="arrow" className="h-4 w-4" />
               </span>
