@@ -44,21 +44,27 @@ function Field({
           {format(value)}
         </span>
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label={label}
-        className="mt-3 h-1 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#2095F1]"
-      />
+      {/* The visible track is 4px; the input over it is 24px so it can be
+          grabbed with a thumb. WCAG 2.2 SC 2.5.8 asks for 24, and a slider you
+          cannot drag on a phone is the one control on this page that matters. */}
+      <div className="relative mt-3 flex h-6 items-center">
+        <div className="pointer-events-none absolute inset-x-0 h-1 rounded-full bg-white/15" />
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          aria-label={label}
+          className="relative h-6 w-full cursor-pointer appearance-none bg-transparent accent-[#2095F1] [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#2095F1] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2095F1] [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgba(0,0,0,0.4)]"
+        />
+      </div>
     </div>
   );
 }
 
-export default function CommissionCalculator() {
+export default function CommissionCalculator({ cta = "Book a free demo" }: { cta?: string }) {
   const [orders, setOrders] = useState(1500);
   const [aov, setAov] = useState(1200);
   const [pct, setPct] = useState(2);
@@ -148,7 +154,7 @@ export default function CommissionCalculator() {
           href="#lead-form"
           className="group mt-8 inline-flex h-[56px] items-center justify-center gap-3 rounded-full bg-white px-8 text-[16px] font-bold text-bp-ink shadow-[0_14px_30px_-12px_rgba(0,0,0,0.6)] transition-all hover:-translate-y-0.5"
         >
-          Book a free demo
+          {cta}
           <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
