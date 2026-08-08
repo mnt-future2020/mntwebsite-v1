@@ -5,6 +5,7 @@ import NewsletterForm from "./NewsletterForm";
 import { site } from "@/lib/site";
 import FooterNav from "./FooterNav";
 import FooterBlurb from "./FooterBlurb";
+import FooterContact from "./FooterContact";
 import { PAGE } from "./blueprint";
 
 export default function Footer() {
@@ -63,6 +64,7 @@ export default function Footer() {
           © {new Date().getFullYear()} MnT Future. All rights reserved.
         </p>
         <div className="flex flex-wrap items-center gap-[22px] font-mono text-[11.5px] text-[#71829A]">
+          <FooterContact />
           <a href={`mailto:${site.email}`} className="inline-block py-1.5 transition-colors hover:text-white">
             {site.email}
           </a>

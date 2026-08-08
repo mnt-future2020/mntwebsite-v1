@@ -17,9 +17,9 @@ export const site = {
    * once. `phone` was previously "+91 00000 00000", which is worse than
    * nothing: a placeholder that reaches a prospect reads as an abandoned site.
    */
-  phone: null as string | null,
+  phone: "+91 82209 47112" as string | null,
   /** Digits only, country code included, e.g. "919876543210". */
-  whatsapp: null as string | null,
+  whatsapp: "918220947112" as string | null,
   /** Where the company actually is. Indian buyers weigh this. */
   city: "Madurai",
   state: "Tamil Nadu",
