@@ -1,5 +1,6 @@
 import DeliveryPlan from "./DeliveryPlan";
 import RatingsRibbon from "./RatingsRibbon";
+import { site } from "@/lib/site";
 import { BpButton, PAGE } from "./blueprint";
 
 // The India hero.
@@ -62,7 +63,13 @@ export default function IndiaHero() {
         </div>
 
         <h1
-          className="mt-8 max-w-[17ch] font-display text-[40px] font-bold leading-[0.96] tracking-[-0.05em] text-bp-ink sm:text-[60px] lg:text-[86px]"
+          // Smaller on a phone than the type scale wants. At 40px this
+          // headline ran to six lines and filled the entire first screen on a
+          // 390px viewport, pushing the paragraph and both buttons below the
+          // fold — a visitor had to scroll a screen and a half before the site
+          // offered them any way to get in touch. The desktop sizes are
+          // unchanged; only the phone step comes down.
+          className="mt-7 max-w-[17ch] font-display text-[33px] font-bold leading-[0.98] tracking-[-0.048em] text-bp-ink sm:mt-8 sm:text-[60px] sm:leading-[0.96] sm:tracking-[-0.05em] lg:text-[86px]"
           style={{ perspective: "900px" }}
         >
           {(() => {
@@ -134,26 +141,58 @@ export default function IndiaHero() {
       </div>
 
       <div
-        className={`relative ${PAGE} grid items-start gap-9 pb-12 pt-10 lg:grid-cols-[1fr_0.9fr] lg:gap-[68px] lg:pb-[76px] lg:pt-14`}
+        className={`relative ${PAGE} grid items-start gap-9 pb-12 pt-7 sm:pt-10 lg:grid-cols-[1fr_0.9fr] lg:gap-[68px] lg:pb-[76px] lg:pt-14`}
       >
         <div className="animate-rise-in [animation-delay:120ms]">
-          <p className="m-0 max-w-[56ch] text-[18.5px] leading-[1.68] text-bp-mute">
-            Online stores with GST built in, AI and automation that your team actually ends up
-            using instead of stopping after the demo, and ready-made software we put in your name.
-            Senior engineers sitting inside your team, from the first call to the day it goes live
-            and after.
+          {/* Four flat statements, one per thing we sell, rather than one long
+              sentence carrying all of them. The previous version ran to five
+              lines on a phone before the reader reached a single full stop. */}
+          <p className="m-0 max-w-[56ch] text-[16.5px] leading-[1.62] text-bp-mute sm:text-[18.5px] sm:leading-[1.68]">
+            Online stores with GST built in. AI and automation your team actually uses, not a demo
+            that stops after the meeting. Ready-made software we put in your name. Senior engineers
+            with you from the first call to the day it goes live.
           </p>
 
           {/* Talking to a person leads, the catalogue follows. "Book a strategy
               session" asks for 45 minutes before the visitor knows whether we
               can help; "talk to a senior engineer" is the same appointment
               described as what it actually is. */}
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3 sm:mt-9">
             <BpButton href="/in/strategy-session">Talk to a Senior Engineer</BpButton>
             <BpButton href="/in/products" variant="outline">
               See our products
             </BpButton>
           </div>
+
+          {/* The number, on the first screen. Both buttons open a form, and an
+              Indian buyer's first move is a call or a WhatsApp message — making
+              them scroll to the footer to find it is the whole gap. Renders
+              only when set in lib/site.ts, so an unset number shows nothing
+              rather than a dead link. */}
+          {(site.phone || site.whatsapp) && (
+            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] leading-[1.6] text-bp-mute">
+              <span>Or talk to us now:</span>
+              {site.phone && (
+                <a
+                  href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
+                  className="inline-block py-1 font-medium text-brand-700 underline-offset-4 hover:underline"
+                >
+                  {site.phone}
+                </a>
+              )}
+              {site.phone && site.whatsapp && <span aria-hidden="true">·</span>}
+              {site.whatsapp && (
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-1 font-medium text-brand-700 underline-offset-4 hover:underline"
+                >
+                  WhatsApp
+                </a>
+              )}
+            </p>
+          )}
 
           <p className="mt-5 max-w-[54ch] text-[14px] leading-[1.65] text-bp-faint">
             Three live client platforms, our own products, and a documented delivery method. Judge
