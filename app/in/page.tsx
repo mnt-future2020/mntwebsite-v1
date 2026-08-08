@@ -41,7 +41,7 @@ const proofStats = [
 // underneath still does the explaining.
 const verticals = [
   {
-    kicker: "We build it for you",
+    kicker: "Build for You",
     title: "Ecommerce Services",
     desc: "Your own platform rather than a rented one. Storefronts, marketplaces and B2B, with GST invoicing, UPI and Indian payment gateways handled properly instead of bolted on with plugins.",
     href: inEcommerceNav.href,
@@ -51,7 +51,7 @@ const verticals = [
     cta: "Explore ecommerce",
   },
   {
-    kicker: "We build it with your team",
+    kicker: "Build With Your Team",
     title: "AI Services",
     desc: "Advice on what is worth doing, work automated, agents that do real jobs, and complete applications. Built by senior engineers sitting inside your team, who stay until it is running every day: not a consultant who hands you a report and leaves.",
     href: inAiNav.href,
@@ -61,7 +61,7 @@ const verticals = [
     cta: "Explore AI",
   },
   {
-    kicker: "Ready to use, in your name",
+    kicker: "Ready Product",
     title: "Our Products",
     desc: "Three applications we set up under your name, on your servers: a customer support desk, a WhatsApp CRM, and an online store with GST built in. Ready in weeks instead of a year, and yours to keep.",
     href: inProductsNav.href,
@@ -194,16 +194,27 @@ export default function IndiaHome() {
         </div>
       </section>
 
-      <Partners />
-
-      {/* 01 WHAT WE BUILD */}
+      {/* 01 THE PROBLEM */}
       <section data-reveal className="border-b border-bp-line bg-white">
-        <div className={`${PAGE} py-20 lg:py-[120px]`}>
+        <div className={`${PAGE} py-20 lg:py-[104px]`}>
           <SectionHead
             no="01"
-            total="05"
-            eyebrow="What we build"
-            title="Three lines, and they are not the same purchase."
+            total="06"
+            eyebrow="Why this matters"
+            title="Your business does not need another demo. It needs software that works every day."
+            sub="A demo answers well on the examples somebody chose. Software your team can depend on has to hold up on a Monday morning with real orders, real customers and the systems you already run. We build for the second one, and we stay until it does."
+          />
+        </div>
+      </section>
+
+      {/* 02 WHAT WE BUILD */}
+      <section data-reveal className="border-b border-bp-line bg-bp-wash">
+        <div className={`${PAGE} py-20 lg:py-[120px]`}>
+          <SectionHead
+            no="02"
+            total="06"
+            eyebrow="Three ways to work with us"
+            title="Choose how you want us to work with you."
             sub="One is a platform we build for you. One is engineering we do inside your team. One is a product we already have, branded and customised for you. Knowing which you need is usually the first conversation."
           />
           <div className="mt-11 grid border-l border-t border-bp-line lg:mt-16 lg:grid-cols-3">
@@ -278,12 +289,12 @@ export default function IndiaHome() {
         </div>
       </section>
 
-      {/* 02 HOW WE DELIVER */}
-      <section data-reveal className="border-b border-bp-line bg-bp-wash">
+      {/* 03 HOW WE DELIVER */}
+      <section data-reveal className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
           <SectionHead
-            no="02"
-            total="05"
+            no="03"
+            total="06"
             eyebrow="How we deliver"
             title="A way of working that ends with it running."
             sub="Most AI work in India stops at a trial that impressed a room full of people and then went nowhere. Making a demo answer well and making something your team can rely on every day are two different jobs, and the second one is the job. This is how we do it."
@@ -318,8 +329,8 @@ export default function IndiaHome() {
       <section data-reveal className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
           <SectionHead
-            no="03"
-            total="05"
+            no="04"
+            total="06"
             eyebrow="Why MnT Future"
             title="What you are actually buying."
           />
@@ -349,8 +360,8 @@ export default function IndiaHome() {
       <section data-reveal className="border-b border-bp-line bg-bp-wash">
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
           <SectionHead
-            no="04"
-            total="05"
+            no="05"
+            total="06"
             eyebrow="Selected work"
             title="Platforms running in India right now."
             sub="Every one of these was designed and engineered here, end to end, and every one is live and trading. Published with the client's permission."
@@ -404,10 +415,16 @@ export default function IndiaHome() {
           somebody who has just finished looking at what we built. */}
       <RatingsRibbon />
 
-      {/* 05 FAQ */}
+      {/* Partner badges follow the work rather than preceding it. They used to
+          sit four sections above any of our own platforms, which put six
+          foreign logos in front of an Indian buyer before a single thing we
+          had built. The badges corroborate; the live platforms persuade. */}
+      <Partners />
+
+      {/* 06 FAQ */}
       <section data-reveal className="border-b border-bp-line bg-white">
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
-          <SectionHead no="05" total="05" eyebrow="Questions" title="The ones we get asked." />
+          <SectionHead no="06" total="06" eyebrow="Questions" title="The ones we get asked." />
           <div className="mx-auto mt-11 max-w-[1080px] lg:mt-16">
             <BlueprintFaq items={homeFaq} />
           </div>
@@ -417,7 +434,7 @@ export default function IndiaHome() {
       <CTASection
         title="Tell us the bottleneck. Leave with a plan you can execute."
         body="A senior consultant, not a salesperson. Bring the problem you have not been able to solve and we will map out how we would build it: how the information is organised, what it has to connect to, and what it would take to get it running."
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "See our work", href: "/in/work" }}
       />
     </>

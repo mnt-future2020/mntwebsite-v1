@@ -321,7 +321,7 @@ export default async function ClientCase(props: { params: Promise<{ slug: string
       <CTASection
         title="What would your team stop doing by hand?"
         body="Tell us the job somebody in your business repeats every week: the rate change, the booking register, the enquiry that gets written on paper. A senior consultant will map what running it properly would take."
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "All client projects", href: "/in/work/clients" }}
       />
     </>

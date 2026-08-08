@@ -184,7 +184,7 @@ export default function IndiaAbout() {
       <CTASection
         title="Tell us the bottleneck. Leave with a plan you can execute."
         body={`A senior consultant, not a salesperson. Or email us directly at ${site.email}.`}
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "See our work", href: "/in/work" }}
       />
     </>

@@ -12,12 +12,15 @@ import { BpButton, PAGE } from "./blueprint";
 // things we sell can carry a marker highlight that wipes in behind them once
 // their words have landed. The closing phrase keeps the stronger treatment (a
 // decode, an underline and a light sweep) so it still reads as the finish.
+// Second person, not third. "Indian businesses actually run on" describes a
+// market; "your business can actually run" describes the reader. The visitor
+// already knows they are an Indian business — they came to /in.
 const SEGMENTS: { text: string; hl?: boolean }[] = [
   { text: "We build the" },
   { text: "ecommerce platforms", hl: true },
   { text: "and" },
   { text: "AI systems", hl: true },
-  { text: "Indian businesses" },
+  { text: "your business can" },
 ];
 
 const WORD_MS = 55;
@@ -115,7 +118,7 @@ export default function IndiaHero() {
                 animationDelay: "2.95s",
               }}
             >
-              actually run on.
+              actually run.
             </span>
             <span
               id="mnt-decode"
@@ -141,10 +144,14 @@ export default function IndiaHero() {
             and after.
           </p>
 
+          {/* Talking to a person leads, the catalogue follows. "Book a strategy
+              session" asks for 45 minutes before the visitor knows whether we
+              can help; "talk to a senior engineer" is the same appointment
+              described as what it actually is. */}
           <div className="mt-9 flex flex-wrap gap-3">
-            <BpButton href="/in/products">See our products</BpButton>
-            <BpButton href="/in/strategy-session" variant="outline">
-              Book a strategy session
+            <BpButton href="/in/strategy-session">Talk to a Senior Engineer</BpButton>
+            <BpButton href="/in/products" variant="outline">
+              See our products
             </BpButton>
           </div>
 

@@ -11,9 +11,21 @@ import { images } from "./site";
  */
 
 const CTA_IN = {
-  primary: { label: "Book a strategy session", href: "/in/strategy-session" },
+  primary: { label: "Talk to a Senior Engineer", href: "/in/strategy-session" },
   secondary: { label: "See our work", href: "/in/work" },
 };
+
+/**
+ * The button label at the bottom of a service page, named for the next step on
+ * that page rather than for the appointment.
+ *
+ * Every page used to end on the same generic button. The section heading above
+ * it already asks something specific — "Tell us what your team retypes",
+ * "Name the task that eats your team's week" — and a button that then says
+ * "talk to a senior engineer" makes the reader translate back. Naming the step
+ * keeps the ask and the action in the same sentence.
+ */
+const cta = (label: string) => ({ ...CTA_IN, primary: { ...CTA_IN.primary, label } });
 
 const ECOM_PARENT = { label: "Ecommerce", href: "/in/ecommerce" };
 const AI_PARENT = { label: "AI", href: "/in/ai" };
@@ -92,7 +104,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Do we have to host it ourselves?", a: "No. We can host and manage it under a support agreement, or deploy into your own cloud account and hand over. Either way the infrastructure is in your name." },
       { q: "Is a custom platform worth it at our size?", a: "Sometimes not, and we will say so. The honest test is whether your platform fee plus commission is real money yet, and whether the way you sell is being limited by what a rented platform allows." },
     ],
-    cta: { title: "Bring your platform bill and your order volume.", body: "A senior consultant will put a real annual number on what renting costs you, then map what owning would look like: data model, integrations, and a realistic timeline.", ...CTA_IN },
+    cta: { title: "Bring your platform bill and your order volume.", body: "A senior consultant will put a real annual number on what renting costs you, then map what owning would look like: data model, integrations, and a realistic timeline.", ...cta("Discuss your build") },
   },
 
   "d2c-storefront": {
@@ -135,7 +147,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Do you handle the design?", a: "Yes, built to your brand rather than a theme with your logo dropped in. If you have a design team we work to their direction instead." },
       { q: "Can it handle a sale-day spike?", a: "Yes, and we load test before the date rather than finding out during it. Tell us the expected peak and we size and prove it in advance." },
     ],
-    cta: { title: "Bring your best-selling product page.", body: "We will tell you what is costing you conversions on it and what a store you own would change about your margin and your repeat rate.", ...CTA_IN },
+    cta: { title: "Bring your best-selling product page.", body: "We will tell you what is costing you conversions on it and what a store you own would change about your margin and your repeat rate.", ...cta("Discuss your store") },
   },
 
   marketplace: {
@@ -181,7 +193,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Who is responsible for GST?", a: "Generally each seller invoices the buyer and you invoice the seller for commission, both of which the platform has to generate correctly. We build that in rather than leaving it to a monthly spreadsheet." },
       { q: "We built one already and it is struggling.", a: "Usually it is settlement, catalogue quality or seller experience rather than the storefront. We will audit it and tell you whether it needs fixing or replacing, including when the answer is fixing." },
     ],
-    cta: { title: "Describe how the money should move.", body: "Who pays, who gets paid, what you keep, and what happens on a return. That conversation tells us most of what your marketplace needs, and it is where a senior consultant will start.", ...CTA_IN },
+    cta: { title: "Describe how the money should move.", body: "Who pays, who gets paid, what you keep, and what happens on a return. That conversation tells us most of what your marketplace needs, and it is where a senior consultant will start.", ...cta("Discuss your marketplace") },
   },
 
   "b2b-wholesale": {
@@ -227,7 +239,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Will our dealers actually use it?", a: "Only if it is faster than messaging your sales person, which is the bar. That is why reordering gets the most design attention and why we roll out gradually with your best dealers first." },
       { q: "Can we sell B2B and D2C from one platform?", a: "Yes, on one stock pool with different pricing, catalogues and checkout rules per audience. It is a common and sensible setup." },
     ],
-    cta: { title: "Tell us your worst pricing exception.", body: "The one nobody has written down. A senior consultant will show you how it gets modelled, which is the honest test of whether a platform can handle your business.", ...CTA_IN },
+    cta: { title: "Tell us your worst pricing exception.", body: "The one nobody has written down. A senior consultant will show you how it gets modelled, which is the honest test of whether a platform can handle your business.", ...cta("Discuss your B2B build") },
   },
 
   integrations: {
@@ -273,7 +285,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "What happens when the other system goes down?", a: "The integration queues and retries rather than losing data, and alerts a human when something has genuinely failed rather than failing silently. Silent failure is the expensive one." },
       { q: "Can you automate without replacing our platform?", a: "Yes, and often that is the right first step. Integration and automation on what you already run is cheaper than a rebuild and buys you time to decide whether you need one." },
     ],
-    cta: { title: "Tell us what your team retypes.", body: "The task somebody does every morning by copying between two screens. A senior consultant will tell you what it costs you a year and what removing it involves.", ...CTA_IN },
+    cta: { title: "Tell us what your team retypes.", body: "The task somebody does every morning by copying between two screens. A senior consultant will tell you what it costs you a year and what removing it involves.", ...cta("Show us your workflow") },
   },
 
   "managed-support": {
@@ -319,7 +331,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Is this instead of having our own team?", a: "It can be either. Some clients have no engineers and we are the whole function. Others have a team and we cover out of hours, infrastructure and the specialist work. Both are normal." },
       { q: "What about sale days?", a: "Planned in advance. We load test against your expected peak, scale ahead of it, and watch it live on the day rather than reacting afterwards." },
     ],
-    cta: { title: "What happens today when checkout breaks?", body: "If the honest answer involves messaging a freelancer and hoping, that is worth a conversation. A senior consultant will map what a real support arrangement would look like for your platform.", ...CTA_IN },
+    cta: { title: "What happens today when checkout breaks?", body: "If the honest answer involves messaging a freelancer and hoping, that is worth a conversation. A senior consultant will map what a real support arrangement would look like for your platform.", ...cta("Discuss support") },
   },
 
   consultation: {
@@ -366,7 +378,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Do we have to build it with you?", a: "No. The document is yours and it is written to be usable by anyone. Plenty of clients take it to their own team." },
       { q: "How long does it take?", a: "One to two weeks for most engagements. Longer if the data is spread across many systems, and we will tell you that before starting rather than halfway through." },
     ],
-    cta: { title: "Start with the problem, not the technology.", body: "Tell us what is slow, expensive or full of mistakes in your business today. A senior consultant will tell you whether AI is the right tool for it, and what it would take to get it working if it is.", ...CTA_IN },
+    cta: { title: "Start with the problem, not the technology.", body: "Tell us what is slow, expensive or full of mistakes in your business today. A senior consultant will tell you whether AI is the right tool for it, and what it would take to get it working if it is.", ...cta("Get an AI assessment") },
   },
 
   automation: {
@@ -412,7 +424,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "How do we know it is worth it?", a: "We measure the task first: time, volume and current error rate. If those numbers do not justify the build, we will tell you before you spend anything." },
       { q: "Does our data go to an AI provider?", a: "Only if you are comfortable with that, and we tell you exactly what would be sent. Where policy does not allow it we run smaller models on your own infrastructure instead." },
     ],
-    cta: { title: "Name the task that eats your team's week.", body: "The repetitive one everybody complains about. A senior consultant will tell you whether it automates well, what it would cost, and whether the numbers justify doing it.", ...CTA_IN },
+    cta: { title: "Name the task that eats your team's week.", body: "The repetitive one everybody complains about. A senior consultant will tell you whether it automates well, what it would cost, and whether the numbers justify doing it.", ...cta("Show us your workflow") },
   },
 
   "agent-development": {
@@ -458,7 +470,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Can it work with our existing systems?", a: "That is usually most of the project. We integrate with your ERP, CRM, databases and internal tools, and the difficulty is almost always there rather than in the model." },
       { q: "What does it cost to run?", a: "It depends on volume and model choice, and we size it during design rather than surprising you. Caching, smaller models for simple steps and hard limits are all part of the build." },
     ],
-    cta: { title: "Describe a decision your team makes fifty times a day.", body: "With the rules, the exceptions and what happens when it goes wrong. That is the shape of a good first agent, and a senior consultant will tell you whether yours qualifies.", ...CTA_IN },
+    cta: { title: "Describe a decision your team makes fifty times a day.", body: "With the rules, the exceptions and what happens when it goes wrong. That is the shape of a good first agent, and a senior consultant will tell you whether yours qualifies.", ...cta("Discuss an agent") },
   },
 
   "custom-applications": {
@@ -504,6 +516,6 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       { q: "Do we own it?", a: "Yes, entirely. Source, data and infrastructure. You can maintain it in-house, extend it, or hand it to another firm." },
       { q: "Can we start smaller?", a: "Yes, and we prefer it. The smallest version that solves one real job, live and being used, then built on. You see value earlier, and the expensive decisions get made from real use rather than guesses." },
     ],
-    cta: { title: "Describe the workflow nothing off the shelf handles.", body: "The thing your business does that every product you have evaluated gets almost right. A senior consultant will tell you whether that is a custom build or a configuration problem, honestly.", ...CTA_IN },
+    cta: { title: "Describe the workflow nothing off the shelf handles.", body: "The thing your business does that every product you have evaluated gets almost right. A senior consultant will tell you whether that is a custom build or a configuration problem, honestly.", ...cta("Build my AI app") },
   },
 };

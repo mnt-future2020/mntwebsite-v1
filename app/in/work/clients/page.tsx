@@ -451,7 +451,7 @@ export default function ClientProjects() {
       <CTASection
         title="Your business, on something you can actually run."
         body={`Tell us what your team needs to change without calling a developer. A senior consultant will map it, and tell you honestly when a smaller build would do. Or email us at ${site.email}.`}
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "All our work", href: "/in/work" }}
       />
     </>

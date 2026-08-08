@@ -350,7 +350,7 @@ export default function ProductsHub() {
       <CTASection
         title="Not sure which one? That is a ten minute conversation."
         body="Describe how messages and orders actually reach your business today. A senior consultant will tell you which of these fits, whether you need two of them, or whether you need none of them and something custom instead."
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "See our work", href: "/in/work" }}
       />
     </>

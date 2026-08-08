@@ -72,7 +72,7 @@ export const inAiNav: NavGroup = {
     {
       label: "AI Consultation",
       href: "/in/ai/consultation",
-      desc: "What AI is worth doing in your business, and what reaching production costs",
+      desc: "What AI is worth doing in your business, and what getting it working costs",
     },
     {
       label: "AI Automation",
@@ -92,7 +92,7 @@ export const inAiNav: NavGroup = {
     {
       label: "How we deliver: Forward Deployed Engineering",
       href: "/in/ai/forward-deployed-engineering",
-      desc: "Senior engineers inside your team until the system runs in production",
+      desc: "Senior engineers inside your team until it is running every day",
     },
   ],
 };
@@ -186,12 +186,12 @@ export const REGIONS: Record<Region, RegionConfig> = {
       { label: "Work", href: "/in/work" },
     ],
     groups: [inEcommerceNav, inAiNav, inProductsNav],
-    cta: { label: "Book a strategy session", href: "/in/strategy-session" },
+    cta: { label: "Talk to a Senior Engineer", href: "/in/strategy-session" },
     announcement: "New: MnT AI Desk · MnT AI CRM · MnT Commerce India",
     footerBlurb:
-      "MnT Future: we build ecommerce platforms with GST built in, and AI systems that reach production, for Indian businesses.",
+      "MnT Future: we build online stores with GST built in, and AI systems your team actually uses, for Indian businesses.",
     newsletterBlurb:
-      "Occasional, practical notes on ecommerce platforms and AI that reaches production. No spam.",
+      "Occasional, practical notes on running an online business and using AI without wasting money. No spam.",
   },
 };
 

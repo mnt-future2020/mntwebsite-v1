@@ -189,7 +189,7 @@ export default function IndiaWork() {
       <CTASection
         title="Tell us the bottleneck. Leave with a plan you can execute."
         body="A senior consultant, not a salesperson. Bring the problem you have not been able to solve and we will map how we would build it."
-        primary={{ label: "Book a strategy session", href: "/in/strategy-session" }}
+        primary={{ label: "Talk to a Senior Engineer", href: "/in/strategy-session" }}
         secondary={{ label: "Our products", href: "/in/products" }}
       />
     </>
