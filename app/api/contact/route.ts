@@ -24,7 +24,8 @@ export async function POST(req: Request) {
     const message = (data.message || "").toString().trim();
     // The form tells us which tree it was submitted from. Allow-listed rather
     // than trusted, so a crafted payload cannot write arbitrary text here.
-    const source = data.source === "contact-form-in" ? "contact-form-in" : "contact-form";
+    const ALLOWED_SOURCES = ["contact-form-in", "lp-commerce-india"];
+    const source = ALLOWED_SOURCES.includes(data.source) ? data.source : "contact-form";
 
     // Shape first, so a visitor who forgot a field gets a straight answer and
     // still has an unspent token to retry with.
