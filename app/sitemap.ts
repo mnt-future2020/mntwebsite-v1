@@ -4,6 +4,7 @@ import { getPublishedPosts } from "@/lib/blog";
 import { caseStudies } from "@/lib/caseStudies";
 import { INDIA_INDUSTRIES } from "@/lib/indiaIndustries";
 import { INDIA_GUIDES } from "@/lib/indiaGuides";
+import { MADURAI_SLUGS } from "@/lib/madurai";
 
 export const revalidate = 3600;
 
@@ -34,6 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...INDIA_INDUSTRIES.map((i) => `/in/industries/${i.slug}`),
     "/in/guides",
     ...INDIA_GUIDES.map((g) => `/in/guides/${g.slug}`),
+    "/in/madurai",
+    ...MADURAI_SLUGS.map((s) => `/in/madurai/${s}`),
     "/in/work",
     "/in/work/clients",
     "/in/work/clients/blufacade",

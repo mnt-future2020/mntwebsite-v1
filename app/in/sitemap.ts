@@ -4,6 +4,7 @@ import { INDIA_CLIENTS } from "@/lib/indiaClients";
 import { CLIENT_DETAILS } from "@/lib/indiaClientDetails";
 import { INDIA_INDUSTRIES } from "@/lib/indiaIndustries";
 import { INDIA_GUIDES } from "@/lib/indiaGuides";
+import { MADURAI_SLUGS } from "@/lib/madurai";
 
 /**
  * India's own sitemap, served at /in/sitemap.xml.
@@ -40,6 +41,8 @@ const ROUTES = [
   ...INDIA_INDUSTRIES.map((i) => `/in/industries/${i.slug}`),
   "/in/guides",
   ...INDIA_GUIDES.map((g) => `/in/guides/${g.slug}`),
+  "/in/madurai",
+  ...MADURAI_SLUGS.map((s) => `/in/madurai/${s}`),
   "/in/work",
   "/in/work/clients",
   // Only the client projects that actually have a detail page. The four we

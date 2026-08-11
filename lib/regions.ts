@@ -214,7 +214,11 @@ export function footerNavFor(region: Region) {
         { label: "Open Source", href: "/open-source" },
         ...(region === "us"
           ? [{ label: "Security & Compliance", href: "/security-compliance" }]
-          : [{ label: "Industries", href: "/in/industries" }, { label: "Guides", href: "/in/guides" }]),
+          : [
+              { label: "Industries", href: "/in/industries" },
+              { label: "Guides", href: "/in/guides" },
+              { label: "Madurai", href: "/in/madurai" },
+            ]),
         { label: "Blog", href: "/blog" },
         { label: "Contact", href: `${b}/contact` },
       ],

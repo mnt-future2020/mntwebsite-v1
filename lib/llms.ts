@@ -7,6 +7,11 @@ import { caseStudies } from "@/lib/caseStudies";
 // inlines the actual content (services, case studies, full blog posts) so an AI
 // can ingest everything in one fetch. Both auto-update as blog posts publish.
 
+import { inEcommerceNav, inAiNav, inProductsNav } from "./regions";
+import { INDIA_INDUSTRIES } from "./indiaIndustries";
+import { INDIA_GUIDES } from "./indiaGuides";
+import { MADURAI_HUB, MADURAI_SERVICES } from "./madurai";
+
 const abs = (path: string) => `${site.url}${path}`;
 
 // Strip rich-text HTML (TipTap) down to readable plain text for the full dump.
@@ -36,7 +41,7 @@ export async function buildLlmsTxt(): Promise<string> {
   out.push("");
   out.push(`> ${site.description}`);
   out.push("");
-  out.push(`${site.tagline}. Focused on US D2C & marketplace brands: commerce platforms + AI agents. Contact: ${site.email}`);
+  out.push(`Two markets. United States: ${site.tagline.toLowerCase()} for D2C & marketplace brands, at mntfuture.com. India: ecommerce platforms with GST built in, AI systems delivered by embedded senior engineers, and three products we host and customise, at mntfuture.com/in. Based in ${site.city}, ${site.state}, India. Contact: ${site.email}${site.phone ? ` · ${site.phone}` : ""}`);
   out.push("");
 
   out.push(`## Commerce Platforms`);
@@ -86,6 +91,37 @@ export async function buildLlmsTxt(): Promise<string> {
     ["Inventory & Demand Agent", "/ai-agents/inventory-demand-agent", "Projects stockouts, surfaces unmet demand, drafts restock orders for approval"],
   ];
   for (const [label, href, desc] of agents) out.push(`- [${label}](${abs(href)}): ${desc}`);
+  out.push("");
+
+  out.push(`## India (mntfuture.com/in)`);
+  out.push(`- [MnT Future India](${abs("/in")}): Ecommerce platforms, AI systems and products for Indian businesses. GST, UPI, COD and WhatsApp handled as first-class, not as plugins.`);
+  out.push(`- [${inEcommerceNav.label} overview](${abs(inEcommerceNav.href)}): Custom ecommerce platform development in India, D2C, marketplace, B2B and managed support.`);
+  for (const c of inEcommerceNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  out.push(`- [${inAiNav.label} overview](${abs(inAiNav.href)}): AI consultation, automation, agents and custom applications, delivered by embedded senior engineers.`);
+  for (const c of inAiNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  out.push(`- [${inProductsNav.label} overview](${abs(inProductsNav.href)}): Ready applications we host, brand and customise.`);
+  for (const c of inProductsNav.children) out.push(`- [${c.label}](${abs(c.href)}): ${c.desc}`);
+  out.push("");
+
+  out.push(`### ${site.city}, ${site.state} (local services)`);
+  out.push(`- [Software development company in ${site.city}](${abs("/in/madurai")}): ${MADURAI_HUB.answer}`);
+  for (const m of Object.values(MADURAI_SERVICES)) {
+    out.push(`- [${m.keyword}](${abs(`/in/madurai/${m.slug}`)}): ${m.answer}`);
+  }
+  out.push("");
+
+  out.push(`### India industries`);
+  for (const i of INDIA_INDUSTRIES) out.push(`- [${i.name}](${abs(`/in/industries/${i.slug}`)}): ${i.heroSub}`);
+  out.push("");
+
+  out.push(`### India guides`);
+  for (const g of INDIA_GUIDES) out.push(`- [${g.title}](${abs(`/in/guides/${g.slug}`)}): ${g.summary}`);
+  out.push("");
+
+  out.push(`### India client work`);
+  out.push(`- [Client projects](${abs("/in/work/clients")}): Live platforms we built for Indian businesses, each one named and linked.`);
+  out.push(`- [Talk to a Senior Engineer](${abs("/in/strategy-session")}): A call with somebody who would work on it, not a salesperson.`);
+  out.push(`- [Contact India](${abs("/in/contact")}): ${site.city}, ${site.state}${site.phone ? ` · ${site.phone}` : ""}`);
   out.push("");
 
   out.push(`## Company`);
