@@ -11,6 +11,20 @@ import { INDIA_CLIENTS } from "@/lib/indiaClients";
 import { CLIENT_DETAILS } from "@/lib/indiaClientDetails";
 import { site } from "@/lib/site";
 
+/**
+ * The industry page for a client, where one genuinely covers the same trade.
+ *
+ * Only exact matches are mapped. Half the client industries have no India
+ * industry page, and sending a reader from an ambulance service to a page
+ * about home and field services because both involve a van would be worse
+ * than sending them nowhere.
+ */
+const INDUSTRY_PAGE: Record<string, { slug: string; name: string }> = {
+  "Home services": { slug: "home-field-services", name: "Home & Field Services" },
+  Travel: { slug: "travel-tours", name: "Travel & Tours" },
+  "Professional services": { slug: "professional-services", name: "Professional Services" },
+};
+
 // Only the projects we have the code for get a detail page. The four we cannot
 // inspect stay as entries on the index, because a case study we cannot support
 // with evidence is just a page of adjectives.
@@ -69,6 +83,7 @@ export default async function ClientCase(props: { params: Promise<{ slug: string
   const found = get(slug);
   if (!found) notFound();
   const { client: c, detail: d } = found;
+  const industryPage = INDUSTRY_PAGE[c.industry];
 
   const others = Object.keys(CLIENT_DETAILS)
     .filter((s) => s !== slug)
@@ -297,6 +312,14 @@ export default async function ClientCase(props: { params: Promise<{ slug: string
                 business, and it keeps running when you are not looking at it.
               </p>
               <div className="mt-9 flex flex-wrap gap-2.5">
+                {industryPage && (
+                  <Link
+                    href={`/in/industries/${industryPage.slug}`}
+                    className="border border-[#D8E1EC] bg-white px-4 py-2.5 font-mono text-[12px] tracking-[0.06em] text-brand-700 transition-colors hover:border-brand-500 hover:bg-brand-500/[0.07]"
+                  >
+                    Systems for {industryPage.name}
+                  </Link>
+                )}
                 {others.map((o) => (
                   <Link
                     key={o.slug}

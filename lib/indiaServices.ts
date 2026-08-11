@@ -57,6 +57,30 @@ const aiRelated = [
   { label: "Forward Deployed Engineering", href: "/in/ai/forward-deployed-engineering" },
 ];
 
+/**
+ * Contextual links from a service page to the guide or industry page that
+ * covers the same problem in depth.
+ *
+ * Google was crawling three of these pages and declining to index them. They
+ * were never orphans — the footer links both hubs and each hub links its
+ * children — but a hub with five equal-weight links is a list, not a
+ * recommendation. Nothing on the site said, in context, what any one of them
+ * was about. The anchor text is the part that carries that, which is why these
+ * labels name the subject rather than saying "read more".
+ */
+const guide = (slug: string, label: string) => ({ label, href: `/in/guides/${slug}` });
+const industry = (slug: string, label: string) => ({ label, href: `/in/industries/${slug}` });
+
+const READING = {
+  automateFirst: guide("what-to-automate-first", "Guide: What to automate first"),
+  stopHalfway: guide("why-ai-projects-stop-halfway", "Guide: Why AI projects stop halfway"),
+  ownVsRented: guide("own-platform-vs-rented", "Guide: Own platform vs rented"),
+  gst: guide("gst-in-your-ecommerce-platform", "Guide: GST in your platform"),
+  whatsapp: guide("whatsapp-selling-without-losing-leads", "Guide: Selling on WhatsApp"),
+  fieldServices: industry("home-field-services", "Industry: Home & Field Services"),
+  fashion: industry("fashion-apparel", "Industry: Fashion & Apparel"),
+};
+
 const base = { areaServed: ["India"] as string[] };
 
 export const INDIA_SERVICES: Record<string, ServiceConfig> = {
@@ -97,7 +121,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "GST logic is tested against real interstate scenarios before launch, not assumed to be correct because a setting was ticked.",
       "You get the source, documentation and training. A platform your team cannot maintain without us is a platform we built badly.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("platform-development")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("platform-development")), READING.gst, READING.ownVsRented],
     faq: [
       { q: "How long does it take?", a: "A focused build is typically eight to sixteen weeks depending on how much integration is involved. Marketplaces and B2B platforms take longer because the rules are more complicated. We scope before quoting rather than giving you an optimistic number you cannot plan around." },
       { q: "Can we migrate from Shopify or WooCommerce?", a: "Usually yes. Products, variants, customers and order history migrate from most platforms. We assess what will and will not survive the move up front and tell you honestly about the gaps." },
@@ -140,7 +164,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "The catalogue is structured properly, with HSN and GST correct from the first product rather than fixed later.",
       "Analytics is set up so you can answer which product, which channel and which campaign actually paid.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("d2c-storefront")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("d2c-storefront")), READING.ownVsRented, READING.fashion],
     faq: [
       { q: "We already sell on marketplaces. Why add a store?", a: "Margin and ownership. On your own store there is no commission and you keep the customer relationship, which is what makes the second and third purchase possible. Most brands run both, using marketplaces for reach and their own store for margin and repeat." },
       { q: "How fast should our store be?", a: "Fast enough that a mid-range Android phone on mobile data shows the product in about two seconds. We treat that as a budget and measure against it, because in India that number is the difference between a sale and a bounce." },
@@ -186,7 +210,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "Settlement reports are built to be reconciled against a bank statement, because eventually somebody will.",
       "We build for the dispute case, not just the happy path: partial refunds, returns after payout, and seller cancellations.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("marketplace")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("marketplace")), READING.ownVsRented],
     faq: [
       { q: "Can we start with a simple version?", a: "Yes, and you should. Onboarding, listing, ordering and payouts is a working marketplace. Ratings, ads, subscriptions and loyalty come after you have sellers who care about them." },
       { q: "How do split payments work in India?", a: "Razorpay Route, Cashfree Easy Split and similar products hold and split funds on your behalf, which keeps you out of the business of holding other people's money. We integrate whichever suits your model and volume." },
@@ -232,7 +256,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "Your sales team gets tools too: place orders on behalf of a customer, see what a dealer has not reordered this month.",
       "Rollout goes dealer by dealer rather than all at once, so a problem costs you one customer's patience instead of all of them.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("b2b-wholesale")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("b2b-wholesale")), READING.gst],
     faq: [
       { q: "Our pricing is complicated. Can it handle that?", a: "Yes, and complicated pricing is the normal case. Customer rates, group rates, volume slabs, contract prices and one-off exceptions all coexist. Getting this right is most of what a B2B platform is." },
       { q: "Can it connect to Tally?", a: "Yes. Tally, SAP, Oracle and most Indian ERPs. We scope the integration properly up front, because the ERP is usually the part that determines the timeline." },
@@ -278,7 +302,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "We do not sync everything just because it is possible. Each connection has to remove real work or it is maintenance debt with no payoff.",
       "Documentation and handover, so a future engineer can understand it without ringing us.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("integrations")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("integrations")), READING.automateFirst, READING.whatsapp],
     faq: [
       { q: "Our ERP is old and has no API.", a: "Common, and workable. Depending on the system we integrate through the database, scheduled file exchange, or a small service that sits alongside it. We assess it before quoting rather than promising and discovering." },
       { q: "How long does an integration take?", a: "A single well-documented connection is often two to three weeks. Older systems take longer, and we would rather tell you that after looking than before." },
@@ -324,7 +348,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "A monthly note on what broke, what we changed, and what is worth fixing properly rather than patching again.",
       "Small improvements included, so the platform keeps getting better rather than only being kept alive.",
     ],
-    related: ecomRelated.filter((r) => !r.href.endsWith("managed-support")),
+    related: [...ecomRelated.filter((r) => !r.href.endsWith("managed-support")), READING.ownVsRented],
     faq: [
       { q: "Do you support platforms you did not build?", a: "Yes, after an audit. We need to understand what we are taking on before agreeing to an SLA, and the audit sometimes finds things you will want fixed before we start." },
       { q: "What counts as an emergency?", a: "Anything stopping customers ordering or paying: checkout down, payment failing, the site unreachable. Those get a defined response clock. A cosmetic issue does not, and the agreement says which is which." },
@@ -371,7 +395,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "You get the costed path in writing, including the option of not doing it.",
       "If we build it afterwards, this is stage one of the same method. If you build it yourselves or with somebody else, the document still works.",
     ],
-    related: aiRelated.filter((r) => !r.href.endsWith("consultation")),
+    related: [...aiRelated.filter((r) => !r.href.endsWith("consultation")), READING.stopHalfway],
     faq: [
       { q: "Why is discovery paid?", a: "Because a free assessment is a sales exercise with a predictable conclusion. Paying for it means we are working for you rather than for the follow-on contract, and it means we can tell you not to build the thing." },
       { q: "What do we actually receive?", a: "A written assessment of your data and use case, a definition of what working would mean in numbers, an architecture direction, a phased plan with costs, and a clear recommendation including whether to proceed." },
@@ -417,7 +441,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "Everything it does is logged and reversible, so a mistake is a correction rather than an investigation.",
       "We widen scope only after the narrow version has proved itself on real volume.",
     ],
-    related: aiRelated.filter((r) => !r.href.endsWith("automation")),
+    related: [...aiRelated.filter((r) => !r.href.endsWith("automation")), READING.automateFirst, READING.fieldServices],
     faq: [
       { q: "Will this replace our staff?", a: "In our experience it moves them onto the work that needed judgement, because the volume that was queuing up gets handled. We are not going to promise you headcount reduction, because the honest outcome is usually more throughput from the same team." },
       { q: "What if it makes a mistake?", a: "It is designed to escalate rather than guess. You set the confidence line, everything is logged, and actions are reversible. Before go-live we run it alongside your team and compare, so you see the error rate before it matters." },
@@ -463,7 +487,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "Evaluation is written before the agent is, so working is a number rather than an opinion.",
       "Cost is designed in: model choice, caching and limits, visible from the first week rather than at the first invoice.",
     ],
-    related: aiRelated.filter((r) => !r.href.endsWith("agent-development")),
+    related: [...aiRelated.filter((r) => !r.href.endsWith("agent-development")), READING.stopHalfway],
     faq: [
       { q: "What is the difference between an agent and a chatbot?", a: "A chatbot answers. An agent takes actions in your systems: updating a record, creating an order, sending a message, escalating a case. That makes it more useful and considerably more dangerous, which is why permissions and audit matter as much as the model." },
       { q: "How do we stop it doing something stupid?", a: "It can only touch what you allow, anything above a limit you set needs a human to approve, it is tested before it goes live, and it starts out only able to read and suggest until it has proved itself. Every action is recorded and can be undone." },
@@ -509,7 +533,7 @@ export const INDIA_SERVICES: Record<string, ServiceConfig> = {
       "Your engineers are in the repository throughout if you have them, so it is maintainable by your team from launch.",
       "We say no when a product would do. Talking a client out of a custom build is a better long-term trade than selling one they did not need.",
     ],
-    related: aiRelated.filter((r) => !r.href.endsWith("custom-applications")),
+    related: [...aiRelated.filter((r) => !r.href.endsWith("custom-applications")), READING.automateFirst, READING.fieldServices],
     faq: [
       { q: "How is this different from buying MnT AI Desk or AI CRM?", a: "Those start from software that already works, so they are fast and comparatively cheap and cover a common shape of problem. Custom starts from your workflow, so it fits exactly, takes longer and costs more. We will tell you honestly which one your problem is." },
       { q: "How long does a custom application take?", a: "Usually twelve to twenty-four weeks for a first working version, depending on how much has to connect to the systems you already run. The first study gives you a real number before you commit to the build." },
