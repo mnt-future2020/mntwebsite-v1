@@ -150,7 +150,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     heroSub:
       "We do not build websites. We build the system your business runs on, and the website is the front of it.",
     answer:
-      "MnT Future is a web development company in Madurai, Tamil Nadu. We build custom websites and the admin panel behind them, where prices, bookings, orders, enquiries, stock and staff are actually managed. Our client platforms are live today in travel, hospitality, construction, healthcare, engineering and logistics, including two travel companies here in Madurai. Every build is custom, on Next.js and PostgreSQL rather than a template, and the code and data are handed over in your name. A focused build typically takes six to twelve weeks.",
+      "MnT Future is a web development company in Madurai, Tamil Nadu. We build custom websites and the admin panel behind them, where prices, bookings, orders, enquiries, stock and staff are actually managed. Our client platforms are live today in travel, hospitality, construction, healthcare, engineering and logistics, including two travel companies here in Madurai. Every build is custom, on Next.js and PostgreSQL rather than a template, and the code and data are handed over in your name. A working build typically takes two weeks.",
     buildsTitle: "What a build actually includes.",
     builds: [
       {
@@ -187,8 +187,8 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     engagement: [
       {
         label: "Typical timeline",
-        value: "6 to 12 weeks",
-        note: "A business site with a working admin. Longer if it has to talk to an ERP or a legacy system, and we say so before quoting rather than after.",
+        value: "2 weeks",
+        note: "A business site with a working admin. Longer only if it has to talk to an ERP or a legacy system, and we say so before quoting rather than after.",
       },
       {
         label: "What you own",
@@ -217,7 +217,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
       },
       {
         title: "We build it in the open",
-        desc: "You get a working link early and every week after. No three-month silence followed by a surprise.",
+        desc: "You get a working link in the first few days and it changes in front of you. On a two-week build there is no room for a silent month, and there should not be one on any build.",
       },
       {
         title: "We hand it over properly",
@@ -228,7 +228,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     proof: [...TRAVEL_MADURAI, VENUE, PEST],
     notFor: [
       "You want a five-page brochure site and nothing behind it. A template and a designer will do that faster and cheaper, and we will tell you so.",
-      "You want it in two weeks. We cannot build something worth owning in two weeks and would rather lose the work than promise it.",
+      "You do not yet know what the system should do. Two weeks works because the scope is settled before we start. If the requirements keep moving, the date moves with them, and no promise from us changes that.",
       "You want the cheapest quote in Madurai. We will not be it.",
     ],
     faq: [
@@ -238,7 +238,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
       },
       {
         q: "How long does it take?",
-        a: "Six to twelve weeks for a business site with a working admin behind it. Longer when it has to connect to an ERP, Tally or an existing system, because that is usually the part that decides the timeline. We tell you which one you are after looking, not before.",
+        a: "Two weeks for a business site with a working admin behind it. That holds when the scope is settled before we start, which is why we scope first. It takes longer only when it has to connect to an ERP, Tally or an existing system, because that is usually the part that decides the timeline, and we tell you that after looking rather than after starting.",
       },
       {
         q: "Will I be able to change things myself?",
@@ -279,7 +279,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     heroSub:
       "An online store you own, with GST, UPI and cash on delivery handled properly, and no commission on your orders.",
     answer:
-      "MnT Future is an ecommerce website development company in Madurai, Tamil Nadu. We build custom online stores for businesses in Madurai and across India: product catalogues with size and colour variants, UPI, cards and cash on delivery, courier integration, and GST invoices generated with the order. We build on Medusa and Next.js rather than on a rented platform, so there is no commission on your sales and the customer data stays yours. A store typically goes live in eight to sixteen weeks.",
+      "MnT Future is an ecommerce website development company in Madurai, Tamil Nadu. We build custom online stores for businesses in Madurai and across India: product catalogues with size and colour variants, UPI, cards and cash on delivery, courier integration, and GST invoices generated with the order. We build on Medusa and Next.js rather than on a rented platform, so there is no commission on your sales and the customer data stays yours. A store typically goes live in four weeks.",
     buildsTitle: "What an Indian online store has to get right.",
     builds: [
       {
@@ -316,8 +316,8 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     engagement: [
       {
         label: "Typical timeline",
-        value: "8 to 16 weeks",
-        note: "Depends most on how ready your product photos and details are, which is the part on your side. Marketplaces and B2B take longer because the rules are harder.",
+        value: "4 weeks",
+        note: "Assuming your product photos and details are ready, which is the part on your side. Marketplaces and B2B platforms take longer, because the rules are harder.",
       },
       {
         label: "Commission we take",
@@ -372,7 +372,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     ],
     notFor: [
       "You have not sold anything yet and want to test the idea. Start on Instagram or a rented store, prove there is demand, then come back. We will tell you this for free.",
-      "You want it live before Diwali next month. A store built in four weeks is a store you will be fixing for a year.",
+      "Your product photos, prices and descriptions are not ready. Four weeks assumes they are. If we are waiting on your catalogue, that is the timeline, and it is not one we control.",
       "Commission on a marketplace is not real money for you yet. If your volume is small, owning the platform is not worth it, and we will say so.",
     ],
     faq: [

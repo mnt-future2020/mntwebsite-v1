@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import CTASection from "@/components/CTASection";
+import Partners from "@/components/Partners";
+import RatingsRibbon from "@/components/RatingsRibbon";
 import BlueprintMotion from "@/components/BlueprintMotion";
 import { Breadcrumbs } from "@/components/blocks";
 import { SectionHead, BpButton, PAGE } from "@/components/blueprint";
 import { MADURAI_HUB, MADURAI_SERVICES } from "@/lib/madurai";
 import { resolveMetadata } from "@/lib/seo";
-import { ratings, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 /**
  * The Madurai hub.
@@ -153,7 +155,7 @@ export default function MaduraiHub() {
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
           <SectionHead
             no="01"
-            total="03"
+            total="02"
             eyebrow="What we do here"
             title="Three things, each built properly."
           />
@@ -194,7 +196,7 @@ export default function MaduraiHub() {
         <div className={`${PAGE} py-20 lg:py-[120px]`}>
           <SectionHead
             no="02"
-            total="03"
+            total="02"
             eyebrow="Why us"
             title="Four things that are true about working with us."
           />
@@ -214,52 +216,8 @@ export default function MaduraiHub() {
         </div>
       </section>
 
-      {/* RATINGS */}
-      <section data-reveal className="border-b border-bp-line bg-bp-wash">
-        <div className={`${PAGE} py-20 lg:py-[120px]`}>
-          <SectionHead
-            no="03"
-            total="03"
-            eyebrow="What clients scored us"
-            title="Three platforms, and the numbers on them."
-            sub="Scores our clients left, on profiles you can open. Where we cannot link the profile the number is shown as plain text rather than as a link that goes nowhere."
-          />
-          <div className="mt-11 grid border-l border-t border-bp-edge lg:mt-16 lg:grid-cols-3">
-            {ratings.map((r) => {
-              const inner = (
-                <>
-                  <span className="font-display text-[46px] font-bold leading-none tracking-[-0.04em] text-bp-ink">
-                    {r.score.toFixed(1)}
-                  </span>
-                  <span className="mt-4 font-mono text-[11.5px] uppercase tracking-[0.16em] text-bp-mute">
-                    {r.source}
-                  </span>
-                </>
-              );
-              return r.href ? (
-                <a
-                  key={r.source}
-                  href={r.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-stagger
-                  className="flex flex-col items-start border-b border-r border-bp-edge bg-white p-7 transition-colors hover:bg-bp-tint lg:p-9"
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div
-                  key={r.source}
-                  data-stagger
-                  className="flex flex-col items-start border-b border-r border-bp-edge bg-white p-7 lg:p-9"
-                >
-                  {inner}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <RatingsRibbon />
+      <Partners />
 
       <CTASection
         title="Tell us what you are trying to build."

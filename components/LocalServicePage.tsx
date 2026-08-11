@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Icon from "./Icon";
 import CTASection from "./CTASection";
+import Partners from "./Partners";
+import RatingsRibbon from "./RatingsRibbon";
 import BlueprintFaq from "./BlueprintFaq";
 import BlueprintMotion from "./BlueprintMotion";
 import { Breadcrumbs } from "./blocks";
@@ -321,6 +323,9 @@ export default function LocalServicePage({ service: s }: { service: LocalService
           </div>
         </div>
       </section>
+
+      <RatingsRibbon />
+      <Partners />
 
       {/* WHO THIS IS NOT FOR */}
       <section data-reveal className="border-b border-bp-line bg-bp-ink text-white">
