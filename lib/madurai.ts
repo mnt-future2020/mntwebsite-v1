@@ -423,7 +423,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     heroSub:
       "iOS and Android from one codebase, on a backend you own, built by the people who will still be there when it needs changing.",
     answer:
-      "MnT Future is a mobile application development company in Madurai, Tamil Nadu. We build native iOS and Android apps from a single React Native and Expo codebase, connected to a backend we build and you own. We have shipped a two-app system in production on this stack: a customer app and an owner app on one shared backend, with real-time availability, booking locks and payments. App development typically runs twelve to twenty weeks from first call to store submission.",
+      "MnT Future is a mobile application development company in Madurai, Tamil Nadu. We build native iOS and Android apps from a single React Native and Expo codebase, connected to a backend we build and you own. We have shipped a two-app system in production on this stack: a customer app and an owner app on one shared backend, with real-time availability, booking locks and payments. App development typically runs six weeks from first call to store submission.",
     buildsTitle: "What we build into an app.",
     builds: [
       {
@@ -460,8 +460,8 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     engagement: [
       {
         label: "Typical timeline",
-        value: "12 to 20 weeks",
-        note: "First call to store submission, including review time. Two connected apps take longer than one, and we scope which you actually need before quoting.",
+        value: "6 weeks",
+        note: "First call to store submission. Apple and Google review after that and the wait is theirs, not ours. Two connected apps take longer than one, and we scope which you actually need before quoting.",
       },
       {
         label: "Platforms",
@@ -511,7 +511,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
     notFor: [
       "You want an app because a competitor has one. That is not a reason, and we will ask you for a better one before quoting.",
       "Your users would open it twice a year. A fast website is the right answer and costs you a fraction of this.",
-      "You want it on the store next month. Apple's review alone can take a week, and rushing the build is how you fail it twice.",
+      "You need a guaranteed date on the store. Six weeks is our build and our submission. The review after it is Apple's and Google's, and we will not promise you a date that is not ours to give.",
     ],
     faq: [
       {
@@ -532,7 +532,7 @@ export const MADURAI_SERVICES: Record<string, LocalService> = {
       },
       {
         q: "How long until it is on the store?",
-        a: "Twelve to twenty weeks for a first version, including store review. Apple's review can take a few days to a week on its own, and a rejection costs you another round, which is why we build to the guidelines rather than discovering them at the end.",
+        a: "Six weeks from the first call to submitting it, for a first version that does one job properly. After that the wait is Apple's and Google's: their review can take a few days to a week, and a rejection costs another round, which is why we build to the guidelines from the start rather than discovering them at the end.",
       },
       {
         q: "Do I really need an app, or is a website enough?",
