@@ -49,12 +49,14 @@ export default function LocalServicePage({ service: s }: { service: LocalService
     description: s.answer,
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.street,
       addressLocality: site.city,
       addressRegion: site.state,
       addressCountry: "IN",
     },
-    // Madurai city centre. We have not published a street address, and a
-    // precise pin we cannot stand behind is worse than an honest one.
+    // Madurai city centre, not the office rooftop: these are the city-wide
+    // service pages, and a pin surveyed to the doorstep would imply a
+    // catchment we do not mean. The street address sits in `address` above.
     geo: { "@type": "GeoCoordinates", latitude: 9.9252, longitude: 78.1198 },
     areaServed: [
       { "@type": "City", name: "Madurai" },

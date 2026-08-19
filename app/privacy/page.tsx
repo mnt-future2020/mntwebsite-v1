@@ -318,7 +318,7 @@ const sections: Section[] = [
       },
       {
         kind: "p",
-        text: `For any privacy question, request or complaint — including as our Grievance Officer under the DPDP Act, and as our point of contact for GDPR matters — write to the Grievance Officer, ${site.legalName}, ${site.city}, ${site.state}, ${site.country}, or email ${site.email}. We answer privacy mail ourselves; it does not go into a ticket queue.`,
+        text: `For any privacy question, request or complaint — including as our Grievance Officer under the DPDP Act, and as our point of contact for GDPR matters — write to the Grievance Officer, ${site.legalName}, ${site.street}, ${site.city}, ${site.state}, ${site.country}, or email ${site.email}. We answer privacy mail ourselves; it does not go into a ticket queue.`,
       },
       {
         kind: "p",

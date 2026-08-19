@@ -47,6 +47,7 @@ export default function MaduraiHub() {
     description: MADURAI_HUB.answer,
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.street,
       addressLocality: site.city,
       addressRegion: site.state,
       addressCountry: "IN",

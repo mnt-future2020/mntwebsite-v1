@@ -115,10 +115,9 @@ const orgSchema = {
     { "@type": "Country", name: "United States" },
     { "@type": "Country", name: "India" },
   ],
-  // City and state only: enough for the India tree to read as a real company
-  // in a real place, without publishing a street address we have not verified.
   address: {
     "@type": "PostalAddress",
+    streetAddress: site.street,
     addressLocality: site.city,
     addressRegion: site.state,
     addressCountry: "IN",

@@ -20,7 +20,17 @@ export const site = {
   phone: "+91 82209 47112" as string | null,
   /** Digits only, country code included, e.g. "919876543210". */
   whatsapp: "918220947112" as string | null,
-  /** Where the company actually is. Indian buyers weigh this. */
+  /**
+   * Where the company actually is. Indian buyers weigh this.
+   *
+   * The street line was withheld until it could be confirmed — a wrong address
+   * in LocalBusiness schema is worse than none, because Google will map the
+   * business to the wrong place and a visitor will turn up at a stranger's
+   * door. It is confirmed now, so it is published: it is the registered office
+   * for the privacy policy's grievance route, and the local-SEO signal the
+   * Madurai pages were missing.
+   */
+  street: "3/501, Subash Street, Muneeswarar Nagar, Iyer Bungalow",
   city: "Madurai",
   state: "Tamil Nadu",
   country: "India",
