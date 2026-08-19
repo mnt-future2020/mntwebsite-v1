@@ -90,6 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/ai-agents/inventory-demand-agent",
     "/commerce/ai-cleanup",
     "/security-compliance",
+    "/privacy",
     "/about",
     "/open-source",
     "/open-source/agentready",
