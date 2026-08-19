@@ -65,6 +65,9 @@ export default function Footer() {
         </p>
         <div className="flex flex-wrap items-center gap-[22px] font-mono text-[11.5px] text-[#71829A]">
           <FooterContact />
+          <Link href="/privacy" className="inline-block py-1.5 transition-colors hover:text-white">
+            Privacy Policy
+          </Link>
           <a href={`mailto:${site.email}`} className="inline-block py-1.5 transition-colors hover:text-white">
             {site.email}
           </a>
